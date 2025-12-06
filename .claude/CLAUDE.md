@@ -44,16 +44,13 @@ If a command is in `allow`, execute it directly without asking for permission.
 ```
 BirthdayReminder/
 ├── BirthdayReminder.sln
-├── Mobile/                         # MAUI App
+├── Mobile/                         # MAUI App (Android & iOS only)
 │   ├── Core/                       # Core logic
 │   │   ├── MobileConstants.cs
 │   │   └── MobileEnums.cs
 │   ├── Platforms/                  # Platform-specific code
 │   │   ├── Android/
-│   │   ├── iOS/
-│   │   ├── MacCatalyst/
-│   │   ├── Tizen/
-│   │   └── Windows/
+│   │   └── iOS/
 │   ├── Resources/                  # Assets, fonts, styles
 │   ├── App.xaml / App.xaml.cs
 │   ├── AppShell.xaml / AppShell.xaml.cs

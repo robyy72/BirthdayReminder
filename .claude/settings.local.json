@@ -26,8 +26,8 @@
       "Bash(dotnet new:*)",
       "Bash(dotnet sln:*)",
       "Bash(dotnet add:*)",
-      "Edit(**/.claude/CLAUDE.md)",
-      "Edit(**/.claude/settings.local.json)"
+      "Edit(.claude/CLAUDE.md)",
+      "Edit(.claude/settings.local.json)"
     ],
     "deny": [],
     "ask": [
