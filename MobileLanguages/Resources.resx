@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Page_Main_Title" xml:space="preserve">
+    <value>Upcoming Birthdays</value>
+  </data>
+  <data name="Page_Main_MissedTitle" xml:space="preserve">
+    <value>Missed Birthdays</value>
+  </data>
+  <data name="Page_Main_NewBirthday" xml:space="preserve">
+    <value>New Birthday</value>
+  </data>
+  <data name="Page_AskForContacts_Title" xml:space="preserve">
+    <value>Setup</value>
+  </data>
+  <data name="Page_AskForContacts_Question" xml:space="preserve">
+    <value>How do you want to manage birthdays?</value>
+  </data>
+  <data name="Page_AskForContacts_ManualInput" xml:space="preserve">
+    <value>Manual Input</value>
+  </data>
+  <data name="Page_AskForContacts_FromContacts" xml:space="preserve">
+    <value>From Contacts</value>
+  </data>
+  <data name="Page_NewBirthday_Title" xml:space="preserve">
+    <value>New Birthday</value>
+  </data>
+  <data name="Page_AllBirthdays_Title" xml:space="preserve">
+    <value>All Birthdays</value>
+  </data>
+  <data name="Page_Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Page_Privacy_Title" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="Tab_ShowAll" xml:space="preserve">
+    <value>Show All</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Tab_Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="General_Button_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="General_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="General_Button_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="General_Label_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="General_Label_Birthday" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+</root>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.SettingsPage"
+             Title="{x:Static resx:Resources.Page_Settings_Title}">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Birthday Source" FontSize="18" FontAttributes="Bold" />
+        <Picker x:Name="SourcePicker">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Manual Input</x:String>
+                    <x:String>From Contacts</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label Text="Default Reminder Time" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0" />
+        <TimePicker x:Name="ReminderTimePicker" />
+
+        <Label Text="Language" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0" />
+        <Picker x:Name="LocalePicker">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>de</x:String>
+                    <x:String>en</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                Clicked="OnSaveClicked"
+                Margin="0,20,0,0" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

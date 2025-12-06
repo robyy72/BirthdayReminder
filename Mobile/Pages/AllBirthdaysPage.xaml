@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.AllBirthdaysPage"
+             Title="{x:Static resx:Resources.Page_AllBirthdays_Title}">
+
+    <CollectionView x:Name="BirthdaysList"
+                    ItemsSource="{Binding AllBirthdays}"
+                    SelectionMode="Single"
+                    SelectionChanged="OnBirthdaySelected">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame Padding="10" Margin="10,5">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center" />
+                        <Label Text="{Binding BirthdayDisplay}" FontSize="14" TextColor="Gray" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <Label Text="No birthdays" TextColor="Gray" HorizontalOptions="Center" Margin="20" />
+        </CollectionView.EmptyView>
+    </CollectionView>
+
+</ContentPage>

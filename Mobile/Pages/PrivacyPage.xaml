@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.PrivacyPage"
+             Title="{x:Static resx:Resources.Page_Privacy_Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Privacy Policy" FontSize="24" FontAttributes="Bold" />
+
+            <Label Text="Your birthday data is stored locally on your device only." />
+
+            <Label Text="If you choose to sync with contacts, we only read birthday information and names. We never upload your data to any server." />
+
+            <Label Text="All data remains on your device and under your control." />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
