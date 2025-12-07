@@ -5,7 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Mobile"
     xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-    Title="BirthdayReminder">
+    Title="BirthdayReminder"
+    Shell.NavBarIsVisible="True"
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Shell.TitleColor="White"
+    Shell.ForegroundColor="White">
 
     <TabBar>
         <ShellContent

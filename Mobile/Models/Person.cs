@@ -12,19 +12,4 @@ public class Person
 	public ReminderType ReminderType { get; set; } = ReminderType.NotSet;
 	public bool NeverReadFromContacts { get; set; }
 	public bool NeverWriteToContacts { get; set; }
-
-	public Person()
-	{
-	}
-
-	public Person(int id, string name, Birthday? birthday, int reminderTime, ReminderType reminderType, bool neverReadFromContacts, bool neverWriteToContacts)
-	{
-		Id = id;
-		Name = name;
-		Birthday = birthday;
-		ReminderTime = reminderTime;
-		ReminderType = reminderType;
-		NeverReadFromContacts = neverReadFromContacts;
-		NeverWriteToContacts = neverWriteToContacts;
-	}
 }

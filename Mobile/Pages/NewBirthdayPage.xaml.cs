@@ -48,10 +48,12 @@ public partial class NewBirthdayPage : ContentPage
 			return;
 		}
 
-		var birthday = new Birthday(
-			BirthdayPicker.Date.Day,
-			BirthdayPicker.Date.Month,
-			BirthdayPicker.Date.Year);
+		var birthday = new Birthday
+		{
+			Day = BirthdayPicker.Date.Day,
+			Month = BirthdayPicker.Date.Month,
+			Year = BirthdayPicker.Date.Year
+		};
 
 		if (_existingPerson != null)
 		{

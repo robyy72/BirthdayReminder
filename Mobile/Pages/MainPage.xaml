@@ -5,18 +5,21 @@
              x:Class="Mobile.MainPage"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
-                     Clicked="OnNewBirthdayClicked" />
-    </ContentPage.ToolbarItems>
-
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="{x:Static resx:Resources.Page_Main_Title}"
-                   FontSize="24"
-                   FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="{x:Static resx:Resources.Page_Main_Title}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       Grid.Column="0" />
 
+                <Button Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
+                        Clicked="OnNewBirthdayClicked"
+                        Grid.Column="1" />
+            </Grid>
+            
             <CollectionView x:Name="UpcomingList"
                             ItemsSource="{Binding UpcomingBirthdays}"
                             SelectionMode="Single"
