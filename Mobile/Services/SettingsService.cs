@@ -50,12 +50,12 @@ public static class SettingsService
 	}
 
 	/// <summary>
-	/// Aim: Check if settings have been initialized (BirthdaySource is set).
+	/// Aim: Check if settings have been initialized (Locale is set).
 	/// </summary>
 	/// <returns>True if initialized, false otherwise.</returns>
 	public static bool IsInitialized()
 	{
 		var settings = Get();
-		return settings.BirthdaySource != BirthdaySource.NotSet;
+		return !string.IsNullOrEmpty(settings.Locale);
 	}
 }

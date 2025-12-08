@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.Welcome_1Page"
+             Title="{x:Static resx:Resources.Page_Welcome_Title}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+            <Label Text="{x:Static resx:Resources.Welcome_Header}"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,30" />
+
+            <!-- Language Selection -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{x:Static resx:Resources.Settings_Language}"
+                           FontSize="22"
+                           FontAttributes="Bold" />
+
+                    <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
+                                         RadioButtonGroup.SelectedValue="{Binding SelectedLocale}"
+                                         x:Name="LocaleRadioGroup"
+                                         Spacing="10">
+                        <RadioButton Content="Deutsch"
+                                     Value="de"
+                                     FontSize="18"
+                                     x:Name="RadioDe" />
+                        <RadioButton Content="English"
+                                     Value="en"
+                                     FontSize="18"
+                                     x:Name="RadioEn" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Reminder Time -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
+                           FontSize="22"
+                           FontAttributes="Bold" />
+
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                        <!-- Hours -->
+                        <Frame BackgroundColor="White"
+                               CornerRadius="10"
+                               Padding="15"
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{x:Static resx:Resources.Time_Hours}"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Gray500}"
+                                       HorizontalOptions="Center" />
+                                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                                    <Button Text="▼"
+                                            FontSize="20"
+                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            CornerRadius="25"
+                                            BackgroundColor="{StaticResource Primary}"
+                                            Clicked="OnHoursDown" />
+                                    <Entry x:Name="HoursEntry"
+                                           Text="18"
+                                           FontSize="28"
+                                           FontAttributes="Bold"
+                                           WidthRequest="70"
+                                           HorizontalTextAlignment="Center"
+                                           Keyboard="Numeric" />
+                                    <Button Text="▲"
+                                            FontSize="20"
+                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            CornerRadius="25"
+                                            BackgroundColor="{StaticResource Primary}"
+                                            Clicked="OnHoursUp" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Label Text=":"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+
+                        <!-- Minutes -->
+                        <Frame BackgroundColor="White"
+                               CornerRadius="10"
+                               Padding="15"
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{x:Static resx:Resources.Time_Minutes}"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Gray500}"
+                                       HorizontalOptions="Center" />
+                                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                                    <Button Text="▼"
+                                            FontSize="20"
+                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            CornerRadius="25"
+                                            BackgroundColor="{StaticResource Primary}"
+                                            Clicked="OnMinutesDown" />
+                                    <Entry x:Name="MinutesEntry"
+                                           Text="00"
+                                           FontSize="28"
+                                           FontAttributes="Bold"
+                                           WidthRequest="70"
+                                           HorizontalTextAlignment="Center"
+                                           Keyboard="Numeric" />
+                                    <Button Text="▲"
+                                            FontSize="20"
+                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            CornerRadius="25"
+                                            BackgroundColor="{StaticResource Primary}"
+                                            Clicked="OnMinutesUp" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Next Button -->
+            <Button Text="{x:Static resx:Resources.General_Button_Next}"
+                    FontSize="20"
+                    HeightRequest="60"
+                    CornerRadius="30"
+                    Margin="0,20,0,0"
+                    Clicked="OnNextClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -196,4 +196,12 @@ public static class PrefsHelper
 		Preferences.Remove(key);
 		Preferences.Remove($"{key}_offset");
 	}
+
+	/// <summary>
+	/// Aim: Remove all keys from preferences.
+	/// </summary>
+	public static void RemoveAllKeys()
+	{
+		Preferences.Clear();
+	}
 }

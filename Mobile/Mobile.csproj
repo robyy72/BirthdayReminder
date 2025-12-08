@@ -1,10 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
-
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
-		
+
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Mobile</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -13,10 +11,10 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Mobile</ApplicationTitle>
+		<ApplicationTitle>Birthday-Reminder</ApplicationTitle>
 
-		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mobile</ApplicationId>
+		<!-- App Identifier (ohne Bindestrich - Apple erlaubt keine Bindestriche in Bundle IDs) -->
+		<ApplicationId>online.birthdayreminder.app</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -24,36 +22,21 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+
 		<SignAssembly>False</SignAssembly>
 		<Title>Birthday-Reminder</Title>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-	  <ApplicationId>online.birthday-reminder.app</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-	  <ApplicationId>online.birthday-reminder.app</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <ApplicationId>online.birthday-reminder.app</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-	  <ApplicationId>online.birthday-reminder.app</ApplicationId>
+	<!-- iOS-spezifische Einstellungen -->
+	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+		<ProvisioningType>automatic</ProvisioningType>
+		<CodesignKey>Apple Development: Created via API (U9925D3F2N)</CodesignKey>
+		<CodesignProvision>VS: online.birthdayreminder.app Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
-		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiIcon Include="Resources\AppIcon\appicon.png" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -68,7 +51,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MobileLanguages\MobileLanguages.csproj" />
+		<ProjectReference Include="..\MobileLanguages\MobileLanguages.csproj" />
 	</ItemGroup>
-
 </Project>

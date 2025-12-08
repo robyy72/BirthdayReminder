@@ -40,13 +40,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page_Main_Title" xml:space="preserve">
-    <value>Upcoming Birthdays</value>
+    <value>Birthday Reminder</value>
   </data>
   <data name="Page_Main_MissedTitle" xml:space="preserve">
     <value>Missed Birthdays</value>
   </data>
   <data name="Page_Main_NewBirthday" xml:space="preserve">
     <value>New Birthday</value>
+  </data>
+  <data name="General_Button_New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="Page_AskForContacts_Title" xml:space="preserve">
     <value>Setup</value>
@@ -95,5 +98,110 @@
   </data>
   <data name="General_Label_Birthday" xml:space="preserve">
     <value>Birthday</value>
+  </data>
+  <data name="General_Button_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="General_Button_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="General_Button_Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="General_Button_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Page_Welcome_Title" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Welcome_Header" xml:space="preserve">
+    <value>Welcome to Birthday Reminder</value>
+  </data>
+  <data name="Welcome_DataSources" xml:space="preserve">
+    <value>Data Sources</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_ReminderTime" xml:space="preserve">
+    <value>Reminder Time</value>
+  </data>
+  <data name="Time_Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="Time_Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Settings_Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Settings_ReadContactsBirthday" xml:space="preserve">
+    <value>Read contacts with birthday</value>
+  </data>
+  <data name="Settings_ReadContactsBirthday_Desc" xml:space="preserve">
+    <value>Import birthdays from contacts that have a birthday set</value>
+  </data>
+  <data name="Settings_ReadContactsAll" xml:space="preserve">
+    <value>Read all contacts</value>
+  </data>
+  <data name="Settings_ReadContactsAll_Desc" xml:space="preserve">
+    <value>Show all contacts to manually add birthdays</value>
+  </data>
+  <data name="Settings_WriteContacts" xml:space="preserve">
+    <value>Write to contacts</value>
+  </data>
+  <data name="Settings_WriteContacts_Desc" xml:space="preserve">
+    <value>Save birthdays back to your contacts</value>
+  </data>
+  <data name="Settings_Calendars" xml:space="preserve">
+    <value>Calendars</value>
+  </data>
+  <data name="Settings_ReadCalendars" xml:space="preserve">
+    <value>Read from calendars</value>
+  </data>
+  <data name="Settings_ReadCalendars_Desc" xml:space="preserve">
+    <value>Import birthday events from your calendars</value>
+  </data>
+  <data name="Settings_WriteCalendars" xml:space="preserve">
+    <value>Write to calendars</value>
+  </data>
+  <data name="Settings_WriteCalendars_Desc" xml:space="preserve">
+    <value>Create birthday events in your calendars</value>
+  </data>
+  <data name="Settings_SelectCalendars" xml:space="preserve">
+    <value>Select calendars:</value>
+  </data>
+  <data name="Permission_Required" xml:space="preserve">
+    <value>Permission Required</value>
+  </data>
+  <data name="Permission_ContactsRead_Denied" xml:space="preserve">
+    <value>Contact read permission is required for this feature. Please enable it in settings.</value>
+  </data>
+  <data name="Permission_ContactsWrite_Denied" xml:space="preserve">
+    <value>Contact write permission is required for this feature. Please enable it in settings.</value>
+  </data>
+  <data name="Permission_CalendarRead_Denied" xml:space="preserve">
+    <value>Calendar read permission is required for this feature. Please enable it in settings.</value>
+  </data>
+  <data name="Permission_CalendarWrite_Denied" xml:space="preserve">
+    <value>Calendar write permission is required for this feature. Please enable it in settings.</value>
+  </data>
+  <data name="Calendar_Default" xml:space="preserve">
+    <value>Default Calendar</value>
+  </data>
+  <data name="Calendar_Personal" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="Calendar_Work" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <data name="Calendar_Family" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="Settings_Saved_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_Saved_Message" xml:space="preserve">
+    <value>Settings saved successfully</value>
   </data>
 </root>

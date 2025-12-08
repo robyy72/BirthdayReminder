@@ -15,7 +15,14 @@
                        VerticalOptions="Center"
                        Grid.Column="0" />
 
-                <Button Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
+                <Button Text="+"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        CornerRadius="25"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
                         Clicked="OnNewBirthdayClicked"
                         Grid.Column="1" />
             </Grid>

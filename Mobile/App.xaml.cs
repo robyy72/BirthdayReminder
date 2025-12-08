@@ -14,9 +14,14 @@ public partial class App : Application
 
 	private static Page SetMainPage()
 	{
+		if (MobileConstants.CLEAN_PREFS_AT_START)
+		{
+			PrefsHelper.RemoveAllKeys();
+		}
+
 		if (!SettingsService.IsInitialized())
 		{
-			return new AskForContactsPage();
+			return new Welcome_1Page();
 		}
 
 		return new AppShell();

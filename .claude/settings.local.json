@@ -27,7 +27,8 @@
       "Bash(dotnet sln:*)",
       "Bash(dotnet add:*)",
       "Edit(.claude/CLAUDE.md)",
-      "Edit(.claude/settings.local.json)"
+      "Edit(.claude/settings.local.json)",
+      "Bash(del \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml\" \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml.cs\")"
     ],
     "deny": [],
     "ask": [

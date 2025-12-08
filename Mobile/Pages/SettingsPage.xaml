@@ -5,35 +5,223 @@
              x:Class="Mobile.SettingsPage"
              Title="{x:Static resx:Resources.Page_Settings_Title}">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-        <Label Text="Birthday Source" FontSize="18" FontAttributes="Bold" />
-        <Picker x:Name="SourcePicker">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Manual Input</x:String>
-                    <x:String>From Contacts</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            <!-- Language Selection -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="12"
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#x1F310;"
+                               FontSize="20"
+                               VerticalOptions="Center" />
+                        <Label Text="{x:Static resx:Resources.Settings_Language}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-        <Label Text="Default Reminder Time" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0" />
-        <TimePicker x:Name="ReminderTimePicker" />
+                    <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
+                                         x:Name="LocaleRadioGroup"
+                                         Spacing="5">
+                        <RadioButton Content="Deutsch"
+                                     Value="de"
+                                     FontSize="16"
+                                     x:Name="RadioDe" />
+                        <RadioButton Content="English"
+                                     Value="en"
+                                     FontSize="16"
+                                     x:Name="RadioEn" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Label Text="Language" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0" />
-        <Picker x:Name="LocalePicker">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>de</x:String>
-                    <x:String>en</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            <!-- Reminder Time -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="12"
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#x23F0;"
+                               FontSize="20"
+                               VerticalOptions="Center" />
+                        <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-        <Button Text="{x:Static resx:Resources.General_Button_Save}"
-                Clicked="OnSaveClicked"
-                Margin="0,20,0,0" />
+                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                        <Frame BackgroundColor="White"
+                               CornerRadius="8"
+                               Padding="10"
+                               HasShadow="False">
+                            <HorizontalStackLayout Spacing="8">
+                                <Button Text="&#x25BC;"
+                                        FontSize="16"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        Clicked="OnHoursDown" />
+                                <Entry x:Name="HoursEntry"
+                                       Text="18"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       WidthRequest="55"
+                                       HorizontalTextAlignment="Center"
+                                       Keyboard="Numeric" />
+                                <Button Text="&#x25B2;"
+                                        FontSize="16"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        Clicked="OnHoursUp" />
+                            </HorizontalStackLayout>
+                        </Frame>
 
-    </VerticalStackLayout>
+                        <Label Text=":"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+
+                        <Frame BackgroundColor="White"
+                               CornerRadius="8"
+                               Padding="10"
+                               HasShadow="False">
+                            <HorizontalStackLayout Spacing="8">
+                                <Button Text="&#x25BC;"
+                                        FontSize="16"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        Clicked="OnMinutesDown" />
+                                <Entry x:Name="MinutesEntry"
+                                       Text="00"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       WidthRequest="55"
+                                       HorizontalTextAlignment="Center"
+                                       Keyboard="Numeric" />
+                                <Button Text="&#x25B2;"
+                                        FontSize="16"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        Clicked="OnMinutesUp" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Contacts Section -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="12"
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#x1F4D6;"
+                               FontSize="20"
+                               VerticalOptions="Center" />
+                        <Label Text="{x:Static resx:Resources.Settings_Contacts}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
+                        <Label Text="{x:Static resx:Resources.Settings_ReadContactsBirthday}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="ReadContactsBirthdaySwitch"
+                                Grid.Column="1"
+                                Toggled="OnContactsReadToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
+                        <Label Text="{x:Static resx:Resources.Settings_ReadContactsAll}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="ReadContactsAllSwitch"
+                                Grid.Column="1"
+                                Toggled="OnContactsReadToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
+                        <Label Text="{x:Static resx:Resources.Settings_WriteContacts}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="WriteContactsSwitch"
+                                Grid.Column="1"
+                                Toggled="OnContactsWriteToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Calendar Section -->
+            <Frame BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="12"
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="12">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="&#x1F4C5;"
+                               FontSize="20"
+                               VerticalOptions="Center" />
+                        <Label Text="{x:Static resx:Resources.Settings_Calendars}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
+                        <Label Text="{x:Static resx:Resources.Settings_ReadCalendars}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="ReadCalendarsSwitch"
+                                Grid.Column="1"
+                                Toggled="OnCalendarReadToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
+                        <Label Text="{x:Static resx:Resources.Settings_WriteCalendars}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="WriteCalendarsSwitch"
+                                Grid.Column="1"
+                                Toggled="OnCalendarWriteToggled"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                    FontSize="18"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    Margin="0,10,0,0"
+                    Clicked="OnSaveClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

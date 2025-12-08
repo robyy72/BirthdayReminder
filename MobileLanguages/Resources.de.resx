@@ -40,13 +40,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page_Main_Title" xml:space="preserve">
-    <value>Nächste Geburtstage</value>
+    <value>Birthday Reminder</value>
   </data>
   <data name="Page_Main_MissedTitle" xml:space="preserve">
     <value>Verpasste Geburtstage</value>
   </data>
   <data name="Page_Main_NewBirthday" xml:space="preserve">
     <value>Neuer Eintrag</value>
+  </data>
+  <data name="General_Button_New" xml:space="preserve">
+    <value>Neu</value>
   </data>
   <data name="Page_AskForContacts_Title" xml:space="preserve">
     <value>Einrichtung</value>
@@ -95,5 +98,110 @@
   </data>
   <data name="General_Label_Birthday" xml:space="preserve">
     <value>Geburtstag</value>
+  </data>
+  <data name="General_Button_Next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="General_Button_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="General_Button_Finish" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="General_Button_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Page_Welcome_Title" xml:space="preserve">
+    <value>Willkommen</value>
+  </data>
+  <data name="Welcome_Header" xml:space="preserve">
+    <value>Willkommen bei Birthday Reminder</value>
+  </data>
+  <data name="Welcome_DataSources" xml:space="preserve">
+    <value>Datenquellen</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Settings_ReminderTime" xml:space="preserve">
+    <value>Erinnerungszeit</value>
+  </data>
+  <data name="Time_Hours" xml:space="preserve">
+    <value>Stunden</value>
+  </data>
+  <data name="Time_Minutes" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="Settings_Contacts" xml:space="preserve">
+    <value>Kontakte</value>
+  </data>
+  <data name="Settings_ReadContactsBirthday" xml:space="preserve">
+    <value>Kontakte mit Geburtstag lesen</value>
+  </data>
+  <data name="Settings_ReadContactsBirthday_Desc" xml:space="preserve">
+    <value>Geburtstage aus Kontakten mit eingetragenem Geburtstag importieren</value>
+  </data>
+  <data name="Settings_ReadContactsAll" xml:space="preserve">
+    <value>Alle Kontakte lesen</value>
+  </data>
+  <data name="Settings_ReadContactsAll_Desc" xml:space="preserve">
+    <value>Alle Kontakte anzeigen, um manuell Geburtstage hinzuzufügen</value>
+  </data>
+  <data name="Settings_WriteContacts" xml:space="preserve">
+    <value>In Kontakte schreiben</value>
+  </data>
+  <data name="Settings_WriteContacts_Desc" xml:space="preserve">
+    <value>Geburtstage in Kontakten speichern</value>
+  </data>
+  <data name="Settings_Calendars" xml:space="preserve">
+    <value>Kalender</value>
+  </data>
+  <data name="Settings_ReadCalendars" xml:space="preserve">
+    <value>Aus Kalendern lesen</value>
+  </data>
+  <data name="Settings_ReadCalendars_Desc" xml:space="preserve">
+    <value>Geburtstagstermine aus Kalendern importieren</value>
+  </data>
+  <data name="Settings_WriteCalendars" xml:space="preserve">
+    <value>In Kalender schreiben</value>
+  </data>
+  <data name="Settings_WriteCalendars_Desc" xml:space="preserve">
+    <value>Geburtstagstermine in Kalendern erstellen</value>
+  </data>
+  <data name="Settings_SelectCalendars" xml:space="preserve">
+    <value>Kalender auswählen:</value>
+  </data>
+  <data name="Permission_Required" xml:space="preserve">
+    <value>Berechtigung erforderlich</value>
+  </data>
+  <data name="Permission_ContactsRead_Denied" xml:space="preserve">
+    <value>Die Leseberechtigung für Kontakte wird für diese Funktion benötigt. Bitte in den Einstellungen aktivieren.</value>
+  </data>
+  <data name="Permission_ContactsWrite_Denied" xml:space="preserve">
+    <value>Die Schreibberechtigung für Kontakte wird für diese Funktion benötigt. Bitte in den Einstellungen aktivieren.</value>
+  </data>
+  <data name="Permission_CalendarRead_Denied" xml:space="preserve">
+    <value>Die Leseberechtigung für Kalender wird für diese Funktion benötigt. Bitte in den Einstellungen aktivieren.</value>
+  </data>
+  <data name="Permission_CalendarWrite_Denied" xml:space="preserve">
+    <value>Die Schreibberechtigung für Kalender wird für diese Funktion benötigt. Bitte in den Einstellungen aktivieren.</value>
+  </data>
+  <data name="Calendar_Default" xml:space="preserve">
+    <value>Standardkalender</value>
+  </data>
+  <data name="Calendar_Personal" xml:space="preserve">
+    <value>Persönlich</value>
+  </data>
+  <data name="Calendar_Work" xml:space="preserve">
+    <value>Arbeit</value>
+  </data>
+  <data name="Calendar_Family" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="Settings_Saved_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Settings_Saved_Message" xml:space="preserve">
+    <value>Einstellungen wurden gespeichert</value>
   </data>
 </root>

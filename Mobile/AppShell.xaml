@@ -5,32 +5,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Mobile"
     xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-    Title="BirthdayReminder"
+    Title="{x:Static resx:Resources.Page_Main_Title}"
     Shell.NavBarIsVisible="True"
     Shell.BackgroundColor="{StaticResource Primary}"
     Shell.TitleColor="White"
-    Shell.ForegroundColor="White">
+    Shell.ForegroundColor="White"
+    FlyoutBackgroundColor="{StaticResource Gray100}"
+    FlyoutBehavior="Flyout">
 
-    <TabBar>
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="120" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="{x:Static resx:Resources.Page_Main_Title}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
 
+    <!-- MainPage - not shown in flyout menu (we're already home) -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"
+        FlyoutItemIsVisible="False" />
+
+    <FlyoutItem Title="{x:Static resx:Resources.Tab_ShowAll}"
+                FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="{x:Static resx:Resources.Tab_ShowAll}"
             ContentTemplate="{DataTemplate local:AllBirthdaysPage}"
             Route="AllBirthdaysPage" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="{x:Static resx:Resources.Tab_Settings}"
+                FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="{x:Static resx:Resources.Tab_Settings}"
             ContentTemplate="{DataTemplate local:SettingsPage}"
             Route="SettingsPage" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="{x:Static resx:Resources.Tab_Privacy}"
+                FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="{x:Static resx:Resources.Tab_Privacy}"
             ContentTemplate="{DataTemplate local:PrivacyPage}"
             Route="PrivacyPage" />
-    </TabBar>
+    </FlyoutItem>
 
 </Shell>

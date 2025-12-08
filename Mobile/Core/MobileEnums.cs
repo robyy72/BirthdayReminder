@@ -1,12 +1,5 @@
 namespace Mobile;
 
-public enum BirthdaySource
-{
-	NotSet = 0,
-	ManualInput = 1,
-	Contacts = 2
-}
-
 public enum ReminderType
 {
 	NotSet = 0,

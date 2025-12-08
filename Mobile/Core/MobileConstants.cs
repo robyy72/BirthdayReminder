@@ -2,6 +2,8 @@ namespace Mobile;
 
 public static class MobileConstants
 {
+	public const bool CLEAN_PREFS_AT_START = true;
+
 	public const int DEFAULT_REMINDER_TIME = 1800;
 	public const string DEFAULT_LOCALE = "de";
 	public static readonly string[] SUPPORTED_LOCALES = ["de", "en"];
