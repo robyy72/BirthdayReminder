@@ -45,6 +45,9 @@
   <data name="Page_Main_MissedTitle" xml:space="preserve">
     <value>Verpasste Geburtstage</value>
   </data>
+  <data name="Page_Main_UpcomingTitle" xml:space="preserve">
+    <value>Anstehende Geburtstage</value>
+  </data>
   <data name="Page_Main_NewBirthday" xml:space="preserve">
     <value>Neuer Eintrag</value>
   </data>

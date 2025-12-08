@@ -37,6 +37,7 @@ public class Resources
 
 	public static string Page_Main_Title => ResourceManager.GetString("Page_Main_Title", resourceCulture) ?? "";
 	public static string Page_Main_MissedTitle => ResourceManager.GetString("Page_Main_MissedTitle", resourceCulture) ?? "";
+	public static string Page_Main_UpcomingTitle => ResourceManager.GetString("Page_Main_UpcomingTitle", resourceCulture) ?? "";
 	public static string Page_Main_NewBirthday => ResourceManager.GetString("Page_Main_NewBirthday", resourceCulture) ?? "";
 	public static string Page_AskForContacts_Title => ResourceManager.GetString("Page_AskForContacts_Title", resourceCulture) ?? "";
 	public static string Page_AskForContacts_Question => ResourceManager.GetString("Page_AskForContacts_Question", resourceCulture) ?? "";

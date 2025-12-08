@@ -8,25 +8,39 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
+            <!-- Header with Title and FAB -->
             <Grid ColumnDefinitions="*,Auto">
                 <Label Text="{x:Static resx:Resources.Page_Main_Title}"
-                       FontSize="24"
+                       FontSize="28"
                        FontAttributes="Bold"
                        VerticalOptions="Center"
                        Grid.Column="0" />
 
-                <Button Text="+"
-                        FontSize="24"
-                        FontAttributes="Bold"
-                        WidthRequest="50"
-                        HeightRequest="50"
-                        CornerRadius="25"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White"
-                        Clicked="OnNewBirthdayClicked"
-                        Grid.Column="1" />
+                <!-- Material Design FAB with + and New label -->
+                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                    <Button Text="+"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            CornerRadius="28"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            Shadow="{Shadow Brush=Black, Offset='2,4', Radius=6, Opacity=0.3}"
+                            Clicked="OnNewBirthdayClicked" />
+                    <Label Text="{x:Static resx:Resources.General_Button_New}"
+                           FontSize="10"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource Gray600}" />
+                </VerticalStackLayout>
             </Grid>
-            
+
+            <!-- Upcoming Birthdays Section -->
+            <Label Text="{x:Static resx:Resources.Page_Main_UpcomingTitle}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0" />
+
             <CollectionView x:Name="UpcomingList"
                             ItemsSource="{Binding UpcomingBirthdays}"
                             SelectionMode="Single"
