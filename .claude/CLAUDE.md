@@ -25,6 +25,13 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - Each solution (in `apps/` and `libs/`) has its own git repository
 - **IMPORTANT:** Before starting work, run `git pull` in each repo to get latest changes
 - Use `git pull` (merge), NOT `git pull --rebase` to preserve history
+- **Commit only, don't push too often** - user will request push when needed
+
+---
+
+## Build
+
+- **Do NOT run `dotnet build` unless explicitly requested** - it breaks Hot Reload!
 
 ---
 
@@ -44,18 +51,48 @@ If a command is in `allow`, execute it directly without asking for permission.
 ```
 BirthdayReminder/
 ├── BirthdayReminder.sln
+├── Common/                         # Shared class library
+│   ├── Core/
+│   │   └── CommonConstants.cs      # DOMAIN, API_BASE_URL
+│   └── Models/
+│       └── ErrorModel.cs           # Error logging model
 ├── Mobile/                         # MAUI App (Android & iOS only)
-│   ├── Core/                       # Core logic
+│   ├── Core/
 │   │   ├── MobileConstants.cs
 │   │   └── MobileEnums.cs
-│   ├── Platforms/                  # Platform-specific code
+│   ├── Helpers/
+│   │   └── PrefsHelper.cs
+│   ├── Pages/
+│   │   ├── MainPage.xaml(.cs)
+│   │   ├── AllBirthdaysPage.xaml(.cs)
+│   │   ├── SettingsPage.xaml(.cs)
+│   │   ├── PrivacyPage.xaml(.cs)
+│   │   ├── Welcome_1Page.xaml(.cs)
+│   │   └── Welcome_2Page.xaml(.cs)
+│   ├── Services/
+│   │   ├── ApiService.cs           # HTTP client with <T> support
+│   │   ├── BirthdayService.cs
+│   │   ├── ErrorService.cs         # Online: Sentry, Offline: prefs
+│   │   ├── MobileService.cs        # Network access detection
+│   │   └── SettingsService.cs
+│   ├── Platforms/
 │   │   ├── Android/
 │   │   └── iOS/
-│   ├── Resources/                  # Assets, fonts, styles
+│   ├── Resources/
 │   ├── App.xaml / App.xaml.cs
 │   ├── AppShell.xaml / AppShell.xaml.cs
-│   ├── MainPage.xaml / MainPage.xaml.cs
 │   └── MauiProgram.cs
-└── MobileLanguages/                # Resource files (resx) for localization
-    └── MobileLanguages.csproj
+├── MobileLanguages/                # Resource files (resx) for localization
+│   ├── Resources.resx              # English (default)
+│   ├── Resources.de.resx           # German
+│   └── Resources.Designer.cs
+├── WebsiteAdmin/                   # ASP.NET Core - admin.birthday-reminder.online
+│   ├── Core/
+│   │   └── WebsiteAdminConstants.cs
+│   ├── Services/
+│   │   └── ApiService.cs
+│   └── Pages/
+└── WebsiteCustomer/                # ASP.NET Core - birthday-reminder.online (landing page)
+    └── Core/
+        └── WebsiteCustomerConstants.cs
 ```

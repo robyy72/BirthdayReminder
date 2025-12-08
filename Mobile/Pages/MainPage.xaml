@@ -16,23 +16,15 @@
                        VerticalOptions="Center"
                        Grid.Column="0" />
 
-                <!-- Material Design FAB with + and New label -->
-                <VerticalStackLayout Grid.Column="1" Spacing="2">
-                    <Button Text="+"
-                            FontSize="28"
-                            FontAttributes="Bold"
-                            WidthRequest="56"
-                            HeightRequest="56"
-                            CornerRadius="28"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="White"
-                            Shadow="{Shadow Brush=Black, Offset='2,4', Radius=6, Opacity=0.3}"
-                            Clicked="OnNewBirthdayClicked" />
-                    <Label Text="{x:Static resx:Resources.General_Button_New}"
-                           FontSize="10"
-                           HorizontalOptions="Center"
-                           TextColor="{StaticResource Gray600}" />
-                </VerticalStackLayout>
+                <Button Text="{x:Static resx:Resources.General_Button_New}"
+                        FontSize="16"
+                        Padding="20,10"
+                        CornerRadius="20"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        Shadow="{Shadow Brush=Black, Offset='2,4', Radius=6, Opacity=0.3}"
+                        Clicked="OnNewBirthdayClicked"
+                        Grid.Column="1" />
             </Grid>
 
             <!-- Upcoming Birthdays Section -->
