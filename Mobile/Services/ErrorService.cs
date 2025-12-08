@@ -79,6 +79,12 @@ public static class ErrorService
 	private static void StoreErrorOffline(ErrorModel error)
 	{
 		var errors = GetStoredErrors();
+
+		if (errors.Count >= MobileConstants.MAX_ERRORS_INTO_PREFS)
+		{
+			return;
+		}
+
 		errors.Add(error);
 		SaveErrors(errors);
 	}

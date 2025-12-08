@@ -204,4 +204,13 @@
   <data name="Settings_Saved_Message" xml:space="preserve">
     <value>Einstellungen wurden gespeichert</value>
   </data>
+  <data name="Welcome_Header_Title" xml:space="preserve">
+    <value>Willkommen bei Birthday Reminder</value>
+  </data>
+  <data name="Welcome_1_Text_1" xml:space="preserve">
+    <value>Vergessen Sie nie wieder einen wichtigen Geburtstag!</value>
+  </data>
+  <data name="Welcome_1_Text_2" xml:space="preserve">
+    <value>Lassen Sie uns Ihre Einstellungen einrichten.</value>
+  </data>
 </root>

@@ -9,11 +9,24 @@
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="25">
 
-            <Label Text="{x:Static resx:Resources.Welcome_Header}"
+            <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   Margin="0,20,0,30" />
+                   Margin="0,20,0,10" />
+
+            <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
+                   FontSize="16"
+                   TextColor="{StaticResource Gray600}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
+                   FontSize="16"
+                   TextColor="{StaticResource Gray600}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,20" />
 
             <!-- Language Selection -->
             <Frame BackgroundColor="{StaticResource Gray100}"

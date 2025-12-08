@@ -15,6 +15,7 @@ public static class MobileConstants
 	public const string PREFS_BIRTHDAYS_PREFIX = "Birthdays_";
 	public const string PREFS_SETTINGS = "Settings";
 	public const string PREFS_ERRORS = "Errors";
+	public const int MAX_ERRORS_INTO_PREFS = 10;
 
 	public const string APP_NAME = "Mobile";
 }

@@ -90,4 +90,7 @@ public class Resources
 	public static string Calendar_Family => ResourceManager.GetString("Calendar_Family", resourceCulture) ?? "";
 	public static string Settings_Saved_Title => ResourceManager.GetString("Settings_Saved_Title", resourceCulture) ?? "";
 	public static string Settings_Saved_Message => ResourceManager.GetString("Settings_Saved_Message", resourceCulture) ?? "";
+	public static string Welcome_Header_Title => ResourceManager.GetString("Welcome_Header_Title", resourceCulture) ?? "";
+	public static string Welcome_1_Text_1 => ResourceManager.GetString("Welcome_1_Text_1", resourceCulture) ?? "";
+	public static string Welcome_1_Text_2 => ResourceManager.GetString("Welcome_1_Text_2", resourceCulture) ?? "";
 }
