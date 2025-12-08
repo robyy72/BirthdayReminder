@@ -1,6 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:label="B-Day 🔔"></application>
+	<application 
+		android:allowBackup="true" 
+		android:icon="@mipmap/appicon" 
+		android:roundIcon="@mipmap/appicon_round" 
+		android:supportsRtl="true" 
+		android:label="B-Day 🔔">
+	</application>
+	
+	<!-- Netzwerk (hast du schon) -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	
+	<!-- Benachrichtigungen (Android 13+) -->
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	
+	<!-- Kalender (falls du das einbauen willst) -->
+	<uses-permission android:name="android.permission.READ_CALENDAR" />
+	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
+	
+	<!-- Kontakte (falls Import von Geburtstagen) -->
+	<uses-permission android:name="android.permission.READ_CONTACTS" />
+	
+	<!-- Wecker/Erinnerungen pünktlich auslösen -->
+	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	
+	<!-- Vibration bei Benachrichtigung -->
+	<uses-permission android:name="android.permission.VIBRATE" />
 </manifest>

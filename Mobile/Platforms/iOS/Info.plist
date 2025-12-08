@@ -16,8 +16,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -32,5 +30,18 @@
 	<string>15.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>B-Day 🔔</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>de</string>
+	</array>
+
+	<!-- Permission Descriptions (Fallback, wird durch Lokalisierung überschrieben) -->
+	<key>NSCalendarsUsageDescription</key>
+	<string>To add new or updated birthdays to your calendar</string>
+	<key>NSContactsUsageDescription</key>
+	<string>To import birthdays from your contacts</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>To remind you of upcoming birthdays</string>
 </dict>
 </plist>

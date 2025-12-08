@@ -1,0 +1,8 @@
+/* Calendar access */
+"NSCalendarsUsageDescription" = "Um neue oder geänderte Geburtstage in deinen Kalender einzutragen";
+
+/* Contacts access */
+"NSContactsUsageDescription" = "Um Geburtstage aus deinen Kontakten zu importieren";
+
+/* Notifications */
+"NSUserNotificationsUsageDescription" = "Um dich an bevorstehende Geburtstage zu erinnern";
