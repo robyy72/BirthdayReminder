@@ -30,5 +30,7 @@
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>MinimumOSVersion</key>
 	<string>15.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>B-Day 🔔</string>
 </dict>
 </plist>
