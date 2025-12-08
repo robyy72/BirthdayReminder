@@ -52,5 +52,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MobileLanguages\MobileLanguages.csproj" />
+		<ProjectReference Include="..\Common\Common.csproj" />
 	</ItemGroup>
 </Project>
