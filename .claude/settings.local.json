@@ -29,7 +29,8 @@
       "Edit(.claude/CLAUDE.md)",
       "Edit(.claude/settings.local.json)",
       "Bash(del \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml\" \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml.cs\")",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(dotnet list:*)"
     ],
     "deny": [],
     "ask": [

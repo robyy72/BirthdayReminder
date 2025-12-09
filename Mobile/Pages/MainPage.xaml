@@ -5,34 +5,17 @@
              x:Class="Mobile.MainPage"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resx:Resources.General_Button_New}"
+                     Clicked="OnNewBirthdayClicked" />
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-
-            <!-- Header with Title and FAB -->
-            <Grid ColumnDefinitions="*,Auto">
-                <Label Text="{x:Static resx:Resources.Page_Main_Title}"
-                       FontSize="28"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       Grid.Column="0" />
-
-                <Button Text="{x:Static resx:Resources.General_Button_New}"
-                        FontSize="16"
-                        Padding="20,10"
-                        CornerRadius="20"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White"
-                        Shadow="{Shadow Brush=Black, Offset='2,4', Radius=6, Opacity=0.3}"
-                        Clicked="OnNewBirthdayClicked"
-                        Grid.Column="1" />
-            </Grid>
-
             <!-- Upcoming Birthdays Section -->
             <Label Text="{x:Static resx:Resources.Page_Main_UpcomingTitle}"
                    FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,10,0,0" />
-
+                   FontAttributes="Bold" />
             <CollectionView x:Name="UpcomingList"
                             ItemsSource="{Binding UpcomingBirthdays}"
                             SelectionMode="Single"
@@ -52,11 +35,11 @@
                 </CollectionView.EmptyView>
             </CollectionView>
 
+            <!-- Missed Birthdays Section -->
             <Label Text="{x:Static resx:Resources.Page_Main_MissedTitle}"
                    FontSize="24"
                    FontAttributes="Bold"
                    Margin="0,20,0,0" />
-
             <CollectionView x:Name="MissedList"
                             ItemsSource="{Binding MissedBirthdays}"
                             SelectionMode="Single"
@@ -75,8 +58,6 @@
                     <Label Text="No missed birthdays" TextColor="Gray" />
                 </CollectionView.EmptyView>
             </CollectionView>
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

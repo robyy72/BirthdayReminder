@@ -9,21 +9,19 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		return new Window(SetMainPage());
+		Page page = SetMainPage();
+        return new Window(page);
 	}
 
 	private static Page SetMainPage()
 	{
-		if (MobileConstants.CLEAN_PREFS_AT_START)
-		{
-			PrefsHelper.RemoveAllKeys();
-		}
+		if (MobileConstants.CLEAN_PREFS_AT_START)		
+			PrefsHelper.RemoveAllKeys();		
 
-		if (!SettingsService.IsInitialized())
-		{
-			return new Welcome_1Page();
-		}
+		Page page = new Welcome_1Page();
+		if (SettingsService.IsInitialized())
+			page = new AppShell();
 
-		return new AppShell();
+		return page;
 	}
 }
