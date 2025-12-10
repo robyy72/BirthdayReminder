@@ -41,8 +41,8 @@ public partial class Welcome_1Page : ContentPage
 		int hours = settings.DefaultReminderTime / 100;
 		int minutes = settings.DefaultReminderTime % 100;
 
-		HoursPicker.SelectedItemsIndex = [hours];
-		MinutesPicker.SelectedItemsIndex = [minutes];
+		HoursPicker.SelectedIndex = hours;
+		MinutesPicker.SelectedIndex = minutes;
 
 		if (settings.Locale == "en")
 			RadioEn.IsChecked = true;
@@ -58,8 +58,7 @@ public partial class Welcome_1Page : ContentPage
 				RadioDark.IsChecked = true;
 				break;
 			default:
-				AppTheme systemTheme = Application.Current?.RequestedTheme ?? AppTheme.Light;
-				if (systemTheme == AppTheme.Dark)
+				if (DeviceService.IsDarkTheme())
 					RadioDark.IsChecked = true;
 				else
 					RadioLight.IsChecked = true;
@@ -71,8 +70,8 @@ public partial class Welcome_1Page : ContentPage
 	{
 		var settings = SettingsService.Get();
 
-		int hours = HoursPicker.SelectedItemsIndex[0];
-		int minutes = MinutesPicker.SelectedItemsIndex[0];
+		int hours = HoursPicker.SelectedIndex;
+		int minutes = MinutesPicker.SelectedIndex;
 		settings.DefaultReminderTime = hours * 100 + minutes;
 
 		if (RadioEn.IsChecked)
@@ -81,21 +80,13 @@ public partial class Welcome_1Page : ContentPage
 			settings.Locale = "de";
 
 		if (RadioLight.IsChecked)
-		{
 			settings.Theme = "Light";
-			Application.Current!.UserAppTheme = AppTheme.Light;
-		}
 		else if (RadioDark.IsChecked)
-		{
 			settings.Theme = "Dark";
-			Application.Current!.UserAppTheme = AppTheme.Dark;
-		}
 		else
-		{
 			settings.Theme = "System";
-			Application.Current!.UserAppTheme = AppTheme.Unspecified;
-		}
 
+		DeviceService.ApplyTheme(settings.Theme);
 		SettingsService.Update(settings);
 
 		await Shell.Current.GoToAsync("//Welcome_2Page");

@@ -2,8 +2,7 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:wp="https://vapolia.eu/WheelPicker">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -329,22 +328,24 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
-    <!-- ==================== WHEEL PICKER ==================== -->
+    <!-- ==================== PICKER ==================== -->
 
-    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerBase">
-        <Setter Property="HeightRequest" Value="120" />
+    <Style TargetType="Picker" x:Key="PickerBase">
+        <Setter Property="FontSize" Value="18" />
         <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
-    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerTime" BasedOn="{StaticResource WheelPickerBase}">
+    <Style TargetType="Picker" x:Key="PickerTime" BasedOn="{StaticResource PickerBase}">
         <Setter Property="WidthRequest" Value="80" />
     </Style>
 
-    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerDayAndMonth" BasedOn="{StaticResource WheelPickerBase}">
+    <Style TargetType="Picker" x:Key="PickerDayAndMonth" BasedOn="{StaticResource PickerBase}">
         <Setter Property="WidthRequest" Value="120" />
     </Style>
 
-    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerYear" BasedOn="{StaticResource WheelPickerBase}">
+    <Style TargetType="Picker" x:Key="PickerYear" BasedOn="{StaticResource PickerBase}">
         <Setter Property="WidthRequest" Value="100" />
     </Style>
 

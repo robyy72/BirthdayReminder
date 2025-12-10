@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             xmlns:wp="https://vapolia.eu/WheelPicker"
              x:Class="Mobile.NewBirthdayPage"
              Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
 
@@ -31,24 +30,24 @@
                         <VerticalStackLayout>
                             <Label Text="{x:Static resx:Resources.Date_Day}"
                                    Style="{StaticResource LabelTimeCaption}" />
-                            <wp:WheelPicker x:Name="DayPicker"
-                                            Style="{StaticResource WheelPickerDayAndMonth}" />
+                            <Picker x:Name="DayPicker"
+                                    Style="{StaticResource PickerDayAndMonth}" />
                         </VerticalStackLayout>
 
                         <!-- Month -->
                         <VerticalStackLayout>
                             <Label Text="{x:Static resx:Resources.Date_Month}"
                                    Style="{StaticResource LabelTimeCaption}" />
-                            <wp:WheelPicker x:Name="MonthPicker"
-                                            Style="{StaticResource WheelPickerDayAndMonth}" />
+                            <Picker x:Name="MonthPicker"
+                                    Style="{StaticResource PickerDayAndMonth}" />
                         </VerticalStackLayout>
 
                         <!-- Year -->
                         <VerticalStackLayout>
                             <Label Text="{x:Static resx:Resources.Date_Year}"
                                    Style="{StaticResource LabelTimeCaption}" />
-                            <wp:WheelPicker x:Name="YearPicker"
-                                            Style="{StaticResource WheelPickerYear}" />
+                            <Picker x:Name="YearPicker"
+                                    Style="{StaticResource PickerYear}" />
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>

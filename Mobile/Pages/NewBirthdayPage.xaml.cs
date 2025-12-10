@@ -76,9 +76,9 @@ public partial class NewBirthdayPage : ContentPage
 
 	private void SetDefaultDate()
 	{
-		DayPicker.SelectedItemsIndex = [DateTime.Now.Day - 1];
-		MonthPicker.SelectedItemsIndex = [DateTime.Now.Month - 1];
-		YearPicker.SelectedItemsIndex = [0];
+		DayPicker.SelectedIndex = DateTime.Now.Day - 1;
+		MonthPicker.SelectedIndex = DateTime.Now.Month - 1;
+		YearPicker.SelectedIndex = 0;
 	}
 
 	private void LoadPerson(int id)
@@ -89,12 +89,12 @@ public partial class NewBirthdayPage : ContentPage
 			NameEntry.Text = _existingPerson.Name;
 			if (_existingPerson.Birthday != null)
 			{
-				DayPicker.SelectedItemsIndex = [_existingPerson.Birthday.Day - 1];
-				MonthPicker.SelectedItemsIndex = [_existingPerson.Birthday.Month - 1];
+				DayPicker.SelectedIndex = _existingPerson.Birthday.Day - 1;
+				MonthPicker.SelectedIndex = _existingPerson.Birthday.Month - 1;
 
 				int currentYear = DateTime.Now.Year;
 				int yearIndex = currentYear - _existingPerson.Birthday.Year;
-				YearPicker.SelectedItemsIndex = [Math.Clamp(yearIndex, 0, _yearsList.Count - 1)];
+				YearPicker.SelectedIndex = Math.Clamp(yearIndex, 0, _yearsList.Count - 1);
 			}
 			DeleteButton.IsVisible = true;
 		}
@@ -106,9 +106,9 @@ public partial class NewBirthdayPage : ContentPage
 		if (string.IsNullOrEmpty(name))
 			return;
 
-		int day = DayPicker.SelectedItemsIndex[0] + 1;
-		int month = MonthPicker.SelectedItemsIndex[0] + 1;
-		int year = int.Parse(_yearsList[YearPicker.SelectedItemsIndex[0]]);
+		int day = DayPicker.SelectedIndex + 1;
+		int month = MonthPicker.SelectedIndex + 1;
+		int year = int.Parse(_yearsList[YearPicker.SelectedIndex]);
 
 		var birthday = new Birthday
 		{
