@@ -2,158 +2,111 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:wp="https://vapolia.eu/WheelPicker"
              x:Class="Mobile.Welcome_1Page"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="25">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Style="{StaticResource HeaderBar}">
+            <Label Text="{x:Static resx:Resources.Page_Main_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+        </Grid>
 
-            <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,10" />
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="25">
 
-            <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
-                   FontSize="16"
-                   TextColor="{StaticResource Gray600}"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
+                       Style="{StaticResource LabelHeader}" />
 
-            <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
-                   FontSize="16"
-                   TextColor="{StaticResource Gray600}"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   Margin="0,0,0,20" />
+                <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
+                       Style="{StaticResource LabelInfo}" />
 
-            <!-- Language Selection -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="15"
-                   Padding="20"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="{x:Static resx:Resources.Settings_Language}"
-                           FontSize="22"
-                           FontAttributes="Bold" />
+                <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
+                       Style="{StaticResource LabelInfo}" />
 
-                    <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
-                                         RadioButtonGroup.SelectedValue="{Binding SelectedLocale}"
-                                         x:Name="LocaleRadioGroup"
-                                         Spacing="10">
-                        <RadioButton Content="Deutsch"
-                                     Value="de"
-                                     FontSize="18"
-                                     x:Name="RadioDe" />
-                        <RadioButton Content="English"
-                                     Value="en"
-                                     FontSize="18"
-                                     x:Name="RadioEn" />
+                <!-- Theme Selection -->
+                <Border Style="{StaticResource Tile}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="{x:Static resx:Resources.Settings_Theme}"
+                               Style="{StaticResource LabelSectionHeader}" />
+
+                        <VerticalStackLayout RadioButtonGroup.GroupName="ThemeGroup"
+                                             x:Name="ThemeRadioGroup"
+                                             Spacing="10">
+                            <RadioButton Content="{x:Static resx:Resources.Settings_Theme_Light}"
+                                         Value="Light"
+                                         Style="{StaticResource RadioStandard}"
+                                         x:Name="RadioLight" />
+                            <RadioButton Content="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                         Value="Dark"
+                                         Style="{StaticResource RadioStandard}"
+                                         x:Name="RadioDark" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
+                </Border>
 
-            <!-- Reminder Time -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="15"
-                   Padding="20"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
-                           FontSize="22"
-                           FontAttributes="Bold" />
+                <!-- Language Selection -->
+                <Border Style="{StaticResource Tile}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="{x:Static resx:Resources.Settings_Language}"
+                               Style="{StaticResource LabelSectionHeader}" />
 
-                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                        <!-- Hours -->
-                        <Frame BackgroundColor="White"
-                               CornerRadius="10"
-                               Padding="15"
-                               HasShadow="False">
-                            <VerticalStackLayout Spacing="5">
+                        <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
+                                             RadioButtonGroup.SelectedValue="{Binding SelectedLocale}"
+                                             x:Name="LocaleRadioGroup"
+                                             Spacing="10">
+                            <RadioButton Content="Deutsch"
+                                         Value="de"
+                                         Style="{StaticResource RadioStandard}"
+                                         x:Name="RadioDe" />
+                            <RadioButton Content="English"
+                                         Value="en"
+                                         Style="{StaticResource RadioStandard}"
+                                         x:Name="RadioEn" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Reminder Time -->
+                <Border Style="{StaticResource Tile}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
+                               Style="{StaticResource LabelSectionHeader}" />
+
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                            <!-- Hours -->
+                            <VerticalStackLayout>
                                 <Label Text="{x:Static resx:Resources.Time_Hours}"
-                                       FontSize="14"
-                                       TextColor="{StaticResource Gray500}"
-                                       HorizontalOptions="Center" />
-                                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                                    <Button Text="▼"
-                                            FontSize="20"
-                                            WidthRequest="50"
-                                            HeightRequest="50"
-                                            CornerRadius="25"
-                                            BackgroundColor="{StaticResource Primary}"
-                                            Clicked="OnHoursDown" />
-                                    <Entry x:Name="HoursEntry"
-                                           Text="18"
-                                           FontSize="28"
-                                           FontAttributes="Bold"
-                                           WidthRequest="70"
-                                           HorizontalTextAlignment="Center"
-                                           Keyboard="Numeric" />
-                                    <Button Text="▲"
-                                            FontSize="20"
-                                            WidthRequest="50"
-                                            HeightRequest="50"
-                                            CornerRadius="25"
-                                            BackgroundColor="{StaticResource Primary}"
-                                            Clicked="OnHoursUp" />
-                                </HorizontalStackLayout>
+                                       Style="{StaticResource LabelTimeCaption}" />
+                                <wp:WheelPicker x:Name="HoursPicker"
+                                                Style="{StaticResource WheelPickerTime}" />
                             </VerticalStackLayout>
-                        </Frame>
 
-                        <Label Text=":"
-                               FontSize="32"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
+                            <Label Text=":"
+                                   Style="{StaticResource LabelTimeSeparator}" />
 
-                        <!-- Minutes -->
-                        <Frame BackgroundColor="White"
-                               CornerRadius="10"
-                               Padding="15"
-                               HasShadow="False">
-                            <VerticalStackLayout Spacing="5">
+                            <!-- Minutes -->
+                            <VerticalStackLayout>
                                 <Label Text="{x:Static resx:Resources.Time_Minutes}"
-                                       FontSize="14"
-                                       TextColor="{StaticResource Gray500}"
-                                       HorizontalOptions="Center" />
-                                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                                    <Button Text="▼"
-                                            FontSize="20"
-                                            WidthRequest="50"
-                                            HeightRequest="50"
-                                            CornerRadius="25"
-                                            BackgroundColor="{StaticResource Primary}"
-                                            Clicked="OnMinutesDown" />
-                                    <Entry x:Name="MinutesEntry"
-                                           Text="00"
-                                           FontSize="28"
-                                           FontAttributes="Bold"
-                                           WidthRequest="70"
-                                           HorizontalTextAlignment="Center"
-                                           Keyboard="Numeric" />
-                                    <Button Text="▲"
-                                            FontSize="20"
-                                            WidthRequest="50"
-                                            HeightRequest="50"
-                                            CornerRadius="25"
-                                            BackgroundColor="{StaticResource Primary}"
-                                            Clicked="OnMinutesUp" />
-                                </HorizontalStackLayout>
+                                       Style="{StaticResource LabelTimeCaption}" />
+                                <wp:WheelPicker x:Name="MinutesPicker"
+                                                Style="{StaticResource WheelPickerTime}" />
                             </VerticalStackLayout>
-                        </Frame>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
 
-            <!-- Next Button -->
-            <Button Text="{x:Static resx:Resources.General_Button_Next}"
-                    FontSize="20"
-                    HeightRequest="60"
-                    CornerRadius="30"
-                    Margin="0,20,0,0"
-                    Clicked="OnNextClicked" />
+                <!-- Next Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Next}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnNextClicked" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>

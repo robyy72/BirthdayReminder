@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary 
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:wp="https://vapolia.eu/WheelPicker">
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -173,18 +174,178 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Label" x:Key="Headline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
-        <Setter Property="FontSize" Value="32" />
+    <!-- ==================== LABELS ==================== -->
+
+    <Style TargetType="Label" x:Key="LabelHeader">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="Label" x:Key="SubHeadline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
-        <Setter Property="FontSize" Value="24" />
+    <Style TargetType="Label" x:Key="LabelSectionHeader">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelInfo">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelBody">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelDescription">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelError">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#D32F2F" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelSuccess">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#388E3C" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelHeaderBar">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelTimeSeparator">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelTimeCaption">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!-- ==================== TILES / BORDERS ==================== -->
+
+    <Style TargetType="Border" x:Key="Tile">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 15" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
+        <Setter Property="StrokeThickness" Value="{AppThemeBinding Light=1, Dark=0}" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="{StaticResource Gray400}"
+                        Offset="2,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileInner">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="Stroke" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="HeaderBar">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="HeightRequest" Value="80" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="HeaderBarWithBack">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
+        <Setter Property="Padding" Value="10,20" />
+        <Setter Property="HeightRequest" Value="80" />
+    </Style>
+
+    <!-- ==================== ENTRIES ==================== -->
+
+    <Style TargetType="Entry" x:Key="EntryStandard">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <!-- ==================== BUTTONS ==================== -->
+
+    <Style TargetType="Button" x:Key="ButtonPrimary">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="CornerRadius" Value="30" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonSecondary">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="CornerRadius" Value="30" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonCircle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonBack">
+        <Setter Property="Text" Value="◀" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <!-- ==================== RADIO BUTTONS ==================== -->
+
+    <Style TargetType="RadioButton" x:Key="RadioStandard">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <!-- ==================== WHEEL PICKER ==================== -->
+
+    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerBase">
+        <Setter Property="HeightRequest" Value="120" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerTime" BasedOn="{StaticResource WheelPickerBase}">
+        <Setter Property="WidthRequest" Value="80" />
+    </Style>
+
+    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerDayAndMonth" BasedOn="{StaticResource WheelPickerBase}">
+        <Setter Property="WidthRequest" Value="120" />
+    </Style>
+
+    <Style TargetType="wp:WheelPicker" x:Key="WheelPickerYear" BasedOn="{StaticResource WheelPickerBase}">
+        <Setter Property="WidthRequest" Value="100" />
     </Style>
 
     <Style TargetType="ListView">
@@ -408,7 +569,7 @@
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBackground}, Dark={StaticResource OffBlack}}" />
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">

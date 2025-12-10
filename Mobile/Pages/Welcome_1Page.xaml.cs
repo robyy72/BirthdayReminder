@@ -2,81 +2,98 @@ namespace Mobile;
 
 public partial class Welcome_1Page : ContentPage
 {
-	private int _hours = 18;
-	private int _minutes = 0;
+	private readonly List<string> _hoursList = [];
+	private readonly List<string> _minutesList = [];
+	private bool _pickersInitialized = false;
 
 	public Welcome_1Page()
 	{
 		InitializeComponent();
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		if (!_pickersInitialized)
+		{
+			InitializePickers();
+			_pickersInitialized = true;
+		}
 		LoadSettings();
+	}
+
+	private void InitializePickers()
+	{
+		for (int i = 0; i < 24; i++)
+			_hoursList.Add(i.ToString("D2"));
+
+		for (int i = 0; i < 60; i++)
+			_minutesList.Add(i.ToString("D2"));
+
+		HoursPicker.ItemsSource = _hoursList;
+		MinutesPicker.ItemsSource = _minutesList;
 	}
 
 	private void LoadSettings()
 	{
 		var settings = SettingsService.Get();
 
-		_hours = settings.DefaultReminderTime / 100;
-		_minutes = settings.DefaultReminderTime % 100;
+		int hours = settings.DefaultReminderTime / 100;
+		int minutes = settings.DefaultReminderTime % 100;
 
-		HoursEntry.Text = _hours.ToString("D2");
-		MinutesEntry.Text = _minutes.ToString("D2");
+		HoursPicker.SelectedItemsIndex = [hours];
+		MinutesPicker.SelectedItemsIndex = [minutes];
 
 		if (settings.Locale == "en")
-		{
 			RadioEn.IsChecked = true;
-		}
 		else
-		{
 			RadioDe.IsChecked = true;
+
+		switch (settings.Theme)
+		{
+			case "Light":
+				RadioLight.IsChecked = true;
+				break;
+			case "Dark":
+				RadioDark.IsChecked = true;
+				break;
+			default:
+				AppTheme systemTheme = Application.Current?.RequestedTheme ?? AppTheme.Light;
+				if (systemTheme == AppTheme.Dark)
+					RadioDark.IsChecked = true;
+				else
+					RadioLight.IsChecked = true;
+				break;
 		}
-	}
-
-	private void OnHoursUp(object? sender, EventArgs e)
-	{
-		_hours = (_hours + 1) % 24;
-		HoursEntry.Text = _hours.ToString("D2");
-	}
-
-	private void OnHoursDown(object? sender, EventArgs e)
-	{
-		_hours = (_hours - 1 + 24) % 24;
-		HoursEntry.Text = _hours.ToString("D2");
-	}
-
-	private void OnMinutesUp(object? sender, EventArgs e)
-	{
-		_minutes = (_minutes + 5) % 60;
-		MinutesEntry.Text = _minutes.ToString("D2");
-	}
-
-	private void OnMinutesDown(object? sender, EventArgs e)
-	{
-		_minutes = (_minutes - 5 + 60) % 60;
-		MinutesEntry.Text = _minutes.ToString("D2");
 	}
 
 	private async void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
 
-		if (int.TryParse(HoursEntry.Text, out int hours))
-		{
-			_hours = Math.Clamp(hours, 0, 23);
-		}
-		if (int.TryParse(MinutesEntry.Text, out int minutes))
-		{
-			_minutes = Math.Clamp(minutes, 0, 59);
-		}
-
-		settings.DefaultReminderTime = _hours * 100 + _minutes;
+		int hours = HoursPicker.SelectedItemsIndex[0];
+		int minutes = MinutesPicker.SelectedItemsIndex[0];
+		settings.DefaultReminderTime = hours * 100 + minutes;
 
 		if (RadioEn.IsChecked)
-		{
 			settings.Locale = "en";
+		else
+			settings.Locale = "de";
+
+		if (RadioLight.IsChecked)
+		{
+			settings.Theme = "Light";
+			Application.Current!.UserAppTheme = AppTheme.Light;
+		}
+		else if (RadioDark.IsChecked)
+		{
+			settings.Theme = "Dark";
+			Application.Current!.UserAppTheme = AppTheme.Dark;
 		}
 		else
 		{
-			settings.Locale = "de";
+			settings.Theme = "System";
+			Application.Current!.UserAppTheme = AppTheme.Unspecified;
 		}
 
 		SettingsService.Update(settings);

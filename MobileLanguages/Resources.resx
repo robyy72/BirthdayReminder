@@ -208,12 +208,69 @@
     <value>Settings saved successfully</value>
   </data>
   <data name="Welcome_Header_Title" xml:space="preserve">
-    <value>Welcome to Birthday Reminder</value>
+    <value>Welcome</value>
   </data>
   <data name="Welcome_1_Text_1" xml:space="preserve">
     <value>Never forget an important birthday again!</value>
   </data>
   <data name="Welcome_1_Text_2" xml:space="preserve">
     <value>Let's set up your preferences to get started.</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_Theme_System" xml:space="preserve">
+    <value>System Default</value>
+  </data>
+  <data name="Date_Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Date_Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Date_Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Month_January" xml:space="preserve">
+    <value>January</value>
+  </data>
+  <data name="Month_February" xml:space="preserve">
+    <value>February</value>
+  </data>
+  <data name="Month_March" xml:space="preserve">
+    <value>March</value>
+  </data>
+  <data name="Month_April" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="Month_May" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="Month_June" xml:space="preserve">
+    <value>June</value>
+  </data>
+  <data name="Month_July" xml:space="preserve">
+    <value>July</value>
+  </data>
+  <data name="Month_August" xml:space="preserve">
+    <value>August</value>
+  </data>
+  <data name="Month_September" xml:space="preserve">
+    <value>September</value>
+  </data>
+  <data name="Month_October" xml:space="preserve">
+    <value>October</value>
+  </data>
+  <data name="Month_November" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="Month_December" xml:space="preserve">
+    <value>December</value>
   </data>
 </root>

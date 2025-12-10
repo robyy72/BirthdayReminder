@@ -181,7 +181,9 @@ public partial class Welcome_2Page : ContentPage
 
 		SettingsService.Update(settings);
 
-		if (Application.Current?.Windows.Count > 0)
+		PrefsHelper.SetValue(MobileConstants.PREFS_SETTINGS_INITIALIZED, true);
+
+        if (Application.Current?.Windows.Count > 0)
 		{
 			Application.Current.Windows[0].Page = new AppShell();
 		}

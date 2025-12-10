@@ -94,4 +94,23 @@ public class Resources
 	public static string Welcome_Header_Title => ResourceManager.GetString("Welcome_Header_Title", resourceCulture) ?? "";
 	public static string Welcome_1_Text_1 => ResourceManager.GetString("Welcome_1_Text_1", resourceCulture) ?? "";
 	public static string Welcome_1_Text_2 => ResourceManager.GetString("Welcome_1_Text_2", resourceCulture) ?? "";
+	public static string Settings_Theme => ResourceManager.GetString("Settings_Theme", resourceCulture) ?? "";
+	public static string Settings_Theme_Light => ResourceManager.GetString("Settings_Theme_Light", resourceCulture) ?? "";
+	public static string Settings_Theme_Dark => ResourceManager.GetString("Settings_Theme_Dark", resourceCulture) ?? "";
+	public static string Settings_Theme_System => ResourceManager.GetString("Settings_Theme_System", resourceCulture) ?? "";
+	public static string Date_Day => ResourceManager.GetString("Date_Day", resourceCulture) ?? "";
+	public static string Date_Month => ResourceManager.GetString("Date_Month", resourceCulture) ?? "";
+	public static string Date_Year => ResourceManager.GetString("Date_Year", resourceCulture) ?? "";
+	public static string Month_January => ResourceManager.GetString("Month_January", resourceCulture) ?? "";
+	public static string Month_February => ResourceManager.GetString("Month_February", resourceCulture) ?? "";
+	public static string Month_March => ResourceManager.GetString("Month_March", resourceCulture) ?? "";
+	public static string Month_April => ResourceManager.GetString("Month_April", resourceCulture) ?? "";
+	public static string Month_May => ResourceManager.GetString("Month_May", resourceCulture) ?? "";
+	public static string Month_June => ResourceManager.GetString("Month_June", resourceCulture) ?? "";
+	public static string Month_July => ResourceManager.GetString("Month_July", resourceCulture) ?? "";
+	public static string Month_August => ResourceManager.GetString("Month_August", resourceCulture) ?? "";
+	public static string Month_September => ResourceManager.GetString("Month_September", resourceCulture) ?? "";
+	public static string Month_October => ResourceManager.GetString("Month_October", resourceCulture) ?? "";
+	public static string Month_November => ResourceManager.GetString("Month_November", resourceCulture) ?? "";
+	public static string Month_December => ResourceManager.GetString("Month_December", resourceCulture) ?? "";
 }

@@ -50,12 +50,24 @@ public static class SettingsService
 	}
 
 	/// <summary>
-	/// Aim: Check if settings have been initialized (Locale is set).
+	/// Aim: Check if settings have been initialized (saved to prefs by user).
 	/// </summary>
 	/// <returns>True if initialized, false otherwise.</returns>
 	public static bool IsInitialized()
 	{
-		var settings = Get();
-		return !string.IsNullOrEmpty(settings.Locale);
+		bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
+        if (startAlwaysWithWelcome)
+			return false;
+
+		bool settingsInitialized = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_SETTINGS_INITIALIZED);
+		return settingsInitialized;
+	}
+
+	/// <summary>
+	/// Aim: Clear the cached settings (used when prefs are cleared).
+	/// </summary>
+	public static void ClearCache()
+	{
+		_settings = null;
 	}
 }

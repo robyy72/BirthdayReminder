@@ -7,19 +7,21 @@
     xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
     Title="{x:Static resx:Resources.Page_Main_Title}"
     Shell.NavBarIsVisible="True"
-    Shell.BackgroundColor="{StaticResource Primary}"
-    Shell.TitleColor="White"
-    Shell.ForegroundColor="White"
-    FlyoutBackgroundColor="{StaticResource Gray100}"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
+    Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"
     FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="120" Padding="20">
+        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
+              HeightRequest="120"
+              Padding="20">
             <VerticalStackLayout VerticalOptions="Center">
                 <Label Text="{x:Static resx:Resources.Page_Main_Title}"
                        FontSize="24"
                        FontAttributes="Bold"
-                       TextColor="White" />
+                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
             </VerticalStackLayout>
         </Grid>
     </Shell.FlyoutHeader>

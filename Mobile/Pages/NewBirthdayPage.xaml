@@ -2,27 +2,72 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:wp="https://vapolia.eu/WheelPicker"
              x:Class="Mobile.NewBirthdayPage"
              Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
 
-        <Label Text="{x:Static resx:Resources.General_Label_Name}" />
-        <Entry x:Name="NameEntry" Placeholder="Name" />
+            <!-- Name -->
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{x:Static resx:Resources.General_Label_Name}"
+                           Style="{StaticResource LabelSectionHeader}" />
+                    <Entry x:Name="NameEntry"
+                           Placeholder="{x:Static resx:Resources.General_Label_Name}"
+                           Style="{StaticResource EntryStandard}" />
+                </VerticalStackLayout>
+            </Border>
 
-        <Label Text="{x:Static resx:Resources.General_Label_Birthday}" />
-        <DatePicker x:Name="BirthdayPicker" />
+            <!-- Birthday -->
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{x:Static resx:Resources.General_Label_Birthday}"
+                           Style="{StaticResource LabelSectionHeader}" />
 
-        <Button Text="{x:Static resx:Resources.General_Button_Save}"
-                Clicked="OnSaveClicked" />
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                        <!-- Day -->
+                        <VerticalStackLayout>
+                            <Label Text="{x:Static resx:Resources.Date_Day}"
+                                   Style="{StaticResource LabelTimeCaption}" />
+                            <wp:WheelPicker x:Name="DayPicker"
+                                            Style="{StaticResource WheelPickerDayAndMonth}" />
+                        </VerticalStackLayout>
 
-        <Button x:Name="DeleteButton"
-                Text="{x:Static resx:Resources.General_Button_Delete}"
-                BackgroundColor="Red"
-                TextColor="White"
-                Clicked="OnDeleteClicked"
-                IsVisible="False" />
+                        <!-- Month -->
+                        <VerticalStackLayout>
+                            <Label Text="{x:Static resx:Resources.Date_Month}"
+                                   Style="{StaticResource LabelTimeCaption}" />
+                            <wp:WheelPicker x:Name="MonthPicker"
+                                            Style="{StaticResource WheelPickerDayAndMonth}" />
+                        </VerticalStackLayout>
 
-    </VerticalStackLayout>
+                        <!-- Year -->
+                        <VerticalStackLayout>
+                            <Label Text="{x:Static resx:Resources.Date_Year}"
+                                   Style="{StaticResource LabelTimeCaption}" />
+                            <wp:WheelPicker x:Name="YearPicker"
+                                            Style="{StaticResource WheelPickerYear}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Save Button -->
+            <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnSaveClicked" />
+
+            <!-- Delete Button -->
+            <Button x:Name="DeleteButton"
+                    Text="{x:Static resx:Resources.General_Button_Delete}"
+                    Style="{StaticResource ButtonSecondary}"
+                    BackgroundColor="#D32F2F"
+                    Clicked="OnDeleteClicked"
+                    IsVisible="False" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

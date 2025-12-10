@@ -11,96 +11,52 @@ namespace Mobile;
 public static class PrefsHelper
 {
 	/// <summary>
-	/// Aim: Get a string value from preferences.
+	/// Aim: Get a value from preferences.
 	/// </summary>
+	/// <typeparam name="T">The type to retrieve.</typeparam>
 	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored string or default value.</returns>
-	public static string GetValue(string key, string defaultValue = "")
+	/// <returns>The stored value or default for type T.</returns>
+	public static T? GetValue<T>(string key)
 	{
-		return Preferences.Get(key, defaultValue);
-	}
-
-	/// <summary>
-	/// Aim: Get an int value from preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored int or default value.</returns>
-	public static int GetValue(string key, int defaultValue)
-	{
-		return Preferences.Get(key, defaultValue);
-	}
-
-	/// <summary>
-	/// Aim: Get a bool value from preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored bool or default value.</returns>
-	public static bool GetValue(string key, bool defaultValue)
-	{
-		return Preferences.Get(key, defaultValue);
-	}
-
-	/// <summary>
-	/// Aim: Get a double value from preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored double or default value.</returns>
-	public static double GetValue(string key, double defaultValue)
-	{
-		return Preferences.Get(key, defaultValue);
-	}
-
-	/// <summary>
-	/// Aim: Get a DateTimeOffset value from preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored DateTimeOffset or default value.</returns>
-	public static DateTimeOffset GetValue(string key, DateTimeOffset defaultValue)
-	{
-		var ticks = Preferences.Get(key, defaultValue.Ticks);
-		var offset = TimeSpan.FromMinutes(Preferences.Get($"{key}_offset", (int)defaultValue.Offset.TotalMinutes));
-		return new DateTimeOffset(ticks, offset);
-	}
-
-	/// <summary>
-	/// Aim: Get a DateOnly value from preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found.</param>
-	/// <returns>The stored DateOnly or default value.</returns>
-	public static DateOnly GetValue(string key, DateOnly defaultValue)
-	{
-		var dayNumber = Preferences.Get(key, defaultValue.DayNumber);
-		return DateOnly.FromDayNumber(dayNumber);
-	}
-
-	/// <summary>
-	/// Aim: Get an object value from preferences (JSON serialized).
-	/// </summary>
-	/// <typeparam name="T">The type to deserialize to.</typeparam>
-	/// <param name="key">The preference key.</param>
-	/// <param name="defaultValue">Default value if key not found or deserialization fails.</param>
-	/// <returns>The deserialized object or default value.</returns>
-	public static T? GetValue<T>(string key, T? defaultValue = default) where T : class
-	{
-		var json = Preferences.Get(key, string.Empty);
-		if (string.IsNullOrEmpty(json))
+		switch (typeof(T))
 		{
-			return defaultValue;
-		}
+			case Type t when t == typeof(bool):
+				bool boolValue = Preferences.Get(key, false);
+				return (T)(object)boolValue;
 
-		try
-		{
-			return JsonSerializer.Deserialize<T>(json) ?? defaultValue;
-		}
-		catch
-		{
-			return defaultValue;
+			case Type t when t == typeof(int):
+				int intValue = Preferences.Get(key, 0);
+				return (T)(object)intValue;
+
+			case Type t when t == typeof(double):
+				double doubleValue = Preferences.Get(key, 0.0);
+				return (T)(object)doubleValue;
+
+			case Type t when t == typeof(string):
+				string stringValue = Preferences.Get(key, string.Empty);
+				return (T)(object)stringValue;
+
+			case Type t when t == typeof(DateTimeOffset):
+				long ticks = Preferences.Get(key, 0L);
+				if (ticks == 0L)
+					return default;
+				int offsetMinutes = Preferences.Get($"{key}_offset", 0);
+				DateTimeOffset dtoValue = new DateTimeOffset(ticks, TimeSpan.FromMinutes(offsetMinutes));
+				return (T)(object)dtoValue;
+
+			default:
+				string json = Preferences.Get(key, string.Empty);
+				if (string.IsNullOrEmpty(json))
+					return default;
+				try
+				{
+					T? deserializedValue = JsonSerializer.Deserialize<T>(json);
+					return deserializedValue;
+				}
+				catch
+				{
+					return default;
+				}
 		}
 	}
 
@@ -156,16 +112,6 @@ public static class PrefsHelper
 	}
 
 	/// <summary>
-	/// Aim: Set a DateOnly value in preferences.
-	/// </summary>
-	/// <param name="key">The preference key.</param>
-	/// <param name="value">The value to store.</param>
-	public static void SetValue(string key, DateOnly value)
-	{
-		Preferences.Set(key, value.DayNumber);
-	}
-
-	/// <summary>
 	/// Aim: Set an object value in preferences (JSON serialized).
 	/// </summary>
 	/// <typeparam name="T">The type of object to serialize.</typeparam>
@@ -173,7 +119,7 @@ public static class PrefsHelper
 	/// <param name="value">The object to store.</param>
 	public static void SetValue<T>(string key, T value) where T : class
 	{
-		var json = JsonSerializer.Serialize(value);
+		string json = JsonSerializer.Serialize(value);
 		Preferences.Set(key, json);
 	}
 
@@ -184,7 +130,8 @@ public static class PrefsHelper
 	/// <returns>True if the key exists, false otherwise.</returns>
 	public static bool Exists(string key)
 	{
-		return Preferences.ContainsKey(key);
+		bool exists = Preferences.ContainsKey(key);
+		return exists;
 	}
 
 	/// <summary>

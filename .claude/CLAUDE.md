@@ -13,6 +13,8 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - Namespace = Project name (no folder-based namespaces)
 - File-scoped namespaces: `namespace Common;`
 - Usings wrapped in `#region Usings`
+- No blank line after `#region` and before `#endregion`
+- Return values: Assign to variable first, then return (easier debugging)
 - Summaries with Aim/Params/Return
 - UTF-8 with BOM, CRLF line endings
 

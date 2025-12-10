@@ -15,4 +15,5 @@ public class Settings
 
 	public int DefaultReminderTime { get; set; } = MobileConstants.DEFAULT_REMINDER_TIME;
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
+	public string Theme { get; set; } = MobileConstants.DEFAULT_THEME;
 }
