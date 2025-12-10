@@ -239,7 +239,7 @@
     <!-- ==================== TILES / BORDERS ==================== -->
 
     <Style TargetType="Border" x:Key="Tile">
-        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 15" />
         <Setter Property="Padding" Value="20" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
@@ -255,7 +255,7 @@
     </Style>
 
     <Style TargetType="Border" x:Key="TileInner">
-        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 10" />
         <Setter Property="Padding" Value="15" />
         <Setter Property="Stroke" Value="Transparent" />

@@ -9,216 +9,129 @@
         <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Language Selection -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="12"
-                   Padding="15"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="10">
-                    <HorizontalStackLayout Spacing="8">
-                        <Label Text="&#x1F310;"
-                               FontSize="20"
-                               VerticalOptions="Center" />
-                        <Label Text="{x:Static resx:Resources.Settings_Language}"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+            <Label Text="{x:Static resx:Resources.Settings_Language}"
+                   Style="{StaticResource LabelHeader}" />
 
-                    <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
-                                         x:Name="LocaleRadioGroup"
-                                         Spacing="5">
-                        <RadioButton Content="Deutsch"
-                                     Value="de"
-                                     FontSize="16"
-                                     x:Name="RadioDe" />
-                        <RadioButton Content="English"
-                                     Value="en"
-                                     FontSize="16"
-                                     x:Name="RadioEn" />
-                    </VerticalStackLayout>
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
+                                     Spacing="10">
+                    <RadioButton Content="Deutsch"
+                                 Value="de"
+                                 Style="{StaticResource RadioStandard}"
+                                 x:Name="RadioDe" />
+                    <RadioButton Content="English"
+                                 Value="en"
+                                 Style="{StaticResource RadioStandard}"
+                                 x:Name="RadioEn" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Reminder Time -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="12"
-                   Padding="15"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="10">
-                    <HorizontalStackLayout Spacing="8">
-                        <Label Text="&#x23F0;"
-                               FontSize="20"
-                               VerticalOptions="Center" />
-                        <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+            <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
+                   Style="{StaticResource LabelHeader}" />
 
-                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                        <Frame BackgroundColor="White"
-                               CornerRadius="8"
-                               Padding="10"
-                               HasShadow="False">
-                            <HorizontalStackLayout Spacing="8">
-                                <Button Text="&#x25BC;"
-                                        FontSize="16"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        CornerRadius="20"
-                                        BackgroundColor="{StaticResource Primary}"
-                                        Clicked="OnHoursDown" />
-                                <Entry x:Name="HoursEntry"
-                                       Text="18"
-                                       FontSize="22"
-                                       FontAttributes="Bold"
-                                       WidthRequest="55"
-                                       HorizontalTextAlignment="Center"
-                                       Keyboard="Numeric" />
-                                <Button Text="&#x25B2;"
-                                        FontSize="16"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        CornerRadius="20"
-                                        BackgroundColor="{StaticResource Primary}"
-                                        Clicked="OnHoursUp" />
-                            </HorizontalStackLayout>
-                        </Frame>
+            <Border Style="{StaticResource Tile}">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                    <VerticalStackLayout>
+                        <Label Text="{x:Static resx:Resources.Time_Hours}"
+                               Style="{StaticResource LabelTimeCaption}" />
+                        <Picker x:Name="HoursPicker"
+                                Style="{StaticResource PickerTime}" />
+                    </VerticalStackLayout>
 
-                        <Label Text=":"
-                               FontSize="24"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
+                    <Label Text=":"
+                           Style="{StaticResource LabelTimeSeparator}" />
 
-                        <Frame BackgroundColor="White"
-                               CornerRadius="8"
-                               Padding="10"
-                               HasShadow="False">
-                            <HorizontalStackLayout Spacing="8">
-                                <Button Text="&#x25BC;"
-                                        FontSize="16"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        CornerRadius="20"
-                                        BackgroundColor="{StaticResource Primary}"
-                                        Clicked="OnMinutesDown" />
-                                <Entry x:Name="MinutesEntry"
-                                       Text="00"
-                                       FontSize="22"
-                                       FontAttributes="Bold"
-                                       WidthRequest="55"
-                                       HorizontalTextAlignment="Center"
-                                       Keyboard="Numeric" />
-                                <Button Text="&#x25B2;"
-                                        FontSize="16"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        CornerRadius="20"
-                                        BackgroundColor="{StaticResource Primary}"
-                                        Clicked="OnMinutesUp" />
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
+                    <VerticalStackLayout>
+                        <Label Text="{x:Static resx:Resources.Time_Minutes}"
+                               Style="{StaticResource LabelTimeCaption}" />
+                        <Picker x:Name="MinutesPicker"
+                                Style="{StaticResource PickerTime}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
 
             <!-- Contacts Section -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="12"
-                   Padding="15"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="12">
-                    <HorizontalStackLayout Spacing="8">
-                        <Label Text="&#x1F4D6;"
-                               FontSize="20"
-                               VerticalOptions="Center" />
-                        <Label Text="{x:Static resx:Resources.Settings_Contacts}"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+            <Label Text="{x:Static resx:Resources.Settings_Contacts}"
+                   Style="{StaticResource LabelHeader}" />
 
-                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
-                        <Label Text="{x:Static resx:Resources.Settings_ReadContactsBirthday}"
-                               Grid.Column="0"
-                               FontSize="15"
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout RadioButtonGroup.GroupName="ContactsGroup"
+                                     Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ContactsRead}"
+                               Style="{StaticResource LabelBody}"
                                VerticalOptions="Center" />
-                        <Switch x:Name="ReadContactsBirthdaySwitch"
-                                Grid.Column="1"
-                                Toggled="OnContactsReadToggled"
-                                VerticalOptions="Center" />
+                        <RadioButton x:Name="RadioContactsRead"
+                                     Grid.Column="1"
+                                     Style="{StaticResource RadioStandard}"
+                                     CheckedChanged="OnContactsRadioChanged" />
                     </Grid>
-
-                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
-                        <Label Text="{x:Static resx:Resources.Settings_ReadContactsAll}"
-                               Grid.Column="0"
-                               FontSize="15"
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ContactsReadWrite}"
+                               Style="{StaticResource LabelBody}"
                                VerticalOptions="Center" />
-                        <Switch x:Name="ReadContactsAllSwitch"
-                                Grid.Column="1"
-                                Toggled="OnContactsReadToggled"
-                                VerticalOptions="Center" />
+                        <RadioButton x:Name="RadioContactsReadWrite"
+                                     Grid.Column="1"
+                                     Style="{StaticResource RadioStandard}"
+                                     CheckedChanged="OnContactsRadioChanged" />
                     </Grid>
-
-                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
-                        <Label Text="{x:Static resx:Resources.Settings_WriteContacts}"
-                               Grid.Column="0"
-                               FontSize="15"
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ContactsBirthdayCalendar}"
+                               Style="{StaticResource LabelBody}"
                                VerticalOptions="Center" />
-                        <Switch x:Name="WriteContactsSwitch"
-                                Grid.Column="1"
-                                Toggled="OnContactsWriteToggled"
-                                VerticalOptions="Center" />
+                        <RadioButton x:Name="RadioContactsBirthdayCalendar"
+                                     Grid.Column="1"
+                                     Style="{StaticResource RadioStandard}"
+                                     CheckedChanged="OnContactsRadioChanged" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ContactsNone}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <RadioButton x:Name="RadioContactsNone"
+                                     Grid.Column="1"
+                                     Style="{StaticResource RadioStandard}"
+                                     CheckedChanged="OnContactsRadioChanged" />
                     </Grid>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Calendar Section -->
-            <Frame BackgroundColor="{StaticResource Gray100}"
-                   CornerRadius="12"
-                   Padding="15"
-                   HasShadow="False">
-                <VerticalStackLayout Spacing="12">
-                    <HorizontalStackLayout Spacing="8">
-                        <Label Text="&#x1F4C5;"
-                               FontSize="20"
-                               VerticalOptions="Center" />
-                        <Label Text="{x:Static resx:Resources.Settings_Calendars}"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+            <Label Text="{x:Static resx:Resources.Settings_Calendars}"
+                   Style="{StaticResource LabelHeader}" />
 
-                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
-                        <Label Text="{x:Static resx:Resources.Settings_ReadCalendars}"
-                               Grid.Column="0"
-                               FontSize="15"
-                               VerticalOptions="Center" />
-                        <Switch x:Name="ReadCalendarsSwitch"
-                                Grid.Column="1"
-                                Toggled="OnCalendarReadToggled"
-                                VerticalOptions="Center" />
-                    </Grid>
-
-                    <Grid ColumnDefinitions="*,Auto" Padding="5,0">
-                        <Label Text="{x:Static resx:Resources.Settings_WriteCalendars}"
-                               Grid.Column="0"
-                               FontSize="15"
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="15">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
+                               Style="{StaticResource LabelBody}"
                                VerticalOptions="Center" />
                         <Switch x:Name="WriteCalendarsSwitch"
                                 Grid.Column="1"
-                                Toggled="OnCalendarWriteToggled"
+                                Toggled="OnWriteCalendarsToggled"
                                 VerticalOptions="Center" />
                     </Grid>
+
+                    <VerticalStackLayout x:Name="CalendarListContainer"
+                                         IsVisible="False"
+                                         Spacing="5">
+                        <Label Text="{x:Static resx:Resources.Settings_SelectCalendars}"
+                               Style="{StaticResource LabelDescription}" />
+                        <VerticalStackLayout x:Name="CalendarTogglesContainer"
+                                             Spacing="5" />
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Save Button -->
             <Button Text="{x:Static resx:Resources.General_Button_Save}"
-                    FontSize="18"
-                    HeightRequest="50"
-                    CornerRadius="25"
-                    Margin="0,10,0,0"
+                    Style="{StaticResource ButtonPrimary}"
                     Clicked="OnSaveClicked" />
 
         </VerticalStackLayout>

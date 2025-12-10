@@ -39,6 +39,10 @@
 	<!-- Permission Descriptions (Fallback, wird durch Lokalisierung überschrieben) -->
 	<key>NSCalendarsUsageDescription</key>
 	<string>To add new or updated birthdays to your calendar</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>To read and write birthday events in your calendar</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>To add birthday events to your calendar</string>
 	<key>NSContactsUsageDescription</key>
 	<string>To import birthdays from your contacts</string>
 	<key>NSUserNotificationsUsageDescription</key>

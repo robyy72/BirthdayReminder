@@ -70,9 +70,17 @@ public static class DeviceService
 	/// </summary>
 	public static async Task<bool> RequestContactsReadPermissionAsync()
 	{
-		PermissionStatus status = await Permissions.RequestAsync<Permissions.ContactsRead>();
-		bool isGranted = status == PermissionStatus.Granted;
-		return isGranted;
+		try
+		{
+			PermissionStatus status = await Permissions.RequestAsync<Permissions.ContactsRead>();
+			bool isGranted = status == PermissionStatus.Granted;
+			return isGranted;
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Contacts read permission error: {ex.Message}");
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -92,9 +100,17 @@ public static class DeviceService
 	/// </summary>
 	public static async Task<bool> RequestContactsWritePermissionAsync()
 	{
-		PermissionStatus status = await Permissions.RequestAsync<Permissions.ContactsWrite>();
-		bool isGranted = status == PermissionStatus.Granted;
-		return isGranted;
+		try
+		{
+			PermissionStatus status = await Permissions.RequestAsync<Permissions.ContactsWrite>();
+			bool isGranted = status == PermissionStatus.Granted;
+			return isGranted;
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Contacts write permission error: {ex.Message}");
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -114,9 +130,17 @@ public static class DeviceService
 	/// </summary>
 	public static async Task<bool> RequestCalendarReadPermissionAsync()
 	{
-		PermissionStatus status = await Permissions.RequestAsync<Permissions.CalendarRead>();
-		bool isGranted = status == PermissionStatus.Granted;
-		return isGranted;
+		try
+		{
+			PermissionStatus status = await Permissions.RequestAsync<Permissions.CalendarRead>();
+			bool isGranted = status == PermissionStatus.Granted;
+			return isGranted;
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Calendar read permission error: {ex.Message}");
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -136,9 +160,17 @@ public static class DeviceService
 	/// </summary>
 	public static async Task<bool> RequestCalendarWritePermissionAsync()
 	{
-		PermissionStatus status = await Permissions.RequestAsync<Permissions.CalendarWrite>();
-		bool isGranted = status == PermissionStatus.Granted;
-		return isGranted;
+		try
+		{
+			PermissionStatus status = await Permissions.RequestAsync<Permissions.CalendarWrite>();
+			bool isGranted = status == PermissionStatus.Granted;
+			return isGranted;
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Calendar write permission error: {ex.Message}");
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -147,15 +179,22 @@ public static class DeviceService
 	/// </summary>
 	public static async Task ShowPermissionDeniedAlertAsync(string title, string message)
 	{
-		bool openSettings = await Application.Current!.MainPage!.DisplayAlert(
-			title,
-			message,
-			MobileLanguages.Resources.General_Button_OK,
-			MobileLanguages.Resources.General_Button_Cancel);
-
-		if (openSettings)
+		if (Application.Current?.Windows.Count > 0)
 		{
-			AppInfo.ShowSettingsUI();
+			var page = Application.Current.Windows[0].Page;
+			if (page != null)
+			{
+				bool openSettings = await page.DisplayAlert(
+					title,
+					message,
+					MobileLanguages.Resources.General_Button_OK,
+					MobileLanguages.Resources.General_Button_Cancel);
+
+				if (openSettings)
+				{
+					AppInfo.ShowSettingsUI();
+				}
+			}
 		}
 	}
 	#endregion

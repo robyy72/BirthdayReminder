@@ -138,23 +138,20 @@
   <data name="Settings_Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
-  <data name="Settings_ReadContactsBirthday" xml:space="preserve">
-    <value>Read contacts with birthday</value>
+  <data name="Settings_ContactsRead" xml:space="preserve">
+    <value>Contacts as source</value>
   </data>
-  <data name="Settings_ReadContactsBirthday_Desc" xml:space="preserve">
-    <value>Import birthdays from contacts that have a birthday set</value>
+  <data name="Settings_ContactsReadWrite" xml:space="preserve">
+    <value>Contacts as source and write back</value>
   </data>
-  <data name="Settings_ReadContactsAll" xml:space="preserve">
-    <value>Read all contacts</value>
+  <data name="Settings_ContactsBirthdayCalendar" xml:space="preserve">
+    <value>Read once from birthday calendar</value>
   </data>
-  <data name="Settings_ReadContactsAll_Desc" xml:space="preserve">
-    <value>Show all contacts to manually add birthdays</value>
+  <data name="Settings_ContactsNone" xml:space="preserve">
+    <value>No access allowed</value>
   </data>
-  <data name="Settings_WriteContacts" xml:space="preserve">
-    <value>Write to contacts</value>
-  </data>
-  <data name="Settings_WriteContacts_Desc" xml:space="preserve">
-    <value>Save birthdays back to your contacts</value>
+  <data name="Settings_WriteCalendarsMultiple" xml:space="preserve">
+    <value>Write back to selected calendars</value>
   </data>
   <data name="Settings_Calendars" xml:space="preserve">
     <value>Calendars</value>

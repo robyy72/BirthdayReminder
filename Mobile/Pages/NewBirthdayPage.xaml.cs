@@ -86,7 +86,7 @@ public partial class NewBirthdayPage : ContentPage
 		_existingPerson = BirthdayService.GetPerson(id);
 		if (_existingPerson != null)
 		{
-			NameEntry.Text = _existingPerson.Name;
+			NameEntry.Text = _existingPerson.DisplayName;
 			if (_existingPerson.Birthday != null)
 			{
 				DayPicker.SelectedIndex = _existingPerson.Birthday.Day - 1;
@@ -119,7 +119,7 @@ public partial class NewBirthdayPage : ContentPage
 
 		if (_existingPerson != null)
 		{
-			_existingPerson.Name = name;
+			_existingPerson.DisplayName = name;
 			_existingPerson.Birthday = birthday;
 			BirthdayService.Update(_existingPerson);
 		}
@@ -128,7 +128,7 @@ public partial class NewBirthdayPage : ContentPage
 			var person = new Person
 			{
 				Id = GenerateId(),
-				Name = name,
+				DisplayName = name,
 				Birthday = birthday
 			};
 			BirthdayService.Add(person);

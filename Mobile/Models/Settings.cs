@@ -5,14 +5,9 @@ namespace Mobile;
 /// </summary>
 public class Settings
 {
-	public bool ReadFromContactsWithBirthday { get; set; }
-	public bool ReadFromContactsAll { get; set; }
-	public bool WriteToContacts { get; set; }
-	public bool ReadFromCalenders { get; set; }
-	public bool WriteToCalenders { get; set; }
-
-	// List of Calenders which the User gave access to
-
+	public ContactsMode ContactsMode { get; set; } = ContactsMode.None;
+	public bool WriteToCalendars { get; set; }
+	public List<string> SelectedCalendarIds { get; set; } = [];
 	public int DefaultReminderTime { get; set; } = MobileConstants.DEFAULT_REMINDER_TIME;
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
 	public string Theme { get; set; } = MobileConstants.DEFAULT_THEME;

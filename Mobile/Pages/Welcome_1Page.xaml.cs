@@ -66,7 +66,7 @@ public partial class Welcome_1Page : ContentPage
 		}
 	}
 
-	private async void OnNextClicked(object? sender, EventArgs e)
+	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
 
@@ -89,6 +89,9 @@ public partial class Welcome_1Page : ContentPage
 		DeviceService.ApplyTheme(settings.Theme);
 		SettingsService.Update(settings);
 
-		await Shell.Current.GoToAsync("//Welcome_2Page");
+		if (Application.Current?.Windows.Count > 0)
+		{
+			Application.Current.Windows[0].Page = new Welcome_2Page();
+		}
 	}
 }

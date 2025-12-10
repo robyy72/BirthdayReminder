@@ -13,7 +13,7 @@
             <DataTemplate>
                 <Frame Padding="10" Margin="10,5">
                     <HorizontalStackLayout Spacing="10">
-                        <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center" />
+                        <Label Text="{Binding DisplayName}" FontSize="18" VerticalOptions="Center" />
                         <Label Text="{Binding BirthdayDisplay}" FontSize="14" TextColor="Gray" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Frame>

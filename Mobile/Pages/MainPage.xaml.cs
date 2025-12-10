@@ -2,77 +2,215 @@ namespace Mobile;
 
 public partial class MainPage : ContentPage
 {
-    public List<PersonViewModel> UpcomingBirthdays { get; set; } = [];
-    public List<PersonViewModel> MissedBirthdays { get; set; } = [];
+	public List<PersonViewModel> UpcomingBirthdays { get; set; } = [];
+	public List<PersonViewModel> MissedBirthdays { get; set; } = [];
 
-    public MainPage()
-    {
-        InitializeComponent();
-        BindingContext = this;
+	private List<Person> _persons = [];
+	private Settings _settings = SettingsService.Get();
+	private bool _foundContactsWithSameBirthday = false;
+
+	public MainPage()
+	{
+		InitializeComponent();
+		BindingContext = this;
+		Init();
+
+	
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		UpdateBirthdayListsOnTheForm();
+	}
+
+	private void Init()
+	{
+        CheckRightsAndUpdateSettings();
+        LoadBirthdaysFromPrefs();
+        ReadContactsIfAllowed();
+        ReadBirthdaysFromBirthdayCalenderIfAllowed();
     }
 
-    protected override void OnAppearing()
+    #region Init Methods
+    private async void CheckRightsAndUpdateSettings()
     {
-        base.OnAppearing();
-        LoadBirthdays();
-    }
+        if (_settings.ContactsMode == ContactsMode.None)
+            return;
 
-    private void LoadBirthdays()
-    {
-        var today = DateTime.Today;
-        var allPersons = new List<Person>();
-
-        for (int month = 1; month <= 12; month++)
+        bool hasContactsRead = await DeviceService.CheckContactsReadPermissionAsync();
+        if (!hasContactsRead && (_settings.ContactsMode == ContactsMode.Read || _settings.ContactsMode == ContactsMode.ReadWrite))
         {
-            allPersons.AddRange(BirthdayService.GetByMonth(month));
+            _settings.ContactsMode = ContactsMode.None;
+            SettingsService.Update(_settings);
+            return;
         }
 
-        var upcoming = allPersons
-            .Where(p => p.Birthday != null)
-            .Select(p => new { Person = p, DaysUntil = GetDaysUntilBirthday(p.Birthday!, today) })
-            .Where(x => x.DaysUntil >= 0)
-            .OrderBy(x => x.DaysUntil)
-            .Take(MobileConstants.SHOW_UPCOMING)
-            .Select(x => new PersonViewModel(x.Person))
-            .ToList();
-
-        var missed = allPersons
-            .Where(p => p.Birthday != null)
-            .Select(p => new { Person = p, DaysSince = GetDaysSinceBirthday(p.Birthday!, today) })
-            .Where(x => x.DaysSince > 0 && x.DaysSince <= 30)
-            .OrderBy(x => x.DaysSince)
-            .Take(MobileConstants.SHOW_MISSED_BIRTHDAYS)
-            .Select(x => new PersonViewModel(x.Person))
-            .ToList();
-
-        UpcomingBirthdays = upcoming;
-        MissedBirthdays = missed;
-
-        OnPropertyChanged(nameof(UpcomingBirthdays));
-        OnPropertyChanged(nameof(MissedBirthdays));
-    }
-
-    private static int GetDaysUntilBirthday(Birthday birthday, DateTime today)
-    {
-        var thisYear = new DateTime(today.Year, birthday.Month, birthday.Day);
-        if (thisYear < today)
+        bool hasCalendarRead = await DeviceService.CheckCalendarReadPermissionAsync();
+        if (!hasCalendarRead && _settings.ContactsMode == ContactsMode.BirthdayCalendar)
         {
-            thisYear = thisYear.AddYears(1);
+            _settings.ContactsMode = ContactsMode.None;
+            SettingsService.Update(_settings);
         }
-        return (thisYear - today).Days;
     }
 
-    private static int GetDaysSinceBirthday(Birthday birthday, DateTime today)
-    {
-        var thisYear = new DateTime(today.Year, birthday.Month, birthday.Day);
-        if (thisYear > today)
-        {
-            thisYear = thisYear.AddYears(-1);
-        }
-        var days = (today - thisYear).Days;
-        return days > 0 && days <= 30 ? days : 0;
-    }
+    private void LoadBirthdaysFromPrefs()
+	{
+		_persons.Clear();
 
+		for (int month = 1; month <= 12; month++)
+		{
+			_persons.AddRange(BirthdayService.GetByMonth(month));
+		}
+	}
+    
+	private async void ReadContactsIfAllowed()
+	{
+		if (_settings.ContactsMode != ContactsMode.Read && _settings.ContactsMode != ContactsMode.ReadWrite)
+			return;
+
+		bool hasPermission = await DeviceService.CheckContactsReadPermissionAsync();
+		if (!hasPermission)
+			return;
+
+		try
+		{
+			var service = new ContactBirthdayService();
+			var contacts = await service.GetContactsWithBirthdaysAsync();
+
+			foreach (var contact in contacts)
+			{
+				if (contact.Birthday == null)
+					continue;
+
+				var birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(contact.Birthday);
+				ImportContactBirthday(contact.DisplayName, birthdayDate, contact.ContactId);
+			}
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error reading contacts: {ex.Message}");
+		}
+	}
+
+	/// <summary>
+	/// Aim: Imports a contact with birthday into the persons list and saves to prefs
+	/// Params: displayName - Contact display name, birthday - Contact birthday, contactId - Platform contact ID
+	/// Return: True if added, false if duplicate
+	/// </summary>
+	public bool ImportContactBirthday(string displayName, DateTime birthday, string? contactId)
+	{
+		if (string.IsNullOrWhiteSpace(displayName))
+			return false;
+
+		if (contactId != null)
+		{
+			var existingByContactId = _persons.FirstOrDefault(p => p.ContactId == contactId);
+			if (existingByContactId != null)
+				return false;
+		}
+
+		var sameBirthday = _persons.FirstOrDefault(p =>
+			p.Birthday != null &&
+			p.Birthday.Day == birthday.Day &&
+			p.Birthday.Month == birthday.Month &&
+			p.DisplayName.Equals(displayName, StringComparison.OrdinalIgnoreCase));
+
+		if (sameBirthday != null)
+		{
+			_foundContactsWithSameBirthday = true;
+			return false;
+		}
+
+		int nextId = _persons.Count > 0 ? _persons.Max(p => p.Id) + 1 : 1;
+		var person = new Person
+		{
+			Id = nextId,
+			DisplayName = displayName,
+			Birthday = new Birthday
+			{
+				Day = birthday.Day,
+				Month = birthday.Month,
+				Year = birthday.Year
+			},
+			ContactId = contactId,
+			Source = PersonSource.Contact
+		};
+
+		_persons.Add(person);
+		BirthdayService.Add(person);
+		return true;
+	}
+
+	/// <summary>
+	/// Aim: Imports a birthday from the birthday calendar into the persons list and saves to prefs
+	/// Params: displayName - Event/person name, birthday - Birthday date
+	/// Return: True if added, false if duplicate
+	/// </summary>
+	public bool ImportCalendarBirthday(string displayName, DateTime birthday)
+	{
+		if (string.IsNullOrWhiteSpace(displayName))
+			return false;
+
+		var sameBirthday = _persons.FirstOrDefault(p =>
+			p.Birthday != null &&
+			p.Birthday.Day == birthday.Day &&
+			p.Birthday.Month == birthday.Month &&
+			p.DisplayName.Equals(displayName, StringComparison.OrdinalIgnoreCase));
+
+		if (sameBirthday != null)
+			return false;
+
+		int nextId = _persons.Count > 0 ? _persons.Max(p => p.Id) + 1 : 1;
+		var person = new Person
+		{
+			Id = nextId,
+			DisplayName = displayName,
+			Birthday = new Birthday
+			{
+				Day = birthday.Day,
+				Month = birthday.Month,
+				Year = birthday.Year
+			},
+			Source = PersonSource.BirthdayCalendar
+		};
+
+		_persons.Add(person);
+		BirthdayService.Add(person);
+		return true;
+	}
+
+	private async void ReadBirthdaysFromBirthdayCalenderIfAllowed()
+	{
+		if (_settings.ContactsMode != ContactsMode.BirthdayCalendar)
+			return;
+
+		bool hasPermission = await DeviceService.CheckCalendarReadPermissionAsync();
+		if (!hasPermission)
+			return;
+
+		try
+		{
+			var service = new ContactBirthdayService();
+			var events = await service.GetBirthdayCalendarEventsAsync();
+
+			foreach (var evt in events)
+			{
+				if (evt.Birthday == null)
+					continue;
+
+				var birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(evt.Birthday);
+				ImportCalendarBirthday(evt.DisplayName, birthdayDate);
+			}
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error reading birthday calendar: {ex.Message}");
+		}
+	}
+    #endregion
+
+    #region Form Update Methods
     private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(NewBirthdayPage));
@@ -90,21 +228,37 @@ public partial class MainPage : ContentPage
             cv.SelectedItem = null;
         }
     }
-}
 
-public class PersonViewModel
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string BirthdayDisplay { get; set; } = string.Empty;
-
-    public PersonViewModel(Person person)
+    private void UpdateBirthdayListsOnTheForm()
     {
-        Id = person.Id;
-        Name = person.Name;
-        if (person.Birthday != null)
-        {
-            BirthdayDisplay = $"{person.Birthday.Day:00}.{person.Birthday.Month:00}.{person.Birthday.Year}";
-        }
+        if (_persons.Count == 0)
+            return;
+
+        var today = DateTime.Today;
+
+        var upcoming = _persons
+            .Where(p => p.Birthday != null)
+            .Select(p => new { Person = p, DaysUntil = BirthdayHelper.GetDaysUntilBirthday(p.Birthday!, today) })
+            .Where(x => x.DaysUntil >= 0)
+            .OrderBy(x => x.DaysUntil)
+            .Take(MobileConstants.SHOW_UPCOMING)
+            .Select(x => new PersonViewModel(x.Person))
+            .ToList();
+
+        var missed = _persons
+            .Where(p => p.Birthday != null)
+            .Select(p => new { Person = p, DaysSince = BirthdayHelper.GetDaysSinceBirthday(p.Birthday!, today) })
+            .Where(x => x.DaysSince > 0 && x.DaysSince <= 30)
+            .OrderBy(x => x.DaysSince)
+            .Take(MobileConstants.SHOW_MISSED_BIRTHDAYS)
+            .Select(x => new PersonViewModel(x.Person))
+            .ToList();
+
+        UpcomingBirthdays = upcoming;
+        MissedBirthdays = missed;
+
+        OnPropertyChanged(nameof(UpcomingBirthdays));
+        OnPropertyChanged(nameof(MissedBirthdays));
     }
+    #endregion
 }

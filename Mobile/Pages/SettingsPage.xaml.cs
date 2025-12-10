@@ -2,126 +2,108 @@ namespace Mobile;
 
 public partial class SettingsPage : ContentPage
 {
-	private int _hours = 18;
-	private int _minutes = 0;
+	private readonly List<string> _hoursList = [];
+	private readonly List<string> _minutesList = [];
+	private List<CalendarInfo> _calendars = [];
+	private bool _isLoading = true;
 
 	public SettingsPage()
 	{
 		InitializeComponent();
+		InitializePickers();
 		LoadSettings();
+		_isLoading = false;
+	}
+
+	private void InitializePickers()
+	{
+		for (int i = 0; i < 24; i++)
+			_hoursList.Add(i.ToString("D2"));
+
+		for (int i = 0; i < 60; i++)
+			_minutesList.Add(i.ToString("D2"));
+
+		HoursPicker.ItemsSource = _hoursList;
+		MinutesPicker.ItemsSource = _minutesList;
 	}
 
 	private void LoadSettings()
 	{
 		var settings = SettingsService.Get();
 
-		_hours = settings.DefaultReminderTime / 100;
-		_minutes = settings.DefaultReminderTime % 100;
+		int hours = settings.DefaultReminderTime / 100;
+		int minutes = settings.DefaultReminderTime % 100;
 
-		HoursEntry.Text = _hours.ToString("D2");
-		MinutesEntry.Text = _minutes.ToString("D2");
+		HoursPicker.SelectedIndex = hours;
+		MinutesPicker.SelectedIndex = minutes;
 
 		if (settings.Locale == "en")
-		{
 			RadioEn.IsChecked = true;
-		}
 		else
-		{
 			RadioDe.IsChecked = true;
+
+		switch (settings.ContactsMode)
+		{
+			case ContactsMode.None:
+				RadioContactsNone.IsChecked = true;
+				break;
+			case ContactsMode.ReadWrite:
+				RadioContactsReadWrite.IsChecked = true;
+				break;
+			case ContactsMode.BirthdayCalendar:
+				RadioContactsBirthdayCalendar.IsChecked = true;
+				break;
+			default:
+				RadioContactsRead.IsChecked = true;
+				break;
 		}
 
-		ReadContactsBirthdaySwitch.IsToggled = settings.ReadFromContactsWithBirthday;
-		ReadContactsAllSwitch.IsToggled = settings.ReadFromContactsAll;
-		WriteContactsSwitch.IsToggled = settings.WriteToContacts;
-		ReadCalendarsSwitch.IsToggled = settings.ReadFromCalenders;
-		WriteCalendarsSwitch.IsToggled = settings.WriteToCalenders;
-	}
+		WriteCalendarsSwitch.IsToggled = settings.WriteToCalendars;
+		UpdateCalendarListVisibility();
 
-	private void OnHoursUp(object? sender, EventArgs e)
-	{
-		_hours = (_hours + 1) % 24;
-		HoursEntry.Text = _hours.ToString("D2");
-	}
-
-	private void OnHoursDown(object? sender, EventArgs e)
-	{
-		_hours = (_hours - 1 + 24) % 24;
-		HoursEntry.Text = _hours.ToString("D2");
-	}
-
-	private void OnMinutesUp(object? sender, EventArgs e)
-	{
-		_minutes = (_minutes + 5) % 60;
-		MinutesEntry.Text = _minutes.ToString("D2");
-	}
-
-	private void OnMinutesDown(object? sender, EventArgs e)
-	{
-		_minutes = (_minutes - 5 + 60) % 60;
-		MinutesEntry.Text = _minutes.ToString("D2");
-	}
-
-	private async void OnContactsReadToggled(object? sender, ToggledEventArgs e)
-	{
-		if (!e.Value)
+		if (settings.WriteToCalendars)
 		{
+			_ = LoadCalendarsAsync(settings.SelectedCalendarIds);
+		}
+	}
+
+	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
+	{
+		if (!e.Value || _isLoading)
 			return;
-		}
 
-		var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
-		if (status != PermissionStatus.Granted)
+		if (sender == RadioContactsRead || sender == RadioContactsReadWrite)
 		{
-			status = await Permissions.RequestAsync<Permissions.ContactsRead>();
-			if (status != PermissionStatus.Granted)
+			bool granted = await DeviceService.RequestContactsReadPermissionAsync();
+			if (!granted)
 			{
-				if (sender is Switch sw)
-				{
-					sw.IsToggled = false;
-				}
+				RadioContactsNone.IsChecked = true;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_ContactsRead_Denied,
 					MobileLanguages.Resources.General_Button_OK);
+				return;
+			}
+
+			if (sender == RadioContactsReadWrite)
+			{
+				bool writeGranted = await DeviceService.RequestContactsWritePermissionAsync();
+				if (!writeGranted)
+				{
+					RadioContactsRead.IsChecked = true;
+					await DisplayAlert(
+						MobileLanguages.Resources.Permission_Required,
+						MobileLanguages.Resources.Permission_ContactsWrite_Denied,
+						MobileLanguages.Resources.General_Button_OK);
+				}
 			}
 		}
-	}
-
-	private async void OnContactsWriteToggled(object? sender, ToggledEventArgs e)
-	{
-		if (!e.Value)
+		else if (sender == RadioContactsBirthdayCalendar)
 		{
-			return;
-		}
-
-		var status = await Permissions.CheckStatusAsync<Permissions.ContactsWrite>();
-		if (status != PermissionStatus.Granted)
-		{
-			status = await Permissions.RequestAsync<Permissions.ContactsWrite>();
-			if (status != PermissionStatus.Granted)
+			bool granted = await DeviceService.RequestCalendarReadPermissionAsync();
+			if (!granted)
 			{
-				WriteContactsSwitch.IsToggled = false;
-				await DisplayAlert(
-					MobileLanguages.Resources.Permission_Required,
-					MobileLanguages.Resources.Permission_ContactsWrite_Denied,
-					MobileLanguages.Resources.General_Button_OK);
-			}
-		}
-	}
-
-	private async void OnCalendarReadToggled(object? sender, ToggledEventArgs e)
-	{
-		if (!e.Value)
-		{
-			return;
-		}
-
-		var status = await Permissions.CheckStatusAsync<Permissions.CalendarRead>();
-		if (status != PermissionStatus.Granted)
-		{
-			status = await Permissions.RequestAsync<Permissions.CalendarRead>();
-			if (status != PermissionStatus.Granted)
-			{
-				ReadCalendarsSwitch.IsToggled = false;
+				RadioContactsNone.IsChecked = true;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_CalendarRead_Denied,
@@ -130,25 +112,115 @@ public partial class SettingsPage : ContentPage
 		}
 	}
 
-	private async void OnCalendarWriteToggled(object? sender, ToggledEventArgs e)
+	private async void OnWriteCalendarsToggled(object? sender, ToggledEventArgs e)
 	{
-		if (!e.Value)
-		{
+		if (_isLoading)
 			return;
-		}
 
-		var status = await Permissions.CheckStatusAsync<Permissions.CalendarWrite>();
-		if (status != PermissionStatus.Granted)
+		if (e.Value)
 		{
-			status = await Permissions.RequestAsync<Permissions.CalendarWrite>();
-			if (status != PermissionStatus.Granted)
+			bool granted = await DeviceService.RequestCalendarWritePermissionAsync();
+			if (!granted)
 			{
 				WriteCalendarsSwitch.IsToggled = false;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_CalendarWrite_Denied,
 					MobileLanguages.Resources.General_Button_OK);
+				return;
 			}
+
+			await LoadCalendarsAsync([]);
+		}
+
+		UpdateCalendarListVisibility();
+	}
+
+	private void UpdateCalendarListVisibility()
+	{
+		CalendarListContainer.IsVisible = WriteCalendarsSwitch.IsToggled;
+	}
+
+	private async Task LoadCalendarsAsync(List<string> selectedIds)
+	{
+		try
+		{
+			_calendars = await GetDeviceCalendarsAsync();
+			foreach (var cal in _calendars)
+			{
+				cal.IsSelected = selectedIds.Contains(cal.Id);
+			}
+			BuildCalendarToggles();
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error loading calendars: {ex.Message}");
+		}
+	}
+
+	private Task<List<CalendarInfo>> GetDeviceCalendarsAsync()
+	{
+		// TODO: Replace with actual calendar API
+		var calendars = new List<CalendarInfo>
+		{
+			new() { Id = "default", Name = MobileLanguages.Resources.Calendar_Default, Color = Colors.Blue },
+			new() { Id = "personal", Name = MobileLanguages.Resources.Calendar_Personal, Color = Colors.Green },
+			new() { Id = "work", Name = MobileLanguages.Resources.Calendar_Work, Color = Colors.Orange },
+			new() { Id = "family", Name = MobileLanguages.Resources.Calendar_Family, Color = Colors.Purple }
+		};
+
+		return Task.FromResult(calendars);
+	}
+
+	private void BuildCalendarToggles()
+	{
+		CalendarTogglesContainer.Children.Clear();
+
+		foreach (var calendar in _calendars)
+		{
+			var grid = new Grid
+			{
+				ColumnDefinitions =
+				[
+					new ColumnDefinition(GridLength.Auto),
+					new ColumnDefinition(GridLength.Star),
+					new ColumnDefinition(GridLength.Auto)
+				],
+				Padding = new Thickness(5, 0)
+			};
+
+			var colorBox = new BoxView
+			{
+				WidthRequest = 12,
+				HeightRequest = 12,
+				CornerRadius = 6,
+				Color = calendar.Color,
+				VerticalOptions = LayoutOptions.Center
+			};
+			grid.SetColumn(colorBox, 0);
+
+			var label = new Label
+			{
+				Text = calendar.Name,
+				FontSize = 16,
+				VerticalOptions = LayoutOptions.Center,
+				Margin = new Thickness(10, 0, 0, 0)
+			};
+			grid.SetColumn(label, 1);
+
+			var toggle = new Switch
+			{
+				IsToggled = calendar.IsSelected,
+				VerticalOptions = LayoutOptions.Center
+			};
+			toggle.Toggled += (s, e) => calendar.IsSelected = e.Value;
+			grid.SetColumn(toggle, 2);
+
+			grid.Children.Add(colorBox);
+			grid.Children.Add(label);
+			grid.Children.Add(toggle);
+
+			CalendarTogglesContainer.Children.Add(grid);
 		}
 	}
 
@@ -156,31 +228,29 @@ public partial class SettingsPage : ContentPage
 	{
 		var settings = SettingsService.Get();
 
-		if (int.TryParse(HoursEntry.Text, out int hours))
-		{
-			_hours = Math.Clamp(hours, 0, 23);
-		}
-		if (int.TryParse(MinutesEntry.Text, out int minutes))
-		{
-			_minutes = Math.Clamp(minutes, 0, 59);
-		}
-
-		settings.DefaultReminderTime = _hours * 100 + _minutes;
+		int hours = HoursPicker.SelectedIndex;
+		int minutes = MinutesPicker.SelectedIndex;
+		settings.DefaultReminderTime = hours * 100 + minutes;
 
 		if (RadioEn.IsChecked)
-		{
 			settings.Locale = "en";
-		}
 		else
-		{
 			settings.Locale = "de";
-		}
 
-		settings.ReadFromContactsWithBirthday = ReadContactsBirthdaySwitch.IsToggled;
-		settings.ReadFromContactsAll = ReadContactsAllSwitch.IsToggled;
-		settings.WriteToContacts = WriteContactsSwitch.IsToggled;
-		settings.ReadFromCalenders = ReadCalendarsSwitch.IsToggled;
-		settings.WriteToCalenders = WriteCalendarsSwitch.IsToggled;
+		if (RadioContactsNone.IsChecked)
+			settings.ContactsMode = ContactsMode.None;
+		else if (RadioContactsReadWrite.IsChecked)
+			settings.ContactsMode = ContactsMode.ReadWrite;
+		else if (RadioContactsBirthdayCalendar.IsChecked)
+			settings.ContactsMode = ContactsMode.BirthdayCalendar;
+		else
+			settings.ContactsMode = ContactsMode.Read;
+
+		settings.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
+		settings.SelectedCalendarIds = _calendars
+			.Where(c => c.IsSelected)
+			.Select(c => c.Id)
+			.ToList();
 
 		SettingsService.Update(settings);
 
