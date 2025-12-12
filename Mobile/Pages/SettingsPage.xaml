@@ -8,6 +8,37 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
+            <!-- Display Section -->
+            <Label Text="{x:Static resx:Resources.Settings_Display}"
+                   Style="{StaticResource LabelHeader}" />
+
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="15">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ShowUpcomingBirthdays}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Entry x:Name="UpcomingEntry"
+                               Grid.Column="1"
+                               Keyboard="Numeric"
+                               WidthRequest="60"
+                               HorizontalTextAlignment="Center" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.Settings_ShowPastBirthdays}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Entry x:Name="PastEntry"
+                               Grid.Column="1"
+                               Keyboard="Numeric"
+                               WidthRequest="60"
+                               HorizontalTextAlignment="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
             <!-- Language Selection -->
             <Label Text="{x:Static resx:Resources.Settings_Language}"
                    Style="{StaticResource LabelHeader}" />

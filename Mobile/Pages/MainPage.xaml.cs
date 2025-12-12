@@ -25,16 +25,24 @@ public partial class MainPage : ContentPage
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
+		_settings = SettingsService.Get();
+		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
+		if (App.NeedsReloadBirthdays)
+		{
+			LoadBirthdaysFromPrefs();
+			App.NeedsReloadBirthdays = false;
+		}
 		UpdateBirthdayListsOnTheForm();
 	}
 
 	private void Init()
 	{
-        CheckRightsAndUpdateSettings();
-        LoadBirthdaysFromPrefs();
-        ReadContactsIfAllowed();
-        ReadBirthdaysFromBirthdayCalenderIfAllowed();
-    }
+		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
+		CheckRightsAndUpdateSettings();
+		LoadBirthdaysFromPrefs();
+		ReadContactsIfAllowed();
+		ReadBirthdaysFromBirthdayCalenderIfAllowed();
+	}
     #endregion
 
     #region Init Methods
@@ -70,7 +78,7 @@ public partial class MainPage : ContentPage
 	private async void ReadContactsIfAllowed()
 	{
 		if (_settings.ContactsMode != ContactsMode.Read && _settings.ContactsMode != ContactsMode.ReadWrite)
-			return;		
+			return;
 
 		try
 		{
@@ -83,7 +91,7 @@ public partial class MainPage : ContentPage
 					continue;
 
 				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
-				ImportContactBirthday(person.DisplayName, birthdayDate, person.ContactId);
+				ImportContactBirthday(person.FirstName, person.LastName, birthdayDate, person.ContactId);
 			}
 		}
 		catch (Exception ex)
@@ -94,12 +102,12 @@ public partial class MainPage : ContentPage
 
 	/// <summary>
 	/// Aim: Imports a contact with birthday into the persons list and saves to prefs
-	/// Params: displayName - Contact display name, birthday - Contact birthday, contactId - Platform contact ID
+	/// Params: firstName - Contact first name, lastName - Contact last name, birthday - Contact birthday, contactId - Platform contact ID
 	/// Return: True if added, false if duplicate
 	/// </summary>
-	public bool ImportContactBirthday(string displayName, DateTime birthday, string? contactId)
+	public bool ImportContactBirthday(string firstName, string lastName, DateTime birthday, string? contactId)
 	{
-		if (string.IsNullOrWhiteSpace(displayName))
+		if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 			return false;
 
 		if (contactId != null)
@@ -113,7 +121,8 @@ public partial class MainPage : ContentPage
 			p.Birthday != null &&
 			p.Birthday.Day == birthday.Day &&
 			p.Birthday.Month == birthday.Month &&
-			p.DisplayName.Equals(displayName, StringComparison.OrdinalIgnoreCase));
+			p.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+			p.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
 
 		if (sameBirthday != null)
 		{
@@ -125,7 +134,8 @@ public partial class MainPage : ContentPage
 		var person = new Person
 		{
 			Id = nextId,
-			DisplayName = displayName,
+			FirstName = firstName,
+			LastName = lastName,
 			Birthday = new Birthday
 			{
 				Day = birthday.Day,
@@ -143,19 +153,20 @@ public partial class MainPage : ContentPage
 
 	/// <summary>
 	/// Aim: Imports a birthday from the birthday calendar into the persons list and saves to prefs
-	/// Params: displayName - Event/person name, birthday - Birthday date
+	/// Params: firstName - First name, lastName - Last name, birthday - Birthday date
 	/// Return: True if added, false if duplicate
 	/// </summary>
-	public bool ImportCalendarBirthday(string displayName, DateTime birthday)
+	public bool ImportCalendarBirthday(string firstName, string lastName, DateTime birthday)
 	{
-		if (string.IsNullOrWhiteSpace(displayName))
+		if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 			return false;
 
 		var sameBirthday = _persons.FirstOrDefault(p =>
 			p.Birthday != null &&
 			p.Birthday.Day == birthday.Day &&
 			p.Birthday.Month == birthday.Month &&
-			p.DisplayName.Equals(displayName, StringComparison.OrdinalIgnoreCase));
+			p.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+			p.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
 
 		if (sameBirthday != null)
 			return false;
@@ -164,7 +175,8 @@ public partial class MainPage : ContentPage
 		var person = new Person
 		{
 			Id = nextId,
-			DisplayName = displayName,
+			FirstName = firstName,
+			LastName = lastName,
 			Birthday = new Birthday
 			{
 				Day = birthday.Day,
@@ -182,11 +194,11 @@ public partial class MainPage : ContentPage
 	private async void ReadBirthdaysFromBirthdayCalenderIfAllowed()
 	{
 		if (_settings.ContactsMode != ContactsMode.BirthdayCalendar)
-			return;		
+			return;
 
 		try
 		{
-            ContactBirthdayService service = new();
+			ContactBirthdayService service = new();
 			List<Person> persons = await service.GetBirthdayCalendarEventsAsync();
 
 			foreach (Person person in persons)
@@ -195,7 +207,7 @@ public partial class MainPage : ContentPage
 					continue;
 
 				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
-				ImportCalendarBirthday(person.DisplayName, birthdayDate);
+				ImportCalendarBirthday(person.FirstName, person.LastName, birthdayDate);
 			}
 		}
 		catch (Exception ex)
@@ -224,36 +236,37 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void UpdateBirthdayListsOnTheForm()
-    {
-        if (_persons.Count == 0)
-            return;
+	private void UpdateBirthdayListsOnTheForm()
+	{
+		if (_persons.Count == 0)
+			return;
 
-        var today = DateTime.Today;
+		var today = DateTime.Today;
+		var nameDirection = _settings.PersonNameDirection;
 
-        var upcoming = _persons
-            .Where(p => p.Birthday != null)
-            .Select(p => new { Person = p, DaysUntil = BirthdayHelper.GetDaysUntilBirthday(p.Birthday!, today) })
-            .Where(x => x.DaysUntil >= 0)
-            .OrderBy(x => x.DaysUntil)
-            .Take(MobileConstants.SHOW_UPCOMING)
-            .Select(x => new PersonViewModel(x.Person))
-            .ToList();
+		var upcoming = _persons
+			.Where(p => p.Birthday != null)
+			.Select(p => new { Person = p, DaysUntil = BirthdayHelper.GetDaysUntilBirthday(p.Birthday!, today) })
+			.Where(x => x.DaysUntil >= 0)
+			.OrderBy(x => x.DaysUntil)
+			.Take(_settings.ShowUpcomingBirthdays)
+			.Select(x => new PersonViewModel(x.Person, nameDirection))
+			.ToList();
 
-        var missed = _persons
-            .Where(p => p.Birthday != null)
-            .Select(p => new { Person = p, DaysSince = BirthdayHelper.GetDaysSinceBirthday(p.Birthday!, today) })
-            .Where(x => x.DaysSince > 0 && x.DaysSince <= 30)
-            .OrderBy(x => x.DaysSince)
-            .Take(MobileConstants.SHOW_MISSED_BIRTHDAYS)
-            .Select(x => new PersonViewModel(x.Person))
-            .ToList();
+		var past = _persons
+			.Where(p => p.Birthday != null)
+			.Select(p => new { Person = p, DaysSince = BirthdayHelper.GetDaysSinceBirthday(p.Birthday!, today) })
+			.Where(x => x.DaysSince > 0 && x.DaysSince <= 30)
+			.OrderBy(x => x.DaysSince)
+			.Take(_settings.ShowPastBirthdays)
+			.Select(x => new PersonViewModel(x.Person, nameDirection))
+			.ToList();
 
-        UpcomingBirthdays = upcoming;
-        MissedBirthdays = missed;
+		UpcomingBirthdays = upcoming;
+		MissedBirthdays = past;
 
-        OnPropertyChanged(nameof(UpcomingBirthdays));
-        OnPropertyChanged(nameof(MissedBirthdays));
-    }
+		OnPropertyChanged(nameof(UpcomingBirthdays));
+		OnPropertyChanged(nameof(MissedBirthdays));
+	}
     #endregion
 }

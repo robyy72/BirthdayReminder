@@ -12,10 +12,23 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame Padding="10" Margin="10,5">
-                    <HorizontalStackLayout Spacing="10">
-                        <Label Text="{Binding DisplayName}" FontSize="18" VerticalOptions="Center" />
-                        <Label Text="{Binding BirthdayDisplay}" FontSize="14" TextColor="Gray" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto,Auto">
+                        <Label Grid.Column="0"
+                               Text="{Binding DisplayName}"
+                               FontSize="18"
+                               VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               Text="{Binding DayDisplay}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="End"
+                               WidthRequest="30" />
+                        <Label Grid.Column="2"
+                               Text="{Binding MonthDisplay}"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="5,0,0,0" />
+                    </Grid>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>

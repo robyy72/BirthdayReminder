@@ -19,15 +19,22 @@
                                     SelectionChanged="OnBirthdaySelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="*,Auto" Padding="5,10">
+                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
                                     <Label Grid.Column="0"
                                            Text="{Binding DisplayName}"
                                            Style="{StaticResource LabelBody}"
                                            VerticalOptions="Center" />
                                     <Label Grid.Column="1"
-                                           Text="{Binding BirthdayDisplay}"
-                                           Style="{StaticResource LabelDescription}"
-                                           VerticalOptions="Center" />
+                                           Text="{Binding DayDisplay}"
+                                           Style="{StaticResource LabelBody}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="End"
+                                           WidthRequest="30" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding MonthDisplay}"
+                                           Style="{StaticResource LabelBody}"
+                                           VerticalOptions="Center"
+                                           Margin="5,0,0,0" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -40,7 +47,7 @@
                 </Border>
 
                 <!-- Missed Birthdays Section -->
-                <Label Text="{x:Static resx:Resources.Page_Main_MissedTitle}"
+                <Label x:Name="MissedBirthdaysLabel"
                        Style="{StaticResource LabelSectionHeader}"
                        Margin="0,10,0,0" />
 
@@ -51,15 +58,22 @@
                                     SelectionChanged="OnBirthdaySelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="*,Auto" Padding="5,10">
+                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
                                     <Label Grid.Column="0"
                                            Text="{Binding DisplayName}"
                                            Style="{StaticResource LabelBody}"
                                            VerticalOptions="Center" />
                                     <Label Grid.Column="1"
-                                           Text="{Binding BirthdayDisplay}"
-                                           Style="{StaticResource LabelDescription}"
-                                           VerticalOptions="Center" />
+                                           Text="{Binding DayDisplay}"
+                                           Style="{StaticResource LabelBody}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="End"
+                                           WidthRequest="30" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding MonthDisplay}"
+                                           Style="{StaticResource LabelBody}"
+                                           VerticalOptions="Center"
+                                           Margin="5,0,0,0" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

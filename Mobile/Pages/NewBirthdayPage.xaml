@@ -13,8 +13,11 @@
                 <VerticalStackLayout Spacing="10">
                     <Label Text="{x:Static resx:Resources.General_Label_Name}"
                            Style="{StaticResource LabelSectionHeader}" />
-                    <Entry x:Name="NameEntry"
-                           Placeholder="{x:Static resx:Resources.General_Label_Name}"
+                    <Entry x:Name="FirstNameEntry"
+                           Placeholder="{x:Static resx:Resources.General_Label_FirstName}"
+                           Style="{StaticResource EntryStandard}" />
+                    <Entry x:Name="LastNameEntry"
+                           Placeholder="{x:Static resx:Resources.General_Label_LastName}"
                            Style="{StaticResource EntryStandard}" />
                 </VerticalStackLayout>
             </Border>
@@ -50,6 +53,23 @@
                                     Style="{StaticResource PickerYear}" />
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Reminder -->
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{x:Static resx:Resources.Reminder_Label}"
+                           Style="{StaticResource LabelSectionHeader}" />
+
+                    <Picker x:Name="ReminderTypePicker"
+                            SelectedIndexChanged="OnReminderTypeChanged" />
+
+                    <VerticalStackLayout x:Name="ReminderMethodContainer" IsVisible="False" Spacing="10">
+                        <Label Text="{x:Static resx:Resources.ReminderMethod_Label}"
+                               Style="{StaticResource LabelBody}" />
+                        <Picker x:Name="ReminderMethodPicker" />
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
 

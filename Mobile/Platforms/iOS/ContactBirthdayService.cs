@@ -13,7 +13,7 @@ public partial class ContactBirthdayService
 {
 	/// <summary>
 	/// Aim: Gets all contacts with birthdays from iOS contacts.
-	/// Return: List of Person objects with DisplayName, Birthday and ContactId
+	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
 	public partial Task<List<Person>> GetContactsAsync()
 	{
@@ -61,8 +61,9 @@ public partial class ContactBirthdayService
 					if (string.IsNullOrWhiteSpace(contactId))
 						continue;
 
-					string displayName = $"{contact.GivenName} {contact.FamilyName}".Trim();
-					if (string.IsNullOrWhiteSpace(displayName))
+					string firstName = contact.GivenName ?? string.Empty;
+					string lastName = contact.FamilyName ?? string.Empty;
+					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 						continue;
 
 					var birthdayComponents = contact.Birthday;
@@ -75,7 +76,8 @@ public partial class ContactBirthdayService
 
 					var person = new Person
 					{
-						DisplayName = displayName,
+						FirstName = firstName,
+						LastName = lastName,
 						Birthday = new Birthday { Day = day, Month = month, Year = year },
 						ContactId = contactId,
 						Source = PersonSource.Contact
@@ -95,7 +97,7 @@ public partial class ContactBirthdayService
 
 	/// <summary>
 	/// Aim: Gets all birthdays from the iOS birthday calendar.
-	/// Return: List of Person objects with DisplayName and Birthday
+	/// Return: List of Person objects with FirstName, LastName and Birthday
 	/// </summary>
 	public partial Task<List<Person>> GetBirthdayCalendarEventsAsync()
 	{
@@ -134,11 +136,13 @@ public partial class ContactBirthdayService
 				if (string.IsNullOrWhiteSpace(displayName))
 					continue;
 
+				var (firstName, lastName) = ParseDisplayName(displayName);
 				var birthdayDate = (DateTime)evt.StartDate;
 
 				var person = new Person
 				{
-					DisplayName = displayName,
+					FirstName = firstName,
+					LastName = lastName,
 					Birthday = BirthdayHelper.ConvertFromDateTimeToBirthday(birthdayDate),
 					Source = PersonSource.BirthdayCalendar
 				};
@@ -173,5 +177,23 @@ public partial class ContactBirthdayService
 		}
 
 		return title;
+	}
+
+	/// <summary>
+	/// Aim: Parses a display name into first and last name.
+	/// Params: displayName - Full display name
+	/// Return: Tuple with first name and last name
+	/// </summary>
+	private static (string FirstName, string LastName) ParseDisplayName(string displayName)
+	{
+		if (string.IsNullOrWhiteSpace(displayName))
+			return (string.Empty, string.Empty);
+
+		var parts = displayName.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+
+		string firstName = parts.Length > 0 ? parts[0] : string.Empty;
+		string lastName = parts.Length > 1 ? parts[1] : string.Empty;
+
+		return (firstName, lastName);
 	}
 }

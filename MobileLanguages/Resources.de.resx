@@ -43,7 +43,7 @@
     <value>Birthday Reminder</value>
   </data>
   <data name="Page_Main_MissedTitle" xml:space="preserve">
-    <value>Verpasste Geburtstage</value>
+    <value>Vergangene Geburtstage ({0})</value>
   </data>
   <data name="Page_Main_UpcomingTitle" xml:space="preserve">
     <value>Anstehende Geburtstage</value>
@@ -98,6 +98,12 @@
   </data>
   <data name="General_Label_Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="General_Label_FirstName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="General_Label_LastName" xml:space="preserve">
+    <value>Nachname</value>
   </data>
   <data name="General_Label_Birthday" xml:space="preserve">
     <value>Geburtstag</value>
@@ -269,5 +275,83 @@
   </data>
   <data name="Month_December" xml:space="preserve">
     <value>Dezember</value>
+  </data>
+  <data name="Month_Short_Jan" xml:space="preserve">
+    <value>Jan</value>
+  </data>
+  <data name="Month_Short_Feb" xml:space="preserve">
+    <value>Feb</value>
+  </data>
+  <data name="Month_Short_Mar" xml:space="preserve">
+    <value>Mär</value>
+  </data>
+  <data name="Month_Short_Apr" xml:space="preserve">
+    <value>Apr</value>
+  </data>
+  <data name="Month_Short_May" xml:space="preserve">
+    <value>Mai</value>
+  </data>
+  <data name="Month_Short_Jun" xml:space="preserve">
+    <value>Jun</value>
+  </data>
+  <data name="Month_Short_Jul" xml:space="preserve">
+    <value>Jul</value>
+  </data>
+  <data name="Month_Short_Aug" xml:space="preserve">
+    <value>Aug</value>
+  </data>
+  <data name="Month_Short_Sep" xml:space="preserve">
+    <value>Sep</value>
+  </data>
+  <data name="Month_Short_Oct" xml:space="preserve">
+    <value>Okt</value>
+  </data>
+  <data name="Month_Short_Nov" xml:space="preserve">
+    <value>Nov</value>
+  </data>
+  <data name="Month_Short_Dec" xml:space="preserve">
+    <value>Dez</value>
+  </data>
+  <data name="Settings_ShowUpcomingBirthdays" xml:space="preserve">
+    <value>Anstehende Geburtstage</value>
+  </data>
+  <data name="Settings_ShowPastBirthdays" xml:space="preserve">
+    <value>Vergangene Geburtstage</value>
+  </data>
+  <data name="Settings_Display" xml:space="preserve">
+    <value>Anzeige</value>
+  </data>
+  <data name="Reminder_Label" xml:space="preserve">
+    <value>Erinnerung</value>
+  </data>
+  <data name="ReminderType_NotSet" xml:space="preserve">
+    <value>Nicht gesetzt</value>
+  </data>
+  <data name="ReminderType_DoNotRemind" xml:space="preserve">
+    <value>Nicht erinnern</value>
+  </data>
+  <data name="ReminderType_RemindByMessage" xml:space="preserve">
+    <value>Per Nachricht erinnern</value>
+  </data>
+  <data name="ReminderType_RemindUntilApproved" xml:space="preserve">
+    <value>Erinnern bis bestätigt</value>
+  </data>
+  <data name="ReminderMethod_Label" xml:space="preserve">
+    <value>Erinnerungsart</value>
+  </data>
+  <data name="ReminderMethod_NotSet" xml:space="preserve">
+    <value>Nicht gesetzt</value>
+  </data>
+  <data name="ReminderMethod_Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="ReminderMethod_Sms" xml:space="preserve">
+    <value>SMS</value>
+  </data>
+  <data name="ReminderMethod_LockScreen" xml:space="preserve">
+    <value>Sperrbildschirm</value>
+  </data>
+  <data name="ReminderMethod_WhatsApp" xml:space="preserve">
+    <value>WhatsApp</value>
   </data>
 </root>

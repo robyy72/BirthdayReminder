@@ -2,7 +2,13 @@ namespace Mobile;
 
 public partial class AllBirthdaysPage : ContentPage
 {
+	#region Private Class Variables
+	private readonly Settings _settings = SettingsService.Get();
+	#endregion
+
+	#region Properties
 	public List<PersonViewModel> AllBirthdays { get; set; } = [];
+	#endregion
 
 	public AllBirthdaysPage()
 	{
@@ -19,6 +25,7 @@ public partial class AllBirthdaysPage : ContentPage
 	private void LoadBirthdays()
 	{
 		var allPersons = new List<Person>();
+		var nameDirection = _settings.PersonNameDirection;
 
 		for (int month = 1; month <= 12; month++)
 		{
@@ -29,7 +36,7 @@ public partial class AllBirthdaysPage : ContentPage
 			.Where(p => p.Birthday != null)
 			.OrderBy(p => p.Birthday!.Month)
 			.ThenBy(p => p.Birthday!.Day)
-			.Select(p => new PersonViewModel(p))
+			.Select(p => new PersonViewModel(p, nameDirection))
 			.ToList();
 
 		OnPropertyChanged(nameof(AllBirthdays));

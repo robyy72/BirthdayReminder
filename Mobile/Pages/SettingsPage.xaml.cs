@@ -31,6 +31,9 @@ public partial class SettingsPage : ContentPage
 	{
 		var settings = SettingsService.Get();
 
+		UpcomingEntry.Text = settings.ShowUpcomingBirthdays.ToString();
+		PastEntry.Text = settings.ShowPastBirthdays.ToString();
+
 		int hours = settings.DefaultReminderTime / 100;
 		int minutes = settings.DefaultReminderTime % 100;
 
@@ -227,6 +230,12 @@ public partial class SettingsPage : ContentPage
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
+
+		if (int.TryParse(UpcomingEntry.Text, out int upcoming))
+			settings.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+
+		if (int.TryParse(PastEntry.Text, out int past))
+			settings.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
 
 		int hours = HoursPicker.SelectedIndex;
 		int minutes = MinutesPicker.SelectedIndex;

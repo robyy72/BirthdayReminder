@@ -2,6 +2,8 @@ namespace Mobile;
 
 public partial class App : Application
 {
+	public static bool NeedsReloadBirthdays { get; set; }
+
 	public App()
 	{
 		InitializeComponent();

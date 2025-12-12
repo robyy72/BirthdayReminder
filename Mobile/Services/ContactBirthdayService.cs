@@ -7,13 +7,13 @@ public partial class ContactBirthdayService
 {
 	/// <summary>
 	/// Aim: Gets all contacts with birthdays from the device.
-	/// Return: List of Person objects with DisplayName, Birthday and ContactId
+	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
 	public partial Task<List<Person>> GetContactsAsync();
 
 	/// <summary>
 	/// Aim: Gets all birthdays from the device birthday calendar.
-	/// Return: List of Person objects with DisplayName and Birthday
+	/// Return: List of Person objects with FirstName, LastName and Birthday
 	/// </summary>
 	public partial Task<List<Person>> GetBirthdayCalendarEventsAsync();
 }

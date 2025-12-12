@@ -8,21 +8,25 @@ public static class MobileConstants
 
 	#region Debug
 	public const bool START_ALWAYS_WITH_WELCOME = true;
-    #endregion
+	#endregion
 
-    #region Supported Values
-    public static readonly string[] SUPPORTED_LOCALES = ["de", "en"];
-    #endregion
+	#region Localization
+	public static readonly string[] SUPPORTED_LOCALES = ["de", "en"];
+	public const string DEFAULT_LOCALE = "de";
+	#endregion
 
-    #region Defaults
-    public const string DEFAULT_LOCALE = "de";
+	#region Theme
 	public const string DEFAULT_THEME = "System";
-	public const int DEFAULT_REMINDER_TIME = 1800;
 	#endregion
 
 	#region Display
-	public const int SHOW_UPCOMING = 5;
-	public const int SHOW_MISSED_BIRTHDAYS = 3;
+	public const int SHOW_UPCOMING_DEFAULT = 5;
+	public const int SHOW_PAST_DEFAULT = 3;
+	public const int SHOW_MAX_BIRTHDAYS = 100;
+	#endregion
+
+	#region Reminder
+	public const int DEFAULT_REMINDER_TIME = 1800;
 	#endregion
 
 	#region Errors

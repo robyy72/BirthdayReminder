@@ -1,3 +1,7 @@
+#region Usings
+using Common;
+#endregion
+
 namespace Mobile;
 
 [QueryProperty(nameof(PersonId), "Id")]
@@ -9,6 +13,8 @@ public partial class NewBirthdayPage : ContentPage
 	private readonly List<string> _daysList = [];
 	private readonly List<string> _monthsList = [];
 	private readonly List<string> _yearsList = [];
+	private readonly List<string> _reminderTypeList = [];
+	private readonly List<string> _reminderMethodList = [];
 	private bool _pickersInitialized = false;
 
 	public string PersonId
@@ -69,9 +75,26 @@ public partial class NewBirthdayPage : ContentPage
 		for (int i = currentYear; i >= currentYear - 120; i--)
 			_yearsList.Add(i.ToString());
 
+		_reminderTypeList.AddRange([
+			MobileLanguages.Resources.ReminderType_NotSet,
+			MobileLanguages.Resources.ReminderType_DoNotRemind,
+			MobileLanguages.Resources.ReminderType_RemindByMessage,
+			MobileLanguages.Resources.ReminderType_RemindUntilApproved
+		]);
+
+		_reminderMethodList.AddRange([
+			MobileLanguages.Resources.ReminderMethod_NotSet,
+			MobileLanguages.Resources.ReminderMethod_Email,
+			MobileLanguages.Resources.ReminderMethod_Sms,
+			MobileLanguages.Resources.ReminderMethod_LockScreen,
+			MobileLanguages.Resources.ReminderMethod_WhatsApp
+		]);
+
 		DayPicker.ItemsSource = _daysList;
 		MonthPicker.ItemsSource = _monthsList;
 		YearPicker.ItemsSource = _yearsList;
+		ReminderTypePicker.ItemsSource = _reminderTypeList;
+		ReminderMethodPicker.ItemsSource = _reminderMethodList;
 	}
 
 	private void SetDefaultDate()
@@ -79,6 +102,8 @@ public partial class NewBirthdayPage : ContentPage
 		DayPicker.SelectedIndex = DateTime.Now.Day - 1;
 		MonthPicker.SelectedIndex = DateTime.Now.Month - 1;
 		YearPicker.SelectedIndex = 0;
+		ReminderTypePicker.SelectedIndex = 0;
+		ReminderMethodPicker.SelectedIndex = 0;
 	}
 
 	private void LoadPerson(int id)
@@ -86,7 +111,8 @@ public partial class NewBirthdayPage : ContentPage
 		_existingPerson = BirthdayService.GetPerson(id);
 		if (_existingPerson != null)
 		{
-			NameEntry.Text = _existingPerson.DisplayName;
+			FirstNameEntry.Text = _existingPerson.FirstName;
+			LastNameEntry.Text = _existingPerson.LastName;
 			if (_existingPerson.Birthday != null)
 			{
 				DayPicker.SelectedIndex = _existingPerson.Birthday.Day - 1;
@@ -96,14 +122,20 @@ public partial class NewBirthdayPage : ContentPage
 				int yearIndex = currentYear - _existingPerson.Birthday.Year;
 				YearPicker.SelectedIndex = Math.Clamp(yearIndex, 0, _yearsList.Count - 1);
 			}
+
+			ReminderTypePicker.SelectedIndex = (int)_existingPerson.ReminderType;
+			ReminderMethodPicker.SelectedIndex = (int)_existingPerson.ReminderMethod;
+			UpdateReminderMethodVisibility();
+
 			DeleteButton.IsVisible = true;
 		}
 	}
 
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
-		var name = NameEntry.Text?.Trim();
-		if (string.IsNullOrEmpty(name))
+		var firstName = FirstNameEntry.Text?.Trim() ?? string.Empty;
+		var lastName = LastNameEntry.Text?.Trim() ?? string.Empty;
+		if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
 			return;
 
 		int day = DayPicker.SelectedIndex + 1;
@@ -117,31 +149,56 @@ public partial class NewBirthdayPage : ContentPage
 			Year = year
 		};
 
+		var reminderType = (ReminderType)ReminderTypePicker.SelectedIndex;
+		var reminderMethod = (ReminderMethod)ReminderMethodPicker.SelectedIndex;
+
 		if (_existingPerson != null)
 		{
-			_existingPerson.DisplayName = name;
+			_existingPerson.FirstName = firstName;
+			_existingPerson.LastName = lastName;
 			_existingPerson.Birthday = birthday;
+			_existingPerson.ReminderType = reminderType;
+			_existingPerson.ReminderMethod = reminderMethod;
 			BirthdayService.Update(_existingPerson);
+			NotificationService.ScheduleForPerson(_existingPerson);
 		}
 		else
 		{
 			var person = new Person
 			{
 				Id = GenerateId(),
-				DisplayName = name,
-				Birthday = birthday
+				FirstName = firstName,
+				LastName = lastName,
+				Birthday = birthday,
+				ReminderType = reminderType,
+				ReminderMethod = reminderMethod
 			};
 			BirthdayService.Add(person);
+			NotificationService.ScheduleForPerson(person);
 		}
 
+		App.NeedsReloadBirthdays = true;
 		await Shell.Current.GoToAsync("..");
+	}
+
+	private void OnReminderTypeChanged(object? sender, EventArgs e)
+	{
+		UpdateReminderMethodVisibility();
+	}
+
+	private void UpdateReminderMethodVisibility()
+	{
+		var selectedType = (ReminderType)ReminderTypePicker.SelectedIndex;
+		ReminderMethodContainer.IsVisible = selectedType == ReminderType.RemindByMessage;
 	}
 
 	private async void OnDeleteClicked(object? sender, EventArgs e)
 	{
 		if (_personId.HasValue)
 		{
+			NotificationService.CancelForPerson(_personId.Value);
 			BirthdayService.Remove(_personId.Value);
+			App.NeedsReloadBirthdays = true;
 			await Shell.Current.GoToAsync("..");
 		}
 	}

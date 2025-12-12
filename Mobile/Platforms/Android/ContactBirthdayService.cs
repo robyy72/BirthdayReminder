@@ -13,7 +13,7 @@ public partial class ContactBirthdayService
 {
 	/// <summary>
 	/// Aim: Gets all contacts with birthdays from Android contacts.
-	/// Return: List of Person objects with DisplayName, Birthday and ContactId
+	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
 	public partial Task<List<Person>> GetContactsAsync()
 	{
@@ -30,46 +30,54 @@ public partial class ContactBirthdayService
 			if (uri == null)
 				return Task.FromResult(results);
 
-			string[] projection =
+			// First, get all contacts with birthdays
+			string[] birthdayProjection =
 			[
 				ContactsContract.Data.InterfaceConsts.ContactId,
-				ContactsContract.Data.InterfaceConsts.DisplayName,
-				ContactsContract.CommonDataKinds.Event.StartDate,
-				ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type
+				ContactsContract.CommonDataKinds.Event.StartDate
 			];
 
-			string selection = $"{ContactsContract.Data.InterfaceConsts.Mimetype} = ? AND {ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type} = ?";
-			string[] selectionArgs = [ContactsContract.CommonDataKinds.Event.ContentItemType, ((int)EventDataKind.Birthday).ToString()];
+			string birthdaySelection = $"{ContactsContract.Data.InterfaceConsts.Mimetype} = ? AND {ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type} = ?";
+			string[] birthdaySelectionArgs = [ContactsContract.CommonDataKinds.Event.ContentItemType, ((int)EventDataKind.Birthday).ToString()];
 
-			using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
-			if (cursor == null)
-				return Task.FromResult(results);
+			var contactBirthdays = new Dictionary<string, string>();
 
-			int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
-			int displayNameIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.DisplayName);
-			int startDateIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.Event.StartDate);
-
-			while (cursor.MoveToNext())
+			using (var cursor = contentResolver.Query(uri, birthdayProjection, birthdaySelection, birthdaySelectionArgs, null))
 			{
-				string? contactId = cursor.GetString(contactIdIndex);
-				string? displayName = cursor.GetString(displayNameIndex);
-				string? dateString = cursor.GetString(startDateIndex);
+				if (cursor != null)
+				{
+					int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
+					int startDateIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.Event.StartDate);
 
-				if (string.IsNullOrWhiteSpace(contactId))
-					continue;
+					while (cursor.MoveToNext())
+					{
+						string? contactId = cursor.GetString(contactIdIndex);
+						string? dateString = cursor.GetString(startDateIndex);
 
-				if (string.IsNullOrWhiteSpace(displayName))
-					continue;
+						if (!string.IsNullOrWhiteSpace(contactId) && !string.IsNullOrWhiteSpace(dateString))
+							contactBirthdays[contactId] = dateString;
+					}
+				}
+			}
 
-				if (string.IsNullOrWhiteSpace(dateString))
-					continue;
+			// Then, get names for those contacts
+			foreach (var kvp in contactBirthdays)
+			{
+				string contactId = kvp.Key;
+				string dateString = kvp.Value;
 
 				if (!TryParseBirthday(dateString, out Birthday? birthday) || birthday == null)
 					continue;
 
+				var (firstName, lastName) = GetContactName(contentResolver, contactId);
+
+				if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+					continue;
+
 				var person = new Person
 				{
-					DisplayName = displayName,
+					FirstName = firstName,
+					LastName = lastName,
 					Birthday = birthday,
 					ContactId = contactId,
 					Source = PersonSource.Contact
@@ -87,8 +95,41 @@ public partial class ContactBirthdayService
 	}
 
 	/// <summary>
+	/// Aim: Gets first and last name for a contact from StructuredName.
+	/// Params: contentResolver - Android content resolver, contactId - Contact ID
+	/// Return: Tuple with first name and last name
+	/// </summary>
+	private static (string FirstName, string LastName) GetContactName(ContentResolver contentResolver, string contactId)
+	{
+		var uri = ContactsContract.Data.ContentUri;
+		if (uri == null)
+			return (string.Empty, string.Empty);
+
+		string[] projection =
+		[
+			ContactsContract.CommonDataKinds.StructuredName.GivenName,
+			ContactsContract.CommonDataKinds.StructuredName.FamilyName
+		];
+
+		string selection = $"{ContactsContract.Data.InterfaceConsts.ContactId} = ? AND {ContactsContract.Data.InterfaceConsts.Mimetype} = ?";
+		string[] selectionArgs = [contactId, ContactsContract.CommonDataKinds.StructuredName.ContentItemType];
+
+		using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
+		if (cursor == null || !cursor.MoveToFirst())
+			return (string.Empty, string.Empty);
+
+		int givenNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GivenName);
+		int familyNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FamilyName);
+
+		string firstName = cursor.GetString(givenNameIndex) ?? string.Empty;
+		string lastName = cursor.GetString(familyNameIndex) ?? string.Empty;
+
+		return (firstName, lastName);
+	}
+
+	/// <summary>
 	/// Aim: Gets all birthdays from the Android birthday calendar.
-	/// Return: List of Person objects with DisplayName and Birthday
+	/// Return: List of Person objects with FirstName, LastName and Birthday
 	/// </summary>
 	public partial Task<List<Person>> GetBirthdayCalendarEventsAsync()
 	{
@@ -139,11 +180,13 @@ public partial class ContactBirthdayService
 				if (string.IsNullOrWhiteSpace(displayName))
 					continue;
 
+				var (firstName, lastName) = ParseDisplayName(displayName);
 				var birthdayDate = DateTimeOffset.FromUnixTimeMilliseconds(dtstart).DateTime;
 
 				var person = new Person
 				{
-					DisplayName = displayName,
+					FirstName = firstName,
+					LastName = lastName,
 					Birthday = BirthdayHelper.ConvertFromDateTimeToBirthday(birthdayDate),
 					Source = PersonSource.BirthdayCalendar
 				};
@@ -243,5 +286,23 @@ public partial class ContactBirthdayService
 		}
 
 		return title;
+	}
+
+	/// <summary>
+	/// Aim: Parses a display name into first and last name.
+	/// Params: displayName - Full display name
+	/// Return: Tuple with first name and last name
+	/// </summary>
+	private static (string FirstName, string LastName) ParseDisplayName(string displayName)
+	{
+		if (string.IsNullOrWhiteSpace(displayName))
+			return (string.Empty, string.Empty);
+
+		var parts = displayName.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+
+		string firstName = parts.Length > 0 ? parts[0] : string.Empty;
+		string lastName = parts.Length > 1 ? parts[1] : string.Empty;
+
+		return (firstName, lastName);
 	}
 }
