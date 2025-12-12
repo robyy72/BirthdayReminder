@@ -15,7 +15,7 @@ public partial class ContactBirthdayService
 	/// Aim: Gets all contacts with birthdays from Android contacts.
 	/// Return: List of Person objects with DisplayName, Birthday and ContactId
 	/// </summary>
-	public partial Task<List<Person>> GetContactsWithBirthdaysAsync()
+	public partial Task<List<Person>> GetContactsAsync()
 	{
 		var results = new List<Person>();
 
@@ -33,7 +33,7 @@ public partial class ContactBirthdayService
 			string[] projection =
 			[
 				ContactsContract.Data.InterfaceConsts.ContactId,
-				ContactsContract.CommonDataKinds.StructuredName.DisplayName,
+				ContactsContract.Data.InterfaceConsts.DisplayName,
 				ContactsContract.CommonDataKinds.Event.StartDate,
 				ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type
 			];
@@ -46,7 +46,7 @@ public partial class ContactBirthdayService
 				return Task.FromResult(results);
 
 			int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
-			int displayNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.DisplayName);
+			int displayNameIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.DisplayName);
 			int startDateIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.Event.StartDate);
 
 			while (cursor.MoveToNext())
@@ -64,13 +64,13 @@ public partial class ContactBirthdayService
 				if (string.IsNullOrWhiteSpace(dateString))
 					continue;
 
-				if (!TryParseBirthdayDate(dateString, out DateTime birthdayDate))
+				if (!TryParseBirthday(dateString, out Birthday? birthday) || birthday == null)
 					continue;
 
 				var person = new Person
 				{
 					DisplayName = displayName,
-					Birthday = BirthdayHelper.ConvertFromDateTimeToBirthday(birthdayDate),
+					Birthday = birthday,
 					ContactId = contactId,
 					Source = PersonSource.Contact
 				};
@@ -198,9 +198,9 @@ public partial class ContactBirthdayService
 		return null;
 	}
 
-	private static bool TryParseBirthdayDate(string dateString, out DateTime birthday)
+	private static bool TryParseBirthday(string dateString, out Birthday? birthday)
 	{
-		birthday = default;
+		birthday = null;
 
 		// Android stores dates in various formats: yyyy-MM-dd, --MM-dd (no year), etc.
 		if (dateString.StartsWith("--"))
@@ -208,15 +208,16 @@ public partial class ContactBirthdayService
 			// No year format: --MM-dd
 			if (dateString.Length >= 7 &&
 				int.TryParse(dateString.Substring(2, 2), out int month) &&
-				int.TryParse(dateString.Substring(5, 2), out int day))
+				int.TryParse(dateString.Substring(5, 2), out int day) &&
+				month >= 1 && month <= 12 && day >= 1 && day <= 31)
 			{
-				birthday = new DateTime(1900, month, day);
+				birthday = new Birthday { Day = day, Month = month, Year = 0 };
 				return true;
 			}
 		}
 		else if (DateTime.TryParse(dateString, out DateTime parsed))
 		{
-			birthday = parsed;
+			birthday = new Birthday { Day = parsed.Day, Month = parsed.Month, Year = parsed.Year };
 			return true;
 		}
 

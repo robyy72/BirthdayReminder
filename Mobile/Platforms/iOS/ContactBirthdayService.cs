@@ -15,7 +15,7 @@ public partial class ContactBirthdayService
 	/// Aim: Gets all contacts with birthdays from iOS contacts.
 	/// Return: List of Person objects with DisplayName, Birthday and ContactId
 	/// </summary>
-	public partial Task<List<Person>> GetContactsWithBirthdaysAsync()
+	public partial Task<List<Person>> GetContactsAsync()
 	{
 		var results = new List<Person>();
 
@@ -66,16 +66,17 @@ public partial class ContactBirthdayService
 						continue;
 
 					var birthdayComponents = contact.Birthday;
-					if (birthdayComponents.Day == 0 || birthdayComponents.Month == 0)
-						continue;
+					int day = (int)birthdayComponents.Day;
+					int month = (int)birthdayComponents.Month;
+					int year = birthdayComponents.Year > 0 ? (int)birthdayComponents.Year : 0;
 
-					int year = birthdayComponents.Year > 0 ? (int)birthdayComponents.Year : 1900;
-					var birthdayDate = new DateTime(year, (int)birthdayComponents.Month, (int)birthdayComponents.Day);
+					if (day <= 0 || day > 31 || month <= 0 || month > 12)
+						continue;
 
 					var person = new Person
 					{
 						DisplayName = displayName,
-						Birthday = BirthdayHelper.ConvertFromDateTimeToBirthday(birthdayDate),
+						Birthday = new Birthday { Day = day, Month = month, Year = year },
 						ContactId = contactId,
 						Source = PersonSource.Contact
 					};

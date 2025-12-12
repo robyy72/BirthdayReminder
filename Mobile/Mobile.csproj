@@ -29,9 +29,10 @@
 
 	<!-- iOS-spezifische Einstellungen -->
 	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
-		<ProvisioningType>automatic</ProvisioningType>
+		<ProvisioningType>manual</ProvisioningType>
 		<CodesignKey>Apple Development: Created via API (U9925D3F2N)</CodesignKey>
 		<CodesignProvision>VS: online.birthdayreminder.app Development</CodesignProvision>
+		<EnableCodeSigning>true</EnableCodeSigning>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,6 +49,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

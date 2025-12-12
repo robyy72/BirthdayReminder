@@ -2,22 +2,26 @@ namespace Mobile;
 
 public partial class MainPage : ContentPage
 {
-	public List<PersonViewModel> UpcomingBirthdays { get; set; } = [];
+    #region Properties
+    public List<PersonViewModel> UpcomingBirthdays { get; set; } = [];
 	public List<PersonViewModel> MissedBirthdays { get; set; } = [];
+    #endregion
 
-	private List<Person> _persons = [];
+    #region Private Class Variables
+    private List<Person> _persons = [];
 	private Settings _settings = SettingsService.Get();
 	private bool _foundContactsWithSameBirthday = false;
+    #endregion
 
-	public MainPage()
+
+    #region Constructor and Start Methods
+    public MainPage()
 	{
 		InitializeComponent();
 		BindingContext = this;
-		Init();
-
-	
+		Init();	
 	}
-
+	
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
@@ -31,6 +35,7 @@ public partial class MainPage : ContentPage
         ReadContactsIfAllowed();
         ReadBirthdaysFromBirthdayCalenderIfAllowed();
     }
+    #endregion
 
     #region Init Methods
     private async void CheckRightsAndUpdateSettings()
@@ -58,33 +63,27 @@ public partial class MainPage : ContentPage
 	{
 		_persons.Clear();
 
-		for (int month = 1; month <= 12; month++)
-		{
-			_persons.AddRange(BirthdayService.GetByMonth(month));
-		}
+		for (int month = 1; month <= 12; month++)		
+			_persons.AddRange(BirthdayService.GetByMonth(month));		
 	}
     
 	private async void ReadContactsIfAllowed()
 	{
 		if (_settings.ContactsMode != ContactsMode.Read && _settings.ContactsMode != ContactsMode.ReadWrite)
-			return;
-
-		bool hasPermission = await DeviceService.CheckContactsReadPermissionAsync();
-		if (!hasPermission)
-			return;
+			return;		
 
 		try
 		{
-			var service = new ContactBirthdayService();
-			var contacts = await service.GetContactsWithBirthdaysAsync();
+			ContactBirthdayService service = new();
+			List<Person> persons = await service.GetContactsAsync();
 
-			foreach (var contact in contacts)
+			foreach (Person person in persons)
 			{
-				if (contact.Birthday == null)
+				if (person.Birthday == null)
 					continue;
 
-				var birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(contact.Birthday);
-				ImportContactBirthday(contact.DisplayName, birthdayDate, contact.ContactId);
+				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
+				ImportContactBirthday(person.DisplayName, birthdayDate, person.ContactId);
 			}
 		}
 		catch (Exception ex)
@@ -183,24 +182,20 @@ public partial class MainPage : ContentPage
 	private async void ReadBirthdaysFromBirthdayCalenderIfAllowed()
 	{
 		if (_settings.ContactsMode != ContactsMode.BirthdayCalendar)
-			return;
-
-		bool hasPermission = await DeviceService.CheckCalendarReadPermissionAsync();
-		if (!hasPermission)
-			return;
+			return;		
 
 		try
 		{
-			var service = new ContactBirthdayService();
-			var events = await service.GetBirthdayCalendarEventsAsync();
+            ContactBirthdayService service = new();
+			List<Person> persons = await service.GetBirthdayCalendarEventsAsync();
 
-			foreach (var evt in events)
+			foreach (Person person in persons)
 			{
-				if (evt.Birthday == null)
+				if (person.Birthday == null)
 					continue;
 
-				var birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(evt.Birthday);
-				ImportCalendarBirthday(evt.DisplayName, birthdayDate);
+				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
+				ImportCalendarBirthday(person.DisplayName, birthdayDate);
 			}
 		}
 		catch (Exception ex)

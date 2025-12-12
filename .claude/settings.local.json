@@ -1,44 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git -C:*)",
-      "Bash(git push:*)",
-      "Bash(git pull:*)",
-      "Bash(git config:*)",
-      "Bash(git remote:*)",
-      "Bash(git checkout:*)",
-      "Bash(git switch:*)",
-      "Bash(git branch:*)",
-      "Bash(git status:*)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)",
-      "Bash(git stash:*)",
-      "Bash(powershell:*)",
-      "Bash(dotnet build:*)",
-      "Bash(dotnet run:*)",
-      "Bash(dotnet test:*)",
-      "Bash(dotnet restore:*)",
-      "Bash(dotnet clean:*)",
-      "Bash(dotnet publish:*)",
-      "Bash(appcmd:*)",
-      "Bash(dotnet new:*)",
-      "Bash(dotnet sln:*)",
-      "Bash(dotnet add:*)",
-      "Edit(.claude/CLAUDE.md)",
-      "Edit(.claude/settings.local.json)",
-      "Bash(del \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml\" \"C:\\Users\\RobertHauptINFINITAS\\misc\\private_repos\\BirthdayReminder\\Mobile\\Pages\\WelcomePage.xaml.cs\")",
-      "Bash(findstr:*)",
-      "Bash(dotnet list:*)",
       "WebSearch",
-      "WebFetch(domain:github.com)"
-    ],
-    "deny": [],
-    "ask": [
-      "Bash(npm:*)",
-      "Bash(npx:*)",
-      "Bash(node:*)"
+      "Bash(dotnet build:*)",
+      "Bash(git add:*)"
     ]
   }
 }

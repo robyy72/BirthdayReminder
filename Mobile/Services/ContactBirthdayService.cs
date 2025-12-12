@@ -9,7 +9,7 @@ public partial class ContactBirthdayService
 	/// Aim: Gets all contacts with birthdays from the device.
 	/// Return: List of Person objects with DisplayName, Birthday and ContactId
 	/// </summary>
-	public partial Task<List<Person>> GetContactsWithBirthdaysAsync();
+	public partial Task<List<Person>> GetContactsAsync();
 
 	/// <summary>
 	/// Aim: Gets all birthdays from the device birthday calendar.
