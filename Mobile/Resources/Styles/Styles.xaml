@@ -232,7 +232,7 @@
 
     <Style TargetType="Label" x:Key="LabelTimeCaption">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
