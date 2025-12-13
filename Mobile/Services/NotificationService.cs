@@ -25,8 +25,9 @@ public static class NotificationService
 		CancelForPerson(person.Id);
 
 		var settings = SettingsService.Get();
-		int hours = settings.DefaultReminderTime / 100;
-		int minutes = settings.DefaultReminderTime % 100;
+		int reminderTime = GetReminderTimeForMethod(person.ReminderMethod, settings);
+		int hours = reminderTime / 100;
+		int minutes = reminderTime % 100;
 
 		var nextBirthday = GetNextBirthdayDate(person.Birthday, hours, minutes);
 		if (nextBirthday <= DateTime.Now)
@@ -90,6 +91,19 @@ public static class NotificationService
 	public static async Task<bool> RequestPermissionAsync()
 	{
 		var result = await LocalNotificationCenter.Current.RequestNotificationPermission();
+		return result;
+	}
+
+	private static int GetReminderTimeForMethod(ReminderMethod method, Settings settings)
+	{
+		int result = method switch
+		{
+			ReminderMethod.Email => settings.ReminderTimeEmail,
+			ReminderMethod.Sms => settings.ReminderTimeSms,
+			ReminderMethod.LockScreen => settings.ReminderTimeLockScreen,
+			ReminderMethod.WhatsApp => settings.ReminderTimeWhatsApp,
+			_ => CommonConstants.DEFAULT_REMINDER_TIME_MORNING
+		};
 		return result;
 	}
 

@@ -67,7 +67,8 @@ BirthdayReminder/
 │   ├── Pages/
 │   │   ├── MainPage.xaml(.cs)
 │   │   ├── AllBirthdaysPage.xaml(.cs)
-│   │   ├── SettingsPage.xaml(.cs)
+│   │   ├── SettingsAllPage.xaml(.cs)
+│   │   ├── SettingsReminderPage.xaml(.cs)
 │   │   ├── PrivacyPage.xaml(.cs)
 │   │   ├── Welcome_1Page.xaml(.cs)
 │   │   └── Welcome_2Page.xaml(.cs)

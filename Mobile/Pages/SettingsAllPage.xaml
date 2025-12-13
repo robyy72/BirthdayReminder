@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             x:Class="Mobile.SettingsPage"
+             x:Class="Mobile.SettingsAllPage"
              Title="{x:Static resx:Resources.Page_Settings_Title}">
 
     <ScrollView>
@@ -54,43 +54,6 @@
                                  Value="en"
                                  Style="{StaticResource RadioStandard}"
                                  x:Name="RadioEn" />
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Reminder Time -->
-            <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout Spacing="15">
-                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                        <VerticalStackLayout>
-                            <Label Text="{x:Static resx:Resources.Time_Hours}"
-                                   Style="{StaticResource LabelTimeCaption}" />
-                            <Picker x:Name="HoursPicker"
-                                    Style="{StaticResource PickerTime}" />
-                        </VerticalStackLayout>
-
-                        <Label Text=":"
-                               Style="{StaticResource LabelTimeSeparator}" />
-
-                        <VerticalStackLayout>
-                            <Label Text="{x:Static resx:Resources.Time_Minutes}"
-                                   Style="{StaticResource LabelTimeCaption}" />
-                            <Picker x:Name="MinutesPicker"
-                                    Style="{StaticResource PickerTime}" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
-                               Style="{StaticResource LabelBody}"
-                               VerticalOptions="Center" />
-                        <Switch x:Name="RemindUntilApprovedSwitch"
-                                Grid.Column="1"
-                                VerticalOptions="Center" />
-                    </Grid>
                 </VerticalStackLayout>
             </Border>
 

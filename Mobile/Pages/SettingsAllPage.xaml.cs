@@ -1,46 +1,28 @@
 namespace Mobile;
 
-public partial class SettingsPage : ContentPage
+public partial class SettingsAllPage : ContentPage
 {
-	private readonly List<string> _hoursList = [];
-	private readonly List<string> _minutesList = [];
+	#region Fields
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
+	#endregion
 
-	public SettingsPage()
+	#region Constructor
+	public SettingsAllPage()
 	{
 		InitializeComponent();
-		InitializePickers();
 		LoadSettings();
 		_isLoading = false;
 	}
+	#endregion
 
-	private void InitializePickers()
-	{
-		for (int i = 0; i < 24; i++)
-			_hoursList.Add(i.ToString("D2"));
-
-		for (int i = 0; i < 60; i++)
-			_minutesList.Add(i.ToString("D2"));
-
-		HoursPicker.ItemsSource = _hoursList;
-		MinutesPicker.ItemsSource = _minutesList;
-	}
-
+	#region Load
 	private void LoadSettings()
 	{
 		var settings = SettingsService.Get();
 
 		UpcomingEntry.Text = settings.ShowUpcomingBirthdays.ToString();
 		PastEntry.Text = settings.ShowPastBirthdays.ToString();
-
-		int hours = settings.DefaultReminderTime / 100;
-		int minutes = settings.DefaultReminderTime % 100;
-
-		HoursPicker.SelectedIndex = hours;
-		MinutesPicker.SelectedIndex = minutes;
-
-		RemindUntilApprovedSwitch.IsToggled = settings.RemindUntilApproved;
 
 		if (settings.Locale == "en")
 			RadioEn.IsChecked = true;
@@ -71,7 +53,9 @@ public partial class SettingsPage : ContentPage
 			_ = LoadCalendarsAsync(settings.SelectedCalendarIds);
 		}
 	}
+	#endregion
 
+	#region Contacts
 	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
 	{
 		if (!e.Value || _isLoading)
@@ -116,7 +100,9 @@ public partial class SettingsPage : ContentPage
 			}
 		}
 	}
+	#endregion
 
+	#region Calendars
 	private async void OnWriteCalendarsToggled(object? sender, ToggledEventArgs e)
 	{
 		if (_isLoading)
@@ -228,7 +214,9 @@ public partial class SettingsPage : ContentPage
 			CalendarTogglesContainer.Children.Add(grid);
 		}
 	}
+	#endregion
 
+	#region Save
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
@@ -238,12 +226,6 @@ public partial class SettingsPage : ContentPage
 
 		if (int.TryParse(PastEntry.Text, out int past))
 			settings.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
-
-		int hours = HoursPicker.SelectedIndex;
-		int minutes = MinutesPicker.SelectedIndex;
-		settings.DefaultReminderTime = hours * 100 + minutes;
-
-		settings.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 
 		if (RadioEn.IsChecked)
 			settings.Locale = "en";
@@ -272,4 +254,5 @@ public partial class SettingsPage : ContentPage
 			MobileLanguages.Resources.Settings_Saved_Message,
 			MobileLanguages.Resources.General_Button_OK);
 	}
+	#endregion
 }

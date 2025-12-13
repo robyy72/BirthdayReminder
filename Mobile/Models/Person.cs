@@ -9,15 +9,22 @@ namespace Mobile;
 /// </summary>
 public class Person
 {
+	#region Identity
 	public int Id { get; set; }
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public Birthday? Birthday { get; set; }
-	public int ReminderTime { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
+	#endregion
+
+	#region Reminder
 	public ReminderMethod ReminderMethod { get; set; } = ReminderMethod.NotSet;
 	public bool RemindUntilApproved { get; set; }
+	#endregion
+
+	#region Contacts
 	public bool NeverReadFromContacts { get; set; }
 	public bool NeverWriteToContacts { get; set; }
 	public string? ContactId { get; set; }
 	public PersonSource Source { get; set; } = PersonSource.Manual;
+	#endregion
 }

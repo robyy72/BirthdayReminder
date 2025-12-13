@@ -42,8 +42,15 @@
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Settings}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            ContentTemplate="{DataTemplate local:SettingsPage}"
-            Route="SettingsPage" />
+            ContentTemplate="{DataTemplate local:SettingsAllPage}"
+            Route="SettingsAllPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="{x:Static resx:Resources.Settings_ReminderTime}"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:SettingsReminderPage}"
+            Route="SettingsReminderPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Privacy}"
