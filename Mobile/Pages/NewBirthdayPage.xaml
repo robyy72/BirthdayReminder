@@ -62,14 +62,17 @@
                     <Label Text="{x:Static resx:Resources.Reminder_Label}"
                            Style="{StaticResource LabelSectionHeader}" />
 
-                    <Picker x:Name="ReminderTypePicker"
-                            SelectedIndexChanged="OnReminderTypeChanged" />
+                    <Label Text="{x:Static resx:Resources.ReminderMethod_Label}"
+                           Style="{StaticResource LabelBody}" />
+                    <Picker x:Name="ReminderMethodPicker" />
 
-                    <VerticalStackLayout x:Name="ReminderMethodContainer" IsVisible="False" Spacing="10">
-                        <Label Text="{x:Static resx:Resources.ReminderMethod_Label}"
-                               Style="{StaticResource LabelBody}" />
-                        <Picker x:Name="ReminderMethodPicker" />
-                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="RemindUntilApprovedSwitch"
+                                Grid.Column="1" />
+                    </Grid>
                 </VerticalStackLayout>
             </Border>
 

@@ -13,7 +13,6 @@ public partial class NewBirthdayPage : ContentPage
 	private readonly List<string> _daysList = [];
 	private readonly List<string> _monthsList = [];
 	private readonly List<string> _yearsList = [];
-	private readonly List<string> _reminderTypeList = [];
 	private readonly List<string> _reminderMethodList = [];
 	private bool _pickersInitialized = false;
 
@@ -75,13 +74,6 @@ public partial class NewBirthdayPage : ContentPage
 		for (int i = currentYear; i >= currentYear - 120; i--)
 			_yearsList.Add(i.ToString());
 
-		_reminderTypeList.AddRange([
-			MobileLanguages.Resources.ReminderType_NotSet,
-			MobileLanguages.Resources.ReminderType_DoNotRemind,
-			MobileLanguages.Resources.ReminderType_RemindByMessage,
-			MobileLanguages.Resources.ReminderType_RemindUntilApproved
-		]);
-
 		_reminderMethodList.AddRange([
 			MobileLanguages.Resources.ReminderMethod_NotSet,
 			MobileLanguages.Resources.ReminderMethod_Email,
@@ -93,7 +85,6 @@ public partial class NewBirthdayPage : ContentPage
 		DayPicker.ItemsSource = _daysList;
 		MonthPicker.ItemsSource = _monthsList;
 		YearPicker.ItemsSource = _yearsList;
-		ReminderTypePicker.ItemsSource = _reminderTypeList;
 		ReminderMethodPicker.ItemsSource = _reminderMethodList;
 	}
 
@@ -102,8 +93,8 @@ public partial class NewBirthdayPage : ContentPage
 		DayPicker.SelectedIndex = DateTime.Now.Day - 1;
 		MonthPicker.SelectedIndex = DateTime.Now.Month - 1;
 		YearPicker.SelectedIndex = 0;
-		ReminderTypePicker.SelectedIndex = 0;
 		ReminderMethodPicker.SelectedIndex = 0;
+		RemindUntilApprovedSwitch.IsToggled = false;
 	}
 
 	private void LoadPerson(int id)
@@ -123,9 +114,8 @@ public partial class NewBirthdayPage : ContentPage
 				YearPicker.SelectedIndex = Math.Clamp(yearIndex, 0, _yearsList.Count - 1);
 			}
 
-			ReminderTypePicker.SelectedIndex = (int)_existingPerson.ReminderType;
 			ReminderMethodPicker.SelectedIndex = (int)_existingPerson.ReminderMethod;
-			UpdateReminderMethodVisibility();
+			RemindUntilApprovedSwitch.IsToggled = _existingPerson.RemindUntilApproved;
 
 			DeleteButton.IsVisible = true;
 		}
@@ -149,16 +139,16 @@ public partial class NewBirthdayPage : ContentPage
 			Year = year
 		};
 
-		var reminderType = (ReminderType)ReminderTypePicker.SelectedIndex;
 		var reminderMethod = (ReminderMethod)ReminderMethodPicker.SelectedIndex;
+		var remindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 
 		if (_existingPerson != null)
 		{
 			_existingPerson.FirstName = firstName;
 			_existingPerson.LastName = lastName;
 			_existingPerson.Birthday = birthday;
-			_existingPerson.ReminderType = reminderType;
 			_existingPerson.ReminderMethod = reminderMethod;
+			_existingPerson.RemindUntilApproved = remindUntilApproved;
 			BirthdayService.Update(_existingPerson);
 			NotificationService.ScheduleForPerson(_existingPerson);
 		}
@@ -170,8 +160,8 @@ public partial class NewBirthdayPage : ContentPage
 				FirstName = firstName,
 				LastName = lastName,
 				Birthday = birthday,
-				ReminderType = reminderType,
-				ReminderMethod = reminderMethod
+				ReminderMethod = reminderMethod,
+				RemindUntilApproved = remindUntilApproved
 			};
 			BirthdayService.Add(person);
 			NotificationService.ScheduleForPerson(person);
@@ -179,17 +169,6 @@ public partial class NewBirthdayPage : ContentPage
 
 		App.NeedsReloadBirthdays = true;
 		await Shell.Current.GoToAsync("..");
-	}
-
-	private void OnReminderTypeChanged(object? sender, EventArgs e)
-	{
-		UpdateReminderMethodVisibility();
-	}
-
-	private void UpdateReminderMethodVisibility()
-	{
-		var selectedType = (ReminderType)ReminderTypePicker.SelectedIndex;
-		ReminderMethodContainer.IsVisible = selectedType == ReminderType.RemindByMessage;
 	}
 
 	private async void OnDeleteClicked(object? sender, EventArgs e)

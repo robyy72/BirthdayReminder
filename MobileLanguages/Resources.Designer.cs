@@ -128,14 +128,11 @@ public class Resources
 	public static string Settings_ShowPastBirthdays => ResourceManager.GetString("Settings_ShowPastBirthdays", resourceCulture) ?? "";
 	public static string Settings_Display => ResourceManager.GetString("Settings_Display", resourceCulture) ?? "";
 	public static string Reminder_Label => ResourceManager.GetString("Reminder_Label", resourceCulture) ?? "";
-	public static string ReminderType_NotSet => ResourceManager.GetString("ReminderType_NotSet", resourceCulture) ?? "";
-	public static string ReminderType_DoNotRemind => ResourceManager.GetString("ReminderType_DoNotRemind", resourceCulture) ?? "";
-	public static string ReminderType_RemindByMessage => ResourceManager.GetString("ReminderType_RemindByMessage", resourceCulture) ?? "";
-	public static string ReminderType_RemindUntilApproved => ResourceManager.GetString("ReminderType_RemindUntilApproved", resourceCulture) ?? "";
 	public static string ReminderMethod_Label => ResourceManager.GetString("ReminderMethod_Label", resourceCulture) ?? "";
 	public static string ReminderMethod_NotSet => ResourceManager.GetString("ReminderMethod_NotSet", resourceCulture) ?? "";
 	public static string ReminderMethod_Email => ResourceManager.GetString("ReminderMethod_Email", resourceCulture) ?? "";
 	public static string ReminderMethod_Sms => ResourceManager.GetString("ReminderMethod_Sms", resourceCulture) ?? "";
 	public static string ReminderMethod_LockScreen => ResourceManager.GetString("ReminderMethod_LockScreen", resourceCulture) ?? "";
 	public static string ReminderMethod_WhatsApp => ResourceManager.GetString("ReminderMethod_WhatsApp", resourceCulture) ?? "";
+	public static string RemindUntilApproved_Label => ResourceManager.GetString("RemindUntilApproved_Label", resourceCulture) ?? "";
 }

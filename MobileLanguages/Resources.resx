@@ -324,18 +324,6 @@
   <data name="Reminder_Label" xml:space="preserve">
     <value>Reminder</value>
   </data>
-  <data name="ReminderType_NotSet" xml:space="preserve">
-    <value>Not set</value>
-  </data>
-  <data name="ReminderType_DoNotRemind" xml:space="preserve">
-    <value>Do not remind</value>
-  </data>
-  <data name="ReminderType_RemindByMessage" xml:space="preserve">
-    <value>Remind by message</value>
-  </data>
-  <data name="ReminderType_RemindUntilApproved" xml:space="preserve">
-    <value>Remind until approved</value>
-  </data>
   <data name="ReminderMethod_Label" xml:space="preserve">
     <value>Reminder Method</value>
   </data>
@@ -353,5 +341,8 @@
   </data>
   <data name="ReminderMethod_WhatsApp" xml:space="preserve">
     <value>WhatsApp</value>
+  </data>
+  <data name="RemindUntilApproved_Label" xml:space="preserve">
+    <value>Remind until approved</value>
   </data>
 </root>

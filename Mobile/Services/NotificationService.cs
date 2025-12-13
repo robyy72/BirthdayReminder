@@ -19,7 +19,7 @@ public static class NotificationService
 		if (person.Birthday == null)
 			return;
 
-		if (person.ReminderType == ReminderType.NotSet || person.ReminderType == ReminderType.DoNotRemind)
+		if (person.ReminderMethod == ReminderMethod.NotSet)
 			return;
 
 		CancelForPerson(person.Id);

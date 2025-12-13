@@ -14,8 +14,8 @@ public class Person
 	public string LastName { get; set; } = string.Empty;
 	public Birthday? Birthday { get; set; }
 	public int ReminderTime { get; set; } = MobileConstants.DEFAULT_REMINDER_TIME;
-	public ReminderType ReminderType { get; set; } = ReminderType.NotSet;
 	public ReminderMethod ReminderMethod { get; set; } = ReminderMethod.NotSet;
+	public bool RemindUntilApproved { get; set; }
 	public bool NeverReadFromContacts { get; set; }
 	public bool NeverWriteToContacts { get; set; }
 	public string? ContactId { get; set; }

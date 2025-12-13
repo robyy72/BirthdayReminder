@@ -18,4 +18,5 @@ public class Settings
 	public PersonNameDirection PersonNameDirection { get; set; } = PersonNameDirection.FirstFirstName;
 	public int ShowUpcomingBirthdays { get; set; } = MobileConstants.SHOW_UPCOMING_DEFAULT;
 	public int ShowPastBirthdays { get; set; } = MobileConstants.SHOW_PAST_DEFAULT;
+	public bool RemindUntilApproved { get; set; }
 }
