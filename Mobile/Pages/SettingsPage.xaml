@@ -62,24 +62,36 @@
                    Style="{StaticResource LabelHeader}" />
 
             <Border Style="{StaticResource Tile}">
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                    <VerticalStackLayout>
-                        <Label Text="{x:Static resx:Resources.Time_Hours}"
-                               Style="{StaticResource LabelTimeCaption}" />
-                        <Picker x:Name="HoursPicker"
-                                Style="{StaticResource PickerTime}" />
-                    </VerticalStackLayout>
+                <VerticalStackLayout Spacing="15">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                        <VerticalStackLayout>
+                            <Label Text="{x:Static resx:Resources.Time_Hours}"
+                                   Style="{StaticResource LabelTimeCaption}" />
+                            <Picker x:Name="HoursPicker"
+                                    Style="{StaticResource PickerTime}" />
+                        </VerticalStackLayout>
 
-                    <Label Text=":"
-                           Style="{StaticResource LabelTimeSeparator}" />
+                        <Label Text=":"
+                               Style="{StaticResource LabelTimeSeparator}" />
 
-                    <VerticalStackLayout>
-                        <Label Text="{x:Static resx:Resources.Time_Minutes}"
-                               Style="{StaticResource LabelTimeCaption}" />
-                        <Picker x:Name="MinutesPicker"
-                                Style="{StaticResource PickerTime}" />
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
+                        <VerticalStackLayout>
+                            <Label Text="{x:Static resx:Resources.Time_Minutes}"
+                                   Style="{StaticResource LabelTimeCaption}" />
+                            <Picker x:Name="MinutesPicker"
+                                    Style="{StaticResource PickerTime}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="RemindUntilApprovedSwitch"
+                                Grid.Column="1"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
             </Border>
 
             <!-- Contacts Section -->

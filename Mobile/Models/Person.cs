@@ -13,7 +13,7 @@ public class Person
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public Birthday? Birthday { get; set; }
-	public int ReminderTime { get; set; } = MobileConstants.DEFAULT_REMINDER_TIME;
+	public int ReminderTime { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
 	public ReminderMethod ReminderMethod { get; set; } = ReminderMethod.NotSet;
 	public bool RemindUntilApproved { get; set; }
 	public bool NeverReadFromContacts { get; set; }

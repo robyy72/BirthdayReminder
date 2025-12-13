@@ -25,10 +25,6 @@ public static class MobileConstants
 	public const int SHOW_MAX_BIRTHDAYS = 100;
 	#endregion
 
-	#region Reminder
-	public const int DEFAULT_REMINDER_TIME = 1800;
-	#endregion
-
 	#region Errors
 	public const int MAX_ERRORS_INTO_PREFS = 10;
 	#endregion

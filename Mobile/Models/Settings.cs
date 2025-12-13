@@ -12,7 +12,7 @@ public class Settings
 	public ContactsMode ContactsMode { get; set; } = ContactsMode.None;
 	public bool WriteToCalendars { get; set; }
 	public List<string> SelectedCalendarIds { get; set; } = [];
-	public int DefaultReminderTime { get; set; } = MobileConstants.DEFAULT_REMINDER_TIME;
+	public int DefaultReminderTime { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
 	public string Theme { get; set; } = MobileConstants.DEFAULT_THEME;
 	public PersonNameDirection PersonNameDirection { get; set; } = PersonNameDirection.FirstFirstName;

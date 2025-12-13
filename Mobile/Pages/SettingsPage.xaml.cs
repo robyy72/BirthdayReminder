@@ -40,6 +40,8 @@ public partial class SettingsPage : ContentPage
 		HoursPicker.SelectedIndex = hours;
 		MinutesPicker.SelectedIndex = minutes;
 
+		RemindUntilApprovedSwitch.IsToggled = settings.RemindUntilApproved;
+
 		if (settings.Locale == "en")
 			RadioEn.IsChecked = true;
 		else
@@ -240,6 +242,8 @@ public partial class SettingsPage : ContentPage
 		int hours = HoursPicker.SelectedIndex;
 		int minutes = MinutesPicker.SelectedIndex;
 		settings.DefaultReminderTime = hours * 100 + minutes;
+
+		settings.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 
 		if (RadioEn.IsChecked)
 			settings.Locale = "en";

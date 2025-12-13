@@ -2,10 +2,6 @@ namespace Mobile;
 
 public partial class Welcome_1Page : ContentPage
 {
-	private readonly List<string> _hoursList = [];
-	private readonly List<string> _minutesList = [];
-	private bool _pickersInitialized = false;
-
 	public Welcome_1Page()
 	{
 		InitializeComponent();
@@ -14,35 +10,12 @@ public partial class Welcome_1Page : ContentPage
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
-		if (!_pickersInitialized)
-		{
-			InitializePickers();
-			_pickersInitialized = true;
-		}
 		LoadSettings();
-	}
-
-	private void InitializePickers()
-	{
-		for (int i = 0; i < 24; i++)
-			_hoursList.Add(i.ToString("D2"));
-
-		for (int i = 0; i < 60; i++)
-			_minutesList.Add(i.ToString("D2"));
-
-		HoursPicker.ItemsSource = _hoursList;
-		MinutesPicker.ItemsSource = _minutesList;
 	}
 
 	private void LoadSettings()
 	{
 		var settings = SettingsService.Get();
-
-		int hours = settings.DefaultReminderTime / 100;
-		int minutes = settings.DefaultReminderTime % 100;
-
-		HoursPicker.SelectedIndex = hours;
-		MinutesPicker.SelectedIndex = minutes;
 
 		if (settings.Locale == "en")
 			RadioEn.IsChecked = true;
@@ -69,10 +42,6 @@ public partial class Welcome_1Page : ContentPage
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
-
-		int hours = HoursPicker.SelectedIndex;
-		int minutes = MinutesPicker.SelectedIndex;
-		settings.DefaultReminderTime = hours * 100 + minutes;
 
 		if (RadioEn.IsChecked)
 			settings.Locale = "en";
