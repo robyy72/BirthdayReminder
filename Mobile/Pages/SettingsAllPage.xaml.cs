@@ -3,6 +3,8 @@ namespace Mobile;
 public partial class SettingsAllPage : ContentPage
 {
 	#region Fields
+	private readonly List<string> _hoursList = [];
+	private readonly List<string> _minutesList = [];
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
 	#endregion
@@ -11,8 +13,32 @@ public partial class SettingsAllPage : ContentPage
 	public SettingsAllPage()
 	{
 		InitializeComponent();
+		InitializePickers();
 		LoadSettings();
 		_isLoading = false;
+	}
+	#endregion
+
+	#region Initialize
+	private void InitializePickers()
+	{
+		for (int i = 0; i < 24; i++)
+			_hoursList.Add(i.ToString("D2"));
+
+		for (int i = 0; i < 60; i++)
+			_minutesList.Add(i.ToString("D2"));
+
+		EmailHoursPicker.ItemsSource = _hoursList;
+		EmailMinutesPicker.ItemsSource = _minutesList;
+
+		SmsHoursPicker.ItemsSource = _hoursList;
+		SmsMinutesPicker.ItemsSource = _minutesList;
+
+		LockScreenHoursPicker.ItemsSource = _hoursList;
+		LockScreenMinutesPicker.ItemsSource = _minutesList;
+
+		WhatsAppHoursPicker.ItemsSource = _hoursList;
+		WhatsAppMinutesPicker.ItemsSource = _minutesList;
 	}
 	#endregion
 
@@ -28,6 +54,12 @@ public partial class SettingsAllPage : ContentPage
 			RadioEn.IsChecked = true;
 		else
 			RadioDe.IsChecked = true;
+
+		SetTimePicker(EmailHoursPicker, EmailMinutesPicker, settings.ReminderTimeEmail);
+		SetTimePicker(SmsHoursPicker, SmsMinutesPicker, settings.ReminderTimeSms);
+		SetTimePicker(LockScreenHoursPicker, LockScreenMinutesPicker, settings.ReminderTimeLockScreen);
+		SetTimePicker(WhatsAppHoursPicker, WhatsAppMinutesPicker, settings.ReminderTimeWhatsApp);
+		RemindUntilApprovedSwitch.IsToggled = settings.RemindUntilApproved;
 
 		switch (settings.ContactsMode)
 		{
@@ -52,6 +84,22 @@ public partial class SettingsAllPage : ContentPage
 		{
 			_ = LoadCalendarsAsync(settings.SelectedCalendarIds);
 		}
+	}
+
+	private static void SetTimePicker(Picker hoursPicker, Picker minutesPicker, int time)
+	{
+		int hours = time / 100;
+		int minutes = time % 100;
+		hoursPicker.SelectedIndex = hours;
+		minutesPicker.SelectedIndex = minutes;
+	}
+
+	private static int GetTimeFromPickers(Picker hoursPicker, Picker minutesPicker)
+	{
+		int hours = hoursPicker.SelectedIndex;
+		int minutes = minutesPicker.SelectedIndex;
+		int result = hours * 100 + minutes;
+		return result;
 	}
 	#endregion
 
@@ -231,6 +279,12 @@ public partial class SettingsAllPage : ContentPage
 			settings.Locale = "en";
 		else
 			settings.Locale = "de";
+
+		settings.ReminderTimeEmail = GetTimeFromPickers(EmailHoursPicker, EmailMinutesPicker);
+		settings.ReminderTimeSms = GetTimeFromPickers(SmsHoursPicker, SmsMinutesPicker);
+		settings.ReminderTimeLockScreen = GetTimeFromPickers(LockScreenHoursPicker, LockScreenMinutesPicker);
+		settings.ReminderTimeWhatsApp = GetTimeFromPickers(WhatsAppHoursPicker, WhatsAppMinutesPicker);
+		settings.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 
 		if (RadioContactsNone.IsChecked)
 			settings.ContactsMode = ContactsMode.None;

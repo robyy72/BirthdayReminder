@@ -57,6 +57,85 @@
                 </VerticalStackLayout>
             </Border>
 
+            <!-- Reminder Section -->
+            <Label Text="{x:Static resx:Resources.Settings_ReminderTime}"
+                   Style="{StaticResource LabelHeader}" />
+
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout Spacing="15">
+                    <!-- Email -->
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.ReminderMethod_Email}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Picker x:Name="EmailHoursPicker"
+                                Grid.Column="1"
+                                Style="{StaticResource PickerTime}" />
+                        <Label Grid.Column="2" Text=":" VerticalOptions="Center" />
+                        <Picker x:Name="EmailMinutesPicker"
+                                Grid.Column="3"
+                                Style="{StaticResource PickerTime}" />
+                    </Grid>
+
+                    <!-- SMS -->
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.ReminderMethod_Sms}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Picker x:Name="SmsHoursPicker"
+                                Grid.Column="1"
+                                Style="{StaticResource PickerTime}" />
+                        <Label Grid.Column="2" Text=":" VerticalOptions="Center" />
+                        <Picker x:Name="SmsMinutesPicker"
+                                Grid.Column="3"
+                                Style="{StaticResource PickerTime}" />
+                    </Grid>
+
+                    <!-- Lock Screen -->
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Picker x:Name="LockScreenHoursPicker"
+                                Grid.Column="1"
+                                Style="{StaticResource PickerTime}" />
+                        <Label Grid.Column="2" Text=":" VerticalOptions="Center" />
+                        <Picker x:Name="LockScreenMinutesPicker"
+                                Grid.Column="3"
+                                Style="{StaticResource PickerTime}" />
+                    </Grid>
+
+                    <!-- WhatsApp -->
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Picker x:Name="WhatsAppHoursPicker"
+                                Grid.Column="1"
+                                Style="{StaticResource PickerTime}" />
+                        <Label Grid.Column="2" Text=":" VerticalOptions="Center" />
+                        <Picker x:Name="WhatsAppMinutesPicker"
+                                Grid.Column="3"
+                                Style="{StaticResource PickerTime}" />
+                    </Grid>
+
+                    <!-- Remind Until Approved -->
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
+                               Style="{StaticResource LabelBody}"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="RemindUntilApprovedSwitch"
+                                Grid.Column="1"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
             <!-- Contacts Section -->
             <Label Text="{x:Static resx:Resources.Settings_Contacts}"
                    Style="{StaticResource LabelHeader}" />
