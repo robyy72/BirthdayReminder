@@ -35,5 +35,6 @@ public static class MobileConstants
 	public const string PREFS_PERSON_PREFIX = "Person_";
 	public const string PREFS_SETTINGS = "Settings";
 	public const string PREFS_SETTINGS_INITIALIZED = "SettingsInitialized";
+	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	#endregion
 }

@@ -42,6 +42,13 @@ public partial class MainPage : ContentPage
 		LoadBirthdaysFromPrefs();
 		ReadContactsIfAllowed();
 		ReadBirthdaysFromBirthdayCalenderIfAllowed();
+		UpdateReminderSettingsButtonVisibility();
+	}
+
+	private void UpdateReminderSettingsButtonVisibility()
+	{
+		bool alreadyShown = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_REMINDER_SETTINGS_SHOWN);
+		ReminderSettingsButton.IsVisible = !alreadyShown;
 	}
     #endregion
 
@@ -221,6 +228,13 @@ public partial class MainPage : ContentPage
     private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(NewBirthdayPage));
+    }
+
+    private async void OnReminderSettingsClicked(object? sender, EventArgs e)
+    {
+        PrefsHelper.SetValue(MobileConstants.PREFS_REMINDER_SETTINGS_SHOWN, true);
+        ReminderSettingsButton.IsVisible = false;
+        await Shell.Current.GoToAsync(nameof(SettingsReminderPage));
     }
 
     private async void OnBirthdaySelected(object? sender, SelectionChangedEventArgs e)

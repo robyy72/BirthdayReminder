@@ -345,4 +345,7 @@
   <data name="RemindUntilApproved_Label" xml:space="preserve">
     <value>Erinnern bis bestätigt</value>
   </data>
+  <data name="Button_ConfigureReminders" xml:space="preserve">
+    <value>Erinnerungen einrichten</value>
+  </data>
 </root>

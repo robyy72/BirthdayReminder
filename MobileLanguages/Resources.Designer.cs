@@ -135,4 +135,5 @@ public class Resources
 	public static string ReminderMethod_LockScreen => ResourceManager.GetString("ReminderMethod_LockScreen", resourceCulture) ?? "";
 	public static string ReminderMethod_WhatsApp => ResourceManager.GetString("ReminderMethod_WhatsApp", resourceCulture) ?? "";
 	public static string RemindUntilApproved_Label => ResourceManager.GetString("RemindUntilApproved_Label", resourceCulture) ?? "";
+	public static string Button_ConfigureReminders => ResourceManager.GetString("Button_ConfigureReminders", resourceCulture) ?? "";
 }
