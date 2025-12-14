@@ -6,54 +6,40 @@
              Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20">
+        <VerticalStackLayout Padding="30" Spacing="15">
 
             <!-- Name -->
             <Border Style="{StaticResource Tile}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="{x:Static resx:Resources.General_Label_Name}"
-                           Style="{StaticResource LabelSectionHeader}" />
-                    <Entry x:Name="FirstNameEntry"
-                           Placeholder="{x:Static resx:Resources.General_Label_FirstName}"
-                           Style="{StaticResource EntryStandard}" />
-                    <Entry x:Name="LastNameEntry"
-                           Placeholder="{x:Static resx:Resources.General_Label_LastName}"
-                           Style="{StaticResource EntryStandard}" />
+                    <Border x:Name="FirstNameBorder" Style="{StaticResource EntryBorder}">
+                        <Entry x:Name="FirstNameEntry"
+                               Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
+                               Style="{StaticResource EntryStandard}"
+                               Focused="OnEntryFocused"
+                               Unfocused="OnEntryUnfocused" />
+                    </Border>
+                    <Border x:Name="LastNameBorder" Style="{StaticResource EntryBorder}">
+                        <Entry x:Name="LastNameEntry"
+                               Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
+                               Style="{StaticResource EntryStandard}"
+                               Focused="OnEntryFocused"
+                               Unfocused="OnEntryUnfocused" />
+                    </Border>
                 </VerticalStackLayout>
             </Border>
 
             <!-- Birthday -->
             <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="{x:Static resx:Resources.General_Label_Birthday}"
-                           Style="{StaticResource LabelSectionHeader}" />
-
-                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                        <!-- Day -->
-                        <VerticalStackLayout>
-                            <Label Text="{x:Static resx:Resources.Date_Day}"
-                                   Style="{StaticResource LabelTimeCaption}" />
-                            <Picker x:Name="DayPicker"
-                                    Style="{StaticResource PickerDayAndMonth}" />
-                        </VerticalStackLayout>
-
-                        <!-- Month -->
-                        <VerticalStackLayout>
-                            <Label Text="{x:Static resx:Resources.Date_Month}"
-                                   Style="{StaticResource LabelTimeCaption}" />
-                            <Picker x:Name="MonthPicker"
-                                    Style="{StaticResource PickerDayAndMonth}" />
-                        </VerticalStackLayout>
-
-                        <!-- Year -->
-                        <VerticalStackLayout>
-                            <Label Text="{x:Static resx:Resources.Date_Year}"
-                                   Style="{StaticResource LabelTimeCaption}" />
-                            <Picker x:Name="YearPicker"
-                                    Style="{StaticResource PickerYear}" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Picker x:Name="DayPicker"
+                            Style="{StaticResource PickerDay}" />
+                    <Label Text="."
+                           Style="{StaticResource LabelDateSeparator}" />
+                    <Picker x:Name="MonthPicker"
+                            Style="{StaticResource PickerMonthShort}" />
+                    <Picker x:Name="YearPicker"
+                            Style="{StaticResource PickerYear}" />
+                </HorizontalStackLayout>
             </Border>
 
             <!-- Reminder -->

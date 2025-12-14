@@ -348,4 +348,13 @@
   <data name="Button_ConfigureReminders" xml:space="preserve">
     <value>Erinnerungen einrichten</value>
   </data>
+  <data name="Placeholder_FirstName" xml:space="preserve">
+    <value>Vornamen eintragen</value>
+  </data>
+  <data name="Placeholder_LastName" xml:space="preserve">
+    <value>Nachnamen eintragen</value>
+  </data>
+  <data name="Settings_NoReminders" xml:space="preserve">
+    <value>Keine Erinnerung verwenden</value>
+  </data>
 </root>

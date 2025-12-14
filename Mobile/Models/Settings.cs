@@ -22,6 +22,10 @@ public class Settings
 	public int ReminderTimeSms { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_SMS;
 	public int ReminderTimeLockScreen { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_LOCKSCREEN;
 	public int ReminderTimeWhatsApp { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_WHATSAPP;
+	public bool ReminderEmailEnabled { get; set; }
+	public bool ReminderSmsEnabled { get; set; }
+	public bool ReminderLockScreenEnabled { get; set; }
+	public bool ReminderWhatsAppEnabled { get; set; }
 	public bool RemindUntilApproved { get; set; }
 	#endregion
 

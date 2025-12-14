@@ -5,98 +5,95 @@
              x:Class="Mobile.MainPage"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
-    <Grid RowDefinitions="*,Auto" Padding="20">
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout Spacing="20">
-                <!-- Upcoming Birthdays Section -->
-                <Label Text="{x:Static resx:Resources.Page_Main_UpcomingTitle}"
-                       Style="{StaticResource LabelSectionHeader}" />
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+            <!-- Upcoming Birthdays Section -->
+            <Label Text="{x:Static resx:Resources.Page_Main_UpcomingTitle}"
+                   Style="{StaticResource LabelSectionHeader}" />
 
-                <Border Style="{StaticResource Tile}">
-                    <CollectionView x:Name="UpcomingList"
-                                    ItemsSource="{Binding UpcomingBirthdays}"
-                                    SelectionMode="Single"
-                                    SelectionChanged="OnBirthdaySelected">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
-                                    <Label Grid.Column="0"
-                                           Text="{Binding DisplayName}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center" />
-                                    <Label Grid.Column="1"
-                                           Text="{Binding DayDisplay}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="End"
-                                           WidthRequest="30" />
-                                    <Label Grid.Column="2"
-                                           Text="{Binding MonthDisplay}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center"
-                                           Margin="5,0,0,0" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        <CollectionView.EmptyView>
-                            <Label Text="No upcoming birthdays"
-                                   Style="{StaticResource LabelDescription}"
-                                   HorizontalOptions="Center" />
-                        </CollectionView.EmptyView>
-                    </CollectionView>
-                </Border>
+            <Border Style="{StaticResource Tile}">
+                <CollectionView x:Name="UpcomingList"
+                                ItemsSource="{Binding UpcomingBirthdays}"
+                                SelectionMode="Single"
+                                SelectionChanged="OnBirthdaySelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
+                                <Label Grid.Column="0"
+                                       Text="{Binding DisplayName}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding DayDisplay}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="End"
+                                       WidthRequest="30" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding MonthDisplay}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center"
+                                       Margin="5,0,0,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label Text="No upcoming birthdays"
+                               Style="{StaticResource LabelDescription}"
+                               HorizontalOptions="Center" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Border>
 
-                <!-- Missed Birthdays Section -->
-                <Label x:Name="MissedBirthdaysLabel"
-                       Style="{StaticResource LabelSectionHeader}"
-                       Margin="0,10,0,0" />
+            <!-- Missed Birthdays Section -->
+            <Label x:Name="MissedBirthdaysLabel"
+                   Style="{StaticResource LabelSectionHeader}"
+                   Margin="0,10,0,0" />
 
-                <Border Style="{StaticResource Tile}">
-                    <CollectionView x:Name="MissedList"
-                                    ItemsSource="{Binding MissedBirthdays}"
-                                    SelectionMode="Single"
-                                    SelectionChanged="OnBirthdaySelected">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
-                                    <Label Grid.Column="0"
-                                           Text="{Binding DisplayName}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center" />
-                                    <Label Grid.Column="1"
-                                           Text="{Binding DayDisplay}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="End"
-                                           WidthRequest="30" />
-                                    <Label Grid.Column="2"
-                                           Text="{Binding MonthDisplay}"
-                                           Style="{StaticResource LabelBody}"
-                                           VerticalOptions="Center"
-                                           Margin="5,0,0,0" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        <CollectionView.EmptyView>
-                            <Label Text="No missed birthdays"
-                                   Style="{StaticResource LabelDescription}"
-                                   HorizontalOptions="Center" />
-                        </CollectionView.EmptyView>
-                    </CollectionView>
-                </Border>
-            </VerticalStackLayout>
-        </ScrollView>
+            <Border Style="{StaticResource Tile}">
+                <CollectionView x:Name="MissedList"
+                                ItemsSource="{Binding MissedBirthdays}"
+                                SelectionMode="Single"
+                                SelectionChanged="OnBirthdaySelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
+                                <Label Grid.Column="0"
+                                       Text="{Binding DisplayName}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding DayDisplay}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="End"
+                                       WidthRequest="30" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding MonthDisplay}"
+                                       Style="{StaticResource LabelBody}"
+                                       VerticalOptions="Center"
+                                       Margin="5,0,0,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label Text="No missed birthdays"
+                               Style="{StaticResource LabelDescription}"
+                               HorizontalOptions="Center" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Border>
 
-        <!-- Buttons at Bottom -->
-        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="0,20,0,0">
+            <!-- Buttons -->
+            <Button Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnNewBirthdayClicked"
+                    Margin="0,10,0,0" />
             <Button x:Name="ReminderSettingsButton"
                     Text="{x:Static resx:Resources.Button_ConfigureReminders}"
                     Style="{StaticResource ButtonSecondary}"
                     Clicked="OnReminderSettingsClicked"
                     IsVisible="False" />
-            <Button Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Clicked="OnNewBirthdayClicked" />
         </VerticalStackLayout>
-    </Grid>
+    </ScrollView>
 </ContentPage>

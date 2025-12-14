@@ -12,7 +12,7 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		Page page = new Welcome_1Page();
+		Page page = new StartPage_1();
 
 		if (SettingsService.IsInitialized())
 			page = new AppShell();

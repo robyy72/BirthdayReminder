@@ -56,20 +56,21 @@ public partial class NewBirthdayPage : ContentPage
 			_daysList.Add(i.ToString());
 
 		_monthsList.AddRange([
-			MobileLanguages.Resources.Month_January,
-			MobileLanguages.Resources.Month_February,
-			MobileLanguages.Resources.Month_March,
-			MobileLanguages.Resources.Month_April,
-			MobileLanguages.Resources.Month_May,
-			MobileLanguages.Resources.Month_June,
-			MobileLanguages.Resources.Month_July,
-			MobileLanguages.Resources.Month_August,
-			MobileLanguages.Resources.Month_September,
-			MobileLanguages.Resources.Month_October,
-			MobileLanguages.Resources.Month_November,
-			MobileLanguages.Resources.Month_December
+			MobileLanguages.Resources.Month_Short_Jan,
+			MobileLanguages.Resources.Month_Short_Feb,
+			MobileLanguages.Resources.Month_Short_Mar,
+			MobileLanguages.Resources.Month_Short_Apr,
+			MobileLanguages.Resources.Month_Short_May,
+			MobileLanguages.Resources.Month_Short_Jun,
+			MobileLanguages.Resources.Month_Short_Jul,
+			MobileLanguages.Resources.Month_Short_Aug,
+			MobileLanguages.Resources.Month_Short_Sep,
+			MobileLanguages.Resources.Month_Short_Oct,
+			MobileLanguages.Resources.Month_Short_Nov,
+			MobileLanguages.Resources.Month_Short_Dec
 		]);
 
+		_yearsList.Add("----");
 		int currentYear = DateTime.Now.Year;
 		for (int i = currentYear; i >= currentYear - 120; i--)
 			_yearsList.Add(i.ToString());
@@ -109,9 +110,16 @@ public partial class NewBirthdayPage : ContentPage
 				DayPicker.SelectedIndex = _existingPerson.Birthday.Day - 1;
 				MonthPicker.SelectedIndex = _existingPerson.Birthday.Month - 1;
 
-				int currentYear = DateTime.Now.Year;
-				int yearIndex = currentYear - _existingPerson.Birthday.Year;
-				YearPicker.SelectedIndex = Math.Clamp(yearIndex, 0, _yearsList.Count - 1);
+				if (_existingPerson.Birthday.Year == 0)
+				{
+					YearPicker.SelectedIndex = 0;
+				}
+				else
+				{
+					int currentYear = DateTime.Now.Year;
+					int yearIndex = currentYear - _existingPerson.Birthday.Year + 1;
+					YearPicker.SelectedIndex = Math.Clamp(yearIndex, 0, _yearsList.Count - 1);
+				}
 			}
 
 			ReminderMethodPicker.SelectedIndex = (int)_existingPerson.ReminderMethod;
@@ -130,7 +138,7 @@ public partial class NewBirthdayPage : ContentPage
 
 		int day = DayPicker.SelectedIndex + 1;
 		int month = MonthPicker.SelectedIndex + 1;
-		int year = int.Parse(_yearsList[YearPicker.SelectedIndex]);
+		int year = YearPicker.SelectedIndex == 0 ? 0 : int.Parse(_yearsList[YearPicker.SelectedIndex]);
 
 		var birthday = new Birthday
 		{
@@ -186,5 +194,31 @@ public partial class NewBirthdayPage : ContentPage
 	{
 		int id = (int)(DateTime.Now.Ticks % int.MaxValue);
 		return id;
+	}
+
+	private void OnEntryFocused(object? sender, FocusEventArgs e)
+	{
+		if (sender is Entry entry)
+		{
+			Border? border = entry.Parent as Border;
+			if (border != null)
+			{
+				border.Stroke = Color.FromArgb("#0066CC");
+				border.StrokeThickness = 2;
+			}
+		}
+	}
+
+	private void OnEntryUnfocused(object? sender, FocusEventArgs e)
+	{
+		if (sender is Entry entry)
+		{
+			Border? border = entry.Parent as Border;
+			if (border != null)
+			{
+				border.Stroke = Color.FromArgb("#ACACAC");
+				border.StrokeThickness = 1;
+			}
+		}
 	}
 }

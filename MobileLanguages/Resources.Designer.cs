@@ -136,4 +136,7 @@ public class Resources
 	public static string ReminderMethod_WhatsApp => ResourceManager.GetString("ReminderMethod_WhatsApp", resourceCulture) ?? "";
 	public static string RemindUntilApproved_Label => ResourceManager.GetString("RemindUntilApproved_Label", resourceCulture) ?? "";
 	public static string Button_ConfigureReminders => ResourceManager.GetString("Button_ConfigureReminders", resourceCulture) ?? "";
+	public static string Placeholder_FirstName => ResourceManager.GetString("Placeholder_FirstName", resourceCulture) ?? "";
+	public static string Placeholder_LastName => ResourceManager.GetString("Placeholder_LastName", resourceCulture) ?? "";
+	public static string Settings_NoReminders => ResourceManager.GetString("Settings_NoReminders", resourceCulture) ?? "";
 }

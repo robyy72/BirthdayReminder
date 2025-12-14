@@ -14,3 +14,4 @@ public enum ReminderMethod
 	LockScreen = 3,
 	WhatsApp = 4
 }
+	
