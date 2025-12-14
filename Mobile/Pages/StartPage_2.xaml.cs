@@ -1,8 +1,8 @@
 namespace Mobile;
 
-public partial class Welcome_1Page : ContentPage
+public partial class StartPage_2 : ContentPage
 {
-	public Welcome_1Page()
+	public StartPage_2()
 	{
 		InitializeComponent();
 	}
@@ -39,6 +39,14 @@ public partial class Welcome_1Page : ContentPage
 		}
 	}
 
+	private void OnBackClicked(object? sender, EventArgs e)
+	{
+		if (Application.Current?.Windows.Count > 0)
+		{
+			Application.Current.Windows[0].Page = new StartPage_1();
+		}
+	}
+
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
@@ -60,7 +68,7 @@ public partial class Welcome_1Page : ContentPage
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new Welcome_2Page();
+			Application.Current.Windows[0].Page = new StartPage_3();
 		}
 	}
 }

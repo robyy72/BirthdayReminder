@@ -2,30 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             x:Class="Mobile.Welcome_1Page"
+             x:Class="Mobile.StartPage_2"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False">
 
     <Grid RowDefinitions="Auto,*">
-        <!-- Header -->
-        <Grid Grid.Row="0" Style="{StaticResource HeaderBar}">
-            <Label Text="{x:Static resx:Resources.Page_Main_Title}"
+        <!-- Header with Back Button -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*">
+            <Button Grid.Column="0"
+                    Style="{StaticResource ButtonBack}"
+                    Clicked="OnBackClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_Main_Title}"
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="25">
-
-                <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
-                       Style="{StaticResource LabelHeader}" />
-
-                <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
-                       Style="{StaticResource LabelInfo}" />
-
-                <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
-                       Style="{StaticResource LabelInfo}" />
 
                 <!-- Theme Selection -->
                 <Border Style="{StaticResource Tile}">

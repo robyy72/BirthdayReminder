@@ -1,11 +1,11 @@
 namespace Mobile;
 
-public partial class Welcome_2Page : ContentPage
+public partial class StartPage_3 : ContentPage
 {
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
 
-	public Welcome_2Page()
+	public StartPage_3()
 	{
 		InitializeComponent();
 		LoadSettings();
@@ -187,11 +187,11 @@ public partial class Welcome_2Page : ContentPage
 	{
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new Welcome_1Page();
+			Application.Current.Windows[0].Page = new StartPage_2();
 		}
 	}
 
-	private void OnFinishClicked(object? sender, EventArgs e)
+	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
 
@@ -212,11 +212,9 @@ public partial class Welcome_2Page : ContentPage
 
 		SettingsService.Update(settings);
 
-		PrefsHelper.SetValue(MobileConstants.PREFS_SETTINGS_INITIALIZED, true);
-
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new AppShell();
+			Application.Current.Windows[0].Page = new StartPage_4();
 		}
 	}
 }

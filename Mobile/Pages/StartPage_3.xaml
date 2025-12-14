@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:local="clr-namespace:Mobile"
-             x:Class="Mobile.Welcome_2Page"
-             x:DataType="local:Welcome_2Page"
+             x:Class="Mobile.StartPage_3"
+             x:DataType="local:StartPage_3"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
@@ -104,10 +104,10 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Finish Button -->
-                <Button Text="{x:Static resx:Resources.General_Button_Finish}"
+                <!-- Next Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Next}"
                         Style="{StaticResource ButtonPrimary}"
-                        Clicked="OnFinishClicked" />
+                        Clicked="OnNextClicked" />
 
             </VerticalStackLayout>
         </ScrollView>
