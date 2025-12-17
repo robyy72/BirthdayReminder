@@ -620,6 +620,16 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
+
+    <Style TargetType="TimePicker" x:Key="TimePickerText">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Format" Value="HH:mm"/>
+        <Setter Property="MinimumHeightRequest" Value="32"/>
+        <Setter Property="MinimumWidthRequest" Value="60"/>
+    </Style>
   
     <!--
     <Style TargetType="TitleBar">
