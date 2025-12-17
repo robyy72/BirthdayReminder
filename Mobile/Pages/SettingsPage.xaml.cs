@@ -1,6 +1,6 @@
 namespace Mobile;
 
-public partial class SettingsAllPage : ContentPage
+public partial class SettingsPage : ContentPage
 {
 	#region Fields
 	private readonly List<string> _hoursList = [];
@@ -10,7 +10,7 @@ public partial class SettingsAllPage : ContentPage
 	#endregion
 
 	#region Constructor
-	public SettingsAllPage()
+	public SettingsPage()
 	{
 		InitializeComponent();
 		InitializePickers();

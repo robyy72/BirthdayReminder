@@ -42,8 +42,8 @@
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Settings}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            ContentTemplate="{DataTemplate local:SettingsAllPage}"
-            Route="SettingsAllPage" />
+            ContentTemplate="{DataTemplate local:SettingsPage}"
+            Route="SettingsPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Privacy}"
