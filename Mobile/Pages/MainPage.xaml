@@ -39,7 +39,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="No upcoming birthdays"
-                               Style="{StaticResource LabelDescription}"
+                               Style="{StaticResource LabelInfo}"
                                HorizontalOptions="Center" />
                     </CollectionView.EmptyView>
                 </CollectionView>
@@ -78,7 +78,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="No missed birthdays"
-                               Style="{StaticResource LabelDescription}"
+                               Style="{StaticResource LabelInfo}"
                                HorizontalOptions="Center" />
                     </CollectionView.EmptyView>
                 </CollectionView>

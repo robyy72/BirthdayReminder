@@ -4,12 +4,33 @@ public partial class StartPage_3 : ContentPage
 {
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
+	private readonly List<string> _hoursList = [];
+	private readonly List<string> _minutesList = [];
 
 	public StartPage_3()
 	{
 		InitializeComponent();
+		InitializeTimePickers();
 		LoadSettings();
 		_isLoading = false;
+	}
+
+	private void InitializeTimePickers()
+	{
+		for (int i = 0; i < 24; i++)
+			_hoursList.Add(i.ToString("D2"));
+
+		for (int i = 0; i < 60; i++)
+			_minutesList.Add(i.ToString("D2"));
+
+		EmailHoursPicker.ItemsSource = _hoursList;
+		EmailMinutesPicker.ItemsSource = _minutesList;
+		SmsHoursPicker.ItemsSource = _hoursList;
+		SmsMinutesPicker.ItemsSource = _minutesList;
+		LockScreenHoursPicker.ItemsSource = _hoursList;
+		LockScreenMinutesPicker.ItemsSource = _minutesList;
+		WhatsAppHoursPicker.ItemsSource = _hoursList;
+		WhatsAppMinutesPicker.ItemsSource = _minutesList;
 	}
 
 	private void LoadSettings()
@@ -27,6 +48,41 @@ public partial class StartPage_3 : ContentPage
 
 		WriteCalendarsSwitch.IsToggled = settings.WriteToCalendars;
 		UpdateCalendarListVisibility();
+
+		// Load reminder settings
+		bool noReminders = !settings.ReminderEmailEnabled &&
+		                   !settings.ReminderSmsEnabled &&
+		                   !settings.ReminderLockScreenEnabled &&
+		                   !settings.ReminderWhatsAppEnabled;
+		NoReminderSwitch.IsToggled = noReminders;
+
+		EmailSwitch.IsToggled = settings.ReminderEmailEnabled;
+		SmsSwitch.IsToggled = settings.ReminderSmsEnabled;
+		LockScreenSwitch.IsToggled = settings.ReminderLockScreenEnabled;
+		WhatsAppSwitch.IsToggled = settings.ReminderWhatsAppEnabled;
+
+		SetTimePicker(EmailHoursPicker, EmailMinutesPicker, settings.ReminderTimeEmail);
+		SetTimePicker(SmsHoursPicker, SmsMinutesPicker, settings.ReminderTimeSms);
+		SetTimePicker(LockScreenHoursPicker, LockScreenMinutesPicker, settings.ReminderTimeLockScreen);
+		SetTimePicker(WhatsAppHoursPicker, WhatsAppMinutesPicker, settings.ReminderTimeWhatsApp);
+
+		UpdateReminderVisibility();
+	}
+
+	private static void SetTimePicker(Picker hoursPicker, Picker minutesPicker, int time)
+	{
+		int hours = time / 100;
+		int minutes = time % 100;
+		hoursPicker.SelectedIndex = hours;
+		minutesPicker.SelectedIndex = minutes;
+	}
+
+	private static int GetTimeFromPickers(Picker hoursPicker, Picker minutesPicker)
+	{
+		int hours = hoursPicker.SelectedIndex >= 0 ? hoursPicker.SelectedIndex : 9;
+		int minutes = minutesPicker.SelectedIndex >= 0 ? minutesPicker.SelectedIndex : 0;
+		int result = hours * 100 + minutes;
+		return result;
 	}
 
 	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
@@ -101,6 +157,44 @@ public partial class StartPage_3 : ContentPage
 	private void UpdateCalendarListVisibility()
 	{
 		CalendarListContainer.IsVisible = WriteCalendarsSwitch.IsToggled;
+	}
+
+	private void OnNoReminderToggled(object? sender, ToggledEventArgs e)
+	{
+		if (_isLoading)
+			return;
+
+		if (e.Value)
+		{
+			EmailSwitch.IsToggled = false;
+			SmsSwitch.IsToggled = false;
+			LockScreenSwitch.IsToggled = false;
+			WhatsAppSwitch.IsToggled = false;
+		}
+
+		UpdateReminderVisibility();
+	}
+
+	private void OnReminderToggled(object? sender, ToggledEventArgs e)
+	{
+		if (_isLoading)
+			return;
+
+		if (e.Value && NoReminderSwitch.IsToggled)
+		{
+			NoReminderSwitch.IsToggled = false;
+		}
+
+		UpdateReminderVisibility();
+	}
+
+	private void UpdateReminderVisibility()
+	{
+		ReminderMethodsContainer.IsVisible = !NoReminderSwitch.IsToggled;
+		EmailTimeContainer.IsVisible = EmailSwitch.IsToggled;
+		SmsTimeContainer.IsVisible = SmsSwitch.IsToggled;
+		LockScreenTimeContainer.IsVisible = LockScreenSwitch.IsToggled;
+		WhatsAppTimeContainer.IsVisible = WhatsAppSwitch.IsToggled;
 	}
 
 	private async Task LoadCalendarsAsync()
@@ -210,11 +304,24 @@ public partial class StartPage_3 : ContentPage
 			.Select(c => c.Id)
 			.ToList();
 
+		// Save reminder settings
+		settings.ReminderEmailEnabled = EmailSwitch.IsToggled;
+		settings.ReminderSmsEnabled = SmsSwitch.IsToggled;
+		settings.ReminderLockScreenEnabled = LockScreenSwitch.IsToggled;
+		settings.ReminderWhatsAppEnabled = WhatsAppSwitch.IsToggled;
+
+		settings.ReminderTimeEmail = GetTimeFromPickers(EmailHoursPicker, EmailMinutesPicker);
+		settings.ReminderTimeSms = GetTimeFromPickers(SmsHoursPicker, SmsMinutesPicker);
+		settings.ReminderTimeLockScreen = GetTimeFromPickers(LockScreenHoursPicker, LockScreenMinutesPicker);
+		settings.ReminderTimeWhatsApp = GetTimeFromPickers(WhatsAppHoursPicker, WhatsAppMinutesPicker);
+
 		SettingsService.Update(settings);
+
+		PrefsHelper.SetValue(MobileConstants.PREFS_SETTINGS_INITIALIZED, true);
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new StartPage_4();
+			Application.Current.Windows[0].Page = new AppShell();
 		}
 	}
 }
