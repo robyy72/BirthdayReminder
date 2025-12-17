@@ -183,42 +183,21 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="Label" x:Key="LabelSectionHeader">
-        <Setter Property="FontSize" Value="22" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-    </Style>
-
     <Style TargetType="Label" x:Key="LabelInfo">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="LabelBody">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     </Style>
 
     <Style TargetType="Label" x:Key="LabelDescription">
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
     </Style>
 
-    <Style TargetType="Label" x:Key="LabelRadio">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="VerticalOptions" Value="Center" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="LabelError">
-        <Setter Property="FontSize" Value="14" />
+    <Style TargetType="Label" x:Key="LabelError" BasedOn="{StaticResource LabelDescription}">
         <Setter Property="TextColor" Value="#D32F2F" />
     </Style>
 
-    <Style TargetType="Label" x:Key="LabelSuccess">
-        <Setter Property="FontSize" Value="14" />
+    <Style TargetType="Label" x:Key="LabelSuccess" BasedOn="{StaticResource LabelDescription}">
         <Setter Property="TextColor" Value="#388E3C" />
     </Style>
 

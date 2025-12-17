@@ -37,7 +37,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_NoReminders}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="NoReminderSwitch"
                                         Grid.Column="1"
@@ -51,7 +51,7 @@
                                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Grid.Column="0"
                                            Text="{x:Static resx:Resources.ReminderMethod_Email}"
-                                           Style="{StaticResource LabelBody}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                     <TimePicker x:Name="EmailTimePicker"
                                                 Grid.Column="1"
@@ -67,7 +67,7 @@
                                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Grid.Column="0"
                                            Text="{x:Static resx:Resources.ReminderMethod_Sms}"
-                                           Style="{StaticResource LabelBody}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                     <TimePicker x:Name="SmsTimePicker"
                                                 Grid.Column="1"
@@ -83,7 +83,7 @@
                                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Grid.Column="0"
                                            Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
-                                           Style="{StaticResource LabelBody}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                     <TimePicker x:Name="LockScreenTimePicker"
                                                 Grid.Column="1"
@@ -99,7 +99,7 @@
                                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                                     <Label Grid.Column="0"
                                            Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
-                                           Style="{StaticResource LabelBody}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                     <TimePicker x:Name="WhatsAppTimePicker"
                                                 Grid.Column="1"

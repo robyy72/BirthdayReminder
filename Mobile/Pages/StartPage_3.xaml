@@ -37,7 +37,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsNone}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsNone"
                                              Grid.Column="1"
@@ -48,7 +48,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsRead"
                                              Grid.Column="1"
@@ -58,7 +58,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsReadWrite}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsReadWrite"
                                              Grid.Column="1"
@@ -68,7 +68,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsBirthdayCalendar}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsBirthdayCalendar"
                                              Grid.Column="1"
@@ -91,7 +91,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="WriteCalendarsSwitch"
                                         Grid.Column="1"

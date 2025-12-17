@@ -46,11 +46,11 @@
             <Border Style="{StaticResource Tile}">
                 <VerticalStackLayout Spacing="15">
                     <Label Text="{x:Static resx:Resources.Reminder_Label}"
-                           Style="{StaticResource LabelSectionHeader}" />
+                           Style="{StaticResource LabelHeader}" />
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Text="{x:Static resx:Resources.ReminderMethod_Email}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="ReminderEmailSwitch"
                                 Grid.Column="1" />
@@ -58,7 +58,7 @@
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Text="{x:Static resx:Resources.ReminderMethod_Sms}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="ReminderSmsSwitch"
                                 Grid.Column="1" />
@@ -66,7 +66,7 @@
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="ReminderLockScreenSwitch"
                                 Grid.Column="1" />
@@ -74,7 +74,7 @@
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="ReminderWhatsAppSwitch"
                                 Grid.Column="1" />
@@ -82,7 +82,7 @@
 
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="RemindUntilApprovedSwitch"
                                 Grid.Column="1" />

@@ -9,7 +9,7 @@
         <VerticalStackLayout Spacing="20">
             <!-- Upcoming Birthdays Section -->
             <Label x:Name="UpcomingBirthdaysLabel"
-                   Style="{StaticResource LabelSectionHeader}" />
+                   Style="{StaticResource LabelHeader}" />
 
             <Border Style="{StaticResource Tile}">
                 <CollectionView x:Name="UpcomingList"
@@ -21,17 +21,17 @@
                             <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
                                 <Label Grid.Column="0"
                                        Text="{Binding DisplayName}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Label Grid.Column="1"
                                        Text="{Binding DayDisplay}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center"
                                        HorizontalTextAlignment="End"
                                        WidthRequest="30" />
                                 <Label Grid.Column="2"
                                        Text="{Binding MonthDisplay}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center"
                                        Margin="5,0,0,0" />
                             </Grid>
@@ -47,7 +47,7 @@
 
             <!-- Missed Birthdays Section -->
             <Label x:Name="MissedBirthdaysLabel"
-                   Style="{StaticResource LabelSectionHeader}"
+                   Style="{StaticResource LabelHeader}"
                    Margin="0,10,0,0" />
 
             <Border Style="{StaticResource Tile}">
@@ -60,17 +60,17 @@
                             <Grid ColumnDefinitions="*,Auto,Auto" Padding="5,10">
                                 <Label Grid.Column="0"
                                        Text="{Binding DisplayName}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Label Grid.Column="1"
                                        Text="{Binding DayDisplay}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center"
                                        HorizontalTextAlignment="End"
                                        WidthRequest="30" />
                                 <Label Grid.Column="2"
                                        Text="{Binding MonthDisplay}"
-                                       Style="{StaticResource LabelBody}"
+                                       Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center"
                                        Margin="5,0,0,0" />
                             </Grid>

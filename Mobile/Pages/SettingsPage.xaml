@@ -17,7 +17,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ShowUpcomingBirthdays}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Entry x:Name="UpcomingEntry"
                                Grid.Column="1"
@@ -28,7 +28,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ShowPastBirthdays}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Entry x:Name="PastEntry"
                                Grid.Column="1"
@@ -67,7 +67,7 @@
                     <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.ReminderMethod_Email}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Picker x:Name="EmailHoursPicker"
                                 Grid.Column="1"
@@ -82,7 +82,7 @@
                     <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.ReminderMethod_Sms}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Picker x:Name="SmsHoursPicker"
                                 Grid.Column="1"
@@ -97,7 +97,7 @@
                     <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Picker x:Name="LockScreenHoursPicker"
                                 Grid.Column="1"
@@ -112,7 +112,7 @@
                     <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Picker x:Name="WhatsAppHoursPicker"
                                 Grid.Column="1"
@@ -127,7 +127,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="RemindUntilApprovedSwitch"
                                 Grid.Column="1"
@@ -146,7 +146,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <RadioButton x:Name="RadioContactsRead"
                                      Grid.Column="1"
@@ -156,7 +156,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ContactsReadWrite}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <RadioButton x:Name="RadioContactsReadWrite"
                                      Grid.Column="1"
@@ -166,7 +166,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ContactsBirthdayCalendar}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <RadioButton x:Name="RadioContactsBirthdayCalendar"
                                      Grid.Column="1"
@@ -176,7 +176,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ContactsNone}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <RadioButton x:Name="RadioContactsNone"
                                      Grid.Column="1"
@@ -195,7 +195,7 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
-                               Style="{StaticResource LabelBody}"
+                               Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
                         <Switch x:Name="WriteCalendarsSwitch"
                                 Grid.Column="1"
