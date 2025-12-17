@@ -8,7 +8,7 @@
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="20">
             <!-- Upcoming Birthdays Section -->
-            <Label Text="{x:Static resx:Resources.Page_Main_UpcomingTitle}"
+            <Label x:Name="UpcomingBirthdaysLabel"
                    Style="{StaticResource LabelSectionHeader}" />
 
             <Border Style="{StaticResource Tile}">

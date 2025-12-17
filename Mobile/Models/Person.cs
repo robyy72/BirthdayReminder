@@ -14,11 +14,14 @@ public class Person
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public Birthday? Birthday { get; set; }
-	#endregion
+    #endregion
 
-	#region Reminder
-	public ReminderMethod ReminderMethod { get; set; } = ReminderMethod.NotSet;
-	public bool RemindUntilApproved { get; set; }
+    #region Reminder
+    public bool ReminderEmailEnabled { get; set; }
+    public bool ReminderSmsEnabled { get; set; }
+    public bool ReminderLockScreenEnabled { get; set; }
+    public bool ReminderWhatsAppEnabled { get; set; }
+    public bool RemindUntilApproved { get; set; }
 	#endregion
 
 	#region Contacts

@@ -26,6 +26,7 @@ public partial class MainPage : ContentPage
 	{
 		base.OnAppearing();
 		_settings = SettingsService.Get();
+		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, _settings.ShowUpcomingBirthdays);
 		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
 		if (App.NeedsReloadBirthdays)
 		{
@@ -37,6 +38,7 @@ public partial class MainPage : ContentPage
 
 	private void Init()
 	{
+		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, _settings.ShowUpcomingBirthdays);
 		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
 		CheckRightsAndUpdateSettings();
 		LoadBirthdaysFromPrefs();

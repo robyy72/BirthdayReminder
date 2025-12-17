@@ -19,13 +19,13 @@ public static class NotificationService
 		if (person.Birthday == null)
 			return;
 
-		if (person.ReminderMethod == ReminderMethod.NotSet)
+		if (!HasAnyReminderEnabled(person))
 			return;
 
 		CancelForPerson(person.Id);
 
 		var settings = SettingsService.Get();
-		int reminderTime = GetReminderTimeForMethod(person.ReminderMethod, settings);
+		int reminderTime = GetEarliestReminderTime(person, settings);
 		int hours = reminderTime / 100;
 		int minutes = reminderTime % 100;
 
@@ -94,16 +94,29 @@ public static class NotificationService
 		return result;
 	}
 
-	private static int GetReminderTimeForMethod(ReminderMethod method, Settings settings)
+	private static bool HasAnyReminderEnabled(Person person)
 	{
-		int result = method switch
-		{
-			ReminderMethod.Email => settings.ReminderTimeEmail,
-			ReminderMethod.Sms => settings.ReminderTimeSms,
-			ReminderMethod.LockScreen => settings.ReminderTimeLockScreen,
-			ReminderMethod.WhatsApp => settings.ReminderTimeWhatsApp,
-			_ => CommonConstants.DEFAULT_REMINDER_TIME_MORNING
-		};
+		bool result = person.ReminderEmailEnabled ||
+					  person.ReminderSmsEnabled ||
+					  person.ReminderLockScreenEnabled ||
+					  person.ReminderWhatsAppEnabled;
+		return result;
+	}
+
+	private static int GetEarliestReminderTime(Person person, Settings settings)
+	{
+		var times = new List<int>();
+
+		if (person.ReminderEmailEnabled)
+			times.Add(settings.ReminderTimeEmail);
+		if (person.ReminderSmsEnabled)
+			times.Add(settings.ReminderTimeSms);
+		if (person.ReminderLockScreenEnabled)
+			times.Add(settings.ReminderTimeLockScreen);
+		if (person.ReminderWhatsAppEnabled)
+			times.Add(settings.ReminderTimeWhatsApp);
+
+		int result = times.Count > 0 ? times.Min() : CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
 		return result;
 	}
 

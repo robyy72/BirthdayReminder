@@ -24,14 +24,15 @@
             <VerticalStackLayout Padding="30" Spacing="25">
 
                 <!-- Theme Selection -->
-                <Border Style="{StaticResource Tile}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="{x:Static resx:Resources.Settings_Theme}"
-                               Style="{StaticResource LabelSectionHeader}" />
-
-                        <VerticalStackLayout RadioButtonGroup.GroupName="ThemeGroup"
-                                             x:Name="ThemeRadioGroup"
-                                             Spacing="10">
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Settings_Theme}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="ThemeGroup"
+                                             x:Name="ThemeRadioGroup">
                             <RadioButton Content="{x:Static resx:Resources.Settings_Theme_Light}"
                                          Value="Light"
                                          Style="{StaticResource RadioStandard}"
@@ -45,15 +46,15 @@
                 </Border>
 
                 <!-- Language Selection -->
-                <Border Style="{StaticResource Tile}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="{x:Static resx:Resources.Settings_Language}"
-                               Style="{StaticResource LabelSectionHeader}" />
-
-                        <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
-                                             RadioButtonGroup.SelectedValue="{Binding SelectedLocale}"
-                                             x:Name="LocaleRadioGroup"
-                                             Spacing="10">
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Settings_Language}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="LocaleGroup"
+                                             x:Name="LocaleRadioGroup">
                             <RadioButton Content="Deutsch"
                                          Value="de"
                                          Style="{StaticResource RadioStandard}"

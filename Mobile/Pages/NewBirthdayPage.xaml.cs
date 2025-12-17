@@ -1,5 +1,4 @@
 #region Usings
-using Common;
 #endregion
 
 namespace Mobile;
@@ -13,7 +12,6 @@ public partial class NewBirthdayPage : ContentPage
 	private readonly List<string> _daysList = [];
 	private readonly List<string> _monthsList = [];
 	private readonly List<string> _yearsList = [];
-	private readonly List<string> _reminderMethodList = [];
 	private bool _pickersInitialized = false;
 
 	public string PersonId
@@ -75,18 +73,9 @@ public partial class NewBirthdayPage : ContentPage
 		for (int i = currentYear; i >= currentYear - 120; i--)
 			_yearsList.Add(i.ToString());
 
-		_reminderMethodList.AddRange([
-			MobileLanguages.Resources.ReminderMethod_NotSet,
-			MobileLanguages.Resources.ReminderMethod_Email,
-			MobileLanguages.Resources.ReminderMethod_Sms,
-			MobileLanguages.Resources.ReminderMethod_LockScreen,
-			MobileLanguages.Resources.ReminderMethod_WhatsApp
-		]);
-
 		DayPicker.ItemsSource = _daysList;
 		MonthPicker.ItemsSource = _monthsList;
 		YearPicker.ItemsSource = _yearsList;
-		ReminderMethodPicker.ItemsSource = _reminderMethodList;
 	}
 
 	private void SetDefaultDate()
@@ -94,7 +83,10 @@ public partial class NewBirthdayPage : ContentPage
 		DayPicker.SelectedIndex = DateTime.Now.Day - 1;
 		MonthPicker.SelectedIndex = DateTime.Now.Month - 1;
 		YearPicker.SelectedIndex = 0;
-		ReminderMethodPicker.SelectedIndex = 0;
+		ReminderEmailSwitch.IsToggled = false;
+		ReminderSmsSwitch.IsToggled = false;
+		ReminderLockScreenSwitch.IsToggled = false;
+		ReminderWhatsAppSwitch.IsToggled = false;
 		RemindUntilApprovedSwitch.IsToggled = false;
 	}
 
@@ -122,7 +114,10 @@ public partial class NewBirthdayPage : ContentPage
 				}
 			}
 
-			ReminderMethodPicker.SelectedIndex = (int)_existingPerson.ReminderMethod;
+			ReminderEmailSwitch.IsToggled = _existingPerson.ReminderEmailEnabled;
+			ReminderSmsSwitch.IsToggled = _existingPerson.ReminderSmsEnabled;
+			ReminderLockScreenSwitch.IsToggled = _existingPerson.ReminderLockScreenEnabled;
+			ReminderWhatsAppSwitch.IsToggled = _existingPerson.ReminderWhatsAppEnabled;
 			RemindUntilApprovedSwitch.IsToggled = _existingPerson.RemindUntilApproved;
 
 			DeleteButton.IsVisible = true;
@@ -147,16 +142,16 @@ public partial class NewBirthdayPage : ContentPage
 			Year = year
 		};
 
-		var reminderMethod = (ReminderMethod)ReminderMethodPicker.SelectedIndex;
-		var remindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
-
 		if (_existingPerson != null)
 		{
 			_existingPerson.FirstName = firstName;
 			_existingPerson.LastName = lastName;
 			_existingPerson.Birthday = birthday;
-			_existingPerson.ReminderMethod = reminderMethod;
-			_existingPerson.RemindUntilApproved = remindUntilApproved;
+			_existingPerson.ReminderEmailEnabled = ReminderEmailSwitch.IsToggled;
+			_existingPerson.ReminderSmsEnabled = ReminderSmsSwitch.IsToggled;
+			_existingPerson.ReminderLockScreenEnabled = ReminderLockScreenSwitch.IsToggled;
+			_existingPerson.ReminderWhatsAppEnabled = ReminderWhatsAppSwitch.IsToggled;
+			_existingPerson.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 			BirthdayService.Update(_existingPerson);
 			NotificationService.ScheduleForPerson(_existingPerson);
 		}
@@ -168,8 +163,11 @@ public partial class NewBirthdayPage : ContentPage
 				FirstName = firstName,
 				LastName = lastName,
 				Birthday = birthday,
-				ReminderMethod = reminderMethod,
-				RemindUntilApproved = remindUntilApproved
+				ReminderEmailEnabled = ReminderEmailSwitch.IsToggled,
+				ReminderSmsEnabled = ReminderSmsSwitch.IsToggled,
+				ReminderLockScreenEnabled = ReminderLockScreenSwitch.IsToggled,
+				ReminderWhatsAppEnabled = ReminderWhatsAppSwitch.IsToggled,
+				RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled
 			};
 			BirthdayService.Add(person);
 			NotificationService.ScheduleForPerson(person);

@@ -46,7 +46,7 @@
     <value>Vergangene Geburtstage ({0})</value>
   </data>
   <data name="Page_Main_UpcomingTitle" xml:space="preserve">
-    <value>Anstehende Geburtstage</value>
+    <value>Anstehende Geburtstage ({0})</value>
   </data>
   <data name="Page_Main_NewBirthday" xml:space="preserve">
     <value>Neuer Eintrag</value>
