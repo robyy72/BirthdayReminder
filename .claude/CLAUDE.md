@@ -32,6 +32,12 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 
 ---
 
+## XAML / UI Rules
+
+- **All pages**: Always put buttons inside the ScrollView, not in a separate Grid row outside
+
+---
+
 ## Build
 
 - **Do NOT run `dotnet build` unless explicitly requested** - it breaks Hot Reload!
