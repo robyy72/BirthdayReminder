@@ -47,6 +47,12 @@ public class Resources
 	public static string Page_AllBirthdays_Title => ResourceManager.GetString("Page_AllBirthdays_Title", resourceCulture) ?? "";
 	public static string Page_Settings_Title => ResourceManager.GetString("Page_Settings_Title", resourceCulture) ?? "";
 	public static string Page_Privacy_Title => ResourceManager.GetString("Page_Privacy_Title", resourceCulture) ?? "";
+	public static string Page_Help_Title => ResourceManager.GetString("Page_Help_Title", resourceCulture) ?? "";
+	public static string Help_Link_WhatIsThis => ResourceManager.GetString("Help_Link_WhatIsThis", resourceCulture) ?? "";
+	public static string Help_UseContacts_Header => ResourceManager.GetString("Help_UseContacts_Header", resourceCulture) ?? "";
+	public static string Help_UseContacts_Content => ResourceManager.GetString("Help_UseContacts_Content", resourceCulture) ?? "";
+	public static string Help_BirthdayCalendar_Header => ResourceManager.GetString("Help_BirthdayCalendar_Header", resourceCulture) ?? "";
+	public static string Help_BirthdayCalendar_Content => ResourceManager.GetString("Help_BirthdayCalendar_Content", resourceCulture) ?? "";
 	public static string Tab_ShowAll => ResourceManager.GetString("Tab_ShowAll", resourceCulture) ?? "";
 	public static string Tab_Settings => ResourceManager.GetString("Tab_Settings", resourceCulture) ?? "";
 	public static string Tab_Privacy => ResourceManager.GetString("Tab_Privacy", resourceCulture) ?? "";
@@ -62,6 +68,11 @@ public class Resources
 	public static string General_Button_Back => ResourceManager.GetString("General_Button_Back", resourceCulture) ?? "";
 	public static string General_Button_Finish => ResourceManager.GetString("General_Button_Finish", resourceCulture) ?? "";
 	public static string General_Button_OK => ResourceManager.GetString("General_Button_OK", resourceCulture) ?? "";
+	public static string General_Label_Day => ResourceManager.GetString("General_Label_Day", resourceCulture) ?? "";
+	public static string General_Label_Month => ResourceManager.GetString("General_Label_Month", resourceCulture) ?? "";
+	public static string Birthday_WithYear => ResourceManager.GetString("Birthday_WithYear", resourceCulture) ?? "";
+	public static string Birthday_WithoutYear => ResourceManager.GetString("Birthday_WithoutYear", resourceCulture) ?? "";
+	public static string Birthday_EnterDate => ResourceManager.GetString("Birthday_EnterDate", resourceCulture) ?? "";
 	public static string Button_LetsGo => ResourceManager.GetString("Button_LetsGo", resourceCulture) ?? "";
 	public static string Page_Welcome_Title => ResourceManager.GetString("Page_Welcome_Title", resourceCulture) ?? "";
 	public static string Welcome_Header => ResourceManager.GetString("Welcome_Header", resourceCulture) ?? "";

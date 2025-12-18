@@ -46,10 +46,16 @@
                                              CheckedChanged="OnContactsRadioChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="{x:Static resx:Resources.Settings_ContactsRead}"
+                                           Style="{StaticResource LabelInfo}" />
+                                    <Label Text="{x:Static resx:Resources.Help_Link_WhatIsThis}"
+                                           Style="{StaticResource LabelHelpLink}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnHelpContactsTapped" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </VerticalStackLayout>
                                 <RadioButton x:Name="RadioContactsRead"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"

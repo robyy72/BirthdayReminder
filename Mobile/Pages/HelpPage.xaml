@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.HelpPage"
+             Title="{x:Static resx:Resources.Page_Help_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Style="{StaticResource HeaderBar}">
+            <Grid ColumnDefinitions="Auto,*">
+                <Button Style="{StaticResource ButtonBack}"
+                        Clicked="OnBackClicked" />
+                <Label Grid.Column="1"
+                       Text="{x:Static resx:Resources.Page_Help_Title}"
+                       Style="{StaticResource LabelHeaderBar}" />
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="25">
+
+                <Label x:Name="HeaderLabel"
+                       Style="{StaticResource LabelHeader}" />
+
+                <Border Style="{StaticResource Card}">
+                    <Label x:Name="ContentLabel"
+                           Style="{StaticResource LabelInfo}"
+                           Padding="20" />
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

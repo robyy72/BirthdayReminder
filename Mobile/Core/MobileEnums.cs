@@ -1,5 +1,11 @@
 namespace Mobile;
 
+public enum HelpTopic
+{
+	UseContacts = 1,
+	ReadFromBirthdayCalendar = 2
+}
+
 public enum ContactsMode
 {
 	Read = 0,

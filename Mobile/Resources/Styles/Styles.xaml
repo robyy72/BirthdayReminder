@@ -182,6 +182,12 @@
         <Setter Property="TextColor" Value="#388E3C" />
     </Style>
 
+    <Style TargetType="Label" x:Key="LabelHelpLink">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelHeaderBar">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -324,7 +330,7 @@
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light=#004999, Dark=#8866cc}" />
         <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="Margin" Value="20,0,20,0" />
+        <Setter Property="Margin" Value="20,0,0,20" />
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow Brush="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Black}}"

@@ -70,6 +70,11 @@ public partial class StartPage_3 : ContentPage
 		}
 	}
 
+	private async void OnHelpContactsTapped(object? sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync($"{nameof(HelpPage)}?Topic={HelpTopic.UseContacts}");
+	}
+
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
 		if (Application.Current?.Windows.Count > 0)

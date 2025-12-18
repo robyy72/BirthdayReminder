@@ -78,6 +78,38 @@
   <data name="Page_Privacy_Title" xml:space="preserve">
     <value>Datenschutz</value>
   </data>
+  <data name="Page_Help_Title" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="Help_Link_WhatIsThis" xml:space="preserve">
+    <value>Was ist das?</value>
+  </data>
+  <data name="Help_UseContacts_Header" xml:space="preserve">
+    <value>Kontakte als Quelle</value>
+  </data>
+  <data name="Help_UseContacts_Content" xml:space="preserve">
+    <value>Wenn du "Kontakte als Quelle" aktivierst, liest Birthday Reminder die Geburtstage aus deiner Kontaktliste.
+
+Das ermöglicht dir:
+• Geburtstage automatisch aus deinen Kontakten zu importieren
+• Deine Geburtstagsliste mit deinen Kontakten synchron zu halten
+• Manuelles Eingeben von bereits gespeicherten Geburtstagen zu vermeiden
+
+Die App liest nur die Geburtstagsinformationen - keine anderen Kontaktdaten werden abgerufen oder gespeichert.</value>
+  </data>
+  <data name="Help_BirthdayCalendar_Header" xml:space="preserve">
+    <value>Geburtstagskalender</value>
+  </data>
+  <data name="Help_BirthdayCalendar_Content" xml:space="preserve">
+    <value>Die Option "Geburtstagskalender" liest Geburtstage aus dem Geburtstagskalender deines Geräts.
+
+Einige Handys erstellen automatisch einen Geburtstagskalender aus deinen Kontakten. Diese Option ermöglicht es Birthday Reminder, Geburtstage aus diesem Kalender zu importieren.
+
+Das ist nützlich, wenn:
+• Deine Kontakte keine Geburtstagsfelder haben
+• Du bereits einen separaten Geburtstagskalender pflegst
+• Du Geburtstage importieren möchtest, ohne vollen Kontaktzugriff zu gewähren</value>
+  </data>
   <data name="Tab_ShowAll" xml:space="preserve">
     <value>Alle anzeigen</value>
   </data>
@@ -119,6 +151,21 @@
   </data>
   <data name="General_Button_OK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="General_Label_Day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="General_Label_Month" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="Birthday_WithYear" xml:space="preserve">
+    <value>Mit Geburtsjahr</value>
+  </data>
+  <data name="Birthday_WithoutYear" xml:space="preserve">
+    <value>Ohne Geburtsjahr</value>
+  </data>
+  <data name="Birthday_EnterDate" xml:space="preserve">
+    <value>Datum eingeben (TT.MM.JJJJ)</value>
   </data>
   <data name="Page_Welcome_Title" xml:space="preserve">
     <value>Willkommen</value>

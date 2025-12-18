@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.CreateEditBirthdayPage"
+             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15">
+
+            <!-- Name -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="0">
+                    <Border Style="{StaticResource CardHeader}">
+                        <Label Text="{x:Static resx:Resources.General_Label_Name}"
+                               Style="{StaticResource LabelCardHeader}" />
+                    </Border>
+                    <VerticalStackLayout Padding="20" Spacing="10">
+                        <Border x:Name="FirstNameBorder" Style="{StaticResource EntryBorder}">
+                            <Entry x:Name="FirstNameEntry"
+                                   Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
+                                   Style="{StaticResource EntryStandard}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused" />
+                        </Border>
+                        <Border x:Name="LastNameBorder" Style="{StaticResource EntryBorder}">
+                            <Entry x:Name="LastNameEntry"
+                                   Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
+                                   Style="{StaticResource EntryStandard}"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Birthday -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="0">
+                    <Border Style="{StaticResource CardHeader}">
+                        <Label Text="{x:Static resx:Resources.General_Label_Birthday}"
+                               Style="{StaticResource LabelCardHeader}" />
+                    </Border>
+                    <VerticalStackLayout Padding="20">
+                        <Label x:Name="DateLabel"
+                               Text="1. Jan ----"
+                               Style="{StaticResource LabelInfo}"
+                               FontSize="24"
+                               HorizontalOptions="Center"
+                               TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDateTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Reminder -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="0">
+                    <Border Style="{StaticResource CardHeader}">
+                        <Label Text="{x:Static resx:Resources.Reminder_Label}"
+                               Style="{StaticResource LabelCardHeader}" />
+                    </Border>
+                    <VerticalStackLayout Padding="20" Spacing="15">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Email}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderEmailSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Sms}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderSmsSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderLockScreenSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderWhatsAppSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="RemindUntilApprovedSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Save Button -->
+            <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnSaveClicked" />
+
+            <!-- Delete Button -->
+            <Button x:Name="DeleteButton"
+                    Text="{x:Static resx:Resources.General_Button_Delete}"
+                    Style="{StaticResource ButtonSecondary}"
+                    BackgroundColor="#D32F2F"
+                    Clicked="OnDeleteClicked"
+                    IsVisible="False" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
