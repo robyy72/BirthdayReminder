@@ -36,23 +36,39 @@ public partial class HelpPage : ContentPage
 		{
 			case HelpTopic.UseContacts:
 				HeaderLabel.Text = MobileLanguages.Resources.Help_UseContacts_Header;
-				ContentLabel.Text = MobileLanguages.Resources.Help_UseContacts_Content;
+				ContentLabel_1.Text = MobileLanguages.Resources.Help_UseContacts_Content_1;
+				ContentLabel_2.Text = MobileLanguages.Resources.Help_UseContacts_Content_2;
 				break;
 
 			case HelpTopic.ReadFromBirthdayCalendar:
 				HeaderLabel.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Header;
-				ContentLabel.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Content;
+				ContentLabel_1.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Content_1;
+				ContentLabel_2.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Content_2;
+				break;
+
+			case HelpTopic.BirthdayWithoutYear:
+				HeaderLabel.Text = MobileLanguages.Resources.Help_BirthdayWithoutYear_Header;
+				ContentLabel_1.Text = MobileLanguages.Resources.Help_BirthdayWithoutYear_Content_1;
+				ContentLabel_2.Text = MobileLanguages.Resources.Help_BirthdayWithoutYear_Content_2;
 				break;
 
 			default:
 				HeaderLabel.Text = MobileLanguages.Resources.Page_Help_Title;
-				ContentLabel.Text = "";
+				ContentLabel_1.Text = "";
+				ContentLabel_2.Text = "";
 				break;
 		}
 	}
 
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync("..");
+		if (Navigation.ModalStack.Count > 0)
+		{
+			await Navigation.PopModalAsync();
+		}
+		else
+		{
+			await Shell.Current.GoToAsync("..");
+		}
 	}
 }

@@ -81,34 +81,25 @@ public partial class CreateEditBirthdayPage : ContentPage
 			RemindUntilApprovedSwitch.IsToggled = _existingPerson.RemindUntilApproved;
 
 			DeleteButton.IsVisible = true;
+
+			if (_existingPerson.Source == PersonSource.Contacts)
+			{
+				WriteToContactCard.IsVisible = true;
+			}
 		}
 	}
 
 	private void UpdateDateLabel()
 	{
-		string monthName = GetMonthShortName(_selectedMonth);
-		string yearText = _selectedYear.HasValue ? _selectedYear.Value.ToString() : "----";
+		string monthName = LanguageHelper.GetFullMonthName(_selectedMonth);
+		string yearText = _selectedYear.HasValue ? _selectedYear.Value.ToString() : "0000";
 		DateLabel.Text = $"{_selectedDay}. {monthName} {yearText}";
 	}
 
-	private static string GetMonthShortName(int month)
+	private async void OnHelpBirthdayTapped(object? sender, EventArgs e)
 	{
-		return month switch
-		{
-			1 => MobileLanguages.Resources.Month_Short_Jan,
-			2 => MobileLanguages.Resources.Month_Short_Feb,
-			3 => MobileLanguages.Resources.Month_Short_Mar,
-			4 => MobileLanguages.Resources.Month_Short_Apr,
-			5 => MobileLanguages.Resources.Month_Short_May,
-			6 => MobileLanguages.Resources.Month_Short_Jun,
-			7 => MobileLanguages.Resources.Month_Short_Jul,
-			8 => MobileLanguages.Resources.Month_Short_Aug,
-			9 => MobileLanguages.Resources.Month_Short_Sep,
-			10 => MobileLanguages.Resources.Month_Short_Oct,
-			11 => MobileLanguages.Resources.Month_Short_Nov,
-			12 => MobileLanguages.Resources.Month_Short_Dec,
-			_ => "---"
-		};
+		var helpPage = new HelpPage { Topic = HelpTopic.BirthdayWithoutYear.ToString() };
+		await Navigation.PushModalAsync(helpPage);
 	}
 
 	private async void OnDateTapped(object? sender, EventArgs e)
@@ -295,6 +286,27 @@ public partial class CreateEditBirthdayPage : ContentPage
 				border.Stroke = Color.FromArgb("#ACACAC");
 				border.StrokeThickness = 1;
 			}
+		}
+	}
+
+	private async void OnBackClicked(object? sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("..");
+	}
+
+	private async void OnWriteToContactToggled(object? sender, ToggledEventArgs e)
+	{
+		if (!e.Value)
+			return;
+
+		bool granted = await DeviceService.RequestContactsWritePermissionAsync();
+		if (!granted)
+		{
+			WriteToContactSwitch.IsToggled = false;
+			await DisplayAlert(
+				MobileLanguages.Resources.Permission_Required,
+				MobileLanguages.Resources.Permission_ContactsWrite_Denied,
+				MobileLanguages.Resources.General_Button_OK);
 		}
 	}
 }

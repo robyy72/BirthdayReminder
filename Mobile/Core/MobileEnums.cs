@@ -3,20 +3,21 @@ namespace Mobile;
 public enum HelpTopic
 {
 	UseContacts = 1,
-	ReadFromBirthdayCalendar = 2
+	ReadFromBirthdayCalendar = 2,
+	BirthdayWithoutYear = 3
 }
 
 public enum ContactsMode
 {
-	Read = 0,
-	ReadWrite = 1,
-	BirthdayCalendar = 2,
-	None = 3
+	NotSet = 0,
+	None = 1,
+	ReadFromContacts = 2,
+	BirthdayCalendar = 3	
 }
 
 public enum PersonSource
 {
 	Manual = 0,
-	Contact = 1,
+	Contacts = 1,
 	BirthdayCalendar = 2
 }

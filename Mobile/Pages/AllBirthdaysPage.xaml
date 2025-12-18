@@ -10,7 +10,7 @@
         <ToolbarItem Text="+" Clicked="OnNewBirthdayClicked" />
     </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="Auto,*" Padding="20">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20,20,20,0">
         <!-- Month Filter Picker -->
         <Picker x:Name="MonthPicker"
                 Style="{StaticResource PickerBase}"
@@ -56,6 +56,13 @@
                        Padding="20" />
             </CollectionView.EmptyView>
         </CollectionView>
+
+        <!-- Back Button -->
+        <Button Grid.Row="2"
+                Text="{x:Static resx:Resources.General_Button_Back}"
+                Style="{StaticResource ButtonPrimary}"
+                Margin="0,15,0,20"
+                Clicked="OnBackClicked" />
     </Grid>
 
 </ContentPage>

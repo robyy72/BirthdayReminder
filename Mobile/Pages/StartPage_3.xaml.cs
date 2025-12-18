@@ -17,12 +17,12 @@ public partial class StartPage_3 : ContentPage
 
 		if (settings.ContactsMode == ContactsMode.None)
 			RadioContactsNone.IsChecked = true;
-		else if (settings.ContactsMode == ContactsMode.ReadWrite)
-			RadioContactsReadWrite.IsChecked = true;
 		else if (settings.ContactsMode == ContactsMode.BirthdayCalendar)
 			RadioContactsBirthdayCalendar.IsChecked = true;
-		else
+		else if (settings.ContactsMode == ContactsMode.ReadFromContacts)
 			RadioContactsRead.IsChecked = true;
+		else
+			RadioContactsNone.IsChecked = true;
 	}
 
 	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
@@ -30,7 +30,7 @@ public partial class StartPage_3 : ContentPage
 		if (!e.Value || _isLoading)
 			return;
 
-		if (sender == RadioContactsRead || sender == RadioContactsReadWrite)
+		if (sender == RadioContactsRead)
 		{
 			bool granted = await DeviceService.RequestContactsReadPermissionAsync();
 			if (!granted)
@@ -40,20 +40,6 @@ public partial class StartPage_3 : ContentPage
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_ContactsRead_Denied,
 					MobileLanguages.Resources.General_Button_OK);
-				return;
-			}
-
-			if (sender == RadioContactsReadWrite)
-			{
-				bool writeGranted = await DeviceService.RequestContactsWritePermissionAsync();
-				if (!writeGranted)
-				{
-					RadioContactsRead.IsChecked = true;
-					await DisplayAlert(
-						MobileLanguages.Resources.Permission_Required,
-						MobileLanguages.Resources.Permission_ContactsWrite_Denied,
-						MobileLanguages.Resources.General_Button_OK);
-				}
 			}
 		}
 		else if (sender == RadioContactsBirthdayCalendar)
@@ -72,7 +58,8 @@ public partial class StartPage_3 : ContentPage
 
 	private async void OnHelpContactsTapped(object? sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync($"{nameof(HelpPage)}?Topic={HelpTopic.UseContacts}");
+		var helpPage = new HelpPage { Topic = HelpTopic.UseContacts.ToString() };
+		await Navigation.PushModalAsync(helpPage);
 	}
 
 	private void OnBackClicked(object? sender, EventArgs e)
@@ -89,12 +76,12 @@ public partial class StartPage_3 : ContentPage
 
 		if (RadioContactsNone.IsChecked)
 			settings.ContactsMode = ContactsMode.None;
-		else if (RadioContactsReadWrite.IsChecked)
-			settings.ContactsMode = ContactsMode.ReadWrite;
 		else if (RadioContactsBirthdayCalendar.IsChecked)
 			settings.ContactsMode = ContactsMode.BirthdayCalendar;
+		else if (RadioContactsRead.IsChecked)
+			settings.ContactsMode = ContactsMode.ReadFromContacts;
 		else
-			settings.ContactsMode = ContactsMode.Read;
+			settings.ContactsMode = ContactsMode.None;
 
 		SettingsService.Update(settings);
 

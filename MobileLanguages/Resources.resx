@@ -87,28 +87,44 @@
   <data name="Help_UseContacts_Header" xml:space="preserve">
     <value>Contacts as source</value>
   </data>
-  <data name="Help_UseContacts_Content" xml:space="preserve">
+  <data name="Help_UseContacts_Content_1" xml:space="preserve">
     <value>When you enable "Contacts as source", Birthday Reminder will read birthdays from your phone's contact list.
 
 This allows you to:
 • Automatically import birthdays from your contacts
 • Keep your birthday list synchronized with your contacts
-• Avoid manually entering birthdays that are already stored in your contacts
-
-The app will only read birthday information - no other contact data is accessed or stored.</value>
+• Avoid manually entering birthdays that are already stored in your contacts</value>
+  </data>
+  <data name="Help_UseContacts_Content_2" xml:space="preserve">
+    <value>The app will only read birthday information - no other contact data is accessed or stored.</value>
   </data>
   <data name="Help_BirthdayCalendar_Header" xml:space="preserve">
     <value>Birthday Calendar</value>
   </data>
-  <data name="Help_BirthdayCalendar_Content" xml:space="preserve">
+  <data name="Help_BirthdayCalendar_Content_1" xml:space="preserve">
     <value>The "Birthday Calendar" option reads birthdays from your device's birthday calendar.
 
-Some phones automatically create a birthday calendar from your contacts. This option allows Birthday Reminder to import birthdays from that calendar.
-
-This is useful if:
+Some phones automatically create a birthday calendar from your contacts. This option allows Birthday Reminder to import birthdays from that calendar.</value>
+  </data>
+  <data name="Help_BirthdayCalendar_Content_2" xml:space="preserve">
+    <value>This is useful if:
 • Your contacts don't have birthday fields
 • You already maintain a separate birthday calendar
 • You want to import birthdays without giving full contact access</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Header" xml:space="preserve">
+    <value>Birthday without year</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Content_1" xml:space="preserve">
+    <value>You can save a birthday with or without a year.
+
+If you don't know the birth year, simply choose "Without year" when selecting the date. The year will be displayed as "0000".</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Content_2" xml:space="preserve">
+    <value>When a birthday has no year:
+• No age will be calculated or displayed
+• The reminder will still work normally
+• You can add the year later by editing the birthday</value>
   </data>
   <data name="Tab_ShowAll" xml:space="preserve">
     <value>Show All</value>
@@ -127,6 +143,9 @@ This is useful if:
   </data>
   <data name="General_Button_Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="Settings_WriteToContact" xml:space="preserve">
+    <value>Save to contact</value>
   </data>
   <data name="General_Label_Name" xml:space="preserve">
     <value>Name</value>

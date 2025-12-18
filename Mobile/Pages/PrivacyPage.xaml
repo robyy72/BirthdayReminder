@@ -5,18 +5,27 @@
              x:Class="Mobile.PrivacyPage"
              Title="{x:Static resx:Resources.Page_Privacy_Title}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="Privacy Policy" FontSize="24" FontAttributes="Bold" />
+                <Label Text="Privacy Policy" FontSize="24" FontAttributes="Bold" />
 
-            <Label Text="Your birthday data is stored locally on your device only." />
+                <Label Text="Your birthday data is stored locally on your device only." />
 
-            <Label Text="If you choose to sync with contacts, we only read birthday information and names. We never upload your data to any server." />
+                <Label Text="If you choose to sync with contacts, we only read birthday information and names. We never upload your data to any server." />
 
-            <Label Text="All data remains on your device and under your control." />
+                <Label Text="All data remains on your device and under your control." />
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Back Button -->
+        <Button Grid.Row="1"
+                Text="{x:Static resx:Resources.General_Button_Back}"
+                Style="{StaticResource ButtonPrimary}"
+                Margin="20,15,20,20"
+                Clicked="OnBackClicked" />
+    </Grid>
 
 </ContentPage>

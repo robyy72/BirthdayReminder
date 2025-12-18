@@ -5,8 +5,9 @@
              x:Class="Mobile.SettingsPage"
              Title="{x:Static resx:Resources.Page_Settings_Title}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Display Section -->
             <Label Text="{x:Static resx:Resources.Settings_Display}"
@@ -161,16 +162,6 @@
                     </Grid>
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_ContactsReadWrite}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <RadioButton x:Name="RadioContactsReadWrite"
-                                     Grid.Column="1"
-                                     Style="{StaticResource RadioStandard}"
-                                     CheckedChanged="OnContactsRadioChanged" />
-                    </Grid>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
                                Text="{x:Static resx:Resources.Settings_ContactsBirthdayCalendar}"
                                Style="{StaticResource LabelInfo}"
                                VerticalOptions="Center" />
@@ -220,12 +211,20 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Save Button -->
-            <Button Text="{x:Static resx:Resources.General_Button_Save}"
+        </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="20,15,20,20">
+            <Button Grid.Column="0"
+                    Text="{x:Static resx:Resources.General_Button_Back}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Clicked="OnBackClicked" />
+            <Button Grid.Column="1"
+                    Text="{x:Static resx:Resources.General_Button_Save}"
                     Style="{StaticResource ButtonPrimary}"
                     Clicked="OnSaveClicked" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+        </Grid>
+    </Grid>
 
 </ContentPage>

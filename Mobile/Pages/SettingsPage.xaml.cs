@@ -66,14 +66,14 @@ public partial class SettingsPage : ContentPage
 			case ContactsMode.None:
 				RadioContactsNone.IsChecked = true;
 				break;
-			case ContactsMode.ReadWrite:
-				RadioContactsReadWrite.IsChecked = true;
-				break;
 			case ContactsMode.BirthdayCalendar:
 				RadioContactsBirthdayCalendar.IsChecked = true;
 				break;
-			default:
+			case ContactsMode.ReadFromContacts:
 				RadioContactsRead.IsChecked = true;
+				break;
+			default:
+				RadioContactsNone.IsChecked = true;
 				break;
 		}
 
@@ -109,7 +109,7 @@ public partial class SettingsPage : ContentPage
 		if (!e.Value || _isLoading)
 			return;
 
-		if (sender == RadioContactsRead || sender == RadioContactsReadWrite)
+		if (sender == RadioContactsRead)
 		{
 			bool granted = await DeviceService.RequestContactsReadPermissionAsync();
 			if (!granted)
@@ -119,20 +119,6 @@ public partial class SettingsPage : ContentPage
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_ContactsRead_Denied,
 					MobileLanguages.Resources.General_Button_OK);
-				return;
-			}
-
-			if (sender == RadioContactsReadWrite)
-			{
-				bool writeGranted = await DeviceService.RequestContactsWritePermissionAsync();
-				if (!writeGranted)
-				{
-					RadioContactsRead.IsChecked = true;
-					await DisplayAlert(
-						MobileLanguages.Resources.Permission_Required,
-						MobileLanguages.Resources.Permission_ContactsWrite_Denied,
-						MobileLanguages.Resources.General_Button_OK);
-				}
 			}
 		}
 		else if (sender == RadioContactsBirthdayCalendar)
@@ -288,12 +274,12 @@ public partial class SettingsPage : ContentPage
 
 		if (RadioContactsNone.IsChecked)
 			settings.ContactsMode = ContactsMode.None;
-		else if (RadioContactsReadWrite.IsChecked)
-			settings.ContactsMode = ContactsMode.ReadWrite;
 		else if (RadioContactsBirthdayCalendar.IsChecked)
 			settings.ContactsMode = ContactsMode.BirthdayCalendar;
+		else if (RadioContactsRead.IsChecked)
+			settings.ContactsMode = ContactsMode.ReadFromContacts;
 		else
-			settings.ContactsMode = ContactsMode.Read;
+			settings.ContactsMode = ContactsMode.None;
 
 		settings.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
 		settings.SelectedCalendarIds = _calendars
@@ -307,6 +293,13 @@ public partial class SettingsPage : ContentPage
 			MobileLanguages.Resources.Settings_Saved_Title,
 			MobileLanguages.Resources.Settings_Saved_Message,
 			MobileLanguages.Resources.General_Button_OK);
+	}
+	#endregion
+
+	#region Back
+	private async void OnBackClicked(object? sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("..");
 	}
 	#endregion
 }

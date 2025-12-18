@@ -103,4 +103,9 @@ public partial class AllBirthdaysPage : ContentPage
 	{
 		await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage));
 	}
+
+	private async void OnBackClicked(object? sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("..");
+	}
 }

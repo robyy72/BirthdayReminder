@@ -5,8 +5,9 @@
              x:Class="Mobile.CreateEditBirthdayPage"
              Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="15">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="30" Spacing="15">
 
             <!-- Name -->
             <Border Style="{StaticResource Card}">
@@ -41,15 +42,22 @@
                         <Label Text="{x:Static resx:Resources.General_Label_Birthday}"
                                Style="{StaticResource LabelCardHeader}" />
                     </Border>
-                    <VerticalStackLayout Padding="20">
+                    <VerticalStackLayout Padding="20" Spacing="10">
                         <Label x:Name="DateLabel"
-                               Text="1. Jan ----"
+                               Text="1. Januar 0000"
                                Style="{StaticResource LabelInfo}"
                                FontSize="24"
                                HorizontalOptions="Center"
                                TextDecorations="Underline">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnDateTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="{x:Static resx:Resources.More_Informations}"
+                               Style="{StaticResource LabelHelpLink}"
+                               HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnHelpBirthdayTapped" />
                             </Label.GestureRecognizers>
                         </Label>
                     </VerticalStackLayout>
@@ -107,20 +115,48 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Save Button -->
-            <Button Text="{x:Static resx:Resources.General_Button_Save}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Clicked="OnSaveClicked" />
+            <!-- Write to Contact (only visible for contact-sourced persons) -->
+            <Border x:Name="WriteToContactCard" Style="{StaticResource Card}" IsVisible="False">
+                <VerticalStackLayout Spacing="0">
+                    <Border Style="{StaticResource CardHeader}">
+                        <Label Text="{x:Static resx:Resources.Settings_Contacts}"
+                               Style="{StaticResource LabelCardHeader}" />
+                    </Border>
+                    <VerticalStackLayout Padding="20">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.Settings_WriteToContact}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="WriteToContactSwitch"
+                                    Grid.Column="1"
+                                    Toggled="OnWriteToContactToggled" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
 
-            <!-- Delete Button -->
+        </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30,15,30,30">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Button Grid.Column="0"
+                        Text="{x:Static resx:Resources.General_Button_Back}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnBackClicked" />
+                <Button Grid.Column="1"
+                        Text="{x:Static resx:Resources.General_Button_Save}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnSaveClicked" />
+            </Grid>
             <Button x:Name="DeleteButton"
                     Text="{x:Static resx:Resources.General_Button_Delete}"
                     Style="{StaticResource ButtonSecondary}"
                     BackgroundColor="#D32F2F"
                     Clicked="OnDeleteClicked"
                     IsVisible="False" />
-
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

@@ -9,7 +9,7 @@
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <!-- Header with Back Button -->
         <Grid Grid.Row="0"
               Style="{StaticResource HeaderBarWithBack}"
@@ -56,13 +56,20 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Next Button -->
-                <Button Text="{x:Static resx:Resources.General_Button_Next}"
-                        Style="{StaticResource ButtonPrimary}"
-                        Clicked="OnNextClicked" />
-
             </VerticalStackLayout>
         </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="30,15,30,30">
+            <Button Grid.Column="0"
+                    Text="{x:Static resx:Resources.General_Button_Back}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Clicked="OnBackClicked" />
+            <Button Grid.Column="1"
+                    Text="{x:Static resx:Resources.General_Button_Next}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnNextClicked" />
+        </Grid>
     </Grid>
 
 </ContentPage>

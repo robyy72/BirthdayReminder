@@ -24,8 +24,8 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource Card}">
-                            <VerticalStackLayout Spacing="0" Margin="0,20,0,0">
+                        <Border Style="{StaticResource Card}" Margin="0,20,0,0">
+                            <VerticalStackLayout Spacing="0">
                                 <Border Style="{StaticResource CardHeader}">
                                     <Label Text="{Binding DisplayName}"
                                            Style="{StaticResource LabelCardHeader}" />

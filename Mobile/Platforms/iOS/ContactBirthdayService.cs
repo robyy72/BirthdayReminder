@@ -80,7 +80,7 @@ public partial class ContactBirthdayService
 						LastName = lastName,
 						Birthday = new Birthday { Day = day, Month = month, Year = year },
 						ContactId = contactId,
-						Source = PersonSource.Contact
+						Source = PersonSource.Contacts
 					};
 
 					results.Add(person);

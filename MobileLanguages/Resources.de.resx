@@ -87,28 +87,44 @@
   <data name="Help_UseContacts_Header" xml:space="preserve">
     <value>Kontakte als Quelle</value>
   </data>
-  <data name="Help_UseContacts_Content" xml:space="preserve">
+  <data name="Help_UseContacts_Content_1" xml:space="preserve">
     <value>Wenn du "Kontakte als Quelle" aktivierst, liest Birthday Reminder die Geburtstage aus deiner Kontaktliste.
 
 Das ermöglicht dir:
 • Geburtstage automatisch aus deinen Kontakten zu importieren
 • Deine Geburtstagsliste mit deinen Kontakten synchron zu halten
-• Manuelles Eingeben von bereits gespeicherten Geburtstagen zu vermeiden
-
-Die App liest nur die Geburtstagsinformationen - keine anderen Kontaktdaten werden abgerufen oder gespeichert.</value>
+• Manuelles Eingeben von bereits gespeicherten Geburtstagen zu vermeiden</value>
+  </data>
+  <data name="Help_UseContacts_Content_2" xml:space="preserve">
+    <value>Die App liest nur die Geburtstagsinformationen - keine anderen Kontaktdaten werden abgerufen oder gespeichert.</value>
   </data>
   <data name="Help_BirthdayCalendar_Header" xml:space="preserve">
     <value>Geburtstagskalender</value>
   </data>
-  <data name="Help_BirthdayCalendar_Content" xml:space="preserve">
+  <data name="Help_BirthdayCalendar_Content_1" xml:space="preserve">
     <value>Die Option "Geburtstagskalender" liest Geburtstage aus dem Geburtstagskalender deines Geräts.
 
-Einige Handys erstellen automatisch einen Geburtstagskalender aus deinen Kontakten. Diese Option ermöglicht es Birthday Reminder, Geburtstage aus diesem Kalender zu importieren.
-
-Das ist nützlich, wenn:
+Einige Handys erstellen automatisch einen Geburtstagskalender aus deinen Kontakten. Diese Option ermöglicht es Birthday Reminder, Geburtstage aus diesem Kalender zu importieren.</value>
+  </data>
+  <data name="Help_BirthdayCalendar_Content_2" xml:space="preserve">
+    <value>Das ist nützlich, wenn:
 • Deine Kontakte keine Geburtstagsfelder haben
 • Du bereits einen separaten Geburtstagskalender pflegst
 • Du Geburtstage importieren möchtest, ohne vollen Kontaktzugriff zu gewähren</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Header" xml:space="preserve">
+    <value>Geburtstag ohne Jahr</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Content_1" xml:space="preserve">
+    <value>Du kannst einen Geburtstag mit oder ohne Jahr speichern.
+
+Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsauswahl. Das Jahr wird als "0000" angezeigt.</value>
+  </data>
+  <data name="Help_BirthdayWithoutYear_Content_2" xml:space="preserve">
+    <value>Wenn ein Geburtstag kein Jahr hat:
+• Es wird kein Alter berechnet oder angezeigt
+• Die Erinnerung funktioniert trotzdem normal
+• Du kannst das Jahr später durch Bearbeiten hinzufügen</value>
   </data>
   <data name="Tab_ShowAll" xml:space="preserve">
     <value>Alle anzeigen</value>
@@ -127,6 +143,9 @@ Das ist nützlich, wenn:
   </data>
   <data name="General_Button_Delete" xml:space="preserve">
     <value>Löschen</value>
+  </data>
+  <data name="Settings_WriteToContact" xml:space="preserve">
+    <value>In Kontakt speichern</value>
   </data>
   <data name="General_Label_Name" xml:space="preserve">
     <value>Name</value>

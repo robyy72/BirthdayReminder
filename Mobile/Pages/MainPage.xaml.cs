@@ -54,7 +54,7 @@ public partial class MainPage : ContentPage
             return;
 
         bool hasContactsRead = await DeviceService.CheckContactsReadPermissionAsync();
-        if (!hasContactsRead && (_settings.ContactsMode == ContactsMode.Read || _settings.ContactsMode == ContactsMode.ReadWrite))
+        if (!hasContactsRead && _settings.ContactsMode == ContactsMode.ReadFromContacts)
         {
             _settings.ContactsMode = ContactsMode.None;
             SettingsService.Update(_settings);
@@ -79,7 +79,7 @@ public partial class MainPage : ContentPage
     
 	private async void ReadContactsIfAllowed()
 	{
-		if (_settings.ContactsMode != ContactsMode.Read && _settings.ContactsMode != ContactsMode.ReadWrite)
+		if (_settings.ContactsMode != ContactsMode.ReadFromContacts)
 			return;
 
 		try
@@ -145,7 +145,7 @@ public partial class MainPage : ContentPage
 				Year = birthday.Year
 			},
 			ContactId = contactId,
-			Source = PersonSource.Contact
+			Source = PersonSource.Contacts
 		};
 
 		_persons.Add(person);
