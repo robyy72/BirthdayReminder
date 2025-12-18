@@ -427,7 +427,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Keine Erinnerung verwenden</value>
   </data>
   <data name="Age_WillTurn" xml:space="preserve">
-    <value>Wird {0} Jahre</value>
+    <value>{0} Jahre</value>
   </data>
   <data name="Filter_AllMonths" xml:space="preserve">
     <value>-- alle --</value>
