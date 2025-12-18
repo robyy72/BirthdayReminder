@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.CreateEditBirthdayPage_1"
+             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+
+    <Grid RowDefinitions="*">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Name -->
+                <Border x:Name="NameCard" Style="{StaticResource Card}">
+                    <FlyoutBase.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="{x:Static resx:Resources.General_Button_Delete}"
+                                            Clicked="OnDeleteMenuClicked" />
+                        </MenuFlyout>
+                    </FlyoutBase.ContextFlyout>
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_Name}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+
+                        <!-- Display Panel (for existing persons) -->
+                        <VerticalStackLayout x:Name="NameDisplayPanel" Padding="20" Spacing="5" IsVisible="False">
+                            <Label x:Name="NameDisplayLabel"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontSize="20"
+                                   HorizontalOptions="Center" />
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNameDisplayTapped" />
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+
+                        <!-- Edit Panel (for new persons or after tap) -->
+                        <VerticalStackLayout x:Name="NameEditPanel" Padding="20" Spacing="10">
+                            <Border x:Name="FirstNameBorder" Style="{StaticResource EntryBorder}">
+                                <Entry x:Name="FirstNameEntry"
+                                       Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
+                                       Style="{StaticResource EntryStandard}"
+                                       Focused="OnEntryFocused"
+                                       Unfocused="OnEntryUnfocused" />
+                            </Border>
+                            <Border x:Name="LastNameBorder" Style="{StaticResource EntryBorder}">
+                                <Entry x:Name="LastNameEntry"
+                                       Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
+                                       Style="{StaticResource EntryStandard}"
+                                       Focused="OnEntryFocused"
+                                       Unfocused="OnEntryUnfocused" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Birthday -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_Birthday}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10">
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                <Picker x:Name="DayPicker"
+                                        Title="{x:Static resx:Resources.General_Label_Day}"
+                                        HorizontalTextAlignment="End"
+                                        FontSize="18" />
+                                <Label Text="."
+                                       FontSize="18"
+                                       VerticalOptions="Center" />
+                                <Picker x:Name="MonthPicker"
+                                        Title="{x:Static resx:Resources.General_Label_Month}"
+                                        FontSize="18" />
+                                <Picker x:Name="YearPicker"
+                                        Title="{x:Static resx:Resources.General_Label_Year}"
+                                        FontSize="18" />
+                            </HorizontalStackLayout>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnHelpBirthdayTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Write to Contact Toggle -->
+                <Grid x:Name="WriteToContactRow" ColumnDefinitions="*,Auto" IsVisible="False" Margin="0,10,0,0">
+                    <Label x:Name="WriteToContactLabel"
+                           Style="{StaticResource LabelInfo}"
+                           VerticalOptions="Center" />
+                    <Switch x:Name="WriteToContactSwitch"
+                            Grid.Column="1"
+                            Toggled="OnWriteToContactToggled" />
+                </Grid>
+
+                <!-- Manual Reminders Toggle -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="{x:Static resx:Resources.Settings_RemindersManual}"
+                           Style="{StaticResource LabelInfo}"
+                           VerticalOptions="Center" />
+                    <Switch x:Name="RemindersManualSwitch"
+                            Grid.Column="1" />
+                </Grid>
+
+                <!-- Bottom Buttons -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <Button Grid.Column="0"
+                            Text="{x:Static resx:Resources.General_Button_Back}"
+                            Style="{StaticResource ButtonSecondary}"
+                            Clicked="OnBackClicked" />
+                    <Button Grid.Column="1"
+                            Text="{x:Static resx:Resources.General_Button_Next}"
+                            Style="{StaticResource ButtonPrimary}"
+                            Clicked="OnNextClicked" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

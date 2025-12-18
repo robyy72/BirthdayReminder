@@ -12,7 +12,7 @@ public static class LanguageHelper
 	/// <summary>
 	/// Aim: Gets localized age display text for upcoming birthday.
 	/// Params: age - The age the person will turn
-	/// Return: Localized text like "Wird 74 Jahre"
+	/// Return: Localized text like "74 Jahre"
 	/// </summary>
 	public static string GetAgeDisplay(int age)
 	{

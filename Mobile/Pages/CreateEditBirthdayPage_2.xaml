@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.CreateEditBirthdayPage_2"
+             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+            <!-- Reminder -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="0">
+                    <Border Style="{StaticResource CardHeader}">
+                        <Label Text="{x:Static resx:Resources.Reminder_Label}"
+                               Style="{StaticResource LabelCardHeader}" />
+                    </Border>
+                    <VerticalStackLayout Padding="20" Spacing="15">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Email}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderEmailSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Sms}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderSmsSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderLockScreenSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="ReminderWhatsAppSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Switch x:Name="RemindUntilApprovedSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="30,15,30,30">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Button Grid.Column="0"
+                        Text="{x:Static resx:Resources.General_Button_Back}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnBackClicked" />
+                <Button Grid.Column="1"
+                        Text="{x:Static resx:Resources.General_Button_Save}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnSaveClicked" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

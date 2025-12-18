@@ -25,8 +25,6 @@ public class Person
 	#endregion
 
 	#region Contacts
-	public bool NeverReadFromContacts { get; set; }
-	public bool NeverWriteToContacts { get; set; }
 	public string? ContactId { get; set; }
 	public PersonSource Source { get; set; } = PersonSource.Manual;
 	#endregion

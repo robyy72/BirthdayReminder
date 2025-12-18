@@ -15,17 +15,19 @@ public class Settings
 	public PersonNameDirection PersonNameDirection { get; set; } = PersonNameDirection.FirstFirstName;
 	public int ShowUpcomingBirthdays { get; set; } = MobileConstants.SHOW_UPCOMING_DEFAULT;
 	public int ShowPastBirthdays { get; set; } = MobileConstants.SHOW_PAST_DEFAULT;
-	#endregion
+    #endregion
 
-	#region Reminder Times
+    #region Reminder Enabled and Time-Values
+    public bool ReminderEmailEnabled { get; set; }
+    public bool ReminderSmsEnabled { get; set; }
+    public bool ReminderLockScreenEnabled { get; set; }
+    public bool ReminderWhatsAppEnabled { get; set; }
+    
 	public int ReminderTimeEmail { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_EMAIL;
 	public int ReminderTimeSms { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_SMS;
 	public int ReminderTimeLockScreen { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_LOCKSCREEN;
 	public int ReminderTimeWhatsApp { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_WHATSAPP;
-	public bool ReminderEmailEnabled { get; set; }
-	public bool ReminderSmsEnabled { get; set; }
-	public bool ReminderLockScreenEnabled { get; set; }
-	public bool ReminderWhatsAppEnabled { get; set; }
+
 	public bool RemindUntilApproved { get; set; }
 	#endregion
 

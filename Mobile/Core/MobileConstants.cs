@@ -25,6 +25,11 @@ public static class MobileConstants
 	public const int SHOW_MAX_BIRTHDAYS = 100;
 	#endregion
 
+	#region Age
+	public const int MAX_AGE = 120;
+	public const string YEARS_DISPLAY_NOT = "1,1604,1900,1904";
+	#endregion
+
 	#region Errors
 	public const int MAX_ERRORS_INTO_PREFS = 10;
 	#endregion

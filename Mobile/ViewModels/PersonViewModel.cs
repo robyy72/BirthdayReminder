@@ -32,7 +32,7 @@ public class PersonViewModel
 			BirthdayMonth = person.Birthday.Month;
 			DayDisplay = $"{person.Birthday.Day}.";
 			MonthDisplay = LanguageHelper.GetShortMonthName(person.Birthday.Month);
-			HasYear = person.Birthday.Year > 0;
+			HasYear = BirthdayHelper.ShouldDisplayYear(person.Birthday.Year);
 			DateDisplay = BirthdayHelper.GetDateDisplay(person.Birthday);
 
 			if (HasYear)
@@ -42,7 +42,7 @@ public class PersonViewModel
 			}
 			else
 			{
-				AgeDisplay = string.Empty;
+				AgeDisplay = "-";
 			}
 		}
 	}

@@ -222,14 +222,14 @@ public partial class MainPage : ContentPage
     #region Form Update Methods
     private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage));
+        await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage_1));
     }
 
     private async void OnBirthdaySelected(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
         {
-            await Shell.Current.GoToAsync($"{nameof(CreateEditBirthdayPage)}?Id={vm.Id}");
+            await Shell.Current.GoToAsync($"{nameof(CreateEditBirthdayPage_1)}?Id={vm.Id}");
         }
 
         if (sender is CollectionView cv)

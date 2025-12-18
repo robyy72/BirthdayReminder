@@ -37,7 +37,7 @@
                                            VerticalOptions="Center" />
                                     <Label Grid.Column="1"
                                            Text="{Binding AgeDisplay}"
-                                           Style="{StaticResource LabelDescription}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                 </Grid>
                             </VerticalStackLayout>

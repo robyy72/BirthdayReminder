@@ -69,6 +69,9 @@
   <data name="Page_NewBirthday_Title" xml:space="preserve">
     <value>Neuer Geburtstag</value>
   </data>
+  <data name="Page_DeleteBirthday_Title" xml:space="preserve">
+    <value>Geburtstag löschen</value>
+  </data>
   <data name="Page_AllBirthdays_Title" xml:space="preserve">
     <value>Alle Geburtstage</value>
   </data>
@@ -147,6 +150,18 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Settings_WriteToContact" xml:space="preserve">
     <value>In Kontakt speichern</value>
   </data>
+  <data name="Settings_UpdateContact" xml:space="preserve">
+    <value>Eintrag unter Kontakte aktualisieren</value>
+  </data>
+  <data name="Settings_CreateContact" xml:space="preserve">
+    <value>Eintrag in Kontakten erstellen</value>
+  </data>
+  <data name="Settings_DeleteContact" xml:space="preserve">
+    <value>Auch aus Kontakten löschen</value>
+  </data>
+  <data name="Settings_RemindersManual" xml:space="preserve">
+    <value>Erinnerungen manuell festlegen</value>
+  </data>
   <data name="General_Label_Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -176,6 +191,18 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   </data>
   <data name="General_Label_Month" xml:space="preserve">
     <value>Monat</value>
+  </data>
+  <data name="General_Label_Year" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="Birthday_EnterYear" xml:space="preserve">
+    <value>Jahr eingeben (0000 = kein Jahr)</value>
+  </data>
+  <data name="CardHeader_Name" xml:space="preserve">
+    <value>Vorname und Nachname</value>
+  </data>
+  <data name="CardHeader_Birthday" xml:space="preserve">
+    <value>Geburtstag mit/ohne Jahr</value>
   </data>
   <data name="Birthday_WithYear" xml:space="preserve">
     <value>Mit Geburtsjahr</value>

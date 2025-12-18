@@ -44,6 +44,7 @@ public class Resources
 	public static string Page_AskForContacts_ManualInput => ResourceManager.GetString("Page_AskForContacts_ManualInput", resourceCulture) ?? "";
 	public static string Page_AskForContacts_FromContacts => ResourceManager.GetString("Page_AskForContacts_FromContacts", resourceCulture) ?? "";
 	public static string Page_NewBirthday_Title => ResourceManager.GetString("Page_NewBirthday_Title", resourceCulture) ?? "";
+	public static string Page_DeleteBirthday_Title => ResourceManager.GetString("Page_DeleteBirthday_Title", resourceCulture) ?? "";
 	public static string Page_AllBirthdays_Title => ResourceManager.GetString("Page_AllBirthdays_Title", resourceCulture) ?? "";
 	public static string Page_Settings_Title => ResourceManager.GetString("Page_Settings_Title", resourceCulture) ?? "";
 	public static string Page_Privacy_Title => ResourceManager.GetString("Page_Privacy_Title", resourceCulture) ?? "";
@@ -65,6 +66,10 @@ public class Resources
 	public static string General_Button_Cancel => ResourceManager.GetString("General_Button_Cancel", resourceCulture) ?? "";
 	public static string General_Button_Delete => ResourceManager.GetString("General_Button_Delete", resourceCulture) ?? "";
 	public static string Settings_WriteToContact => ResourceManager.GetString("Settings_WriteToContact", resourceCulture) ?? "";
+	public static string Settings_UpdateContact => ResourceManager.GetString("Settings_UpdateContact", resourceCulture) ?? "";
+	public static string Settings_CreateContact => ResourceManager.GetString("Settings_CreateContact", resourceCulture) ?? "";
+	public static string Settings_DeleteContact => ResourceManager.GetString("Settings_DeleteContact", resourceCulture) ?? "";
+	public static string Settings_RemindersManual => ResourceManager.GetString("Settings_RemindersManual", resourceCulture) ?? "";
 	public static string General_Button_New => ResourceManager.GetString("General_Button_New", resourceCulture) ?? "";
 	public static string General_Label_Name => ResourceManager.GetString("General_Label_Name", resourceCulture) ?? "";
 	public static string General_Label_FirstName => ResourceManager.GetString("General_Label_FirstName", resourceCulture) ?? "";
@@ -76,6 +81,10 @@ public class Resources
 	public static string General_Button_OK => ResourceManager.GetString("General_Button_OK", resourceCulture) ?? "";
 	public static string General_Label_Day => ResourceManager.GetString("General_Label_Day", resourceCulture) ?? "";
 	public static string General_Label_Month => ResourceManager.GetString("General_Label_Month", resourceCulture) ?? "";
+	public static string General_Label_Year => ResourceManager.GetString("General_Label_Year", resourceCulture) ?? "";
+	public static string Birthday_EnterYear => ResourceManager.GetString("Birthday_EnterYear", resourceCulture) ?? "";
+	public static string CardHeader_Name => ResourceManager.GetString("CardHeader_Name", resourceCulture) ?? "";
+	public static string CardHeader_Birthday => ResourceManager.GetString("CardHeader_Birthday", resourceCulture) ?? "";
 	public static string Birthday_WithYear => ResourceManager.GetString("Birthday_WithYear", resourceCulture) ?? "";
 	public static string Birthday_WithoutYear => ResourceManager.GetString("Birthday_WithoutYear", resourceCulture) ?? "";
 	public static string Birthday_EnterDate => ResourceManager.GetString("Birthday_EnterDate", resourceCulture) ?? "";

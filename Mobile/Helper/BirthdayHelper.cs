@@ -6,6 +6,54 @@ namespace Mobile;
 public static class BirthdayHelper
 {
 	/// <summary>
+	/// Aim: Checks if a birth year should be displayed.
+	/// Params: year - The birth year to check
+	/// Return: True if year should be displayed, false if it's a placeholder year or too old
+	/// </summary>
+	public static bool ShouldDisplayYear(int year)
+	{
+		if (year <= 0)
+		{
+			return false;
+		}
+
+		int minYear = DateTime.Today.Year - MobileConstants.MAX_AGE;
+		if (year < minYear)
+		{
+			return false;
+		}
+
+		List<int> excludedYears = ParseYearsDisplayNot(MobileConstants.YEARS_DISPLAY_NOT);
+		bool result = !excludedYears.Contains(year);
+		return result;
+	}
+
+	/// <summary>
+	/// Aim: Parses the YEARS_DISPLAY_NOT string into a list of integers.
+	/// Params: yearsString - Comma-separated string of years (e.g. "1,1604,1900,1904")
+	/// Return: List of years as integers
+	/// </summary>
+	public static List<int> ParseYearsDisplayNot(string yearsString)
+	{
+		var result = new List<int>();
+		if (string.IsNullOrWhiteSpace(yearsString))
+		{
+			return result;
+		}
+
+		string[] parts = yearsString.Split(',');
+		foreach (string part in parts)
+		{
+			if (int.TryParse(part.Trim(), out int year))
+			{
+				result.Add(year);
+			}
+		}
+
+		return result;
+	}
+
+	/// <summary>
 	/// Aim: Calculates the age a person will turn on their next birthday.
 	/// Params: birthday - The birthday
 	/// Return: Age they will turn (or turned if birthday already passed this year)
@@ -35,7 +83,7 @@ public static class BirthdayHelper
 		string monthName = LanguageHelper.GetShortMonthName(birthday.Month);
 		string result;
 
-		if (birthday.Year > 0)
+		if (ShouldDisplayYear(birthday.Year))
 		{
 			result = $"{birthday.Day}. {monthName} {birthday.Year}";
 		}
