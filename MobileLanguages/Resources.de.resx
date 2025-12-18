@@ -130,7 +130,7 @@
     <value>Datenquellen</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Sprache festlegen</value>
   </data>
   <data name="Settings_ReminderTime" xml:space="preserve">
     <value>Erinnerungszeit</value>
@@ -214,13 +214,16 @@
     <value>Herzlich willkommen</value>
   </data>
   <data name="Welcome_1_Text_1" xml:space="preserve">
-    <value>Vergessen Sie nie wieder einen wichtigen Geburtstag!</value>
+    <value>Denken Sie ab jetzt mit unserer Hilfe an jeden wichtigen Geburtstag.</value>
   </data>
   <data name="Welcome_1_Text_2" xml:space="preserve">
-    <value>Lassen Sie uns Ihre Einstellungen einrichten.</value>
+    <value>Wir müssen vorher noch einige wichtige Einstellungen vornehmen.</value>
+  </data>
+  <data name="Button_LetsGo" xml:space="preserve">
+    <value>Los geht's</value>
   </data>
   <data name="Settings_Theme" xml:space="preserve">
-    <value>Design</value>
+    <value>Design auswählen</value>
   </data>
   <data name="Settings_Theme_Light" xml:space="preserve">
     <value>Hell</value>
@@ -322,7 +325,7 @@
     <value>Anzeige</value>
   </data>
   <data name="Reminder_Label" xml:space="preserve">
-    <value>Erinnerung</value>
+    <value>Erinnerung festlegen</value>
   </data>
   <data name="ReminderMethod_Label" xml:space="preserve">
     <value>Erinnerungsart</value>
@@ -356,5 +359,14 @@
   </data>
   <data name="Settings_NoReminders" xml:space="preserve">
     <value>Keine Erinnerung verwenden</value>
+  </data>
+  <data name="Age_WillTurn" xml:space="preserve">
+    <value>Wird {0} Jahre</value>
+  </data>
+  <data name="Filter_AllMonths" xml:space="preserve">
+    <value>-- alle --</value>
+  </data>
+  <data name="Tab_Overview" xml:space="preserve">
+    <value>Übersicht</value>
   </data>
 </root>

@@ -10,6 +10,17 @@ using MobileLanguages;
 public static class LanguageHelper
 {
 	/// <summary>
+	/// Aim: Gets localized age display text for upcoming birthday.
+	/// Params: age - The age the person will turn
+	/// Return: Localized text like "Wird 74 Jahre"
+	/// </summary>
+	public static string GetAgeDisplay(int age)
+	{
+		string result = string.Format(Resources.Age_WillTurn, age);
+		return result;
+	}
+
+	/// <summary>
 	/// Aim: Gets localized short month name for a given month number.
 	/// Params: month - Month number (1-12)
 	/// Return: Localized short month name

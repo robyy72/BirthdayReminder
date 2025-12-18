@@ -33,14 +33,22 @@
                         <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="ThemeGroup"
                                              x:Name="ThemeRadioGroup">
-                            <RadioButton Content="{x:Static resx:Resources.Settings_Theme_Light}"
-                                         Value="Light"
-                                         Style="{StaticResource RadioStandard}"
-                                         x:Name="RadioLight" />
-                            <RadioButton Content="{x:Static resx:Resources.Settings_Theme_Dark}"
-                                         Value="Dark"
-                                         Style="{StaticResource RadioStandard}"
-                                         x:Name="RadioDark" />
+                            <RadioButton Value="Light"
+                                         CheckedChanged="OnThemeChanged"
+                                         x:Name="RadioLight">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Value="Dark"
+                                         CheckedChanged="OnThemeChanged"
+                                         x:Name="RadioDark">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -55,14 +63,20 @@
                         <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="LocaleGroup"
                                              x:Name="LocaleRadioGroup">
-                            <RadioButton Content="Deutsch"
-                                         Value="de"
-                                         Style="{StaticResource RadioStandard}"
-                                         x:Name="RadioDe" />
-                            <RadioButton Content="English"
-                                         Value="en"
-                                         Style="{StaticResource RadioStandard}"
-                                         x:Name="RadioEn" />
+                            <RadioButton Value="de"
+                                         x:Name="RadioDe">
+                                <RadioButton.Content>
+                                    <Label Text="Deutsch"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Value="en"
+                                         x:Name="RadioEn">
+                                <RadioButton.Content>
+                                    <Label Text="English"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

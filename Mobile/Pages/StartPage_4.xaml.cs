@@ -2,6 +2,7 @@ namespace Mobile;
 
 public partial class StartPage_4 : ContentPage
 {
+	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
 
 	public StartPage_4()
@@ -14,72 +15,117 @@ public partial class StartPage_4 : ContentPage
 	private void LoadSettings()
 	{
 		var settings = SettingsService.Get();
-
-		bool noReminders = !settings.ReminderEmailEnabled &&
-		                   !settings.ReminderSmsEnabled &&
-		                   !settings.ReminderLockScreenEnabled &&
-		                   !settings.ReminderWhatsAppEnabled;
-		NoReminderSwitch.IsToggled = noReminders;
-
-		EmailSwitch.IsToggled = settings.ReminderEmailEnabled;
-		SmsSwitch.IsToggled = settings.ReminderSmsEnabled;
-		LockScreenSwitch.IsToggled = settings.ReminderLockScreenEnabled;
-		WhatsAppSwitch.IsToggled = settings.ReminderWhatsAppEnabled;
-
-		EmailTimePicker.Time = IntToTimeSpan(settings.ReminderTimeEmail);
-		SmsTimePicker.Time = IntToTimeSpan(settings.ReminderTimeSms);
-		LockScreenTimePicker.Time = IntToTimeSpan(settings.ReminderTimeLockScreen);
-		WhatsAppTimePicker.Time = IntToTimeSpan(settings.ReminderTimeWhatsApp);
-
-		UpdateReminderVisibility();
+		WriteCalendarsSwitch.IsToggled = settings.WriteToCalendars;
+		UpdateCalendarListVisibility();
 	}
 
-	private static TimeSpan IntToTimeSpan(int time)
-	{
-		int hours = time / 100;
-		int minutes = time % 100;
-		var result = new TimeSpan(hours, minutes, 0);
-		return result;
-	}
-
-	private static int TimeSpanToInt(TimeSpan time)
-	{
-		int result = time.Hours * 100 + time.Minutes;
-		return result;
-	}
-
-	private void OnNoReminderToggled(object? sender, ToggledEventArgs e)
+	private async void OnWriteCalendarsToggled(object? sender, ToggledEventArgs e)
 	{
 		if (_isLoading)
 			return;
 
 		if (e.Value)
 		{
-			EmailSwitch.IsToggled = false;
-			SmsSwitch.IsToggled = false;
-			LockScreenSwitch.IsToggled = false;
-			WhatsAppSwitch.IsToggled = false;
+			bool granted = await DeviceService.RequestCalendarWritePermissionAsync();
+			if (!granted)
+			{
+				WriteCalendarsSwitch.IsToggled = false;
+				await DisplayAlert(
+					MobileLanguages.Resources.Permission_Required,
+					MobileLanguages.Resources.Permission_CalendarWrite_Denied,
+					MobileLanguages.Resources.General_Button_OK);
+				return;
+			}
+
+			await LoadCalendarsAsync();
 		}
 
-		UpdateReminderVisibility();
+		UpdateCalendarListVisibility();
 	}
 
-	private void OnReminderToggled(object? sender, ToggledEventArgs e)
+	private void UpdateCalendarListVisibility()
 	{
-		if (_isLoading)
-			return;
+		CalendarListContainer.IsVisible = WriteCalendarsSwitch.IsToggled;
+	}
 
-		if (e.Value && NoReminderSwitch.IsToggled)
+	private async Task LoadCalendarsAsync()
+	{
+		try
 		{
-			NoReminderSwitch.IsToggled = false;
+			_calendars = await GetDeviceCalendarsAsync();
+			BuildCalendarToggles();
 		}
-
-		UpdateReminderVisibility();
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error loading calendars: {ex.Message}");
+		}
 	}
 
-	private void UpdateReminderVisibility()
+	private Task<List<CalendarInfo>> GetDeviceCalendarsAsync()
 	{
-		ReminderMethodsContainer.IsVisible = !NoReminderSwitch.IsToggled;
+		// TODO: Replace with actual calendar API
+		// Birthday calendar is excluded - it's a special one
+		var calendars = new List<CalendarInfo>
+		{
+			new() { Id = "default", Name = MobileLanguages.Resources.Calendar_Default, Color = Colors.Blue },
+			new() { Id = "personal", Name = MobileLanguages.Resources.Calendar_Personal, Color = Colors.Green },
+			new() { Id = "work", Name = MobileLanguages.Resources.Calendar_Work, Color = Colors.Orange },
+			new() { Id = "family", Name = MobileLanguages.Resources.Calendar_Family, Color = Colors.Purple }
+		};
+
+		return Task.FromResult(calendars);
+	}
+
+	private void BuildCalendarToggles()
+	{
+		CalendarTogglesContainer.Children.Clear();
+
+		foreach (var calendar in _calendars)
+		{
+			var grid = new Grid
+			{
+				ColumnDefinitions =
+				[
+					new ColumnDefinition(GridLength.Auto),
+					new ColumnDefinition(GridLength.Star),
+					new ColumnDefinition(GridLength.Auto)
+				],
+				Padding = new Thickness(5, 0)
+			};
+
+			var colorBox = new BoxView
+			{
+				WidthRequest = 12,
+				HeightRequest = 12,
+				CornerRadius = 6,
+				Color = calendar.Color,
+				VerticalOptions = LayoutOptions.Center
+			};
+			grid.SetColumn(colorBox, 0);
+
+			var label = new Label
+			{
+				Text = calendar.Name,
+				FontSize = 16,
+				VerticalOptions = LayoutOptions.Center,
+				Margin = new Thickness(10, 0, 0, 0)
+			};
+			grid.SetColumn(label, 1);
+
+			var toggle = new Switch
+			{
+				IsToggled = calendar.IsSelected,
+				VerticalOptions = LayoutOptions.Center
+			};
+			toggle.Toggled += (s, e) => calendar.IsSelected = e.Value;
+			grid.SetColumn(toggle, 2);
+
+			grid.Children.Add(colorBox);
+			grid.Children.Add(label);
+			grid.Children.Add(toggle);
+
+			CalendarTogglesContainer.Children.Add(grid);
+		}
 	}
 
 	private void OnBackClicked(object? sender, EventArgs e)
@@ -90,27 +136,29 @@ public partial class StartPage_4 : ContentPage
 		}
 	}
 
-	private void OnFinishClicked(object? sender, EventArgs e)
+	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var settings = SettingsService.Get();
 
-		settings.ReminderEmailEnabled = EmailSwitch.IsToggled;
-		settings.ReminderSmsEnabled = SmsSwitch.IsToggled;
-		settings.ReminderLockScreenEnabled = LockScreenSwitch.IsToggled;
-		settings.ReminderWhatsAppEnabled = WhatsAppSwitch.IsToggled;
-
-		settings.ReminderTimeEmail = TimeSpanToInt(EmailTimePicker.Time);
-		settings.ReminderTimeSms = TimeSpanToInt(SmsTimePicker.Time);
-		settings.ReminderTimeLockScreen = TimeSpanToInt(LockScreenTimePicker.Time);
-		settings.ReminderTimeWhatsApp = TimeSpanToInt(WhatsAppTimePicker.Time);
+		settings.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
+		settings.SelectedCalendarIds = _calendars
+			.Where(c => c.IsSelected)
+			.Select(c => c.Id)
+			.ToList();
 
 		SettingsService.Update(settings);
 
-		PrefsHelper.SetValue(MobileConstants.PREFS_SETTINGS_INITIALIZED, true);
-
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new AppShell();
+			Application.Current.Windows[0].Page = new StartPage_5();
 		}
 	}
+}
+
+public class CalendarInfo
+{
+	public string Id { get; set; } = string.Empty;
+	public string Name { get; set; } = string.Empty;
+	public Color Color { get; set; } = Colors.Blue;
+	public bool IsSelected { get; set; } = false;
 }

@@ -39,6 +39,15 @@ public partial class StartPage_2 : ContentPage
 		}
 	}
 
+	private void OnThemeChanged(object? sender, CheckedChangedEventArgs e)
+	{
+		if (!e.Value)
+			return;
+
+		string theme = RadioLight.IsChecked ? "Light" : "Dark";
+		DeviceService.ApplyTheme(theme);
+	}
+
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
 		if (Application.Current?.Windows.Count > 0)

@@ -130,7 +130,7 @@
     <value>Data Sources</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Select Language</value>
   </data>
   <data name="Settings_ReminderTime" xml:space="preserve">
     <value>Reminder Time</value>
@@ -214,13 +214,16 @@
     <value>Welcome</value>
   </data>
   <data name="Welcome_1_Text_1" xml:space="preserve">
-    <value>Never forget an important birthday again!</value>
+    <value>From now on, remember every important birthday with our help.</value>
   </data>
   <data name="Welcome_1_Text_2" xml:space="preserve">
-    <value>Let's set up your preferences to get started.</value>
+    <value>First, we need to configure some important settings.</value>
+  </data>
+  <data name="Button_LetsGo" xml:space="preserve">
+    <value>Let's go</value>
   </data>
   <data name="Settings_Theme" xml:space="preserve">
-    <value>Theme</value>
+    <value>Select Theme</value>
   </data>
   <data name="Settings_Theme_Light" xml:space="preserve">
     <value>Light</value>
@@ -322,7 +325,7 @@
     <value>Display</value>
   </data>
   <data name="Reminder_Label" xml:space="preserve">
-    <value>Reminder</value>
+    <value>Set Reminders</value>
   </data>
   <data name="ReminderMethod_Label" xml:space="preserve">
     <value>Reminder Method</value>
@@ -356,5 +359,14 @@
   </data>
   <data name="Settings_NoReminders" xml:space="preserve">
     <value>Don't use reminders</value>
+  </data>
+  <data name="Age_WillTurn" xml:space="preserve">
+    <value>Turns {0}</value>
+  </data>
+  <data name="Filter_AllMonths" xml:space="preserve">
+    <value>-- all --</value>
+  </data>
+  <data name="Tab_Overview" xml:space="preserve">
+    <value>Overview</value>
   </data>
 </root>

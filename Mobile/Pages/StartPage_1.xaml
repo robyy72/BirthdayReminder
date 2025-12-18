@@ -21,14 +21,20 @@
                 <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
                        Style="{StaticResource LabelHeader}" />
 
-                <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
-                       Style="{StaticResource LabelInfo}" />
+                <Border Style="{StaticResource Card}">
+                    <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
+                           Style="{StaticResource LabelInfo}"
+                           Padding="20" />
+                </Border>
 
-                <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
-                       Style="{StaticResource LabelInfo}" />
+                <Border Style="{StaticResource Card}">
+                    <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
+                           Style="{StaticResource LabelInfo}"
+                           Padding="20" />
+                </Border>
 
                 <!-- Next Button -->
-                <Button Text="{x:Static resx:Resources.General_Button_Next}"
+                <Button Text="{x:Static resx:Resources.Button_LetsGo}"
                         Style="{StaticResource ButtonPrimary}"
                         Clicked="OnNextClicked" />
 

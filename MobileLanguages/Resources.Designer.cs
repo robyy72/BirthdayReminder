@@ -62,6 +62,7 @@ public class Resources
 	public static string General_Button_Back => ResourceManager.GetString("General_Button_Back", resourceCulture) ?? "";
 	public static string General_Button_Finish => ResourceManager.GetString("General_Button_Finish", resourceCulture) ?? "";
 	public static string General_Button_OK => ResourceManager.GetString("General_Button_OK", resourceCulture) ?? "";
+	public static string Button_LetsGo => ResourceManager.GetString("Button_LetsGo", resourceCulture) ?? "";
 	public static string Page_Welcome_Title => ResourceManager.GetString("Page_Welcome_Title", resourceCulture) ?? "";
 	public static string Welcome_Header => ResourceManager.GetString("Welcome_Header", resourceCulture) ?? "";
 	public static string Welcome_DataSources => ResourceManager.GetString("Welcome_DataSources", resourceCulture) ?? "";
@@ -139,4 +140,7 @@ public class Resources
 	public static string Placeholder_FirstName => ResourceManager.GetString("Placeholder_FirstName", resourceCulture) ?? "";
 	public static string Placeholder_LastName => ResourceManager.GetString("Placeholder_LastName", resourceCulture) ?? "";
 	public static string Settings_NoReminders => ResourceManager.GetString("Settings_NoReminders", resourceCulture) ?? "";
+	public static string Age_WillTurn => ResourceManager.GetString("Age_WillTurn", resourceCulture) ?? "";
+	public static string Filter_AllMonths => ResourceManager.GetString("Filter_AllMonths", resourceCulture) ?? "";
+	public static string Tab_Overview => ResourceManager.GetString("Tab_Overview", resourceCulture) ?? "";
 }

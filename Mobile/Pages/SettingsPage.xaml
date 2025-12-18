@@ -46,14 +46,20 @@
             <Border Style="{StaticResource Tile}">
                 <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
                                      Spacing="10">
-                    <RadioButton Content="Deutsch"
-                                 Value="de"
-                                 Style="{StaticResource RadioStandard}"
-                                 x:Name="RadioDe" />
-                    <RadioButton Content="English"
-                                 Value="en"
-                                 Style="{StaticResource RadioStandard}"
-                                 x:Name="RadioEn" />
+                    <RadioButton Value="de"
+                                 x:Name="RadioDe">
+                        <RadioButton.Content>
+                            <Label Text="Deutsch"
+                                   Style="{StaticResource LabelInfo}" />
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Value="en"
+                                 x:Name="RadioEn">
+                        <RadioButton.Content>
+                            <Label Text="English"
+                                   Style="{StaticResource LabelInfo}" />
+                        </RadioButton.Content>
+                    </RadioButton>
                 </VerticalStackLayout>
             </Border>
 

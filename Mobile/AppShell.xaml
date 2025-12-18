@@ -10,8 +10,20 @@
     Shell.BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
     Shell.TitleColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
     Shell.ForegroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
     FlyoutBehavior="Flyout">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="Auto,*" Padding="20,10">
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                       FontSize="16"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
@@ -26,11 +38,12 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <!-- MainPage - not shown in flyout menu (we're already home) -->
-    <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"
-        FlyoutItemIsVisible="False" />
+    <FlyoutItem Title="{x:Static resx:Resources.Tab_Overview}"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
 
     <FlyoutItem Title="{x:Static resx:Resources.Tab_ShowAll}"
                 FlyoutDisplayOptions="AsMultipleItems">

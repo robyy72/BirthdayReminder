@@ -6,6 +6,48 @@ namespace Mobile;
 public static class BirthdayHelper
 {
 	/// <summary>
+	/// Aim: Calculates the age a person will turn on their next birthday.
+	/// Params: birthday - The birthday
+	/// Return: Age they will turn (or turned if birthday already passed this year)
+	/// </summary>
+	public static int GetUpcomingAge(Birthday birthday)
+	{
+		var today = DateTime.Today;
+		int age = today.Year - birthday.Year;
+
+		var birthdayThisYear = new DateTime(today.Year, birthday.Month, birthday.Day);
+		if (birthdayThisYear < today)
+		{
+			age++;
+		}
+
+		var result = age;
+		return result;
+	}
+
+	/// <summary>
+	/// Aim: Gets formatted date display string for a birthday.
+	/// Params: birthday - The birthday
+	/// Return: Formatted date string (e.g. "25. Dez" or "25. Dez 1950")
+	/// </summary>
+	public static string GetDateDisplay(Birthday birthday)
+	{
+		string monthName = LanguageHelper.GetShortMonthName(birthday.Month);
+		string result;
+
+		if (birthday.Year > 0)
+		{
+			result = $"{birthday.Day}. {monthName} {birthday.Year}";
+		}
+		else
+		{
+			result = $"{birthday.Day}. {monthName}";
+		}
+
+		return result;
+	}
+
+	/// <summary>
 	/// Aim: Calculates days until next birthday.
 	/// Params: birthday - The birthday, today - Today's date
 	/// Return: Number of days until next birthday

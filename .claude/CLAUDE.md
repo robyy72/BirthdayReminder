@@ -28,6 +28,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - **IMPORTANT:** Before starting work, run `git pull` in each repo to get latest changes
 - Use `git pull` (merge), NOT `git pull --rebase` to preserve history
 - **Commit only, don't push too often** - user will request push when needed
+- **Do NOT suggest "push" after commits** - user will push when ready
 
 ---
 
