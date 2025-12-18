@@ -19,7 +19,8 @@
             <VerticalStackLayout Padding="30" Spacing="25">
 
                 <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
-                       Style="{StaticResource LabelHeader}" />
+                       Style="{StaticResource LabelHeader}"
+                       Margin="0,20,0,0" />
 
                 <Border Style="{StaticResource Card}">
                     <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
