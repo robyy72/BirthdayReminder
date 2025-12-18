@@ -81,8 +81,8 @@
   <data name="Page_Help_Title" xml:space="preserve">
     <value>Hilfe</value>
   </data>
-  <data name="Help_Link_WhatIsThis" xml:space="preserve">
-    <value>Was ist das?</value>
+  <data name="More_Informations" xml:space="preserve">
+    <value>Mehr Informationen</value>
   </data>
   <data name="Help_UseContacts_Header" xml:space="preserve">
     <value>Kontakte als Quelle</value>

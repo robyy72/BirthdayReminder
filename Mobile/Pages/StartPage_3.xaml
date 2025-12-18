@@ -49,7 +49,7 @@
                                 <VerticalStackLayout Grid.Column="0" Spacing="2">
                                     <Label Text="{x:Static resx:Resources.Settings_ContactsRead}"
                                            Style="{StaticResource LabelInfo}" />
-                                    <Label Text="{x:Static resx:Resources.Help_Link_WhatIsThis}"
+                                    <Label Text="{x:Static resx:Resources.More_Informations}"
                                            Style="{StaticResource LabelHelpLink}">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnHelpContactsTapped" />

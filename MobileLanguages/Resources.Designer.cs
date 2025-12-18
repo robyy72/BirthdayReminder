@@ -48,7 +48,7 @@ public class Resources
 	public static string Page_Settings_Title => ResourceManager.GetString("Page_Settings_Title", resourceCulture) ?? "";
 	public static string Page_Privacy_Title => ResourceManager.GetString("Page_Privacy_Title", resourceCulture) ?? "";
 	public static string Page_Help_Title => ResourceManager.GetString("Page_Help_Title", resourceCulture) ?? "";
-	public static string Help_Link_WhatIsThis => ResourceManager.GetString("Help_Link_WhatIsThis", resourceCulture) ?? "";
+	public static string More_Informations => ResourceManager.GetString("More_Informations", resourceCulture) ?? "";
 	public static string Help_UseContacts_Header => ResourceManager.GetString("Help_UseContacts_Header", resourceCulture) ?? "";
 	public static string Help_UseContacts_Content => ResourceManager.GetString("Help_UseContacts_Content", resourceCulture) ?? "";
 	public static string Help_BirthdayCalendar_Header => ResourceManager.GetString("Help_BirthdayCalendar_Header", resourceCulture) ?? "";
