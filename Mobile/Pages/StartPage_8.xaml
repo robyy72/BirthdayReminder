@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             x:Class="Mobile.StartPage_2"
+             xmlns:local="clr-namespace:Mobile"
+             x:Class="Mobile.StartPage_8"
+             x:DataType="local:StartPage_8"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
@@ -21,33 +23,35 @@
         </Grid>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="30" Spacing="25">
+            <VerticalStackLayout Padding="30" Spacing="20">
 
-                <Label Text="Jeder deiner Kontakte hat ein Feld für den Geburtstag. Willst Du damit arbeiten oder evtl. nur die Namen einlesen oder komplett separat nur diese App benutzen und alles neu eingeben?"
-                       Style="{StaticResource LabelInfo}" />
-
-                <!-- Contacts Selection -->
+                <!-- Calendar Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Kontakte benutzen ja / nein"
+                            <Label Text="{x:Static resx:Resources.Settings_Calendars}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="15"
-                                             RadioButtonGroup.GroupName="ContactsGroup">
-                            <RadioButton x:Name="RadioNoContacts"
-                                         IsChecked="True">
-                                <RadioButton.Content>
-                                    <Label Text="Keinerlei Nutzung meiner Kontakte"
-                                           Style="{StaticResource LabelInfo}" />
-                                </RadioButton.Content>
-                            </RadioButton>
-                            <RadioButton x:Name="RadioAskNextPage">
-                                <RadioButton.Content>
-                                    <Label Text="Optionen auf nächster Seite genauer erfragen"
-                                           Style="{StaticResource LabelInfo}" />
-                                </RadioButton.Content>
-                            </RadioButton>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <!-- Write to calendars toggle -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="WriteCalendarsSwitch"
+                                        Grid.Column="1"
+                                        Toggled="OnWriteCalendarsToggled"
+                                        VerticalOptions="Center" />
+                            </Grid>
+
+                            <!-- Calendar List -->
+                            <VerticalStackLayout x:Name="CalendarListContainer"
+                                                 IsVisible="False"
+                                                 Spacing="5">
+                                <VerticalStackLayout x:Name="CalendarTogglesContainer"
+                                                     Spacing="5" />
+                            </VerticalStackLayout>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

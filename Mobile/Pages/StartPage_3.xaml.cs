@@ -7,22 +7,16 @@ public partial class StartPage_3 : ContentPage
 	public StartPage_3()
 	{
 		InitializeComponent();
-		LoadSettings();
+		LoadAccount();
 		_isLoading = false;
 	}
 
-	private void LoadSettings()
+	private void LoadAccount()
 	{
-		var settings = SettingsService.Get();
-
-		if (settings.ContactsMode == ContactsMode.None)
-			RadioContactsNone.IsChecked = true;
-		else if (settings.ContactsMode == ContactsMode.BirthdayCalendar)
+		if (App.Account.ContactsMode == ContactsMode.BirthdayCalendar)
 			RadioContactsBirthdayCalendar.IsChecked = true;
-		else if (settings.ContactsMode == ContactsMode.ReadFromContacts)
-			RadioContactsRead.IsChecked = true;
 		else
-			RadioContactsNone.IsChecked = true;
+			RadioContactsRead.IsChecked = true;
 	}
 
 	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
@@ -35,7 +29,7 @@ public partial class StartPage_3 : ContentPage
 			bool granted = await DeviceService.RequestContactsReadPermissionAsync();
 			if (!granted)
 			{
-				RadioContactsNone.IsChecked = true;
+				RadioContactsBirthdayCalendar.IsChecked = true;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_ContactsRead_Denied,
@@ -47,7 +41,7 @@ public partial class StartPage_3 : ContentPage
 			bool granted = await DeviceService.RequestCalendarReadPermissionAsync();
 			if (!granted)
 			{
-				RadioContactsNone.IsChecked = true;
+				RadioContactsRead.IsChecked = true;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_CalendarRead_Denied,
@@ -72,18 +66,12 @@ public partial class StartPage_3 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		var settings = SettingsService.Get();
-
-		if (RadioContactsNone.IsChecked)
-			settings.ContactsMode = ContactsMode.None;
-		else if (RadioContactsBirthdayCalendar.IsChecked)
-			settings.ContactsMode = ContactsMode.BirthdayCalendar;
-		else if (RadioContactsRead.IsChecked)
-			settings.ContactsMode = ContactsMode.ReadFromContacts;
+		if (RadioContactsBirthdayCalendar.IsChecked)
+			App.Account.ContactsMode = ContactsMode.BirthdayCalendar;
 		else
-			settings.ContactsMode = ContactsMode.None;
+			App.Account.ContactsMode = ContactsMode.ReadFromContacts;
 
-		SettingsService.Update(settings);
+		AccountService.Save();
 
 		if (Application.Current?.Windows.Count > 0)
 		{

@@ -3,6 +3,23 @@ namespace Mobile;
 public partial class App : Application
 {
 	public static bool NeedsReloadBirthdays { get; set; }
+	public static bool UseContacts { get; set; }
+
+	#region Reminder Templates (used during StartPage wizard)
+	public static Reminder? Reminder_1_Template { get; set; }
+	public static Reminder? Reminder_2_Template { get; set; }
+	public static Reminder? Reminder_3_Template { get; set; }
+	#endregion
+
+	/// <summary>
+	/// Aim: Get the current account (reads from prefs via AccountService, keeps in sync).
+	/// </summary>
+	public static Account Account => AccountService.Get();
+
+	/// <summary>
+	/// Aim: Get the current persons list (reads from prefs via PersonService, only once).
+	/// </summary>
+	public static List<Person> Persons => PersonService.Get();
 
 	public App()
 	{
@@ -14,7 +31,7 @@ public partial class App : Application
 	{
 		Page page = new StartPage_1();
 
-		if (SettingsService.IsInitialized())
+		if (AccountService.IsInitialized())
 			page = new AppShell();
 
 		Window window = new Window(page);
@@ -23,7 +40,7 @@ public partial class App : Application
 
 	private void ApplyTheme()
 	{
-		var settings = SettingsService.Get();
-		DeviceService.ApplyTheme(settings.Theme);
+		var account = Account;
+		DeviceService.ApplyTheme(account.Theme);
 	}
 }

@@ -25,92 +25,55 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Reminder Section -->
+                <!-- Reminder 1 Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Reminder_Label}"
+                            <Label Text="{x:Static resx:Resources.Settings_Reminder_1}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
-                            <!-- No Reminder -->
-                            <Grid ColumnDefinitions="*,Auto">
+
+                            <!-- Days before -->
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_NoReminders}"
+                                       Text="{x:Static resx:Resources.Settings_DaysBefore}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <Switch x:Name="NoReminderSwitch"
-                                        Grid.Column="1"
-                                        Toggled="OnNoReminderToggled"
-                                        VerticalOptions="Center" />
+                                <Entry x:Name="DaysEntry"
+                                       Grid.Column="1"
+                                       Keyboard="Numeric"
+                                       WidthRequest="60"
+                                       HorizontalTextAlignment="Center"
+                                       Text="0" />
                             </Grid>
 
-                            <!-- Reminder Methods Container -->
-                            <VerticalStackLayout x:Name="ReminderMethodsContainer" Spacing="12">
-                                <!-- Email -->
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
-                                    <Label Grid.Column="0"
-                                           Text="{x:Static resx:Resources.ReminderMethod_Email}"
-                                           Style="{StaticResource LabelInfo}"
-                                           VerticalOptions="Center" />
-                                    <TimePicker x:Name="EmailTimePicker"
-                                                Grid.Column="1"
-                                                Style="{StaticResource TimePickerText}"
-                                                VerticalOptions="Center" />
-                                    <Switch x:Name="EmailSwitch"
-                                            Grid.Column="2"
-                                            Toggled="OnReminderToggled"
-                                            VerticalOptions="Center" />
-                                </Grid>
+                            <!-- Methods -->
+                            <Label Text="{x:Static resx:Resources.Settings_ReminderMethods}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold" />
 
-                                <!-- SMS -->
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
-                                    <Label Grid.Column="0"
-                                           Text="{x:Static resx:Resources.ReminderMethod_Sms}"
-                                           Style="{StaticResource LabelInfo}"
-                                           VerticalOptions="Center" />
-                                    <TimePicker x:Name="SmsTimePicker"
-                                                Grid.Column="1"
-                                                Style="{StaticResource TimePickerText}"
-                                                VerticalOptions="Center" />
-                                    <Switch x:Name="SmsSwitch"
-                                            Grid.Column="2"
-                                            Toggled="OnReminderToggled"
-                                            VerticalOptions="Center" />
-                                </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Email" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="EmailSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="SMS" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="SmsSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Lock Screen" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="LockScreenSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="WhatsApp" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Signal" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="SignalSwitch" Grid.Column="1" />
+                            </Grid>
 
-                                <!-- Lock Screen -->
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
-                                    <Label Grid.Column="0"
-                                           Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
-                                           Style="{StaticResource LabelInfo}"
-                                           VerticalOptions="Center" />
-                                    <TimePicker x:Name="LockScreenTimePicker"
-                                                Grid.Column="1"
-                                                Style="{StaticResource TimePickerText}"
-                                                VerticalOptions="Center" />
-                                    <Switch x:Name="LockScreenSwitch"
-                                            Grid.Column="2"
-                                            Toggled="OnReminderToggled"
-                                            VerticalOptions="Center" />
-                                </Grid>
-
-                                <!-- WhatsApp -->
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
-                                    <Label Grid.Column="0"
-                                           Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
-                                           Style="{StaticResource LabelInfo}"
-                                           VerticalOptions="Center" />
-                                    <TimePicker x:Name="WhatsAppTimePicker"
-                                                Grid.Column="1"
-                                                Style="{StaticResource TimePickerText}"
-                                                VerticalOptions="Center" />
-                                    <Switch x:Name="WhatsAppSwitch"
-                                            Grid.Column="2"
-                                            Toggled="OnReminderToggled"
-                                            VerticalOptions="Center" />
-                                </Grid>
-                            </VerticalStackLayout>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -122,9 +85,9 @@
                             Style="{StaticResource ButtonSecondary}"
                             Clicked="OnBackClicked" />
                     <Button Grid.Column="1"
-                            Text="{x:Static resx:Resources.General_Button_Finish}"
+                            Text="{x:Static resx:Resources.General_Button_Next}"
                             Style="{StaticResource ButtonPrimary}"
-                            Clicked="OnFinishClicked" />
+                            Clicked="OnNextClicked" />
                 </Grid>
 
             </VerticalStackLayout>

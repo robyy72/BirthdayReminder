@@ -35,17 +35,6 @@
                         <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="ContactsGroup">
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ContactsNone}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioContactsNone"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}"
-                                             IsChecked="True"
-                                             CheckedChanged="OnContactsRadioChanged" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout Grid.Column="0" Spacing="2">
                                     <Label Text="{x:Static resx:Resources.Settings_ContactsRead}"
                                            Style="{StaticResource LabelInfo}" />
@@ -59,6 +48,7 @@
                                 <RadioButton x:Name="RadioContactsRead"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
+                                             IsChecked="True"
                                              CheckedChanged="OnContactsRadioChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
