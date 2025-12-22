@@ -35,11 +35,12 @@ public static class MobileConstants
 	#endregion
 
 	#region Preferences Keys
+	public const string PREFS_ACCOUNT = "Account";
+	public const string PREFS_ACCOUNT_INITIALIZED = "AccountInitialized";
 	public const string PREFS_BIRTHDAYS_PREFIX = "Birthdays_";
 	public const string PREFS_ERRORS = "Errors";
+	public const string PREFS_PERSONS = "Persons";
 	public const string PREFS_PERSON_PREFIX = "Person_";
-	public const string PREFS_SETTINGS = "Settings";
-	public const string PREFS_SETTINGS_INITIALIZED = "SettingsInitialized";
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	#endregion
 }

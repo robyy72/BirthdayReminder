@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             x:Class="Mobile.SettingsPage"
-             Title="{x:Static resx:Resources.Page_Settings_Title}">
+             x:Class="Mobile.AccountPage"
+             Title="{x:Static resx:Resources.Page_Account_Title}">
 
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
@@ -37,6 +37,30 @@
                                WidthRequest="60"
                                HorizontalTextAlignment="Center" />
                     </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Theme Selection -->
+            <Label Text="{x:Static resx:Resources.Settings_Theme}"
+                   Style="{StaticResource LabelHeader}" />
+
+            <Border Style="{StaticResource Tile}">
+                <VerticalStackLayout RadioButtonGroup.GroupName="ThemeGroup"
+                                     Spacing="10">
+                    <RadioButton Value="Light"
+                                 x:Name="RadioLight">
+                        <RadioButton.Content>
+                            <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
+                                   Style="{StaticResource LabelInfo}" />
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Value="Dark"
+                                 x:Name="RadioDark">
+                        <RadioButton.Content>
+                            <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                   Style="{StaticResource LabelInfo}" />
+                        </RadioButton.Content>
+                    </RadioButton>
                 </VerticalStackLayout>
             </Border>
 

@@ -5,9 +5,9 @@ using Common;
 namespace Mobile;
 
 /// <summary>
-/// Aim: Represents application settings.
+/// Aim: Represents application account/settings.
 /// </summary>
-public class Settings
+public class Account
 {
 	#region Display
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
@@ -17,18 +17,8 @@ public class Settings
 	public int ShowPastBirthdays { get; set; } = MobileConstants.SHOW_PAST_DEFAULT;
     #endregion
 
-    #region Reminder Enabled and Time-Values
-    public bool ReminderEmailEnabled { get; set; }
-    public bool ReminderSmsEnabled { get; set; }
-    public bool ReminderLockScreenEnabled { get; set; }
-    public bool ReminderWhatsAppEnabled { get; set; }
-    
-	public int ReminderTimeEmail { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_EMAIL;
-	public int ReminderTimeSms { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_SMS;
-	public int ReminderTimeLockScreen { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_LOCKSCREEN;
-	public int ReminderTimeWhatsApp { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_WHATSAPP;
-
-	public bool RemindUntilApproved { get; set; }
+    #region Reminder
+    public ReminderCount ReminderCount { get; set; } = ReminderCount.NoReminder;
 	#endregion
 
 	#region Contacts

@@ -52,11 +52,11 @@
             Route="AllBirthdaysPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static resx:Resources.Tab_Settings}"
+    <FlyoutItem Title="{x:Static resx:Resources.Tab_Account}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            ContentTemplate="{DataTemplate local:SettingsPage}"
-            Route="SettingsPage" />
+            ContentTemplate="{DataTemplate local:AccountPage}"
+            Route="AccountPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Privacy}"

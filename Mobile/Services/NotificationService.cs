@@ -24,8 +24,8 @@ public static class NotificationService
 
 		CancelForPerson(person.Id);
 
-		var settings = SettingsService.Get();
-		int reminderTime = GetEarliestReminderTime(person, settings);
+		var account = App.Account;
+		int reminderTime = GetEarliestReminderTime(person, account);
 		int hours = reminderTime / 100;
 		int minutes = reminderTime % 100;
 
@@ -33,7 +33,7 @@ public static class NotificationService
 		if (nextBirthday <= DateTime.Now)
 			return;
 
-		var displayName = GetDisplayName(person, settings);
+		var displayName = GetDisplayName(person, account);
 		var title = MobileLanguages.Resources.General_Label_Birthday;
 		var description = string.Format("{0}", displayName);
 
@@ -103,18 +103,18 @@ public static class NotificationService
 		return result;
 	}
 
-	private static int GetEarliestReminderTime(Person person, Settings settings)
+	private static int GetEarliestReminderTime(Person person, Account account)
 	{
 		var times = new List<int>();
 
 		if (person.ReminderEmailEnabled)
-			times.Add(settings.ReminderTimeEmail);
+			times.Add(account.ReminderTimeEmail);
 		if (person.ReminderSmsEnabled)
-			times.Add(settings.ReminderTimeSms);
+			times.Add(account.ReminderTimeSms);
 		if (person.ReminderLockScreenEnabled)
-			times.Add(settings.ReminderTimeLockScreen);
+			times.Add(account.ReminderTimeLockScreen);
 		if (person.ReminderWhatsAppEnabled)
-			times.Add(settings.ReminderTimeWhatsApp);
+			times.Add(account.ReminderTimeWhatsApp);
 
 		int result = times.Count > 0 ? times.Min() : CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
 		return result;
@@ -133,9 +133,9 @@ public static class NotificationService
 		return thisYearBirthday;
 	}
 
-	private static string GetDisplayName(Person person, Settings settings)
+	private static string GetDisplayName(Person person, Account account)
 	{
-		if (settings.PersonNameDirection == PersonNameDirection.FirstLastName)
+		if (account.PersonNameDirection == PersonNameDirection.FirstLastName)
 		{
 			return $"{person.LastName} {person.FirstName}".Trim();
 		}

@@ -1,6 +1,6 @@
 namespace Mobile;
 
-public partial class SettingsPage : ContentPage
+public partial class AccountPage : ContentPage
 {
 	#region Fields
 	private readonly List<string> _hoursList = [];
@@ -10,11 +10,11 @@ public partial class SettingsPage : ContentPage
 	#endregion
 
 	#region Constructor
-	public SettingsPage()
+	public AccountPage()
 	{
 		InitializeComponent();
 		InitializePickers();
-		LoadSettings();
+		LoadAccount();
 		_isLoading = false;
 	}
 	#endregion
@@ -43,25 +43,30 @@ public partial class SettingsPage : ContentPage
 	#endregion
 
 	#region Load
-	private void LoadSettings()
+	private void LoadAccount()
 	{
-		var settings = SettingsService.Get();
+		var account = App.Account;
 
-		UpcomingEntry.Text = settings.ShowUpcomingBirthdays.ToString();
-		PastEntry.Text = settings.ShowPastBirthdays.ToString();
+		UpcomingEntry.Text = account.ShowUpcomingBirthdays.ToString();
+		PastEntry.Text = account.ShowPastBirthdays.ToString();
 
-		if (settings.Locale == "en")
+		if (account.Theme == "Dark")
+			RadioDark.IsChecked = true;
+		else
+			RadioLight.IsChecked = true;
+
+		if (account.Locale == "en")
 			RadioEn.IsChecked = true;
 		else
 			RadioDe.IsChecked = true;
 
-		SetTimePicker(EmailHoursPicker, EmailMinutesPicker, settings.ReminderTimeEmail);
-		SetTimePicker(SmsHoursPicker, SmsMinutesPicker, settings.ReminderTimeSms);
-		SetTimePicker(LockScreenHoursPicker, LockScreenMinutesPicker, settings.ReminderTimeLockScreen);
-		SetTimePicker(WhatsAppHoursPicker, WhatsAppMinutesPicker, settings.ReminderTimeWhatsApp);
-		RemindUntilApprovedSwitch.IsToggled = settings.RemindUntilApproved;
+		SetTimePicker(EmailHoursPicker, EmailMinutesPicker, account.ReminderTimeEmail);
+		SetTimePicker(SmsHoursPicker, SmsMinutesPicker, account.ReminderTimeSms);
+		SetTimePicker(LockScreenHoursPicker, LockScreenMinutesPicker, account.ReminderTimeLockScreen);
+		SetTimePicker(WhatsAppHoursPicker, WhatsAppMinutesPicker, account.ReminderTimeWhatsApp);
+		RemindUntilApprovedSwitch.IsToggled = account.RemindUntilApproved;
 
-		switch (settings.ContactsMode)
+		switch (account.ContactsMode)
 		{
 			case ContactsMode.None:
 				RadioContactsNone.IsChecked = true;
@@ -77,12 +82,12 @@ public partial class SettingsPage : ContentPage
 				break;
 		}
 
-		WriteCalendarsSwitch.IsToggled = settings.WriteToCalendars;
+		WriteCalendarsSwitch.IsToggled = account.WriteToCalendars;
 		UpdateCalendarListVisibility();
 
-		if (settings.WriteToCalendars)
+		if (account.WriteToCalendars)
 		{
-			_ = LoadCalendarsAsync(settings.SelectedCalendarIds);
+			_ = LoadCalendarsAsync(account.SelectedCalendarIds);
 		}
 	}
 
@@ -253,45 +258,52 @@ public partial class SettingsPage : ContentPage
 	#region Save
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
-		var settings = SettingsService.Get();
+		var account = App.Account;
 
 		if (int.TryParse(UpcomingEntry.Text, out int upcoming))
-			settings.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+			account.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
 
 		if (int.TryParse(PastEntry.Text, out int past))
-			settings.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+			account.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+
+		if (RadioDark.IsChecked)
+			account.Theme = "Dark";
+		else
+			account.Theme = "Light";
+
+		DeviceService.ApplyTheme(account.Theme);
 
 		if (RadioEn.IsChecked)
-			settings.Locale = "en";
+			account.Locale = "en";
 		else
-			settings.Locale = "de";
+			account.Locale = "de";
 
-		settings.ReminderTimeEmail = GetTimeFromPickers(EmailHoursPicker, EmailMinutesPicker);
-		settings.ReminderTimeSms = GetTimeFromPickers(SmsHoursPicker, SmsMinutesPicker);
-		settings.ReminderTimeLockScreen = GetTimeFromPickers(LockScreenHoursPicker, LockScreenMinutesPicker);
-		settings.ReminderTimeWhatsApp = GetTimeFromPickers(WhatsAppHoursPicker, WhatsAppMinutesPicker);
-		settings.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
+		account.ReminderTimeEmail = GetTimeFromPickers(EmailHoursPicker, EmailMinutesPicker);
+		account.ReminderTimeSms = GetTimeFromPickers(SmsHoursPicker, SmsMinutesPicker);
+		account.ReminderTimeLockScreen = GetTimeFromPickers(LockScreenHoursPicker, LockScreenMinutesPicker);
+		account.ReminderTimeWhatsApp = GetTimeFromPickers(WhatsAppHoursPicker, WhatsAppMinutesPicker);
+		account.RemindUntilApproved = RemindUntilApprovedSwitch.IsToggled;
 
 		if (RadioContactsNone.IsChecked)
-			settings.ContactsMode = ContactsMode.None;
+			account.ContactsMode = ContactsMode.None;
 		else if (RadioContactsBirthdayCalendar.IsChecked)
-			settings.ContactsMode = ContactsMode.BirthdayCalendar;
+			account.ContactsMode = ContactsMode.BirthdayCalendar;
 		else if (RadioContactsRead.IsChecked)
-			settings.ContactsMode = ContactsMode.ReadFromContacts;
+			account.ContactsMode = ContactsMode.ReadFromContacts;
 		else
-			settings.ContactsMode = ContactsMode.None;
+			account.ContactsMode = ContactsMode.None;
 
-		settings.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
-		settings.SelectedCalendarIds = _calendars
+		account.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
+		account.SelectedCalendarIds = _calendars
 			.Where(c => c.IsSelected)
 			.Select(c => c.Id)
 			.ToList();
 
-		SettingsService.Update(settings);
+		AccountService.Update(account);
 
 		await DisplayAlert(
-			MobileLanguages.Resources.Settings_Saved_Title,
-			MobileLanguages.Resources.Settings_Saved_Message,
+			MobileLanguages.Resources.Account_Saved_Title,
+			MobileLanguages.Resources.Account_Saved_Message,
 			MobileLanguages.Resources.General_Button_OK);
 	}
 	#endregion

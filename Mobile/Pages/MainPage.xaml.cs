@@ -9,7 +9,6 @@ public partial class MainPage : ContentPage
 
     #region Private Class Variables
     private List<Person> _persons = [];
-	private Settings _settings = SettingsService.Get();
 	private bool _foundContactsWithSameBirthday = false;
     #endregion
 
@@ -25,9 +24,8 @@ public partial class MainPage : ContentPage
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
-		_settings = SettingsService.Get();
-		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, _settings.ShowUpcomingBirthdays);
-		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
+		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, App.Account.ShowUpcomingBirthdays);
+		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, App.Account.ShowPastBirthdays);
 		if (App.NeedsReloadBirthdays)
 		{
 			LoadBirthdaysFromPrefs();
@@ -38,9 +36,9 @@ public partial class MainPage : ContentPage
 
 	private void Init()
 	{
-		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, _settings.ShowUpcomingBirthdays);
-		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, _settings.ShowPastBirthdays);
-		CheckRightsAndUpdateSettings();
+		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, App.Account.ShowUpcomingBirthdays);
+		MissedBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, App.Account.ShowPastBirthdays);
+		CheckRightsAndUpdateAccount();
 		LoadBirthdaysFromPrefs();
 		ReadContactsIfAllowed();
 		ReadBirthdaysFromBirthdayCalenderIfAllowed();
@@ -48,24 +46,24 @@ public partial class MainPage : ContentPage
     #endregion
 
     #region Init Methods
-    private async void CheckRightsAndUpdateSettings()
+    private async void CheckRightsAndUpdateAccount()
     {
-        if (_settings.ContactsMode == ContactsMode.None)
+        if (App.Account.ContactsMode == ContactsMode.None)
             return;
 
         bool hasContactsRead = await DeviceService.CheckContactsReadPermissionAsync();
-        if (!hasContactsRead && _settings.ContactsMode == ContactsMode.ReadFromContacts)
+        if (!hasContactsRead && App.Account.ContactsMode == ContactsMode.ReadFromContacts)
         {
-            _settings.ContactsMode = ContactsMode.None;
-            SettingsService.Update(_settings);
+            App.Account.ContactsMode = ContactsMode.None;
+            AccountService.Save();
             return;
         }
 
         bool hasCalendarRead = await DeviceService.CheckCalendarReadPermissionAsync();
-        if (!hasCalendarRead && _settings.ContactsMode == ContactsMode.BirthdayCalendar)
+        if (!hasCalendarRead && App.Account.ContactsMode == ContactsMode.BirthdayCalendar)
         {
-            _settings.ContactsMode = ContactsMode.None;
-            SettingsService.Update(_settings);
+            App.Account.ContactsMode = ContactsMode.None;
+            AccountService.Save();
         }
     }
 
@@ -79,7 +77,7 @@ public partial class MainPage : ContentPage
     
 	private async void ReadContactsIfAllowed()
 	{
-		if (_settings.ContactsMode != ContactsMode.ReadFromContacts)
+		if (App.Account.ContactsMode != ContactsMode.ReadFromContacts)
 			return;
 
 		try
@@ -195,7 +193,7 @@ public partial class MainPage : ContentPage
 
 	private async void ReadBirthdaysFromBirthdayCalenderIfAllowed()
 	{
-		if (_settings.ContactsMode != ContactsMode.BirthdayCalendar)
+		if (App.Account.ContactsMode != ContactsMode.BirthdayCalendar)
 			return;
 
 		try
@@ -244,14 +242,14 @@ public partial class MainPage : ContentPage
 			return;
 
 		var today = DateTime.Today;
-		var nameDirection = _settings.PersonNameDirection;
+		var nameDirection = App.Account.PersonNameDirection;
 
 		var upcoming = _persons
 			.Where(p => p.Birthday != null)
 			.Select(p => new { Person = p, DaysUntil = BirthdayHelper.GetDaysUntilBirthday(p.Birthday!, today) })
 			.Where(x => x.DaysUntil >= 0)
 			.OrderBy(x => x.DaysUntil)
-			.Take(_settings.ShowUpcomingBirthdays)
+			.Take(App.Account.ShowUpcomingBirthdays)
 			.Select(x => new PersonViewModel(x.Person, nameDirection))
 			.ToList();
 
@@ -260,7 +258,7 @@ public partial class MainPage : ContentPage
 			.Select(p => new { Person = p, DaysSince = BirthdayHelper.GetDaysSinceBirthday(p.Birthday!, today) })
 			.Where(x => x.DaysSince > 0 && x.DaysSince <= 30)
 			.OrderBy(x => x.DaysSince)
-			.Take(_settings.ShowPastBirthdays)
+			.Take(App.Account.ShowPastBirthdays)
 			.Select(x => new PersonViewModel(x.Person, nameDirection))
 			.ToList();
 

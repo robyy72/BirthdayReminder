@@ -16,12 +16,10 @@ public class Person
 	public Birthday? Birthday { get; set; }
     #endregion
 
-    #region Reminder
-    public bool ReminderEmailEnabled { get; set; }
-    public bool ReminderSmsEnabled { get; set; }
-    public bool ReminderLockScreenEnabled { get; set; }
-    public bool ReminderWhatsAppEnabled { get; set; }
-    public bool RemindUntilApproved { get; set; }
+    #region Reminders
+    public Reminder? Reminder_1 { get; set; }
+    public Reminder? Reminder_2 { get; set; }
+    public Reminder? Reminder_3 { get; set; }
 	#endregion
 
 	#region Contacts

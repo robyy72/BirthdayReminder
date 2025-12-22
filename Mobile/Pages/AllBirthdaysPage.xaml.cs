@@ -7,7 +7,6 @@ using MobileLanguages;
 public partial class AllBirthdaysPage : ContentPage
 {
 	#region Private Class Variables
-	private readonly Settings _settings = SettingsService.Get();
 	private List<PersonViewModel> _allBirthdays = [];
 	private int _selectedMonthIndex = 0;
 	#endregion
@@ -49,7 +48,7 @@ public partial class AllBirthdaysPage : ContentPage
 	private void LoadBirthdays()
 	{
 		var allPersons = new List<Person>();
-		var nameDirection = _settings.PersonNameDirection;
+		var nameDirection = App.Account.PersonNameDirection;
 
 		for (int month = 1; month <= 12; month++)
 		{
