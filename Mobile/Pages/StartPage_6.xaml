@@ -25,11 +25,11 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Reminder 2 Section -->
+                <!-- Reminder 1 Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Reminder_2}"
+                            <Label Text="{x:Static resx:Resources.Settings_Reminder_1}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">

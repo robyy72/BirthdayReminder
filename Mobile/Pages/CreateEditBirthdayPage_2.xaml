@@ -9,58 +9,12 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="30" Spacing="15">
 
-            <!-- Reminder -->
-            <Border Style="{StaticResource Card}">
-                <VerticalStackLayout Spacing="0">
-                    <Border Style="{StaticResource CardHeader}">
-                        <Label Text="{x:Static resx:Resources.Reminder_Label}"
-                               Style="{StaticResource LabelCardHeader}" />
-                    </Border>
-                    <VerticalStackLayout Padding="20" Spacing="15">
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="{x:Static resx:Resources.ReminderMethod_Email}"
-                                   Style="{StaticResource LabelInfo}"
-                                   VerticalOptions="Center" />
-                            <Switch x:Name="ReminderEmailSwitch"
-                                    Grid.Column="1" />
-                        </Grid>
+                <!-- Placeholder for future content -->
+                <Label Text="(Reminder settings coming soon)"
+                       Style="{StaticResource LabelInfo}"
+                       HorizontalOptions="Center" />
 
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="{x:Static resx:Resources.ReminderMethod_Sms}"
-                                   Style="{StaticResource LabelInfo}"
-                                   VerticalOptions="Center" />
-                            <Switch x:Name="ReminderSmsSwitch"
-                                    Grid.Column="1" />
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="{x:Static resx:Resources.ReminderMethod_LockScreen}"
-                                   Style="{StaticResource LabelInfo}"
-                                   VerticalOptions="Center" />
-                            <Switch x:Name="ReminderLockScreenSwitch"
-                                    Grid.Column="1" />
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
-                                   Style="{StaticResource LabelInfo}"
-                                   VerticalOptions="Center" />
-                            <Switch x:Name="ReminderWhatsAppSwitch"
-                                    Grid.Column="1" />
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="{x:Static resx:Resources.RemindUntilApproved_Label}"
-                                   Style="{StaticResource LabelInfo}"
-                                   VerticalOptions="Center" />
-                            <Switch x:Name="RemindUntilApprovedSwitch"
-                                    Grid.Column="1" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Border>
-
-        </VerticalStackLayout>
+            </VerticalStackLayout>
         </ScrollView>
 
         <!-- Bottom Buttons -->

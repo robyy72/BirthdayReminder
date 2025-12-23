@@ -186,18 +186,12 @@ public partial class CreateEditBirthdayPage_1 : ContentPage
 		}
 		else
 		{
-			var account = App.Account;
 			var person = new Person
 			{
 				Id = GenerateId(),
 				FirstName = firstName,
 				LastName = lastName,
-				Birthday = birthday,
-				ReminderEmailEnabled = account.ReminderEmailEnabled,
-				ReminderSmsEnabled = account.ReminderSmsEnabled,
-				ReminderLockScreenEnabled = account.ReminderLockScreenEnabled,
-				ReminderWhatsAppEnabled = account.ReminderWhatsAppEnabled,
-				RemindUntilApproved = account.RemindUntilApproved
+				Birthday = birthday
 			};
 			BirthdayService.Add(person);
 			personId = person.Id;

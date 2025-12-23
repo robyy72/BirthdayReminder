@@ -1,76 +1,24 @@
 namespace Mobile;
 
-public partial class AccountPage : ContentPage
+public partial class StartPage_9 : ContentPage
 {
-	#region Fields
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
-	#endregion
 
-	#region Constructor
-	public AccountPage()
+	public StartPage_9()
 	{
 		InitializeComponent();
 		LoadAccount();
 		_isLoading = false;
 	}
-	#endregion
 
-	#region Load
 	private void LoadAccount()
 	{
 		var account = App.Account;
-
-		UpcomingEntry.Text = account.ShowUpcomingBirthdays.ToString();
-		PastEntry.Text = account.ShowPastBirthdays.ToString();
-
-		if (account.Theme == "Dark")
-			RadioDark.IsChecked = true;
-		else
-			RadioLight.IsChecked = true;
-
-		if (account.Locale == "en")
-			RadioEn.IsChecked = true;
-		else
-			RadioDe.IsChecked = true;
-
-		if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
-			RadioContactsNone.IsChecked = true;
-		else
-			RadioContactsRead.IsChecked = true;
-
 		WriteCalendarsSwitch.IsToggled = account.WriteToCalendars;
 		UpdateCalendarListVisibility();
-
-		if (account.WriteToCalendars)
-		{
-			_ = LoadCalendarsAsync(account.SelectedCalendarIds);
-		}
 	}
-	#endregion
 
-	#region Contacts
-	private async void OnContactsRadioChanged(object? sender, CheckedChangedEventArgs e)
-	{
-		if (!e.Value || _isLoading)
-			return;
-
-		if (sender == RadioContactsRead)
-		{
-			bool granted = await DeviceService.RequestContactsReadPermissionAsync();
-			if (!granted)
-			{
-				RadioContactsNone.IsChecked = true;
-				await DisplayAlert(
-					MobileLanguages.Resources.Permission_Required,
-					MobileLanguages.Resources.Permission_ContactsRead_Denied,
-					MobileLanguages.Resources.General_Button_OK);
-			}
-		}
-	}
-	#endregion
-
-	#region Calendars
 	private async void OnWriteCalendarsToggled(object? sender, ToggledEventArgs e)
 	{
 		if (_isLoading)
@@ -89,7 +37,7 @@ public partial class AccountPage : ContentPage
 				return;
 			}
 
-			await LoadCalendarsAsync([]);
+			await LoadCalendarsAsync();
 		}
 
 		UpdateCalendarListVisibility();
@@ -100,15 +48,11 @@ public partial class AccountPage : ContentPage
 		CalendarListContainer.IsVisible = WriteCalendarsSwitch.IsToggled;
 	}
 
-	private async Task LoadCalendarsAsync(List<string> selectedIds)
+	private async Task LoadCalendarsAsync()
 	{
 		try
 		{
 			_calendars = await GetDeviceCalendarsAsync();
-			foreach (var cal in _calendars)
-			{
-				cal.IsSelected = selectedIds.Contains(cal.Id);
-			}
 			BuildCalendarToggles();
 		}
 		catch (Exception ex)
@@ -120,6 +64,7 @@ public partial class AccountPage : ContentPage
 	private Task<List<CalendarInfo>> GetDeviceCalendarsAsync()
 	{
 		// TODO: Replace with actual calendar API
+		// Birthday calendar is excluded - it's a special one
 		var calendars = new List<CalendarInfo>
 		{
 			new() { Id = "default", Name = MobileLanguages.Resources.Calendar_Default, Color = Colors.Blue },
@@ -182,39 +127,25 @@ public partial class AccountPage : ContentPage
 			CalendarTogglesContainer.Children.Add(grid);
 		}
 	}
-	#endregion
 
-	#region Save
-	private async void OnSaveClicked(object? sender, EventArgs e)
+	private void OnBackClicked(object? sender, EventArgs e)
+	{
+		if (Application.Current?.Windows.Count > 0)
+		{
+			Page page = App.Account.ReminderCount switch
+			{
+				ReminderCount.ThreeReminders => new StartPage_8(),
+				ReminderCount.TwoReminders => new StartPage_7(),
+				ReminderCount.OneReminder => new StartPage_6(),
+				_ => new StartPage_5()
+			};
+			Application.Current.Windows[0].Page = page;
+		}
+	}
+
+	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		var account = App.Account;
-
-		if (int.TryParse(UpcomingEntry.Text, out int upcoming))
-			account.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
-
-		if (int.TryParse(PastEntry.Text, out int past))
-			account.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
-
-		if (RadioDark.IsChecked)
-			account.Theme = "Dark";
-		else
-			account.Theme = "Light";
-
-		DeviceService.ApplyTheme(account.Theme);
-
-		if (RadioEn.IsChecked)
-			account.Locale = "en";
-		else
-			account.Locale = "de";
-
-		if (RadioContactsNone.IsChecked)
-			account.ContactsReadMode = ContactsReadMode.None;
-		else if (RadioContactsRead.IsChecked)
-		{
-			// If enabling contacts, default to ReadNamesWithBirthday if not already set
-			if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
-				account.ContactsReadMode = ContactsReadMode.ReadNamesWithBirthday;
-		}
 
 		account.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
 		account.SelectedCalendarIds = _calendars
@@ -222,19 +153,20 @@ public partial class AccountPage : ContentPage
 			.Select(c => c.Id)
 			.ToList();
 
-		AccountService.Update(account);
+		AccountService.Save();
+		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_INITIALIZED, true);
 
-		await DisplayAlert(
-			MobileLanguages.Resources.Settings_Saved_Title,
-			MobileLanguages.Resources.Settings_Saved_Message,
-			MobileLanguages.Resources.General_Button_OK);
+		if (Application.Current?.Windows.Count > 0)
+		{
+			Application.Current.Windows[0].Page = new AppShell();
+		}
 	}
-	#endregion
+}
 
-	#region Back
-	private async void OnBackClicked(object? sender, EventArgs e)
-	{
-		await Shell.Current.GoToAsync("..");
-	}
-	#endregion
+public class CalendarInfo
+{
+	public string Id { get; set; } = string.Empty;
+	public string Name { get; set; } = string.Empty;
+	public Color Color { get; set; } = Colors.Blue;
+	public bool IsSelected { get; set; } = false;
 }

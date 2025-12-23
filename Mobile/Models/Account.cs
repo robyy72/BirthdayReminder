@@ -22,7 +22,7 @@ public class Account
 	#endregion
 
 	#region Contacts
-	public ContactsMode ContactsMode { get; set; } = ContactsMode.None;
+	public ContactsReadMode ContactsReadMode { get; set; } = ContactsReadMode.None;
 	#endregion
 
 	#region Calendars

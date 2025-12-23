@@ -25,33 +25,55 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Calendar Section -->
+                <!-- Reminder 3 Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Calendars}"
+                            <Label Text="{x:Static resx:Resources.Settings_Reminder_3}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
-                            <!-- Write to calendars toggle -->
-                            <Grid ColumnDefinitions="*,Auto">
+
+                            <!-- Days before -->
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
+                                       Text="{x:Static resx:Resources.Settings_DaysBefore}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <Switch x:Name="WriteCalendarsSwitch"
-                                        Grid.Column="1"
-                                        Toggled="OnWriteCalendarsToggled"
-                                        VerticalOptions="Center" />
+                                <Entry x:Name="DaysEntry"
+                                       Grid.Column="1"
+                                       Keyboard="Numeric"
+                                       WidthRequest="60"
+                                       HorizontalTextAlignment="Center"
+                                       Text="0" />
                             </Grid>
 
-                            <!-- Calendar List -->
-                            <VerticalStackLayout x:Name="CalendarListContainer"
-                                                 IsVisible="False"
-                                                 Spacing="5">
-                                <VerticalStackLayout x:Name="CalendarTogglesContainer"
-                                                     Spacing="5" />
-                            </VerticalStackLayout>
+                            <!-- Methods -->
+                            <Label Text="{x:Static resx:Resources.Settings_ReminderMethods}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold" />
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Email" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="EmailSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="SMS" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="SmsSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Lock Screen" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="LockScreenSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="WhatsApp" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Signal" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="SignalSwitch" Grid.Column="1" />
+                            </Grid>
+
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

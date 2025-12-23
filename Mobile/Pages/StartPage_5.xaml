@@ -25,55 +25,52 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Reminder 1 Section -->
+                <!-- Reminder Count Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Reminder_1}"
+                            <Label Text="{x:Static resx:Resources.Settings_ReminderCount}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="15">
-
-                            <!-- Days before -->
-                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="ReminderCountGroup">
+                            <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                                       Text="{x:Static resx:Resources.ReminderCount_None}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <Entry x:Name="DaysEntry"
-                                       Grid.Column="1"
-                                       Keyboard="Numeric"
-                                       WidthRequest="60"
-                                       HorizontalTextAlignment="Center"
-                                       Text="0" />
-                            </Grid>
-
-                            <!-- Methods -->
-                            <Label Text="{x:Static resx:Resources.Settings_ReminderMethods}"
-                                   Style="{StaticResource LabelInfo}"
-                                   FontAttributes="Bold" />
-
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Email" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="EmailSwitch" Grid.Column="1" />
+                                <RadioButton x:Name="RadioNoReminder"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             IsChecked="True" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="SMS" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="SmsSwitch" Grid.Column="1" />
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.ReminderCount_One}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioOneReminder"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Lock Screen" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="LockScreenSwitch" Grid.Column="1" />
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.ReminderCount_Two}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioTwoReminders"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="WhatsApp" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.ReminderCount_Three}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioThreeReminders"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
                             </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Signal" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="SignalSwitch" Grid.Column="1" />
-                            </Grid>
-
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

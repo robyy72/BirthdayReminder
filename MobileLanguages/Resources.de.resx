@@ -462,4 +462,34 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Tab_Overview" xml:space="preserve">
     <value>Übersicht</value>
   </data>
+  <data name="Settings_ReminderCount" xml:space="preserve">
+    <value>Anzahl Erinnerungen</value>
+  </data>
+  <data name="Settings_Reminder_1" xml:space="preserve">
+    <value>Erinnerung 1</value>
+  </data>
+  <data name="Settings_Reminder_2" xml:space="preserve">
+    <value>Erinnerung 2</value>
+  </data>
+  <data name="Settings_Reminder_3" xml:space="preserve">
+    <value>Erinnerung 3</value>
+  </data>
+  <data name="Settings_DaysBefore" xml:space="preserve">
+    <value>Tage vorher</value>
+  </data>
+  <data name="Settings_ReminderMethods" xml:space="preserve">
+    <value>Erinnerungsmethoden</value>
+  </data>
+  <data name="ReminderCount_None" xml:space="preserve">
+    <value>Keine Erinnerungen</value>
+  </data>
+  <data name="ReminderCount_One" xml:space="preserve">
+    <value>1 Erinnerung</value>
+  </data>
+  <data name="ReminderCount_Two" xml:space="preserve">
+    <value>2 Erinnerungen</value>
+  </data>
+  <data name="ReminderCount_Three" xml:space="preserve">
+    <value>3 Erinnerungen</value>
+  </data>
 </root>

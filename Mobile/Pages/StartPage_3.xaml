@@ -25,41 +25,65 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Contacts Section -->
+                <!-- Card 1: Which names to read -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Contacts}"
+                            <Label Text="Welche Kontakte einlesen?"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10"
-                                             RadioButtonGroup.GroupName="ContactsGroup">
+                                             RadioButtonGroup.GroupName="ContactsReadModeGroup">
                             <Grid ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                    <Label Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                                           Style="{StaticResource LabelInfo}" />
-                                    <Label Text="{x:Static resx:Resources.More_Informations}"
-                                           Style="{StaticResource LabelHelpLink}">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnHelpContactsTapped" />
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                </VerticalStackLayout>
-                                <RadioButton x:Name="RadioContactsRead"
+                                <Label Grid.Column="0"
+                                       Text="Nur Kontakte mit Geburtstag"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadWithBirthday"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
-                                             IsChecked="True"
-                                             CheckedChanged="OnContactsRadioChanged" />
+                                             IsChecked="True" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ContactsBirthdayCalendar}"
+                                       Text="Alle Kontakte (auch ohne Geburtstag)"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioContactsBirthdayCalendar"
+                                <RadioButton x:Name="RadioReadAll"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card 2: How to sync -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="Wie synchronisieren?"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="ContactsReadWriteModeGroup">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Einmalig einlesen"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadOnce"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
-                                             CheckedChanged="OnContactsRadioChanged" />
+                                             IsChecked="True" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Immer aktuell halten"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadAlways"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
                             </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>

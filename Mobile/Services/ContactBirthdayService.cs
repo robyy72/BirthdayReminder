@@ -10,10 +10,4 @@ public partial class ContactBirthdayService
 	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
 	public partial Task<List<Person>> GetContactsAsync();
-
-	/// <summary>
-	/// Aim: Gets all birthdays from the device birthday calendar.
-	/// Return: List of Person objects with FirstName, LastName and Birthday
-	/// </summary>
-	public partial Task<List<Person>> GetBirthdayCalendarEventsAsync();
 }

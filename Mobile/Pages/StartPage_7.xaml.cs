@@ -34,11 +34,14 @@ public partial class StartPage_7 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		App.Reminder_3_Template = CreateReminder();
+		App.Reminder_2_Template = CreateReminder();
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new StartPage_8();
+			if (App.Account.ReminderCount == ReminderCount.ThreeReminders)
+				Application.Current.Windows[0].Page = new StartPage_8();
+			else
+				Application.Current.Windows[0].Page = new StartPage_9();
 		}
 	}
 }

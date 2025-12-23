@@ -5,59 +5,61 @@ public partial class StartPage_5 : ContentPage
 	public StartPage_5()
 	{
 		InitializeComponent();
-		LoadReminder();
+		LoadAccount();
 	}
 
-	private void LoadReminder()
+	private void LoadAccount()
 	{
-		var reminder = App.Persons.FirstOrDefault()?.Reminder_1;
-		if (reminder != null)
+		switch (App.Account.ReminderCount)
 		{
-			DaysEntry.Text = reminder.Days.ToString();
-			EmailSwitch.IsToggled = reminder.EmailEnabled;
-			SmsSwitch.IsToggled = reminder.SmsEnabled;
-			LockScreenSwitch.IsToggled = reminder.LockScreenEnabled;
-			WhatsAppSwitch.IsToggled = reminder.WhatsAppEnabled;
-			SignalSwitch.IsToggled = reminder.SignalEnabled;
+			case ReminderCount.NoReminder:
+				RadioNoReminder.IsChecked = true;
+				break;
+			case ReminderCount.OneReminder:
+				RadioOneReminder.IsChecked = true;
+				break;
+			case ReminderCount.TwoReminders:
+				RadioTwoReminders.IsChecked = true;
+				break;
+			case ReminderCount.ThreeReminders:
+				RadioThreeReminders.IsChecked = true;
+				break;
+			default:
+				RadioNoReminder.IsChecked = true;
+				break;
 		}
-	}
-
-	private Reminder CreateReminder()
-	{
-		int.TryParse(DaysEntry.Text, out int days);
-
-		var reminder = new Reminder
-		{
-			Days = days,
-			EmailEnabled = EmailSwitch.IsToggled,
-			SmsEnabled = SmsSwitch.IsToggled,
-			LockScreenEnabled = LockScreenSwitch.IsToggled,
-			WhatsAppEnabled = WhatsAppSwitch.IsToggled,
-			SignalEnabled = SignalSwitch.IsToggled
-		};
-
-		return reminder;
 	}
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new StartPage_4();
+			if (App.UseContacts)
+				Application.Current.Windows[0].Page = new StartPage_4();
+			else
+				Application.Current.Windows[0].Page = new StartPage_2();
 		}
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		// Store Reminder_1 template in a static variable for later use
-		App.Reminder_1_Template = CreateReminder();
+		if (RadioNoReminder.IsChecked)
+			App.Account.ReminderCount = ReminderCount.NoReminder;
+		else if (RadioOneReminder.IsChecked)
+			App.Account.ReminderCount = ReminderCount.OneReminder;
+		else if (RadioTwoReminders.IsChecked)
+			App.Account.ReminderCount = ReminderCount.TwoReminders;
+		else if (RadioThreeReminders.IsChecked)
+			App.Account.ReminderCount = ReminderCount.ThreeReminders;
+
+		AccountService.Save();
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			if (App.Account.ReminderCount >= ReminderCount.TwoReminders)
-				Application.Current.Windows[0].Page = new StartPage_6();
+			if (App.Account.ReminderCount == ReminderCount.NoReminder)
+				Application.Current.Windows[0].Page = new StartPage_9();
 			else
-				Application.Current.Windows[0].Page = new StartPage_8();
+				Application.Current.Windows[0].Page = new StartPage_6();
 		}
 	}
 }

@@ -40,12 +40,6 @@ public partial class HelpPage : ContentPage
 				ContentLabel_2.Text = MobileLanguages.Resources.Help_UseContacts_Content_2;
 				break;
 
-			case HelpTopic.ReadFromBirthdayCalendar:
-				HeaderLabel.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Header;
-				ContentLabel_1.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Content_1;
-				ContentLabel_2.Text = MobileLanguages.Resources.Help_BirthdayCalendar_Content_2;
-				break;
-
 			case HelpTopic.BirthdayWithoutYear:
 				HeaderLabel.Text = MobileLanguages.Resources.Help_BirthdayWithoutYear_Header;
 				ContentLabel_1.Text = MobileLanguages.Resources.Help_BirthdayWithoutYear_Content_1;

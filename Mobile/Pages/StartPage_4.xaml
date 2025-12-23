@@ -25,55 +25,27 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Reminder Count Section -->
-                <Border Style="{StaticResource Card}">
-                    <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_ReminderCount}"
-                                   Style="{StaticResource LabelCardHeader}" />
-                        </Border>
-                        <VerticalStackLayout Padding="20" Spacing="10"
-                                             RadioButtonGroup.GroupName="ReminderCountGroup">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_NoReminder}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioNoReminder"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}"
-                                             IsChecked="True" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_OneReminder}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioOneReminder"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_TwoReminders}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioTwoReminders"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ThreeReminders}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioThreeReminders"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
+                <!-- Initial State: Ask for Permission -->
+                <VerticalStackLayout x:Name="PanelInitial" Spacing="20">
+                    <Label Text="Um Deine Kontakte lesen zu können, brauchen wir Deine Erlaubnis."
+                           Style="{StaticResource LabelInfo}" />
+
+                    <Button Text="Berechtigung jetzt anfragen"
+                            Style="{StaticResource ButtonPrimary}"
+                            Clicked="OnRequestPermissionClicked" />
+                </VerticalStackLayout>
+
+                <!-- Permission Granted State -->
+                <VerticalStackLayout x:Name="PanelGranted" IsVisible="False" Spacing="20">
+                    <Label Text="Vielen Dank! Wir kümmern uns darum."
+                           Style="{StaticResource LabelInfo}" />
+                </VerticalStackLayout>
+
+                <!-- Permission Denied State -->
+                <VerticalStackLayout x:Name="PanelDenied" IsVisible="False" Spacing="20">
+                    <Label Text="OK, Berechtigung abgelehnt, verstanden. Jederzeit änderbar in deinen Account-Einstellungen."
+                           Style="{StaticResource LabelInfo}" />
+                </VerticalStackLayout>
 
                 <!-- Bottom Buttons -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
@@ -81,10 +53,12 @@
                             Text="{x:Static resx:Resources.General_Button_Back}"
                             Style="{StaticResource ButtonSecondary}"
                             Clicked="OnBackClicked" />
-                    <Button Grid.Column="1"
+                    <Button x:Name="ButtonNext"
+                            Grid.Column="1"
                             Text="{x:Static resx:Resources.General_Button_Next}"
                             Style="{StaticResource ButtonPrimary}"
-                            Clicked="OnNextClicked" />
+                            Clicked="OnNextClicked"
+                            IsEnabled="False" />
                 </Grid>
 
             </VerticalStackLayout>

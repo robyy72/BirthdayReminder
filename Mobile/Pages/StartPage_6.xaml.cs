@@ -5,6 +5,21 @@ public partial class StartPage_6 : ContentPage
 	public StartPage_6()
 	{
 		InitializeComponent();
+		LoadReminder();
+	}
+
+	private void LoadReminder()
+	{
+		var reminder = App.Persons.FirstOrDefault()?.Reminder_1;
+		if (reminder != null)
+		{
+			DaysEntry.Text = reminder.Days.ToString();
+			EmailSwitch.IsToggled = reminder.EmailEnabled;
+			SmsSwitch.IsToggled = reminder.SmsEnabled;
+			LockScreenSwitch.IsToggled = reminder.LockScreenEnabled;
+			WhatsAppSwitch.IsToggled = reminder.WhatsAppEnabled;
+			SignalSwitch.IsToggled = reminder.SignalEnabled;
+		}
 	}
 
 	private Reminder CreateReminder()
@@ -34,14 +49,15 @@ public partial class StartPage_6 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		App.Reminder_2_Template = CreateReminder();
+		// Store Reminder_1 template in a static variable for later use
+		App.Reminder_1_Template = CreateReminder();
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			if (App.Account.ReminderCount == ReminderCount.ThreeReminders)
+			if (App.Account.ReminderCount >= ReminderCount.TwoReminders)
 				Application.Current.Windows[0].Page = new StartPage_7();
 			else
-				Application.Current.Windows[0].Page = new StartPage_8();
+				Application.Current.Windows[0].Page = new StartPage_9();
 		}
 	}
 }

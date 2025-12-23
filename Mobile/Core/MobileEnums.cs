@@ -3,23 +3,38 @@ namespace Mobile;
 public enum HelpTopic
 {
 	UseContacts = 1,
-	ReadFromBirthdayCalendar = 2,
-	BirthdayWithoutYear = 3
+	BirthdayWithoutYear = 2
 }
 
-public enum ContactsMode
+public enum ContactsReadMode
 {
 	NotSet = 0,
 	None = 1,
-	ReadFromContacts = 2,
-	BirthdayCalendar = 3	
+	ReadNamesWithBirthday = 2,
+	ReadAllNames = 3
+}
+
+public enum ContactsReadWriteMode
+{
+	NotSet = 0,
+	ReadOnlyOnce = 1,
+	ReadAlways = 2,
+	ReadAlwaysAndAskWriteBack = 3,
+	ReadAlwaysAndWriteBack = 4
+}
+
+// at the moment only used for iOS
+public enum ContactsAccessChoice
+{
+	NotSet = 0,
+	OnlySomeContacts = 1,
+    AllContacts = 2,
 }
 
 public enum PersonSource
 {
 	Manual = 0,
-	Contacts = 1,
-	BirthdayCalendar = 2
+	Contacts = 1
 }
 
 public enum ReminderCount

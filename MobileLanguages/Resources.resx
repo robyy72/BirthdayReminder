@@ -462,4 +462,34 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Tab_Overview" xml:space="preserve">
     <value>Overview</value>
   </data>
+  <data name="Settings_ReminderCount" xml:space="preserve">
+    <value>Number of Reminders</value>
+  </data>
+  <data name="Settings_Reminder_1" xml:space="preserve">
+    <value>Reminder 1</value>
+  </data>
+  <data name="Settings_Reminder_2" xml:space="preserve">
+    <value>Reminder 2</value>
+  </data>
+  <data name="Settings_Reminder_3" xml:space="preserve">
+    <value>Reminder 3</value>
+  </data>
+  <data name="Settings_DaysBefore" xml:space="preserve">
+    <value>Days before</value>
+  </data>
+  <data name="Settings_ReminderMethods" xml:space="preserve">
+    <value>Reminder Methods</value>
+  </data>
+  <data name="ReminderCount_None" xml:space="preserve">
+    <value>No reminders</value>
+  </data>
+  <data name="ReminderCount_One" xml:space="preserve">
+    <value>1 reminder</value>
+  </data>
+  <data name="ReminderCount_Two" xml:space="preserve">
+    <value>2 reminders</value>
+  </data>
+  <data name="ReminderCount_Three" xml:space="preserve">
+    <value>3 reminders</value>
+  </data>
 </root>

@@ -25,5 +25,7 @@ public class Person
 	#region Contacts
 	public string? ContactId { get; set; }
 	public PersonSource Source { get; set; } = PersonSource.Manual;
+	public ContactsReadMode ContactsReadMode { get; set; } = ContactsReadMode.NotSet;
+	public ContactsReadWriteMode ContactsReadWriteMode { get; set; } = ContactsReadWriteMode.NotSet;
 	#endregion
 }

@@ -169,4 +169,14 @@ public class Resources
 	public static string Age_WillTurn => ResourceManager.GetString("Age_WillTurn", resourceCulture) ?? "";
 	public static string Filter_AllMonths => ResourceManager.GetString("Filter_AllMonths", resourceCulture) ?? "";
 	public static string Tab_Overview => ResourceManager.GetString("Tab_Overview", resourceCulture) ?? "";
+	public static string Settings_ReminderCount => ResourceManager.GetString("Settings_ReminderCount", resourceCulture) ?? "";
+	public static string Settings_Reminder_1 => ResourceManager.GetString("Settings_Reminder_1", resourceCulture) ?? "";
+	public static string Settings_Reminder_2 => ResourceManager.GetString("Settings_Reminder_2", resourceCulture) ?? "";
+	public static string Settings_Reminder_3 => ResourceManager.GetString("Settings_Reminder_3", resourceCulture) ?? "";
+	public static string Settings_DaysBefore => ResourceManager.GetString("Settings_DaysBefore", resourceCulture) ?? "";
+	public static string Settings_ReminderMethods => ResourceManager.GetString("Settings_ReminderMethods", resourceCulture) ?? "";
+	public static string ReminderCount_None => ResourceManager.GetString("ReminderCount_None", resourceCulture) ?? "";
+	public static string ReminderCount_One => ResourceManager.GetString("ReminderCount_One", resourceCulture) ?? "";
+	public static string ReminderCount_Two => ResourceManager.GetString("ReminderCount_Two", resourceCulture) ?? "";
+	public static string ReminderCount_Three => ResourceManager.GetString("ReminderCount_Three", resourceCulture) ?? "";
 }

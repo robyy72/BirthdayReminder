@@ -9,7 +9,6 @@ public partial class MainPage : ContentPage
 
     #region Private Class Variables
     private List<Person> _persons = [];
-	private bool _foundContactsWithSameBirthday = false;
     #endregion
 
 
@@ -41,28 +40,19 @@ public partial class MainPage : ContentPage
 		CheckRightsAndUpdateAccount();
 		LoadBirthdaysFromPrefs();
 		ReadContactsIfAllowed();
-		ReadBirthdaysFromBirthdayCalenderIfAllowed();
 	}
     #endregion
 
     #region Init Methods
     private async void CheckRightsAndUpdateAccount()
     {
-        if (App.Account.ContactsMode == ContactsMode.None)
+        if (App.Account.ContactsReadMode == ContactsReadMode.None || App.Account.ContactsReadMode == ContactsReadMode.NotSet)
             return;
 
         bool hasContactsRead = await DeviceService.CheckContactsReadPermissionAsync();
-        if (!hasContactsRead && App.Account.ContactsMode == ContactsMode.ReadFromContacts)
+        if (!hasContactsRead)
         {
-            App.Account.ContactsMode = ContactsMode.None;
-            AccountService.Save();
-            return;
-        }
-
-        bool hasCalendarRead = await DeviceService.CheckCalendarReadPermissionAsync();
-        if (!hasCalendarRead && App.Account.ContactsMode == ContactsMode.BirthdayCalendar)
-        {
-            App.Account.ContactsMode = ContactsMode.None;
+            App.Account.ContactsReadMode = ContactsReadMode.None;
             AccountService.Save();
         }
     }
@@ -77,7 +67,8 @@ public partial class MainPage : ContentPage
     
 	private async void ReadContactsIfAllowed()
 	{
-		if (App.Account.ContactsMode != ContactsMode.ReadFromContacts)
+		if (App.Account.ContactsReadMode != ContactsReadMode.ReadNamesWithBirthday &&
+			App.Account.ContactsReadMode != ContactsReadMode.ReadAllNames)
 			return;
 
 		try
@@ -151,70 +142,6 @@ public partial class MainPage : ContentPage
 		return true;
 	}
 
-	/// <summary>
-	/// Aim: Imports a birthday from the birthday calendar into the persons list and saves to prefs
-	/// Params: firstName - First name, lastName - Last name, birthday - Birthday date
-	/// Return: True if added, false if duplicate
-	/// </summary>
-	public bool ImportCalendarBirthday(string firstName, string lastName, DateTime birthday)
-	{
-		if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
-			return false;
-
-		var sameBirthday = _persons.FirstOrDefault(p =>
-			p.Birthday != null &&
-			p.Birthday.Day == birthday.Day &&
-			p.Birthday.Month == birthday.Month &&
-			p.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
-			p.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
-
-		if (sameBirthday != null)
-			return false;
-
-		int nextId = _persons.Count > 0 ? _persons.Max(p => p.Id) + 1 : 1;
-		var person = new Person
-		{
-			Id = nextId,
-			FirstName = firstName,
-			LastName = lastName,
-			Birthday = new Birthday
-			{
-				Day = birthday.Day,
-				Month = birthday.Month,
-				Year = birthday.Year
-			},
-			Source = PersonSource.BirthdayCalendar
-		};
-
-		_persons.Add(person);
-		BirthdayService.Add(person);
-		return true;
-	}
-
-	private async void ReadBirthdaysFromBirthdayCalenderIfAllowed()
-	{
-		if (App.Account.ContactsMode != ContactsMode.BirthdayCalendar)
-			return;
-
-		try
-		{
-			ContactBirthdayService service = new();
-			List<Person> persons = await service.GetBirthdayCalendarEventsAsync();
-
-			foreach (Person person in persons)
-			{
-				if (person.Birthday == null)
-					continue;
-
-				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
-				ImportCalendarBirthday(person.FirstName, person.LastName, birthdayDate);
-			}
-		}
-		catch (Exception ex)
-		{
-			System.Diagnostics.Debug.WriteLine($"Error reading birthday calendar: {ex.Message}");
-		}
-	}
     #endregion
 
     #region Form Update Methods

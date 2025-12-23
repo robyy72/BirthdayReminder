@@ -96,27 +96,15 @@ public static class NotificationService
 
 	private static bool HasAnyReminderEnabled(Person person)
 	{
-		bool result = person.ReminderEmailEnabled ||
-					  person.ReminderSmsEnabled ||
-					  person.ReminderLockScreenEnabled ||
-					  person.ReminderWhatsAppEnabled;
+		// TODO: Check person.Reminder_1/2/3 when reminder system is implemented
+		bool result = false;
 		return result;
 	}
 
 	private static int GetEarliestReminderTime(Person person, Account account)
 	{
-		var times = new List<int>();
-
-		if (person.ReminderEmailEnabled)
-			times.Add(account.ReminderTimeEmail);
-		if (person.ReminderSmsEnabled)
-			times.Add(account.ReminderTimeSms);
-		if (person.ReminderLockScreenEnabled)
-			times.Add(account.ReminderTimeLockScreen);
-		if (person.ReminderWhatsAppEnabled)
-			times.Add(account.ReminderTimeWhatsApp);
-
-		int result = times.Count > 0 ? times.Min() : CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
+		// TODO: Get from person.Reminder_1/2/3 when reminder system is implemented
+		int result = CommonConstants.DEFAULT_REMINDER_TIME_MORNING;
 		return result;
 	}
 
