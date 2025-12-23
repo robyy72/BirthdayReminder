@@ -8,6 +8,7 @@ public partial class MainPage : ContentPage
     #endregion
 
     #region Private Class Variables
+	private bool _foundContactsWithSameBirthday = false;
     private List<Person> _persons = [];
     #endregion
 

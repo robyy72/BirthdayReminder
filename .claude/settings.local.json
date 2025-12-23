@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Edit(.claude/CLAUDE.md)",
       "WebSearch",
       "Bash(git add:*)",
       "Bash(git commit:*)",
@@ -31,7 +32,8 @@
       "Bash(adb shell am start:*)",
       "Bash(adb shell monkey:*)",
       "Bash(export PATH:*)",
-      "Bash(git -C:*)"
+      "Bash(git -C:*)",
+      "Bash(Select-Object -First 20)"
     ],
     "deny": []
   }

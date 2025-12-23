@@ -39,12 +39,12 @@ public partial class AccountPage : ContentPage
 		else
 			RadioContactsRead.IsChecked = true;
 
-		WriteCalendarsSwitch.IsToggled = account.WriteToCalendars;
+		WriteCalendarsSwitch.IsToggled = account.DeviceCalendar_Enabled;
 		UpdateCalendarListVisibility();
 
-		if (account.WriteToCalendars)
+		if (account.DeviceCalendar_Enabled)
 		{
-			_ = LoadCalendarsAsync(account.SelectedCalendarIds);
+			_ = LoadCalendarsAsync(account.DeviceCalendar_SelectedIds);
 		}
 	}
 	#endregion
@@ -216,8 +216,8 @@ public partial class AccountPage : ContentPage
 				account.ContactsReadMode = ContactsReadMode.ReadNamesWithBirthday;
 		}
 
-		account.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
-		account.SelectedCalendarIds = _calendars
+		account.DeviceCalendar_Enabled = WriteCalendarsSwitch.IsToggled;
+		account.DeviceCalendar_SelectedIds = _calendars
 			.Where(c => c.IsSelected)
 			.Select(c => c.Id)
 			.ToList();
