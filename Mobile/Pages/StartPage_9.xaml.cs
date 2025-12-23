@@ -4,6 +4,7 @@ public partial class StartPage_9 : ContentPage
 {
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
+	private int _openAccordion = 0;
 
 	public StartPage_9()
 	{
@@ -15,11 +16,84 @@ public partial class StartPage_9 : ContentPage
 	private void LoadAccount()
 	{
 		var account = App.Account;
-		WriteCalendarsSwitch.IsToggled = account.WriteToCalendars;
+
+		// Device Calendar
+		DeviceCalendarSwitch.IsToggled = account.DeviceCalendar_Enabled;
 		UpdateCalendarListVisibility();
+
+		// Outlook
+		OutlookSingleEmailSwitch.IsToggled = account.OutlookCalendar_SingleEmail;
+		OutlookGrantAccessSwitch.IsToggled = account.OutlookCalendar_GrantAccess;
+
+		// Google
+		GoogleSingleEmailSwitch.IsToggled = account.GoogleCalendar_SingleEmail;
+		GoogleGrantAccessSwitch.IsToggled = account.GoogleCalendar_GrantAccess;
 	}
 
-	private async void OnWriteCalendarsToggled(object? sender, ToggledEventArgs e)
+	#region Accordion Logic
+	private void OnAccordion1Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(1);
+	}
+
+	private void OnAccordion2Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(2);
+	}
+
+	private void OnAccordion3Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(3);
+	}
+
+	private void ToggleAccordion(int accordionNumber)
+	{
+		if (_openAccordion == accordionNumber)
+		{
+			// Close current accordion
+			SetAccordionState(accordionNumber, false);
+			_openAccordion = 0;
+		}
+		else
+		{
+			// Close previously open accordion
+			if (_openAccordion > 0)
+				SetAccordionState(_openAccordion, false);
+
+			// Open new accordion
+			SetAccordionState(accordionNumber, true);
+			_openAccordion = accordionNumber;
+		}
+	}
+
+	private void SetAccordionState(int accordionNumber, bool isOpen)
+	{
+		var content = accordionNumber switch
+		{
+			1 => Accordion1Content,
+			2 => Accordion2Content,
+			3 => Accordion3Content,
+			_ => null
+		};
+
+		var arrow = accordionNumber switch
+		{
+			1 => Accordion1Arrow,
+			2 => Accordion2Arrow,
+			3 => Accordion3Arrow,
+			_ => null
+		};
+
+		if (content != null)
+			content.IsVisible = isOpen;
+
+		if (arrow != null)
+			arrow.Text = isOpen ? "▲" : "▼";
+	}
+	#endregion
+
+	#region Device Calendar
+	private async void OnDeviceCalendarToggled(object? sender, ToggledEventArgs e)
 	{
 		if (_isLoading)
 			return;
@@ -29,7 +103,7 @@ public partial class StartPage_9 : ContentPage
 			bool granted = await DeviceService.RequestCalendarWritePermissionAsync();
 			if (!granted)
 			{
-				WriteCalendarsSwitch.IsToggled = false;
+				DeviceCalendarSwitch.IsToggled = false;
 				await DisplayAlert(
 					MobileLanguages.Resources.Permission_Required,
 					MobileLanguages.Resources.Permission_CalendarWrite_Denied,
@@ -45,7 +119,7 @@ public partial class StartPage_9 : ContentPage
 
 	private void UpdateCalendarListVisibility()
 	{
-		CalendarListContainer.IsVisible = WriteCalendarsSwitch.IsToggled;
+		CalendarListContainer.IsVisible = DeviceCalendarSwitch.IsToggled;
 	}
 
 	private async Task LoadCalendarsAsync()
@@ -64,7 +138,6 @@ public partial class StartPage_9 : ContentPage
 	private Task<List<CalendarInfo>> GetDeviceCalendarsAsync()
 	{
 		// TODO: Replace with actual calendar API
-		// Birthday calendar is excluded - it's a special one
 		var calendars = new List<CalendarInfo>
 		{
 			new() { Id = "default", Name = MobileLanguages.Resources.Calendar_Default, Color = Colors.Blue },
@@ -127,7 +200,9 @@ public partial class StartPage_9 : ContentPage
 			CalendarTogglesContainer.Children.Add(grid);
 		}
 	}
+	#endregion
 
+	#region Navigation
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
 		if (Application.Current?.Windows.Count > 0)
@@ -147,11 +222,20 @@ public partial class StartPage_9 : ContentPage
 	{
 		var account = App.Account;
 
-		account.WriteToCalendars = WriteCalendarsSwitch.IsToggled;
-		account.SelectedCalendarIds = _calendars
+		// Device Calendar
+		account.DeviceCalendar_Enabled = DeviceCalendarSwitch.IsToggled;
+		account.DeviceCalendar_SelectedIds = _calendars
 			.Where(c => c.IsSelected)
 			.Select(c => c.Id)
 			.ToList();
+
+		// Outlook
+		account.OutlookCalendar_SingleEmail = OutlookSingleEmailSwitch.IsToggled;
+		account.OutlookCalendar_GrantAccess = OutlookGrantAccessSwitch.IsToggled;
+
+		// Google
+		account.GoogleCalendar_SingleEmail = GoogleSingleEmailSwitch.IsToggled;
+		account.GoogleCalendar_GrantAccess = GoogleGrantAccessSwitch.IsToggled;
 
 		AccountService.Save();
 		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_INITIALIZED, true);
@@ -161,6 +245,7 @@ public partial class StartPage_9 : ContentPage
 			Application.Current.Windows[0].Page = new AppShell();
 		}
 	}
+	#endregion
 }
 
 public class CalendarInfo

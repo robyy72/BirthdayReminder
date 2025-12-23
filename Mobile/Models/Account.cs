@@ -23,10 +23,19 @@ public class Account
 
 	#region Contacts
 	public ContactsReadMode ContactsReadMode { get; set; } = ContactsReadMode.None;
+	public ContactsReadWriteMode ContactsReadWriteMode { get; set; } = ContactsReadWriteMode.NotSet;
+	public ContactsAccessChoice ContactsAccessChoice { get; set; } = ContactsAccessChoice.NotSet;
 	#endregion
 
 	#region Calendars
-	public bool WriteToCalendars { get; set; }
-	public List<string> SelectedCalendarIds { get; set; } = [];
+	// Device Calendar
+	public bool DeviceCalendar_Enabled { get; set; }
+	public List<string> DeviceCalendar_SelectedIds { get; set; } = [];
+	// Outlook Calendar
+	public bool OutlookCalendar_SingleEmail { get; set; }
+	public bool OutlookCalendar_GrantAccess { get; set; }
+	// Google Calendar
+	public bool GoogleCalendar_SingleEmail { get; set; }
+	public bool GoogleCalendar_GrantAccess { get; set; }
 	#endregion
 }

@@ -25,27 +25,66 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Initial State: Ask for Permission -->
-                <VerticalStackLayout x:Name="PanelInitial" Spacing="20">
-                    <Label Text="Um Deine Kontakte lesen zu können, brauchen wir Deine Erlaubnis."
-                           Style="{StaticResource LabelInfo}" />
+                <!-- Card 1: Permission Request -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="Berechtigung benötigt"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="20">
+                            <Label Text="Jetzt bitte Berechtigung für dieses Telefon erteilen"
+                                   Style="{StaticResource LabelInfo}" />
 
-                    <Button Text="Berechtigung jetzt anfragen"
-                            Style="{StaticResource ButtonPrimary}"
-                            Clicked="OnRequestPermissionClicked" />
-                </VerticalStackLayout>
+                            <Button x:Name="ButtonRequestPermission"
+                                    Text="Dialog starten"
+                                    Style="{StaticResource ButtonPrimary}"
+                                    Clicked="OnRequestPermissionClicked" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
 
-                <!-- Permission Granted State -->
-                <VerticalStackLayout x:Name="PanelGranted" IsVisible="False" Spacing="20">
-                    <Label Text="Vielen Dank! Wir kümmern uns darum."
-                           Style="{StaticResource LabelInfo}" />
-                </VerticalStackLayout>
+                <!-- Card 2: Result (always visible) -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="Ergebnis"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="20">
+                            <!-- Initial State -->
+                            <VerticalStackLayout x:Name="PanelInitial">
+                                <Label Text="Warte auf Berechtigung..."
+                                       Style="{StaticResource LabelInfo}" />
+                            </VerticalStackLayout>
 
-                <!-- Permission Denied State -->
-                <VerticalStackLayout x:Name="PanelDenied" IsVisible="False" Spacing="20">
-                    <Label Text="OK, Berechtigung abgelehnt, verstanden. Jederzeit änderbar in deinen Account-Einstellungen."
-                           Style="{StaticResource LabelInfo}" />
-                </VerticalStackLayout>
+                            <!-- Loading State -->
+                            <VerticalStackLayout x:Name="PanelLoading" IsVisible="False" Spacing="15">
+                                <ActivityIndicator IsRunning="True"
+                                                   Color="{StaticResource Primary}"
+                                                   WidthRequest="40"
+                                                   HeightRequest="40"
+                                                   HorizontalOptions="Center" />
+                                <Label Text="Kontakte werden geladen..."
+                                       Style="{StaticResource LabelInfo}"
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+
+                            <!-- Success State -->
+                            <VerticalStackLayout x:Name="PanelSuccess" IsVisible="False">
+                                <Label x:Name="LabelSuccess"
+                                       Style="{StaticResource LabelInfo}" />
+                            </VerticalStackLayout>
+
+                            <!-- Denied State -->
+                            <VerticalStackLayout x:Name="PanelDenied" IsVisible="False">
+                                <Label Text="Berechtigung nicht erteilt, auch ok"
+                                       Style="{StaticResource LabelInfo}" />
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
 
                 <!-- Bottom Buttons -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="15">

@@ -24,7 +24,7 @@ public partial class StartPage_2 : ContentPage
 			if (App.UseContacts)
 				Application.Current.Windows[0].Page = new StartPage_3();
 			else
-				Application.Current.Windows[0].Page = new StartPage_4();
+				Application.Current.Windows[0].Page = new StartPage_5();
 		}
 	}
 }

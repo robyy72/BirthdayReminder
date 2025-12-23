@@ -33,24 +33,30 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Kontakte benutzen?"
+                            <Label Text="Kontakte benutzen ?"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="15"
+                        <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="ContactsGroup">
-                            <RadioButton x:Name="RadioNoContacts"
-                                         IsChecked="True">
-                                <RadioButton.Content>
-                                    <Label Text="Keinerlei Nutzung meiner Kontakte"
-                                           Style="{StaticResource LabelInfo}" />
-                                </RadioButton.Content>
-                            </RadioButton>
-                            <RadioButton x:Name="RadioAskNextPage">
-                                <RadioButton.Content>
-                                    <Label Text="Optionen auf nächster Seite genauer erfragen"
-                                           Style="{StaticResource LabelInfo}" />
-                                </RadioButton.Content>
-                            </RadioButton>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Keinerlei Nutzung meiner Kontakte"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioNoContacts"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             IsChecked="True" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Optionen auf nächster Seite genauer erfragen"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioAskNextPage"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

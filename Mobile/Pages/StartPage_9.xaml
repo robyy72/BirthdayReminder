@@ -25,23 +25,33 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <!-- Calendar Section -->
-                <Border Style="{StaticResource Card}">
+                <!-- Accordion 1: Device Calendar -->
+                <Border x:Name="Accordion1" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Calendars}"
-                                   Style="{StaticResource LabelCardHeader}" />
-                        </Border>
-                        <VerticalStackLayout Padding="20" Spacing="15">
-                            <!-- Write to calendars toggle -->
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
+                                       Text="Kalender dieses Telefon"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion1Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion1Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion1Content" Padding="20" Spacing="15" IsVisible="False">
+                            <!-- Enable device calendar toggle -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="In Kalender schreiben"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <Switch x:Name="WriteCalendarsSwitch"
+                                <Switch x:Name="DeviceCalendarSwitch"
                                         Grid.Column="1"
-                                        Toggled="OnWriteCalendarsToggled"
+                                        Toggled="OnDeviceCalendarToggled"
                                         VerticalOptions="Center" />
                             </Grid>
 
@@ -52,6 +62,86 @@
                                 <VerticalStackLayout x:Name="CalendarTogglesContainer"
                                                      Spacing="5" />
                             </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Accordion 2: Outlook Calendar -->
+                <Border x:Name="Accordion2" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Outlook Kalender"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion2Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion2Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion2Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Einzeln per Email"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="OutlookSingleEmailSwitch"
+                                        Grid.Column="1"
+                                        VerticalOptions="Center" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Zugang gewähren"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="OutlookGrantAccessSwitch"
+                                        Grid.Column="1"
+                                        VerticalOptions="Center" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Accordion 3: Google Calendar -->
+                <Border x:Name="Accordion3" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Google Kalender"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion3Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion3Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Einzeln per Email"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="GoogleSingleEmailSwitch"
+                                        Grid.Column="1"
+                                        VerticalOptions="Center" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Zugang gewähren"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="GoogleGrantAccessSwitch"
+                                        Grid.Column="1"
+                                        VerticalOptions="Center" />
+                            </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

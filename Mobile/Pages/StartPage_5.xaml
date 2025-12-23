@@ -25,6 +25,9 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
+                <Label Text="Willst du genau an dem Tag erinnert werden oder auch schon drei Tage vorher oder sogar 3x ?"
+                       Style="{StaticResource LabelInfo}" />
+
                 <!-- Reminder Count Section -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">

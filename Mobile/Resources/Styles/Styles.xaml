@@ -375,7 +375,7 @@
         <Setter Property="FontSize" Value="18" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="Margin" Value="-5,0,10,0" />
+        <Setter Property="Margin" Value="5,0,-5,0" />
     </Style>
 
     <!-- ==================== PICKER ==================== -->
