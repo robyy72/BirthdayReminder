@@ -154,7 +154,7 @@ public partial class MainPage : ContentPage
             null,
             MobileLanguages.Resources.Page_Main_NewBirthday,
             MobileLanguages.Resources.Page_AllBirthdays_Title,
-            MobileLanguages.Resources.Page_Account_Title);
+            MobileLanguages.Resources.Page_Settings_Title);
 
         if (action == MobileLanguages.Resources.Page_Main_NewBirthday)
         {
@@ -164,7 +164,7 @@ public partial class MainPage : ContentPage
         {
             await Shell.Current.GoToAsync(nameof(AllBirthdaysPage));
         }
-        else if (action == MobileLanguages.Resources.Page_Account_Title)
+        else if (action == MobileLanguages.Resources.Page_Settings_Title)
         {
             await Shell.Current.GoToAsync(nameof(AccountPage));
         }
