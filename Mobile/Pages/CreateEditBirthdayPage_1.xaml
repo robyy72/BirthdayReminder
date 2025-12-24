@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.CreateEditBirthdayPage_1"
-             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+             Title="{x:Static resx:Resources.Page_NewBirthday_Title}"
+             Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="*">
         <ScrollView Grid.Row="0">

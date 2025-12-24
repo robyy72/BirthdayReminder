@@ -226,6 +226,11 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Border" x:Key="TileFlyout" BasedOn="{StaticResource Tile}">
+        <Setter Property="Margin" Value="10,5" />
+        <Setter Property="Padding" Value="12,10" />
+    </Style>
+
     <Style TargetType="Border" x:Key="TileInner">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 10" />
@@ -249,6 +254,10 @@
                         Opacity="0.3" />
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="CardBirthday" BasedOn="{StaticResource Card}">
+        <Setter Property="Margin" Value="0,0,0,10" />
     </Style>
 
     <Style TargetType="Border" x:Key="CardHeader">
@@ -342,7 +351,7 @@
     </Style>
 
     <Style TargetType="Button" x:Key="ButtonSecondary">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -367,6 +376,24 @@
         <Setter Property="TextColor" Value="White" />
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonGlass">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="#30FFFFFF" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="WidthRequest" Value="44" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderColor" Value="#50FFFFFF" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="#40000000" Offset="0,2" Radius="8" Opacity="0.3" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- ==================== RADIO BUTTONS ==================== -->

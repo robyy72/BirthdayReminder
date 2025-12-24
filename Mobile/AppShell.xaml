@@ -13,31 +13,41 @@
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
     FlyoutBehavior="Flyout">
 
+    <!-- Custom Hamburger Icon -->
+    <Shell.FlyoutIcon>
+        <FontImageSource Glyph="☰"
+                         FontFamily="Arial"
+                         Size="24"
+                         Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+    </Shell.FlyoutIcon>
+
+    <!-- Flyout Item Template -->
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid ColumnDefinitions="Auto,*" Padding="20,10">
-                <Label Grid.Column="1"
-                       Text="{Binding Title}"
-                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+            <Border Style="{StaticResource TileFlyout}">
+                <Label Text="{Binding Title}"
+                       TextColor="{AppThemeBinding Light=Black, Dark=White}"
                        FontSize="16"
+                       FontAttributes="Bold"
                        VerticalTextAlignment="Center" />
-            </Grid>
+            </Border>
         </DataTemplate>
     </Shell.ItemTemplate>
 
+    <!-- Flyout Header -->
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
-              HeightRequest="120"
-              Padding="20">
-            <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="{x:Static resx:Resources.Page_Main_Title}"
-                       FontSize="24"
-                       FontAttributes="Bold"
-                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
-            </VerticalStackLayout>
+              HeightRequest="60"
+              Padding="15,10">
+            <Label Text="Wunschseite wählen"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
+                   VerticalOptions="Center" />
         </Grid>
     </Shell.FlyoutHeader>
 
+    <!-- Main Page -->
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Overview}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
@@ -45,13 +55,7 @@
             Route="MainPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static resx:Resources.Tab_ShowAll}"
-                FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent
-            ContentTemplate="{DataTemplate local:AllBirthdaysPage}"
-            Route="AllBirthdaysPage" />
-    </FlyoutItem>
-
+    <!-- Account/Settings -->
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Settings}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
@@ -59,11 +63,18 @@
             Route="AccountPage" />
     </FlyoutItem>
 
+    <!-- Privacy -->
     <FlyoutItem Title="{x:Static resx:Resources.Tab_Privacy}"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             ContentTemplate="{DataTemplate local:PrivacyPage}"
             Route="PrivacyPage" />
     </FlyoutItem>
+
+    <!-- AllBirthdaysPage als Route registrieren, aber nicht im Flyout -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:AllBirthdaysPage}"
+        Route="AllBirthdaysPage"
+        FlyoutItemIsVisible="False" />
 
 </Shell>

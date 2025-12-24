@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.HelpPage"
-             Title="{x:Static resx:Resources.Page_Help_Title}">
+             Title="{x:Static resx:Resources.Page_Help_Title}"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,*,Auto">
         <!-- Header -->
