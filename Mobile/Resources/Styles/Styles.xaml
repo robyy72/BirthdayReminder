@@ -396,6 +396,15 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="ButtonMenu">
+        <Setter Property="Text" Value="☰" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
     <!-- ==================== RADIO BUTTONS ==================== -->
 
     <Style TargetType="RadioButton" x:Key="RadioStandard">

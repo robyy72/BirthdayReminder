@@ -1,5 +1,32 @@
 # CLAUDE.md – BirthdayReminder
 
+## Known Issues (iOS) – Caching/Transfer Problems
+
+These are likely old Xamarin cache issues, not code problems. The actual resources are correct.
+
+**Environment:** Windows 11 + USB cable + iPhone only (no Mac available)
+
+- [ ] **App Icon**: Home screen still shows ".NET" icon
+- [ ] **Splash Screen**: Still shows ".NET" branding
+- [x] **MainPage Hamburger**: Menu button has unwanted background → Fixed: Created `ButtonMenu` style (transparent)
+- [x] **Flyout Tiles**: Text is black but not visible → Fixed: Changed to `{StaticResource Black/White}` in AppThemeBinding
+
+**Investigation results:**
+- Source `appicon.png` ✓ correct (birthday cake icon)
+- Generated icons in `obj/Debug/net9.0-ios/.../Assets.xcassets` ✓ correct
+- `Info.plist` → `XSAppIconAssets` ✓ points to correct path
+- Deleting app from iPhone ✗ didn't help
+
+**Things to try:**
+- Clean solution (`dotnet clean` or VS Build → Clean)
+- Delete `bin/` and `obj/` folders in all projects
+- **On Mac build host:** Delete `~/Library/Caches/Xamarin` and `~/Library/Developer/Xcode/DerivedData`
+- Delete app from device, reinstall fresh
+- Restart VS 2022 AND Mac build host
+- Check `Mobile/Platforms/iOS/Assets.xcassets` for correct icons
+
+---
+
 ## Current State (Dec 2024)
 
 - **Settings → Account**: Renamed model, service, page

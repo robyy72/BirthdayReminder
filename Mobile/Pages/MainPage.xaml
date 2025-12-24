@@ -13,8 +13,7 @@
               ColumnDefinitions="Auto,*,Auto">
             <Button x:Name="MenuButton"
                     Grid.Column="0"
-                    Text="☰"
-                    Style="{StaticResource ButtonGlass}"
+                    Style="{StaticResource ButtonMenu}"
                     Clicked="OnMenuClicked" />
             <Label Grid.Column="1"
                    Text="{x:Static resx:Resources.Page_Main_Title}"

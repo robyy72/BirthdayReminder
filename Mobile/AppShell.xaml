@@ -18,7 +18,7 @@
         <DataTemplate>
             <Border Style="{StaticResource TileFlyout}">
                 <Label Text="{Binding Title}"
-                       TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                        FontSize="16"
                        FontAttributes="Bold"
                        VerticalTextAlignment="Center" />
