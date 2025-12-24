@@ -481,15 +481,15 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Erinnerungsmethoden</value>
   </data>
   <data name="ReminderCount_None" xml:space="preserve">
-    <value>Keine Erinnerungen</value>
+    <value>Erstmal keine Erinnerungen</value>
   </data>
   <data name="ReminderCount_One" xml:space="preserve">
-    <value>1 Erinnerung</value>
+    <value>Eine Erinnerung</value>
   </data>
   <data name="ReminderCount_Two" xml:space="preserve">
-    <value>2 Erinnerungen</value>
+    <value>Zwei Erinnerungen</value>
   </data>
   <data name="ReminderCount_Three" xml:space="preserve">
-    <value>3 Erinnerungen</value>
+    <value>Drei Erinnerungen</value>
   </data>
 </root>

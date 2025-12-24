@@ -25,6 +25,9 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
+                <Label Text="Kalender-Export"
+                       Style="{StaticResource LabelHeader}" />
+
                 <!-- Accordion 1: Device Calendar -->
                 <Border x:Name="Accordion1" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">

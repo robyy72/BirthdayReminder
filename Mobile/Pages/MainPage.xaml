@@ -3,13 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.MainPage"
+             Shell.NavBarIsVisible="False"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnNewBirthdayClicked" />
-    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header with Menu Button -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*,Auto">
+            <Button x:Name="MenuButton"
+                    Grid.Column="0"
+                    Text="☰"
+                    Style="{StaticResource ButtonGlass}"
+                    Clicked="OnMenuClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_Main_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+        </Grid>
 
-    <ScrollView Padding="20">
+        <ScrollView Grid.Row="1" Padding="20">
         <VerticalStackLayout Spacing="15">
             <!-- Upcoming Birthdays Section -->
             <Label x:Name="UpcomingBirthdaysLabel"
@@ -20,11 +32,11 @@
                             SelectionMode="Single"
                             SelectionChanged="OnBirthdaySelected">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource Card}" Margin="0,20,0,0">
+                        <Border Style="{StaticResource CardBirthday}">
                             <VerticalStackLayout Spacing="0">
                                 <Border Style="{StaticResource CardHeader}">
                                     <Label Text="{Binding DisplayName}"
@@ -63,11 +75,11 @@
                             SelectionMode="Single"
                             SelectionChanged="OnBirthdaySelected">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource Card}">
+                        <Border Style="{StaticResource CardBirthday}">
                             <VerticalStackLayout Spacing="0">
                                 <Border Style="{StaticResource CardHeader}">
                                     <Label Text="{Binding DisplayName}"
@@ -80,7 +92,7 @@
                                            VerticalOptions="Center" />
                                     <Label Grid.Column="1"
                                            Text="{Binding AgeDisplay}"
-                                           Style="{StaticResource LabelDescription}"
+                                           Style="{StaticResource LabelInfo}"
                                            VerticalOptions="Center" />
                                 </Grid>
                             </VerticalStackLayout>
@@ -101,5 +113,6 @@
                     Clicked="OnNewBirthdayClicked"
                     Margin="0,10,0,40" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+    </Grid>
 </ContentPage>

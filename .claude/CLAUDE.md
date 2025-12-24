@@ -40,6 +40,15 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - Use `git pull` (merge), NOT `git pull --rebase` to preserve history
 - **Commit only, don't push too often** - user will request push when needed
 - **Do NOT suggest "push" after commits** - user will push when ready
+- **IMPORTANT:** On every commit, increment `ApplicationVersion` in `Mobile/Mobile.csproj` by 1
+
+---
+
+## Versioning
+
+- **ApplicationDisplayVersion** (e.g. `1.0`): Only changes on deploy/release
+- **ApplicationVersion** (e.g. `135`): Increment by 1 on every commit
+- Display format in app: `Version 1.0 (135)`
 
 ---
 

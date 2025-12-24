@@ -78,6 +78,9 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <Label Text="Für jeden Eintrag kann das auch manuell definiert werden"
+                       Style="{StaticResource LabelInfo}" />
+
                 <!-- Bottom Buttons -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                     <Button Grid.Column="0"

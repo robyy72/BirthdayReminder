@@ -146,6 +146,30 @@ public partial class MainPage : ContentPage
     #endregion
 
     #region Form Update Methods
+    private async void OnMenuClicked(object? sender, EventArgs e)
+    {
+        string action = await DisplayActionSheet(
+            null,
+            MobileLanguages.Resources.General_Button_Cancel,
+            null,
+            MobileLanguages.Resources.Page_Main_NewBirthday,
+            MobileLanguages.Resources.Page_AllBirthdays_Title,
+            MobileLanguages.Resources.Page_Account_Title);
+
+        if (action == MobileLanguages.Resources.Page_Main_NewBirthday)
+        {
+            await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage_1));
+        }
+        else if (action == MobileLanguages.Resources.Page_AllBirthdays_Title)
+        {
+            await Shell.Current.GoToAsync(nameof(AllBirthdaysPage));
+        }
+        else if (action == MobileLanguages.Resources.Page_Account_Title)
+        {
+            await Shell.Current.GoToAsync(nameof(AccountPage));
+        }
+    }
+
     private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage_1));

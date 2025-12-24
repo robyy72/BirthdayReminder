@@ -3,66 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.AllBirthdaysPage"
+             Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              Title="{x:Static resx:Resources.Page_AllBirthdays_Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnNewBirthdayClicked" />
-    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header with Back Button -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*,Auto">
+            <Button Grid.Column="0"
+                    Style="{StaticResource ButtonBack}"
+                    Clicked="OnBackClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_AllBirthdays_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+            <Button Grid.Column="2"
+                    Text="+"
+                    Style="{StaticResource ButtonGlass}"
+                    Clicked="OnNewBirthdayClicked" />
+        </Grid>
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="20,20,20,0">
-        <!-- Month Filter Picker -->
-        <Picker x:Name="MonthPicker"
-                Style="{StaticResource PickerBase}"
-                HorizontalOptions="Fill"
-                SelectedIndexChanged="OnMonthFilterChanged" />
+        <Grid Grid.Row="1" RowDefinitions="Auto,*" Padding="20,20,20,0">
+            <!-- Month Filter Picker -->
+            <Picker x:Name="MonthPicker"
+                    Style="{StaticResource PickerBase}"
+                    HorizontalOptions="Fill"
+                    SelectedIndexChanged="OnMonthFilterChanged" />
 
-        <!-- Birthday List -->
-        <CollectionView Grid.Row="1"
-                        x:Name="BirthdaysList"
-                        ItemsSource="{Binding FilteredBirthdays}"
-                        SelectionMode="Single"
-                        SelectionChanged="OnBirthdaySelected"
-                        Margin="0,15,0,0">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Style="{StaticResource Card}">
-                        <VerticalStackLayout Spacing="0">
-                            <Border Style="{StaticResource CardHeader}">
-                                <Label Text="{Binding DisplayName}"
-                                       Style="{StaticResource LabelCardHeader}" />
-                            </Border>
-                            <Grid ColumnDefinitions="*,Auto" Padding="15,12">
-                                <Label Grid.Column="0"
-                                       Text="{Binding DateDisplay}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <Label Grid.Column="1"
-                                       Text="{Binding AgeDisplay}"
-                                       Style="{StaticResource LabelDescription}"
-                                       VerticalOptions="Center" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            <CollectionView.EmptyView>
-                <Label Text="No birthdays"
-                       Style="{StaticResource LabelInfo}"
-                       HorizontalOptions="Center"
-                       Padding="20" />
-            </CollectionView.EmptyView>
-        </CollectionView>
-
-        <!-- Back Button -->
-        <Button Grid.Row="2"
-                Text="{x:Static resx:Resources.General_Button_Back}"
-                Style="{StaticResource ButtonPrimary}"
-                Margin="0,15,0,20"
-                Clicked="OnBackClicked" />
+            <!-- Birthday List -->
+            <CollectionView Grid.Row="1"
+                            x:Name="BirthdaysList"
+                            ItemsSource="{Binding FilteredBirthdays}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnBirthdaySelected"
+                            Margin="0,15,0,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardBirthday}">
+                            <VerticalStackLayout Spacing="0">
+                                <Border Style="{StaticResource CardHeader}">
+                                    <Label Text="{Binding DisplayName}"
+                                           Style="{StaticResource LabelCardHeader}" />
+                                </Border>
+                                <Grid ColumnDefinitions="*,Auto" Padding="15,12">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding DateDisplay}"
+                                           Style="{StaticResource LabelInfo}"
+                                           VerticalOptions="Center" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding AgeDisplay}"
+                                           Style="{StaticResource LabelInfo}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="No birthdays"
+                           Style="{StaticResource LabelInfo}"
+                           HorizontalOptions="Center"
+                           Padding="20" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
     </Grid>
 
 </ContentPage>

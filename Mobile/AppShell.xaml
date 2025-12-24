@@ -13,14 +13,6 @@
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
     FlyoutBehavior="Flyout">
 
-    <!-- Custom Hamburger Icon -->
-    <Shell.FlyoutIcon>
-        <FontImageSource Glyph="☰"
-                         FontFamily="Arial"
-                         Size="24"
-                         Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
-    </Shell.FlyoutIcon>
-
     <!-- Flyout Item Template -->
     <Shell.ItemTemplate>
         <DataTemplate>
@@ -76,5 +68,15 @@
         ContentTemplate="{DataTemplate local:AllBirthdaysPage}"
         Route="AllBirthdaysPage"
         FlyoutItemIsVisible="False" />
+
+    <!-- Flyout Footer with Version -->
+    <Shell.FlyoutFooter>
+        <Grid Padding="15,10" HeightRequest="50">
+            <Label x:Name="VersionLabel"
+                   Style="{StaticResource LabelDescription}"
+                   VerticalOptions="End"
+                   HorizontalOptions="Start" />
+        </Grid>
+    </Shell.FlyoutFooter>
 
 </Shell>

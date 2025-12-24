@@ -9,6 +9,10 @@ namespace Mobile;
 /// </summary>
 public class Account
 {
+	#region User
+	public string? Email { get; set; }
+	#endregion
+
 	#region Display
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
 	public string Theme { get; set; } = MobileConstants.DEFAULT_THEME;
