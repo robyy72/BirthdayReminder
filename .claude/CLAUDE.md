@@ -1,29 +1,18 @@
 # CLAUDE.md – BirthdayReminder
 
-## Known Issues (iOS) – Caching/Transfer Problems
+## Known Issues (iOS) – Caching Problems
 
-These are likely old Xamarin cache issues, not code problems. The actual resources are correct.
+**Environment:** Windows 11 + USB cable + iPhone (no Mac until ~March 2025)
 
-**Environment:** Windows 11 + USB cable + iPhone only (no Mac available)
+- [ ] **App Icon**: Home screen still shows ".NET" icon – needs Mac cache clear
+- [ ] **Splash Screen**: Still shows ".NET" branding – needs Mac cache clear
+- [x] **MainPage Hamburger**: Fixed with `ButtonMenu` style (transparent)
+- [x] **Flyout**: No longer a real Flyout – now a panel with lightgray background (both themes), white tiles with shadow
 
-- [ ] **App Icon**: Home screen still shows ".NET" icon
-- [ ] **Splash Screen**: Still shows ".NET" branding
-- [x] **MainPage Hamburger**: Menu button has unwanted background → Fixed: Created `ButtonMenu` style (transparent)
-- [x] **Flyout Tiles**: Text is black but not visible → Fixed: Changed to `{StaticResource Black/White}` in AppThemeBinding
-
-**Investigation results:**
-- Source `appicon.png` ✓ correct (birthday cake icon)
-- Generated icons in `obj/Debug/net9.0-ios/.../Assets.xcassets` ✓ correct
-- `Info.plist` → `XSAppIconAssets` ✓ points to correct path
-- Deleting app from iPhone ✗ didn't help
-
-**Things to try:**
-- Clean solution (`dotnet clean` or VS Build → Clean)
-- Delete `bin/` and `obj/` folders in all projects
-- **On Mac build host:** Delete `~/Library/Caches/Xamarin` and `~/Library/Developer/Xcode/DerivedData`
-- Delete app from device, reinstall fresh
-- Restart VS 2022 AND Mac build host
-- Check `Mobile/Platforms/iOS/Assets.xcassets` for correct icons
+**When Mac is available again:**
+- Delete `~/Library/Caches/Xamarin`
+- Delete `~/Library/Developer/Xcode/DerivedData`
+- Clean & rebuild
 
 ---
 
@@ -88,6 +77,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 ## Build
 
 - **Do NOT run `dotnet build` unless explicitly requested** - it breaks Hot Reload!
+- **Clean command:** `pwsh -File clean.ps1` – deletes all bin/obj folders and runs dotnet clean
 
 ---
 
