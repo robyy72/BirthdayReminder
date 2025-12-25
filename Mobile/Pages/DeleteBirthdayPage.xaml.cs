@@ -4,29 +4,22 @@ using Common;
 
 namespace Mobile;
 
-[QueryProperty(nameof(PersonId), "Id")]
 public partial class DeleteBirthdayPage : ContentPage
 {
 	private int? _personId;
 	private Person? _person;
-
-	public string PersonId
-	{
-		set
-		{
-			if (int.TryParse(value, out var id))
-			{
-				_personId = id;
-			}
-		}
-	}
 
 	public DeleteBirthdayPage()
 	{
 		InitializeComponent();
 	}
 
-	protected override void OnAppearing()
+	public DeleteBirthdayPage(int personId) : this()
+	{
+		_personId = personId;
+	}
+
+	protected override async void OnAppearing()
 	{
 		base.OnAppearing();
 
@@ -36,16 +29,16 @@ public partial class DeleteBirthdayPage : ContentPage
 		}
 		else
 		{
-			Shell.Current.GoToAsync("..");
+			await NavigationService.GoBack();
 		}
 	}
 
-	private void LoadPerson(int id)
+	private async void LoadPerson(int id)
 	{
 		_person = BirthdayService.GetPerson(id);
 		if (_person == null)
 		{
-			Shell.Current.GoToAsync("..");
+			await NavigationService.GoBack();
 			return;
 		}
 
@@ -70,7 +63,7 @@ public partial class DeleteBirthdayPage : ContentPage
 
 	private async void OnCancelClicked(object? sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync("..");
+		await NavigationService.GoBack();
 	}
 
 	private async void OnDeleteClicked(object? sender, EventArgs e)
@@ -83,6 +76,6 @@ public partial class DeleteBirthdayPage : ContentPage
 		NotificationService.CancelForPerson(_person.Id);
 		BirthdayService.Remove(_person.Id);
 		App.NeedsReloadBirthdays = true;
-		await Shell.Current.GoToAsync("../..");
+		await NavigationService.NavigateToRoot();
 	}
 }

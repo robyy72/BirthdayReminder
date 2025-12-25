@@ -6,8 +6,8 @@
 
 - [ ] **App Icon**: Home screen still shows ".NET" icon – needs Mac cache clear
 - [ ] **Splash Screen**: Still shows ".NET" branding – needs Mac cache clear
-- [x] **MainPage Hamburger**: Fixed with `ButtonMenu` style (transparent)
-- [x] **Flyout**: No longer a real Flyout – now a panel with lightgray background (both themes), white tiles with shadow
+- [x] **MainPage Hamburger**: Uses Shell's built-in navbar with Flyout
+- [x] **Flyout**: Restored to real Shell Flyout with version in footer
 
 **When Mac is available again:**
 - Delete `~/Library/Caches/Xamarin`

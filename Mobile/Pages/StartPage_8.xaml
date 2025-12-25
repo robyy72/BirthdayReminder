@@ -54,23 +54,23 @@
                                    FontAttributes="Bold" />
 
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Email" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Email}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="EmailSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="SMS" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Sms}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="SmsSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Lock Screen" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_LockScreen}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="LockScreenSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="WhatsApp" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="Signal" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Signal}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="SignalSwitch" Grid.Column="1" />
                             </Grid>
 

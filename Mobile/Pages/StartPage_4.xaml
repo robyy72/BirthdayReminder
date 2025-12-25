@@ -29,15 +29,15 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Berechtigung benötigt"
+                            <Label Text="{x:Static resx:Resources.Start4_PermissionNeeded}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="20">
-                            <Label Text="Jetzt bitte Berechtigung für dieses Telefon erteilen"
+                            <Label Text="{x:Static resx:Resources.Start4_GrantPermission}"
                                    Style="{StaticResource LabelInfo}" />
 
                             <Button x:Name="ButtonRequestPermission"
-                                    Text="Dialog starten"
+                                    Text="{x:Static resx:Resources.Start4_StartDialog}"
                                     Style="{StaticResource ButtonPrimary}"
                                     Clicked="OnRequestPermissionClicked" />
                         </VerticalStackLayout>
@@ -48,13 +48,13 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Ergebnis"
+                            <Label Text="{x:Static resx:Resources.Start4_Result}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="20">
                             <!-- Initial State -->
                             <VerticalStackLayout x:Name="PanelInitial">
-                                <Label Text="Warte auf Berechtigung..."
+                                <Label Text="{x:Static resx:Resources.Start4_WaitingForPermission}"
                                        Style="{StaticResource LabelInfo}" />
                             </VerticalStackLayout>
 
@@ -65,7 +65,7 @@
                                                    WidthRequest="40"
                                                    HeightRequest="40"
                                                    HorizontalOptions="Center" />
-                                <Label Text="Kontakte werden geladen..."
+                                <Label Text="{x:Static resx:Resources.Start4_LoadingContacts}"
                                        Style="{StaticResource LabelInfo}"
                                        HorizontalOptions="Center" />
                             </VerticalStackLayout>
@@ -78,7 +78,7 @@
 
                             <!-- Denied State -->
                             <VerticalStackLayout x:Name="PanelDenied" IsVisible="False">
-                                <Label Text="Berechtigung nicht erteilt, auch ok"
+                                <Label Text="{x:Static resx:Resources.Start4_PermissionDenied}"
                                        Style="{StaticResource LabelInfo}" />
                             </VerticalStackLayout>
 

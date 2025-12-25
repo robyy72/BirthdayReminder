@@ -492,4 +492,165 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="ReminderCount_Three" xml:space="preserve">
     <value>Drei Erinnerungen</value>
   </data>
+  <data name="Page_BirthdayDetail_Title" xml:space="preserve">
+    <value>Geburtstagsdetails</value>
+  </data>
+  <data name="Page_EditBirthday_Title" xml:space="preserve">
+    <value>Geburtstag bearbeiten</value>
+  </data>
+  <data name="General_Button_Edit" xml:space="preserve">
+    <value>Ändern</value>
+  </data>
+  <data name="CardHeader_NextBirthday" xml:space="preserve">
+    <value>Nächster Geburtstag</value>
+  </data>
+  <data name="Age_Years" xml:space="preserve">
+    <value>{0} Jahre alt</value>
+  </data>
+  <data name="Birthday_Today" xml:space="preserve">
+    <value>Heute!</value>
+  </data>
+  <data name="Birthday_Tomorrow" xml:space="preserve">
+    <value>Morgen</value>
+  </data>
+  <data name="Birthday_InDays" xml:space="preserve">
+    <value>In {0} Tagen</value>
+  </data>
+  <data name="EmptyView_NoUpcoming" xml:space="preserve">
+    <value>Keine anstehenden Geburtstage</value>
+  </data>
+  <data name="EmptyView_NoMissed" xml:space="preserve">
+    <value>Keine vergangenen Geburtstage</value>
+  </data>
+  <data name="EmptyView_NoBirthdays" xml:space="preserve">
+    <value>Keine Geburtstage</value>
+  </data>
+  <data name="Privacy_Header" xml:space="preserve">
+    <value>Datenschutz</value>
+  </data>
+  <data name="Privacy_Text_1" xml:space="preserve">
+    <value>Deine Geburtstagsdaten werden nur lokal auf deinem Gerät gespeichert.</value>
+  </data>
+  <data name="Privacy_Text_2" xml:space="preserve">
+    <value>Wenn du die Synchronisierung mit Kontakten wählst, lesen wir nur Geburtstagsinformationen und Namen. Wir laden niemals deine Daten auf einen Server hoch.</value>
+  </data>
+  <data name="Privacy_Text_3" xml:space="preserve">
+    <value>Alle Daten bleiben auf deinem Gerät und unter deiner Kontrolle.</value>
+  </data>
+  <!-- StartPage_2 -->
+  <data name="Start2_Text_1" xml:space="preserve">
+    <value>Jeder deiner Kontakte hat zusätzlich zum Vor- und Nachnamen noch das Feld für das Geburtsdatum.</value>
+  </data>
+  <data name="Start2_Text_2" xml:space="preserve">
+    <value>Willst Du davon was nutzen oder komplett separat bleiben und alles neu hier eingeben ?</value>
+  </data>
+  <data name="Start2_UseContacts" xml:space="preserve">
+    <value>Kontakte benutzen ?</value>
+  </data>
+  <data name="Start2_NoContacts" xml:space="preserve">
+    <value>Keinerlei Nutzung meiner Kontakte</value>
+  </data>
+  <data name="Start2_AskNextPage" xml:space="preserve">
+    <value>Optionen auf nächster Seite genauer erfragen</value>
+  </data>
+  <!-- StartPage_3 -->
+  <data name="Start3_WhichContacts" xml:space="preserve">
+    <value>Welche Kontakte ?</value>
+  </data>
+  <data name="Start3_OnlyWithBirthday" xml:space="preserve">
+    <value>Nur Kontakte mit Geburtstag</value>
+  </data>
+  <data name="Start3_AllContacts" xml:space="preserve">
+    <value>Alle Kontakte</value>
+  </data>
+  <data name="Start3_HowToSync" xml:space="preserve">
+    <value>Auf welche Art ?</value>
+  </data>
+  <data name="Start3_ReadOnce" xml:space="preserve">
+    <value>Einmalig einlesen</value>
+  </data>
+  <data name="Start3_ReadAlways" xml:space="preserve">
+    <value>Immer einlesen</value>
+  </data>
+  <data name="Start3_ReadAlwaysAskWrite" xml:space="preserve">
+    <value>Immer einlesen und für Schreiben nachfragen</value>
+  </data>
+  <data name="Start3_ReadAlwaysWrite" xml:space="preserve">
+    <value>Immer einlesen und immer Kontakt erstellen oder aktualisieren</value>
+  </data>
+  <!-- StartPage_4 -->
+  <data name="Start4_PermissionNeeded" xml:space="preserve">
+    <value>Berechtigung benötigt</value>
+  </data>
+  <data name="Start4_GrantPermission" xml:space="preserve">
+    <value>Jetzt bitte Berechtigung für dieses Telefon erteilen</value>
+  </data>
+  <data name="Start4_StartDialog" xml:space="preserve">
+    <value>Dialog starten</value>
+  </data>
+  <data name="Start4_Result" xml:space="preserve">
+    <value>Ergebnis</value>
+  </data>
+  <data name="Start4_WaitingForPermission" xml:space="preserve">
+    <value>Warte auf Berechtigung...</value>
+  </data>
+  <data name="Start4_LoadingContacts" xml:space="preserve">
+    <value>Kontakte werden geladen...</value>
+  </data>
+  <data name="Start4_PermissionDenied" xml:space="preserve">
+    <value>Berechtigung nicht erteilt, auch ok</value>
+  </data>
+  <!-- StartPage_5 -->
+  <data name="Start5_ReminderQuestion" xml:space="preserve">
+    <value>Willst du genau an dem Tag erinnert werden oder auch schon drei Tage vorher oder sogar 3x ?</value>
+  </data>
+  <data name="Start5_ManualNote" xml:space="preserve">
+    <value>Für jeden Eintrag kann das auch manuell definiert werden</value>
+  </data>
+  <!-- StartPage_6/7/8 - ReminderMethod_Signal missing -->
+  <data name="ReminderMethod_Signal" xml:space="preserve">
+    <value>Signal</value>
+  </data>
+  <!-- StartPage_9 -->
+  <data name="Start9_CalendarExport" xml:space="preserve">
+    <value>Kalender-Export</value>
+  </data>
+  <data name="Start9_DeviceCalendar" xml:space="preserve">
+    <value>Kalender dieses Telefon</value>
+  </data>
+  <data name="Start9_WriteToCalendar" xml:space="preserve">
+    <value>In Kalender schreiben</value>
+  </data>
+  <data name="Start9_OutlookCalendar" xml:space="preserve">
+    <value>Outlook Kalender</value>
+  </data>
+  <data name="Start9_SingleEmail" xml:space="preserve">
+    <value>Einzeln per Email</value>
+  </data>
+  <data name="Start9_GrantAccess" xml:space="preserve">
+    <value>Zugang gewähren</value>
+  </data>
+  <data name="Start9_GoogleCalendar" xml:space="preserve">
+    <value>Google Kalender</value>
+  </data>
+  <!-- SearchPersonPage -->
+  <data name="SearchPerson_Description" xml:space="preserve">
+    <value>Suche nach einem vorhandenen Eintrag oder erstelle einen neuen.</value>
+  </data>
+  <data name="SearchPerson_SearchHeader" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="SearchPerson_SearchPlaceholder" xml:space="preserve">
+    <value>Name eingeben...</value>
+  </data>
+  <data name="SearchPerson_NoResults" xml:space="preserve">
+    <value>Keine Einträge gefunden</value>
+  </data>
+  <data name="SearchPerson_CreateNew" xml:space="preserve">
+    <value>Auf jeden Fall neu</value>
+  </data>
+  <!-- Found Birthdays -->
+  <data name="FoundBirthdays_Header" xml:space="preserve">
+    <value>Gefundene Geburtstage</value>
+  </data>
 </root>

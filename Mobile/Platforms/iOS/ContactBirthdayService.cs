@@ -12,10 +12,11 @@ namespace Mobile;
 public partial class ContactBirthdayService
 {
 	/// <summary>
-	/// Aim: Gets all contacts with birthdays from iOS contacts.
+	/// Aim: Gets contacts from iOS contacts.
+	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
 	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
-	public partial Task<List<Person>> GetContactsAsync()
+	public partial Task<List<Person>> GetContactsAsync(bool onlyWithBirthday)
 	{
 		var results = new List<Person>();
 
@@ -54,7 +55,8 @@ public partial class ContactBirthdayService
 
 				foreach (var contact in contacts)
 				{
-					if (contact.Birthday == null)
+					// Skip contacts without birthday if filter is enabled
+					if (onlyWithBirthday && contact.Birthday == null)
 						continue;
 
 					string? contactId = contact.Identifier;
@@ -66,19 +68,25 @@ public partial class ContactBirthdayService
 					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 						continue;
 
-					var birthdayComponents = contact.Birthday;
-					int day = (int)birthdayComponents.Day;
-					int month = (int)birthdayComponents.Month;
-					int year = birthdayComponents.Year > 0 ? (int)birthdayComponents.Year : 0;
+					Birthday? birthday = null;
+					if (contact.Birthday != null)
+					{
+						var birthdayComponents = contact.Birthday;
+						int day = (int)birthdayComponents.Day;
+						int month = (int)birthdayComponents.Month;
+						int year = birthdayComponents.Year > 0 ? (int)birthdayComponents.Year : 0;
 
-					if (day <= 0 || day > 31 || month <= 0 || month > 12)
-						continue;
+						if (day > 0 && day <= 31 && month > 0 && month <= 12)
+						{
+							birthday = new Birthday { Day = day, Month = month, Year = year };
+						}
+					}
 
 					var person = new Person
 					{
 						FirstName = firstName,
 						LastName = lastName,
-						Birthday = new Birthday { Day = day, Month = month, Year = year },
+						Birthday = birthday,
 						ContactId = contactId,
 						Source = PersonSource.Contacts
 					};

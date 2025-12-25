@@ -3,13 +3,13 @@
 
 namespace Mobile;
 
-[QueryProperty(nameof(Topic), "Topic")]
 public partial class HelpPage : ContentPage
 {
 	private HelpTopic _topic;
 
 	public string Topic
 	{
+		get => _topic.ToString();
 		set
 		{
 			if (Enum.TryParse<HelpTopic>(value, out var topic))
@@ -62,7 +62,7 @@ public partial class HelpPage : ContentPage
 		}
 		else
 		{
-			await Shell.Current.GoToAsync("..");
+			await NavigationService.GoBack();
 		}
 	}
 }

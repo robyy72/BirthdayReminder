@@ -2,11 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.AccountPage"
+             NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.Page_Settings_Title}">
 
-    <Grid RowDefinitions="*,Auto">
-        <ScrollView Grid.Row="0">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_Settings_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Display Section -->
@@ -150,7 +158,7 @@
         </ScrollView>
 
         <!-- Bottom Buttons -->
-        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="20,15,20,20">
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="20,15,20,20">
             <Button Grid.Column="0"
                     Text="{x:Static resx:Resources.General_Button_Back}"
                     Style="{StaticResource ButtonSecondary}"

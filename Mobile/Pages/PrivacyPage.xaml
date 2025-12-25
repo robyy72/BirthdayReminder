@@ -2,26 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.PrivacyPage"
+             NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.Page_Privacy_Title}">
 
-    <Grid RowDefinitions="*,Auto">
-        <ScrollView Grid.Row="0">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_Privacy_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="15">
 
-                <Label Text="Privacy Policy" FontSize="24" FontAttributes="Bold" />
+                <Label Text="{x:Static resx:Resources.Privacy_Header}" FontSize="24" FontAttributes="Bold" />
 
-                <Label Text="Your birthday data is stored locally on your device only." />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_1}" />
 
-                <Label Text="If you choose to sync with contacts, we only read birthday information and names. We never upload your data to any server." />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_2}" />
 
-                <Label Text="All data remains on your device and under your control." />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_3}" />
 
             </VerticalStackLayout>
         </ScrollView>
 
         <!-- Back Button -->
-        <Button Grid.Row="1"
+        <Button Grid.Row="2"
                 Text="{x:Static resx:Resources.General_Button_Back}"
                 Style="{StaticResource ButtonPrimary}"
                 Margin="20,15,20,20"

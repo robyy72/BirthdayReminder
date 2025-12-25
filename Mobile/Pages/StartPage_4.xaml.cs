@@ -43,7 +43,8 @@ public partial class StartPage_4 : ContentPage
 		try
 		{
 			var service = new ContactBirthdayService();
-			var contacts = await service.GetContactsAsync();
+			bool onlyWithBirthday = App.Account.ContactsReadMode == ContactsReadMode.ReadNamesWithBirthday;
+			var contacts = await service.GetContactsAsync(onlyWithBirthday);
 
 			if (_cts.Token.IsCancellationRequested)
 				return;

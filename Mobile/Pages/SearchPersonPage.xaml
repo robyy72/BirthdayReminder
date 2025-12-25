@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.SearchPersonPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_NewBirthday_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <Label Text="{x:Static resx:Resources.SearchPerson_Description}"
+                       Style="{StaticResource LabelInfo}" />
+
+                <!-- Search Card -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.SearchPerson_SearchHeader}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Entry x:Name="SearchEntry"
+                                   Placeholder="{x:Static resx:Resources.SearchPerson_SearchPlaceholder}"
+                                   TextChanged="OnSearchTextChanged" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Create New Button (before results) -->
+                <Button Text="{x:Static resx:Resources.SearchPerson_CreateNew}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnCreateNewClicked" />
+
+                <!-- Search Results -->
+                <CollectionView x:Name="ResultsList"
+                                SelectionMode="Single"
+                                SelectionChanged="OnPersonSelected"
+                                IsVisible="False">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardBirthday}">
+                                <VerticalStackLayout Spacing="0">
+                                    <Border Style="{StaticResource CardHeader}">
+                                        <Label Text="{Binding DisplayName}"
+                                               Style="{StaticResource LabelCardHeader}" />
+                                    </Border>
+                                    <Grid Padding="15,12">
+                                        <Label Text="{Binding DateDisplay}"
+                                               Style="{StaticResource LabelInfo}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label Text="{x:Static resx:Resources.SearchPerson_NoResults}"
+                               Style="{StaticResource LabelInfo}"
+                               HorizontalOptions="Center"
+                               Padding="20" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

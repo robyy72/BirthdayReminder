@@ -29,13 +29,39 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		Page page = new StartPage_1();
+		Page page;
 
 		if (AccountService.IsInitialized())
-			page = new AppShell();
+		{
+			page = CreateMainNavigationPage();
+		}
+		else
+		{
+			page = new StartPage_1();
+		}
 
 		Window window = new Window(page);
 		return window;
+	}
+
+	/// <summary>
+	/// Aim: Erstellt die Haupt-NavigationPage und initialisiert den NavigationService
+	/// Return: NavigationPage mit MainPage als Root
+	/// </summary>
+	public static NavigationPage CreateMainNavigationPage()
+	{
+		var mainPage = new MainPage();
+		var navigationPage = new NavigationPage(mainPage)
+		{
+			BarBackgroundColor = Application.Current?.RequestedTheme == AppTheme.Dark
+				? Color.FromArgb("#1C1C1E")  // Gray900
+				: Color.FromArgb("#0066CC"), // Primary
+			BarTextColor = Colors.White
+		};
+
+		NavigationService.Initialize(navigationPage.Navigation);
+
+		return navigationPage;
 	}
 
 	private void ApplyTheme()

@@ -47,5 +47,18 @@
 	<string>To import birthdays from your contacts</string>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>To remind you of upcoming birthdays</string>
+
+	<!-- Deep Link URL Scheme -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>online.birthdayreminder.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>birthdayreminder</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

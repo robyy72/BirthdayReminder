@@ -29,14 +29,14 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Welche Kontakte ?"
+                            <Label Text="{x:Static resx:Resources.Start3_WhichContacts}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="ContactsReadModeGroup">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Nur Kontakte mit Geburtstag"
+                                       Text="{x:Static resx:Resources.Start3_OnlyWithBirthday}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadWithBirthday"
@@ -46,7 +46,7 @@
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Alle Kontakte"
+                                       Text="{x:Static resx:Resources.Start3_AllContacts}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAll"
@@ -63,14 +63,14 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="Auf welche Art ?"
+                            <Label Text="{x:Static resx:Resources.Start3_HowToSync}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10"
                                              RadioButtonGroup.GroupName="ContactsReadWriteModeGroup">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Einmalig einlesen"
+                                       Text="{x:Static resx:Resources.Start3_ReadOnce}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadOnlyOnce"
@@ -80,7 +80,7 @@
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Immer einlesen"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlways}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlways"
@@ -89,7 +89,7 @@
                             </Grid>
                             <Grid x:Name="GridOption3" ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Immer einlesen und für Schreiben nachfragen"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlwaysAskWrite}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlwaysAndAskWriteBack"
@@ -98,7 +98,7 @@
                             </Grid>
                             <Grid x:Name="GridOption4" ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Immer einlesen und immer Kontakt erstellen oder aktualisieren"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlwaysWrite}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlwaysAndWriteBack"

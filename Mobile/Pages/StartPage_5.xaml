@@ -25,7 +25,7 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <Label Text="Willst du genau an dem Tag erinnert werden oder auch schon drei Tage vorher oder sogar 3x ?"
+                <Label Text="{x:Static resx:Resources.Start5_ReminderQuestion}"
                        Style="{StaticResource LabelInfo}" />
 
                 <!-- Reminder Count Section -->
@@ -78,7 +78,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Label Text="Für jeden Eintrag kann das auch manuell definiert werden"
+                <Label Text="{x:Static resx:Resources.Start5_ManualNote}"
                        Style="{StaticResource LabelInfo}" />
 
                 <!-- Bottom Buttons -->

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.FlyoutMenu"
+             IsVisible="False">
+
+    <Grid>
+        <!-- Semi-transparent overlay (tap to close) -->
+        <BoxView x:Name="Overlay"
+                 Color="#80000000"
+                 Opacity="0">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <!-- Flyout Panel -->
+        <Frame x:Name="FlyoutPanel"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+               CornerRadius="0"
+               Padding="0"
+               HorizontalOptions="Start"
+               WidthRequest="280"
+               HasShadow="True"
+               TranslationX="-280">
+
+            <Grid RowDefinitions="60,*,Auto">
+
+                <!-- Header -->
+                <Grid Grid.Row="0"
+                      BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
+                      Padding="15,0">
+                    <Label Text="Wunschseite wählen"
+                           Style="{StaticResource LabelHeaderBar}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+                </Grid>
+
+                <!-- Menu Items -->
+                <VerticalStackLayout Grid.Row="1"
+                                     Padding="10,15"
+                                     Spacing="5">
+
+                    <!-- Übersicht -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnOverviewTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_Overview}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Einstellungen -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_Settings}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Datenschutz -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPrivacyTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_Privacy}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                </VerticalStackLayout>
+
+                <!-- Footer with Version -->
+                <Grid Grid.Row="2"
+                      Padding="15,10"
+                      HeightRequest="50">
+                    <Label x:Name="VersionLabel"
+                           Style="{StaticResource LabelDescription}"
+                           VerticalOptions="End"
+                           HorizontalOptions="Start" />
+                </Grid>
+
+            </Grid>
+        </Frame>
+    </Grid>
+
+</ContentView>

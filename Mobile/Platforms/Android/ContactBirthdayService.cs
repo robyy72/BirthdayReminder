@@ -12,10 +12,11 @@ namespace Mobile;
 public partial class ContactBirthdayService
 {
 	/// <summary>
-	/// Aim: Gets all contacts with birthdays from Android contacts.
+	/// Aim: Gets contacts from Android contacts.
+	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
 	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
 	/// </summary>
-	public partial Task<List<Person>> GetContactsAsync()
+	public partial Task<List<Person>> GetContactsAsync(bool onlyWithBirthday)
 	{
 		var results = new List<Person>();
 
@@ -30,60 +31,69 @@ public partial class ContactBirthdayService
 			if (uri == null)
 				return Task.FromResult(results);
 
-			// First, get all contacts with birthdays
-			string[] birthdayProjection =
-			[
-				ContactsContract.Data.InterfaceConsts.ContactId,
-				ContactsContract.CommonDataKinds.Event.StartDate
-			];
+			// Get all contacts with birthdays
+			var contactBirthdays = GetContactBirthdays(contentResolver, uri);
 
-			string birthdaySelection = $"{ContactsContract.Data.InterfaceConsts.Mimetype} = ? AND {ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type} = ?";
-			string[] birthdaySelectionArgs = [ContactsContract.CommonDataKinds.Event.ContentItemType, ((int)EventDataKind.Birthday).ToString()];
-
-			var contactBirthdays = new Dictionary<string, string>();
-
-			using (var cursor = contentResolver.Query(uri, birthdayProjection, birthdaySelection, birthdaySelectionArgs, null))
+			if (onlyWithBirthday)
 			{
-				if (cursor != null)
+				// Only return contacts that have birthdays
+				foreach (var kvp in contactBirthdays)
 				{
-					int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
-					int startDateIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.Event.StartDate);
+					string contactId = kvp.Key;
+					string dateString = kvp.Value;
 
-					while (cursor.MoveToNext())
+					if (!TryParseBirthday(dateString, out Birthday? birthday) || birthday == null)
+						continue;
+
+					var (firstName, lastName) = GetContactName(contentResolver, contactId);
+
+					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+						continue;
+
+					var person = new Person
 					{
-						string? contactId = cursor.GetString(contactIdIndex);
-						string? dateString = cursor.GetString(startDateIndex);
+						FirstName = firstName,
+						LastName = lastName,
+						Birthday = birthday,
+						ContactId = contactId,
+						Source = PersonSource.Contacts
+					};
 
-						if (!string.IsNullOrWhiteSpace(contactId) && !string.IsNullOrWhiteSpace(dateString))
-							contactBirthdays[contactId] = dateString;
-					}
+					results.Add(person);
 				}
 			}
-
-			// Then, get names for those contacts
-			foreach (var kvp in contactBirthdays)
+			else
 			{
-				string contactId = kvp.Key;
-				string dateString = kvp.Value;
+				// Return ALL contacts, with or without birthday
+				var allContactIds = GetAllContactIds(contentResolver);
 
-				if (!TryParseBirthday(dateString, out Birthday? birthday) || birthday == null)
-					continue;
-
-				var (firstName, lastName) = GetContactName(contentResolver, contactId);
-
-				if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
-					continue;
-
-				var person = new Person
+				foreach (string contactId in allContactIds)
 				{
-					FirstName = firstName,
-					LastName = lastName,
-					Birthday = birthday,
-					ContactId = contactId,
-					Source = PersonSource.Contacts
-				};
+					var (firstName, lastName) = GetContactName(contentResolver, contactId);
 
-				results.Add(person);
+					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+						continue;
+
+					Birthday? birthday = null;
+					if (contactBirthdays.TryGetValue(contactId, out string? dateString))
+					{
+						if (TryParseBirthday(dateString, out Birthday? parsed))
+						{
+							birthday = parsed;
+						}
+					}
+
+					var person = new Person
+					{
+						FirstName = firstName,
+						LastName = lastName,
+						Birthday = birthday,
+						ContactId = contactId,
+						Source = PersonSource.Contacts
+					};
+
+					results.Add(person);
+				}
 			}
 		}
 		catch (Exception ex)
@@ -92,6 +102,76 @@ public partial class ContactBirthdayService
 		}
 
 		return Task.FromResult(results);
+	}
+
+	/// <summary>
+	/// Aim: Gets all contact IDs from the device.
+	/// Params: contentResolver - Android content resolver
+	/// Return: HashSet of contact IDs
+	/// </summary>
+	private static HashSet<string> GetAllContactIds(ContentResolver contentResolver)
+	{
+		var contactIds = new HashSet<string>();
+
+		var contactsUri = ContactsContract.Contacts.ContentUri;
+		if (contactsUri == null)
+			return contactIds;
+
+		string[] projection = [ContactsContract.Contacts.InterfaceConsts.Id];
+
+		using var cursor = contentResolver.Query(contactsUri, projection, null, null, null);
+		if (cursor == null)
+			return contactIds;
+
+		int idIndex = cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.Id);
+
+		while (cursor.MoveToNext())
+		{
+			string? id = cursor.GetString(idIndex);
+			if (!string.IsNullOrWhiteSpace(id))
+			{
+				contactIds.Add(id);
+			}
+		}
+
+		return contactIds;
+	}
+
+	/// <summary>
+	/// Aim: Gets all birthdays from contacts.
+	/// Params: contentResolver - Android content resolver, uri - Data content URI
+	/// Return: Dictionary mapping contact ID to birthday string
+	/// </summary>
+	private static Dictionary<string, string> GetContactBirthdays(ContentResolver contentResolver, Android.Net.Uri uri)
+	{
+		var contactBirthdays = new Dictionary<string, string>();
+
+		string[] birthdayProjection =
+		[
+			ContactsContract.Data.InterfaceConsts.ContactId,
+			ContactsContract.CommonDataKinds.Event.StartDate
+		];
+
+		string birthdaySelection = $"{ContactsContract.Data.InterfaceConsts.Mimetype} = ? AND {ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type} = ?";
+		string[] birthdaySelectionArgs = [ContactsContract.CommonDataKinds.Event.ContentItemType, ((int)EventDataKind.Birthday).ToString()];
+
+		using var cursor = contentResolver.Query(uri, birthdayProjection, birthdaySelection, birthdaySelectionArgs, null);
+		if (cursor == null)
+			return contactBirthdays;
+
+		int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
+		int startDateIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.Event.StartDate);
+
+		while (cursor.MoveToNext())
+		{
+			string? contactId = cursor.GetString(contactIdIndex);
+			string? dateString = cursor.GetString(startDateIndex);
+
+			if (!string.IsNullOrWhiteSpace(contactId) && !string.IsNullOrWhiteSpace(dateString))
+				contactBirthdays[contactId] = dateString;
+		}
+
+		return contactBirthdays;
 	}
 
 	/// <summary>

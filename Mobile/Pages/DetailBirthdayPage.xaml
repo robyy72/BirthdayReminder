@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.DetailBirthdayPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_BirthdayDetail_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_BirthdayDetail_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Name Card -->
+                <Border Style="{StaticResource Card}">
+                    <FlyoutBase.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="{x:Static resx:Resources.General_Button_Edit}"
+                                            Clicked="OnEditMenuClicked" />
+                            <MenuFlyoutItem Text="{x:Static resx:Resources.General_Button_Delete}"
+                                            Clicked="OnDeleteMenuClicked" />
+                        </MenuFlyout>
+                    </FlyoutBase.ContextFlyout>
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_Name}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="5">
+                            <Label x:Name="NameDisplayLabel"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontSize="20"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Birthday Card -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_Birthday}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="5">
+                            <Label x:Name="BirthdayDisplayLabel"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontSize="20"
+                                   HorizontalOptions="Center" />
+                            <Label x:Name="AgeDisplayLabel"
+                                   Style="{StaticResource LabelDescription}"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Days Until Birthday -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_NextBirthday}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="5">
+                            <Label x:Name="DaysUntilLabel"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontSize="20"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Bottom Buttons -->
+                <Button Text="{x:Static resx:Resources.General_Button_Edit}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnEditClicked"
+                        Margin="0,20,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

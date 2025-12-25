@@ -25,7 +25,7 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <Label Text="Kalender-Export"
+                <Label Text="{x:Static resx:Resources.Start9_CalendarExport}"
                        Style="{StaticResource LabelHeader}" />
 
                 <!-- Accordion 1: Device Calendar -->
@@ -34,7 +34,7 @@
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Kalender dieses Telefon"
+                                       Text="{x:Static resx:Resources.Start9_DeviceCalendar}"
                                        Style="{StaticResource LabelCardHeader}" />
                                 <Label x:Name="Accordion1Arrow"
                                        Grid.Column="1"
@@ -49,7 +49,7 @@
                             <!-- Enable device calendar toggle -->
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="In Kalender schreiben"
+                                       Text="{x:Static resx:Resources.Start9_WriteToCalendar}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="DeviceCalendarSwitch"
@@ -75,7 +75,7 @@
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Outlook Kalender"
+                                       Text="{x:Static resx:Resources.Start9_OutlookCalendar}"
                                        Style="{StaticResource LabelCardHeader}" />
                                 <Label x:Name="Accordion2Arrow"
                                        Grid.Column="1"
@@ -89,7 +89,7 @@
                         <VerticalStackLayout x:Name="Accordion2Content" Padding="20" Spacing="15" IsVisible="False">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Einzeln per Email"
+                                       Text="{x:Static resx:Resources.Start9_SingleEmail}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="OutlookSingleEmailSwitch"
@@ -98,7 +98,7 @@
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Zugang gewähren"
+                                       Text="{x:Static resx:Resources.Start9_GrantAccess}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="OutlookGrantAccessSwitch"
@@ -115,7 +115,7 @@
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Google Kalender"
+                                       Text="{x:Static resx:Resources.Start9_GoogleCalendar}"
                                        Style="{StaticResource LabelCardHeader}" />
                                 <Label x:Name="Accordion3Arrow"
                                        Grid.Column="1"
@@ -129,7 +129,7 @@
                         <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="15" IsVisible="False">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Einzeln per Email"
+                                       Text="{x:Static resx:Resources.Start9_SingleEmail}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="GoogleSingleEmailSwitch"
@@ -138,7 +138,7 @@
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="Zugang gewähren"
+                                       Text="{x:Static resx:Resources.Start9_GrantAccess}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="GoogleGrantAccessSwitch"

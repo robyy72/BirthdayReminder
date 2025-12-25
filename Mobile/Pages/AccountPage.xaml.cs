@@ -234,7 +234,7 @@ public partial class AccountPage : ContentPage
 	#region Back
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync("..");
+		await NavigationService.GoBack();
 	}
 	#endregion
 }

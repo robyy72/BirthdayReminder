@@ -75,15 +75,12 @@ public partial class MainPage : ContentPage
 		try
 		{
 			ContactBirthdayService service = new();
-			List<Person> persons = await service.GetContactsAsync();
+			bool onlyWithBirthday = App.Account.ContactsReadMode == ContactsReadMode.ReadNamesWithBirthday;
+			List<Person> persons = await service.GetContactsAsync(onlyWithBirthday);
 
 			foreach (Person person in persons)
 			{
-				if (person.Birthday == null)
-					continue;
-
-				DateTime birthdayDate = BirthdayHelper.ConvertFromBirthdayToDateTime(person.Birthday);
-				ImportContactBirthday(person.FirstName, person.LastName, birthdayDate, person.ContactId);
+				ImportContact(person);
 			}
 		}
 		catch (Exception ex)
@@ -93,93 +90,97 @@ public partial class MainPage : ContentPage
 	}
 
 	/// <summary>
-	/// Aim: Imports a contact with birthday into the persons list and saves to prefs
-	/// Params: firstName - Contact first name, lastName - Contact last name, birthday - Contact birthday, contactId - Platform contact ID
+	/// Aim: Imports a contact into the persons list and saves to prefs
+	/// Params: person - The contact to import (may or may not have a birthday)
 	/// Return: True if added, false if duplicate
 	/// </summary>
-	public bool ImportContactBirthday(string firstName, string lastName, DateTime birthday, string? contactId)
+	private bool ImportContact(Person person)
 	{
-		if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+		if (string.IsNullOrWhiteSpace(person.FirstName) && string.IsNullOrWhiteSpace(person.LastName))
 			return false;
 
-		if (contactId != null)
+		// Check if contact already exists by ContactId
+		if (!string.IsNullOrEmpty(person.ContactId))
 		{
-			var existingByContactId = _persons.FirstOrDefault(p => p.ContactId == contactId);
+			var existingByContactId = _persons.FirstOrDefault(p => p.ContactId == person.ContactId);
 			if (existingByContactId != null)
+				return false;
+
+			// Also check in App.Persons
+			var existingInApp = App.Persons.FirstOrDefault(p => p.ContactId == person.ContactId);
+			if (existingInApp != null)
 				return false;
 		}
 
-		var sameBirthday = _persons.FirstOrDefault(p =>
-			p.Birthday != null &&
-			p.Birthday.Day == birthday.Day &&
-			p.Birthday.Month == birthday.Month &&
-			p.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
-			p.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
-
-		if (sameBirthday != null)
+		// Check for duplicate by name and birthday (if birthday exists)
+		if (person.Birthday != null)
 		{
-			_foundContactsWithSameBirthday = true;
-			return false;
+			var sameBirthday = _persons.FirstOrDefault(p =>
+				p.Birthday != null &&
+				p.Birthday.Day == person.Birthday.Day &&
+				p.Birthday.Month == person.Birthday.Month &&
+				p.FirstName.Equals(person.FirstName, StringComparison.OrdinalIgnoreCase) &&
+				p.LastName.Equals(person.LastName, StringComparison.OrdinalIgnoreCase));
+
+			if (sameBirthday != null)
+			{
+				_foundContactsWithSameBirthday = true;
+				return false;
+			}
 		}
 
-		int nextId = _persons.Count > 0 ? _persons.Max(p => p.Id) + 1 : 1;
-		var person = new Person
-		{
-			Id = nextId,
-			FirstName = firstName,
-			LastName = lastName,
-			Birthday = new Birthday
-			{
-				Day = birthday.Day,
-				Month = birthday.Month,
-				Year = birthday.Year
-			},
-			ContactId = contactId,
-			Source = PersonSource.Contacts
-		};
+		int nextId = Math.Max(
+			_persons.Count > 0 ? _persons.Max(p => p.Id) + 1 : 1,
+			App.Persons.Count > 0 ? App.Persons.Max(p => p.Id) + 1 : 1
+		);
+
+		person.Id = nextId;
+		person.Source = PersonSource.Contacts;
 
 		_persons.Add(person);
-		BirthdayService.Add(person);
+		App.Persons.Add(person);
+
+		// Only save to BirthdayService if contact has a birthday
+		if (person.Birthday != null)
+		{
+			BirthdayService.Add(person);
+		}
+
 		return true;
 	}
 
     #endregion
 
     #region Form Update Methods
-    private async void OnMenuClicked(object? sender, EventArgs e)
+    private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
-        string action = await DisplayActionSheet(
-            null,
-            MobileLanguages.Resources.General_Button_Cancel,
-            null,
-            MobileLanguages.Resources.Page_Main_NewBirthday,
-            MobileLanguages.Resources.Page_AllBirthdays_Title,
-            MobileLanguages.Resources.Page_Settings_Title);
-
-        if (action == MobileLanguages.Resources.Page_Main_NewBirthday)
+        // If contacts are not used (None), go directly to CreateBirthday
+        // Otherwise show search page to avoid duplicates
+        if (App.Account.ContactsReadMode == ContactsReadMode.None)
         {
-            await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage_1));
+            await NavigationService.NavigateTo<CreateBirthdayPage>();
         }
-        else if (action == MobileLanguages.Resources.Page_AllBirthdays_Title)
+        else
         {
-            await Shell.Current.GoToAsync(nameof(AllBirthdaysPage));
-        }
-        else if (action == MobileLanguages.Resources.Page_Settings_Title)
-        {
-            await Shell.Current.GoToAsync(nameof(AccountPage));
+            await NavigationService.NavigateTo<SearchPersonPage>();
         }
     }
 
-    private async void OnNewBirthdayClicked(object? sender, EventArgs e)
+    private async void OnAllBirthdaysClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(CreateEditBirthdayPage_1));
+        await NavigationService.NavigateTo<AllBirthdaysPage>();
+    }
+
+    private async void OnSettingsClicked(object? sender, EventArgs e)
+    {
+        await NavigationService.NavigateTo<AccountPage>();
     }
 
     private async void OnBirthdaySelected(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
         {
-            await Shell.Current.GoToAsync($"{nameof(CreateEditBirthdayPage_1)}?Id={vm.Id}");
+            await NavigationService.NavigateTo<DetailBirthdayPage>(vm.Id);
         }
 
         if (sender is CollectionView cv)
