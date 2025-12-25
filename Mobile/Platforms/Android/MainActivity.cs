@@ -27,7 +27,7 @@ public class MainActivity : MauiAppCompatActivity
 		if (intent?.Data != null)
 		{
 			string? url = intent.Data.ToString();
-			_ = DeepLinkRouter.HandleUrl(url);
+			_ = DeepLinkService.HandleUrl(url);
 		}
 	}
 
@@ -41,7 +41,7 @@ public class MainActivity : MauiAppCompatActivity
 		if (Intent?.Data != null)
 		{
 			string? url = Intent.Data.ToString();
-			_ = DeepLinkRouter.HandleUrl(url);
+			_ = DeepLinkService.HandleUrl(url);
 		}
 	}
 }

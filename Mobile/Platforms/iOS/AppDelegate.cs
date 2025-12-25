@@ -17,7 +17,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 	{
 		if (url != null)
 		{
-			_ = DeepLinkRouter.HandleUrl(url.ToString());
+			_ = DeepLinkService.HandleUrl(url.ToString());
 		}
 
 		return base.OpenUrl(application, url, options);

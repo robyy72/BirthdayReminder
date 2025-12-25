@@ -8,7 +8,7 @@ namespace Mobile;
 /// <summary>
 /// Aim: Verarbeitet Deep Links und navigiert zur entsprechenden Seite
 /// </summary>
-public static class DeepLinkRouter
+public static class DeepLinkService
 {
     #region Constants
     public const string Scheme = "birthdayreminder";
@@ -59,7 +59,7 @@ public static class DeepLinkRouter
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"DeepLinkRouter error: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"DeepLinkService error: {ex.Message}");
             return false;
         }
     }
