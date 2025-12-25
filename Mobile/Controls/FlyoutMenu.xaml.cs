@@ -61,7 +61,7 @@ public partial class FlyoutMenu : ContentView
         await Close();
     }
 
-    private async void OnOverlayTapped(object? sender, TappedEventArgs e)
+    private void OnOverlayTapped(object? sender, TappedEventArgs e)
     {
         NavigationService.CloseFlyout();
     }

@@ -16,14 +16,14 @@
         </BoxView>
 
         <!-- Flyout Panel -->
-        <Frame x:Name="FlyoutPanel"
-               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
-               CornerRadius="0"
-               Padding="0"
-               HorizontalOptions="Start"
-               WidthRequest="280"
-               HasShadow="True"
-               TranslationX="-280">
+        <Border x:Name="FlyoutPanel"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+                StrokeThickness="0"
+                Padding="0"
+                HorizontalOptions="Start"
+                WidthRequest="280"
+                Shadow="{Shadow Brush=Black, Offset='5,5', Radius=10, Opacity=0.3}"
+                TranslationX="-280">
 
             <Grid RowDefinitions="60,*,Auto">
 
@@ -91,7 +91,7 @@
                 </Grid>
 
             </Grid>
-        </Frame>
+        </Border>
     </Grid>
 
 </ContentView>

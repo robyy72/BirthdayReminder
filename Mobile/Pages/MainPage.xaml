@@ -4,6 +4,7 @@
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.MainPage"
+             x:DataType="controls:MainPage"
              NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
@@ -39,7 +40,7 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="controls:PersonViewModel">
                             <Border Style="{StaticResource CardBirthday}">
                                 <VerticalStackLayout Spacing="0">
                                     <Border Style="{StaticResource CardHeader}">
@@ -82,7 +83,7 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="controls:PersonViewModel">
                             <Border Style="{StaticResource CardBirthday}">
                                 <VerticalStackLayout Spacing="0">
                                     <Border Style="{StaticResource CardHeader}">

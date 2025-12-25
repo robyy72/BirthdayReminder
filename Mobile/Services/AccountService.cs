@@ -11,7 +11,7 @@ public static class AccountService
 	/// <returns>The account object.</returns>
 	public static void Load()
 	{
-		Account account = PrefsHelper.GetValue<Account>(MobileConstants.PREFS_ACCOUNT);
+		Account? account = PrefsHelper.GetValue<Account>(MobileConstants.PREFS_ACCOUNT);
 		if (account != null)
 		{
 			App.Account = account;

@@ -57,6 +57,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - **Commit only, don't push too often** - user will request push when needed
 - **Do NOT suggest "push" after commits** - user will push when ready
 - **IMPORTANT:** On every commit, increment `ApplicationVersion` in `Mobile/Mobile.csproj` by 1
+- **IMPORTANT:** Run `dotnet build` before committing to ensure the build succeeds
 
 ---
 
@@ -71,6 +72,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 ## XAML / UI Rules
 
 - **All pages**: Always put buttons inside the ScrollView, not in a separate Grid row outside
+- **Do NOT use Frame** - it's obsolete in .NET 9. Use Border instead
 
 ---
 

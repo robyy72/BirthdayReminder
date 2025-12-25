@@ -49,7 +49,7 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="controls:PersonViewModel">
                             <Border Style="{StaticResource CardBirthday}">
                                 <VerticalStackLayout Spacing="0">
                                     <Border Style="{StaticResource CardHeader}">

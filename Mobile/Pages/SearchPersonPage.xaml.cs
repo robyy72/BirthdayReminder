@@ -59,7 +59,7 @@ public partial class SearchPersonPage : ContentPage
 	private async void OnCreateNewClicked(object? sender, EventArgs e)
 	{
 		// Navigate to CreateBirthday with search text as prefill
-		string? searchText = SearchEntry.Text?.Trim();
+		string searchText = SearchEntry.Text?.Trim() ?? string.Empty;
 		await NavigationService.NavigateTo<CreateBirthdayPage>(searchText);
 	}
 }
