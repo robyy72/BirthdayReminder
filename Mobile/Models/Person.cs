@@ -14,6 +14,12 @@ public class Person
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public Birthday? Birthday { get; set; }
+
+	/// <summary>
+	/// Aim: Gets the formatted display name based on current settings.
+	/// Return: Display name in format "FirstName LastName" or "LastName, FirstName"
+	/// </summary>
+	public string DisplayName => PersonHelper.GetDisplayName(FirstName, LastName, App.Account.PersonNameDirection);
     #endregion
 
     #region Reminders

@@ -14,7 +14,11 @@ public partial class CreateBirthdayPage : ContentPage
     #endregion
 
     #region Constructor
-    public CreateBirthdayPage(string? prefillName = null)
+    public CreateBirthdayPage() : this(null)
+    {
+    }
+
+    public CreateBirthdayPage(string? prefillName)
     {
         _prefillName = prefillName;
         InitializeComponent();

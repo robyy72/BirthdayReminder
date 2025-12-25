@@ -242,7 +242,7 @@ public partial class StartPage_9 : ContentPage
 
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new AppShell();
+			Application.Current.Windows[0].Page = App.CreateMainNavigationPage();
 		}
 	}
 	#endregion

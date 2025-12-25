@@ -54,6 +54,26 @@ public static class BirthdayHelper
 	}
 
 	/// <summary>
+	/// Aim: Calculates the current age based on birthday.
+	/// Params: birthday - The birthday
+	/// Return: Current age in years
+	/// </summary>
+	public static int CalculateAge(Birthday birthday)
+	{
+		var today = DateTime.Today;
+		int age = today.Year - birthday.Year;
+
+		var birthdayThisYear = new DateTime(today.Year, birthday.Month, birthday.Day);
+		if (birthdayThisYear > today)
+		{
+			age--;
+		}
+
+		var result = age;
+		return result;
+	}
+
+	/// <summary>
 	/// Aim: Calculates the age a person will turn on their next birthday.
 	/// Params: birthday - The birthday
 	/// Return: Age they will turn (or turned if birthday already passed this year)
