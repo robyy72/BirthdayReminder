@@ -689,4 +689,79 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Tab_Reminders" xml:space="preserve">
     <value>Reminders</value>
   </data>
+  <!-- Reminder Methods - Local -->
+  <data name="ReminderMethod_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="ReminderMethod_Alarm" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <!-- Reminder Message Templates - Today -->
+  <data name="ReminderTemplate_Email_Today" xml:space="preserve">
+    <value>Hello,
+
+I would like to remind you that {Name} has a birthday today ({Date}). {AgeText}
+
+{Goodbye}
+
+{TeamSignature}</value>
+  </data>
+  <data name="ReminderTemplate_Sms_Today" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday today ({Date})! {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_WhatsApp_Today" xml:space="preserve">
+    <value>Hey! {Name} has a birthday today ({Date})! 🎂 {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_Signal_Today" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday today ({Date})! {AgeText}</value>
+  </data>
+  <!-- Reminder Message Templates - Tomorrow -->
+  <data name="ReminderTemplate_Email_Tomorrow" xml:space="preserve">
+    <value>Hello,
+
+I would like to remind you that {Name} has a birthday tomorrow ({Date}). {AgeText}
+
+{Goodbye}
+
+{TeamSignature}</value>
+  </data>
+  <data name="ReminderTemplate_Sms_Tomorrow" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday tomorrow ({Date})! {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_WhatsApp_Tomorrow" xml:space="preserve">
+    <value>Hey! {Name} has a birthday tomorrow ({Date})! 🎂 {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_Signal_Tomorrow" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday tomorrow ({Date})! {AgeText}</value>
+  </data>
+  <!-- Reminder Message Templates - In X Days -->
+  <data name="ReminderTemplate_Email_InDays" xml:space="preserve">
+    <value>Hello,
+
+I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {AgeText}
+
+{Goodbye}
+
+{TeamSignature}</value>
+  </data>
+  <data name="ReminderTemplate_Sms_InDays" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday in {Days} days ({Date})! {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_WhatsApp_InDays" xml:space="preserve">
+    <value>Hey! {Name} has a birthday in {Days} days ({Date})! 🎂 {AgeText}</value>
+  </data>
+  <data name="ReminderTemplate_Signal_InDays" xml:space="preserve">
+    <value>Reminder: {Name} has a birthday in {Days} days ({Date})! {AgeText}</value>
+  </data>
+  <!-- Age Text -->
+  <data name="ReminderTemplate_AgeText" xml:space="preserve">
+    <value>{Name} is turning {Age} years old.</value>
+  </data>
+  <!-- Goodbye and Signature -->
+  <data name="ReminderTemplate_Goodbye" xml:space="preserve">
+    <value>Best regards</value>
+  </data>
+  <data name="ReminderTemplate_TeamSignature" xml:space="preserve">
+    <value>Your team from {Domain}</value>
+  </data>
 </root>
