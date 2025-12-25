@@ -1,3 +1,7 @@
+#region Usings
+using Common;
+#endregion
+
 namespace Mobile;
 
 public partial class App : Application
@@ -14,9 +18,10 @@ public partial class App : Application
     /// Aim: Get the current persons list (loads from prefs once, then cached).
     /// </summary>
     public static List<Person> Persons { get; set; } = [];
-    public static List<Person> Contacts { get; set; } = [];
+    public static List<Contact> Contacts { get; set; } = [];
     public static Account Account { get; set; } = new();
 	public static bool NeedsReadContacts { get; set; } = false;
+	public static DeviceSystem DeviceSystem { get; set; } = DeviceSystem.NotSet;
     #endregion
 
 	public App()
@@ -65,6 +70,11 @@ public partial class App : Application
 
 	private void Init()
 	{
+#if IOS
+		DeviceSystem = DeviceSystem.iOS;
+#elif ANDROID
+		DeviceSystem = DeviceSystem.Android;
+#endif
 		PersonService.Load();
 		AccountService.Load();
 		if (AccountService.UseContacts())

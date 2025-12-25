@@ -2,6 +2,7 @@ namespace Common;
 
 public enum PersonNameDirection
 {
+	NotSet = 0,
 	FirstFirstName = 1,
 	FirstLastName = 2,
 	FirstNameOnly = 3
@@ -25,4 +26,9 @@ public enum SupportEntryStatus
 	Cancelled = 6
 }
 
-
+public enum DeviceSystem
+{
+	NotSet = 0,
+	iOS = 1,
+	Android = 2
+}

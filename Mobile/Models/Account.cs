@@ -16,7 +16,7 @@ public class Account
 	#region Display
 	public string Locale { get; set; } = MobileConstants.DEFAULT_LOCALE;
 	public string Theme { get; set; } = MobileConstants.DEFAULT_THEME;
-	public PersonNameDirection PersonNameDirection { get; set; } = PersonNameDirection.FirstFirstName;
+	public PersonNameDirection PersonNameDirection { get; set; } = PersonNameDirection.NotSet;
 	public int ShowUpcomingBirthdays { get; set; } = MobileConstants.SHOW_UPCOMING_DEFAULT;
 	public int ShowPastBirthdays { get; set; } = MobileConstants.SHOW_PAST_DEFAULT;
     #endregion

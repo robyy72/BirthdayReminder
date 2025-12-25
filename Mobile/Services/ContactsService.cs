@@ -1,3 +1,5 @@
+using Common;
+
 namespace Mobile;
 
 /// <summary>
@@ -22,13 +24,19 @@ public partial class ContactsService
 
 		try
 		{
-			var service = new ContactsService();
+			var serviceWithPlatformCode = new ContactsService();
 			bool onlyWithBirthday = App.Account.ContactsReadMode == ContactsReadMode.ReadNamesWithBirthday;
-			App.Contacts = await service.GetContactsAsync(onlyWithBirthday);
+			App.Contacts = await serviceWithPlatformCode.GetContactsAsync(onlyWithBirthday);
 
-			// If no persons exist yet, import contacts as persons
-			if (App.Persons.Count == 0 && App.Contacts.Count > 0)
+			// no work with no contacts found
+			if (App.Contacts.Count == 0) return;
+
+            // If no persons exist yet, import contacts as persons
+            if (App.Persons.Count == 0)
 			{
+				List<Contact> contacts = App.Contacts;
+
+				int countDisplayNamesWithCommaForAndroid = 0;
 				foreach (var contact in App.Contacts)
 				{
 					if (string.IsNullOrWhiteSpace(contact.FirstName) && string.IsNullOrWhiteSpace(contact.LastName))
@@ -36,8 +44,44 @@ public partial class ContactsService
 
 					contact.Source = PersonSource.Contacts;
 					PersonService.Add(contact);
-				}
-			}
+
+					// count Commata for Android Contacts
+					if (App.DeviceSystem == DeviceSystem.Android)
+						if (contact.DisplayName.Contains(","))
+							countDisplayNamesWithCommaForAndroid++;
+
+					// remove from the relevant list because it's added
+					App.Contacts.Remove(contact);
+                }
+
+				// set the PersonNameDirection and store it into the Account
+				switch (App.DeviceSystem)
+				{
+					case DeviceSystem.iOS:
+#if IOS
+						var contact = new Contacts.CNContact();
+						var nameOrder = Contacts.CNContactFormatter.GetNameOrderForContact(contact);
+						App.Account.PersonNameDirection = nameOrder == Contacts.CNContactDisplayNameOrder.GivenNameFirst
+							? PersonNameDirection.FirstFirstName
+							: PersonNameDirection.FirstLastName;
+#endif
+                        break;
+
+					case DeviceSystem.Android:
+						// more than 50% DisplayNames have Comma ?
+						if (countDisplayNamesWithCommaForAndroid > Math.Abs(App.Contacts.Count / 2))
+							App.Account.PersonNameDirection = PersonNameDirection.FirstLastName;
+						else
+							App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+						break;
+                }
+
+				// Default first FirstName 
+				if (App.Account.PersonNameDirection == PersonNameDirection.NotSet)
+					App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+
+				AccountService.Save();
+            }
 
 			// TODO: Search / compare logic for when Persons already exist
 		}
