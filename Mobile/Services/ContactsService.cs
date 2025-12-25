@@ -37,13 +37,14 @@ public partial class ContactsService
 				List<Contact> contacts = App.Contacts;
 
 				int countDisplayNamesWithCommaForAndroid = 0;
-				foreach (var contact in App.Contacts)
+				foreach (Contact contact in App.Contacts)
 				{
 					if (string.IsNullOrWhiteSpace(contact.FirstName) && string.IsNullOrWhiteSpace(contact.LastName))
 						continue;
 
-					contact.Source = PersonSource.Contacts;
-					PersonService.Add(contact);
+					Person person = ConvertContactToPerson(contact);
+					person.Source = PersonSource.Contacts;
+					PersonService.Add(person);
 
 					// count Commata for Android Contacts
 					if (App.DeviceSystem == DeviceSystem.Android)
@@ -90,4 +91,26 @@ public partial class ContactsService
 			System.Diagnostics.Debug.WriteLine($"Error reading contacts: {ex.Message}");
 		}
 	}
+
+	private static Person ConvertContactToPerson(Contact contact)
+	{
+		Person person = new Person
+		{
+			FirstName = contact.FirstName,
+			LastName = contact.LastName,
+			Birthday = ConvertDateTimeToBirthday (contact.Birthday),
+			ContactId = contact.Id
+		};
+		return person;
+    }
+
+	private static Birthday ConvertDateTimeToBirthday(DateTime dateTime)
+	{
+		// implement
+	}
+
+	private static int ConvertContactIdToInt(string contactId)
+	{
+        // implement
+    }
 }

@@ -23,7 +23,7 @@ public static class PersonService
     /// </summary>
     public static void Save()
 	{
-		PrefsHelper.SetValue(MobileConstants.PREFS_PERSONS, App.Persons);
+		PrefsHelper.SetValue(MobileConstants.PREFS_PERSONS , App.Persons);
 	}
 
 	/// <summary>
