@@ -35,7 +35,9 @@
       "Bash(git -C:*)",
       "Bash(Select-Object -First 20)",
       "Bash(pwsh -File \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\clean.ps1\")",
-      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml.cs\" -Force)"
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml.cs\" -Force)",
+      "Bash(Select-Object -First 50)",
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Services\\\\BirthdayService.cs\" -Force)"
     ],
     "deny": []
   }

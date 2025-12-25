@@ -222,7 +222,7 @@ public partial class AccountPage : ContentPage
 			.Select(c => c.Id)
 			.ToList();
 
-		AccountService.Update(account);
+		AccountService.Save();
 
 		await DisplayAlert(
 			MobileLanguages.Resources.Settings_Saved_Title,

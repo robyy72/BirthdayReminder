@@ -35,7 +35,7 @@ public partial class DeleteBirthdayPage : ContentPage
 
 	private async void LoadPerson(int id)
 	{
-		_person = BirthdayService.GetPerson(id);
+		_person = PersonService.GetById(id);
 		if (_person == null)
 		{
 			await NavigationService.GoBack();
@@ -74,8 +74,7 @@ public partial class DeleteBirthdayPage : ContentPage
 		}
 
 		NotificationService.CancelForPerson(_person.Id);
-		BirthdayService.Remove(_person.Id);
-		App.NeedsReloadBirthdays = true;
+		PersonService.Remove(_person.Id);
 		await NavigationService.NavigateToRoot();
 	}
 }

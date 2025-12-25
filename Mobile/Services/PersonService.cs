@@ -1,117 +1,95 @@
 namespace Mobile;
 
 /// <summary>
-/// Aim: Service for managing persons list.
+/// Aim: Service for managing persons list (uses App.Persons as cache).
 /// </summary>
 public static class PersonService
 {
-	private static List<Person>? _persons;
-	private static bool _isLoaded;
-
-	/// <summary>
-	/// Aim: Get the current persons list, loading from prefs if needed (only once).
-	/// </summary>
-	/// <returns>The persons list.</returns>
-	public static List<Person> Get()
+	public static void Load()
 	{
-		if (_isLoaded && _persons != null)
+		var persons = PrefsHelper.GetValue<List<Person>>(MobileConstants.PREFS_PERSONS);
+		if (persons != null)
 		{
-			return _persons;
+			App.Persons = persons;
 		}
-
-		_persons = PrefsHelper.GetValue<List<Person>>(MobileConstants.PREFS_PERSONS);
-		if (_persons == null)
+		else
 		{
-			_persons = [];
+			App.Persons = new List<Person>();
 		}
+    }
 
-		_isLoaded = true;
-		return _persons;
+    /// <summary>
+    /// Aim: Save App.Persons to prefs.
+    /// </summary>
+    public static void Save()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_PERSONS, App.Persons);
 	}
 
 	/// <summary>
-	/// Aim: Save the current persons list to prefs.
+	/// Aim: Add a person to App.Persons and save.
+	/// Params: person - The person to add
 	/// </summary>
-	public static void Save()
-	{
-		if (_persons != null)
-		{
-			PrefsHelper.SetValue(MobileConstants.PREFS_PERSONS, _persons);
-		}
-	}
-
-	/// <summary>
-	/// Aim: Update persons list and save.
-	/// </summary>
-	/// <param name="persons">The persons list to save.</param>
-	public static void Update(List<Person> persons)
-	{
-		_persons = persons;
-		Save();
-	}
-
-	/// <summary>
-	/// Aim: Add a person and save.
-	/// </summary>
-	/// <param name="person">The person to add.</param>
 	public static void Add(Person person)
 	{
-		var persons = Get();
 		person.Id = GetNextId();
-		persons.Add(person);
+		App.Persons.Add(person);
 		Save();
 	}
 
 	/// <summary>
-	/// Aim: Remove a person by id and save.
+	/// Aim: Update a person in App.Persons and save.
+	/// Params: person - The person to update
 	/// </summary>
-	/// <param name="id">The id of the person to remove.</param>
-	public static void Remove(int id)
+	public static void Update(Person person)
 	{
-		var persons = Get();
-		var person = persons.FirstOrDefault(p => p.Id == id);
-		if (person != null)
+		var existing = App.Persons.FirstOrDefault(p => p.Id == person.Id);
+		if (existing != null)
 		{
-			persons.Remove(person);
+			int index = App.Persons.IndexOf(existing);
+			App.Persons[index] = person;
 			Save();
 		}
 	}
 
 	/// <summary>
-	/// Aim: Get a person by id.
+	/// Aim: Remove a person by id from App.Persons and save.
+	/// Params: id - The id of the person to remove
 	/// </summary>
-	/// <param name="id">The id of the person.</param>
-	/// <returns>The person or null if not found.</returns>
+	public static void Remove(int id)
+	{
+		var person = App.Persons.FirstOrDefault(p => p.Id == id);
+		if (person != null)
+		{
+			App.Persons.Remove(person);
+			Save();
+		}
+	}
+
+	/// <summary>
+	/// Aim: Get a person by id from App.Persons.
+	/// Params: id - The id of the person
+	/// Return: The person or null if not found
+	/// </summary>
 	public static Person? GetById(int id)
 	{
-		var persons = Get();
-		var person = persons.FirstOrDefault(p => p.Id == id);
+		var person = App.Persons.FirstOrDefault(p => p.Id == id);
 		return person;
 	}
 
 	/// <summary>
 	/// Aim: Get the next available id.
+	/// Return: The next id
 	/// </summary>
-	/// <returns>The next id.</returns>
 	private static int GetNextId()
 	{
-		var persons = Get();
-		if (persons.Count == 0)
+		if (App.Persons.Count == 0)
 		{
 			return 1;
 		}
 
-		int maxId = persons.Max(p => p.Id);
+		int maxId = App.Persons.Max(p => p.Id);
 		int nextId = maxId + 1;
 		return nextId;
-	}
-
-	/// <summary>
-	/// Aim: Clear the cached persons (used when prefs are cleared).
-	/// </summary>
-	public static void ClearCache()
-	{
-		_persons = null;
-		_isLoaded = false;
 	}
 }

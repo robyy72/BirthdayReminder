@@ -42,7 +42,7 @@ public partial class StartPage_4 : ContentPage
 
 		try
 		{
-			var service = new ContactBirthdayService();
+			var service = new ContactsService();
 			bool onlyWithBirthday = App.Account.ContactsReadMode == ContactsReadMode.ReadNamesWithBirthday;
 			var contacts = await service.GetContactsAsync(onlyWithBirthday);
 

@@ -69,7 +69,7 @@ public partial class EditBirthdayPage : ContentPage
 
     private async Task LoadPerson()
     {
-        _person = BirthdayService.GetPerson(_personId);
+        _person = PersonService.GetById(_personId);
         if (_person == null)
         {
             await NavigationService.GoBack();
@@ -139,8 +139,7 @@ public partial class EditBirthdayPage : ContentPage
             Year = selectedYear
         };
 
-        BirthdayService.Update(_person);
-        App.NeedsReloadBirthdays = true;
+        PersonService.Update(_person);
 
         await NavigationService.GoBack();
     }

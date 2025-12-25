@@ -34,7 +34,7 @@ public partial class StartPage_5 : ContentPage
 	{
 		if (Application.Current?.Windows.Count > 0)
 		{
-			if (App.UseContacts)
+			if (AccountService.UseContacts())
 				Application.Current.Windows[0].Page = new StartPage_4();
 			else
 				Application.Current.Windows[0].Page = new StartPage_2();

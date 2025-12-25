@@ -121,8 +121,7 @@ public partial class CreateBirthdayPage : ContentPage
             Birthday = birthday
         };
 
-        BirthdayService.Add(person);
-        App.NeedsReloadBirthdays = true;
+        PersonService.Add(person);
 
         await NavigationService.GoBack();
     }

@@ -68,14 +68,14 @@
                     </CollectionView.EmptyView>
                 </CollectionView>
 
-                <!-- Missed Birthdays Section -->
-                <Label x:Name="MissedBirthdaysLabel"
+                <!-- Past Birthdays Section -->
+                <Label x:Name="PastBirthdaysLabel"
                        Style="{StaticResource LabelSubHeader}"
                        HorizontalOptions="Center"
                        Margin="0,10,0,0" />
 
-                <CollectionView x:Name="MissedList"
-                                ItemsSource="{Binding MissedBirthdays}"
+                <CollectionView x:Name="PastList"
+                                ItemsSource="{Binding PastBirthdays}"
                                 SelectionMode="Single"
                                 SelectionChanged="OnBirthdaySelected">
                     <CollectionView.ItemsLayout>

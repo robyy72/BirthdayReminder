@@ -2,28 +2,27 @@ namespace Mobile;
 
 public partial class App : Application
 {
-	public static bool NeedsReloadBirthdays { get; set; }
-	public static bool UseContacts { get; set; }
+    #region Public Properties
 
-	#region Reminder Templates (used during StartPage wizard)
-	public static Reminder? Reminder_1_Template { get; set; }
+    #region Reminder Templates (used during StartPage wizard)
+    public static Reminder? Reminder_1_Template { get; set; }
 	public static Reminder? Reminder_2_Template { get; set; }
 	public static Reminder? Reminder_3_Template { get; set; }
 	#endregion
 
-	/// <summary>
-	/// Aim: Get the current account (reads from prefs via AccountService, keeps in sync).
-	/// </summary>
-	public static Account Account => AccountService.Get();
-
-	/// <summary>
-	/// Aim: Get the current persons list (reads from prefs via PersonService, only once).
-	/// </summary>
-	public static List<Person> Persons => PersonService.Get();
+    /// <summary>
+    /// Aim: Get the current persons list (loads from prefs once, then cached).
+    /// </summary>
+    public static List<Person> Persons { get; set; } = [];
+    public static List<Person> Contacts { get; set; } = [];
+    public static Account Account { get; set; } = new();
+	public static bool NeedsReadContacts { get; set; } = false;
+    #endregion
 
 	public App()
 	{
 		InitializeComponent();
+		Init();
 		ApplyTheme();
 	}
 
@@ -64,7 +63,15 @@ public partial class App : Application
 		return navigationPage;
 	}
 
-	private void ApplyTheme()
+	private void Init()
+	{
+		PersonService.Load();
+		AccountService.Load();
+		if (AccountService.UseContacts())
+			NeedsReadContacts = true;
+    }
+
+    private void ApplyTheme()
 	{
 		var account = Account;
 		DeviceService.ApplyTheme(account.Theme);

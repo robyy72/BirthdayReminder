@@ -17,11 +17,9 @@ public partial class StartPage_2 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		App.UseContacts = RadioAskNextPage.IsChecked;
-
 		if (Application.Current?.Windows.Count > 0)
 		{
-			if (App.UseContacts)
+			if (RadioAskNextPage.IsChecked)
 				Application.Current.Windows[0].Page = new StartPage_3();
 			else
 				Application.Current.Windows[0].Page = new StartPage_5();

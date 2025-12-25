@@ -47,15 +47,9 @@ public partial class AllBirthdaysPage : ContentPage
 
 	private void LoadBirthdays()
 	{
-		var allPersons = new List<Person>();
 		var nameDirection = App.Account.PersonNameDirection;
 
-		for (int month = 1; month <= 12; month++)
-		{
-			allPersons.AddRange(BirthdayService.GetByMonth(month));
-		}
-
-		_allBirthdays = allPersons
+		_allBirthdays = App.Persons
 			.Where(p => p.Birthday != null)
 			.OrderBy(p => p.Birthday!.Month)
 			.ThenBy(p => p.Birthday!.Day)

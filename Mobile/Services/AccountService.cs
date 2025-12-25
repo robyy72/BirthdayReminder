@@ -5,27 +5,17 @@ namespace Mobile;
 /// </summary>
 public static class AccountService
 {
-	private static Account? _account;
-
 	/// <summary>
 	/// Aim: Get the current account, loading from prefs if needed.
 	/// </summary>
 	/// <returns>The account object.</returns>
-	public static Account Get()
+	public static void Load()
 	{
-		if (_account != null)
+		Account account = PrefsHelper.GetValue<Account>(MobileConstants.PREFS_ACCOUNT);
+		if (account != null)
 		{
-			return _account;
-		}
-
-		_account = PrefsHelper.GetValue<Account>(MobileConstants.PREFS_ACCOUNT);
-		if (_account == null)
-		{
-			_account = new Account();
-			Save();
-		}
-
-		return _account;
+			App.Account = account;
+        }
 	}
 
 	/// <summary>
@@ -33,20 +23,10 @@ public static class AccountService
 	/// </summary>
 	public static void Save()
 	{
-		if (_account != null)
+		if (App.Account != null)
 		{
-			PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT, _account);
+			PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT, App.Account);
 		}
-	}
-
-	/// <summary>
-	/// Aim: Update account and save.
-	/// </summary>
-	/// <param name="account">The account to save.</param>
-	public static void Update(Account account)
-	{
-		_account = account;
-		Save();
 	}
 
 	/// <summary>
@@ -64,10 +44,46 @@ public static class AccountService
 	}
 
 	/// <summary>
-	/// Aim: Clear the cached account (used when prefs are cleared).
+	/// Aim: Check if contacts are being used.
+	/// Return: True if ContactsReadMode is not None
 	/// </summary>
-	public static void ClearCache()
+	public static bool UseContacts()
 	{
-		_account = null;
+		bool result = App.Account.ContactsReadMode > ContactsReadMode.None;
+		return result;
+	}
+
+	/// <summary>
+	/// Aim: Checks if permissions (contacts, calendar) are still granted, updates Account settings if not.
+	/// </summary>
+	public static async void CheckRightsAndUpdateAccount()
+	{
+		bool needsSave = false;
+
+		// Check Contacts permission
+		if (App.Account.ContactsReadMode != ContactsReadMode.None && App.Account.ContactsReadMode != ContactsReadMode.NotSet)
+		{
+			bool hasContactsRead = await DeviceService.CheckContactsReadPermissionAsync();
+			if (!hasContactsRead)
+			{
+				App.Account.ContactsReadMode = ContactsReadMode.None;
+				needsSave = true;
+			}
+		}
+
+		// Check Calendar permission
+		if (App.Account.DeviceCalendar_Enabled)
+		{
+			bool hasCalendarRead = await DeviceService.CheckCalendarReadPermissionAsync();
+			if (!hasCalendarRead)
+			{
+				App.Account.DeviceCalendar_Enabled = false;
+				App.Account.DeviceCalendar_SelectedIds = [];
+				needsSave = true;
+			}
+		}
+
+		if (needsSave)
+			Save();
 	}
 }

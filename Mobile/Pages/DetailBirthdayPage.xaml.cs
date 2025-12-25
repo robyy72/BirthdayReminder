@@ -30,7 +30,7 @@ public partial class DetailBirthdayPage : ContentPage
     #region Private Methods
     private async Task LoadPerson()
     {
-        _person = BirthdayService.GetPerson(_personId);
+        _person = PersonService.GetById(_personId);
         if (_person == null)
         {
             await NavigationService.GoBack();

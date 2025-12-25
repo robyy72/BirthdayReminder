@@ -7,9 +7,9 @@ using Foundation;
 namespace Mobile;
 
 /// <summary>
-/// Aim: iOS implementation for reading contact birthdays.
+/// Aim: iOS implementation for reading contacts.
 /// </summary>
-public partial class ContactBirthdayService
+public partial class ContactsService
 {
 	/// <summary>
 	/// Aim: Gets contacts from iOS contacts.

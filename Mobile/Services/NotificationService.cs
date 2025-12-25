@@ -66,13 +66,9 @@ public static class NotificationService
 	/// </summary>
 	public static void ScheduleAll()
 	{
-		for (int month = 1; month <= 12; month++)
+		foreach (var person in App.Persons)
 		{
-			var persons = BirthdayService.GetByMonth(month);
-			foreach (var person in persons)
-			{
-				ScheduleForPerson(person);
-			}
+			ScheduleForPerson(person);
 		}
 	}
 

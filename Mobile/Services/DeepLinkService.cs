@@ -45,7 +45,7 @@ public static class DeepLinkService
             }
 
             // Prüfe ob Person existiert
-            var person = BirthdayService.GetPerson(personId);
+            var person = PersonService.GetById(personId);
             if (person == null)
             {
                 // Person nicht gefunden → normaler Start

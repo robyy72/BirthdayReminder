@@ -7,9 +7,9 @@ using Android.Provider;
 namespace Mobile;
 
 /// <summary>
-/// Aim: Android implementation for reading contact birthdays.
+/// Aim: Android implementation for reading contacts.
 /// </summary>
-public partial class ContactBirthdayService
+public partial class ContactsService
 {
 	/// <summary>
 	/// Aim: Gets contacts from Android contacts.
