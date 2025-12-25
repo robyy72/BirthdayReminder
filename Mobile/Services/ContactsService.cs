@@ -59,8 +59,8 @@ public partial class ContactsService
 				{
 					case DeviceSystem.iOS:
 #if IOS
-						var contact = new Contacts.CNContact();
-						var nameOrder = Contacts.CNContactFormatter.GetNameOrderForContact(contact);
+						var cnContact = new Contacts.CNContact();
+						var nameOrder = Contacts.CNContactFormatter.GetNameOrderFor(cnContact);
 						App.Account.PersonNameDirection = nameOrder == Contacts.CNContactDisplayNameOrder.GivenNameFirst
 							? PersonNameDirection.FirstFirstName
 							: PersonNameDirection.FirstLastName;
