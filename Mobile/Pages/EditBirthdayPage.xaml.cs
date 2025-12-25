@@ -122,8 +122,12 @@ public partial class EditBirthdayPage : ContentPage
 
         if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
         {
+            ErrorLabel.Text = MobileLanguages.Resources.Error_NameRequired;
+            ErrorBorder.IsVisible = true;
             return;
         }
+
+        ErrorBorder.IsVisible = false;
 
         int selectedDay = DayPicker.SelectedIndex + 1;
         int selectedMonth = MonthPicker.SelectedIndex + 1;
