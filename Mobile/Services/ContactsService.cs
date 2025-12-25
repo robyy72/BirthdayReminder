@@ -11,7 +11,7 @@ public partial class ContactsService
 	/// <summary>
 	/// Aim: Gets contacts from the device.
 	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
-	/// Return: List of Contact objects with FirstName, LastName, BirthdayAsDateTime and Id
+	/// Return: List of Contact objects with FirstName, LastName, Birthday and Id
 	/// </summary>
 	public partial Task<List<Contact>> GetContactsAsync(bool onlyWithBirthday);
 
