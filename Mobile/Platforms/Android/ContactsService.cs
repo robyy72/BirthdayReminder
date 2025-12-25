@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Database;
 using Android.Provider;
+using Common;
 #endregion
 
 namespace Mobile;
@@ -14,11 +15,11 @@ public partial class ContactsService
 	/// <summary>
 	/// Aim: Gets contacts from Android contacts.
 	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
-	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
+	/// Return: List of Contact objects with FirstName, LastName, BirthdayAsDateTime and Id
 	/// </summary>
-	public partial Task<List<Person>> GetContactsAsync(bool onlyWithBirthday)
+	public partial Task<List<Contact>> GetContactsAsync(bool onlyWithBirthday)
 	{
-		var results = new List<Person>();
+		var results = new List<Contact>();
 
 		try
 		{
@@ -34,6 +35,7 @@ public partial class ContactsService
 			// Get all contacts with birthdays
 			var contactBirthdays = GetContactBirthdays(contentResolver, uri);
 
+			int idCounter = 1;
 			if (onlyWithBirthday)
 			{
 				// Only return contacts that have birthdays
@@ -50,16 +52,16 @@ public partial class ContactsService
 					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 						continue;
 
-					var person = new Person
+					var contact = new Contact
 					{
+						Id = idCounter++,
 						FirstName = firstName,
 						LastName = lastName,
-						Birthday = birthday,
-						ContactId = contactId,
-						Source = PersonSource.Contacts
+						DisplayName = $"{lastName}, {firstName}".Trim(' ', ','),
+						Birthday = birthday
 					};
 
-					results.Add(person);
+					results.Add(contact);
 				}
 			}
 			else
@@ -77,22 +79,19 @@ public partial class ContactsService
 					Birthday? birthday = null;
 					if (contactBirthdays.TryGetValue(contactId, out string? dateString))
 					{
-						if (TryParseBirthday(dateString, out Birthday? parsed))
-						{
-							birthday = parsed;
-						}
+						TryParseBirthday(dateString, out birthday);
 					}
 
-					var person = new Person
+					var contact = new Contact
 					{
+						Id = idCounter++,
 						FirstName = firstName,
 						LastName = lastName,
-						Birthday = birthday,
-						ContactId = contactId,
-						Source = PersonSource.Contacts
+						DisplayName = $"{lastName}, {firstName}".Trim(' ', ','),
+						Birthday = birthday
 					};
 
-					results.Add(person);
+					results.Add(contact);
 				}
 			}
 		}
@@ -231,5 +230,40 @@ public partial class ContactsService
 		}
 
 		return false;
+	}
+
+	public static partial Person ConvertContactToPerson(Contact contact) => new()
+	{
+		FirstName = contact.FirstName,
+		LastName = contact.LastName,
+		Birthday = contact.Birthday,
+		ContactId = contact.Id.ToString()
+	};
+
+	public static partial Contact ConvertPersonToContact(Person person) => new()
+	{
+		FirstName = person.FirstName,
+		LastName = person.LastName,
+		Birthday = person.Birthday,
+		DisplayName = $"{person.LastName}, {person.FirstName}".Trim(' ', ',')
+	};
+
+	public static partial PersonNameDirection GetDeviceNameOrder()
+	{
+		int countWithComma = 0;
+		foreach (var contact in App.Contacts)
+		{
+			if (contact.DisplayName.Contains(","))
+				countWithComma++;
+		}
+
+		// more than 50% DisplayNames have Comma?
+		if (countWithComma > App.Contacts.Count / 2)
+			return PersonNameDirection.FirstLastName;
+
+		if (countWithComma < App.Contacts.Count / 2)
+			return PersonNameDirection.FirstFirstName;
+
+		return PersonNameDirection.NotSet;
 	}
 }

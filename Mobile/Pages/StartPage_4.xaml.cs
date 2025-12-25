@@ -50,9 +50,12 @@ public partial class StartPage_4 : ContentPage
 				return;
 
 			// Store contacts in App
+			App.Contacts = contacts;
 			foreach (var contact in contacts)
 			{
-				App.Persons.Add(contact);
+				Person person = ContactsService.ConvertContactToPerson(contact);
+				person.Source = PersonSource.Contacts;
+				App.Persons.Add(person);
 			}
 
 			// Build success message based on access level

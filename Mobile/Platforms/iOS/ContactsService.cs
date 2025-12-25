@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Contacts;
 using EventKit;
 using Foundation;
@@ -14,11 +15,11 @@ public partial class ContactsService
 	/// <summary>
 	/// Aim: Gets contacts from iOS contacts.
 	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
-	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
+	/// Return: List of Contact objects with FirstName, LastName, BirthdayAsDateTime and Id
 	/// </summary>
-	public partial Task<List<Person>> GetContactsAsync(bool onlyWithBirthday)
+	public partial Task<List<Contact>> GetContactsAsync(bool onlyWithBirthday)
 	{
-		var results = new List<Person>();
+		var results = new List<Contact>();
 
 		try
 		{
@@ -39,6 +40,7 @@ public partial class ContactsService
 				return Task.FromResult(results);
 			}
 
+			int idCounter = 1;
 			foreach (var container in containers)
 			{
 				var predicate = CNContact.GetPredicateForContactsInContainer(container.Identifier);
@@ -53,25 +55,21 @@ public partial class ContactsService
 				if (contacts == null)
 					continue;
 
-				foreach (var contact in contacts)
+				foreach (var cnContact in contacts)
 				{
 					// Skip contacts without birthday if filter is enabled
-					if (onlyWithBirthday && contact.Birthday == null)
+					if (onlyWithBirthday && cnContact.Birthday == null)
 						continue;
 
-					string? contactId = contact.Identifier;
-					if (string.IsNullOrWhiteSpace(contactId))
-						continue;
-
-					string firstName = contact.GivenName ?? string.Empty;
-					string lastName = contact.FamilyName ?? string.Empty;
+					string firstName = cnContact.GivenName ?? string.Empty;
+					string lastName = cnContact.FamilyName ?? string.Empty;
 					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
 						continue;
 
 					Birthday? birthday = null;
-					if (contact.Birthday != null)
+					if (cnContact.Birthday != null)
 					{
-						var birthdayComponents = contact.Birthday;
+						var birthdayComponents = cnContact.Birthday;
 						int day = (int)birthdayComponents.Day;
 						int month = (int)birthdayComponents.Month;
 						int year = birthdayComponents.Year > 0 ? (int)birthdayComponents.Year : 0;
@@ -82,16 +80,16 @@ public partial class ContactsService
 						}
 					}
 
-					var person = new Person
+					var contact = new Contact
 					{
+						Id = idCounter++,
 						FirstName = firstName,
 						LastName = lastName,
-						Birthday = birthday,
-						ContactId = contactId,
-						Source = PersonSource.Contacts
+						DisplayName = $"{firstName} {lastName}".Trim(),
+						Birthday = birthday
 					};
 
-					results.Add(person);
+					results.Add(contact);
 				}
 			}
 		}
@@ -103,4 +101,31 @@ public partial class ContactsService
 		return Task.FromResult(results);
 	}
 
+	public static partial Person ConvertContactToPerson(Contact contact) => new()
+	{
+		FirstName = contact.FirstName,
+		LastName = contact.LastName,
+		Birthday = contact.Birthday,
+		ContactId = contact.Id.ToString()
+	};
+
+	public static partial Contact ConvertPersonToContact(Person person) => new()
+	{
+		FirstName = person.FirstName,
+		LastName = person.LastName,
+		Birthday = person.Birthday,
+		DisplayName = $"{person.FirstName} {person.LastName}".Trim()
+	};
+
+	public static partial PersonNameDirection GetDeviceNameOrder()
+	{
+		var cnContact = new CNContact();
+		var nameOrder = CNContactFormatter.GetNameOrderFor(cnContact);
+
+		PersonNameDirection result = nameOrder == CNContactDisplayNameOrder.GivenNameFirst
+			? PersonNameDirection.FirstFirstName
+			: PersonNameDirection.FirstLastName;
+
+		return result;
+	}
 }

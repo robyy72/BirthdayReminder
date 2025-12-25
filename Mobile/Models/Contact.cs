@@ -14,6 +14,6 @@ public class Contact
 	public string FirstName { get; set; } = string.Empty;
 	public string LastName { get; set; } = string.Empty;
 	public string DisplayName { get; set; } = string.Empty;
-	public DateTime? BirthdayAsDateTime { get; set; }
-    #endregion
+	public Birthday? Birthday { get; set; }
+	#endregion
 }

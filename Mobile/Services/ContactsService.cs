@@ -4,15 +4,16 @@ namespace Mobile;
 
 /// <summary>
 /// Aim: Platform-agnostic service for reading contacts.
+/// A lot of platform-specific code is in the partial classes (check Platform folder)
 /// </summary>
 public partial class ContactsService
 {
 	/// <summary>
 	/// Aim: Gets contacts from the device.
 	/// Params: onlyWithBirthday - If true, only returns contacts that have a birthday set
-	/// Return: List of Person objects with FirstName, LastName, Birthday and ContactId
+	/// Return: List of Contact objects with FirstName, LastName, BirthdayAsDateTime and Id
 	/// </summary>
-	public partial Task<List<Person>> GetContactsAsync(bool onlyWithBirthday);
+	public partial Task<List<Contact>> GetContactsAsync(bool onlyWithBirthday);
 
 	/// <summary>
 	/// Aim: Reads contacts into App.Contacts if allowed. If Persons is empty, copies contacts to Persons.
@@ -34,9 +35,6 @@ public partial class ContactsService
             // If no persons exist yet, import contacts as persons
             if (App.Persons.Count == 0)
 			{
-				List<Contact> contacts = App.Contacts;
-
-				int countDisplayNamesWithCommaForAndroid = 0;
 				foreach (Contact contact in App.Contacts)
 				{
 					if (string.IsNullOrWhiteSpace(contact.FirstName) && string.IsNullOrWhiteSpace(contact.LastName))
@@ -45,37 +43,10 @@ public partial class ContactsService
 					Person person = ConvertContactToPerson(contact);
 					person.Source = PersonSource.Contacts;
 					PersonService.Add(person);
-
-					// count Commata for Android Contacts
-					if (App.DeviceSystem == DeviceSystem.Android)
-						if (contact.DisplayName.Contains(","))
-							countDisplayNamesWithCommaForAndroid++;
-
-					// remove from the relevant list because it's added
-					App.Contacts.Remove(contact);
-                }
+				}
 
 				// set the PersonNameDirection and store it into the Account
-				switch (App.DeviceSystem)
-				{
-					case DeviceSystem.iOS:
-#if IOS
-						var cnContact = new Contacts.CNContact();
-						var nameOrder = Contacts.CNContactFormatter.GetNameOrderFor(cnContact);
-						App.Account.PersonNameDirection = nameOrder == Contacts.CNContactDisplayNameOrder.GivenNameFirst
-							? PersonNameDirection.FirstFirstName
-							: PersonNameDirection.FirstLastName;
-#endif
-                        break;
-
-					case DeviceSystem.Android:
-						// more than 50% DisplayNames have Comma ?
-						if (countDisplayNamesWithCommaForAndroid > Math.Abs(App.Contacts.Count / 2))
-							App.Account.PersonNameDirection = PersonNameDirection.FirstLastName;
-						else
-							App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
-						break;
-                }
+				App.Account.PersonNameDirection = GetDeviceNameOrder();
 
 				// Default first FirstName 
 				if (App.Account.PersonNameDirection == PersonNameDirection.NotSet)
@@ -92,25 +63,7 @@ public partial class ContactsService
 		}
 	}
 
-	private static Person ConvertContactToPerson(Contact contact)
-	{
-		Person person = new Person
-		{
-			FirstName = contact.FirstName,
-			LastName = contact.LastName,
-			Birthday = ConvertDateTimeToBirthday (contact.Birthday),
-			ContactId = contact.Id
-		};
-		return person;
-    }
-
-	private static Birthday ConvertDateTimeToBirthday(DateTime dateTime)
-	{
-		// implement
-	}
-
-	private static int ConvertContactIdToInt(string contactId)
-	{
-        // implement
-    }
+	public static partial Person ConvertContactToPerson(Contact contact);
+	public static partial Contact ConvertPersonToContact(Person person);
+	public static partial PersonNameDirection GetDeviceNameOrder();
 }
