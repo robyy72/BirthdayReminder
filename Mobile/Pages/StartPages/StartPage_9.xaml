@@ -29,7 +29,7 @@
                        Style="{StaticResource LabelHeader}" />
 
                 <!-- Accordion 1: Device Calendar -->
-                <Border x:Name="Accordion1" Style="{StaticResource Card}">
+                <Border x:Name="Accordion1" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">
@@ -70,7 +70,7 @@
                 </Border>
 
                 <!-- Accordion 2: Outlook Calendar -->
-                <Border x:Name="Accordion2" Style="{StaticResource Card}">
+                <Border x:Name="Accordion2" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">
@@ -110,7 +110,7 @@
                 </Border>
 
                 <!-- Accordion 3: Google Calendar -->
-                <Border x:Name="Accordion3" Style="{StaticResource Card}">
+                <Border x:Name="Accordion3" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
                             <Grid ColumnDefinitions="*,Auto">

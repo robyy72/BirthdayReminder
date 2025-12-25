@@ -276,6 +276,21 @@
         <Setter Property="Stroke" Value="Transparent" />
     </Style>
 
+    <Style TargetType="Border" x:Key="Accordion">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="{StaticResource Gray400}"
+                        Offset="2,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelCardHeader">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontAttributes" Value="Bold" />
