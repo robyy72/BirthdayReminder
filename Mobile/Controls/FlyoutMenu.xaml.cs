@@ -72,11 +72,25 @@ public partial class FlyoutMenu : ContentView
         await NavigationService.NavigateToRoot();
     }
 
-    private async void OnSettingsTapped(object? sender, TappedEventArgs e)
+    private async void OnAccountTapped(object? sender, TappedEventArgs e)
     {
         NavigationService.CloseFlyout();
         await NavigationService.NavigateToRoot();
         await NavigationService.NavigateTo<AccountPage>();
+    }
+
+    private async void OnSettingsTapped(object? sender, TappedEventArgs e)
+    {
+        NavigationService.CloseFlyout();
+        await NavigationService.NavigateToRoot();
+        await NavigationService.NavigateTo<SettingsPage>();
+    }
+
+    private async void OnRemindersTapped(object? sender, TappedEventArgs e)
+    {
+        NavigationService.CloseFlyout();
+        await NavigationService.NavigateToRoot();
+        await NavigationService.NavigateTo<ReminderStandardSettings>();
     }
 
     private async void OnPrivacyTapped(object? sender, TappedEventArgs e)

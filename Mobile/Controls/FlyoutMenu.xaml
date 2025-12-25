@@ -54,12 +54,36 @@
                                VerticalOptions="Center" />
                     </Border>
 
+                    <!-- Konto -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_Account}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
                     <!-- Einstellungen -->
                     <Border Style="{StaticResource TileFlyout}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSettingsTapped" />
                         </Border.GestureRecognizers>
                         <Label Text="{x:Static resx:Resources.Tab_Settings}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Erinnerungen -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRemindersTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_Reminders}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.ReminderStandardSettings"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_ReminderSettings_Title}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_ReminderSettings_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Reminder Count -->
+                <Label Text="{x:Static resx:Resources.Settings_ReminderCount}"
+                       Style="{StaticResource LabelHeader}" />
+
+                <Border Style="{StaticResource Tile}">
+                    <VerticalStackLayout RadioButtonGroup.GroupName="ReminderCountGroup"
+                                         Spacing="10">
+                        <RadioButton x:Name="RadioNoReminder" Value="0">
+                            <RadioButton.Content>
+                                <Label Text="{x:Static resx:Resources.ReminderCount_None}"
+                                       Style="{StaticResource LabelInfo}" />
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioOneReminder" Value="1">
+                            <RadioButton.Content>
+                                <Label Text="{x:Static resx:Resources.ReminderCount_One}"
+                                       Style="{StaticResource LabelInfo}" />
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioTwoReminders" Value="2">
+                            <RadioButton.Content>
+                                <Label Text="{x:Static resx:Resources.ReminderCount_Two}"
+                                       Style="{StaticResource LabelInfo}" />
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton x:Name="RadioThreeReminders" Value="3">
+                            <RadioButton.Content>
+                                <Label Text="{x:Static resx:Resources.ReminderCount_Three}"
+                                       Style="{StaticResource LabelInfo}" />
+                            </RadioButton.Content>
+                        </RadioButton>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Reminder 1 -->
+                <VerticalStackLayout x:Name="Reminder1Section" Spacing="10">
+                    <Label Text="{x:Static resx:Resources.Settings_Reminder_1}"
+                           Style="{StaticResource LabelHeader}" />
+                    <Border Style="{StaticResource Tile}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Entry x:Name="Reminder1Days"
+                                   Grid.Column="1"
+                                   Keyboard="Numeric"
+                                   WidthRequest="60"
+                                   HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Reminder 2 -->
+                <VerticalStackLayout x:Name="Reminder2Section" Spacing="10">
+                    <Label Text="{x:Static resx:Resources.Settings_Reminder_2}"
+                           Style="{StaticResource LabelHeader}" />
+                    <Border Style="{StaticResource Tile}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Entry x:Name="Reminder2Days"
+                                   Grid.Column="1"
+                                   Keyboard="Numeric"
+                                   WidthRequest="60"
+                                   HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Reminder 3 -->
+                <VerticalStackLayout x:Name="Reminder3Section" Spacing="10">
+                    <Label Text="{x:Static resx:Resources.Settings_Reminder_3}"
+                           Style="{StaticResource LabelHeader}" />
+                    <Border Style="{StaticResource Tile}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                                   Style="{StaticResource LabelInfo}"
+                                   VerticalOptions="Center" />
+                            <Entry x:Name="Reminder3Days"
+                                   Grid.Column="1"
+                                   Keyboard="Numeric"
+                                   WidthRequest="60"
+                                   HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Bottom Buttons inside ScrollView -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,20,0,0">
+                    <Button Grid.Column="0"
+                            Text="{x:Static resx:Resources.General_Button_Back}"
+                            Style="{StaticResource ButtonSecondary}"
+                            Clicked="OnBackClicked" />
+                    <Button Grid.Column="1"
+                            Text="{x:Static resx:Resources.General_Button_Save}"
+                            Style="{StaticResource ButtonPrimary}"
+                            Clicked="OnSaveClicked" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

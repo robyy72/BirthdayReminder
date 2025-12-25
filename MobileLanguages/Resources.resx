@@ -657,4 +657,36 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Error_NameRequired" xml:space="preserve">
     <value>Please enter at least a first or last name.</value>
   </data>
+  <!-- Account Page -->
+  <data name="Page_Account_Title" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Account_Subscription" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
+  <data name="Account_SubscriptionTier" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="Account_ValidUntil" xml:space="preserve">
+    <value>Valid until</value>
+  </data>
+  <data name="Account_NoEmail" xml:space="preserve">
+    <value>Not set</value>
+  </data>
+  <data name="Account_Unlimited" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+  <!-- Reminder Settings Page -->
+  <data name="Page_ReminderSettings_Title" xml:space="preserve">
+    <value>Reminder Settings</value>
+  </data>
+  <data name="Tab_Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Tab_Reminders" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
 </root>

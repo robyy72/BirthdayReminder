@@ -11,6 +11,8 @@ public class Account
 {
 	#region User
 	public string? Email { get; set; }
+	public SubscriptionTier Subscription { get; set; } = SubscriptionTier.Free;
+	public DateTime? ValidUntil { get; set; }
 	#endregion
 
 	#region Display

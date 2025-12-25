@@ -657,4 +657,36 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Error_NameRequired" xml:space="preserve">
     <value>Bitte gib mindestens einen Vor- oder Nachnamen ein.</value>
   </data>
+  <!-- Account Page -->
+  <data name="Page_Account_Title" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Account_Subscription" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="Account_SubscriptionTier" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="Account_ValidUntil" xml:space="preserve">
+    <value>Gültig bis</value>
+  </data>
+  <data name="Account_NoEmail" xml:space="preserve">
+    <value>Nicht gesetzt</value>
+  </data>
+  <data name="Account_Unlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <!-- Reminder Settings Page -->
+  <data name="Page_ReminderSettings_Title" xml:space="preserve">
+    <value>Erinnerungseinstellungen</value>
+  </data>
+  <data name="Tab_Account" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="Tab_Reminders" xml:space="preserve">
+    <value>Erinnerungen</value>
+  </data>
 </root>

@@ -32,3 +32,10 @@ public enum DeviceSystem
 	iOS = 1,
 	Android = 2
 }
+
+public enum SubscriptionTier
+{
+	Free,
+	Plus,
+	Pro
+}
