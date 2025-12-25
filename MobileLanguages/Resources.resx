@@ -653,4 +653,8 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="FoundBirthdays_Header" xml:space="preserve">
     <value>Found birthdays</value>
   </data>
+  <!-- Error Messages -->
+  <data name="Error_NameRequired" xml:space="preserve">
+    <value>Please enter at least a first or last name.</value>
+  </data>
 </root>

@@ -96,9 +96,27 @@ public partial class CreateBirthdayPage : ContentPage
         var firstName = FirstNameEntry.Text?.Trim() ?? string.Empty;
         var lastName = LastNameEntry.Text?.Trim() ?? string.Empty;
 
+        // Validate: at least one name required
         if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
         {
+            ErrorLabel.Text = MobileLanguages.Resources.Error_NameRequired;
+            ErrorBorder.IsVisible = true;
             return;
+        }
+
+        ErrorBorder.IsVisible = false;
+
+        // First entry: set PersonNameDirection if still NotSet
+        if (App.Persons.Count == 0 && App.Account.PersonNameDirection == PersonNameDirection.NotSet)
+        {
+            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+                App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+            else if (!string.IsNullOrEmpty(firstName))
+                App.Account.PersonNameDirection = PersonNameDirection.FirstNameOnly;
+            else
+                App.Account.PersonNameDirection = PersonNameDirection.FirstLastName;
+
+            AccountService.Save();
         }
 
         int selectedDay = DayPicker.SelectedIndex + 1;

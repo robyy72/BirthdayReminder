@@ -178,6 +178,15 @@
         <Setter Property="TextColor" Value="#D32F2F" />
     </Style>
 
+    <Style TargetType="Border" x:Key="BorderError">
+        <Setter Property="BackgroundColor" Value="#FFEBEE" />
+        <Setter Property="Stroke" Value="#D32F2F" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        <Setter Property="Padding" Value="15,10" />
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelSuccess" BasedOn="{StaticResource LabelDescription}">
         <Setter Property="TextColor" Value="#388E3C" />
     </Style>

@@ -653,4 +653,8 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="FoundBirthdays_Header" xml:space="preserve">
     <value>Gefundene Geburtstage</value>
   </data>
+  <!-- Error Messages -->
+  <data name="Error_NameRequired" xml:space="preserve">
+    <value>Bitte gib mindestens einen Vor- oder Nachnamen ein.</value>
+  </data>
 </root>

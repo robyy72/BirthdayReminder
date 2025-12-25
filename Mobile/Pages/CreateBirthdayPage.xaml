@@ -25,6 +25,9 @@
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10">
+                            <Border x:Name="ErrorBorder" Style="{StaticResource BorderError}">
+                                <Label x:Name="ErrorLabel" Style="{StaticResource LabelError}" />
+                            </Border>
                             <Border x:Name="FirstNameBorder" Style="{StaticResource EntryBorder}">
                                 <Entry x:Name="FirstNameEntry"
                                        Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"

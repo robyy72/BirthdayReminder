@@ -18,12 +18,12 @@
 
 ## Current State (Dec 2024)
 
-- **Settings → Account**: Renamed model, service, page
-- **StartPage wizard flow**: 1→2→3→4→5/6/7→8 (based on UseContacts and ReminderCount)
+- **Navigation**: NavigationPage (no Shell), CustomHeader + FlyoutMenu controls
+- **ContactsService**: Returns `List<Contact>`, converts to Person via `ConvertContactToPerson`
+- **App.xaml.cs**: Central state with `App.Account`, `App.Persons`, `App.Contacts`, `App.DeviceSystem`
+- **StartPage wizard flow**: 1→2→3→4→5/6/7→8→9 (based on UseContacts and ReminderCount)
 - **Reminder model**: Method flags (Email, SMS, LockScreen, WhatsApp, Signal), times, and Days
 - **Person.Reminder_1/_2/_3**: Replaced individual reminder flags with Reminder objects
-- **App.xaml.cs**: Central state with `App.Account`, `App.Persons`, `App.Reminder_X_Template`
-- **Code may not compile** - some pages may still reference old properties
 
 ---
 
@@ -113,23 +113,33 @@ BirthdayReminder/
 │   ├── Pages/
 │   │   ├── MainPage.xaml(.cs)
 │   │   ├── AllBirthdaysPage.xaml(.cs)
-│   │   ├── SettingsAllPage.xaml(.cs)
-│   │   ├── SettingsReminderPage.xaml(.cs)
+│   │   ├── CreateBirthdayPage.xaml(.cs)
+│   │   ├── EditBirthdayPage.xaml(.cs)
+│   │   ├── DetailBirthdayPage.xaml(.cs)
+│   │   ├── DeleteBirthdayPage.xaml(.cs)
+│   │   ├── SearchPersonPage.xaml(.cs)
+│   │   ├── AccountPage.xaml(.cs)
 │   │   ├── PrivacyPage.xaml(.cs)
-│   │   ├── Welcome_1Page.xaml(.cs)
-│   │   └── Welcome_2Page.xaml(.cs)
+│   │   ├── HelpPage.xaml(.cs)
+│   │   ├── SyncContactsToPersonsPage.xaml(.cs)
+│   │   ├── SyncPersonsToContactsPage.xaml(.cs)
+│   │   └── StartPage_1..9.xaml(.cs)    # Wizard flow
 │   ├── Services/
+│   │   ├── AccountService.cs       # Account/Settings management
 │   │   ├── ApiService.cs           # HTTP client with <T> support
-│   │   ├── BirthdayService.cs
+│   │   ├── ContactsService.cs      # Phone contacts (partial, platform code)
+│   │   ├── DeepLinkService.cs      # URL scheme handling
+│   │   ├── DeviceService.cs        # Device permissions, theme
 │   │   ├── ErrorService.cs         # Online: Sentry, Offline: prefs
 │   │   ├── MobileService.cs        # Network access detection
-│   │   └── SettingsService.cs
+│   │   ├── NavigationService.cs    # NavigationPage navigation
+│   │   ├── NotificationService.cs  # Local notifications
+│   │   └── PersonService.cs        # Person CRUD operations
 │   ├── Platforms/
-│   │   ├── Android/
-│   │   └── iOS/
+│   │   ├── Android/                # Android-specific (ContactsService, etc.)
+│   │   └── iOS/                    # iOS-specific (ContactsService, etc.)
 │   ├── Resources/
 │   ├── App.xaml / App.xaml.cs
-│   ├── AppShell.xaml / AppShell.xaml.cs
 │   └── MauiProgram.cs
 ├── MobileLanguages/                # Resource files (resx) for localization
 │   ├── Resources.resx              # English (default)
