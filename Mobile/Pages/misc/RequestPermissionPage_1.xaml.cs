@@ -46,7 +46,6 @@ public partial class RequestPermissionPage_1 : ContentPage
 			App.NeedsReadContacts = true;
 			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
-			LabelSuccess.Text = "Berechtigung erteilt";
 		}
 
 		switch (_permissionType)
@@ -81,7 +80,7 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (currentStatus == AppPermissionStatus.Denied)
 		{
-			App.SetRootPage(new RequestPermissionPage_2(_permissionType));
+			await App.PushPageAsync(new RequestPermissionPage_2());
 			return;
 		}
 
@@ -105,13 +104,11 @@ public partial class RequestPermissionPage_1 : ContentPage
 			App.NeedsReadContacts = true;
 			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
-			LabelSuccess.Text = "Berechtigung erteilt";
 		}
 		else
 		{
 			SetPermissionStatus(AppPermissionStatus.Denied);
 			ShowPanel(ResultState.Denied);
-			LabelSuccess.Text = "Berechtigung verweigert";
 
 			if (_permissionType == PermissionType.Contacts)
 			{

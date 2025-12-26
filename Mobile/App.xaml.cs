@@ -25,16 +25,6 @@ public partial class App : Application
 	#region Navigation (for reusable pages)
 	public static Page? ForwardPage { get; set; }
 	public static Page? BackwardPage { get; set; }
-
-	/// <summary>
-	/// Aim: Sets the root page of the application window.
-	/// Params: page - The page to set as root
-	/// </summary>
-	public static void SetRootPage(Page page)
-	{
-		Current!.Windows[0].Page = page;
-	}
-	#endregion
     #endregion
 
 	public App()
@@ -44,7 +34,8 @@ public partial class App : Application
 		ApplyTheme();
 	}
 
-	protected override Window CreateWindow(IActivationState? activationState)
+    #region Proctected Methods
+    protected override Window CreateWindow(IActivationState? activationState)
 	{
 		Page page;
 
@@ -60,12 +51,14 @@ public partial class App : Application
 		Window window = new Window(page);
 		return window;
 	}
+    #endregion
 
-	/// <summary>
-	/// Aim: Erstellt die Haupt-NavigationPage und initialisiert den NavigationService
-	/// Return: NavigationPage mit MainPage als Root
-	/// </summary>
-	public static NavigationPage CreateMainNavigationPage()
+    #region Public Methods
+    /// <summary>
+    /// Aim: Erstellt die Haupt-NavigationPage und initialisiert den NavigationService
+    /// Return: NavigationPage mit MainPage als Root
+    /// </summary>
+    public static NavigationPage CreateMainNavigationPage()
 	{
 		var mainPage = new MainPage();
 		var navigationPage = new NavigationPage(mainPage)
@@ -81,7 +74,52 @@ public partial class App : Application
 		return navigationPage;
 	}
 
-	private void Init()
+    /// <summary>
+    /// Aim: Sets the root page of the application window.
+    /// Params: page - The page to set as root
+    /// </summary>
+    public static void SetRootPage(Page page)
+    {
+        Current!.Windows[0].Page = page;
+    }
+
+    /// <summary>
+    /// Aim: Pushes a page onto the navigation stack.
+    /// If not in a NavigationPage, wraps the current page first.
+    /// Params: page - The page to push
+    /// </summary>
+    public static async Task PushPageAsync(Page page)
+    {
+        var window = Current!.Windows[0];
+        if (window.Page is NavigationPage navPage)
+        {
+            await navPage.PushAsync(page);
+        }
+        else
+        {
+            // Wrap current page in NavigationPage and push
+            var currentPage = window.Page;
+            var navigationPage = new NavigationPage(currentPage);
+            window.Page = navigationPage;
+            await navigationPage.PushAsync(page);
+        }
+    }
+
+    /// <summary>
+    /// Aim: Pops the current page from the navigation stack.
+    /// </summary>
+    public static async Task PopPageAsync()
+    {
+        var window = Current!.Windows[0];
+        if (window.Page is NavigationPage navPage)
+        {
+            await navPage.PopAsync();
+        }
+    }
+    #endregion
+
+    #region Private Methods
+    private void Init()
 	{
 		PersonService.Load();
 		AccountService.Load();
@@ -94,4 +132,5 @@ public partial class App : Application
 		var account = Account;
 		DeviceService.ApplyTheme(account.Theme);
 	}
+    #endregion
 }

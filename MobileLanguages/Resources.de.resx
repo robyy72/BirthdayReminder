@@ -578,27 +578,33 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Start3_ReadAlwaysWrite" xml:space="preserve">
     <value>Immer einlesen und immer Kontakt erstellen oder aktualisieren</value>
   </data>
-  <!-- StartPage_4 -->
-  <data name="Start4_PermissionNeeded" xml:space="preserve">
+  <!-- RequestPermissionPage -->
+  <data name="Permission_Needed" xml:space="preserve">
     <value>Berechtigung benötigt</value>
   </data>
-  <data name="Start4_GrantPermission" xml:space="preserve">
+  <data name="Permission_GrantRequest" xml:space="preserve">
     <value>Jetzt bitte Berechtigung für dieses Telefon erteilen</value>
   </data>
-  <data name="Start4_StartDialog" xml:space="preserve">
+  <data name="Permission_StartDialog" xml:space="preserve">
     <value>Dialog starten</value>
   </data>
-  <data name="Start4_Result" xml:space="preserve">
+  <data name="Permission_Result" xml:space="preserve">
     <value>Ergebnis</value>
   </data>
-  <data name="Start4_WaitingForPermission" xml:space="preserve">
+  <data name="Permission_Waiting" xml:space="preserve">
     <value>Warte auf Berechtigung...</value>
   </data>
-  <data name="Start4_LoadingContacts" xml:space="preserve">
-    <value>Kontakte werden geladen...</value>
+  <data name="Permission_Granted" xml:space="preserve">
+    <value>Berechtigung erteilt</value>
   </data>
-  <data name="Start4_PermissionDenied" xml:space="preserve">
+  <data name="Permission_Denied" xml:space="preserve">
     <value>Berechtigung nicht erteilt, auch ok</value>
+  </data>
+  <data name="Permission_DeniedInfo" xml:space="preserve">
+    <value>Die Berechtigung wurde bereits abgelehnt. Der Dialog kann nicht erneut angezeigt werden. Bitte gehe in die Einstellungen deines Geräts, um die Berechtigung manuell zu erteilen.</value>
+  </data>
+  <data name="Permission_OpenSettings" xml:space="preserve">
+    <value>Einstellungen öffnen</value>
   </data>
   <!-- StartPage_5 -->
   <data name="Start5_ReminderQuestion" xml:space="preserve">

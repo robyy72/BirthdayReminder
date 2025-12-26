@@ -578,27 +578,33 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Start3_ReadAlwaysWrite" xml:space="preserve">
     <value>Always read and always create or update contact</value>
   </data>
-  <!-- StartPage_4 -->
-  <data name="Start4_PermissionNeeded" xml:space="preserve">
+  <!-- RequestPermissionPage -->
+  <data name="Permission_Needed" xml:space="preserve">
     <value>Permission required</value>
   </data>
-  <data name="Start4_GrantPermission" xml:space="preserve">
+  <data name="Permission_GrantRequest" xml:space="preserve">
     <value>Please grant permission for this phone now</value>
   </data>
-  <data name="Start4_StartDialog" xml:space="preserve">
+  <data name="Permission_StartDialog" xml:space="preserve">
     <value>Start dialog</value>
   </data>
-  <data name="Start4_Result" xml:space="preserve">
+  <data name="Permission_Result" xml:space="preserve">
     <value>Result</value>
   </data>
-  <data name="Start4_WaitingForPermission" xml:space="preserve">
+  <data name="Permission_Waiting" xml:space="preserve">
     <value>Waiting for permission...</value>
   </data>
-  <data name="Start4_LoadingContacts" xml:space="preserve">
-    <value>Loading contacts...</value>
+  <data name="Permission_Granted" xml:space="preserve">
+    <value>Permission granted</value>
   </data>
-  <data name="Start4_PermissionDenied" xml:space="preserve">
+  <data name="Permission_Denied" xml:space="preserve">
     <value>Permission not granted, that's ok too</value>
+  </data>
+  <data name="Permission_DeniedInfo" xml:space="preserve">
+    <value>The permission was already denied. The dialog cannot be shown again. Please go to your device settings to grant the permission manually.</value>
+  </data>
+  <data name="Permission_OpenSettings" xml:space="preserve">
+    <value>Open Settings</value>
   </data>
   <!-- StartPage_5 -->
   <data name="Start5_ReminderQuestion" xml:space="preserve">

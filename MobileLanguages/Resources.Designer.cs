@@ -1858,65 +1858,83 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please grant permission for this phone now ähnelt.
-        /// </summary>
-        public static string Start4_GrantPermission {
-            get {
-                return ResourceManager.GetString("Start4_GrantPermission", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Loading contacts... ähnelt.
-        /// </summary>
-        public static string Start4_LoadingContacts {
-            get {
-                return ResourceManager.GetString("Start4_LoadingContacts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Permission not granted, that&apos;s ok too ähnelt.
         /// </summary>
-        public static string Start4_PermissionDenied {
+        public static string Permission_Denied {
             get {
-                return ResourceManager.GetString("Start4_PermissionDenied", resourceCulture);
+                return ResourceManager.GetString("Permission_Denied", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The permission was already denied... ähnelt.
+        /// </summary>
+        public static string Permission_DeniedInfo {
+            get {
+                return ResourceManager.GetString("Permission_DeniedInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Permission granted ähnelt.
+        /// </summary>
+        public static string Permission_Granted {
+            get {
+                return ResourceManager.GetString("Permission_Granted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please grant permission for this phone now ähnelt.
+        /// </summary>
+        public static string Permission_GrantRequest {
+            get {
+                return ResourceManager.GetString("Permission_GrantRequest", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Permission required ähnelt.
         /// </summary>
-        public static string Start4_PermissionNeeded {
+        public static string Permission_Needed {
             get {
-                return ResourceManager.GetString("Start4_PermissionNeeded", resourceCulture);
+                return ResourceManager.GetString("Permission_Needed", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open Settings ähnelt.
+        /// </summary>
+        public static string Permission_OpenSettings {
+            get {
+                return ResourceManager.GetString("Permission_OpenSettings", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Result ähnelt.
         /// </summary>
-        public static string Start4_Result {
+        public static string Permission_Result {
             get {
-                return ResourceManager.GetString("Start4_Result", resourceCulture);
+                return ResourceManager.GetString("Permission_Result", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start dialog ähnelt.
         /// </summary>
-        public static string Start4_StartDialog {
+        public static string Permission_StartDialog {
             get {
-                return ResourceManager.GetString("Start4_StartDialog", resourceCulture);
+                return ResourceManager.GetString("Permission_StartDialog", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Waiting for permission... ähnelt.
         /// </summary>
-        public static string Start4_WaitingForPermission {
+        public static string Permission_Waiting {
             get {
-                return ResourceManager.GetString("Start4_WaitingForPermission", resourceCulture);
+                return ResourceManager.GetString("Permission_Waiting", resourceCulture);
             }
         }
         
