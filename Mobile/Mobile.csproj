@@ -14,8 +14,11 @@
 		<ApplicationTitle>Birthday-Reminder</ApplicationTitle>
 
 		<!-- App Identifier (ohne Bindestrich - Apple erlaubt keine Bindestriche in Bundle IDs) -->
-		<ApplicationId>online.birthdayreminder.app</ApplicationId>
+		<!--<ApplicationId>online.birthdayreminder.app</ApplicationId>-->
 
+		<ApplicationId Condition="'$(Configuration)'=='Debug'">online.birthdayreminder.vs2022</ApplicationId>
+		<ApplicationId Condition="'$(Configuration)'=='Release'">online.birthdayreminder.app</ApplicationId>
+		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>20</ApplicationVersion>
