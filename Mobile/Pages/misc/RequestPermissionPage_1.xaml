@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:local="clr-namespace:Mobile"
-             x:Class="Mobile.StartPage_4"
-             x:DataType="local:StartPage_4"
+             x:Class="Mobile.RequestPermissionPage_1"
+             x:DataType="local:RequestPermissionPage_1"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
@@ -56,18 +56,6 @@
                             <VerticalStackLayout x:Name="PanelInitial">
                                 <Label Text="{x:Static resx:Resources.Start4_WaitingForPermission}"
                                        Style="{StaticResource LabelInfo}" />
-                            </VerticalStackLayout>
-
-                            <!-- Loading State -->
-                            <VerticalStackLayout x:Name="PanelLoading" IsVisible="False" Spacing="15">
-                                <ActivityIndicator IsRunning="True"
-                                                   Color="{StaticResource Primary}"
-                                                   WidthRequest="40"
-                                                   HeightRequest="40"
-                                                   HorizontalOptions="Center" />
-                                <Label Text="{x:Static resx:Resources.Start4_LoadingContacts}"
-                                       Style="{StaticResource LabelInfo}"
-                                       HorizontalOptions="Center" />
                             </VerticalStackLayout>
 
                             <!-- Success State -->

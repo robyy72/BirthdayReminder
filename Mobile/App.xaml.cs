@@ -21,6 +21,11 @@ public partial class App : Application
     public static List<Contact> Contacts { get; set; } = [];
     public static Account Account { get; set; } = new();
 	public static bool NeedsReadContacts { get; set; } = false;
+
+	#region Navigation (for reusable pages)
+	public static Page? ForwardPage { get; set; }
+	public static Page? BackwardPage { get; set; }
+	#endregion
     #endregion
 
 	public App()

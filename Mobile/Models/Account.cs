@@ -33,6 +33,11 @@ public class Account
 	public ContactsAccessChoice ContactsAccessChoice { get; set; } = ContactsAccessChoice.NotSet;
 	#endregion
 
+	#region Permissions
+	public AppPermissionStatus ContactsPermission { get; set; } = AppPermissionStatus.NotSet;
+	public AppPermissionStatus CalendarPermission { get; set; } = AppPermissionStatus.NotSet;
+	#endregion
+
 	#region Calendars
 	// Device Calendar
 	public bool DeviceCalendar_Enabled { get; set; }

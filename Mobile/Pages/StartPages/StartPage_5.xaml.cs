@@ -35,9 +35,15 @@ public partial class StartPage_5 : ContentPage
 		if (Application.Current?.Windows.Count > 0)
 		{
 			if (AccountService.UseContacts())
-				Application.Current.Windows[0].Page = new StartPage_4();
+			{
+				App.BackwardPage = new StartPage_3();
+				App.ForwardPage = new StartPage_5();
+				Application.Current.Windows[0].Page = new RequestPermissionPage_1(PermissionType.Contacts);
+			}
 			else
+			{
 				Application.Current.Windows[0].Page = new StartPage_2();
+			}
 		}
 	}
 

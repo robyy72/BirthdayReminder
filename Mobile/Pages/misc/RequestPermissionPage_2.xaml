@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:local="clr-namespace:Mobile"
+             x:Class="Mobile.RequestPermissionPage_2"
+             x:DataType="local:RequestPermissionPage_2"
+             Title="{x:Static resx:Resources.Page_Welcome_Title}"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header with Back Button -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*">
+            <Button Grid.Column="0"
+                    Style="{StaticResource ButtonBack}"
+                    Clicked="OnBackClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_Main_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <!-- Card: Settings Required -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Start4_PermissionNeeded}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="20">
+                            <Label x:Name="LabelInfo"
+                                   Text="Die Berechtigung wurde bereits abgelehnt. Der Dialog kann nicht erneut angezeigt werden. Bitte gehe in die Einstellungen deines Geräts, um die Berechtigung manuell zu erteilen."
+                                   Style="{StaticResource LabelInfo}" />
+
+                            <Button x:Name="ButtonOpenSettings"
+                                    Text="Einstellungen öffnen"
+                                    Style="{StaticResource ButtonPrimary}"
+                                    Clicked="OnOpenSettingsClicked" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Bottom Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Back}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnBackClicked" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

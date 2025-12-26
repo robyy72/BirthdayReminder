@@ -2,14 +2,18 @@ namespace Mobile;
 
 public partial class StartPage_3 : ContentPage
 {
+	#region Fields
 	private bool _isLoading = true;
+	#endregion
 
+	#region Constructor
 	public StartPage_3()
 	{
 		InitializeComponent();
 		LoadAccount();
 		_isLoading = false;
 	}
+	#endregion
 
 	private void LoadAccount()
 	{
@@ -98,7 +102,9 @@ public partial class StartPage_3 : ContentPage
 		// Navigate to permission request page
 		if (Application.Current?.Windows.Count > 0)
 		{
-			Application.Current.Windows[0].Page = new StartPage_4();
+			App.BackwardPage = new StartPage_3();
+			App.ForwardPage = new StartPage_5();
+			Application.Current.Windows[0].Page = new RequestPermissionPage_1(PermissionType.Contacts);
 		}
 	}
 }

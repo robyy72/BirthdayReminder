@@ -44,3 +44,17 @@ public enum ReminderCount
 	TwoReminders = 2,
 	ThreeReminders = 3
 }
+
+public enum AppPermissionStatus
+{
+	NotSet = 0,
+	Granted = 1,
+	Denied = 2
+}
+
+public enum PermissionType
+{
+	NotSet = 0,
+	Contacts = 1,
+	Calendar = 2
+}
