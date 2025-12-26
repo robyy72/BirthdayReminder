@@ -2,16 +2,11 @@ namespace Mobile;
 
 public partial class ReminderStandardSettings : ContentPage
 {
-	#region Fields
-	private bool _isLoading = true;
-	#endregion
-
 	#region Constructor
 	public ReminderStandardSettings()
 	{
 		InitializeComponent();
 		LoadSettings();
-		_isLoading = false;
 	}
 	#endregion
 

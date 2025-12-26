@@ -21,7 +21,7 @@
 		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>20</ApplicationVersion>
+		<ApplicationVersion>21</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -34,7 +34,7 @@
 	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
 		<ProvisioningType>manual</ProvisioningType>
 		<CodesignKey>Apple Development: Created via API (U9925D3F2N)</CodesignKey>
-		<CodesignProvision>VS: online.birthdayreminder.app Development</CodesignProvision>
+		<CodesignProvision>VS: online.birthdayreminder.vs2022 Development</CodesignProvision>
 		<EnableCodeSigning>true</EnableCodeSigning>
 	</PropertyGroup>
 

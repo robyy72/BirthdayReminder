@@ -696,19 +696,6 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="ReminderMethod_Alarm" xml:space="preserve">
     <value>Alarm</value>
   </data>
-  <!-- Reminder Methods - External (override existing) -->
-  <data name="ReminderMethod_Email" xml:space="preserve">
-    <value>E-Mail</value>
-  </data>
-  <data name="ReminderMethod_Sms" xml:space="preserve">
-    <value>SMS</value>
-  </data>
-  <data name="ReminderMethod_WhatsApp" xml:space="preserve">
-    <value>WhatsApp</value>
-  </data>
-  <data name="ReminderMethod_Signal" xml:space="preserve">
-    <value>Signal</value>
-  </data>
   <!-- Reminder Message Templates - Today -->
   <data name="ReminderTemplate_Email_Today" xml:space="preserve">
     <value>Hallo,
