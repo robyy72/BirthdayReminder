@@ -62,7 +62,7 @@ public partial class HelpPage : ContentPage
 		}
 		else
 		{
-			await NavigationService.GoBack();
+			await App.GoBackAsync();
 		}
 	}
 }

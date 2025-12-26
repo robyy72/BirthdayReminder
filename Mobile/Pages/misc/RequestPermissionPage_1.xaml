@@ -38,7 +38,7 @@
 
                             <Button x:Name="ButtonRequestPermission"
                                     Text="{x:Static resx:Resources.Permission_StartDialog}"
-                                    Style="{StaticResource ButtonPrimary}"
+                                    Style="{StaticResource ButtonGreen}"
                                     Clicked="OnRequestPermissionClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>

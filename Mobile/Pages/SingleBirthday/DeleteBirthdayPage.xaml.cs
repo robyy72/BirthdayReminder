@@ -29,7 +29,7 @@ public partial class DeleteBirthdayPage : ContentPage
 		}
 		else
 		{
-			await NavigationService.GoBack();
+			await App.GoBackAsync();
 		}
 	}
 
@@ -38,7 +38,7 @@ public partial class DeleteBirthdayPage : ContentPage
 		_person = PersonService.GetById(id);
 		if (_person == null)
 		{
-			await NavigationService.GoBack();
+			await App.GoBackAsync();
 			return;
 		}
 
@@ -63,7 +63,7 @@ public partial class DeleteBirthdayPage : ContentPage
 
 	private async void OnCancelClicked(object? sender, EventArgs e)
 	{
-		await NavigationService.GoBack();
+		await App.GoBackAsync();
 	}
 
 	private async void OnDeleteClicked(object? sender, EventArgs e)
@@ -75,6 +75,6 @@ public partial class DeleteBirthdayPage : ContentPage
 
 		NotificationService.CancelForPerson(_person.Id);
 		PersonService.Remove(_person.Id);
-		await NavigationService.NavigateToRoot();
+		await App.NavigateToRootAsync();
 	}
 }

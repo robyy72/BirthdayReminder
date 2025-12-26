@@ -31,7 +31,7 @@ public partial class MainPage : ContentPage
 			ContactsService.ReadContactsIfAllowed();
 			if (App.Contacts.Count > 0)
 			{
-                await NavigationService.NavigateTo<SyncContactsToPersonsPage>();
+                await App.NavigateToAsync<SyncContactsToPersonsPage>();
             }
         }
 	}
@@ -44,29 +44,29 @@ public partial class MainPage : ContentPage
         // Otherwise show search page to avoid duplicates
         if (App.Account.ContactsReadMode == ContactsReadMode.None)
         {
-            await NavigationService.NavigateTo<CreateBirthdayPage>();
+            await App.NavigateToAsync<CreateBirthdayPage>();
         }
         else
         {
-            await NavigationService.NavigateTo<SearchPersonPage>();
+            await App.NavigateToAsync<SearchPersonPage>();
         }
     }
 
     private async void OnAllBirthdaysClicked(object? sender, EventArgs e)
     {
-        await NavigationService.NavigateTo<AllBirthdaysPage>();
+        await App.NavigateToAsync<AllBirthdaysPage>();
     }
 
     private async void OnSettingsClicked(object? sender, EventArgs e)
     {
-        await NavigationService.NavigateTo<AccountPage>();
+        await App.NavigateToAsync<AccountPage>();
     }
 
     private async void OnBirthdaySelected(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
         {
-            await NavigationService.NavigateTo<DetailBirthdayPage>(vm.Id);
+            await App.NavigateToAsync<DetailBirthdayPage>(vm.Id);
         }
 
         if (sender is CollectionView cv)

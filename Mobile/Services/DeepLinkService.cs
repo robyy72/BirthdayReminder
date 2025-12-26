@@ -53,8 +53,8 @@ public static class DeepLinkService
             }
 
             // Person gefunden → zur Detail-Page navigieren
-            await NavigationService.NavigateToRoot();
-            await NavigationService.NavigateTo<DetailBirthdayPage>(personId);
+            await App.NavigateToRootAsync();
+            await App.NavigateToAsync<DetailBirthdayPage>(personId);
             return true;
         }
         catch (Exception ex)

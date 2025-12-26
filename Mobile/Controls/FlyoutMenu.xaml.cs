@@ -1,7 +1,3 @@
-#region Usings
-using Microsoft.Maui.Controls;
-#endregion
-
 namespace Mobile;
 
 /// <summary>
@@ -19,8 +15,8 @@ public partial class FlyoutMenu : ContentView
         InitializeComponent();
         VersionLabel.Text = $"Version {AppInfo.Current.VersionString} ({AppInfo.Current.BuildString})";
 
-        NavigationService.FlyoutOpenRequested += OnFlyoutOpenRequested;
-        NavigationService.FlyoutCloseRequested += OnFlyoutCloseRequested;
+        App.FlyoutOpenRequested += OnFlyoutOpenRequested;
+        App.FlyoutCloseRequested += OnFlyoutCloseRequested;
     }
     #endregion
 
@@ -63,41 +59,36 @@ public partial class FlyoutMenu : ContentView
 
     private void OnOverlayTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
+        App.CloseFlyout();
     }
 
     private async void OnOverviewTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
-        await NavigationService.NavigateToRoot();
+        await App.NavigateToRootAsync();
     }
 
     private async void OnAccountTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
-        await NavigationService.NavigateToRoot();
-        await NavigationService.NavigateTo<AccountPage>();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<AccountPage>();
     }
 
     private async void OnSettingsTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
-        await NavigationService.NavigateToRoot();
-        await NavigationService.NavigateTo<SettingsPage>();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<SettingsPage>();
     }
 
     private async void OnRemindersTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
-        await NavigationService.NavigateToRoot();
-        await NavigationService.NavigateTo<ReminderStandardSettings>();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<ReminderStandardSettings>();
     }
 
     private async void OnPrivacyTapped(object? sender, TappedEventArgs e)
     {
-        NavigationService.CloseFlyout();
-        await NavigationService.NavigateToRoot();
-        await NavigationService.NavigateTo<PrivacyPage>();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<PrivacyPage>();
     }
     #endregion
 }

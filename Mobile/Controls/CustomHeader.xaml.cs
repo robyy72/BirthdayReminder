@@ -1,7 +1,3 @@
-#region Usings
-using Microsoft.Maui.Controls;
-#endregion
-
 namespace Mobile;
 
 /// <summary>
@@ -89,12 +85,12 @@ public partial class CustomHeader : ContentView
     #region Event Handlers
     private void OnMenuClicked(object? sender, EventArgs e)
     {
-        NavigationService.OpenFlyout();
+        App.OpenFlyout();
     }
 
     private async void OnBackClicked(object? sender, EventArgs e)
     {
-        await NavigationService.GoBack();
+        await App.GoBackAsync();
     }
     #endregion
 }

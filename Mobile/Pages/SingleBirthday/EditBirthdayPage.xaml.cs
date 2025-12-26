@@ -72,7 +72,7 @@ public partial class EditBirthdayPage : ContentPage
         _person = PersonService.GetById(_personId);
         if (_person == null)
         {
-            await NavigationService.GoBack();
+            await App.GoBackAsync();
             return;
         }
 
@@ -145,7 +145,7 @@ public partial class EditBirthdayPage : ContentPage
 
         PersonService.Update(_person);
 
-        await NavigationService.GoBack();
+        await App.GoBackAsync();
     }
 
     private async void OnHelpBirthdayTapped(object? sender, EventArgs e)

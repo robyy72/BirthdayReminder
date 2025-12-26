@@ -103,7 +103,7 @@ public partial class ReminderStandardSettings : ContentPage
 
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
-		await NavigationService.GoBack();
+		await App.GoBackAsync();
 	}
 	#endregion
 }

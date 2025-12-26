@@ -33,7 +33,7 @@ public partial class DetailBirthdayPage : ContentPage
         _person = PersonService.GetById(_personId);
         if (_person == null)
         {
-            await NavigationService.GoBack();
+            await App.GoBackAsync();
             return;
         }
 
@@ -83,17 +83,17 @@ public partial class DetailBirthdayPage : ContentPage
     #region Event Handlers
     private async void OnEditClicked(object? sender, EventArgs e)
     {
-        await NavigationService.NavigateTo<EditBirthdayPage>(_personId);
+        await App.NavigateToAsync<EditBirthdayPage>(_personId);
     }
 
     private async void OnEditMenuClicked(object? sender, EventArgs e)
     {
-        await NavigationService.NavigateTo<EditBirthdayPage>(_personId);
+        await App.NavigateToAsync<EditBirthdayPage>(_personId);
     }
 
     private async void OnDeleteMenuClicked(object? sender, EventArgs e)
     {
-        await NavigationService.NavigateTo<DeleteBirthdayPage>(_personId);
+        await App.NavigateToAsync<DeleteBirthdayPage>(_personId);
     }
     #endregion
 }

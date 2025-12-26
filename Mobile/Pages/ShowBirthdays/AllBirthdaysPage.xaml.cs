@@ -83,7 +83,7 @@ public partial class AllBirthdaysPage : ContentPage
 	{
 		if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
 		{
-			await NavigationService.NavigateTo<DetailBirthdayPage>(vm.Id);
+			await App.NavigateToAsync<DetailBirthdayPage>(vm.Id);
 		}
 
 		if (sender is CollectionView cv)
@@ -94,11 +94,11 @@ public partial class AllBirthdaysPage : ContentPage
 
 	private async void OnNewBirthdayClicked(object? sender, EventArgs e)
 	{
-		await NavigationService.NavigateTo<CreateBirthdayPage>();
+		await App.NavigateToAsync<CreateBirthdayPage>();
 	}
 
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
-		await NavigationService.GoBack();
+		await App.GoBackAsync();
 	}
 }

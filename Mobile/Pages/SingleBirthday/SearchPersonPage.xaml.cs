@@ -53,13 +53,13 @@ public partial class SearchPersonPage : ContentPage
 		ResultsList.SelectedItem = null;
 
 		// Navigate to EditBirthday with this person's ID
-		await NavigationService.NavigateTo<EditBirthdayPage>(selectedPerson.Id);
+		await App.NavigateToAsync<EditBirthdayPage>(selectedPerson.Id);
 	}
 
 	private async void OnCreateNewClicked(object? sender, EventArgs e)
 	{
 		// Navigate to CreateBirthday with search text as prefill
 		string searchText = SearchEntry.Text?.Trim() ?? string.Empty;
-		await NavigationService.NavigateTo<CreateBirthdayPage>(searchText);
+		await App.NavigateToAsync<CreateBirthdayPage>(searchText);
 	}
 }

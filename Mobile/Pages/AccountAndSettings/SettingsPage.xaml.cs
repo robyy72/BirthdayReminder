@@ -234,7 +234,7 @@ public partial class SettingsPage : ContentPage
 	#region Back
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
-		await NavigationService.GoBack();
+		await App.GoBackAsync();
 	}
 	#endregion
 }

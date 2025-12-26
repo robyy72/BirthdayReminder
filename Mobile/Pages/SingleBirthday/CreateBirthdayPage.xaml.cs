@@ -141,7 +141,7 @@ public partial class CreateBirthdayPage : ContentPage
 
         PersonService.Add(person);
 
-        await NavigationService.GoBack();
+        await App.GoBackAsync();
     }
 
     private async void OnHelpBirthdayTapped(object? sender, EventArgs e)
@@ -240,7 +240,7 @@ public partial class CreateBirthdayPage : ContentPage
             int personId = person.Id;
             tapGesture.Tapped += async (s, e) =>
             {
-                await NavigationService.NavigateTo<EditBirthdayPage>(personId);
+                await App.NavigateToAsync<EditBirthdayPage>(personId);
             };
             label.GestureRecognizers.Add(tapGesture);
 

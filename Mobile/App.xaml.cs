@@ -6,6 +6,10 @@ namespace Mobile;
 
 public partial class App : Application
 {
+    #region Private Fields
+    private static INavigation? _navigation;
+    #endregion
+
     #region Public Properties
 
     #region Reminder Templates (used during StartPage wizard)
@@ -25,6 +29,13 @@ public partial class App : Application
 	#region Navigation (for reusable pages)
 	public static Page? ForwardPage { get; set; }
 	public static Page? BackwardPage { get; set; }
+    #endregion
+
+    #region Flyout Events
+    public static event Action? FlyoutOpenRequested;
+    public static event Action? FlyoutCloseRequested;
+    #endregion
+
     #endregion
 
 	public App()
@@ -54,8 +65,10 @@ public partial class App : Application
     #endregion
 
     #region Public Methods
+
+    #region Main Navigation Setup
     /// <summary>
-    /// Aim: Erstellt die Haupt-NavigationPage und initialisiert den NavigationService
+    /// Aim: Erstellt die Haupt-NavigationPage und initialisiert die Navigation
     /// Return: NavigationPage mit MainPage als Root
     /// </summary>
     public static NavigationPage CreateMainNavigationPage()
@@ -69,11 +82,13 @@ public partial class App : Application
 			BarTextColor = Colors.White
 		};
 
-		NavigationService.Initialize(navigationPage.Navigation);
+		_navigation = navigationPage.Navigation;
 
 		return navigationPage;
 	}
+    #endregion
 
+    #region Root Page Methods
     /// <summary>
     /// Aim: Sets the root page of the application window.
     /// Params: page - The page to set as root
@@ -116,6 +131,83 @@ public partial class App : Application
             await navPage.PopAsync();
         }
     }
+    #endregion
+
+    #region Stack Navigation Methods
+    /// <summary>
+    /// Aim: Navigiert zu einer neuen Page
+    /// Params: TPage - Der Page-Typ
+    /// </summary>
+    public static async Task NavigateToAsync<TPage>() where TPage : Page, new()
+    {
+        if (_navigation == null)
+            return;
+
+        CloseFlyout();
+        var page = new TPage();
+        await _navigation.PushAsync(page);
+    }
+
+    /// <summary>
+    /// Aim: Navigiert zu einer neuen Page mit Parameter
+    /// Params: TPage - Der Page-Typ, parameter - Der Parameter für die Page
+    /// </summary>
+    public static async Task NavigateToAsync<TPage>(object parameter) where TPage : Page
+    {
+        if (_navigation == null)
+            return;
+
+        CloseFlyout();
+        var page = (TPage?)Activator.CreateInstance(typeof(TPage), parameter);
+        if (page != null)
+        {
+            await _navigation.PushAsync(page);
+        }
+    }
+
+    /// <summary>
+    /// Aim: Navigiert zur vorherigen Page
+    /// </summary>
+    public static async Task GoBackAsync()
+    {
+        if (_navigation == null)
+            return;
+
+        CloseFlyout();
+        await _navigation.PopAsync();
+    }
+
+    /// <summary>
+    /// Aim: Navigiert zur Root-Page
+    /// </summary>
+    public static async Task NavigateToRootAsync()
+    {
+        if (_navigation == null)
+            return;
+
+        CloseFlyout();
+        await _navigation.PopToRootAsync();
+    }
+    #endregion
+
+    #region Flyout Methods
+    /// <summary>
+    /// Aim: Öffnet das Flyout-Menü
+    /// </summary>
+    public static void OpenFlyout()
+    {
+        FlyoutOpenRequested?.Invoke();
+    }
+
+    /// <summary>
+    /// Aim: Schließt das Flyout-Menü
+    /// </summary>
+    public static void CloseFlyout()
+    {
+        FlyoutCloseRequested?.Invoke();
+    }
+    #endregion
+
     #endregion
 
     #region Private Methods
