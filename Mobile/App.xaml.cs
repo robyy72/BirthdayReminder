@@ -21,7 +21,6 @@ public partial class App : Application
     public static List<Contact> Contacts { get; set; } = [];
     public static Account Account { get; set; } = new();
 	public static bool NeedsReadContacts { get; set; } = false;
-	public static DeviceSystem DeviceSystem { get; set; } = DeviceSystem.NotSet;
     #endregion
 
 	public App()
@@ -70,11 +69,6 @@ public partial class App : Application
 
 	private void Init()
 	{
-#if IOS
-		DeviceSystem = DeviceSystem.iOS;
-#elif ANDROID
-		DeviceSystem = DeviceSystem.Android;
-#endif
 		PersonService.Load();
 		AccountService.Load();
 		if (AccountService.UseContacts())

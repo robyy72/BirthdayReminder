@@ -26,13 +26,6 @@ public enum SupportEntryStatus
 	Cancelled = 6
 }
 
-public enum DeviceSystem
-{
-	NotSet = 0,
-	iOS = 1,
-	Android = 2
-}
-
 public enum SubscriptionTier
 {
 	Free,

@@ -20,7 +20,7 @@
 
 - **Navigation**: NavigationPage (no Shell), CustomHeader + FlyoutMenu controls
 - **ContactsService**: Returns `List<Contact>`, converts to Person via `ConvertContactToPerson`
-- **App.xaml.cs**: Central state with `App.Account`, `App.Persons`, `App.Contacts`, `App.DeviceSystem`
+- **App.xaml.cs**: Central state with `App.Account`, `App.Persons`, `App.Contacts`
 - **StartPage wizard flow**: 1→2→3→4→5/6/7→8→9 (based on UseContacts and ReminderCount)
 - **Reminder model**: Method flags (Email, SMS, LockScreen, WhatsApp, Signal), times, and Days
 - **Person.Reminder_1/_2/_3**: Replaced individual reminder flags with Reminder objects
