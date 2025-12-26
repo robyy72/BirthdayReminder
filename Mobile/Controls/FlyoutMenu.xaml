@@ -6,9 +6,9 @@
              IsVisible="False">
 
     <Grid>
-        <!-- Semi-transparent overlay (tap to close) -->
+        <!-- Semi-transparent overlay (tap to close, MainPage visible behind) -->
         <BoxView x:Name="Overlay"
-                 Color="#80000000"
+                 Color="#40000000"
                  Opacity="0">
             <BoxView.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnOverlayTapped" />
@@ -21,9 +21,9 @@
                 StrokeThickness="0"
                 Padding="0"
                 HorizontalOptions="Start"
-                WidthRequest="280"
+                WidthRequest="250"
                 Shadow="{Shadow Brush=Black, Offset='5,5', Radius=10, Opacity=0.3}"
-                TranslationX="-280">
+                TranslationX="-250">
 
             <Grid RowDefinitions="60,*,Auto">
 

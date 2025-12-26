@@ -3,75 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.CustomHeader">
 
-    <Grid RowDefinitions="Auto,Auto">
-        <!-- Header Bar -->
-        <Grid Grid.Row="0"
-              BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
-              MinimumHeightRequest="50"
-              Padding="15,12"
-              ColumnDefinitions="Auto,*,Auto">
+    <!-- Header Bar -->
+    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
+          MinimumHeightRequest="50"
+          Padding="15,5,12,5"
+          ColumnDefinitions="Auto,*,Auto">
 
-            <!-- Menu Button (Hamburger) -->
-            <Button x:Name="MenuButton"
-                    Grid.Column="0"
-                    Text="☰"
-                    FontSize="24"
-                    TextColor="{StaticResource White}"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    WidthRequest="50"
-                    HeightRequest="50"
-                    Clicked="OnMenuClicked" />
+        <!-- Menu Button (Hamburger) -->
+        <Button x:Name="MenuButton"
+                Grid.Column="0"
+                Text="☰"
+                FontSize="24"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                Clicked="OnMenuClicked" />
 
-            <!-- Back Button -->
-            <Button x:Name="BackButton"
-                    Grid.Column="0"
-                    Text="◀"
-                    FontSize="20"
-                    TextColor="{StaticResource White}"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    WidthRequest="50"
-                    HeightRequest="50"
-                    IsVisible="False"
-                    Clicked="OnBackClicked" />
-
-            <!-- Title -->
-            <Label x:Name="TitleLabel"
-                   Grid.Column="1"
-                   Text=""
-                   Style="{StaticResource LabelHeaderBar}"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center" />
-
-            <!-- Context Menu Button -->
-            <Button x:Name="ContextMenuButton"
-                    Grid.Column="2"
-                    Text="⋮"
-                    FontSize="24"
-                    TextColor="{StaticResource White}"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    WidthRequest="50"
-                    HeightRequest="50"
-                    IsVisible="False"
-                    Clicked="OnContextMenuButtonClicked" />
-        </Grid>
-
-        <!-- Context Menu Dropdown -->
-        <Border x:Name="ContextMenuDropdown"
-                Grid.Row="1"
+        <!-- Back Button -->
+        <Button x:Name="BackButton"
+                Grid.Column="0"
+                Text="◀"
+                FontSize="20"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
                 IsVisible="False"
-                HorizontalOptions="End"
-                Margin="0,0,10,0"
-                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray800}}"
-                Stroke="{StaticResource Gray300}"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 8">
-            <VerticalStackLayout x:Name="ContextMenuItems"
-                                 Padding="5"
-                                 Spacing="2" />
-        </Border>
+                Clicked="OnBackClicked" />
+
+        <!-- Title -->
+        <Label x:Name="TitleLabel"
+               Grid.Column="1"
+               Text=""
+               Style="{StaticResource LabelHeaderBar}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <!-- Context Menu Button (uses Opacity to reserve space when hidden) -->
+        <Button x:Name="ContextMenuButton"
+                Grid.Column="2"
+                Text="⋮"
+                FontSize="24"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                MinimumWidthRequest="30"
+                Opacity="0"
+                InputTransparent="True"
+                Clicked="OnContextMenuButtonClicked" />
     </Grid>
 
 </ContentView>

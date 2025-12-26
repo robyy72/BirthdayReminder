@@ -1,20 +1,7 @@
-#region Usings
-using System.Collections.ObjectModel;
-#endregion
-
 namespace Mobile;
 
 /// <summary>
-/// Aim: Represents a context menu item with text and click action
-/// </summary>
-public class ContextMenuItem
-{
-    public string Text { get; set; } = string.Empty;
-    public Action? ClickAction { get; set; }
-}
-
-/// <summary>
-/// Aim: Wiederverwendbarer Header mit Hamburger-Menü, Back-Button und Context-Menü
+/// Aim: Wiederverwendbarer Header mit Hamburger-Menü, Back-Button und Context-Menü Button
 /// </summary>
 public partial class CustomHeader : ContentView
 {
@@ -72,8 +59,6 @@ public partial class CustomHeader : ContentView
         get => (bool)GetValue(ShowContextMenuProperty);
         set => SetValue(ShowContextMenuProperty, value);
     }
-
-    public ObservableCollection<ContextMenuItem> MenuItems { get; } = [];
     #endregion
 
     #region Constructor
@@ -81,31 +66,6 @@ public partial class CustomHeader : ContentView
     {
         InitializeComponent();
         UpdateButtonVisibility();
-
-        App.ContextMenuOpenRequested += OnContextMenuOpenRequested;
-        App.ContextMenuCloseRequested += OnContextMenuCloseRequested;
-    }
-    #endregion
-
-    #region Public Methods
-    /// <summary>
-    /// Aim: Adds a menu item to the context menu
-    /// Params: text - Display text, clickAction - Action to execute on click
-    /// </summary>
-    public void AddMenuItem(string text, Action clickAction)
-    {
-        var item = new ContextMenuItem { Text = text, ClickAction = clickAction };
-        MenuItems.Add(item);
-        BuildMenuItems();
-    }
-
-    /// <summary>
-    /// Aim: Clears all menu items
-    /// </summary>
-    public void ClearMenuItems()
-    {
-        MenuItems.Clear();
-        ContextMenuItems.Children.Clear();
     }
     #endregion
 
@@ -130,7 +90,9 @@ public partial class CustomHeader : ContentView
     {
         if (bindable is CustomHeader header)
         {
-            header.ContextMenuButton.IsVisible = (bool)newValue;
+            var show = (bool)newValue;
+            header.ContextMenuButton.Opacity = show ? 1 : 0;
+            header.ContextMenuButton.InputTransparent = !show;
         }
     }
     #endregion
@@ -140,59 +102,6 @@ public partial class CustomHeader : ContentView
     {
         MenuButton.IsVisible = ShowMenuButton && !ShowBackButton;
         BackButton.IsVisible = ShowBackButton;
-    }
-
-    private void BuildMenuItems()
-    {
-        ContextMenuItems.Children.Clear();
-
-        foreach (var item in MenuItems)
-        {
-            var label = new Label
-            {
-                Text = item.Text,
-                Padding = new Thickness(15, 10),
-                FontSize = 16,
-                TextColor = Application.Current?.RequestedTheme == AppTheme.Dark
-                    ? Colors.White
-                    : Colors.Black
-            };
-
-            var tapGesture = new TapGestureRecognizer();
-            tapGesture.Tapped += (s, e) =>
-            {
-                CloseContextMenu();
-                item.ClickAction?.Invoke();
-            };
-            label.GestureRecognizers.Add(tapGesture);
-
-            ContextMenuItems.Children.Add(label);
-        }
-    }
-
-    private void OpenContextMenu()
-    {
-        if (MenuItems.Count == 0)
-            return;
-
-        ContextMenuDropdown.IsVisible = true;
-    }
-
-    private void CloseContextMenu()
-    {
-        ContextMenuDropdown.IsVisible = false;
-    }
-
-    private void ToggleContextMenu()
-    {
-        if (ContextMenuDropdown.IsVisible)
-        {
-            CloseContextMenu();
-        }
-        else
-        {
-            OpenContextMenu();
-        }
     }
     #endregion
 
@@ -209,17 +118,7 @@ public partial class CustomHeader : ContentView
 
     private void OnContextMenuButtonClicked(object? sender, EventArgs e)
     {
-        ToggleContextMenu();
-    }
-
-    private void OnContextMenuOpenRequested()
-    {
-        OpenContextMenu();
-    }
-
-    private void OnContextMenuCloseRequested()
-    {
-        CloseContextMenu();
+        App.OpenContextMenu();
     }
     #endregion
 }

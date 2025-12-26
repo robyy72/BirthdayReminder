@@ -39,7 +39,7 @@ public partial class FlyoutMenu : ContentView
     public async Task Close()
     {
         await Task.WhenAll(
-            FlyoutPanel.TranslateTo(-280, 0, AnimationDuration, Easing.CubicIn),
+            FlyoutPanel.TranslateTo(-250, 0, AnimationDuration, Easing.CubicIn),
             Overlay.FadeTo(0, AnimationDuration)
         );
         IsVisible = false;
@@ -64,29 +64,34 @@ public partial class FlyoutMenu : ContentView
 
     private async void OnOverviewTapped(object? sender, TappedEventArgs e)
     {
+        await Close();
         await App.NavigateToRootAsync();
     }
 
     private async void OnAccountTapped(object? sender, TappedEventArgs e)
     {
+        await Close();
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<AccountPage>();
     }
 
     private async void OnSettingsTapped(object? sender, TappedEventArgs e)
     {
+        await Close();
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<SettingsPage>();
     }
 
     private async void OnRemindersTapped(object? sender, TappedEventArgs e)
     {
+        await Close();
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<ReminderStandardSettings>();
     }
 
     private async void OnPrivacyTapped(object? sender, TappedEventArgs e)
     {
+        await Close();
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<PrivacyPage>();
     }

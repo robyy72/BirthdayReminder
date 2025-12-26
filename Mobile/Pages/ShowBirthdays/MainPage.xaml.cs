@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
 
 	private void InitContextMenu()
 	{
-		TheHeader.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
 	}
 
 	protected override void OnAppearing()
