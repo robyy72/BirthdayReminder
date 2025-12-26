@@ -40,6 +40,8 @@ public partial class MainPage : ContentPage
     #region Form Update Methods
     private async void OnNewBirthdayClicked(object? sender, EventArgs e)
     {
+        CloseFlyout();
+
         // If contacts are not used (None), go directly to CreateBirthday
         // Otherwise show search page to avoid duplicates
         if (App.Account.ContactsReadMode == ContactsReadMode.None)
@@ -54,16 +56,19 @@ public partial class MainPage : ContentPage
 
     private async void OnAllBirthdaysClicked(object? sender, EventArgs e)
     {
+        CloseFlyout();
         await App.NavigateToAsync<AllBirthdaysPage>();
     }
 
     private async void OnSettingsClicked(object? sender, EventArgs e)
     {
+        CloseFlyout();
         await App.NavigateToAsync<AccountPage>();
     }
 
     private async void OnBirthdaySelected(object? sender, SelectionChangedEventArgs e)
     {
+        CloseFlyout();
         if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
         {
             await App.NavigateToAsync<DetailBirthdayPage>(vm.Id);
@@ -107,5 +112,12 @@ public partial class MainPage : ContentPage
 		OnPropertyChanged(nameof(UpcomingBirthdays));
 		OnPropertyChanged(nameof(PastBirthdays));
 	}
+    #endregion
+
+    #region Private Methods
+    private async void CloseFlyout()
+    {
+        await TheFlyout.Close();
+    }
     #endregion
 }

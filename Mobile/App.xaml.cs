@@ -33,7 +33,6 @@ public partial class App : Application
 
     #region Flyout Events
     public static event Action? FlyoutOpenRequested;
-    public static event Action? FlyoutCloseRequested;
     #endregion
 
     #endregion
@@ -143,7 +142,6 @@ public partial class App : Application
         if (_navigation == null)
             return;
 
-        CloseFlyout();
         var page = new TPage();
         await _navigation.PushAsync(page);
     }
@@ -157,7 +155,6 @@ public partial class App : Application
         if (_navigation == null)
             return;
 
-        CloseFlyout();
         var page = (TPage?)Activator.CreateInstance(typeof(TPage), parameter);
         if (page != null)
         {
@@ -173,7 +170,6 @@ public partial class App : Application
         if (_navigation == null)
             return;
 
-        CloseFlyout();
         await _navigation.PopAsync();
     }
 
@@ -185,7 +181,6 @@ public partial class App : Application
         if (_navigation == null)
             return;
 
-        CloseFlyout();
         await _navigation.PopToRootAsync();
     }
     #endregion
@@ -197,14 +192,6 @@ public partial class App : Application
     public static void OpenFlyout()
     {
         FlyoutOpenRequested?.Invoke();
-    }
-
-    /// <summary>
-    /// Aim: Schließt das Flyout-Menü
-    /// </summary>
-    public static void CloseFlyout()
-    {
-        FlyoutCloseRequested?.Invoke();
     }
     #endregion
 

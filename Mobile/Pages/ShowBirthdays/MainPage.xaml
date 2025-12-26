@@ -121,7 +121,8 @@
         </ScrollView>
 
         <!-- Flyout Menu Overlay (spans all rows) -->
-        <controls:FlyoutMenu Grid.Row="0"
+        <controls:FlyoutMenu x:Name="TheFlyout"
+                             Grid.Row="0"
                              Grid.RowSpan="2" />
     </Grid>
 </ContentPage>
