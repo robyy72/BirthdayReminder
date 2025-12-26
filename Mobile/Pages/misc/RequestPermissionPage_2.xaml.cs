@@ -22,11 +22,8 @@ public partial class RequestPermissionPage_2 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			// Go back to RequestPermissionPage_1, keep same Forward/Backward pages
-			Application.Current.Windows[0].Page = new RequestPermissionPage_1(_permissionType);
-		}
+		// Go back to RequestPermissionPage_1, keep same Forward/Backward pages
+		App.SetRootPage(new RequestPermissionPage_1(_permissionType));
 	}
 	#endregion
 }

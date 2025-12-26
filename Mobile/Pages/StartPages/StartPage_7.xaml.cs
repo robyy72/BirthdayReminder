@@ -26,22 +26,16 @@ public partial class StartPage_7 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			Application.Current.Windows[0].Page = new StartPage_6();
-		}
+		App.SetRootPage(new StartPage_6());
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		App.Reminder_2_Template = CreateReminder();
 
-		if (Application.Current?.Windows.Count > 0)
-		{
-			if (App.Account.ReminderCount == ReminderCount.ThreeReminders)
-				Application.Current.Windows[0].Page = new StartPage_8();
-			else
-				Application.Current.Windows[0].Page = new StartPage_9();
-		}
+		if (App.Account.ReminderCount == ReminderCount.ThreeReminders)
+			App.SetRootPage(new StartPage_8());
+		else
+			App.SetRootPage(new StartPage_9());
 	}
 }

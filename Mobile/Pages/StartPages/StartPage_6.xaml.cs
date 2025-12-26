@@ -41,10 +41,7 @@ public partial class StartPage_6 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			Application.Current.Windows[0].Page = new StartPage_5();
-		}
+		App.SetRootPage(new StartPage_5());
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
@@ -52,12 +49,9 @@ public partial class StartPage_6 : ContentPage
 		// Store Reminder_1 template in a static variable for later use
 		App.Reminder_1_Template = CreateReminder();
 
-		if (Application.Current?.Windows.Count > 0)
-		{
-			if (App.Account.ReminderCount >= ReminderCount.TwoReminders)
-				Application.Current.Windows[0].Page = new StartPage_7();
-			else
-				Application.Current.Windows[0].Page = new StartPage_9();
-		}
+		if (App.Account.ReminderCount >= ReminderCount.TwoReminders)
+			App.SetRootPage(new StartPage_7());
+		else
+			App.SetRootPage(new StartPage_9());
 	}
 }

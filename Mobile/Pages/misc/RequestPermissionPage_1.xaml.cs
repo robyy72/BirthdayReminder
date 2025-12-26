@@ -13,6 +13,11 @@ public partial class RequestPermissionPage_1 : ContentPage
 	{
 		InitializeComponent();
 		_permissionType = permissionType;
+
+		if (App.BackwardPage == null)
+			throw new InvalidOperationException("BackwardPage is null.");
+		if (App.ForwardPage == null)
+			throw new InvalidOperationException("ForwardPage is null.");
 	}
 	#endregion
 
@@ -39,7 +44,7 @@ public partial class RequestPermissionPage_1 : ContentPage
 		if (granted)
 		{
 			App.NeedsReadContacts = true;
-            SetPermissionStatus(AppPermissionStatus.Granted);
+			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 			LabelSuccess.Text = "Berechtigung erteilt";
 		}
@@ -76,10 +81,7 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (currentStatus == AppPermissionStatus.Denied)
 		{
-			if (Application.Current?.Windows.Count > 0)
-			{
-				Application.Current.Windows[0].Page = new RequestPermissionPage_2(_permissionType);
-			}
+			App.SetRootPage(new RequestPermissionPage_2(_permissionType));
 			return;
 		}
 
@@ -104,37 +106,34 @@ public partial class RequestPermissionPage_1 : ContentPage
 			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 			LabelSuccess.Text = "Berechtigung erteilt";
-			ButtonNext.IsEnabled = true;
 		}
 		else
 		{
 			SetPermissionStatus(AppPermissionStatus.Denied);
 			ShowPanel(ResultState.Denied);
+			LabelSuccess.Text = "Berechtigung verweigert";
 
 			if (_permissionType == PermissionType.Contacts)
 			{
-				App.Account.ContactsReadMode = ContactsReadMode.None;
+				if (App.Account.ContactsReadMode != ContactsReadMode.None)
+				{
+					App.Account.ContactsReadMode = ContactsReadMode.None;
+					AccountService.Save();
+				}
 			}
-
-			AccountService.Save();
-			ButtonNext.IsEnabled = true;
 		}
+
+		ButtonNext.IsEnabled = true;
 	}
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0 && App.BackwardPage != null)
-		{
-			Application.Current.Windows[0].Page = App.BackwardPage;
-		}
+		App.SetRootPage(App.BackwardPage!);
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0 && App.ForwardPage != null)
-		{
-			Application.Current.Windows[0].Page = App.ForwardPage;
-		}
+		App.SetRootPage(App.ForwardPage!);
 	}
 	#endregion
 

@@ -9,20 +9,14 @@ public partial class StartPage_2 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			Application.Current.Windows[0].Page = new StartPage_1();
-		}
+		App.SetRootPage(new StartPage_1());
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			if (RadioAskNextPage.IsChecked)
-				Application.Current.Windows[0].Page = new StartPage_3();
-			else
-				Application.Current.Windows[0].Page = new StartPage_5();
-		}
+		if (RadioAskNextPage.IsChecked)
+			App.SetRootPage(new StartPage_3());
+		else
+			App.SetRootPage(new StartPage_5());
 	}
 }

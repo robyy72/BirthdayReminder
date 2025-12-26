@@ -205,17 +205,14 @@ public partial class StartPage_9 : ContentPage
 	#region Navigation
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
+		Page page = App.Account.ReminderCount switch
 		{
-			Page page = App.Account.ReminderCount switch
-			{
-				ReminderCount.ThreeReminders => new StartPage_8(),
-				ReminderCount.TwoReminders => new StartPage_7(),
-				ReminderCount.OneReminder => new StartPage_6(),
-				_ => new StartPage_5()
-			};
-			Application.Current.Windows[0].Page = page;
-		}
+			ReminderCount.ThreeReminders => new StartPage_8(),
+			ReminderCount.TwoReminders => new StartPage_7(),
+			ReminderCount.OneReminder => new StartPage_6(),
+			_ => new StartPage_5()
+		};
+		App.SetRootPage(page);
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
@@ -240,10 +237,7 @@ public partial class StartPage_9 : ContentPage
 		AccountService.Save();
 		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_INITIALIZED, true);
 
-		if (Application.Current?.Windows.Count > 0)
-		{
-			Application.Current.Windows[0].Page = App.CreateMainNavigationPage();
-		}
+		App.SetRootPage(App.CreateMainNavigationPage());
 	}
 	#endregion
 }

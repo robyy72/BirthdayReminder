@@ -32,18 +32,15 @@ public partial class StartPage_5 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
+		if (AccountService.UseContacts())
 		{
-			if (AccountService.UseContacts())
-			{
-				App.BackwardPage = new StartPage_3();
-				App.ForwardPage = new StartPage_5();
-				Application.Current.Windows[0].Page = new RequestPermissionPage_1(PermissionType.Contacts);
-			}
-			else
-			{
-				Application.Current.Windows[0].Page = new StartPage_2();
-			}
+			App.BackwardPage = new StartPage_3();
+			App.ForwardPage = new StartPage_5();
+			App.SetRootPage(new RequestPermissionPage_1(PermissionType.Contacts));
+		}
+		else
+		{
+			App.SetRootPage(new StartPage_2());
 		}
 	}
 
@@ -60,12 +57,9 @@ public partial class StartPage_5 : ContentPage
 
 		AccountService.Save();
 
-		if (Application.Current?.Windows.Count > 0)
-		{
-			if (App.Account.ReminderCount == ReminderCount.NoReminder)
-				Application.Current.Windows[0].Page = new StartPage_9();
-			else
-				Application.Current.Windows[0].Page = new StartPage_6();
-		}
+		if (App.Account.ReminderCount == ReminderCount.NoReminder)
+			App.SetRootPage(new StartPage_9());
+		else
+			App.SetRootPage(new StartPage_6());
 	}
 }

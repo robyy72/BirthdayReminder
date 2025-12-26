@@ -25,6 +25,15 @@ public partial class App : Application
 	#region Navigation (for reusable pages)
 	public static Page? ForwardPage { get; set; }
 	public static Page? BackwardPage { get; set; }
+
+	/// <summary>
+	/// Aim: Sets the root page of the application window.
+	/// Params: page - The page to set as root
+	/// </summary>
+	public static void SetRootPage(Page page)
+	{
+		Current!.Windows[0].Page = page;
+	}
 	#endregion
     #endregion
 

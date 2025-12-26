@@ -73,10 +73,7 @@ public partial class StartPage_3 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		if (Application.Current?.Windows.Count > 0)
-		{
-			Application.Current.Windows[0].Page = new StartPage_2();
-		}
+		App.SetRootPage(new StartPage_2());
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
@@ -100,11 +97,8 @@ public partial class StartPage_3 : ContentPage
 		AccountService.Save();
 
 		// Navigate to permission request page
-		if (Application.Current?.Windows.Count > 0)
-		{
-			App.BackwardPage = new StartPage_3();
-			App.ForwardPage = new StartPage_5();
-			Application.Current.Windows[0].Page = new RequestPermissionPage_1(PermissionType.Contacts);
-		}
+		App.BackwardPage = new StartPage_3();
+		App.ForwardPage = new StartPage_5();
+		App.SetRootPage(new RequestPermissionPage_1(PermissionType.Contacts));
 	}
 }
