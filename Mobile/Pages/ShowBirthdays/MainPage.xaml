@@ -10,10 +10,12 @@
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
-        <controls:CustomHeader Grid.Row="0"
+        <controls:CustomHeader x:Name="TheHeader"
+                               Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_Main_Title}"
                                ShowMenuButton="True"
-                               ShowBackButton="False" />
+                               ShowBackButton="False"
+                               ShowContextMenu="True" />
 
         <!-- Content -->
         <ScrollView Grid.Row="1" Padding="20">
@@ -114,9 +116,9 @@
 
                 <!-- Buttons -->
                 <Button Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
-                        Style="{StaticResource ButtonPrimary}"
+                        Style="{StaticResource ButtonGreen}"
                         Clicked="OnNewBirthdayClicked"
-                        Margin="0,10,0,40" />
+                        Margin="0,30,0,40" />
             </VerticalStackLayout>
         </ScrollView>
 

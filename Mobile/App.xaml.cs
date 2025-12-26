@@ -33,6 +33,9 @@ public partial class App : Application
 
     #region Flyout Events
     public static event Action? FlyoutOpenRequested;
+    public static event Action? FlyoutCloseRequested;
+    public static event Action? ContextMenuOpenRequested;
+    public static event Action? ContextMenuCloseRequested;
     #endregion
 
     #endregion
@@ -192,6 +195,30 @@ public partial class App : Application
     public static void OpenFlyout()
     {
         FlyoutOpenRequested?.Invoke();
+    }
+
+    /// <summary>
+    /// Aim: Schließt das Flyout-Menü
+    /// </summary>
+    public static void CloseFlyout()
+    {
+        FlyoutCloseRequested?.Invoke();
+    }
+
+    /// <summary>
+    /// Aim: Öffnet das Context-Menü
+    /// </summary>
+    public static void OpenContextMenu()
+    {
+        ContextMenuOpenRequested?.Invoke();
+    }
+
+    /// <summary>
+    /// Aim: Schließt das Context-Menü
+    /// </summary>
+    public static void CloseContextMenu()
+    {
+        ContextMenuCloseRequested?.Invoke();
     }
     #endregion
 

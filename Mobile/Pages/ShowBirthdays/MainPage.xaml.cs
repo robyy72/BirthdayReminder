@@ -12,7 +12,13 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = this;
+		InitContextMenu();
 		Init();
+	}
+
+	private void InitContextMenu()
+	{
+		TheHeader.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
 	}
 
 	protected override void OnAppearing()
@@ -115,9 +121,23 @@ public partial class MainPage : ContentPage
     #endregion
 
     #region Private Methods
-    private async void CloseFlyout()
+    private void CloseFlyout()
     {
-        await TheFlyout.Close();
+        App.CloseFlyout();
+    }
+
+    private async void OnNewBirthdayFromMenu()
+    {
+        // If contacts are not used (None), go directly to CreateBirthday
+        // Otherwise show search page to avoid duplicates
+        if (App.Account.ContactsReadMode == ContactsReadMode.None)
+        {
+            await App.NavigateToAsync<CreateBirthdayPage>();
+        }
+        else
+        {
+            await App.NavigateToAsync<SearchPersonPage>();
+        }
     }
     #endregion
 }

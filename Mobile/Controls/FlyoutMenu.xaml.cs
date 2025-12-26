@@ -16,6 +16,7 @@ public partial class FlyoutMenu : ContentView
         VersionLabel.Text = $"Version {AppInfo.Current.VersionString} ({AppInfo.Current.BuildString})";
 
         App.FlyoutOpenRequested += OnFlyoutOpenRequested;
+        App.FlyoutCloseRequested += OnFlyoutCloseRequested;
     }
     #endregion
 
@@ -49,6 +50,11 @@ public partial class FlyoutMenu : ContentView
     private async void OnFlyoutOpenRequested()
     {
         await Open();
+    }
+
+    private async void OnFlyoutCloseRequested()
+    {
+        await Close();
     }
 
     private async void OnOverlayTapped(object? sender, TappedEventArgs e)
