@@ -516,6 +516,30 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Birthday_InDays" xml:space="preserve">
     <value>In {0} days</value>
   </data>
+  <data name="Detail_BirthdayOf" xml:space="preserve">
+    <value>The birthday of</value>
+  </data>
+  <data name="Detail_IsOn" xml:space="preserve">
+    <value>is on</value>
+  </data>
+  <data name="Detail_AgeOnThatDay" xml:space="preserve">
+    <value>He / she will turn {0} on that day</value>
+  </data>
+  <data name="Detail_Birthday_TodayIs" xml:space="preserve">
+    <value>That's Today!</value>
+  </data>
+  <data name="Detail_Birthday_TomorrowIs" xml:space="preserve">
+    <value>That's Tomorrow</value>
+  </data>
+  <data name="Detail_Birthday_InDaysIs" xml:space="preserve">
+    <value>That's in {0} days</value>
+  </data>
+  <data name="Detail_NoReminders" xml:space="preserve">
+    <value>No reminders set yet</value>
+  </data>
+  <data name="Detail_RemindersSet" xml:space="preserve">
+    <value>You will be reminded as follows:</value>
+  </data>
   <data name="EmptyView_NoUpcoming" xml:space="preserve">
     <value>No upcoming birthdays</value>
   </data>

@@ -516,6 +516,30 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Birthday_InDays" xml:space="preserve">
     <value>In {0} Tagen</value>
   </data>
+  <data name="Detail_BirthdayOf" xml:space="preserve">
+    <value>Der Geburtstag von</value>
+  </data>
+  <data name="Detail_IsOn" xml:space="preserve">
+    <value>ist am</value>
+  </data>
+  <data name="Detail_AgeOnThatDay" xml:space="preserve">
+    <value>Er / sie wird an dem Tag {0} Jahre alt</value>
+  </data>
+  <data name="Detail_Birthday_TodayIs" xml:space="preserve">
+    <value>Das ist Heute!</value>
+  </data>
+  <data name="Detail_Birthday_TomorrowIs" xml:space="preserve">
+    <value>Das ist Morgen</value>
+  </data>
+  <data name="Detail_Birthday_InDaysIs" xml:space="preserve">
+    <value>Das ist in {0} Tagen</value>
+  </data>
+  <data name="Detail_NoReminders" xml:space="preserve">
+    <value>Bisher keine Erinnerungen hinterlegt</value>
+  </data>
+  <data name="Detail_RemindersSet" xml:space="preserve">
+    <value>Du wirst folgendermaßen erinnert:</value>
+  </data>
   <data name="EmptyView_NoUpcoming" xml:space="preserve">
     <value>Keine anstehenden Geburtstage</value>
   </data>

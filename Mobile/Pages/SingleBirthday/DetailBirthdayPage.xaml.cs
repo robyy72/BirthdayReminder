@@ -47,14 +47,18 @@ public partial class DetailBirthdayPage : ContentPage
         // Birthday
         if (_person.Birthday != null)
         {
-            string birthdayDisplay = BirthdayHelper.GetDateDisplay(_person.Birthday);
-            BirthdayDisplayLabel.Text = birthdayDisplay;
+            string dateDisplay = BirthdayHelper.GetDateDisplay(_person.Birthday);
 
-            // Age
+            // Date
+            DateDisplayLabel.Text = dateDisplay;
+
+            // Age (only if year is known)
             if (BirthdayHelper.ShouldDisplayYear(_person.Birthday.Year))
             {
-                int age = BirthdayHelper.CalculateAge(_person.Birthday);
-                AgeDisplayLabel.Text = string.Format(MobileLanguages.Resources.Age_Years, age);
+                int nextAge = BirthdayHelper.CalculateAge(_person.Birthday) + 1;
+                AgeDisplayLabel.Text = string.Format(
+                    MobileLanguages.Resources.Detail_AgeOnThatDay,
+                    nextAge);
                 AgeDisplayLabel.IsVisible = true;
             }
             else
@@ -66,17 +70,25 @@ public partial class DetailBirthdayPage : ContentPage
             int daysUntil = BirthdayHelper.GetDaysUntilBirthday(_person.Birthday, DateTime.Today);
             if (daysUntil == 0)
             {
-                DaysUntilLabel.Text = MobileLanguages.Resources.Birthday_Today;
+                DaysUntilLabel.Text = MobileLanguages.Resources.Detail_Birthday_TodayIs;
             }
             else if (daysUntil == 1)
             {
-                DaysUntilLabel.Text = MobileLanguages.Resources.Birthday_Tomorrow;
+                DaysUntilLabel.Text = MobileLanguages.Resources.Detail_Birthday_TomorrowIs;
             }
             else
             {
-                DaysUntilLabel.Text = string.Format(MobileLanguages.Resources.Birthday_InDays, daysUntil);
+                DaysUntilLabel.Text = string.Format(
+                    MobileLanguages.Resources.Detail_Birthday_InDaysIs,
+                    daysUntil);
             }
         }
+
+        // Reminder info
+        bool hasReminders = _person.Reminder_1 != null || _person.Reminder_2 != null || _person.Reminder_3 != null;
+        ReminderInfoLabel.Text = hasReminders
+            ? MobileLanguages.Resources.Detail_RemindersSet
+            : MobileLanguages.Resources.Detail_NoReminders;
     }
     #endregion
 

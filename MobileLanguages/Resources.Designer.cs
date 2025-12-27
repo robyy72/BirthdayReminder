@@ -194,7 +194,79 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Birthday_WithYear", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The birthday of ähnelt.
+        /// </summary>
+        public static string Detail_BirthdayOf {
+            get {
+                return ResourceManager.GetString("Detail_BirthdayOf", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die is on ähnelt.
+        /// </summary>
+        public static string Detail_IsOn {
+            get {
+                return ResourceManager.GetString("Detail_IsOn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die He / she will turn {0} on that day ähnelt.
+        /// </summary>
+        public static string Detail_AgeOnThatDay {
+            get {
+                return ResourceManager.GetString("Detail_AgeOnThatDay", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That's Today! ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_TodayIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_TodayIs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That's Tomorrow ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_TomorrowIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_TomorrowIs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That's in {0} days ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_InDaysIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_InDaysIs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You have no reminders set ähnelt.
+        /// </summary>
+        public static string Detail_NoReminders {
+            get {
+                return ResourceManager.GetString("Detail_NoReminders", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will be reminded as follows: ähnelt.
+        /// </summary>
+        public static string Detail_RemindersSet {
+            get {
+                return ResourceManager.GetString("Detail_RemindersSet", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Configure Reminders ähnelt.
         /// </summary>
