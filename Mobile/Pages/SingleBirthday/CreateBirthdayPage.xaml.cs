@@ -168,35 +168,31 @@ public partial class CreateBirthdayPage : ContentPage
         }
     }
 
+    private void OnDatePickerChanged(object? sender, EventArgs e)
+    {
+        SearchMatchingBirthdays();
+    }
+
     private void OnEntryFocused(object? sender, FocusEventArgs e)
     {
-        if (sender is Entry entry)
+        if (sender is Entry entry && entry.Parent?.Parent is Border outerBorder)
         {
-            Border? border = entry.Parent as Border;
-            if (border != null)
-            {
-                border.Stroke = Color.FromArgb("#0066CC");
-                border.StrokeThickness = 2;
-            }
+            var primary = (Color)Application.Current!.Resources["Primary"];
+            outerBorder.Stroke = primary;
+            outerBorder.StrokeThickness = 2;
         }
     }
 
     private void OnEntryUnfocused(object? sender, FocusEventArgs e)
     {
-        if (sender is Entry entry)
+        if (sender is Entry entry && entry.Parent?.Parent is Border outerBorder)
         {
-            Border? border = entry.Parent as Border;
-            if (border != null)
-            {
-                border.Stroke = Color.FromArgb("#ACACAC");
-                border.StrokeThickness = 1;
-            }
+            var strokeColor = Application.Current!.RequestedTheme == AppTheme.Dark
+                ? (Color)Application.Current.Resources["Gray700"]
+                : (Color)Application.Current.Resources["Gray300"];
+            outerBorder.Stroke = strokeColor;
+            outerBorder.StrokeThickness = 1;
         }
-    }
-
-    private void OnDatePickerChanged(object? sender, EventArgs e)
-    {
-        SearchMatchingBirthdays();
     }
     #endregion
 

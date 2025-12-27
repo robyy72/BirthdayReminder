@@ -24,23 +24,27 @@
                             <Label Text="{x:Static resx:Resources.CardHeader_Name}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="10">
+                        <VerticalStackLayout Padding="15" Spacing="10">
                             <Border x:Name="ErrorBorder" Style="{StaticResource BorderError}">
                                 <Label x:Name="ErrorLabel" Style="{StaticResource LabelError}" />
                             </Border>
-                            <Border x:Name="FirstNameBorder" Style="{StaticResource EntryBorder}">
-                                <Entry x:Name="FirstNameEntry"
-                                       Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
-                                       Style="{StaticResource EntryStandard}"
-                                       Focused="OnEntryFocused"
-                                       Unfocused="OnEntryUnfocused" />
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Entry x:Name="FirstNameEntry"
+                                           Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
+                                           Style="{StaticResource EntryStandard}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused" />
+                                </Border>
                             </Border>
-                            <Border x:Name="LastNameBorder" Style="{StaticResource EntryBorder}">
-                                <Entry x:Name="LastNameEntry"
-                                       Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
-                                       Style="{StaticResource EntryStandard}"
-                                       Focused="OnEntryFocused"
-                                       Unfocused="OnEntryUnfocused" />
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Entry x:Name="LastNameEntry"
+                                           Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
+                                           Style="{StaticResource EntryStandard}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused" />
+                                </Border>
                             </Border>
                         </VerticalStackLayout>
                     </VerticalStackLayout>

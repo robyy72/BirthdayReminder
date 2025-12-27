@@ -150,6 +150,13 @@
 
     <!-- ==================== LABELS ==================== -->
 
+    <Style TargetType="Label" x:Key="LabelHeaderBar">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelHeader">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -197,13 +204,6 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style TargetType="Label" x:Key="LabelHeaderBar">
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="White" />
-        <Setter Property="VerticalOptions" Value="Center" />
-    </Style>
-
     <Style TargetType="Label" x:Key="LabelTimeSeparator">
         <Setter Property="FontSize" Value="32" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -215,6 +215,33 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
         <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!-- ==================== ENTRIES ==================== -->
+
+    <Style TargetType="Entry" x:Key="EntryStandard">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
     <!-- ==================== TILES / BORDERS ==================== -->
@@ -235,16 +262,25 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Border" x:Key="TileOuterForEntry">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileInnerForEntry">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 9" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+    
     <Style TargetType="Border" x:Key="TileFlyout" BasedOn="{StaticResource Tile}">
         <Setter Property="Margin" Value="10,5" />
         <Setter Property="Padding" Value="12,10" />
-    </Style>
-
-    <Style TargetType="Border" x:Key="TileInner">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
-        <Setter Property="Padding" Value="15" />
-        <Setter Property="Stroke" Value="Transparent" />
     </Style>
 
     <!-- ==================== CARDS ==================== -->
@@ -266,7 +302,7 @@
     </Style>
 
     <Style TargetType="Border" x:Key="CardBirthday" BasedOn="{StaticResource Card}">
-        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Margin" Value="0,0,0,25" />
     </Style>
 
     <Style TargetType="Border" x:Key="CardHeader">
@@ -307,49 +343,6 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
         <Setter Property="Padding" Value="10,20" />
         <Setter Property="HeightRequest" Value="80" />
-    </Style>
-
-    <!-- ==================== ENTRIES ==================== -->
-
-    <Style TargetType="Border" x:Key="EntryBorder">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
-        <Setter Property="Padding" Value="15,10" />
-        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}" />
-        <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="Shadow">
-            <Setter.Value>
-                <Shadow Brush="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Black}}"
-                        Offset="0,2"
-                        Radius="4"
-                        Opacity="0.2" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="Entry" x:Key="EntryStandard">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="HorizontalTextAlignment" Value="Start" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Focused">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
     </Style>
 
     <!-- ==================== BUTTONS ==================== -->
@@ -524,8 +517,7 @@
         </Setter>
     </Style>
 
-    <!-- Shell Flyout Item Styling für iOS -->
-    <Style TargetType="Label" Class="FlyoutItemLabelStyle">
+    <Style TargetType="Label" x:Key="LabelFlyoutItem">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="FontSize" Value="17" />
     </Style>
