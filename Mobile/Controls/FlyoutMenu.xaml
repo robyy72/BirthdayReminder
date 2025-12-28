@@ -42,12 +42,24 @@
                                      Padding="10,15"
                                      Spacing="5">
 
-                    <!-- Übersicht -->
+                    <!-- Startseite -->
                     <Border Style="{StaticResource TileFlyout}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOverviewTapped" />
                         </Border.GestureRecognizers>
                         <Label Text="{x:Static resx:Resources.Tab_Overview}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Alle Geburtstage -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAllBirthdaysTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Tab_ShowAll}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"

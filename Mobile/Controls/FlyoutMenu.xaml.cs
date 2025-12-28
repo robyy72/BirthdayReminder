@@ -68,6 +68,13 @@ public partial class FlyoutMenu : ContentView
         await App.NavigateToRootAsync();
     }
 
+    private async void OnAllBirthdaysTapped(object? sender, TappedEventArgs e)
+    {
+        await Close();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<AllBirthdaysPage>();
+    }
+
     private async void OnAccountTapped(object? sender, TappedEventArgs e)
     {
         await Close();

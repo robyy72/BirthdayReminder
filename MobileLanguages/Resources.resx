@@ -460,7 +460,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>-- all --</value>
   </data>
   <data name="Tab_Overview" xml:space="preserve">
-    <value>Overview</value>
+    <value>Home</value>
   </data>
   <data name="Settings_ReminderCount" xml:space="preserve">
     <value>Number of Reminders</value>
