@@ -32,3 +32,27 @@ public enum SubscriptionTier
 	Plus,
 	Pro
 }
+
+#region Reminder Method Types
+public enum LocalMethodType
+{
+	Notification,
+	Alarm
+}
+
+public enum ExternalMethodType
+{
+	Email,
+	Sms,
+	WhatsApp,
+	Signal
+}
+
+public enum NotificationPriority
+{
+	Low,
+	Normal,
+	High,
+	Critical
+}
+#endregion

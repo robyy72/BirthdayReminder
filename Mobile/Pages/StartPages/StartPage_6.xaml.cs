@@ -1,3 +1,7 @@
+#region Usings
+using Common;
+#endregion
+
 namespace Mobile;
 
 public partial class StartPage_6 : ContentPage
@@ -10,15 +14,26 @@ public partial class StartPage_6 : ContentPage
 
 	private void LoadReminder()
 	{
-		var reminder = App.Persons.FirstOrDefault()?.Reminder_1;
+		var reminder = App.Reminder_1_Template;
 		if (reminder != null)
 		{
-			DaysEntry.Text = reminder.Days.ToString();
-			EmailSwitch.IsToggled = reminder.EmailEnabled;
-			SmsSwitch.IsToggled = reminder.SmsEnabled;
-			LockScreenSwitch.IsToggled = reminder.LockScreenEnabled;
-			WhatsAppSwitch.IsToggled = reminder.WhatsAppEnabled;
-			SignalSwitch.IsToggled = reminder.SignalEnabled;
+			DaysEntry.Text = reminder.DaysBefore.ToString();
+
+			// Local methods
+			var notification = reminder.LocalMethods.FirstOrDefault(m => m.Type == LocalMethodType.Notification);
+			var alarm = reminder.LocalMethods.FirstOrDefault(m => m.Type == LocalMethodType.Alarm);
+			NotificationSwitch.IsToggled = notification?.Enabled ?? false;
+			AlarmSwitch.IsToggled = alarm?.Enabled ?? false;
+
+			// External methods
+			var email = reminder.ExternalMethods.FirstOrDefault(m => m.Type == ExternalMethodType.Email);
+			var sms = reminder.ExternalMethods.FirstOrDefault(m => m.Type == ExternalMethodType.Sms);
+			var whatsApp = reminder.ExternalMethods.FirstOrDefault(m => m.Type == ExternalMethodType.WhatsApp);
+			var signal = reminder.ExternalMethods.FirstOrDefault(m => m.Type == ExternalMethodType.Signal);
+			EmailSwitch.IsToggled = email?.Enabled ?? false;
+			SmsSwitch.IsToggled = sms?.Enabled ?? false;
+			WhatsAppSwitch.IsToggled = whatsApp?.Enabled ?? false;
+			SignalSwitch.IsToggled = signal?.Enabled ?? false;
 		}
 	}
 
@@ -28,12 +43,63 @@ public partial class StartPage_6 : ContentPage
 
 		var reminder = new Reminder
 		{
-			Days = days,
-			EmailEnabled = EmailSwitch.IsToggled,
-			SmsEnabled = SmsSwitch.IsToggled,
-			LockScreenEnabled = LockScreenSwitch.IsToggled,
-			WhatsAppEnabled = WhatsAppSwitch.IsToggled,
-			SignalEnabled = SignalSwitch.IsToggled
+			DaysBefore = days,
+			LocalMethods =
+			[
+				new ReminderMethodLocal
+				{
+					Type = LocalMethodType.Notification,
+					Enabled = NotificationSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.Local[LocalMethodType.Notification].DefaultTime,
+					PlaySound = CommonConstants.DEFAULT_NOTIFICATION_SOUND,
+					Vibrate = CommonConstants.DEFAULT_NOTIFICATION_VIBRATE,
+					WakeScreen = CommonConstants.DEFAULT_NOTIFICATION_WAKE_SCREEN,
+					OverrideSilentMode = CommonConstants.DEFAULT_NOTIFICATION_OVERRIDE_SILENT,
+					Priority = NotificationPriority.Normal
+				},
+				new ReminderMethodLocal
+				{
+					Type = LocalMethodType.Alarm,
+					Enabled = AlarmSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.Local[LocalMethodType.Alarm].DefaultTime,
+					PlaySound = CommonConstants.DEFAULT_ALARM_SOUND,
+					Vibrate = CommonConstants.DEFAULT_ALARM_VIBRATE,
+					WakeScreen = CommonConstants.DEFAULT_ALARM_WAKE_SCREEN,
+					OverrideSilentMode = CommonConstants.DEFAULT_ALARM_OVERRIDE_SILENT,
+					Priority = NotificationPriority.High
+				}
+			],
+			ExternalMethods =
+			[
+				new ReminderMethodExternal
+				{
+					Type = ExternalMethodType.Email,
+					Enabled = EmailSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Email].DefaultTime,
+					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
+				},
+				new ReminderMethodExternal
+				{
+					Type = ExternalMethodType.Sms,
+					Enabled = SmsSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Sms].DefaultTime,
+					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
+				},
+				new ReminderMethodExternal
+				{
+					Type = ExternalMethodType.WhatsApp,
+					Enabled = WhatsAppSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.WhatsApp].DefaultTime,
+					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
+				},
+				new ReminderMethodExternal
+				{
+					Type = ExternalMethodType.Signal,
+					Enabled = SignalSwitch.IsToggled,
+					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Signal].DefaultTime,
+					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
+				}
+			]
 		};
 
 		return reminder;
@@ -46,7 +112,6 @@ public partial class StartPage_6 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		// Store Reminder_1 template in a static variable for later use
 		App.Reminder_1_Template = CreateReminder();
 
 		if (App.Account.ReminderCount >= ReminderCount.TwoReminders)

@@ -18,4 +18,20 @@ public static class CommonConstants
 	public const int DEFAULT_REMINDER_TIME_WHATSAPP = DEFAULT_REMINDER_TIME_EVENING;
 	public const int DEFAULT_REMINDER_TIME_SIGNAL = DEFAULT_REMINDER_TIME_EVENING;
 	#endregion
+
+	#region Reminder Defaults - Local
+	public const bool DEFAULT_NOTIFICATION_SOUND = true;
+	public const bool DEFAULT_NOTIFICATION_VIBRATE = false;
+	public const bool DEFAULT_NOTIFICATION_WAKE_SCREEN = false;
+	public const bool DEFAULT_NOTIFICATION_OVERRIDE_SILENT = false;
+
+	public const bool DEFAULT_ALARM_SOUND = true;
+	public const bool DEFAULT_ALARM_VIBRATE = true;
+	public const bool DEFAULT_ALARM_WAKE_SCREEN = true;
+	public const bool DEFAULT_ALARM_OVERRIDE_SILENT = false;
+	#endregion
+
+	#region Reminder Defaults - External
+	public const bool DEFAULT_MESSAGE_INCLUDE_AGE = false;
+	#endregion
 }

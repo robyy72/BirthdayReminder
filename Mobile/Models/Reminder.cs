@@ -1,31 +1,22 @@
-#region Usings
-using Common;
-#endregion
-
 namespace Mobile;
 
 /// <summary>
-/// Aim: Represents a reminder configuration with method flags, times and days before birthday.
+/// Aim: Represents a complete reminder configuration.
+/// Contains the days before the birthday and all enabled methods.
 /// </summary>
 public class Reminder
 {
-	#region Methods Enabled
-	public bool EmailEnabled { get; set; }
-	public bool SmsEnabled { get; set; }
-	public bool LockScreenEnabled { get; set; }
-	public bool WhatsAppEnabled { get; set; }
-	public bool SignalEnabled { get; set; }
-	#endregion
+	public int DaysBefore { get; set; }
+	public List<ReminderMethodLocal> LocalMethods { get; set; } = [];
+	public List<ReminderMethodExternal> ExternalMethods { get; set; } = [];
 
-	#region Method Times
-	public int TimeEmail { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_EMAIL;
-	public int TimeSms { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_SMS;
-	public int TimeLockScreen { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_LOCKSCREEN;
-	public int TimeWhatsApp { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_WHATSAPP;
-	public int TimeSignal { get; set; } = CommonConstants.DEFAULT_REMINDER_TIME_SIGNAL;
-	#endregion
+	#region Helper Properties
+	public bool HasAnyMethodEnabled =>
+		LocalMethods.Any(m => m.Enabled) ||
+		ExternalMethods.Any(m => m.Enabled);
 
-	#region Days Before
-	public int Days { get; set; }
+	public int EnabledMethodCount =>
+		LocalMethods.Count(m => m.Enabled) +
+		ExternalMethods.Count(m => m.Enabled);
 	#endregion
 }

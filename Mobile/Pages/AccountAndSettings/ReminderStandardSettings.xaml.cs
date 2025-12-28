@@ -33,17 +33,17 @@ public partial class ReminderStandardSettings : ContentPage
 
 		if (App.Reminder_1_Template != null)
 		{
-			Reminder1Days.Text = App.Reminder_1_Template.Days.ToString();
+			Reminder1Days.Text = App.Reminder_1_Template.DaysBefore.ToString();
 		}
 
 		if (App.Reminder_2_Template != null)
 		{
-			Reminder2Days.Text = App.Reminder_2_Template.Days.ToString();
+			Reminder2Days.Text = App.Reminder_2_Template.DaysBefore.ToString();
 		}
 
 		if (App.Reminder_3_Template != null)
 		{
-			Reminder3Days.Text = App.Reminder_3_Template.Days.ToString();
+			Reminder3Days.Text = App.Reminder_3_Template.DaysBefore.ToString();
 		}
 
 		UpdateSectionsVisibility();
@@ -80,17 +80,17 @@ public partial class ReminderStandardSettings : ContentPage
 
 		if (int.TryParse(Reminder1Days.Text, out int days1) && App.Reminder_1_Template != null)
 		{
-			App.Reminder_1_Template.Days = days1;
+			App.Reminder_1_Template.DaysBefore = days1;
 		}
 
 		if (int.TryParse(Reminder2Days.Text, out int days2) && App.Reminder_2_Template != null)
 		{
-			App.Reminder_2_Template.Days = days2;
+			App.Reminder_2_Template.DaysBefore = days2;
 		}
 
 		if (int.TryParse(Reminder3Days.Text, out int days3) && App.Reminder_3_Template != null)
 		{
-			App.Reminder_3_Template.Days = days3;
+			App.Reminder_3_Template.DaysBefore = days3;
 		}
 
 		AccountService.Save();

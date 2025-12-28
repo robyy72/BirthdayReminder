@@ -53,6 +53,16 @@
                                    Style="{StaticResource LabelInfo}"
                                    FontAttributes="Bold" />
 
+                            <!-- Local Methods -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Notification}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="NotificationSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Alarm}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Switch x:Name="AlarmSwitch" Grid.Column="1" />
+                            </Grid>
+                            <!-- External Methods -->
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Email}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="EmailSwitch" Grid.Column="1" />
@@ -60,10 +70,6 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Sms}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="SmsSwitch" Grid.Column="1" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_LockScreen}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="LockScreenSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
