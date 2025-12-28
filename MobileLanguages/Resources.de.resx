@@ -151,10 +151,10 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>In Kontakt speichern</value>
   </data>
   <data name="Settings_UpdateContact" xml:space="preserve">
-    <value>Eintrag unter Kontakte aktualisieren</value>
+    <value>Eintrag in meinen Kontakten aktualisieren</value>
   </data>
   <data name="Settings_CreateContact" xml:space="preserve">
-    <value>Eintrag in Kontakten erstellen</value>
+    <value>Eintrag in meine Kontakte hinzufügen</value>
   </data>
   <data name="Settings_DeleteContact" xml:space="preserve">
     <value>Auch aus Kontakten löschen</value>
@@ -793,5 +793,15 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="ReminderTemplate_TeamSignature" xml:space="preserve">
     <value>Dein Team von {Domain}</value>
+  </data>
+  <!-- Name Direction -->
+  <data name="Settings_NameDirection" xml:space="preserve">
+    <value>Namensreihenfolge</value>
+  </data>
+  <data name="NameDirection_FirstFirstName" xml:space="preserve">
+    <value>Vorname Nachname</value>
+  </data>
+  <data name="NameDirection_FirstLastName" xml:space="preserve">
+    <value>Nachname, Vorname</value>
   </data>
 </root>

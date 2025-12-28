@@ -1,3 +1,7 @@
+#region Usings
+using Common;
+#endregion
+
 namespace Mobile;
 
 public partial class SettingsPage : ContentPage
@@ -5,6 +9,7 @@ public partial class SettingsPage : ContentPage
 	#region Fields
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
+	private int _openAccordion = 0;
 	#endregion
 
 	#region Constructor
@@ -29,6 +34,12 @@ public partial class SettingsPage : ContentPage
 		else
 			RadioLight.IsChecked = true;
 
+		// Name Direction
+		if (account.PersonNameDirection == PersonNameDirection.FirstLastName)
+			RadioFirstLastName.IsChecked = true;
+		else
+			RadioFirstFirstName.IsChecked = true;
+
 		if (account.Locale == "en")
 			RadioEn.IsChecked = true;
 		else
@@ -46,6 +57,82 @@ public partial class SettingsPage : ContentPage
 		{
 			_ = LoadCalendarsAsync(account.DeviceCalendar_SelectedIds);
 		}
+	}
+	#endregion
+
+	#region Accordion Logic
+	private void OnAccordion1Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(1);
+	}
+
+	private void OnAccordion2Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(2);
+	}
+
+	private void OnAccordion3Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(3);
+	}
+
+	private void OnAccordion4Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(4);
+	}
+
+	private void OnAccordion5Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(5);
+	}
+
+	private void ToggleAccordion(int accordionNumber)
+	{
+		if (_openAccordion == accordionNumber)
+		{
+			// Close current accordion
+			SetAccordionState(accordionNumber, false);
+			_openAccordion = 0;
+		}
+		else
+		{
+			// Close previously open accordion
+			if (_openAccordion > 0)
+				SetAccordionState(_openAccordion, false);
+
+			// Open new accordion
+			SetAccordionState(accordionNumber, true);
+			_openAccordion = accordionNumber;
+		}
+	}
+
+	private void SetAccordionState(int accordionNumber, bool isOpen)
+	{
+		var content = accordionNumber switch
+		{
+			1 => Accordion1Content,
+			2 => Accordion2Content,
+			3 => Accordion3Content,
+			4 => Accordion4Content,
+			5 => Accordion5Content,
+			_ => null
+		};
+
+		var arrow = accordionNumber switch
+		{
+			1 => Accordion1Arrow,
+			2 => Accordion2Arrow,
+			3 => Accordion3Arrow,
+			4 => Accordion4Arrow,
+			5 => Accordion5Arrow,
+			_ => null
+		};
+
+		if (content != null)
+			content.IsVisible = isOpen;
+
+		if (arrow != null)
+			arrow.Text = isOpen ? "▲" : "▼";
 	}
 	#endregion
 
@@ -202,6 +289,12 @@ public partial class SettingsPage : ContentPage
 
 		DeviceService.ApplyTheme(account.Theme);
 
+		// Name Direction
+		if (RadioFirstLastName.IsChecked)
+			account.PersonNameDirection = PersonNameDirection.FirstLastName;
+		else
+			account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+
 		if (RadioEn.IsChecked)
 			account.Locale = "en";
 		else
@@ -228,12 +321,7 @@ public partial class SettingsPage : ContentPage
 			MobileLanguages.Resources.Settings_Saved_Title,
 			MobileLanguages.Resources.Settings_Saved_Message,
 			MobileLanguages.Resources.General_Button_OK);
-	}
-	#endregion
 
-	#region Back
-	private async void OnBackClicked(object? sender, EventArgs e)
-	{
 		await App.GoBackAsync();
 	}
 	#endregion

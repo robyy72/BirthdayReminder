@@ -12,7 +12,8 @@
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_BirthdayDetail_Title}"
                                ShowMenuButton="False"
-                               ShowBackButton="True" />
+                               ShowBackButton="True"
+                               BackClickedCommand="{Binding BackCommand}" />
 
         <ScrollView Grid.Row="1">
             <Grid RowDefinitions="*,Auto" Padding="30">

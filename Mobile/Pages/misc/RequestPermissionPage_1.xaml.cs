@@ -14,10 +14,10 @@ public partial class RequestPermissionPage_1 : ContentPage
 		InitializeComponent();
 		_permissionType = permissionType;
 
-		if (App.BackwardPage == null)
-			throw new InvalidOperationException("BackwardPage is null.");
-		if (App.ForwardPage == null)
-			throw new InvalidOperationException("ForwardPage is null.");
+		if (App.BackwardPageType == null)
+			throw new InvalidOperationException("BackwardPageType is null.");
+		if (App.ForwardPageType == null)
+			throw new InvalidOperationException("ForwardPageType is null.");
 	}
 	#endregion
 
@@ -125,12 +125,14 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		App.SetRootPage(App.BackwardPage!);
+		var page = (Page)Activator.CreateInstance(App.BackwardPageType!)!;
+		App.SetRootPage(page);
 	}
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		App.SetRootPage(App.ForwardPage!);
+		var page = (Page)Activator.CreateInstance(App.ForwardPageType!)!;
+		App.SetRootPage(page);
 	}
 	#endregion
 

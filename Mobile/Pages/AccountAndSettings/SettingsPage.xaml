@@ -7,7 +7,7 @@
              NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.Page_Settings_Title}">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_Settings_Title}"
@@ -15,159 +15,238 @@
                                ShowBackButton="True" />
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="20">
+            <VerticalStackLayout Padding="30" Spacing="15">
 
-            <!-- Display Section -->
-            <Label Text="{x:Static resx:Resources.Settings_Display}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout Spacing="15">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_ShowUpcomingBirthdays}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <Entry x:Name="UpcomingEntry"
-                               Grid.Column="1"
-                               Keyboard="Numeric"
-                               WidthRequest="60"
-                               HorizontalTextAlignment="Center" />
-                    </Grid>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_ShowPastBirthdays}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <Entry x:Name="PastEntry"
-                               Grid.Column="1"
-                               Keyboard="Numeric"
-                               WidthRequest="60"
-                               HorizontalTextAlignment="Center" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Theme Selection -->
-            <Label Text="{x:Static resx:Resources.Settings_Theme}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout RadioButtonGroup.GroupName="ThemeGroup"
-                                     Spacing="10">
-                    <RadioButton Value="Light"
-                                 x:Name="RadioLight">
-                        <RadioButton.Content>
-                            <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
-                                   Style="{StaticResource LabelInfo}" />
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Value="Dark"
-                                 x:Name="RadioDark">
-                        <RadioButton.Content>
-                            <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
-                                   Style="{StaticResource LabelInfo}" />
-                        </RadioButton.Content>
-                    </RadioButton>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Language Selection -->
-            <Label Text="{x:Static resx:Resources.Settings_Language}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout RadioButtonGroup.GroupName="LocaleGroup"
-                                     Spacing="10">
-                    <RadioButton Value="de"
-                                 x:Name="RadioDe">
-                        <RadioButton.Content>
-                            <Label Text="Deutsch"
-                                   Style="{StaticResource LabelInfo}" />
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Value="en"
-                                 x:Name="RadioEn">
-                        <RadioButton.Content>
-                            <Label Text="English"
-                                   Style="{StaticResource LabelInfo}" />
-                        </RadioButton.Content>
-                    </RadioButton>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Contacts Section -->
-            <Label Text="{x:Static resx:Resources.Settings_Contacts}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout RadioButtonGroup.GroupName="ContactsGroup"
-                                     Spacing="10">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <RadioButton x:Name="RadioContactsRead"
-                                     Grid.Column="1"
-                                     Style="{StaticResource RadioStandard}"
-                                     CheckedChanged="OnContactsRadioChanged" />
-                    </Grid>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_ContactsNone}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <RadioButton x:Name="RadioContactsNone"
-                                     Grid.Column="1"
-                                     Style="{StaticResource RadioStandard}"
-                                     CheckedChanged="OnContactsRadioChanged" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-
-            <!-- Calendar Section -->
-            <Label Text="{x:Static resx:Resources.Settings_Calendars}"
-                   Style="{StaticResource LabelHeader}" />
-
-            <Border Style="{StaticResource Tile}">
-                <VerticalStackLayout Spacing="15">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0"
-                               Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
-                               Style="{StaticResource LabelInfo}"
-                               VerticalOptions="Center" />
-                        <Switch x:Name="WriteCalendarsSwitch"
-                                Grid.Column="1"
-                                Toggled="OnWriteCalendarsToggled"
-                                VerticalOptions="Center" />
-                    </Grid>
-
-                    <VerticalStackLayout x:Name="CalendarListContainer"
-                                         IsVisible="False"
-                                         Spacing="5">
-                        <Label Text="{x:Static resx:Resources.Settings_SelectCalendars}"
-                               Style="{StaticResource LabelDescription}" />
-                        <VerticalStackLayout x:Name="CalendarTogglesContainer"
-                                             Spacing="5" />
+                <!-- Accordion 1: Display -->
+                <Border x:Name="Accordion1" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Display}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion1Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion1Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion1Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_ShowUpcomingBirthdays}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Border Grid.Column="1" Style="{StaticResource TileOuterForEntry}" WidthRequest="70">
+                                    <Border Style="{StaticResource TileInnerForEntry}">
+                                        <Entry x:Name="UpcomingEntry"
+                                               Keyboard="Numeric"
+                                               HorizontalTextAlignment="Center"
+                                               Style="{StaticResource EntryStandard}" />
+                                    </Border>
+                                </Border>
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_ShowPastBirthdays}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Border Grid.Column="1" Style="{StaticResource TileOuterForEntry}" WidthRequest="70">
+                                    <Border Style="{StaticResource TileInnerForEntry}">
+                                        <Entry x:Name="PastEntry"
+                                               Keyboard="Numeric"
+                                               HorizontalTextAlignment="Center"
+                                               Style="{StaticResource EntryStandard}" />
+                                    </Border>
+                                </Border>
+                            </Grid>
+                            <!-- Name Direction -->
+                            <Label Text="{x:Static resx:Resources.Settings_NameDirection}"
+                                   Style="{StaticResource LabelDescription}"
+                                   Margin="0,10,0,0" />
+                            <VerticalStackLayout RadioButtonGroup.GroupName="NameDirectionGroup" Spacing="5">
+                                <RadioButton Value="FirstFirstName" x:Name="RadioFirstFirstName">
+                                    <RadioButton.Content>
+                                        <Label Text="{x:Static resx:Resources.NameDirection_FirstFirstName}"
+                                               Style="{StaticResource LabelInfo}" />
+                                    </RadioButton.Content>
+                                </RadioButton>
+                                <RadioButton Value="FirstLastName" x:Name="RadioFirstLastName">
+                                    <RadioButton.Content>
+                                        <Label Text="{x:Static resx:Resources.NameDirection_FirstLastName}"
+                                               Style="{StaticResource LabelInfo}" />
+                                    </RadioButton.Content>
+                                </RadioButton>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Border>
+                </Border>
 
-        </VerticalStackLayout>
+                <!-- Accordion 2: Theme -->
+                <Border x:Name="Accordion2" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Theme}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion2Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion2Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion2Content" Padding="20" Spacing="10" IsVisible="False"
+                                             RadioButtonGroup.GroupName="ThemeGroup">
+                            <RadioButton Value="Light" x:Name="RadioLight">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Value="Dark" x:Name="RadioDark">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Accordion 3: Language -->
+                <Border x:Name="Accordion3" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Language}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion3Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion3Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="10" IsVisible="False"
+                                             RadioButtonGroup.GroupName="LocaleGroup">
+                            <RadioButton Value="de" x:Name="RadioDe">
+                                <RadioButton.Content>
+                                    <Label Text="Deutsch"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Value="en" x:Name="RadioEn">
+                                <RadioButton.Content>
+                                    <Label Text="English"
+                                           Style="{StaticResource LabelInfo}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Accordion 4: Contacts -->
+                <Border x:Name="Accordion4" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Contacts}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion4Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion4Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion4Content" Padding="20" Spacing="10" IsVisible="False"
+                                             RadioButtonGroup.GroupName="ContactsGroup">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_ContactsRead}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioContactsRead"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnContactsRadioChanged" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_ContactsNone}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioContactsNone"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnContactsRadioChanged" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Accordion 5: Calendars -->
+                <Border x:Name="Accordion5" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Calendars}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion5Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion5Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion5Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="WriteCalendarsSwitch"
+                                        Grid.Column="1"
+                                        Toggled="OnWriteCalendarsToggled"
+                                        VerticalOptions="Center" />
+                            </Grid>
+
+                            <VerticalStackLayout x:Name="CalendarListContainer"
+                                                 IsVisible="False"
+                                                 Spacing="5">
+                                <Label Text="{x:Static resx:Resources.Settings_SelectCalendars}"
+                                       Style="{StaticResource LabelDescription}" />
+                                <VerticalStackLayout x:Name="CalendarTogglesContainer"
+                                                     Spacing="5" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Save Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnSaveClicked"
+                        Margin="0,15,0,0" />
+
+            </VerticalStackLayout>
         </ScrollView>
-
-        <!-- Bottom Buttons -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="20,15,20,20">
-            <Button Grid.Column="0"
-                    Text="{x:Static resx:Resources.General_Button_Back}"
-                    Style="{StaticResource ButtonSecondary}"
-                    Clicked="OnBackClicked" />
-            <Button Grid.Column="1"
-                    Text="{x:Static resx:Resources.General_Button_Save}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Clicked="OnSaveClicked" />
-        </Grid>
     </Grid>
 
 </ContentPage>

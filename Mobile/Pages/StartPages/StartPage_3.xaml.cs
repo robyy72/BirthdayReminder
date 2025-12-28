@@ -97,8 +97,8 @@ public partial class StartPage_3 : ContentPage
 		AccountService.Save();
 
 		// Navigate to permission request page
-		App.BackwardPage = new StartPage_3();
-		App.ForwardPage = new StartPage_5();
+		App.BackwardPageType = typeof(StartPage_3);
+		App.ForwardPageType = typeof(StartPage_5);
 		App.SetRootPage(new RequestPermissionPage_1(PermissionType.Contacts));
 	}
 }

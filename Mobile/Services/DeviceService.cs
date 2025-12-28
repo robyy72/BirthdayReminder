@@ -199,6 +199,18 @@ public static class DeviceService
 	}
 	#endregion
 
+	#region TimeZone
+	/// <summary>
+	/// Aim: Gets the device's current time zone ID
+	/// Return: Time zone ID string (e.g., "Europe/Berlin")
+	/// </summary>
+	public static string GetTimeZoneId()
+	{
+		string timeZoneId = TimeZoneInfo.Local.Id;
+		return timeZoneId;
+	}
+	#endregion
+
 	#region Device Info
 	/// <summary>
 	/// Aim: Gets the device platform (Android, iOS, etc.)

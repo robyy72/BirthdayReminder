@@ -34,8 +34,8 @@ public partial class StartPage_5 : ContentPage
 	{
 		if (AccountService.UseContacts())
 		{
-			App.BackwardPage = new StartPage_3();
-			App.ForwardPage = new StartPage_5();
+			App.BackwardPageType = typeof(StartPage_3);
+			App.ForwardPageType = typeof(StartPage_5);
 			App.SetRootPage(new RequestPermissionPage_1(PermissionType.Contacts));
 		}
 		else

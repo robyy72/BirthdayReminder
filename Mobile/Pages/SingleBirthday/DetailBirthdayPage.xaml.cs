@@ -1,5 +1,6 @@
 #region Usings
 using Common;
+using System.Windows.Input;
 #endregion
 
 namespace Mobile;
@@ -11,10 +12,16 @@ public partial class DetailBirthdayPage : ContentPage
     private Person? _person;
     #endregion
 
+    #region Properties
+    public ICommand BackCommand { get; }
+    #endregion
+
     #region Constructor
     public DetailBirthdayPage(int personId)
     {
+        BackCommand = new Command(async () => await NavigateBack());
         InitializeComponent();
+        BindingContext = this;
         _personId = personId;
     }
     #endregion
@@ -89,6 +96,20 @@ public partial class DetailBirthdayPage : ContentPage
         ReminderInfoLabel.Text = hasReminders
             ? MobileLanguages.Resources.Detail_RemindersSet
             : MobileLanguages.Resources.Detail_NoReminders;
+    }
+    #endregion
+
+    #region Navigation
+    private async Task NavigateBack()
+    {
+        // Navigate to root first
+        await App.NavigateToRootAsync();
+
+        // If coming from AllBirthdaysPage, navigate there
+        if (App.BackwardPageType == typeof(AllBirthdaysPage))
+        {
+            await App.NavigateToAsync<AllBirthdaysPage>();
+        }
     }
     #endregion
 

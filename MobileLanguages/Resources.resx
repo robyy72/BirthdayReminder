@@ -794,4 +794,14 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="ReminderTemplate_TeamSignature" xml:space="preserve">
     <value>Your team from {Domain}</value>
   </data>
+  <!-- Name Direction -->
+  <data name="Settings_NameDirection" xml:space="preserve">
+    <value>Name order</value>
+  </data>
+  <data name="NameDirection_FirstFirstName" xml:space="preserve">
+    <value>First name Last name</value>
+  </data>
+  <data name="NameDirection_FirstLastName" xml:space="preserve">
+    <value>Last name, First name</value>
+  </data>
 </root>

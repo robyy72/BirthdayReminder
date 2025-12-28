@@ -33,6 +33,12 @@ public partial class CustomHeader : ContentView
         typeof(CustomHeader),
         false,
         propertyChanged: OnContextMenuVisibilityChanged);
+
+    public static readonly BindableProperty BackClickedCommandProperty = BindableProperty.Create(
+        nameof(BackClickedCommand),
+        typeof(System.Windows.Input.ICommand),
+        typeof(CustomHeader),
+        null);
     #endregion
 
     #region Properties
@@ -58,6 +64,12 @@ public partial class CustomHeader : ContentView
     {
         get => (bool)GetValue(ShowContextMenuProperty);
         set => SetValue(ShowContextMenuProperty, value);
+    }
+
+    public System.Windows.Input.ICommand? BackClickedCommand
+    {
+        get => (System.Windows.Input.ICommand?)GetValue(BackClickedCommandProperty);
+        set => SetValue(BackClickedCommandProperty, value);
     }
     #endregion
 
@@ -113,7 +125,14 @@ public partial class CustomHeader : ContentView
 
     private async void OnBackClicked(object? sender, EventArgs e)
     {
-        await App.GoBackAsync();
+        if (BackClickedCommand != null && BackClickedCommand.CanExecute(null))
+        {
+            BackClickedCommand.Execute(null);
+        }
+        else
+        {
+            await App.GoBackAsync();
+        }
     }
 
     private void OnContextMenuButtonClicked(object? sender, EventArgs e)

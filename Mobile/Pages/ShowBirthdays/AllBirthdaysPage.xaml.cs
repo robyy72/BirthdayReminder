@@ -25,6 +25,7 @@ public partial class AllBirthdaysPage : ContentPage
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
+		App.BackwardPageType = typeof(AllBirthdaysPage);
 		LoadBirthdays();
 		ApplyFilter();
 	}
@@ -94,7 +95,16 @@ public partial class AllBirthdaysPage : ContentPage
 
 	private async void OnNewBirthdayClicked(object? sender, EventArgs e)
 	{
-		await App.NavigateToAsync<CreateBirthdayPage>();
+		// If contacts are not used (None), go directly to CreateBirthday
+		// Otherwise show search page to avoid duplicates
+		if (App.Account.ContactsReadMode == ContactsReadMode.None)
+		{
+			await App.NavigateToAsync<CreateBirthdayPage>();
+		}
+		else
+		{
+			await App.NavigateToAsync<SearchPersonPage>();
+		}
 	}
 
 	private async void OnBackClicked(object? sender, EventArgs e)

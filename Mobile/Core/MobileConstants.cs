@@ -7,7 +7,7 @@ public static class MobileConstants
 	#endregion
 
 	#region Debug
-	public const bool START_ALWAYS_WITH_WELCOME = true;
+	public const bool START_ALWAYS_WITH_WELCOME = false;
 	#endregion
 
 	#region Localization

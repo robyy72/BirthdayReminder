@@ -2207,5 +2207,32 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Welcome_Header_Title", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name order ähnelt.
+        /// </summary>
+        public static string Settings_NameDirection {
+            get {
+                return ResourceManager.GetString("Settings_NameDirection", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die First name Last name ähnelt.
+        /// </summary>
+        public static string NameDirection_FirstFirstName {
+            get {
+                return ResourceManager.GetString("NameDirection_FirstFirstName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Last name, First name ähnelt.
+        /// </summary>
+        public static string NameDirection_FirstLastName {
+            get {
+                return ResourceManager.GetString("NameDirection_FirstLastName", resourceCulture);
+            }
+        }
     }
 }

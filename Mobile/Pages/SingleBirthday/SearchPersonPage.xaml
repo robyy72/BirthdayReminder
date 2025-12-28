@@ -15,63 +15,58 @@
                                ShowBackButton="True" />
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="15">
+            <VerticalStackLayout Padding="30" Spacing="15">
 
-                <Label Text="{x:Static resx:Resources.SearchPerson_Description}"
-                       Style="{StaticResource LabelInfo}" />
-
-                <!-- Search Card -->
+                <!-- Name Input Card -->
                 <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.CardHeader_Name}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="15" Spacing="10">
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Entry x:Name="FirstNameEntry"
+                                           Placeholder="{x:Static resx:Resources.Placeholder_FirstName}"
+                                           Style="{StaticResource EntryStandard}"
+                                           TextChanged="OnSearchTextChanged"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused" />
+                                </Border>
+                            </Border>
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Entry x:Name="LastNameEntry"
+                                           Placeholder="{x:Static resx:Resources.Placeholder_LastName}"
+                                           Style="{StaticResource EntryStandard}"
+                                           TextChanged="OnSearchTextChanged"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused" />
+                                </Border>
+                            </Border>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Search Results Card -->
+                <Border x:Name="ResultsCard" Style="{StaticResource Card}" IsVisible="False">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
                             <Label Text="{x:Static resx:Resources.SearchPerson_SearchHeader}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="15">
-                            <Entry x:Name="SearchEntry"
-                                   Placeholder="{x:Static resx:Resources.SearchPerson_SearchPlaceholder}"
-                                   TextChanged="OnSearchTextChanged" />
+                        <VerticalStackLayout x:Name="ResultsList" Padding="10" Spacing="5">
+                            <!-- Dynamically populated with Tiles -->
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Create New Button (before results) -->
+                <!-- Create New Button -->
                 <Button Text="{x:Static resx:Resources.SearchPerson_CreateNew}"
-                        Style="{StaticResource ButtonSecondary}"
-                        Clicked="OnCreateNewClicked" />
-
-                <!-- Search Results -->
-                <CollectionView x:Name="ResultsList"
-                                SelectionMode="Single"
-                                SelectionChanged="OnPersonSelected"
-                                IsVisible="False">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="controls:PersonViewModel">
-                            <Border Style="{StaticResource CardBirthday}">
-                                <VerticalStackLayout Spacing="0">
-                                    <Border Style="{StaticResource CardHeader}">
-                                        <Label Text="{Binding DisplayName}"
-                                               Style="{StaticResource LabelCardHeader}" />
-                                    </Border>
-                                    <Grid Padding="15,12">
-                                        <Label Text="{Binding DateDisplay}"
-                                               Style="{StaticResource LabelInfo}"
-                                               VerticalOptions="Center" />
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                    <CollectionView.EmptyView>
-                        <Label Text="{x:Static resx:Resources.SearchPerson_NoResults}"
-                               Style="{StaticResource LabelInfo}"
-                               HorizontalOptions="Center"
-                               Padding="20" />
-                    </CollectionView.EmptyView>
-                </CollectionView>
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnCreateNewClicked"
+                        Margin="0,10,0,0" />
 
             </VerticalStackLayout>
         </ScrollView>

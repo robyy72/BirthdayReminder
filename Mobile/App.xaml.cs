@@ -27,8 +27,8 @@ public partial class App : Application
 	public static bool NeedsReadContacts { get; set; } = false;
 
 	#region Navigation (for reusable pages)
-	public static Page? ForwardPage { get; set; }
-	public static Page? BackwardPage { get; set; }
+	public static Type? ForwardPageType { get; set; }
+	public static Type? BackwardPageType { get; set; }
     #endregion
 
     #region Flyout Events
@@ -44,7 +44,6 @@ public partial class App : Application
 	{
 		InitializeComponent();
 		Init();
-		ApplyTheme();
 	}
 
     #region Proctected Methods
@@ -229,14 +228,27 @@ public partial class App : Application
 	{
 		PersonService.Load();
 		AccountService.Load();
+
+        CheckTimeZone();
+
 		if (AccountService.UseContacts())
 			NeedsReadContacts = true;
+
+        ApplyTheme();
+    }
+
+    private void CheckTimeZone()
+    {
+        if (string.IsNullOrEmpty(Account.TimeZoneId))
+        {
+            Account.TimeZoneId = DeviceService.GetTimeZoneId();
+            AccountService.Save();
+        }
     }
 
     private void ApplyTheme()
 	{
-		var account = Account;
-		DeviceService.ApplyTheme(account.Theme);
+		DeviceService.ApplyTheme(Account.Theme);
 	}
     #endregion
 }

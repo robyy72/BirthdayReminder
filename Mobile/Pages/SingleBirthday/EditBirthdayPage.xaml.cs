@@ -145,7 +145,8 @@ public partial class EditBirthdayPage : ContentPage
 
         PersonService.Update(_person);
 
-        await App.GoBackAsync();
+        // Navigate to DetailBirthdayPage instead of going back
+        await App.NavigateToAsync<DetailBirthdayPage>(_personId);
     }
 
     private async void OnHelpBirthdayTapped(object? sender, EventArgs e)

@@ -23,6 +23,10 @@ public class Account
 	public int ShowPastBirthdays { get; set; } = MobileConstants.SHOW_PAST_DEFAULT;
     #endregion
 
+	#region Device
+	public string TimeZoneId { get; set; } = string.Empty;
+	#endregion
+
     #region Reminder
     public ReminderCount ReminderCount { get; set; } = ReminderCount.NoReminder;
 	#endregion
