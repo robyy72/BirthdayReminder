@@ -107,7 +107,7 @@ public partial class SearchPersonPage : ContentPage
 		int personId = person.Id;
 		tapGesture.Tapped += async (s, e) =>
 		{
-			await App.NavigateToAsync<EditBirthdayPage>(personId);
+			await App.NavigateToAsync<EditPersonPage>(personId);
 		};
 		tile.GestureRecognizers.Add(tapGesture);
 
@@ -140,7 +140,7 @@ public partial class SearchPersonPage : ContentPage
 			prefillName = lastName;
 		}
 
-		await App.NavigateToAsync<CreateBirthdayPage>(prefillName);
+		await App.NavigateToAsync<CreatePersonPage>(prefillName);
 	}
 
 	private void OnEntryFocused(object? sender, FocusEventArgs e)

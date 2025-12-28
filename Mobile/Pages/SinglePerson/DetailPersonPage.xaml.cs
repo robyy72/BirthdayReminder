@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Mobile;
 
-public partial class DetailBirthdayPage : ContentPage
+public partial class DetailPersonPage : ContentPage
 {
     #region Fields
     private int _personId;
@@ -17,7 +17,7 @@ public partial class DetailBirthdayPage : ContentPage
     #endregion
 
     #region Constructor
-    public DetailBirthdayPage(int personId)
+    public DetailPersonPage(int personId)
     {
         BackCommand = new Command(async () => await NavigateBack());
         InitializeComponent();
@@ -92,7 +92,7 @@ public partial class DetailBirthdayPage : ContentPage
         }
 
         // Reminder info
-        bool hasReminders = _person.Reminder_1 != null || _person.Reminder_2 != null || _person.Reminder_3 != null;
+        bool hasReminders = _person.Reminders.Any(r => r != null);
         ReminderInfoLabel.Text = hasReminders
             ? MobileLanguages.Resources.Detail_RemindersSet
             : MobileLanguages.Resources.Detail_NoReminders;
@@ -116,17 +116,17 @@ public partial class DetailBirthdayPage : ContentPage
     #region Event Handlers
     private async void OnEditClicked(object? sender, EventArgs e)
     {
-        await App.NavigateToAsync<EditBirthdayPage>(_personId);
+        await App.NavigateToAsync<EditPersonPage>(_personId);
     }
 
     private async void OnEditMenuClicked(object? sender, EventArgs e)
     {
-        await App.NavigateToAsync<EditBirthdayPage>(_personId);
+        await App.NavigateToAsync<EditPersonPage>(_personId);
     }
 
     private async void OnDeleteMenuClicked(object? sender, EventArgs e)
     {
-        await App.NavigateToAsync<DeleteBirthdayPage>(_personId);
+        await App.NavigateToAsync<DeletePersonPage>(_personId);
     }
     #endregion
 }

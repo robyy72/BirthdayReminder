@@ -37,14 +37,6 @@ public enum PersonSource
 	Contacts = 1
 }
 
-public enum ReminderCount
-{
-	NoReminder = 0,
-	OneReminder = 1,
-	TwoReminders = 2,
-	ThreeReminders = 3
-}
-
 public enum AppPermissionStatus
 {
 	NotSet = 0,

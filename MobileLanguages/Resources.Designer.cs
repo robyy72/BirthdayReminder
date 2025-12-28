@@ -1046,6 +1046,42 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Page_ReminderSettings_Title", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Configure your reminders. Tap a card to edit. ähnelt.
+        /// </summary>
+        public static string ReminderSettings_Description {
+            get {
+                return ResourceManager.GetString("ReminderSettings_Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die {0} days before ähnelt.
+        /// </summary>
+        public static string ReminderSettings_DaysBefore {
+            get {
+                return ResourceManager.GetString("ReminderSettings_DaysBefore", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Not configured yet ähnelt.
+        /// </summary>
+        public static string ReminderSettings_NotConfigured {
+            get {
+                return ResourceManager.GetString("ReminderSettings_NotConfigured", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No methods enabled ähnelt.
+        /// </summary>
+        public static string ReminderSettings_NoMethods {
+            get {
+                return ResourceManager.GetString("ReminderSettings_NoMethods", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.

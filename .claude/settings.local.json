@@ -37,7 +37,11 @@
       "Bash(pwsh -File \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\clean.ps1\")",
       "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\AddBirthdayToContactPage.xaml.cs\" -Force)",
       "Bash(Select-Object -First 50)",
-      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Services\\\\BirthdayService.cs\" -Force)"
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Services\\\\BirthdayService.cs\" -Force)",
+      "Bash(Select-String -Pattern \"\\(error|warning|Build succeeded\\)\")",
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Services\\\\NavigationService.cs\" -Force)",
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_6.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_6.xaml.cs\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_7.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_7.xaml.cs\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_8.xaml\", \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\\\\StartPages\\\\StartPage_8.xaml.cs\" -Force)",
+      "Bash(pwsh -File \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\.claude\\\\clean.ps1\")"
     ],
     "deny": []
   }

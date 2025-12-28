@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:controls="clr-namespace:Mobile"
-             x:Class="Mobile.CreateBirthdayPage"
+             x:Class="Mobile.EditPersonPage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
+             Title="{x:Static resx:Resources.Page_EditBirthday_Title}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
-                               Title="{x:Static resx:Resources.Page_NewBirthday_Title}"
+                               Title="{x:Static resx:Resources.Page_EditBirthday_Title}"
                                ShowMenuButton="False"
                                ShowBackButton="True" />
 
@@ -62,15 +62,13 @@
                                 <Picker x:Name="DayPicker"
                                         Title="{x:Static resx:Resources.General_Label_Day}"
                                         HorizontalTextAlignment="End"
-                                        FontSize="18"
-                                        SelectedIndexChanged="OnDatePickerChanged" />
+                                        FontSize="18" />
                                 <Label Text="."
                                        FontSize="18"
                                        VerticalOptions="Center" />
                                 <Picker x:Name="MonthPicker"
                                         Title="{x:Static resx:Resources.General_Label_Month}"
-                                        FontSize="18"
-                                        SelectedIndexChanged="OnDatePickerChanged" />
+                                        FontSize="18" />
                                 <Picker x:Name="YearPicker"
                                         Title="{x:Static resx:Resources.General_Label_Year}"
                                         FontSize="18" />
@@ -86,27 +84,14 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Found Birthdays (hidden until matches found) -->
-                <Border x:Name="FoundBirthdaysCard" Style="{StaticResource Card}" IsVisible="False">
-                    <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.FoundBirthdays_Header}"
-                                   Style="{StaticResource LabelCardHeader}" />
-                        </Border>
-                        <VerticalStackLayout x:Name="FoundBirthdaysList" Padding="10" Spacing="5">
-                            <!-- Dynamically populated -->
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Write to Contact Toggle -->
-                <Grid ColumnDefinitions="*,Auto" Margin="0,10,0,0">
-                    <Label Text="{x:Static resx:Resources.Settings_CreateContact}"
+                <!-- Update Contact Toggle -->
+                <Grid x:Name="UpdateContactRow" ColumnDefinitions="*,Auto" IsVisible="False" Margin="0,10,0,0">
+                    <Label x:Name="UpdateContactLabel"
                            Style="{StaticResource LabelInfo}"
                            VerticalOptions="Center" />
-                    <Switch x:Name="WriteToContactSwitch"
+                    <Switch x:Name="UpdateContactSwitch"
                             Grid.Column="1"
-                            Toggled="OnWriteToContactToggled" />
+                            Toggled="OnUpdateContactToggled" />
                 </Grid>
 
                 <!-- Bottom Buttons -->

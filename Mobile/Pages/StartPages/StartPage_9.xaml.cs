@@ -205,11 +205,11 @@ public partial class StartPage_9 : ContentPage
 	#region Navigation
 	private void OnBackClicked(object? sender, EventArgs e)
 	{
-		Page page = App.Account.ReminderCount switch
+		Page page = App.Account.RequestedReminderTemplatesCount switch
 		{
-			ReminderCount.ThreeReminders => new StartPage_8(),
-			ReminderCount.TwoReminders => new StartPage_7(),
-			ReminderCount.OneReminder => new StartPage_6(),
+			3 => new ReminderPage(2),
+			2 => new ReminderPage(1),
+			1 => new ReminderPage(0),
 			_ => new StartPage_5()
 		};
 		App.SetRootPage(page);
@@ -233,6 +233,13 @@ public partial class StartPage_9 : ContentPage
 		// Google
 		account.GoogleCalendar_SingleEmail = GoogleSingleEmailSwitch.IsToggled;
 		account.GoogleCalendar_GrantAccess = GoogleGrantAccessSwitch.IsToggled;
+
+		// Verify actual reminder count matches requested
+		int actualCount = ReminderService.CountUsedTemplateReminders();
+		if (actualCount < account.RequestedReminderTemplatesCount)
+		{
+			account.RequestedReminderTemplatesCount = actualCount;
+		}
 
 		AccountService.Save();
 		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_INITIALIZED, true);

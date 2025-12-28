@@ -28,7 +28,8 @@ public class Account
 	#endregion
 
     #region Reminder
-    public ReminderCount ReminderCount { get; set; } = ReminderCount.NoReminder;
+    public int RequestedReminderTemplatesCount { get; set; } = 0;
+	public Reminder?[] ReminderTemplates { get; set; } = new Reminder?[MobileConstants.MAX_REMINDERS];
 	#endregion
 
 	#region Contacts

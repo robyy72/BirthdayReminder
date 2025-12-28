@@ -4,17 +4,17 @@ using Common;
 
 namespace Mobile;
 
-public partial class DeleteBirthdayPage : ContentPage
+public partial class DeletePersonPage : ContentPage
 {
 	private int? _personId;
 	private Person? _person;
 
-	public DeleteBirthdayPage()
+	public DeletePersonPage()
 	{
 		InitializeComponent();
 	}
 
-	public DeleteBirthdayPage(int personId) : this()
+	public DeletePersonPage(int personId) : this()
 	{
 		_personId = personId;
 	}

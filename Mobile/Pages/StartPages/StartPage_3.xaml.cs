@@ -76,7 +76,7 @@ public partial class StartPage_3 : ContentPage
 		App.SetRootPage(new StartPage_2());
 	}
 
-	private void OnNextClicked(object? sender, EventArgs e)
+	private async void OnNextClicked(object? sender, EventArgs e)
 	{
 		// Save ContactsReadMode selection
 		if (RadioReadAll.IsChecked)
@@ -95,6 +95,15 @@ public partial class StartPage_3 : ContentPage
 			App.Account.ContactsReadWriteMode = ContactsReadWriteMode.ReadOnlyOnce;
 
 		AccountService.Save();
+
+		// Check if permission is already granted
+		bool granted = await DeviceService.CheckContactsReadPermissionAsync();
+		if (granted)
+		{
+			// Skip permission request page
+			App.SetRootPage(new StartPage_5());
+			return;
+		}
 
 		// Navigate to permission request page
 		App.BackwardPageType = typeof(StartPage_3);

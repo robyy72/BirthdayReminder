@@ -12,12 +12,6 @@ public partial class App : Application
 
     #region Public Properties
 
-    #region Reminder Templates (used during StartPage wizard)
-    public static Reminder? Reminder_1_Template { get; set; }
-	public static Reminder? Reminder_2_Template { get; set; }
-	public static Reminder? Reminder_3_Template { get; set; }
-	#endregion
-
     /// <summary>
     /// Aim: Get the current persons list (loads from prefs once, then cached).
     /// </summary>
@@ -51,7 +45,7 @@ public partial class App : Application
 	{
 		Page page;
 
-		if (AccountService.IsInitialized())
+		if (AccountService.IsFirstRun())
 		{
 			page = CreateMainNavigationPage();
 		}
@@ -158,6 +152,22 @@ public partial class App : Application
             return;
 
         var page = (TPage?)Activator.CreateInstance(typeof(TPage), parameter);
+        if (page != null)
+        {
+            await _navigation.PushAsync(page);
+        }
+    }
+
+    /// <summary>
+    /// Aim: Navigiert zu einer neuen Page mit zwei Parametern
+    /// Params: TPage - Der Page-Typ, param1/param2 - Die Parameter für die Page
+    /// </summary>
+    public static async Task NavigateToAsync<TPage>(object param1, object param2) where TPage : Page
+    {
+        if (_navigation == null)
+            return;
+
+        var page = (TPage?)Activator.CreateInstance(typeof(TPage), param1, param2);
         if (page != null)
         {
             await _navigation.PushAsync(page);

@@ -597,7 +597,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Immer einlesen</value>
   </data>
   <data name="Start3_ReadAlwaysAskWrite" xml:space="preserve">
-    <value>Immer einlesen und für Schreiben nachfragen</value>
+    <value>Immer einlesen und für's Schreiben fragen</value>
   </data>
   <data name="Start3_ReadAlwaysWrite" xml:space="preserve">
     <value>Immer einlesen und immer Kontakt erstellen oder aktualisieren</value>
@@ -632,7 +632,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   </data>
   <!-- StartPage_5 -->
   <data name="Start5_ReminderQuestion" xml:space="preserve">
-    <value>Willst du genau an dem Tag erinnert werden oder auch schon drei Tage vorher oder sogar 3x ?</value>
+    <value>Willst du genau an dem Tag erinnert werden oder auch schon z.B. 3 Tage vorher oder sogar insgesamt bis zu 3x ?</value>
   </data>
   <data name="Start5_ManualNote" xml:space="preserve">
     <value>Für jeden Eintrag kann das auch manuell definiert werden</value>
@@ -712,6 +712,18 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <!-- Reminder Settings Page -->
   <data name="Page_ReminderSettings_Title" xml:space="preserve">
     <value>Erinnerungseinstellungen</value>
+  </data>
+  <data name="ReminderSettings_Description" xml:space="preserve">
+    <value>Konfiguriere deine Erinnerungen. Tippe auf eine Karte zum Bearbeiten.</value>
+  </data>
+  <data name="ReminderSettings_DaysBefore" xml:space="preserve">
+    <value>{0} Tage vorher</value>
+  </data>
+  <data name="ReminderSettings_NotConfigured" xml:space="preserve">
+    <value>Noch nicht konfiguriert</value>
+  </data>
+  <data name="ReminderSettings_NoMethods" xml:space="preserve">
+    <value>Keine Methoden aktiviert</value>
   </data>
   <data name="Tab_Account" xml:space="preserve">
     <value>Account</value>

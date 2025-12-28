@@ -23,9 +23,7 @@ public class Person
     #endregion
 
     #region Reminders
-    public Reminder? Reminder_1 { get; set; }
-    public Reminder? Reminder_2 { get; set; }
-    public Reminder? Reminder_3 { get; set; }
+    public Reminder?[] Reminders { get; set; } = new Reminder?[MobileConstants.MAX_REMINDERS];
 	#endregion
 
 	#region Contacts

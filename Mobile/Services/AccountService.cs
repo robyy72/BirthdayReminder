@@ -29,19 +29,19 @@ public static class AccountService
 		}
 	}
 
-	/// <summary>
-	/// Aim: Check if account has been initialized (saved to prefs by user).
-	/// </summary>
-	/// <returns>True if initialized, false otherwise.</returns>
-	public static bool IsInitialized()
+	public static bool IsFirstRun()
 	{
-		bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
+        bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
         if (startAlwaysWithWelcome)
-			return false;
+		{
+            PrefsHelper.RemoveAllKeys();
+            return false;
+        }
+            
 
-		bool accountInitialized = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_INITIALIZED);
-		return accountInitialized;
-	}
+        bool firstRun = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_FIRST_RUN);
+		return firstRun;
+    }
 
 	/// <summary>
 	/// Aim: Check if contacts are being used.

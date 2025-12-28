@@ -4,30 +4,27 @@ using Common;
 
 namespace Mobile;
 
-public partial class EditBirthdayPage : ContentPage
+public partial class CreatePersonPage : ContentPage
 {
     #region Fields
-    private int _personId;
-    private Person? _person;
     private List<string> _days = new();
     private List<string> _months = new();
     private List<string> _years = new();
+    private string? _prefillName;
     #endregion
 
     #region Constructor
-    public EditBirthdayPage(int personId)
+    public CreatePersonPage() : this(null)
     {
-        InitializeComponent();
-        _personId = personId;
-        InitializePickers();
     }
-    #endregion
 
-    #region Lifecycle
-    protected override async void OnAppearing()
+    public CreatePersonPage(string? prefillName)
     {
-        base.OnAppearing();
-        await LoadPerson();
+        _prefillName = prefillName;
+        InitializeComponent();
+        InitializePickers();
+        SetDefaultValues();
+        PrefillName();
     }
     #endregion
 
@@ -67,44 +64,28 @@ public partial class EditBirthdayPage : ContentPage
         YearPicker.ItemsSource = _years;
     }
 
-    private async Task LoadPerson()
+    private void SetDefaultValues()
     {
-        _person = PersonService.GetById(_personId);
-        if (_person == null)
-        {
-            await App.GoBackAsync();
+        DayPicker.SelectedIndex = DateTime.Now.Day - 1;
+        MonthPicker.SelectedIndex = DateTime.Now.Month - 1;
+        YearPicker.SelectedIndex = 0;
+    }
+
+    private void PrefillName()
+    {
+        if (string.IsNullOrWhiteSpace(_prefillName))
             return;
-        }
 
-        FirstNameEntry.Text = _person.FirstName;
-        LastNameEntry.Text = _person.LastName;
-
-        if (_person.Birthday != null)
+        // Try to split into first and last name
+        var parts = _prefillName.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length >= 2)
         {
-            DayPicker.SelectedIndex = _person.Birthday.Day - 1;
-            MonthPicker.SelectedIndex = _person.Birthday.Month - 1;
-
-            int year = _person.Birthday.Year;
-            if (BirthdayHelper.ShouldDisplayYear(year))
-            {
-                int yearIndex = _years.IndexOf(year.ToString());
-                YearPicker.SelectedIndex = yearIndex >= 0 ? yearIndex : 0;
-            }
-            else
-            {
-                YearPicker.SelectedIndex = 0;
-            }
-        }
-
-        // Contact toggle
-        UpdateContactRow.IsVisible = true;
-        if (!string.IsNullOrEmpty(_person.ContactId))
-        {
-            UpdateContactLabel.Text = MobileLanguages.Resources.Settings_UpdateContact;
+            FirstNameEntry.Text = parts[0];
+            LastNameEntry.Text = parts[1];
         }
         else
         {
-            UpdateContactLabel.Text = MobileLanguages.Resources.Settings_CreateContact;
+            FirstNameEntry.Text = _prefillName.Trim();
         }
     }
     #endregion
@@ -112,14 +93,10 @@ public partial class EditBirthdayPage : ContentPage
     #region Event Handlers
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
-        if (_person == null)
-        {
-            return;
-        }
-
         var firstName = FirstNameEntry.Text?.Trim() ?? string.Empty;
         var lastName = LastNameEntry.Text?.Trim() ?? string.Empty;
 
+        // Validate: at least one name required
         if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
         {
             ErrorLabel.Text = MobileLanguages.Resources.Error_NameRequired;
@@ -129,24 +106,43 @@ public partial class EditBirthdayPage : ContentPage
 
         ErrorBorder.IsVisible = false;
 
+        // First entry: set PersonNameDirection if still NotSet
+        if (App.Persons.Count == 0 && App.Account.PersonNameDirection == PersonNameDirection.NotSet)
+        {
+            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+                App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+            else if (!string.IsNullOrEmpty(firstName))
+                App.Account.PersonNameDirection = PersonNameDirection.FirstNameOnly;
+            else
+                App.Account.PersonNameDirection = PersonNameDirection.FirstLastName;
+
+            AccountService.Save();
+        }
+
         int selectedDay = DayPicker.SelectedIndex + 1;
         int selectedMonth = MonthPicker.SelectedIndex + 1;
         string selectedYearStr = _years[YearPicker.SelectedIndex];
         int selectedYear = selectedYearStr == "0000" ? 0 : int.Parse(selectedYearStr);
 
-        _person.FirstName = firstName;
-        _person.LastName = lastName;
-        _person.Birthday = new Birthday
+        var birthday = new Birthday
         {
             Day = selectedDay,
             Month = selectedMonth,
             Year = selectedYear
         };
 
-        PersonService.Update(_person);
+        var person = new Person
+        {
+            Id = GenerateId(),
+            FirstName = firstName,
+            LastName = lastName,
+            Birthday = birthday
+        };
 
-        // Navigate to DetailBirthdayPage instead of going back
-        await App.NavigateToAsync<DetailBirthdayPage>(_personId);
+        PersonService.Add(person);
+
+        // Navigate to DetailPersonPage instead of going back
+        await App.NavigateToAsync<DetailPersonPage>(person.Id);
     }
 
     private async void OnHelpBirthdayTapped(object? sender, EventArgs e)
@@ -155,7 +151,7 @@ public partial class EditBirthdayPage : ContentPage
         await Navigation.PushModalAsync(helpPage);
     }
 
-    private async void OnUpdateContactToggled(object? sender, ToggledEventArgs e)
+    private async void OnWriteToContactToggled(object? sender, ToggledEventArgs e)
     {
         if (!e.Value)
         {
@@ -165,12 +161,17 @@ public partial class EditBirthdayPage : ContentPage
         bool granted = await DeviceService.RequestContactsWritePermissionAsync();
         if (!granted)
         {
-            UpdateContactSwitch.IsToggled = false;
+            WriteToContactSwitch.IsToggled = false;
             await DisplayAlert(
                 MobileLanguages.Resources.Permission_Required,
                 MobileLanguages.Resources.Permission_ContactsWrite_Denied,
                 MobileLanguages.Resources.General_Button_OK);
         }
+    }
+
+    private void OnDatePickerChanged(object? sender, EventArgs e)
+    {
+        SearchMatchingBirthdays();
     }
 
     private void OnEntryFocused(object? sender, FocusEventArgs e)
@@ -193,6 +194,57 @@ public partial class EditBirthdayPage : ContentPage
             outerBorder.Stroke = strokeColor;
             outerBorder.StrokeThickness = 1;
         }
+    }
+    #endregion
+
+    #region Private Methods
+    private static int GenerateId()
+    {
+        int id = (int)(DateTime.Now.Ticks % int.MaxValue);
+        return id;
+    }
+
+    private void SearchMatchingBirthdays()
+    {
+        FoundBirthdaysList.Children.Clear();
+        FoundBirthdaysCard.IsVisible = false;
+
+        if (DayPicker.SelectedIndex < 0 || MonthPicker.SelectedIndex < 0)
+            return;
+
+        int day = DayPicker.SelectedIndex + 1;
+        int month = MonthPicker.SelectedIndex + 1;
+
+        var matches = App.Persons
+            .Where(p => p.Birthday != null && p.Birthday.Day == day && p.Birthday.Month == month)
+            .OrderBy(p => p.DisplayName)
+            .ToList();
+
+        if (matches.Count == 0)
+            return;
+
+        foreach (var person in matches)
+        {
+            var label = new Label
+            {
+                Text = person.DisplayName,
+                Style = (Style)Application.Current!.Resources["LabelInfo"],
+                Padding = new Thickness(10, 8),
+                TextDecorations = TextDecorations.Underline
+            };
+
+            var tapGesture = new TapGestureRecognizer();
+            int personId = person.Id;
+            tapGesture.Tapped += async (s, e) =>
+            {
+                await App.NavigateToAsync<EditPersonPage>(personId);
+            };
+            label.GestureRecognizers.Add(tapGesture);
+
+            FoundBirthdaysList.Children.Add(label);
+        }
+
+        FoundBirthdaysCard.IsVisible = true;
     }
     #endregion
 }

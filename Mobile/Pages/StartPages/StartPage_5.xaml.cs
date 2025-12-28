@@ -10,18 +10,18 @@ public partial class StartPage_5 : ContentPage
 
 	private void LoadAccount()
 	{
-		switch (App.Account.ReminderCount)
+		switch (App.Account.RequestedReminderTemplatesCount)
 		{
-			case ReminderCount.NoReminder:
+			case 0:
 				RadioNoReminder.IsChecked = true;
 				break;
-			case ReminderCount.OneReminder:
+			case 1:
 				RadioOneReminder.IsChecked = true;
 				break;
-			case ReminderCount.TwoReminders:
+			case 2:
 				RadioTwoReminders.IsChecked = true;
 				break;
-			case ReminderCount.ThreeReminders:
+			case 3:
 				RadioThreeReminders.IsChecked = true;
 				break;
 			default:
@@ -47,19 +47,19 @@ public partial class StartPage_5 : ContentPage
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
 		if (RadioNoReminder.IsChecked)
-			App.Account.ReminderCount = ReminderCount.NoReminder;
+			App.Account.RequestedReminderTemplatesCount = 0;
 		else if (RadioOneReminder.IsChecked)
-			App.Account.ReminderCount = ReminderCount.OneReminder;
+			App.Account.RequestedReminderTemplatesCount = 1;
 		else if (RadioTwoReminders.IsChecked)
-			App.Account.ReminderCount = ReminderCount.TwoReminders;
+			App.Account.RequestedReminderTemplatesCount = 2;
 		else if (RadioThreeReminders.IsChecked)
-			App.Account.ReminderCount = ReminderCount.ThreeReminders;
+			App.Account.RequestedReminderTemplatesCount = 3;
 
 		AccountService.Save();
 
-		if (App.Account.ReminderCount == ReminderCount.NoReminder)
+		if (App.Account.RequestedReminderTemplatesCount == 0)
 			App.SetRootPage(new StartPage_9());
 		else
-			App.SetRootPage(new StartPage_6());
+			App.SetRootPage(new ReminderPage(0));
 	}
 }

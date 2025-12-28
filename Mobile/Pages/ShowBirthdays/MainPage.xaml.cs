@@ -53,7 +53,7 @@ public partial class MainPage : ContentPage
         // Otherwise show search page to avoid duplicates
         if (App.Account.ContactsReadMode == ContactsReadMode.None)
         {
-            await App.NavigateToAsync<CreateBirthdayPage>();
+            await App.NavigateToAsync<CreatePersonPage>();
         }
         else
         {
@@ -78,7 +78,7 @@ public partial class MainPage : ContentPage
         CloseFlyout();
         if (e.CurrentSelection.FirstOrDefault() is PersonViewModel vm)
         {
-            await App.NavigateToAsync<DetailBirthdayPage>(vm.Id);
+            await App.NavigateToAsync<DetailPersonPage>(vm.Id);
         }
 
         if (sender is CollectionView cv)
@@ -133,7 +133,7 @@ public partial class MainPage : ContentPage
         // Otherwise show search page to avoid duplicates
         if (App.Account.ContactsReadMode == ContactsReadMode.None)
         {
-            await App.NavigateToAsync<CreateBirthdayPage>();
+            await App.NavigateToAsync<CreatePersonPage>();
         }
         else
         {
