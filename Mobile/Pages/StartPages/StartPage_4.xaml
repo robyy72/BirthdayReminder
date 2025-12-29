@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:local="clr-namespace:Mobile"
+             x:Class="Mobile.StartPage_4"
+             x:DataType="local:StartPage_4"
+             Title="{x:Static resx:Resources.Page_Welcome_Title}"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header with Back Button -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*">
+            <Button Grid.Column="0"
+                    Style="{StaticResource ButtonBack}"
+                    Clicked="OnBackClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_Main_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <!-- Card 1: Which names to read -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Start3_WhichContacts}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="ContactsReadModeGroup">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_OnlyWithBirthday}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadWithBirthday"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnReadModeChanged" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_AllContacts}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadAll"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             IsChecked="True"
+                                             CheckedChanged="OnReadModeChanged" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card 2: How to sync -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Start3_HowToSync}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="ContactsReadWriteModeGroup">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_ReadOnce}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadOnlyOnce"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             IsChecked="True" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlways}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadAlways"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                            <Grid x:Name="GridOption3" ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlwaysAskWrite}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadAlwaysAndAskWriteBack"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                            <Grid x:Name="GridOption4" ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Start3_ReadAlwaysWrite}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioReadAlwaysAndWriteBack"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Bottom Buttons -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <Button Grid.Column="0"
+                            Text="{x:Static resx:Resources.General_Button_Back}"
+                            Style="{StaticResource ButtonSecondary}"
+                            Clicked="OnBackClicked" />
+                    <Button Grid.Column="1"
+                            Text="{x:Static resx:Resources.General_Button_Next}"
+                            Style="{StaticResource ButtonPrimary}"
+                            Clicked="OnNextClicked" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

@@ -21,42 +21,76 @@
         </Grid>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="30" Spacing="25">
+            <VerticalStackLayout Padding="30" Spacing="20">
 
-                <Label Text="{x:Static resx:Resources.Start2_Text_1}"
-                       Style="{StaticResource LabelInfo}" />
-
-                <Label Text="{x:Static resx:Resources.Start2_Text_2}"
-                       Style="{StaticResource LabelInfo}" />
-
-                <!-- Contacts Selection -->
+                <!-- Card: Theme -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Start2_UseContacts}"
+                            <Label Text="{x:Static resx:Resources.Settings_Theme}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10"
-                                             RadioButtonGroup.GroupName="ContactsGroup">
+                                             RadioButtonGroup.GroupName="ThemeGroup">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Start2_NoContacts}"
+                                       Text="{x:Static resx:Resources.Settings_Theme_System}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioNoContacts"
+                                <RadioButton x:Name="RadioThemeSystem"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
                                              IsChecked="True" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Start2_AskNextPage}"
+                                       Text="{x:Static resx:Resources.Settings_Theme_Light}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioAskNextPage"
+                                <RadioButton x:Name="RadioThemeLight"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}" />
                             </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioThemeDark"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnThemeInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: Timezone -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Settings_Timezone}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Picker x:Name="TimezonePicker"
+                                    Title="{x:Static resx:Resources.Settings_Timezone_Select}" />
+                            <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
+                                   Style="{StaticResource LabelSmall}"
+                                   TextColor="{StaticResource Gray500}" />
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTimezoneInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

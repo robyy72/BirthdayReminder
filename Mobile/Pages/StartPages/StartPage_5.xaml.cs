@@ -34,13 +34,13 @@ public partial class StartPage_5 : ContentPage
 	{
 		if (AccountService.UseContacts())
 		{
-			App.BackwardPageType = typeof(StartPage_3);
+			App.BackwardPageType = typeof(StartPage_4);
 			App.ForwardPageType = typeof(StartPage_5);
 			App.SetRootPage(new RequestPermissionPage_1(PermissionType.Contacts));
 		}
 		else
 		{
-			App.SetRootPage(new StartPage_2());
+			App.SetRootPage(new StartPage_3());
 		}
 	}
 

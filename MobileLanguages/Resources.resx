@@ -333,6 +333,15 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Settings_Theme_System" xml:space="preserve">
     <value>System Default</value>
   </data>
+  <data name="Settings_Timezone" xml:space="preserve">
+    <value>Timezone</value>
+  </data>
+  <data name="Settings_Timezone_Select" xml:space="preserve">
+    <value>Select Timezone</value>
+  </data>
+  <data name="Settings_Timezone_Hint" xml:space="preserve">
+    <value>Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time.</value>
+  </data>
   <data name="Date_Day" xml:space="preserve">
     <value>Day</value>
   </data>

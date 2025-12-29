@@ -1802,7 +1802,34 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Settings_Theme_System", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Timezone ähnelt.
+        /// </summary>
+        public static string Settings_Timezone {
+            get {
+                return ResourceManager.GetString("Settings_Timezone", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Set this to your main location ähnelt.
+        /// </summary>
+        public static string Settings_Timezone_Hint {
+            get {
+                return ResourceManager.GetString("Settings_Timezone_Hint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Select Timezone ähnelt.
+        /// </summary>
+        public static string Settings_Timezone_Select {
+            get {
+                return ResourceManager.GetString("Settings_Timezone_Select", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Update contact entry ähnelt.
         /// </summary>
