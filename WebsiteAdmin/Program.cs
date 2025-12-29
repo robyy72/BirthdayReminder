@@ -43,6 +43,7 @@ using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
 	db.Database.EnsureCreated();
+	await DbContextInit.SeedAsync(db);
 }
 #endregion
 

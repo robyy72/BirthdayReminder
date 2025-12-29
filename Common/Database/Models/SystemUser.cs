@@ -22,9 +22,9 @@ public class SystemUser
 	[MaxLength(100)]
 	public string? DisplayName { get; set; }
 
-	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
-	public DateTime? LastLoginAt { get; set; }
+	public DateTimeOffset? LastLoginAt { get; set; }
 
 	public bool IsActive { get; set; } = true;
 }

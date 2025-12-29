@@ -41,7 +41,7 @@ public class HeartbeatService
 				PurchaseToken = dto.PurchaseToken,
 				Store = dto.Store,
 				PreferredChannel = dto.PreferredChannel,
-				LastHeartbeat = DateTime.UtcNow
+				LastHeartbeat = DateTimeOffset.UtcNow
 			};
 			_db.Customers.Add(user);
 		}
@@ -69,7 +69,7 @@ public class HeartbeatService
 				user.PreferredChannel = dto.PreferredChannel;
 			}
 
-			user.LastHeartbeat = DateTime.UtcNow;
+			user.LastHeartbeat = DateTimeOffset.UtcNow;
 		}
 
 		await _db.SaveChangesAsync();
@@ -96,7 +96,7 @@ public class HeartbeatService
 	/// </summary>
 	public async Task<List<Customer>> GetActiveUsersAsync(int days = 7)
 	{
-		var cutoff = DateTime.UtcNow.AddDays(-days);
+		var cutoff = DateTimeOffset.UtcNow.AddDays(-days);
 
 		var users = await _db.Customers
 			.Where(u => u.LastHeartbeat >= cutoff)
@@ -112,7 +112,7 @@ public class HeartbeatService
 	/// </summary>
 	public async Task<UserStats> GetUserStatsAsync()
 	{
-		var now = DateTime.UtcNow;
+		var now = DateTimeOffset.UtcNow;
 
 		var stats = new UserStats
 		{

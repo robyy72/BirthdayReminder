@@ -179,7 +179,7 @@ namespace Common.Database.Migrations
             migrationBuilder.InsertData(
                 table: "SystemUsers",
                 columns: new[] { "Id", "CreatedAt", "DisplayName", "Email", "IsActive", "LastLoginAt", "PasswordHash" },
-                values: new object[] { 1, new DateTime(2025, 12, 29, 22, 32, 4, 984, DateTimeKind.Utc).AddTicks(7501), "Admin", "admin@birthday-reminder.online", true, null, "$2a$11$KZOBamnRyzRqTG9RLOp9f.mOMetFx3G6Mw6.0ya5cP/6sh1VY06kC" });
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Admin", "admin@birthday-reminder.online", true, null, "$2a$11$KZOBamnRyzRqTG9RLOp9f.mOMetFx3G6Mw6.0ya5cP/6sh1VY06kC" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_Email",

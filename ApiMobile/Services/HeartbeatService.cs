@@ -41,7 +41,7 @@ public class HeartbeatService
 				PurchaseToken = dto.PurchaseToken,
 				Store = dto.Store,
 				PreferredChannel = dto.PreferredChannel,
-				LastHeartbeat = DateTime.UtcNow
+				LastHeartbeat = DateTimeOffset.UtcNow
 			};
 			_db.Customers.Add(user);
 		}
@@ -69,7 +69,7 @@ public class HeartbeatService
 				user.PreferredChannel = dto.PreferredChannel;
 			}
 
-			user.LastHeartbeat = DateTime.UtcNow;
+			user.LastHeartbeat = DateTimeOffset.UtcNow;
 		}
 
 		await _db.SaveChangesAsync();

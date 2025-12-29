@@ -54,7 +54,7 @@ public class TextsService
 	/// </summary>
 	public async Task<int> CreateEmailTextAsync(EmailText text)
 	{
-		text.CreatedAt = DateTime.UtcNow;
+		text.CreatedAt = DateTimeOffset.UtcNow;
 		_db.EmailTexts.Add(text);
 		await _db.SaveChangesAsync();
 
@@ -79,7 +79,7 @@ public class TextsService
 		existing.Content = text.Content;
 		existing.IsHtml = text.IsHtml;
 		existing.IsActive = text.IsActive;
-		existing.UpdatedAt = DateTime.UtcNow;
+		existing.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
 		return true;
@@ -137,7 +137,7 @@ public class TextsService
 	/// </summary>
 	public async Task<int> CreateMessengerTextAsync(MessengerText text)
 	{
-		text.CreatedAt = DateTime.UtcNow;
+		text.CreatedAt = DateTimeOffset.UtcNow;
 		_db.MessengerTexts.Add(text);
 		await _db.SaveChangesAsync();
 
@@ -162,7 +162,7 @@ public class TextsService
 		existing.Channel = text.Channel;
 		existing.PreviewText = text.PreviewText;
 		existing.IsActive = text.IsActive;
-		existing.UpdatedAt = DateTime.UtcNow;
+		existing.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
 		return true;

@@ -27,9 +27,9 @@ public class Customer
 
 	public SubscriptionTier Subscription { get; set; } = SubscriptionTier.Free;
 
-	public DateTime? SubscriptionValidUntil { get; set; }
+	public DateTimeOffset? SubscriptionValidUntil { get; set; }
 
-	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
-	public DateTime LastHeartbeat { get; set; } = DateTime.UtcNow;
+	public DateTimeOffset LastHeartbeat { get; set; } = DateTimeOffset.UtcNow;
 }

@@ -148,7 +148,7 @@ public class SupportService
 		}
 
 		ticket.Status = status;
-		ticket.UpdatedAt = DateTime.UtcNow;
+		ticket.UpdatedAt = DateTimeOffset.UtcNow;
 
 		if (!string.IsNullOrEmpty(adminNotes))
 		{
@@ -157,7 +157,7 @@ public class SupportService
 
 		if (status == TicketStatus.Closed)
 		{
-			ticket.ClosedAt = DateTime.UtcNow;
+			ticket.ClosedAt = DateTimeOffset.UtcNow;
 		}
 
 		await _db.SaveChangesAsync();
@@ -179,7 +179,7 @@ public class SupportService
 
 		ticket.SystemUserId = adminId;
 		ticket.Status = TicketStatus.InProgress;
-		ticket.UpdatedAt = DateTime.UtcNow;
+		ticket.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
 		return true;
@@ -280,7 +280,7 @@ public class SupportService
 		};
 
 		_db.SupportTicketEntries.Add(entry);
-		ticket.UpdatedAt = DateTime.UtcNow;
+		ticket.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
 		return true;

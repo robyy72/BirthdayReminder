@@ -29,5 +29,5 @@ public class SupportTicketEntry
 	[ForeignKey(nameof(SystemUserId))]
 	public SystemUser? systemUser { get; set; }
 
-	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }

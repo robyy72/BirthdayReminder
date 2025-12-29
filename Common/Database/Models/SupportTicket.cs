@@ -35,11 +35,11 @@ public class SupportTicket
 
 	public string? AdminNotes { get; set; }
 
-	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
-	public DateTime? UpdatedAt { get; set; }
+	public DateTimeOffset? UpdatedAt { get; set; }
 
-	public DateTime? ClosedAt { get; set; }
+	public DateTimeOffset? ClosedAt { get; set; }
 
 	public ICollection<SupportTicketEntry> Entries { get; set; } = new List<SupportTicketEntry>();
 }

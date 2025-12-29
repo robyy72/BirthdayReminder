@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Database.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20251229223205_AddSupportTicketSource")]
+    [Migration("20251229223635_AddSupportTicketSource")]
     partial class AddSupportTicketSource
     {
         /// <inheritdoc />
@@ -377,7 +377,7 @@ namespace Common.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 29, 22, 32, 4, 984, DateTimeKind.Utc).AddTicks(7501),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DisplayName = "Admin",
                             Email = "admin@birthday-reminder.online",
                             IsActive = true,

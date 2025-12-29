@@ -44,7 +44,7 @@ public class AuthService
 		}
 
 		// Update last login
-		user.LastLoginAt = DateTime.UtcNow;
+		user.LastLoginAt = DateTimeOffset.UtcNow;
 		await _db.SaveChangesAsync();
 
 		return user;

@@ -91,7 +91,7 @@ public class SubscriptionService
 			return false;
 		}
 
-		if (user.SubscriptionValidUntil.HasValue && user.SubscriptionValidUntil.Value < DateTime.UtcNow)
+		if (user.SubscriptionValidUntil.HasValue && user.SubscriptionValidUntil.Value < DateTimeOffset.UtcNow)
 		{
 			return false;
 		}
@@ -113,7 +113,7 @@ public class SubscriptionService
 			ExpiredSubscriptions = await _db.Customers.CountAsync(u =>
 				u.Subscription != SubscriptionTier.Free &&
 				u.SubscriptionValidUntil.HasValue &&
-				u.SubscriptionValidUntil.Value < DateTime.UtcNow)
+				u.SubscriptionValidUntil.Value < DateTimeOffset.UtcNow)
 		};
 
 		return stats;
