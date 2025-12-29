@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Microsoft.EntityFrameworkCore;
 #endregion
 
@@ -10,11 +11,11 @@ namespace WebsiteAdmin;
 public class AuthService
 {
 	#region Fields
-	private readonly AdminDbContext _db;
+	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public AuthService(AdminDbContext db)
+	public AuthService(CoreDbContext db)
 	{
 		_db = db;
 	}

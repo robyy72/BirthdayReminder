@@ -88,18 +88,18 @@ else
                                 <td>@Model.Ticket.ClosedAt.Value.ToString("dd.MM.yyyy HH:mm")</td>
                             </tr>
                         }
-                        @if (Model.Ticket.AssignedTo != null)
+                        @if (Model.Ticket.systemUser != null)
                         {
                             <tr>
                                 <td><strong>Assigned To</strong></td>
-                                <td>@(Model.Ticket.AssignedTo.DisplayName ?? Model.Ticket.AssignedTo.Email)</td>
+                                <td>@(Model.Ticket.systemUser.DisplayName ?? Model.Ticket.systemUser.Email)</td>
                             </tr>
                         }
                     </table>
                 </div>
             </div>
 
-            @if (Model.Ticket.User != null)
+            @if (Model.Ticket.customer != null)
             {
                 <div class="card">
                     <div class="card-header">User Info</div>
@@ -107,23 +107,23 @@ else
                         <table class="table table-sm">
                             <tr>
                                 <td><strong>Email</strong></td>
-                                <td>@(Model.Ticket.User.Email ?? "-")</td>
+                                <td>@(Model.Ticket.customer.Email ?? "-")</td>
                             </tr>
                             <tr>
                                 <td><strong>Phone</strong></td>
-                                <td>@(Model.Ticket.User.PhoneNumber ?? "-")</td>
+                                <td>@(Model.Ticket.customer.PhoneNumber ?? "-")</td>
                             </tr>
                             <tr>
                                 <td><strong>Store</strong></td>
-                                <td>@Model.Ticket.User.Store</td>
+                                <td>@Model.Ticket.customer.Store</td>
                             </tr>
                             <tr>
                                 <td><strong>Subscription</strong></td>
-                                <td>@Model.Ticket.User.Subscription</td>
+                                <td>@Model.Ticket.customer.Subscription</td>
                             </tr>
                             <tr>
                                 <td><strong>Last Seen</strong></td>
-                                <td>@Model.Ticket.User.LastHeartbeat.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>@Model.Ticket.customer.LastHeartbeat.ToString("dd.MM.yyyy HH:mm")</td>
                             </tr>
                         </table>
                     </div>

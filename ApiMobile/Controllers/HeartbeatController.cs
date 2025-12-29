@@ -74,7 +74,7 @@ public class HeartbeatController : ControllerBase
 
 		var result = new
 		{
-			userId = user.UserId,
+			userId = user.Id,
 			email = user.Email,
 			phoneNumber = user.PhoneNumber,
 			store = user.Store,

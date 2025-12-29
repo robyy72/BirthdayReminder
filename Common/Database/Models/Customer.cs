@@ -10,7 +10,7 @@ namespace Common;
 public class Customer
 {
 	[Key]
-	public Guid UserId { get; set; }
+	public Guid Id { get; set; }
 
 	[MaxLength(200)]
 	public string? Email { get; set; }

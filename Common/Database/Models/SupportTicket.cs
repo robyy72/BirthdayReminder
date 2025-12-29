@@ -1,10 +1,9 @@
 #region Usings
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common;
 #endregion
 
-namespace ApiMobile;
+namespace Common;
 
 /// <summary>
 /// Aim: Support ticket entity for user support requests.
@@ -15,10 +14,10 @@ public class SupportTicket
 	public int Id { get; set; }
 
 	[Required]
-	public Guid UserId { get; set; }
+	public Guid CustomerId { get; set; }
 
-	[ForeignKey(nameof(UserId))]
-	public Customer? User { get; set; }
+	[ForeignKey(nameof(CustomerId))]
+	public Customer? customer { get; set; }
 
 	[Required]
 	public string Message { get; set; } = string.Empty;
@@ -27,7 +26,10 @@ public class SupportTicket
 
 	public TicketStatus Status { get; set; } = TicketStatus.Open;
 
-	public int? AssignedToId { get; set; }
+	public int? SystemUserId { get; set; }
+
+	[ForeignKey(nameof(SystemUserId))]
+	public SystemUser? systemUser { get; set; }
 
 	public string? AdminNotes { get; set; }
 
@@ -36,4 +38,6 @@ public class SupportTicket
 	public DateTime? UpdatedAt { get; set; }
 
 	public DateTime? ClosedAt { get; set; }
+
+	public ICollection<SupportTicketEntry> Entries { get; set; } = new List<SupportTicketEntry>();
 }

@@ -11,11 +11,11 @@ namespace WebsiteAdmin;
 public class HeartbeatService
 {
 	#region Fields
-	private readonly AdminDbContext _db;
+	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public HeartbeatService(AdminDbContext db)
+	public HeartbeatService(CoreDbContext db)
 	{
 		_db = db;
 	}
@@ -35,7 +35,7 @@ public class HeartbeatService
 		{
 			user = new Customer
 			{
-				UserId = dto.UserId,
+				Id = dto.UserId,
 				Email = dto.Email,
 				PhoneNumber = dto.PhoneNumber,
 				PurchaseToken = dto.PurchaseToken,
@@ -135,7 +135,7 @@ public class HeartbeatService
 	public async Task<Customer?> GetUserByIdAsync(Guid userId)
 	{
 		var user = await _db.Customers
-			.FirstOrDefaultAsync(u => u.UserId == userId);
+			.FirstOrDefaultAsync(u => u.Id == userId);
 
 		return user;
 	}

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 #endregion
 
-namespace WebsiteAdmin;
+namespace Common;
 
 /// <summary>
 /// Aim: Admin user entity for backend login.

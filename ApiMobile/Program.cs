@@ -1,5 +1,6 @@
 #region Usings
 using System.Text;
+using Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Services
 // Database (shared with WebsiteAdmin)
-builder.Services.AddDbContext<ApiDbContext>(options =>
+builder.Services.AddDbContext<CoreDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // JWT Authentication
@@ -49,7 +50,7 @@ var app = builder.Build();
 #region Database Initialization
 using (var scope = app.Services.CreateScope())
 {
-	var db = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
+	var db = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
 	db.Database.EnsureCreated();
 }
 #endregion

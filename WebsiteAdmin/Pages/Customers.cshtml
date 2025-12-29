@@ -56,7 +56,7 @@
         @foreach (var user in Model.Users)
         {
             <tr>
-                <td>@user.UserId.ToString().Substring(0, 8)...</td>
+                <td>@user.Id.ToString().Substring(0, 8)...</td>
                 <td>@(user.Email ?? "-")</td>
                 <td>@(user.PhoneNumber ?? "-")</td>
                 <td>

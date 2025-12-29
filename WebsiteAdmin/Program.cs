@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WebsiteAdmin;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Services
 // Database
-builder.Services.AddDbContext<AdminDbContext>(options =>
+builder.Services.AddDbContext<CoreDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Cookie Authentication
@@ -39,7 +40,7 @@ var app = builder.Build();
 #region Database Initialization
 using (var scope = app.Services.CreateScope())
 {
-	var db = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+	var db = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
 	db.Database.EnsureCreated();
 }
 #endregion

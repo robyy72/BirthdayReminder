@@ -11,13 +11,13 @@ namespace WebsiteAdmin;
 public class SubscriptionService
 {
 	#region Fields
-	private readonly AdminDbContext _db;
+	private readonly CoreDbContext _db;
 	private readonly IConfiguration _config;
 	private readonly HttpClient _httpClient;
 	#endregion
 
 	#region Constructor
-	public SubscriptionService(AdminDbContext db, IConfiguration config, IHttpClientFactory httpClientFactory)
+	public SubscriptionService(CoreDbContext db, IConfiguration config, IHttpClientFactory httpClientFactory)
 	{
 		_db = db;
 		_config = config;

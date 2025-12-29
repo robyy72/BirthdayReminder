@@ -11,11 +11,11 @@ namespace ApiMobile;
 public class SupportService
 {
 	#region Fields
-	private readonly ApiDbContext _db;
+	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public SupportService(ApiDbContext db)
+	public SupportService(CoreDbContext db)
 	{
 		_db = db;
 	}
@@ -35,7 +35,7 @@ public class SupportService
 		{
 			user = new Customer
 			{
-				UserId = dto.UserId,
+				Id = dto.UserId,
 				Email = dto.Email,
 				PhoneNumber = dto.PhoneNumber,
 				PurchaseToken = dto.PurchaseToken,
@@ -66,7 +66,7 @@ public class SupportService
 
 		var ticket = new SupportTicket
 		{
-			UserId = dto.UserId,
+			CustomerId = dto.UserId,
 			Message = dto.Message,
 			Type = dto.Type,
 			Status = TicketStatus.Open
@@ -86,7 +86,7 @@ public class SupportService
 	public async Task<List<SupportTicket>> GetUserTicketsAsync(Guid userId)
 	{
 		var tickets = await _db.SupportTickets
-			.Where(t => t.UserId == userId)
+			.Where(t => t.CustomerId == userId)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();
 

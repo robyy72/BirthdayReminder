@@ -1,32 +1,26 @@
 #region Usings
-using Common;
 using Microsoft.EntityFrameworkCore;
 #endregion
 
-namespace WebsiteAdmin;
+namespace Common;
 
 /// <summary>
-/// Aim: Database context for admin backend with SQLite.
+/// Aim: Unified database context for all projects.
 /// </summary>
-public class AdminDbContext : DbContext
+public class CoreDbContext : DbContext
 {
-	public AdminDbContext(DbContextOptions<AdminDbContext> options) : base(options)
+	public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
 	{
 	}
 
-	public DbSet<SystemUser> SystemUsers { get; set; } = null!;
 	public DbSet<Customer> Customers { get; set; } = null!;
+	public DbSet<SystemUser> SystemUsers { get; set; } = null!;
 	public DbSet<SupportTicket> SupportTickets { get; set; } = null!;
+	public DbSet<SupportTicketEntry> SupportTicketEntries { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		base.OnModelCreating(modelBuilder);
-
-		// SystemUser configuration
-		modelBuilder.Entity<SystemUser>(entity =>
-		{
-			entity.HasIndex(e => e.Email).IsUnique();
-		});
 
 		// Customer configuration
 		modelBuilder.Entity<Customer>(entity =>
@@ -35,21 +29,41 @@ public class AdminDbContext : DbContext
 			entity.HasIndex(e => e.PhoneNumber);
 		});
 
+		// SystemUser configuration
+		modelBuilder.Entity<SystemUser>(entity =>
+		{
+			entity.HasIndex(e => e.Email).IsUnique();
+		});
+
 		// SupportTicket configuration
 		modelBuilder.Entity<SupportTicket>(entity =>
 		{
-			entity.HasOne(t => t.User)
+			entity.HasOne(t => t.customer)
 				.WithMany()
-				.HasForeignKey(t => t.UserId)
+				.HasForeignKey(t => t.CustomerId)
 				.OnDelete(DeleteBehavior.Cascade);
 
-			entity.HasOne(t => t.AssignedTo)
+			entity.HasOne(t => t.systemUser)
 				.WithMany()
-				.HasForeignKey(t => t.AssignedToId)
+				.HasForeignKey(t => t.SystemUserId)
 				.OnDelete(DeleteBehavior.SetNull);
 
 			entity.HasIndex(e => e.Status);
 			entity.HasIndex(e => e.CreatedAt);
+		});
+
+		// SupportTicketEntry configuration
+		modelBuilder.Entity<SupportTicketEntry>(entity =>
+		{
+			entity.HasOne(e => e.supportTicket)
+				.WithMany(t => t.Entries)
+				.HasForeignKey(e => e.SupportTicketId)
+				.OnDelete(DeleteBehavior.Cascade);
+
+			entity.HasOne(e => e.systemUser)
+				.WithMany()
+				.HasForeignKey(e => e.SystemUserId)
+				.OnDelete(DeleteBehavior.SetNull);
 		});
 
 		// Seed default admin user (password: admin123 - change in production!)

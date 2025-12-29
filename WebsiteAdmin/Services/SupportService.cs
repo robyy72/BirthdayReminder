@@ -11,11 +11,11 @@ namespace WebsiteAdmin;
 public class SupportService
 {
 	#region Fields
-	private readonly AdminDbContext _db;
+	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public SupportService(AdminDbContext db)
+	public SupportService(CoreDbContext db)
 	{
 		_db = db;
 	}
@@ -35,7 +35,7 @@ public class SupportService
 		{
 			user = new Customer
 			{
-				UserId = dto.UserId,
+				Id = dto.UserId,
 				Email = dto.Email,
 				PhoneNumber = dto.PhoneNumber,
 				PurchaseToken = dto.PurchaseToken,
@@ -66,7 +66,7 @@ public class SupportService
 
 		var ticket = new SupportTicket
 		{
-			UserId = dto.UserId,
+			CustomerId = dto.UserId,
 			Message = dto.Message,
 			Type = dto.Type,
 			Status = TicketStatus.Open
@@ -85,8 +85,8 @@ public class SupportService
 	public async Task<List<SupportTicket>> GetOpenTicketsAsync()
 	{
 		var tickets = await _db.SupportTickets
-			.Include(t => t.User)
-			.Include(t => t.AssignedTo)
+			.Include(t => t.customer)
+			.Include(t => t.systemUser)
 			.Where(t => t.Status != TicketStatus.Closed)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();
@@ -102,8 +102,8 @@ public class SupportService
 	public async Task<List<SupportTicket>> GetTicketsAsync(TicketStatus? status = null)
 	{
 		var query = _db.SupportTickets
-			.Include(t => t.User)
-			.Include(t => t.AssignedTo)
+			.Include(t => t.customer)
+			.Include(t => t.systemUser)
 			.AsQueryable();
 
 		if (status.HasValue)
@@ -126,8 +126,8 @@ public class SupportService
 	public async Task<SupportTicket?> GetTicketByIdAsync(int id)
 	{
 		var ticket = await _db.SupportTickets
-			.Include(t => t.User)
-			.Include(t => t.AssignedTo)
+			.Include(t => t.customer)
+			.Include(t => t.systemUser)
 			.FirstOrDefaultAsync(t => t.Id == id);
 
 		return ticket;
@@ -176,7 +176,7 @@ public class SupportService
 			return false;
 		}
 
-		ticket.AssignedToId = adminId;
+		ticket.SystemUserId = adminId;
 		ticket.Status = TicketStatus.InProgress;
 		ticket.UpdatedAt = DateTime.UtcNow;
 

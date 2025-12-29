@@ -52,7 +52,7 @@
                             break;
                     }
                 </td>
-                <td>@(ticket.User?.Email ?? ticket.User?.PhoneNumber ?? ticket.UserId.ToString().Substring(0, 8))</td>
+                <td>@(ticket.customer?.Email ?? ticket.customer?.PhoneNumber ?? ticket.CustomerId.ToString().Substring(0, 8))</td>
                 <td>@(ticket.Message.Length > 50 ? ticket.Message.Substring(0, 50) + "..." : ticket.Message)</td>
                 <td>
                     @switch (ticket.Status)
