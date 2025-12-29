@@ -26,6 +26,9 @@ public static class MauiProgram
 
 #if DEBUG
 		builder.Logging.AddDebug();
+		builder.Services.AddSingleton<IBillingService, FakeBillingService>();
+#else
+		builder.Services.AddSingleton<IBillingService, StoreBillingService>();
 #endif
 
 		return builder.Build();

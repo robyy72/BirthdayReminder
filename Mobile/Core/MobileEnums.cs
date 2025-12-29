@@ -64,3 +64,11 @@ public enum PermissionType
 	Contacts = 1,
 	Calendar = 2
 }
+
+public enum PurchaseResult
+{
+	Success = 0,
+	Cancelled = 1,
+	Error = 2,
+	AlreadyOwned = 3
+}
