@@ -92,7 +92,7 @@ else
                         {
                             <tr>
                                 <td><strong>Assigned To</strong></td>
-                                <td>@Model.Ticket.AssignedTo.Username</td>
+                                <td>@(Model.Ticket.AssignedTo.DisplayName ?? Model.Ticket.AssignedTo.Email)</td>
                             </tr>
                         }
                     </table>

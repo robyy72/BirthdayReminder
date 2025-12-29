@@ -1,4 +1,7 @@
 #region Usings
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
@@ -26,33 +29,51 @@ public class LoginModel : PageModel
 	#endregion
 
 	#region Handlers
-	public void OnGet()
+	public async Task<IActionResult> OnGetAsync()
 	{
+		// If already logged in, redirect to dashboard
+		if (User.Identity?.IsAuthenticated == true)
+		{
+			return RedirectToPage("/Index");
+		}
+
+		return Page();
 	}
 
-	public async Task<IActionResult> OnPostAsync(string username, string password)
+	public async Task<IActionResult> OnPostAsync(string email, string password)
 	{
-		if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+		if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
 		{
-			ErrorMessage = "Please enter username and password";
+			ErrorMessage = "Please enter email and password";
 			return Page();
 		}
 
-		var token = await _authService.LoginAsync(username, password);
-		if (token == null)
+		var user = await _authService.ValidateCredentialsAsync(email, password);
+		if (user == null)
 		{
 			ErrorMessage = "Invalid credentials";
 			return Page();
 		}
 
-		// Store token in cookie for subsequent requests
-		Response.Cookies.Append("AuthToken", token, new CookieOptions
+		// Create claims
+		var claims = new List<Claim>
 		{
-			HttpOnly = true,
-			Secure = true,
-			SameSite = SameSiteMode.Strict,
-			Expires = DateTimeOffset.UtcNow.AddHours(8)
-		});
+			new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+			new Claim(ClaimTypes.Email, user.Email),
+			new Claim(ClaimTypes.Name, user.DisplayName ?? user.Email)
+		};
+
+		var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+		var authProperties = new AuthenticationProperties
+		{
+			IsPersistent = true,
+			ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
+		};
+
+		await HttpContext.SignInAsync(
+			CookieAuthenticationDefaults.AuthenticationScheme,
+			new ClaimsPrincipal(claimsIdentity),
+			authProperties);
 
 		return RedirectToPage("/Index");
 	}

@@ -81,3 +81,12 @@ public enum PreferredChannel
 	Signal = 4
 }
 #endregion
+
+#region Database
+public enum DatabaseProviderType
+{
+	NotSet = 0,
+	MsSqlServer = 1,
+	Oracle = 2
+}
+#endregion

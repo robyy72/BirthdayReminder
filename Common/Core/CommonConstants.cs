@@ -5,9 +5,15 @@ namespace Common;
 /// </summary>
 public static class CommonConstants
 {
-	public const string DOMAIN = "birthday-reminder.online";
-	public const string API_BASE_URL = "api." + DOMAIN;
-	public const int MAX_LENGTH_DISPLAYNAME = 50;
+    #region Domain und Api-Base-URLs
+    public const string DOMAIN = "birthday-reminder.online";
+    public const string URL_API_DEV = "https://api-dev." + DOMAIN;
+    public const string URL_API_PROD = "https://api-prod." + DOMAIN;
+    #endregion
+
+    #region Lengths / Min- and Max
+    public const int MAX_LENGTH_DISPLAYNAME = 50;
+    #endregion
 
 	#region Reminder Times
 	public const int DEFAULT_REMINDER_TIME_MORNING = 900;

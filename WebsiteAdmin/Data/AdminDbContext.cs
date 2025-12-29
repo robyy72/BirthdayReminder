@@ -24,7 +24,7 @@ public class AdminDbContext : DbContext
 		// SystemUser configuration
 		modelBuilder.Entity<SystemUser>(entity =>
 		{
-			entity.HasIndex(e => e.Username).IsUnique();
+			entity.HasIndex(e => e.Email).IsUnique();
 		});
 
 		// AppUser configuration
@@ -55,9 +55,9 @@ public class AdminDbContext : DbContext
 		modelBuilder.Entity<SystemUser>().HasData(new SystemUser
 		{
 			Id = 1,
-			Username = "admin",
-			PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
 			Email = "admin@birthday-reminder.online",
+			PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+			DisplayName = "Admin",
 			CreatedAt = DateTime.UtcNow,
 			IsActive = true
 		});

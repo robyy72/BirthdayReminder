@@ -1,4 +1,5 @@
 #region Usings
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
 
@@ -7,6 +8,7 @@ namespace WebsiteAdmin.Pages;
 /// <summary>
 /// Aim: Page model for customers list.
 /// </summary>
+[Authorize]
 public class CustomersModel : PageModel
 {
 	#region Fields

@@ -1,31 +1,30 @@
-﻿# Codex.md
+# Codex.md
 
 ## Aim
-This document defines the coding style, conventions, and infrastructure setup for all solutions in the TestyFriend organization.
+This document defines the coding style, conventions, and infrastructure setup for the BirthdayReminder solution.
 
 ---
 
 ## Project Overview
 
 ### End User Perspective
-- **Customers:** Mobile App only (+ Landing Page, URL TBD)
+- **Customers:** Mobile App only (+ Landing Page at birthday-reminder.online)
 - **Admin:** WebsiteAdmin (internal use only)
 
 ### Domains (Dev Environment)
 | App | URL |
 |-----|-----|
-| WebsiteAdmin | `dev.DOMAIN.tld` |
-| Hangfire Dashboard | `dev.DOMAIN.tld/hangfire` |
-| ApiMobile | `api-dev.DOMAIN.tld` |
+| WebsiteAdmin | `dev.birthday-reminder.online` |
+| ApiMobile | `api-dev.birthday-reminder.online` |
+| Landing Page | `birthday-reminder.online` |
 
 ### Domain Pattern per Environment
 | Environment | WebsiteAdmin | ApiMobile |
 |-------------|--------------|-----------|
-| Dev | `dev.DOMAIN.tld` | `api-dev.DOMAIN.tld` |
-| Stage | `stage.DOMAIN.tld` | `api-stage.DOMAIN.tld` |
-| Prod | `prod.DOMAIN.tld` | `api-prod.DOMAIN.tld` |
+| Dev | `dev.DOMAIN` | `api-dev.DOMAIN` |
+| Prod | `prod.DOMAIN` | `api-prod.DOMAIN` |
 
-**Note:** Typically the "prod" prefix is omitted for production URLs. However, since end users only interact with the Mobile App (and never see these URLs), we use consistent prefixes across all environments for clarity and structure.
+**Note:** Since end users only interact with the Mobile App (and never see these URLs), we use consistent prefixes across all environments for clarity and structure.
 
 ---
 
@@ -34,25 +33,36 @@ This document defines the coding style, conventions, and infrastructure setup fo
 ### Naming Convention
 All IIS sites and App Pools follow this pattern:
 ```
-TestyFriend-[AppName]-[Environment]
+BirthdayReminder-[AppName]-[Environment]
 ```
 
 ### Sites & App Pools
 | App | IIS Site Name | App Pool |
 |-----|---------------|----------|
-| WebsiteAdmin | TestyFriend-WebsiteAdmin-Dev | TestyFriend-WebsiteAdmin-Dev |
-| ApiMobile | TestyFriend-ApiMobile-Dev | TestyFriend-ApiMobile-Dev |
-| BackgroundJobsHost | TestyFriend-BackgroundJobsHost-Dev | TestyFriend-BackgroundJobsHost-Dev |
+| WebsiteAdmin | BirthdayReminder-WebsiteAdmin-Dev | BirthdayReminder-WebsiteAdmin-Dev |
+| ApiMobile | BirthdayReminder-ApiMobile-Dev | BirthdayReminder-ApiMobile-Dev |
 
 ### Environments
 - `Dev` – Development/Test server
-- `Stage` – Pre-production
 - `Prod` – Production
 
 ### Rules
 - One AppPool per solution/domain
 - Always use `DOTNET_ENVIRONMENT`, never `ASPNETCORE_ENVIRONMENT`
 - App Pool identity: dedicated service account per environment
+
+---
+
+## Database
+
+### Provider
+- **Development:** SQL Server Express (local)
+- **Production:** MS SQL Server (Contabo server)
+
+### Connection String Template
+```
+Server={ServerName};Database=BirthdayReminder;Trusted_Connection=True;TrustServerCertificate=True;
+```
 
 ---
 
@@ -96,7 +106,7 @@ trim_trailing_whitespace = true
 ## General Principles
 - Allman style for braces (each `{` and `}` on its own line).
 - Explicit code, no hidden abstractions.
-- Prefer long, descriptive names (e.g., `WeatherProviderClient`).
+- Prefer long, descriptive names (e.g., `PersonService`).
 - **Namespaces = Project name only.** Folder names never appear in namespaces.
 - **File-scoped namespaces preferred** (C# 10+): `namespace Common;` instead of `namespace Common { }`.
 - One constants file per project (e.g., `MobileConstants.cs`).
@@ -106,12 +116,13 @@ trim_trailing_whitespace = true
 ## Namespaces
 - **Rule:** The root namespace **must equal the project name** (e.g., project `WebsiteAdmin` ⇒ `namespace WebsiteAdmin`).
 - **No folder-based subnamespaces.** Folders are for physical organization only and do not influence namespaces.
-- **Class name uniqueness:** Since folders don't create subnamespaces, ensure distinct class names (e.g., `DatabaseLogger`, `ServiceLogger`).
-- **File-scoped namespace (preferred):** Use `namespace ProjectName;` (without braces) for single-namespace files. This saves one indentation level and is the modern C# 10+ style.
+- **Class name uniqueness:** Since folders don't create subnamespaces, ensure distinct class names.
+- **File-scoped namespace (preferred):** Use `namespace ProjectName;` (without braces) for single-namespace files.
 
 ### Examples
 - Project `Common` → `namespace Common;`
 - Project `WebsiteAdmin` → `namespace WebsiteAdmin;`
+- Project `ApiMobile` → `namespace ApiMobile;`
 - Project `Mobile` → `namespace Mobile;`
 
 ### File-scoped vs. Traditional
@@ -125,23 +136,7 @@ public class MyClass
 }
 ```
 
-```csharp
-// Legacy (traditional, still valid)
-namespace Common
-{
-    public class MyClass
-    {
-        // Extra indentation level
-    }
-}
-```
-
-**Use file-scoped for all new files.** Only use traditional braces when multiple namespaces are needed in one file (rare).
-
-### Pitfalls & Guidance
-- **Mixed legacy namespaces:** Refactor imports/usings when flattening to project-only namespaces.
-- **Tooling defaults:** Disable or ignore IDE prompts like "Match namespace to folder".
-- **Code generators:** EF Core and other generators may create folder-based namespaces. After generating, **adjust** to project namespace.
+**Use file-scoped for all new files.**
 
 ---
 
@@ -186,14 +181,11 @@ Example:
 
 ```csharp
 /// <summary>
-/// Aim: Returns a cached value or creates a new one using the provided factory.
-/// Params:
-///   key (string) - The cache key.
-///   factory (Func<Task<byte[]?>>) - Function to generate the value if not cached.
-///   ttl (TimeSpan?) - Optional TTL override.
-/// Return (byte[]?): The cached or newly created value, or null if not available.
+/// Aim: Send heartbeat to backend.
+/// Params: None.
+/// Return (bool): True if successful, false otherwise.
 /// </summary>
-public async Task<byte[]?> GetOrCreateAsync(string key, Func<Task<byte[]?>> factory, TimeSpan? ttl = null)
+public async Task<bool> SendHeartbeatAsync()
 ```
 
 ---
@@ -211,46 +203,41 @@ public async Task<byte[]?> GetOrCreateAsync(string key, Func<Task<byte[]?>> fact
   - `CommonEnums.cs` (in `Common` project)
 - No duplicates of cross-project values in project files; migrate to `Common*` if needed.
 
-**Provider Constants**
-- Provider-specific constants (e.g., `WeatherProviderConstants`, `DeviceProviderConstants`) are placed in `Common/Constants/ProviderConstants/`.
-- Namespace remains `Common` (flat), despite subfolder.
-
 **Conventions**
 - **Enum baseline:** Always `NotSet = 0` as first entry.
-- **Constants naming:** UPPER_SNAKE_CASE (e.g., `DEFAULT_CULTURE`, `IIS_DEV_SECRETS_FILE_PATH`).
-- **Placeholders:** `[UPPERCASE_WITH_UNDERSCORES]` (e.g., `[PROJECT_TITLE]`, `[APP_ENVIRONMENT]`, `[VERSION]`), replaced via `CommonHelper.ReplacePlaceholders(...)` before processing.
+- **Constants naming:** UPPER_SNAKE_CASE (e.g., `DEFAULT_CULTURE`, `DOMAIN`).
 
 ---
 
 ## Object Initialization Style
-- For local variables of known types, use the style:  
+- For local variables of known types, use the style:
 
 ```csharp
 Dictionary<string, string> replacements = new();
 ```
 
-- When initializing with attributes, use inline object initializers:  
+- When initializing with attributes, use inline object initializers:
 
 ```csharp
-User systemUser = new()
+Person person = new()
 {
-    Id = systemUserId,
-    Firstname = "System",
-    IsSystemUser = true
+    Id = personId,
+    FirstName = "John",
+    Birthday = new DateTime(1990, 5, 15)
 };
 ```
 
 ---
 
 ## Control Flow (if / while)
-- **Single statement rule:** For a single command, braces `{ }` may be omitted.  
-  Example:  
+- **Single statement rule:** For a single command, braces `{ }` may be omitted.
+  Example:
   ```csharp
   if (user == null) return;
   ```
 
-- **Multi-statement rule:** For two or more commands, braces **must** be used in **Allman style**.  
-  Example:  
+- **Multi-statement rule:** For two or more commands, braces **must** be used in **Allman style**.
+  Example:
   ```csharp
   if (user == null)
   {
@@ -259,196 +246,61 @@ User systemUser = new()
   }
   ```
 
-- Developer discretion: May indent long single statements to the next line for readability.
-
----
-
-## File Headers (C# Files)
-- **All C# files in subdirectories** should include a header comment block to identify their location and purpose.
-- Use the following format at the top, after usings and before namespace:
-
-```csharp
-#region Usings
-using System;
-#endregion
-
-// Project:     WebsiteAdmin
-// File:        HomeController.Dashboard.BackgroundJobs.cs
-// Location:    Controllers/HomeControllerDashboardFiles
-// Type:        Partial class - Dashboard data method
-
-namespace WebsiteAdmin;
-```
-
-- **Purpose:** Files with similar names (especially partials) need clear identification.
-- **Location:** Helps navigate between related files in subdirectories.
-- **Type:** Brief description of file purpose (e.g., "Partial class", "ViewModel", "Helper").
-
----
-
-## Views (.cshtml Files)
-- **Header comments required** for all views to identify their purpose and location.
-- Use the following format at the top of each view file:
-
-```cshtml
-@* 
-   Project:     WebsiteAdmin
-   File:        Create.cshtml
-   Location:    Views/Customer
-   Type:        Customer creation form
-*@
-@model CustomerViewModel
-```
-
-- **Purpose:** Views with common names (Create.cshtml, Edit.cshtml, Index.cshtml) need clear identification.
-- **Location:** Helps navigate between similar-named files.
-- **Type:** Brief description of what the view does.
-
----
-
-## Example File Layout (File-scoped Namespace)
-
-```csharp
-#region Usings
-using System.Collections.Concurrent;
-#endregion
-
-namespace Common;
-
-/// <summary>
-/// Aim: Separate in-memory cache for crypto keys (byte[]).
-/// Keys have a very short TTL; values are zeroized on remove, expire, or clear.
-/// </summary>
-public sealed class KeyCache
-{
-    #region Private Fields
-    private sealed class Entry
-    {
-        public byte[]? Value { get; set; }
-        public DateTimeOffset ExpiresAtUtc { get; set; }
-    }
-
-    private readonly ConcurrentDictionary<string, Entry> _cache = new();
-    private readonly ConcurrentDictionary<string, object> _locks = new();
-    private readonly TimeSpan _defaultTtl;
-    #endregion
-
-    #region Constructor
-    /// <summary>
-    /// Aim: Initializes a new cache instance with a default TTL.
-    /// Params:
-    ///   defaultTtl (TimeSpan?) - Optional default time-to-live for entries. Defaults to 2 minutes.
-    /// </summary>
-    public KeyCache(TimeSpan? defaultTtl = null)
-    {
-        _defaultTtl = defaultTtl ?? TimeSpan.FromMinutes(2);
-    }
-    #endregion
-
-    #region Public Methods
-    /// <summary>
-    /// Aim: Adds or replaces a cache entry with the specified TTL.
-    /// Params:
-    ///   key (string) - The cache key. Must not be null or whitespace.
-    ///   value (byte[]) - The byte array value. Must not be null.
-    ///   ttl (TimeSpan?) - Optional time-to-live. Defaults to the cache's default TTL.
-    /// </summary>
-    public void Set(string key, byte[] value, TimeSpan? ttl = null)
-    {
-        // ...
-    }
-    #endregion
-}
-```
-
 ---
 
 ## Project Structure
 
 ```
-src/
-├── powershell-scripts/
-│   ├── Prebuild-Local.ps1
-│   ├── Create-Local-Migrations.ps1
-│   └── Update-Local-Database.ps1
+BirthdayReminder/
+├── BirthdayReminder.sln
+├── Common/                         # Shared class library
+│   ├── Core/
+│   │   ├── CommonConstants.cs
+│   │   └── CommonEnums.cs
+│   ├── DTOs/
+│   │   ├── HeartbeatDto.cs
+│   │   ├── SupportTicketDto.cs
+│   │   └── SubscriptionStatusDto.cs
+│   ├── Models/
+│   │   └── ErrorModel.cs
+│   └── [[Guidelines]]/
+│       └── Codex.md
 │
-├── libs/
-│   ├── Common/
-│   │   └── Common.sln
-│   │       ├── Common
-│   │       └── Common.Tests
-│   │
-│   ├── ApiService/
-│   │   └── ApiService.sln
-│   │       ├── ApiService
-│   │       ├── ApiService.Tests
-│   │       └── [Common] (extern)
-│   │
-│   ├── WeatherProviders/
-│   │   └── WeatherProviders.sln
-│   │       ├── WeatherProviderMeteonomiqs
-│   │       ├── WeatherProviders.Tests
-│   │       ├── [ApiService] (extern)
-│   │       └── [Common] (extern)
-│   │
-│   ├── SecretProviders/
-│   │   └── SecretProvider.sln
-│   │       ├── LocalDevSecrets
-│   │       ├── AwsSecrets
-│   │       ├── SecretProvider.Tests
-│   │       └── [Common] (extern)
-│   │
-│   └── BackgroundJobs/
-│       └── BackgroundJobs.sln
-│           ├── BackgroundJobs
-│           ├── ConsoleTest
-│           ├── BackgroundJobs.Tests
-│           └── [Common] (extern)
+├── Mobile/                         # MAUI App (Android & iOS)
+│   ├── Core/
+│   │   ├── MobileConstants.cs
+│   │   └── MobileEnums.cs
+│   ├── Pages/
+│   ├── Services/
+│   └── Platforms/
 │
-└── apps/
-    ├── Mobile/
-    │   └── Mobile.sln
-    │       ├── Mobile
-    │       ├── Mobile.Tests
-    │       └── Shared (extern)/
-    │           ├── [Common]
-    │           └── [ApiService]
-    │
-    ├── WebsiteAdmin/
-    │   └── WebsiteAdmin.sln
-    │       ├── WebsiteAdmin
-    │       ├── WebsiteAdmin.Tests
-    │       ├── Projektmappenelemente/
-    │       │   └── .editorconfig
-    │       └── Shared (extern)/
-    │           └── [Common]
-    │
-    ├── ApiMobile/
-    │   └── ApiMobile.sln
-    │       ├── ApiMobile
-    │       ├── ApiMobile.Tests
-    │       └── Shared (extern)/
-    │           └── [Common]
-    │
-    └── BackgroundJobsHost/
-        └── BackgroundJobsHost.sln
-            ├── BackgroundJobsHost
-            ├── ConsoleTest
-            ├── BackgroundJobsHost.Tests
-            └── [Common] (extern)
-
-Legend:
-- [ProjectName] = External project reference (from another solution)
-- (extern) = Solution folder for external references
+├── MobileLanguages/                # Resource files (resx) for localization
+│   ├── Resources.resx              # English (default)
+│   ├── Resources.de.resx           # German
+│   └── Resources.Designer.cs
+│
+├── ApiMobile/                      # ASP.NET Core API for Mobile
+│   ├── Controllers/
+│   ├── Data/
+│   ├── Entities/
+│   └── Services/
+│
+├── WebsiteAdmin/                   # ASP.NET Core - Admin Panel
+│   ├── Data/
+│   ├── Entities/
+│   ├── Pages/
+│   └── Services/
+│
+└── WebsiteCustomer/                # ASP.NET Core - Landing Page
+    └── Pages/
 ```
 
 ### Dependency Hierarchy
 - `Common` → Base (no dependencies)
-- `ApiService` → Common
-- `WeatherProviders` → ApiService, Common
-- `SecretProviders` → Common
-- `BackgroundJobs` → Common
-- Apps → Common + specific libs as needed
+- `Mobile` → Common, MobileLanguages
+- `ApiMobile` → Common
+- `WebsiteAdmin` → Common
+- `WebsiteCustomer` → (standalone)
 
 ---
 
@@ -463,4 +315,3 @@ Legend:
 - [ ] **File-scoped namespace (`namespace ProjectName;`) for new files.**
 - [ ] **Project-specific** constants in `Core/<ProjectName>Constants.cs`, enums in `Core/<ProjectName>Enums.cs`.
 - [ ] **Cross-project** constants/enums only in `CommonConstants.cs` / `CommonEnums.cs` (no duplicates).
-- [ ] **Provider Constants** in `Common/Constants/ProviderConstants/` with `namespace Common;`.

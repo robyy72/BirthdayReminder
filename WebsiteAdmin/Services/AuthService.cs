@@ -1,41 +1,35 @@
 #region Usings
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 #endregion
 
 namespace WebsiteAdmin;
 
 /// <summary>
-/// Aim: Service for admin authentication and JWT token generation.
+/// Aim: Service for admin authentication.
 /// </summary>
 public class AuthService
 {
 	#region Fields
 	private readonly AdminDbContext _db;
-	private readonly IConfiguration _config;
 	#endregion
 
 	#region Constructor
-	public AuthService(AdminDbContext db, IConfiguration config)
+	public AuthService(AdminDbContext db)
 	{
 		_db = db;
-		_config = config;
 	}
 	#endregion
 
 	#region Public Methods
 	/// <summary>
-	/// Aim: Validate admin credentials and return JWT token.
-	/// Params: username - admin username, password - plain text password.
-	/// Return: JWT token string or null if invalid.
+	/// Aim: Validate admin credentials.
+	/// Params: email - admin email, password - plain text password.
+	/// Return: SystemUser if valid, null if invalid.
 	/// </summary>
-	public async Task<string?> LoginAsync(string username, string password)
+	public async Task<SystemUser?> ValidateCredentialsAsync(string email, string password)
 	{
 		var user = await _db.SystemUsers
-			.FirstOrDefaultAsync(u => u.Username == username && u.IsActive);
+			.FirstOrDefaultAsync(u => u.Email == email && u.IsActive);
 
 		if (user == null)
 		{
@@ -52,8 +46,7 @@ public class AuthService
 		user.LastLoginAt = DateTime.UtcNow;
 		await _db.SaveChangesAsync();
 
-		var token = GenerateJwtToken(user);
-		return token;
+		return user;
 	}
 
 	/// <summary>
@@ -84,36 +77,6 @@ public class AuthService
 		await _db.SaveChangesAsync();
 
 		return true;
-	}
-	#endregion
-
-	#region Private Methods
-	private string GenerateJwtToken(SystemUser user)
-	{
-		var jwtKey = _config["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key not configured");
-		var jwtIssuer = _config["Jwt:Issuer"] ?? "WebsiteAdmin";
-		var jwtAudience = _config["Jwt:Audience"] ?? "WebsiteAdmin";
-
-		var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-		var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-		var claims = new[]
-		{
-			new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-			new Claim(ClaimTypes.Name, user.Username),
-			new Claim(ClaimTypes.Email, user.Email ?? string.Empty)
-		};
-
-		var token = new JwtSecurityToken(
-			issuer: jwtIssuer,
-			audience: jwtAudience,
-			claims: claims,
-			expires: DateTime.UtcNow.AddHours(8),
-			signingCredentials: credentials
-		);
-
-		var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-		return tokenString;
 	}
 	#endregion
 }

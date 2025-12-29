@@ -19,7 +19,11 @@ public class ApiService
 	public ApiService()
 	{
 		_httpClient = new HttpClient();
-		_baseUrl = "https://" + CommonConstants.API_BASE_URL;
+#if DEBUG
+		_baseUrl = CommonHelper.GetApiUrl(isDevelopment: true);
+#else
+		_baseUrl = CommonHelper.GetApiUrl(isDevelopment: false);
+#endif
 	}
 
 	/// <summary>

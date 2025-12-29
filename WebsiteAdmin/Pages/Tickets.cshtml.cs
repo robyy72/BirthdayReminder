@@ -1,5 +1,6 @@
 #region Usings
 using Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
 
@@ -8,6 +9,7 @@ namespace WebsiteAdmin.Pages;
 /// <summary>
 /// Aim: Page model for support tickets list.
 /// </summary>
+[Authorize]
 public class TicketsModel : PageModel
 {
 	#region Fields
