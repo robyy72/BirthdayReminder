@@ -36,27 +36,60 @@ public partial class ReminderPage : ContentPage
 
 		SetupHeader();
 		SetupDaysPicker();
+		SetupTimeLabels();
 		LoadReminder();
 		UpdateButtonText();
+		UpdateStatusLabels();
 	}
 	#endregion
 
 	#region Private Methods
 	private void SetupHeader()
 	{
-		ReminderHeaderLabel.Text = _reminderIndex switch
-		{
-			0 => MobileLanguages.Resources.Settings_Reminder_1,
-			1 => MobileLanguages.Resources.Settings_Reminder_2,
-			2 => MobileLanguages.Resources.Settings_Reminder_3,
-			_ => MobileLanguages.Resources.Settings_Reminder_1
-		};
+		int displayNumber = _reminderIndex + 1;
+		ReminderHeaderLabel.Text = string.Format(
+			MobileLanguages.Resources.Settings_ReminderNumber,
+			displayNumber);
+	}
+
+	private void SetupTimeLabels()
+	{
+		string timezoneAbbr = DeviceService.GetTimeZoneAbbreviation();
+		string timeLabel = string.Format(MobileLanguages.Resources.General_Label_Time, timezoneAbbr);
+		NotificationTimeLabel.Text = timeLabel;
+		AlarmTimeLabel.Text = timeLabel;
+		EmailTimeLabel.Text = timeLabel;
+		SignalTimeLabel.Text = timeLabel;
+		SmsTimeLabel.Text = timeLabel;
+		WhatsAppTimeLabel.Text = timeLabel;
 	}
 
 	private void SetupDaysPicker()
 	{
 		// Get days already used by other reminders
-		var usedDays = ReminderService.GetUsedDays(_person, _reminderIndex);
+		var usedDays = new HashSet<int>();
+		if (_person != null)
+		{
+			// Person mode: check person's other reminders
+			for (int i = 0; i < _person.Reminders.Length; i++)
+			{
+				if (i != _reminderIndex && _person.Reminders[i] != null)
+				{
+					usedDays.Add(_person.Reminders[i]!.DaysBefore);
+				}
+			}
+		}
+		else
+		{
+			// Wizard mode: check account's reminder templates
+			for (int i = 0; i < App.Account.ReminderTemplates.Length; i++)
+			{
+				if (i != _reminderIndex && App.Account.ReminderTemplates[i] != null)
+				{
+					usedDays.Add(App.Account.ReminderTemplates[i]!.DaysBefore);
+				}
+			}
+		}
 
 		// Get current reminder's days (to include in list)
 		var currentReminder = GetCurrentReminder();
@@ -64,7 +97,7 @@ public partial class ReminderPage : ContentPage
 
 		// Build available days list (0-30), excluding used days but including current
 		_availableDays = [];
-		for (int i = 0; i < MobileConstants.MAX_REMINDER_DAYS; i++)
+		for (int i = 0; i < MobileConstants.MAX_REMINDER_DAYS + 1; i++)
 		{
 			if (!usedDays.Contains(i) || i == _currentDays)
 			{
@@ -86,9 +119,9 @@ public partial class ReminderPage : ContentPage
 	{
 		var result = _reminderIndex switch
 		{
-			0 => 7,
+			0 => 0,
 			1 => 3,
-			2 => 0,
+			2 => 7,
 			_ => 0
 		};
 
@@ -103,6 +136,18 @@ public partial class ReminderPage : ContentPage
 		}
 	}
 
+	private void UpdateStatusLabels()
+	{
+		// Hide status labels when user has a valid subscription
+		bool hasSubscription = App.Account.Subscription != SubscriptionTier.Free;
+		NotificationStatusLabel.IsVisible = !hasSubscription;
+		AlarmStatusLabel.IsVisible = !hasSubscription;
+		EmailStatusLabel.IsVisible = !hasSubscription;
+		SignalStatusLabel.IsVisible = !hasSubscription;
+		SmsStatusLabel.IsVisible = !hasSubscription;
+		WhatsAppStatusLabel.IsVisible = !hasSubscription;
+	}
+
 	private void LoadReminder()
 	{
 		var reminder = GetCurrentReminder();
@@ -113,6 +158,8 @@ public partial class ReminderPage : ContentPage
 			var alarm = reminder.LocalMethods.FirstOrDefault(m => m.Type == LocalMethodType.Alarm);
 			NotificationSwitch.IsToggled = notification?.Enabled ?? false;
 			AlarmSwitch.IsToggled = alarm?.Enabled ?? false;
+			NotificationTimePicker.Time = MinutesToTimeSpan(notification?.TimeMinutes ?? ReminderMethodConfig.Local[LocalMethodType.Notification].DefaultTime);
+			AlarmTimePicker.Time = MinutesToTimeSpan(alarm?.TimeMinutes ?? ReminderMethodConfig.Local[LocalMethodType.Alarm].DefaultTime);
 
 			// External methods
 			var email = reminder.ExternalMethods.FirstOrDefault(m => m.Type == ExternalMethodType.Email);
@@ -123,7 +170,35 @@ public partial class ReminderPage : ContentPage
 			SmsSwitch.IsToggled = sms?.Enabled ?? false;
 			WhatsAppSwitch.IsToggled = whatsApp?.Enabled ?? false;
 			SignalSwitch.IsToggled = signal?.Enabled ?? false;
+			EmailTimePicker.Time = MinutesToTimeSpan(email?.TimeMinutes ?? ReminderMethodConfig.External[ExternalMethodType.Email].DefaultTime);
+			SmsTimePicker.Time = MinutesToTimeSpan(sms?.TimeMinutes ?? ReminderMethodConfig.External[ExternalMethodType.Sms].DefaultTime);
+			WhatsAppTimePicker.Time = MinutesToTimeSpan(whatsApp?.TimeMinutes ?? ReminderMethodConfig.External[ExternalMethodType.WhatsApp].DefaultTime);
+			SignalTimePicker.Time = MinutesToTimeSpan(signal?.TimeMinutes ?? ReminderMethodConfig.External[ExternalMethodType.Signal].DefaultTime);
 		}
+		else
+		{
+			// Set defaults for new reminder
+			NotificationTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.Local[LocalMethodType.Notification].DefaultTime);
+			AlarmTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.Local[LocalMethodType.Alarm].DefaultTime);
+			EmailTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.External[ExternalMethodType.Email].DefaultTime);
+			SmsTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.External[ExternalMethodType.Sms].DefaultTime);
+			WhatsAppTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.External[ExternalMethodType.WhatsApp].DefaultTime);
+			SignalTimePicker.Time = MinutesToTimeSpan(ReminderMethodConfig.External[ExternalMethodType.Signal].DefaultTime);
+		}
+	}
+
+	private static TimeSpan MinutesToTimeSpan(int minutes)
+	{
+		int hours = minutes / 60;
+		int mins = minutes % 60;
+		var result = new TimeSpan(hours, mins, 0);
+		return result;
+	}
+
+	private static int TimeSpanToMinutes(TimeSpan time)
+	{
+		int result = (int)time.TotalMinutes;
+		return result;
 	}
 
 	private Reminder? GetCurrentReminder()
@@ -166,7 +241,7 @@ public partial class ReminderPage : ContentPage
 				{
 					Type = LocalMethodType.Notification,
 					Enabled = NotificationSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.Local[LocalMethodType.Notification].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(NotificationTimePicker.Time),
 					PlaySound = CommonConstants.DEFAULT_NOTIFICATION_SOUND,
 					Vibrate = CommonConstants.DEFAULT_NOTIFICATION_VIBRATE,
 					WakeScreen = CommonConstants.DEFAULT_NOTIFICATION_WAKE_SCREEN,
@@ -177,7 +252,7 @@ public partial class ReminderPage : ContentPage
 				{
 					Type = LocalMethodType.Alarm,
 					Enabled = AlarmSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.Local[LocalMethodType.Alarm].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(AlarmTimePicker.Time),
 					PlaySound = CommonConstants.DEFAULT_ALARM_SOUND,
 					Vibrate = CommonConstants.DEFAULT_ALARM_VIBRATE,
 					WakeScreen = CommonConstants.DEFAULT_ALARM_WAKE_SCREEN,
@@ -191,28 +266,28 @@ public partial class ReminderPage : ContentPage
 				{
 					Type = ExternalMethodType.Email,
 					Enabled = EmailSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Email].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(EmailTimePicker.Time),
 					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
 				},
 				new ReminderMethodExternal
 				{
 					Type = ExternalMethodType.Sms,
 					Enabled = SmsSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Sms].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(SmsTimePicker.Time),
 					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
 				},
 				new ReminderMethodExternal
 				{
 					Type = ExternalMethodType.WhatsApp,
 					Enabled = WhatsAppSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.WhatsApp].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(WhatsAppTimePicker.Time),
 					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
 				},
 				new ReminderMethodExternal
 				{
 					Type = ExternalMethodType.Signal,
 					Enabled = SignalSwitch.IsToggled,
-					TimeMinutes = ReminderMethodConfig.External[ExternalMethodType.Signal].DefaultTime,
+					TimeMinutes = TimeSpanToMinutes(SignalTimePicker.Time),
 					IncludeAge = CommonConstants.DEFAULT_MESSAGE_INCLUDE_AGE
 				}
 			]
@@ -223,6 +298,42 @@ public partial class ReminderPage : ContentPage
 	#endregion
 
 	#region Event Handlers
+	private async void OnNotificationInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderNotification.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private async void OnAlarmInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderAlarm.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private async void OnEmailInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderEmail.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private async void OnSignalInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderSignal.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private async void OnSmsInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderSms.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private async void OnWhatsAppInfoTapped(object? sender, EventArgs e)
+	{
+		var helpPage = new HelpPage { Topic = HelpTopic.ReminderWhatsApp.ToString() };
+		await Navigation.PushModalAsync(helpPage);
+	}
+
 	private async void OnBackClicked(object? sender, EventArgs e)
 	{
 		if (!_isWizardMode)

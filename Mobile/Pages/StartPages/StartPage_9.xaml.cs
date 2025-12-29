@@ -242,6 +242,7 @@ public partial class StartPage_9 : ContentPage
 		}
 
 		AccountService.Save();
+		AccountService.CompleteFirstRun();
 		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_INITIALIZED, true);
 
 		App.SetRootPage(App.CreateMainNavigationPage());

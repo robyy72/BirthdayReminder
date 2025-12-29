@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.NewSupportEntryPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_NewSupport_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_NewSupport_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Support Type Display -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label x:Name="TypeHeaderLabel"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="15" Spacing="10">
+                            <!-- Error Display -->
+                            <Border x:Name="ErrorBorder" Style="{StaticResource BorderError}">
+                                <Label x:Name="ErrorLabel" Style="{StaticResource LabelError}" />
+                            </Border>
+                            <!-- Title Entry -->
+                            <Label Text="{x:Static resx:Resources.Support_Title}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold" />
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Entry x:Name="TitleEntry"
+                                           Style="{StaticResource EntryStandard}"
+                                           Focused="OnEntryFocused"
+                                           Unfocused="OnEntryUnfocused" />
+                                </Border>
+                            </Border>
+                            <!-- Text Editor -->
+                            <Label Text="{x:Static resx:Resources.Support_Text}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold"
+                                   Margin="0,10,0,0" />
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Editor x:Name="TextEditor"
+                                            HeightRequest="150"
+                                            AutoSize="TextChanges" />
+                                </Border>
+                            </Border>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Bottom Buttons -->
+                <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnSaveClicked"
+                        Margin="0,20,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

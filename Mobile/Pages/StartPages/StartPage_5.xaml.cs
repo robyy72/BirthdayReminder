@@ -46,18 +46,25 @@ public partial class StartPage_5 : ContentPage
 
 	private void OnNextClicked(object? sender, EventArgs e)
 	{
-		if (RadioNoReminder.IsChecked)
-			App.Account.RequestedReminderTemplatesCount = 0;
-		else if (RadioOneReminder.IsChecked)
-			App.Account.RequestedReminderTemplatesCount = 1;
+		int newCount = 0;
+		if (RadioOneReminder.IsChecked)
+			newCount = 1;
 		else if (RadioTwoReminders.IsChecked)
-			App.Account.RequestedReminderTemplatesCount = 2;
+			newCount = 2;
 		else if (RadioThreeReminders.IsChecked)
-			App.Account.RequestedReminderTemplatesCount = 3;
+			newCount = 3;
+
+		App.Account.RequestedReminderTemplatesCount = newCount;
+
+		// Clear reminder templates beyond the new count
+		for (int i = newCount; i < App.Account.ReminderTemplates.Length; i++)
+		{
+			App.Account.ReminderTemplates[i] = null;
+		}
 
 		AccountService.Save();
 
-		if (App.Account.RequestedReminderTemplatesCount == 0)
+		if (newCount == 0)
 			App.SetRootPage(new StartPage_9());
 		else
 			App.SetRootPage(new ReminderPage(0));

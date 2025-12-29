@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.SupportDetailPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_SupportDetail_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_SupportDetail_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Support Entry Card -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label x:Name="TypeHeaderLabel"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <!-- Title -->
+                            <Label Text="{x:Static resx:Resources.Support_Title}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold" />
+                            <Label x:Name="TitleLabel"
+                                   Style="{StaticResource LabelInfo}" />
+                            <!-- Text -->
+                            <Label Text="{x:Static resx:Resources.Support_Text}"
+                                   Style="{StaticResource LabelInfo}"
+                                   FontAttributes="Bold"
+                                   Margin="0,10,0,0" />
+                            <Label x:Name="TextLabel"
+                                   Style="{StaticResource LabelInfo}" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Delete Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Delete}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnDeleteClicked"
+                        Margin="0,20,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

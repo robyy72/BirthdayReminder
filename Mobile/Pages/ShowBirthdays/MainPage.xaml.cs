@@ -19,6 +19,9 @@ public partial class MainPage : ContentPage
 	private void InitContextMenu()
 	{
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_ReportBug, OnReportBugFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_FeatureRequest, OnFeatureRequestFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_Feedback, OnFeedbackFromMenu);
 	}
 
 	protected override void OnAppearing()
@@ -139,6 +142,21 @@ public partial class MainPage : ContentPage
         {
             await App.NavigateToAsync<SearchPersonPage>();
         }
+    }
+
+    private async void OnReportBugFromMenu()
+    {
+        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.Bug);
+    }
+
+    private async void OnFeatureRequestFromMenu()
+    {
+        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.FeatureRequest);
+    }
+
+    private async void OnFeedbackFromMenu()
+    {
+        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.Feedback);
     }
     #endregion
 }

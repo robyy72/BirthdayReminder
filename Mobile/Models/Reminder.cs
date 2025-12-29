@@ -1,4 +1,4 @@
-namespace Mobile;
+	namespace Mobile;
 
 /// <summary>
 /// Aim: Represents a complete reminder configuration.

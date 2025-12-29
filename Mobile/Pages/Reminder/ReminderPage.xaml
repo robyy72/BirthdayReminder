@@ -9,7 +9,7 @@
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*">
         <!-- Header with Back Button -->
         <Grid Grid.Row="0"
               Style="{StaticResource HeaderBarWithBack}"
@@ -22,62 +22,255 @@
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="30" Spacing="20">
+        <!-- Fixed Header Section -->
+        <VerticalStackLayout Grid.Row="1" Padding="30,20,30,10" Spacing="15">
+            <!-- Header: Reminder Number -->
+            <Label x:Name="ReminderHeaderLabel"
+                   Style="{StaticResource LabelHeader}"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start" />
 
-                <!-- Reminder Section -->
+            <!-- Days Before Picker -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <Label Grid.Column="0"
+                       Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                       Style="{StaticResource LabelInfo}"
+                       VerticalOptions="Center" />
+                <Picker x:Name="DaysPicker"
+                        Grid.Column="1"
+                        WidthRequest="80"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Padding="30,10,30,30" Spacing="20">
+
+                <!-- Card: Push Notification -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label x:Name="ReminderHeaderLabel"
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Notification}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
-
-                            <!-- Days before -->
-                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label x:Name="NotificationStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_Free}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_DaysBefore}"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
-                                <Picker x:Name="DaysPicker"
-                                        Grid.Column="1"
-                                        WidthRequest="80"
-                                        HorizontalTextAlignment="Center" />
-                            </Grid>
-
-                            <!-- Methods -->
-                            <Label Text="{x:Static resx:Resources.Settings_ReminderMethods}"
-                                   Style="{StaticResource LabelInfo}"
-                                   FontAttributes="Bold" />
-
-                            <!-- Local Methods -->
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Notification}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
                                 <Switch x:Name="NotificationSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Alarm}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label x:Name="NotificationTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="NotificationTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnNotificationInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: Phone Alarm -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Alarm}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="AlarmStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_Free}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
                                 <Switch x:Name="AlarmSwitch" Grid.Column="1" />
                             </Grid>
-                            <!-- External Methods -->
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Email}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label x:Name="AlarmTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="AlarmTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAlarmInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: Email -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Email}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="EmailStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_FreeLimited}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
                                 <Switch x:Name="EmailSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Sms}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label x:Name="EmailTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="EmailTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEmailInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: Signal -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Signal}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="SignalStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_FreeCurrently}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <Switch x:Name="SignalSwitch" Grid.Column="1" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label x:Name="SignalTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="SignalTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSignalInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: SMS (Paid) -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_Sms}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="SmsStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_Subscription}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
                                 <Switch x:Name="SmsSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
+                                <Label x:Name="SmsTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="SmsTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
+                            </Grid>
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSmsInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card: WhatsApp (Paid) -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.ReminderMethod_WhatsApp}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="WhatsAppStatusLabel"
+                                   Text="{x:Static resx:Resources.Reminder_Status_Subscription}"
+                                   Style="{StaticResource LabelInfo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.General_Label_Active}"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
                                 <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0" Text="{x:Static resx:Resources.ReminderMethod_Signal}" Style="{StaticResource LabelInfo}" VerticalOptions="Center" />
-                                <Switch x:Name="SignalSwitch" Grid.Column="1" />
+                                <Label x:Name="WhatsAppTimeLabel"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <TimePicker x:Name="WhatsAppTimePicker"
+                                            Grid.Column="1"
+                                            Style="{StaticResource TimePickerText}" />
                             </Grid>
-
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnWhatsAppInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

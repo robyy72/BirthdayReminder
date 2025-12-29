@@ -33,15 +33,19 @@ public static class AccountService
 	{
         bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
         if (startAlwaysWithWelcome)
-		{
-            PrefsHelper.RemoveAllKeys();
-            return false;
-        }
-            
-
+		   return false;
+        
         bool firstRun = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_FIRST_RUN);
 		return firstRun;
     }
+
+	/// <summary>
+	/// Aim: Marks the first run wizard as completed.
+	/// </summary>
+	public static void CompleteFirstRun()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_FIRST_RUN, true);
+	}
 
 	/// <summary>
 	/// Aim: Check if contacts are being used.

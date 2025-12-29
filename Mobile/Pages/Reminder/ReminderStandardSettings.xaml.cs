@@ -76,7 +76,8 @@ public partial class ReminderStandardSettings : ContentPage
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
 		var account = App.Account;
-		account.RequestedReminderTemplatesCount = GetSelectedReminderCount();
+		int newCount = GetSelectedReminderCount();
+		account.RequestedReminderTemplatesCount = newCount;
 
 		if (int.TryParse(Reminder1Days.Text, out int days1) && App.Account.ReminderTemplates[0] != null)
 		{
@@ -91,6 +92,12 @@ public partial class ReminderStandardSettings : ContentPage
 		if (int.TryParse(Reminder3Days.Text, out int days3) && App.Account.ReminderTemplates[2] != null)
 		{
 			App.Account.ReminderTemplates[2].DaysBefore = days3;
+		}
+
+		// Clear reminder templates beyond the new count
+		for (int i = newCount; i < App.Account.ReminderTemplates.Length; i++)
+		{
+			App.Account.ReminderTemplates[i] = null;
 		}
 
 		AccountService.Save();

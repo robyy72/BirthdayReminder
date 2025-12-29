@@ -17,6 +17,7 @@ public partial class App : Application
     /// </summary>
     public static List<Person> Persons { get; set; } = [];
     public static List<Contact> Contacts { get; set; } = [];
+    public static List<Support> SupportEntries { get; set; } = [];
     public static Account Account { get; set; } = new();
 	public static bool NeedsReadContacts { get; set; } = false;
 
@@ -236,8 +237,13 @@ public partial class App : Application
     #region Private Methods
     private void Init()
 	{
-		PersonService.Load();
+        bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
+        if (startAlwaysWithWelcome)
+            PrefsHelper.RemoveAllKeys();
+
+        PersonService.Load();
 		AccountService.Load();
+		SupportService.Load();
 
         CheckTimeZone();
 

@@ -3,7 +3,21 @@ namespace Mobile;
 public enum HelpTopic
 {
 	UseContacts = 1,
-	BirthdayWithoutYear = 2
+	BirthdayWithoutYear = 2,
+	FreeReminders = 3,
+	ReminderNotification = 4,
+	ReminderAlarm = 5,
+	ReminderEmail = 6,
+	ReminderSignal = 7,
+	ReminderSms = 8,
+	ReminderWhatsApp = 9
+}
+
+public enum SupportType
+{
+	Bug = 1,
+	FeatureRequest = 2,
+	Feedback = 3
 }
 
 public enum ContactsReadMode
