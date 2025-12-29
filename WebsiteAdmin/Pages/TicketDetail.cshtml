@@ -1,0 +1,134 @@
+@page "{id:int}"
+@model TicketDetailModel
+@{
+    ViewData["Title"] = $"Ticket #{Model.Ticket?.Id}";
+}
+
+@if (Model.Ticket == null)
+{
+    <div class="alert alert-danger">Ticket not found.</div>
+}
+else
+{
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Ticket #@Model.Ticket.Id</h1>
+        <a href="/Tickets" class="btn btn-outline-secondary">Back to List</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">Message</div>
+                <div class="card-body">
+                    <p class="card-text" style="white-space: pre-wrap;">@Model.Ticket.Message</p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Ticket.AdminNotes))
+            {
+                <div class="card mb-3">
+                    <div class="card-header">Admin Notes</div>
+                    <div class="card-body">
+                        <p class="card-text" style="white-space: pre-wrap;">@Model.Ticket.AdminNotes</p>
+                    </div>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-header">Update Ticket</div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" name="ticketId" value="@Model.Ticket.Id" />
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select">
+                                <option value="Open" selected="@(Model.Ticket.Status == Common.TicketStatus.Open)">Open</option>
+                                <option value="InProgress" selected="@(Model.Ticket.Status == Common.TicketStatus.InProgress)">In Progress</option>
+                                <option value="Closed" selected="@(Model.Ticket.Status == Common.TicketStatus.Closed)">Closed</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Admin Notes</label>
+                            <textarea name="adminNotes" class="form-control" rows="3">@Model.Ticket.AdminNotes</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">Ticket Info</div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Type</strong></td>
+                            <td>@Model.Ticket.Type</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Ticket.Status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created</strong></td>
+                            <td>@Model.Ticket.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                        </tr>
+                        @if (Model.Ticket.UpdatedAt.HasValue)
+                        {
+                            <tr>
+                                <td><strong>Updated</strong></td>
+                                <td>@Model.Ticket.UpdatedAt.Value.ToString("dd.MM.yyyy HH:mm")</td>
+                            </tr>
+                        }
+                        @if (Model.Ticket.ClosedAt.HasValue)
+                        {
+                            <tr>
+                                <td><strong>Closed</strong></td>
+                                <td>@Model.Ticket.ClosedAt.Value.ToString("dd.MM.yyyy HH:mm")</td>
+                            </tr>
+                        }
+                        @if (Model.Ticket.AssignedTo != null)
+                        {
+                            <tr>
+                                <td><strong>Assigned To</strong></td>
+                                <td>@Model.Ticket.AssignedTo.Username</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+
+            @if (Model.Ticket.User != null)
+            {
+                <div class="card">
+                    <div class="card-header">User Info</div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td>@(Model.Ticket.User.Email ?? "-")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone</strong></td>
+                                <td>@(Model.Ticket.User.PhoneNumber ?? "-")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Store</strong></td>
+                                <td>@Model.Ticket.User.Store</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Subscription</strong></td>
+                                <td>@Model.Ticket.User.Subscription</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Seen</strong></td>
+                                <td>@Model.Ticket.User.LastHeartbeat.ToString("dd.MM.yyyy HH:mm")</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

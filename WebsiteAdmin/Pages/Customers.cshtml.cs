@@ -1,0 +1,35 @@
+#region Usings
+using Microsoft.AspNetCore.Mvc.RazorPages;
+#endregion
+
+namespace WebsiteAdmin.Pages;
+
+/// <summary>
+/// Aim: Page model for customers list.
+/// </summary>
+public class CustomersModel : PageModel
+{
+	#region Fields
+	private readonly HeartbeatService _heartbeatService;
+	#endregion
+
+	#region Properties
+	public List<AppUser> Users { get; set; } = [];
+	public UserStats Stats { get; set; } = new();
+	#endregion
+
+	#region Constructor
+	public CustomersModel(HeartbeatService heartbeatService)
+	{
+		_heartbeatService = heartbeatService;
+	}
+	#endregion
+
+	#region Handlers
+	public async Task OnGetAsync()
+	{
+		Users = await _heartbeatService.GetAllUsersAsync();
+		Stats = await _heartbeatService.GetUserStatsAsync();
+	}
+	#endregion
+}

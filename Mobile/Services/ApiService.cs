@@ -120,4 +120,95 @@ public class ApiService
 			return false;
 		}
 	}
+
+	#region App-Specific Methods
+	/// <summary>
+	/// Aim: Send heartbeat to backend.
+	/// Return: True if successful.
+	/// </summary>
+	public async Task<bool> SendHeartbeatAsync()
+	{
+		try
+		{
+			if (!MobileService.HasNetworkAccess())
+			{
+				return false;
+			}
+
+			var dto = new HeartbeatDto
+			{
+				UserId = App.Account.UserId,
+				Email = App.Account.Email,
+				PhoneNumber = App.Account.PhoneNumber,
+				PurchaseToken = App.Account.PurchaseToken,
+				Store = App.Account.Store,
+				PreferredChannel = App.Account.PreferredChannel
+			};
+
+			var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/heartbeat", dto);
+
+			if (response.IsSuccessStatusCode)
+			{
+				App.Account.LastHeartbeat = DateTime.UtcNow;
+				AccountService.Save();
+			}
+
+			return response.IsSuccessStatusCode;
+		}
+		catch (Exception ex)
+		{
+			ErrorService.LogError(ex, "heartbeat");
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Aim: Send support ticket to backend.
+	/// Params: message - support message, type - ticket type.
+	/// Return: Created ticket ID or -1 if failed.
+	/// </summary>
+	public async Task<int> SendSupportTicketAsync(string message, SupportEntryType type = SupportEntryType.SupportRequest)
+	{
+		try
+		{
+			if (!MobileService.HasNetworkAccess())
+			{
+				return -1;
+			}
+
+			var dto = new SupportTicketDto
+			{
+				UserId = App.Account.UserId,
+				Message = message,
+				Email = App.Account.Email,
+				PhoneNumber = App.Account.PhoneNumber,
+				PurchaseToken = App.Account.PurchaseToken,
+				Store = App.Account.Store,
+				Type = type
+			};
+
+			var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/support", dto);
+			if (!response.IsSuccessStatusCode)
+			{
+				return -1;
+			}
+
+			var result = await response.Content.ReadFromJsonAsync<TicketResponse>();
+			return result?.TicketId ?? -1;
+		}
+		catch (Exception ex)
+		{
+			ErrorService.LogError(ex, "support");
+			return -1;
+		}
+	}
+	#endregion
+}
+
+/// <summary>
+/// Aim: Response model for ticket creation.
+/// </summary>
+internal class TicketResponse
+{
+	public int TicketId { get; set; }
 }

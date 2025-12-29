@@ -56,3 +56,28 @@ public enum NotificationPriority
 	Critical
 }
 #endregion
+
+#region Support
+public enum TicketStatus
+{
+	Open = 1,
+	InProgress = 2,
+	Closed = 3
+}
+
+public enum Store
+{
+	Unknown = 0,
+	GooglePlay = 1,
+	Apple = 2
+}
+
+public enum PreferredChannel
+{
+	NotSet = 0,
+	Email = 1,
+	Sms = 2,
+	WhatsApp = 3,
+	Signal = 4
+}
+#endregion

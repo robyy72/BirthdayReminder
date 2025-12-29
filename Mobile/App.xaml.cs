@@ -251,7 +251,21 @@ public partial class App : Application
 			NeedsReadContacts = true;
 
         ApplyTheme();
+		SendHeartbeatIfNeeded();
     }
+
+	private async void SendHeartbeatIfNeeded()
+	{
+		// Send heartbeat at most once per day
+		var lastHeartbeat = Account.LastHeartbeat;
+		if (DateTime.UtcNow - lastHeartbeat < TimeSpan.FromDays(1))
+		{
+			return;
+		}
+
+		var apiService = new ApiService();
+		await apiService.SendHeartbeatAsync();
+	}
 
     private void CheckTimeZone()
     {

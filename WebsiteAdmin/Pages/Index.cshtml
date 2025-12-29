@@ -1,10 +1,81 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Admin Dashboard";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Birthday Reminder Admin</h1>
-    <p class="lead">Administration panel for Birthday Reminder</p>
+<h1>Dashboard</h1>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Users</div>
+            <div class="card-body">
+                <h2 class="card-title">@Model.UserStats.TotalUsers</h2>
+                <p class="card-text">Total registered users</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Active (7d)</div>
+            <div class="card-body">
+                <h2 class="card-title">@Model.UserStats.ActiveLast7d</h2>
+                <p class="card-text">Users active last 7 days</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Open Tickets</div>
+            <div class="card-body">
+                <h2 class="card-title">@Model.OpenTickets</h2>
+                <p class="card-text">Tickets needing attention</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">User Statistics</div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td>Active (24h)</td>
+                        <td>@Model.UserStats.ActiveLast24h</td>
+                    </tr>
+                    <tr>
+                        <td>Active (30d)</td>
+                        <td>@Model.UserStats.ActiveLast30d</td>
+                    </tr>
+                    <tr>
+                        <td>Plus Subscribers</td>
+                        <td>@Model.UserStats.PlusSubscribers</td>
+                    </tr>
+                    <tr>
+                        <td>Pro Subscribers</td>
+                        <td>@Model.UserStats.ProSubscribers</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Ticket Statistics</div>
+            <div class="card-body">
+                <table class="table">
+                    @foreach (var stat in Model.TicketStats)
+                    {
+                        <tr>
+                            <td>@stat.Key</td>
+                            <td>@stat.Value</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
