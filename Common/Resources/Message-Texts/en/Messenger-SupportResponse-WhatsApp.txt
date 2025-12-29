@@ -1,0 +1,5 @@
+New response to your support ticket #{TicketId}:
+
+{Message}
+
+Reply in the app for further assistance.

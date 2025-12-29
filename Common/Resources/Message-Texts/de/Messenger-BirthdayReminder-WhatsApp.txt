@@ -1,0 +1,1 @@
+Hey! Eine kleine Erinnerung: {Name} hat am {Date} Geburtstag. Du hast noch {DaysLeft} Tage Zeit!

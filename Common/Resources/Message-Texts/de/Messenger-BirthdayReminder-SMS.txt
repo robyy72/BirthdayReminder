@@ -1,0 +1,1 @@
+Geburtstagserinnerung: {Name} hat am {Date} Geburtstag. Noch {DaysLeft} Tage!

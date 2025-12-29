@@ -1,4 +1,5 @@
 #region Usings
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 #endregion
 
@@ -9,17 +10,22 @@ namespace Common;
 /// </summary>
 public static class DbContextInit
 {
+	#region Constants
+	private const string MESSAGE_TEXTS_PATH = "Common.Resources.Message-Texts";
+	private const string DEFAULT_LANGUAGE = "en";
+	#endregion
+
 	#region Public Methods
 	/// <summary>
 	/// Aim: Seed the database with initial data if not exists.
-	/// Params: db - the database context.
+	/// Params: db - the database context, language - language code (en, de).
 	/// Return: None.
 	/// </summary>
-	public static async Task SeedAsync(CoreDbContext db)
+	public static async Task SeedAsync(CoreDbContext db, string language = DEFAULT_LANGUAGE)
 	{
 		await SeedSystemUsersAsync(db);
-		await SeedEmailTextsAsync(db);
-		await SeedMessengerTextsAsync(db);
+		await SeedEmailTextsAsync(db, language);
+		await SeedMessengerTextsAsync(db, language);
 	}
 	#endregion
 
@@ -47,81 +53,21 @@ public static class DbContextInit
 	}
 
 	/// <summary>
-	/// Aim: Seed email templates.
-	/// Params: db - the database context.
+	/// Aim: Seed email templates from resource files.
+	/// Params: db - the database context, language - language code.
 	/// Return: None.
 	/// </summary>
-	private static async Task SeedEmailTextsAsync(CoreDbContext db)
+	private static async Task SeedEmailTextsAsync(CoreDbContext db, string language)
 	{
 		if (await db.EmailTexts.AnyAsync()) return;
 
 		var templates = new List<EmailText>
 		{
-			new EmailText
-			{
-				Name = "Welcome",
-				Subject = "Welcome to Birthday Reminder!",
-				Content = @"<h1>Welcome to Birthday Reminder!</h1>
-<p>Thank you for joining Birthday Reminder. We're excited to help you never forget an important birthday again.</p>
-<p>Get started by adding your first birthday reminder in the app.</p>
-<p>Best regards,<br>The Birthday Reminder Team</p>",
-				IsHtml = true,
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new EmailText
-			{
-				Name = "Birthday Reminder",
-				Subject = "Birthday Reminder: {Name}'s birthday is coming up!",
-				Content = @"<h1>Birthday Reminder</h1>
-<p>Don't forget! <strong>{Name}</strong>'s birthday is on <strong>{Date}</strong>.</p>
-<p>You have {DaysLeft} days to prepare a gift or send your wishes.</p>
-<p>Best regards,<br>The Birthday Reminder Team</p>",
-				IsHtml = true,
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new EmailText
-			{
-				Name = "Support Ticket Created",
-				Subject = "Support Ticket #{TicketId} - We received your request",
-				Content = @"<h1>Support Request Received</h1>
-<p>Thank you for contacting us. We have received your support request.</p>
-<p><strong>Ticket ID:</strong> #{TicketId}<br>
-<strong>Subject:</strong> {Subject}</p>
-<p>Our team will review your request and get back to you as soon as possible.</p>
-<p>Best regards,<br>The Birthday Reminder Support Team</p>",
-				IsHtml = true,
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new EmailText
-			{
-				Name = "Support Ticket Response",
-				Subject = "Support Ticket #{TicketId} - New response",
-				Content = @"<h1>New Response to Your Support Ticket</h1>
-<p>There is a new response to your support ticket #{TicketId}.</p>
-<p><strong>Response:</strong></p>
-<blockquote>{Message}</blockquote>
-<p>If you have any further questions, please reply to this email.</p>
-<p>Best regards,<br>The Birthday Reminder Support Team</p>",
-				IsHtml = true,
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new EmailText
-			{
-				Name = "Support Ticket Closed",
-				Subject = "Support Ticket #{TicketId} - Closed",
-				Content = @"<h1>Support Ticket Closed</h1>
-<p>Your support ticket #{TicketId} has been closed.</p>
-<p>If you need further assistance, feel free to open a new support request in the app.</p>
-<p>Thank you for using Birthday Reminder!</p>
-<p>Best regards,<br>The Birthday Reminder Support Team</p>",
-				IsHtml = true,
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			}
+			CreateEmailText("Welcome", language),
+			CreateEmailText("BirthdayReminder", language),
+			CreateEmailText("SupportTicketCreated", language),
+			CreateEmailText("SupportTicketResponse", language),
+			CreateEmailText("SupportTicketClosed", language)
 		};
 
 		db.EmailTexts.AddRange(templates);
@@ -129,65 +75,92 @@ public static class DbContextInit
 	}
 
 	/// <summary>
-	/// Aim: Seed messenger templates.
-	/// Params: db - the database context.
+	/// Aim: Seed messenger templates from resource files.
+	/// Params: db - the database context, language - language code.
 	/// Return: None.
 	/// </summary>
-	private static async Task SeedMessengerTextsAsync(CoreDbContext db)
+	private static async Task SeedMessengerTextsAsync(CoreDbContext db, string language)
 	{
 		if (await db.MessengerTexts.AnyAsync()) return;
 
 		var templates = new List<MessengerText>
 		{
-			new MessengerText
-			{
-				Name = "Birthday Reminder WhatsApp",
-				Channel = PreferredChannel.WhatsApp,
-				PreviewText = "Birthday reminder for {Name}",
-				Content = "Hey! Just a friendly reminder: {Name}'s birthday is on {Date}. You have {DaysLeft} days left to prepare!",
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new MessengerText
-			{
-				Name = "Birthday Reminder SMS",
-				Channel = PreferredChannel.Sms,
-				PreviewText = "Birthday: {Name}",
-				Content = "Birthday Reminder: {Name}'s birthday is on {Date}. {DaysLeft} days left!",
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new MessengerText
-			{
-				Name = "Birthday Reminder Signal",
-				Channel = PreferredChannel.Signal,
-				PreviewText = "Birthday reminder for {Name}",
-				Content = "Hey! Just a friendly reminder: {Name}'s birthday is on {Date}. You have {DaysLeft} days left to prepare!",
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new MessengerText
-			{
-				Name = "Support Response WhatsApp",
-				Channel = PreferredChannel.WhatsApp,
-				PreviewText = "Support Ticket #{TicketId}",
-				Content = "New response to your support ticket #{TicketId}:\n\n{Message}\n\nReply in the app for further assistance.",
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			},
-			new MessengerText
-			{
-				Name = "Support Response SMS",
-				Channel = PreferredChannel.Sms,
-				PreviewText = "Ticket #{TicketId}",
-				Content = "Ticket #{TicketId} update: {Message}",
-				IsActive = true,
-				CreatedAt = DateTimeOffset.UtcNow
-			}
+			CreateMessengerText("BirthdayReminder", PreferredChannel.WhatsApp, "Birthday reminder for {Name}", language),
+			CreateMessengerText("BirthdayReminder", PreferredChannel.Sms, "Birthday: {Name}", language),
+			CreateMessengerText("BirthdayReminder", PreferredChannel.Signal, "Birthday reminder for {Name}", language),
+			CreateMessengerText("SupportResponse", PreferredChannel.WhatsApp, "Support Ticket #{TicketId}", language),
+			CreateMessengerText("SupportResponse", PreferredChannel.Sms, "Ticket #{TicketId}", language)
 		};
 
 		db.MessengerTexts.AddRange(templates);
 		await db.SaveChangesAsync();
+	}
+
+	/// <summary>
+	/// Aim: Create an EmailText from resource files.
+	/// Params: templateName - name of the template, language - language code.
+	/// Return (EmailText): The created email text.
+	/// </summary>
+	private static EmailText CreateEmailText(string templateName, string language)
+	{
+		var subject = ReadResourceFile($"{language}.Email-{templateName}-Subject.txt");
+		var body = ReadResourceFile($"{language}.Email-{templateName}-Body.html");
+
+		var emailText = new EmailText
+		{
+			Name = templateName,
+			Subject = subject,
+			Content = body,
+			IsHtml = true,
+			IsActive = true,
+			CreatedAt = DateTimeOffset.UtcNow
+		};
+
+		return emailText;
+	}
+
+	/// <summary>
+	/// Aim: Create a MessengerText from resource files.
+	/// Params: templateName - name of template, channel - messenger channel, previewText - preview text, language - language code.
+	/// Return (MessengerText): The created messenger text.
+	/// </summary>
+	private static MessengerText CreateMessengerText(string templateName, PreferredChannel channel, string previewText, string language)
+	{
+		var channelName = channel.ToString();
+		var content = ReadResourceFile($"{language}.Messenger-{templateName}-{channelName}.txt");
+
+		var messengerText = new MessengerText
+		{
+			Name = $"{templateName} {channelName}",
+			Channel = channel,
+			PreviewText = previewText,
+			Content = content,
+			IsActive = true,
+			CreatedAt = DateTimeOffset.UtcNow
+		};
+
+		return messengerText;
+	}
+
+	/// <summary>
+	/// Aim: Read content from embedded resource file.
+	/// Params: resourceName - relative resource name (e.g., "en.Email-Welcome-Body.html").
+	/// Return (string): The file content.
+	/// </summary>
+	private static string ReadResourceFile(string resourceName)
+	{
+		var assembly = Assembly.GetExecutingAssembly();
+		var fullResourceName = $"{MESSAGE_TEXTS_PATH}.{resourceName}";
+
+		using var stream = assembly.GetManifestResourceStream(fullResourceName);
+		if (stream == null)
+		{
+			throw new InvalidOperationException($"Resource not found: {fullResourceName}");
+		}
+
+		using var reader = new StreamReader(stream);
+		var content = reader.ReadToEnd();
+		return content;
 	}
 	#endregion
 }

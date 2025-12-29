@@ -1,0 +1,1 @@
+Hey! Just a friendly reminder: {Name}'s birthday is on {Date}. You have {DaysLeft} days left to prepare!

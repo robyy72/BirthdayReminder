@@ -1,0 +1,5 @@
+Neue Antwort auf dein Support-Ticket #{TicketId}:
+
+{Message}
+
+Antworte in der App für weitere Hilfe.
