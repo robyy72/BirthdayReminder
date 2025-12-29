@@ -11,8 +11,7 @@ public enum HelpTopic
 	ReminderSignal = 7,
 	ReminderSms = 8,
 	ReminderWhatsApp = 9,
-	Theme = 10,
-	Timezone = 11
+	Timezone = 10
 }
 
 public enum SupportType

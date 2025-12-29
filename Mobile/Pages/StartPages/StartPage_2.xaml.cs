@@ -111,12 +111,6 @@ public partial class StartPage_2 : ContentPage
 		App.SetRootPage(new StartPage_3());
 	}
 
-	private async void OnThemeInfoTapped(object? sender, EventArgs e)
-	{
-		var helpPage = new HelpPage { Topic = HelpTopic.Theme.ToString() };
-		await Navigation.PushModalAsync(helpPage);
-	}
-
 	private async void OnTimezoneInfoTapped(object? sender, EventArgs e)
 	{
 		var helpPage = new HelpPage { Topic = HelpTopic.Timezone.ToString() };

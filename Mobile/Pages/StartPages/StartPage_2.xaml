@@ -60,13 +60,6 @@
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}" />
                             </Grid>
-                            <Label Text="{x:Static resx:Resources.More_Informations}"
-                                   Style="{StaticResource LabelHelpLink}"
-                                   HorizontalOptions="End">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnThemeInfoTapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
