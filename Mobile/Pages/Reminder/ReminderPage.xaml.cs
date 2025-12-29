@@ -1,4 +1,5 @@
 #region Usings
+using System.Windows.Input;
 using Common;
 #endregion
 
@@ -6,6 +7,10 @@ namespace Mobile;
 
 public partial class ReminderPage : ContentPage
 {
+	#region Properties
+	public ICommand BackCommand { get; }
+	#endregion
+
 	#region Private Fields
 	private readonly int _reminderIndex;
 	private readonly Person? _person;
@@ -34,6 +39,9 @@ public partial class ReminderPage : ContentPage
 		_person = person;
 		_isWizardMode = person == null;
 
+		BackCommand = new Command(ExecuteBackCommand);
+		BindingContext = this;
+
 		Init();
 	}
 	#endregion
@@ -41,6 +49,7 @@ public partial class ReminderPage : ContentPage
 	#region Init
 	private void Init()
 	{
+		InitContextMenu();
 		SetupHeader();
 		SetupDaysPicker();
 		SetupTimeLabels();
@@ -49,6 +58,13 @@ public partial class ReminderPage : ContentPage
 		UpdateStatusLabels();
 		SetupSwitchEvents();
 		UpdateNextButtonState();
+	}
+
+	private void InitContextMenu()
+	{
+		TheContextMenu.AddMenuItem(
+			MobileLanguages.Resources.ContextMenu_Subscribe,
+			OnSubscribeFromMenu);
 	}
 
 	private void SetupSwitchEvents()
@@ -370,7 +386,27 @@ public partial class ReminderPage : ContentPage
 		UpdateNextButtonState();
 	}
 
+	private async void OnSubscriptionTapped(object? sender, EventArgs e)
+	{
+		await App.PushPageAsync(new PurchaseAboPage());
+	}
+
+	private async void OnSubscribeFromMenu()
+	{
+		await App.PushPageAsync(new PurchaseAboPage());
+	}
+
+	private async void ExecuteBackCommand()
+	{
+		await HandleBack();
+	}
+
 	private async void OnBackClicked(object? sender, EventArgs e)
+	{
+		await HandleBack();
+	}
+
+	private async Task HandleBack()
 	{
 		if (!_isWizardMode)
 		{

@@ -2,25 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             xmlns:local="clr-namespace:Mobile"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.ReminderPage"
-             x:DataType="local:ReminderPage"
+             x:DataType="controls:ReminderPage"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
 
     <Grid RowDefinitions="Auto,Auto,*">
-        <!-- Header with Back Button -->
-        <Grid Grid.Row="0"
-              Style="{StaticResource HeaderBarWithBack}"
-              ColumnDefinitions="Auto,*">
-            <Button Grid.Column="0"
-                    Style="{StaticResource ButtonBack}"
-                    Clicked="OnBackClicked" />
-            <Label Grid.Column="1"
-                   Text="{x:Static resx:Resources.Page_Main_Title}"
-                   Style="{StaticResource LabelHeaderBar}" />
-        </Grid>
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_Main_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True"
+                               ShowContextMenu="True"
+                               BackClickedCommand="{Binding BackCommand}" />
 
         <!-- Fixed Header Section -->
         <VerticalStackLayout Grid.Row="1" Padding="30,20,30,10" Spacing="15">
@@ -209,7 +205,11 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="SmsStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_Subscription}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelHelpLink}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSubscriptionTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
@@ -247,7 +247,11 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="WhatsAppStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_Subscription}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelHelpLink}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSubscriptionTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
@@ -290,6 +294,11 @@
 
             </VerticalStackLayout>
         </ScrollView>
+
+        <!-- Context Menu Overlay (spans all rows) -->
+        <controls:ContextMenu x:Name="TheContextMenu"
+                              Grid.Row="0"
+                              Grid.RowSpan="3" />
     </Grid>
 
 </ContentPage>

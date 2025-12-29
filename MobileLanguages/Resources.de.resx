@@ -1094,4 +1094,35 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Timezone_Unknown" xml:space="preserve">
     <value>Unbekannte Zeitzone</value>
   </data>
+  <!-- Purchase Abo Page -->
+  <data name="PurchaseAbo_Title" xml:space="preserve">
+    <value>Abo abschließen</value>
+  </data>
+  <data name="PurchaseAbo_CardHeader" xml:space="preserve">
+    <value>Premium-Funktionen</value>
+  </data>
+  <data name="PurchaseAbo_Description" xml:space="preserve">
+    <value>Schalte alle Erinnerungsmethoden mit einem Abonnement frei. SMS- und WhatsApp-Erinnerungen erfordern ein aktives Abo.</value>
+  </data>
+  <data name="PurchaseAbo_Button" xml:space="preserve">
+    <value>Jetzt abonnieren</value>
+  </data>
+  <data name="PurchaseAbo_FeaturesHeader" xml:space="preserve">
+    <value>Enthaltene Funktionen</value>
+  </data>
+  <data name="PurchaseAbo_Feature_Sms" xml:space="preserve">
+    <value>• Unbegrenzte SMS-Erinnerungen</value>
+  </data>
+  <data name="PurchaseAbo_Feature_WhatsApp" xml:space="preserve">
+    <value>• Unbegrenzte WhatsApp-Erinnerungen</value>
+  </data>
+  <data name="PurchaseAbo_Feature_Email" xml:space="preserve">
+    <value>• Unbegrenzte E-Mail-Erinnerungen</value>
+  </data>
+  <data name="PurchaseAbo_ComingSoon" xml:space="preserve">
+    <value>In-App-Käufe werden bald verfügbar sein.</value>
+  </data>
+  <data name="ContextMenu_Subscribe" xml:space="preserve">
+    <value>Abo abschließen</value>
+  </data>
 </root>

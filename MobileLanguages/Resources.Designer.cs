@@ -2685,5 +2685,95 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Timezone_MoreInfo", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   PurchaseAbo_Title
+        /// </summary>
+        public static string PurchaseAbo_Title {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_CardHeader
+        /// </summary>
+        public static string PurchaseAbo_CardHeader {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_CardHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_Description
+        /// </summary>
+        public static string PurchaseAbo_Description {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_Button
+        /// </summary>
+        public static string PurchaseAbo_Button {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Button", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_FeaturesHeader
+        /// </summary>
+        public static string PurchaseAbo_FeaturesHeader {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_FeaturesHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_Feature_Sms
+        /// </summary>
+        public static string PurchaseAbo_Feature_Sms {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_Sms", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_Feature_WhatsApp
+        /// </summary>
+        public static string PurchaseAbo_Feature_WhatsApp {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_WhatsApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_Feature_Email
+        /// </summary>
+        public static string PurchaseAbo_Feature_Email {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_Email", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   PurchaseAbo_ComingSoon
+        /// </summary>
+        public static string PurchaseAbo_ComingSoon {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_ComingSoon", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   ContextMenu_Subscribe
+        /// </summary>
+        public static string ContextMenu_Subscribe {
+            get {
+                return ResourceManager.GetString("ContextMenu_Subscribe", resourceCulture);
+            }
+        }
     }
 }
