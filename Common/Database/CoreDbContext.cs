@@ -152,5 +152,59 @@ public class CoreDbContext : DbContext
 				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
 			}
 		);
+
+		// Seed messenger templates
+		modelBuilder.Entity<MessengerText>().HasData(
+			new MessengerText
+			{
+				Id = 1,
+				Name = "Birthday Reminder WhatsApp",
+				Channel = PreferredChannel.WhatsApp,
+				PreviewText = "Birthday reminder for {Name}",
+				Content = "Hey! Just a friendly reminder: {Name}'s birthday is on {Date}. You have {DaysLeft} days left to prepare!",
+				IsActive = true,
+				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+			},
+			new MessengerText
+			{
+				Id = 2,
+				Name = "Birthday Reminder SMS",
+				Channel = PreferredChannel.Sms,
+				PreviewText = "Birthday: {Name}",
+				Content = "Birthday Reminder: {Name}'s birthday is on {Date}. {DaysLeft} days left!",
+				IsActive = true,
+				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+			},
+			new MessengerText
+			{
+				Id = 3,
+				Name = "Birthday Reminder Signal",
+				Channel = PreferredChannel.Signal,
+				PreviewText = "Birthday reminder for {Name}",
+				Content = "Hey! Just a friendly reminder: {Name}'s birthday is on {Date}. You have {DaysLeft} days left to prepare!",
+				IsActive = true,
+				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+			},
+			new MessengerText
+			{
+				Id = 4,
+				Name = "Support Response WhatsApp",
+				Channel = PreferredChannel.WhatsApp,
+				PreviewText = "Support Ticket #{TicketId}",
+				Content = "New response to your support ticket #{TicketId}:\n\n{Message}\n\nReply in the app for further assistance.",
+				IsActive = true,
+				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+			},
+			new MessengerText
+			{
+				Id = 5,
+				Name = "Support Response SMS",
+				Channel = PreferredChannel.Sms,
+				PreviewText = "Ticket #{TicketId}",
+				Content = "Ticket #{TicketId} update: {Message}",
+				IsActive = true,
+				CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+			}
+		);
 	}
 }
