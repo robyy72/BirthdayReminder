@@ -1,14 +1,13 @@
 #region Usings
 using System.ComponentModel.DataAnnotations;
-using Common;
 #endregion
 
-namespace ApiMobile;
+namespace Common;
 
 /// <summary>
-/// Aim: App user entity for tracking mobile app users.
+/// Aim: Customer entity for tracking mobile app users.
 /// </summary>
-public class AppUser
+public class Customer
 {
 	[Key]
 	public Guid UserId { get; set; }
@@ -33,6 +32,4 @@ public class AppUser
 	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 	public DateTime LastHeartbeat { get; set; } = DateTime.UtcNow;
-
-	public ICollection<SupportTicket> SupportTickets { get; set; } = [];
 }

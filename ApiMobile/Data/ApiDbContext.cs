@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Microsoft.EntityFrameworkCore;
 #endregion
 
@@ -6,7 +7,7 @@ namespace ApiMobile;
 
 /// <summary>
 /// Aim: Database context for mobile API with SQLite.
-/// Note: Shares database with WebsiteAdmin for AppUsers and SupportTickets.
+/// Note: Shares database with WebsiteAdmin for Customers and SupportTickets.
 /// </summary>
 public class ApiDbContext : DbContext
 {
@@ -14,15 +15,15 @@ public class ApiDbContext : DbContext
 	{
 	}
 
-	public DbSet<AppUser> AppUsers { get; set; } = null!;
+	public DbSet<Customer> Customers { get; set; } = null!;
 	public DbSet<SupportTicket> SupportTickets { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		base.OnModelCreating(modelBuilder);
 
-		// AppUser configuration
-		modelBuilder.Entity<AppUser>(entity =>
+		// Customer configuration
+		modelBuilder.Entity<Customer>(entity =>
 		{
 			entity.HasIndex(e => e.Email);
 			entity.HasIndex(e => e.PhoneNumber);
@@ -32,7 +33,7 @@ public class ApiDbContext : DbContext
 		modelBuilder.Entity<SupportTicket>(entity =>
 		{
 			entity.HasOne(t => t.User)
-				.WithMany(u => u.SupportTickets)
+				.WithMany()
 				.HasForeignKey(t => t.UserId)
 				.OnDelete(DeleteBehavior.Cascade);
 

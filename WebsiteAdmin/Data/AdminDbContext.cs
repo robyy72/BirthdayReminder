@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Microsoft.EntityFrameworkCore;
 #endregion
 
@@ -14,7 +15,7 @@ public class AdminDbContext : DbContext
 	}
 
 	public DbSet<SystemUser> SystemUsers { get; set; } = null!;
-	public DbSet<AppUser> AppUsers { get; set; } = null!;
+	public DbSet<Customer> Customers { get; set; } = null!;
 	public DbSet<SupportTicket> SupportTickets { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,8 +28,8 @@ public class AdminDbContext : DbContext
 			entity.HasIndex(e => e.Email).IsUnique();
 		});
 
-		// AppUser configuration
-		modelBuilder.Entity<AppUser>(entity =>
+		// Customer configuration
+		modelBuilder.Entity<Customer>(entity =>
 		{
 			entity.HasIndex(e => e.Email);
 			entity.HasIndex(e => e.PhoneNumber);
@@ -38,7 +39,7 @@ public class AdminDbContext : DbContext
 		modelBuilder.Entity<SupportTicket>(entity =>
 		{
 			entity.HasOne(t => t.User)
-				.WithMany(u => u.SupportTickets)
+				.WithMany()
 				.HasForeignKey(t => t.UserId)
 				.OnDelete(DeleteBehavior.Cascade);
 

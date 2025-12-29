@@ -1,4 +1,5 @@
 #region Usings
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
@@ -16,7 +17,7 @@ public class CustomersModel : PageModel
 	#endregion
 
 	#region Properties
-	public List<AppUser> Users { get; set; } = [];
+	public List<Customer> Users { get; set; } = [];
 	public UserStats Stats { get; set; } = new();
 	#endregion
 

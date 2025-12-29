@@ -29,11 +29,11 @@ public class HeartbeatService
 	/// </summary>
 	public async Task<bool> RecordHeartbeatAsync(HeartbeatDto dto)
 	{
-		var user = await _db.AppUsers.FindAsync(dto.UserId);
+		var user = await _db.Customers.FindAsync(dto.UserId);
 
 		if (user == null)
 		{
-			user = new AppUser
+			user = new Customer
 			{
 				UserId = dto.UserId,
 				Email = dto.Email,
@@ -43,7 +43,7 @@ public class HeartbeatService
 				PreferredChannel = dto.PreferredChannel,
 				LastHeartbeat = DateTime.UtcNow
 			};
-			_db.AppUsers.Add(user);
+			_db.Customers.Add(user);
 		}
 		else
 		{
@@ -79,12 +79,11 @@ public class HeartbeatService
 	/// <summary>
 	/// Aim: Get user by ID.
 	/// Params: userId - user GUID.
-	/// Return: AppUser or null.
+	/// Return: Customer or null.
 	/// </summary>
-	public async Task<AppUser?> GetUserByIdAsync(Guid userId)
+	public async Task<Customer?> GetUserByIdAsync(Guid userId)
 	{
-		var user = await _db.AppUsers
-			.Include(u => u.SupportTickets)
+		var user = await _db.Customers
 			.FirstOrDefaultAsync(u => u.UserId == userId);
 
 		return user;

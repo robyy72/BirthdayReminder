@@ -36,7 +36,7 @@ public class SubscriptionService
 		// TODO: Implement actual store API verification
 		// For now, trust the app data and update the user
 
-		var user = await _db.AppUsers.FirstOrDefaultAsync(u => u.PurchaseToken == dto.ProductId);
+		var user = await _db.Customers.FirstOrDefaultAsync(u => u.PurchaseToken == dto.ProductId);
 		if (user == null)
 		{
 			return false;
@@ -60,7 +60,7 @@ public class SubscriptionService
 	/// </summary>
 	public async Task<bool> UpdateSubscriptionAsync(Guid userId, SubscriptionTier tier, DateTime? validUntil)
 	{
-		var user = await _db.AppUsers.FindAsync(userId);
+		var user = await _db.Customers.FindAsync(userId);
 		if (user == null)
 		{
 			return false;
@@ -80,7 +80,7 @@ public class SubscriptionService
 	/// </summary>
 	public async Task<bool> IsSubscriptionActiveAsync(Guid userId)
 	{
-		var user = await _db.AppUsers.FindAsync(userId);
+		var user = await _db.Customers.FindAsync(userId);
 		if (user == null)
 		{
 			return false;
@@ -107,10 +107,10 @@ public class SubscriptionService
 	{
 		var stats = new SubscriptionStats
 		{
-			FreeUsers = await _db.AppUsers.CountAsync(u => u.Subscription == SubscriptionTier.Free),
-			PlusUsers = await _db.AppUsers.CountAsync(u => u.Subscription == SubscriptionTier.Plus),
-			ProUsers = await _db.AppUsers.CountAsync(u => u.Subscription == SubscriptionTier.Pro),
-			ExpiredSubscriptions = await _db.AppUsers.CountAsync(u =>
+			FreeUsers = await _db.Customers.CountAsync(u => u.Subscription == SubscriptionTier.Free),
+			PlusUsers = await _db.Customers.CountAsync(u => u.Subscription == SubscriptionTier.Plus),
+			ProUsers = await _db.Customers.CountAsync(u => u.Subscription == SubscriptionTier.Pro),
+			ExpiredSubscriptions = await _db.Customers.CountAsync(u =>
 				u.Subscription != SubscriptionTier.Free &&
 				u.SubscriptionValidUntil.HasValue &&
 				u.SubscriptionValidUntil.Value < DateTime.UtcNow)

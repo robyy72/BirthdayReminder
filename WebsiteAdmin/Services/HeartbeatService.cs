@@ -29,11 +29,11 @@ public class HeartbeatService
 	/// </summary>
 	public async Task<bool> RecordHeartbeatAsync(HeartbeatDto dto)
 	{
-		var user = await _db.AppUsers.FindAsync(dto.UserId);
+		var user = await _db.Customers.FindAsync(dto.UserId);
 
 		if (user == null)
 		{
-			user = new AppUser
+			user = new Customer
 			{
 				UserId = dto.UserId,
 				Email = dto.Email,
@@ -43,7 +43,7 @@ public class HeartbeatService
 				PreferredChannel = dto.PreferredChannel,
 				LastHeartbeat = DateTime.UtcNow
 			};
-			_db.AppUsers.Add(user);
+			_db.Customers.Add(user);
 		}
 		else
 		{
@@ -80,9 +80,9 @@ public class HeartbeatService
 	/// Aim: Get all app users.
 	/// Return: List of app users.
 	/// </summary>
-	public async Task<List<AppUser>> GetAllUsersAsync()
+	public async Task<List<Customer>> GetAllUsersAsync()
 	{
-		var users = await _db.AppUsers
+		var users = await _db.Customers
 			.OrderByDescending(u => u.LastHeartbeat)
 			.ToListAsync();
 
@@ -94,11 +94,11 @@ public class HeartbeatService
 	/// Params: days - number of days.
 	/// Return: List of active users.
 	/// </summary>
-	public async Task<List<AppUser>> GetActiveUsersAsync(int days = 7)
+	public async Task<List<Customer>> GetActiveUsersAsync(int days = 7)
 	{
 		var cutoff = DateTime.UtcNow.AddDays(-days);
 
-		var users = await _db.AppUsers
+		var users = await _db.Customers
 			.Where(u => u.LastHeartbeat >= cutoff)
 			.OrderByDescending(u => u.LastHeartbeat)
 			.ToListAsync();
@@ -116,12 +116,12 @@ public class HeartbeatService
 
 		var stats = new UserStats
 		{
-			TotalUsers = await _db.AppUsers.CountAsync(),
-			ActiveLast24h = await _db.AppUsers.CountAsync(u => u.LastHeartbeat >= now.AddHours(-24)),
-			ActiveLast7d = await _db.AppUsers.CountAsync(u => u.LastHeartbeat >= now.AddDays(-7)),
-			ActiveLast30d = await _db.AppUsers.CountAsync(u => u.LastHeartbeat >= now.AddDays(-30)),
-			PlusSubscribers = await _db.AppUsers.CountAsync(u => u.Subscription == SubscriptionTier.Plus),
-			ProSubscribers = await _db.AppUsers.CountAsync(u => u.Subscription == SubscriptionTier.Pro)
+			TotalUsers = await _db.Customers.CountAsync(),
+			ActiveLast24h = await _db.Customers.CountAsync(u => u.LastHeartbeat >= now.AddHours(-24)),
+			ActiveLast7d = await _db.Customers.CountAsync(u => u.LastHeartbeat >= now.AddDays(-7)),
+			ActiveLast30d = await _db.Customers.CountAsync(u => u.LastHeartbeat >= now.AddDays(-30)),
+			PlusSubscribers = await _db.Customers.CountAsync(u => u.Subscription == SubscriptionTier.Plus),
+			ProSubscribers = await _db.Customers.CountAsync(u => u.Subscription == SubscriptionTier.Pro)
 		};
 
 		return stats;
@@ -130,12 +130,11 @@ public class HeartbeatService
 	/// <summary>
 	/// Aim: Get user by ID.
 	/// Params: userId - user GUID.
-	/// Return: AppUser or null.
+	/// Return: Customer or null.
 	/// </summary>
-	public async Task<AppUser?> GetUserByIdAsync(Guid userId)
+	public async Task<Customer?> GetUserByIdAsync(Guid userId)
 	{
-		var user = await _db.AppUsers
-			.Include(u => u.SupportTickets)
+		var user = await _db.Customers
 			.FirstOrDefaultAsync(u => u.UserId == userId);
 
 		return user;

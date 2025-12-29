@@ -18,7 +18,7 @@ public class SupportTicket
 	public Guid UserId { get; set; }
 
 	[ForeignKey(nameof(UserId))]
-	public AppUser? User { get; set; }
+	public Customer? User { get; set; }
 
 	[Required]
 	public string Message { get; set; } = string.Empty;

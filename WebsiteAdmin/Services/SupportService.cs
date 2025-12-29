@@ -30,10 +30,10 @@ public class SupportService
 	public async Task<int> CreateTicketAsync(SupportTicketDto dto)
 	{
 		// Ensure user exists
-		var user = await _db.AppUsers.FindAsync(dto.UserId);
+		var user = await _db.Customers.FindAsync(dto.UserId);
 		if (user == null)
 		{
-			user = new AppUser
+			user = new Customer
 			{
 				UserId = dto.UserId,
 				Email = dto.Email,
@@ -41,7 +41,7 @@ public class SupportService
 				PurchaseToken = dto.PurchaseToken,
 				Store = dto.Store
 			};
-			_db.AppUsers.Add(user);
+			_db.Customers.Add(user);
 		}
 		else
 		{
