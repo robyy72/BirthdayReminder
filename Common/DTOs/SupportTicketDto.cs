@@ -12,4 +12,5 @@ public class SupportTicketDto
 	public string? PurchaseToken { get; set; }
 	public Store Store { get; set; } = Store.Unknown;
 	public SupportEntryType Type { get; set; } = SupportEntryType.SupportRequest;
+	public SupportSource Source { get; set; } = SupportSource.Mobile;
 }

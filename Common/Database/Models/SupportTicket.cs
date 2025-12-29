@@ -24,6 +24,8 @@ public class SupportTicket
 
 	public SupportEntryType Type { get; set; } = SupportEntryType.SupportRequest;
 
+	public SupportSource Source { get; set; } = SupportSource.NotSet;
+
 	public TicketStatus Status { get; set; } = TicketStatus.Open;
 
 	public int? SystemUserId { get; set; }

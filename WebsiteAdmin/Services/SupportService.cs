@@ -69,6 +69,7 @@ public class SupportService
 			CustomerId = dto.UserId,
 			Message = dto.Message,
 			Type = dto.Type,
+			Source = dto.Source,
 			Status = TicketStatus.Open
 		};
 

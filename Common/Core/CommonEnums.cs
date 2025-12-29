@@ -8,12 +8,13 @@ public enum PersonNameDirection
 	FirstNameOnly = 3
 }
 
-public enum SupportEntryType	
+public enum SupportEntryType
 {
     NotSet = 0,
 	Error = 1,
 	SupportRequest = 2,
-    FeatureRequest = 3
+    FeatureRequest = 3,
+	CustomerFeedback = 4
 }
 
 public enum SupportEntryStatus
@@ -79,6 +80,15 @@ public enum PreferredChannel
 	Sms = 2,
 	WhatsApp = 3,
 	Signal = 4
+}
+
+public enum SupportSource
+{
+	NotSet = 0,
+	Mobile = 1,
+	SystemUser = 2,
+	ContactFormular = 3,
+	DirectEmail = 4
 }
 #endregion
 
