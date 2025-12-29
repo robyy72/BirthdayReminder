@@ -1,0 +1,158 @@
+@page
+@model MessengerTextsModel
+@{
+    ViewData["Title"] = "Messenger Texts";
+}
+
+<div class="row">
+    <!-- Left side: Text List (40%) -->
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Messenger Templates</span>
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
+                    + New
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="list-group" style="max-height: 500px; overflow-y: auto;">
+                    @foreach (var text in Model.MessengerTexts)
+                    {
+                        var isSelected = Model.SelectedId == text.Id;
+                        <a asp-page="/MessengerTexts" asp-route-SelectedId="@text.Id"
+                           class="list-group-item list-group-item-action @(isSelected ? "active" : "")">
+                            <div class="d-flex w-100 justify-content-between">
+                                <span class="fw-bold">@text.Name</span>
+                                <span class="badge @(text.IsActive ? "bg-success" : "bg-secondary")">
+                                    @(text.IsActive ? "Active" : "Inactive")
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-truncate">@(text.PreviewText ?? text.Content.Substring(0, Math.Min(50, text.Content.Length)))</small>
+                                <span class="badge bg-info">@text.Channel</span>
+                            </div>
+                        </a>
+                    }
+                    @if (Model.MessengerTexts.Count == 0)
+                    {
+                        <div class="text-center text-muted py-3">No messenger templates found</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right side: Detail/Edit (60%) -->
+    <div class="col-md-7">
+        @if (Model.SelectedText != null)
+        {
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Edit Template</span>
+                    <form method="post" asp-page-handler="Delete" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.SelectedText.Id" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Delete this template?');">Delete</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="Update">
+                        <input type="hidden" asp-for="SelectedText.Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="SelectedText.Name" class="form-label">Name</label>
+                            <input asp-for="SelectedText.Name" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SelectedText.Channel" class="form-label">Channel</label>
+                            <select asp-for="SelectedText.Channel" class="form-select">
+                                @foreach (var channel in Enum.GetValues<Common.PreferredChannel>())
+                                {
+                                    <option value="@channel">@channel</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SelectedText.PreviewText" class="form-label">Preview Text</label>
+                            <input asp-for="SelectedText.PreviewText" class="form-control" placeholder="Short preview (optional)" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SelectedText.Content" class="form-label">Content</label>
+                            <textarea asp-for="SelectedText.Content" class="form-control" rows="8" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="SelectedText.IsActive" class="form-check-input" type="checkbox" />
+                                <label asp-for="SelectedText.IsActive" class="form-check-label">Active</label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">
+                                Created: @Model.SelectedText.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                                @if (Model.SelectedText.UpdatedAt.HasValue)
+                                {
+                                    <span>| Updated: @Model.SelectedText.UpdatedAt.Value.ToString("dd.MM.yyyy HH:mm")</span>
+                                }
+                            </small>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body text-center text-muted">
+                    <p>Select a template to edit or create a new one</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="Create">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Messenger Template</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input name="name" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Channel</label>
+                        <select name="channel" class="form-select">
+                            @foreach (var channel in Enum.GetValues<Common.PreferredChannel>())
+                            {
+                                <option value="@channel">@channel</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Preview Text</label>
+                        <input name="previewText" class="form-control" placeholder="Short preview (optional)" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <textarea name="content" class="form-control" rows="6" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

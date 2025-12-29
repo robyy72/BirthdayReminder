@@ -197,5 +197,92 @@ public class SupportService
 
 		return stats;
 	}
+
+	/// <summary>
+	/// Aim: Get tickets with filter.
+	/// Params: filter - ticket filter options.
+	/// Return: Filtered list of tickets.
+	/// </summary>
+	public async Task<List<SupportTicket>> GetFilteredTicketsAsync(TicketFilter filter)
+	{
+		var query = _db.SupportTickets
+			.Include(t => t.customer)
+			.Include(t => t.systemUser)
+			.Include(t => t.Entries)
+			.AsQueryable();
+
+		if (filter.Status.HasValue)
+		{
+			query = query.Where(t => t.Status == filter.Status.Value);
+		}
+
+		if (filter.Type.HasValue)
+		{
+			query = query.Where(t => t.Type == filter.Type.Value);
+		}
+
+		if (!string.IsNullOrEmpty(filter.SearchText))
+		{
+			query = query.Where(t =>
+				t.Message.Contains(filter.SearchText) ||
+				(t.customer != null && t.customer.Email != null && t.customer.Email.Contains(filter.SearchText)));
+		}
+
+		if (filter.FromDate.HasValue)
+		{
+			query = query.Where(t => t.CreatedAt >= filter.FromDate.Value);
+		}
+
+		if (filter.ToDate.HasValue)
+		{
+			query = query.Where(t => t.CreatedAt <= filter.ToDate.Value);
+		}
+
+		if (filter.OnlyUnassigned)
+		{
+			query = query.Where(t => t.SystemUserId == null);
+		}
+
+		var tickets = await query
+			.OrderByDescending(t => t.CreatedAt)
+			.ToListAsync();
+
+		return tickets;
+	}
+
+	/// <summary>
+	/// Aim: Add entry to ticket conversation.
+	/// Params: ticketId - ticket ID, message - entry text, isFromCustomer - sender type, adminName - admin name if from admin.
+	/// Return: True if successful.
+	/// </summary>
+	public async Task<bool> AddTicketEntryAsync(int ticketId, string message, bool isFromCustomer, string? adminName = null)
+	{
+		var ticket = await _db.SupportTickets.FindAsync(ticketId);
+		if (ticket == null)
+		{
+			return false;
+		}
+
+		int? systemUserId = null;
+		if (!isFromCustomer && !string.IsNullOrEmpty(adminName))
+		{
+			var admin = await _db.SystemUsers.FirstOrDefaultAsync(u => u.Email == adminName);
+			systemUserId = admin?.Id;
+		}
+
+		var entry = new SupportTicketEntry
+		{
+			SupportTicketId = ticketId,
+			Message = message,
+			IsFromCustomer = isFromCustomer,
+			SystemUserId = systemUserId
+		};
+
+		_db.SupportTicketEntries.Add(entry);
+		ticket.UpdatedAt = DateTime.UtcNow;
+
+		await _db.SaveChangesAsync();
+		return true;
+	}
 	#endregion
 }

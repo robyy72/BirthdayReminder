@@ -1,81 +1,215 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Support Tickets";
 }
 
-<h1>Dashboard</h1>
-
-<div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Users</div>
-            <div class="card-body">
-                <h2 class="card-title">@Model.UserStats.TotalUsers</h2>
-                <p class="card-text">Total registered users</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-header">Active (7d)</div>
-            <div class="card-body">
-                <h2 class="card-title">@Model.UserStats.ActiveLast7d</h2>
-                <p class="card-text">Users active last 7 days</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-warning mb-3">
-            <div class="card-header">Open Tickets</div>
-            <div class="card-body">
-                <h2 class="card-title">@Model.OpenTickets</h2>
-                <p class="card-text">Tickets needing attention</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
+<div class="row">
+    <!-- Left side: Ticket List with Filters (50%) -->
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">User Statistics</div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <td>Active (24h)</td>
-                        <td>@Model.UserStats.ActiveLast24h</td>
-                    </tr>
-                    <tr>
-                        <td>Active (30d)</td>
-                        <td>@Model.UserStats.ActiveLast30d</td>
-                    </tr>
-                    <tr>
-                        <td>Plus Subscribers</td>
-                        <td>@Model.UserStats.PlusSubscribers</td>
-                    </tr>
-                    <tr>
-                        <td>Pro Subscribers</td>
-                        <td>@Model.UserStats.ProSubscribers</td>
-                    </tr>
-                </table>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Tickets</span>
+                <span class="badge bg-primary">@Model.Tickets.Count</span>
             </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">Ticket Statistics</div>
             <div class="card-body">
-                <table class="table">
-                    @foreach (var stat in Model.TicketStats)
+                <!-- Filter Form -->
+                <form method="get" class="mb-3">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <select asp-for="Filter.Status" class="form-select form-select-sm">
+                                <option value="">All Status</option>
+                                @foreach (var status in Enum.GetValues<Common.TicketStatus>())
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select asp-for="Filter.Type" class="form-select form-select-sm">
+                                <option value="">All Types</option>
+                                @foreach (var type in Enum.GetValues<Common.SupportEntryType>())
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input asp-for="Filter.OnlyUnassigned" class="form-check-input" type="checkbox" />
+                                <label asp-for="Filter.OnlyUnassigned" class="form-check-label small">Unassigned</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-1">
+                        <div class="col-md-8">
+                            <input asp-for="Filter.SearchText" class="form-control form-control-sm" placeholder="Search..." />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-sm btn-primary w-100">Filter</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Ticket List -->
+                <div class="list-group" style="max-height: 500px; overflow-y: auto;">
+                    @foreach (var ticket in Model.Tickets)
                     {
-                        <tr>
-                            <td>@stat.Key</td>
-                            <td>@stat.Value</td>
-                        </tr>
+                        var isSelected = Model.SelectedId == ticket.Id;
+                        <a asp-page="/Index" asp-route-SelectedId="@ticket.Id"
+                           class="list-group-item list-group-item-action @(isSelected ? "active" : "")">
+                            <div class="d-flex w-100 justify-content-between">
+                                <small class="fw-bold">#@ticket.Id</small>
+                                <small>@ticket.CreatedAt.ToString("dd.MM.yy HH:mm")</small>
+                            </div>
+                            <p class="mb-1 small text-truncate">@ticket.Message</p>
+                            <div class="d-flex justify-content-between">
+                                <small>@(ticket.customer?.Email ?? ticket.CustomerId.ToString().Substring(0, 8))</small>
+                                @{
+                                    var statusClass = ticket.Status switch
+                                    {
+                                        Common.TicketStatus.Open => "bg-warning",
+                                        Common.TicketStatus.InProgress => "bg-info",
+                                        Common.TicketStatus.Closed => "bg-success",
+                                        _ => "bg-secondary"
+                                    };
+                                }
+                                <span class="badge @statusClass">@ticket.Status</span>
+                            </div>
+                        </a>
                     }
-                </table>
+                    @if (Model.Tickets.Count == 0)
+                    {
+                        <div class="text-center text-muted py-3">No tickets found</div>
+                    }
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Right side: Ticket Detail (50%) -->
+    <div class="col-md-6">
+        @if (Model.SelectedTicket != null)
+        {
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ticket #@Model.SelectedTicket.Id</span>
+                    @{
+                        var detailStatusClass = Model.SelectedTicket.Status switch
+                        {
+                            Common.TicketStatus.Open => "bg-warning",
+                            Common.TicketStatus.InProgress => "bg-info",
+                            Common.TicketStatus.Closed => "bg-success",
+                            _ => "bg-secondary"
+                        };
+                    }
+                    <span class="badge @detailStatusClass">@Model.SelectedTicket.Status</span>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <td class="fw-bold" style="width: 120px;">Customer</td>
+                            <td>@(Model.SelectedTicket.customer?.Email ?? Model.SelectedTicket.customer?.PhoneNumber ?? "-")</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Type</td>
+                            <td>@Model.SelectedTicket.Type</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Created</td>
+                            <td>@Model.SelectedTicket.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                        </tr>
+                        @if (Model.SelectedTicket.systemUser != null)
+                        {
+                            <tr>
+                                <td class="fw-bold">Assigned To</td>
+                                <td>@(Model.SelectedTicket.systemUser.DisplayName ?? Model.SelectedTicket.systemUser.Email)</td>
+                            </tr>
+                        }
+                    </table>
+
+                    <!-- Status Actions -->
+                    <div class="btn-group btn-group-sm mb-3">
+                        @if (Model.SelectedTicket.Status != Common.TicketStatus.InProgress)
+                        {
+                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
+                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
+                                <input type="hidden" name="status" value="@Common.TicketStatus.InProgress" />
+                                <button type="submit" class="btn btn-info btn-sm">In Progress</button>
+                            </form>
+                        }
+                        @if (Model.SelectedTicket.Status != Common.TicketStatus.Closed)
+                        {
+                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline ms-1">
+                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
+                                <input type="hidden" name="status" value="@Common.TicketStatus.Closed" />
+                                <button type="submit" class="btn btn-success btn-sm">Close</button>
+                            </form>
+                        }
+                        @if (Model.SelectedTicket.Status == Common.TicketStatus.Closed)
+                        {
+                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
+                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
+                                <input type="hidden" name="status" value="@Common.TicketStatus.Open" />
+                                <button type="submit" class="btn btn-warning btn-sm">Reopen</button>
+                            </form>
+                        }
+                    </div>
+
+                    <!-- Initial Message -->
+                    <div class="card bg-light mb-2">
+                        <div class="card-body py-2">
+                            <small class="text-muted">Initial message:</small>
+                            <p class="mb-0">@Model.SelectedTicket.Message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversation Entries -->
+            <div class="card">
+                <div class="card-header">Conversation</div>
+                <div class="card-body" style="max-height: 250px; overflow-y: auto;">
+                    @if (Model.SelectedTicket.Entries.Any())
+                    {
+                        @foreach (var entry in Model.SelectedTicket.Entries.OrderBy(e => e.CreatedAt))
+                        {
+                            var entryClass = entry.IsFromCustomer ? "bg-light" : "bg-primary bg-opacity-10";
+                            var align = entry.IsFromCustomer ? "" : "text-end";
+                            <div class="mb-2 @align">
+                                <div class="d-inline-block p-2 rounded @entryClass" style="max-width: 80%;">
+                                    <small class="d-block text-muted">
+                                        @(entry.IsFromCustomer ? "Customer" : entry.systemUser?.DisplayName ?? "Admin")
+                                        - @entry.CreatedAt.ToString("dd.MM HH:mm")
+                                    </small>
+                                    <span>@entry.Message</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">No replies yet</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <form method="post" asp-page-handler="AddEntry">
+                        <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
+                        <div class="input-group">
+                            <input type="text" name="message" class="form-control form-control-sm" placeholder="Type a reply..." required />
+                            <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body text-center text-muted">
+                    <p>Select a ticket to view details</p>
+                </div>
+            </div>
+        }
     </div>
 </div>

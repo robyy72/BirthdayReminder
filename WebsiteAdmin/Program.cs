@@ -30,6 +30,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<SupportService>();
 builder.Services.AddScoped<HeartbeatService>();
 builder.Services.AddScoped<SubscriptionService>();
+builder.Services.AddScoped<TextsService>();
 
 // Razor Pages
 builder.Services.AddRazorPages();

@@ -17,6 +17,8 @@ public class CoreDbContext : DbContext
 	public DbSet<SystemUser> SystemUsers { get; set; } = null!;
 	public DbSet<SupportTicket> SupportTickets { get; set; } = null!;
 	public DbSet<SupportTicketEntry> SupportTicketEntries { get; set; } = null!;
+	public DbSet<EmailText> EmailTexts { get; set; } = null!;
+	public DbSet<MessengerText> MessengerTexts { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
