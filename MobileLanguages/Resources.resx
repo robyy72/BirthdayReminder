@@ -88,7 +88,7 @@
     <value>More information</value>
   </data>
   <data name="Browser_OpenExternal" xml:space="preserve">
-    <value>Open in browser</value>
+    <value>Browser ▶</value>
   </data>
   <data name="Timezone_MoreInfo" xml:space="preserve">
     <value>Learn more about timezones</value>

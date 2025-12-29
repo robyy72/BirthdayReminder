@@ -74,6 +74,12 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - **All pages**: Always put buttons inside the ScrollView, not in a separate Grid row outside
 - **Do NOT use Frame** - it's obsolete in .NET 9. Use Border instead
 
+## Page Initialization
+
+- **Prefer Init() methods** called from the constructor over OnAppearing()
+- OnAppearing() only when it makes sense (e.g., data refresh on return, visibility-dependent logic)
+- Init() keeps initialization predictable and happens once at construction
+
 ---
 
 ## Build

@@ -21,6 +21,7 @@ public static class MauiProgram
 
 #if ANDROID || IOS
 		EntryHandlerConfiguration.ConfigureEntryHandler();
+		SwitchHandlerConfiguration.ConfigureSwitchHandler();
 #endif
 
 #if DEBUG

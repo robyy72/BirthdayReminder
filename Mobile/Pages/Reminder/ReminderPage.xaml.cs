@@ -34,12 +34,43 @@ public partial class ReminderPage : ContentPage
 		_person = person;
 		_isWizardMode = person == null;
 
+		Init();
+	}
+	#endregion
+
+	#region Init
+	private void Init()
+	{
 		SetupHeader();
 		SetupDaysPicker();
 		SetupTimeLabels();
 		LoadReminder();
 		UpdateButtonText();
 		UpdateStatusLabels();
+		SetupSwitchEvents();
+		UpdateNextButtonState();
+	}
+
+	private void SetupSwitchEvents()
+	{
+		NotificationSwitch.Toggled += OnSwitchToggled;
+		AlarmSwitch.Toggled += OnSwitchToggled;
+		EmailSwitch.Toggled += OnSwitchToggled;
+		SignalSwitch.Toggled += OnSwitchToggled;
+		SmsSwitch.Toggled += OnSwitchToggled;
+		WhatsAppSwitch.Toggled += OnSwitchToggled;
+	}
+
+	private void UpdateNextButtonState()
+	{
+		bool anySelected = NotificationSwitch.IsToggled
+			|| AlarmSwitch.IsToggled
+			|| EmailSwitch.IsToggled
+			|| SignalSwitch.IsToggled
+			|| SmsSwitch.IsToggled
+			|| WhatsAppSwitch.IsToggled;
+
+		NextButton.IsEnabled = anySelected;
 	}
 	#endregion
 
@@ -332,6 +363,11 @@ public partial class ReminderPage : ContentPage
 	{
 		var helpPage = new HelpPage { Topic = HelpTopic.ReminderWhatsApp.ToString() };
 		await Navigation.PushModalAsync(helpPage);
+	}
+
+	private void OnSwitchToggled(object? sender, ToggledEventArgs e)
+	{
+		UpdateNextButtonState();
 	}
 
 	private async void OnBackClicked(object? sender, EventArgs e)
