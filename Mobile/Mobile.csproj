@@ -23,7 +23,7 @@
 		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>55</ApplicationVersion>
+		<ApplicationVersion>56</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -55,7 +55,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
-		<PackageReference Include="Plugin.InAppBilling" Version="9.0.0" />
+		<PackageReference Include="Plugin.InAppBilling" Version="9.1.0" />
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
 	</ItemGroup>
