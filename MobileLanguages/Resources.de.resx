@@ -82,10 +82,16 @@
     <value>Datenschutz</value>
   </data>
   <data name="Page_Help_Title" xml:space="preserve">
-    <value>Hilfe</value>
+    <value>Mehr Informationen</value>
   </data>
   <data name="More_Informations" xml:space="preserve">
     <value>Mehr Informationen</value>
+  </data>
+  <data name="Browser_OpenExternal" xml:space="preserve">
+    <value>Im Browser öffnen</value>
+  </data>
+  <data name="Timezone_MoreInfo" xml:space="preserve">
+    <value>Mehr über Zeitzonen erfahren</value>
   </data>
   <data name="Help_UseContacts_Header" xml:space="preserve">
     <value>Kontakte als Quelle</value>
@@ -427,16 +433,16 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Nicht gesetzt</value>
   </data>
   <data name="ReminderMethod_Email" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>Email Nachricht</value>
   </data>
   <data name="ReminderMethod_Sms" xml:space="preserve">
-    <value>SMS</value>
+    <value>SMS Nachricht</value>
   </data>
   <data name="ReminderMethod_LockScreen" xml:space="preserve">
     <value>Sperrbildschirm</value>
   </data>
   <data name="ReminderMethod_WhatsApp" xml:space="preserve">
-    <value>WhatsApp</value>
+    <value>WhatsApp Messenger</value>
   </data>
   <data name="RemindUntilApproved_Label" xml:space="preserve">
     <value>Erinnern bis bestätigt</value>
@@ -639,7 +645,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   </data>
   <!-- StartPage_6/7/8 - ReminderMethod_Signal missing -->
   <data name="ReminderMethod_Signal" xml:space="preserve">
-    <value>Signal</value>
+    <value>Signal Messenger</value>
   </data>
   <!-- StartPage_9 -->
   <data name="Start9_CalendarExport" xml:space="preserve">
@@ -733,10 +739,10 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   </data>
   <!-- Reminder Methods - Local -->
   <data name="ReminderMethod_Notification" xml:space="preserve">
-    <value>Benachrichtigung</value>
+    <value>Push-Message auf dem Sperrbildschirm</value>
   </data>
   <data name="ReminderMethod_Alarm" xml:space="preserve">
-    <value>Alarm</value>
+    <value>Alarm des Mobiltelefons</value>
   </data>
   <!-- Reminder Message Templates - Today -->
   <data name="ReminderTemplate_Email_Today" xml:space="preserve">
@@ -815,5 +821,277 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="NameDirection_FirstLastName" xml:space="preserve">
     <value>Nachname, Vorname</value>
+  </data>
+  <!-- ReminderPage - New structure -->
+  <data name="Settings_ReminderNumber" xml:space="preserve">
+    <value>Erinnerung Nr - {0} -</value>
+  </data>
+  <data name="Settings_FreeReminders" xml:space="preserve">
+    <value>Kostenlose Erinnerungen</value>
+  </data>
+  <data name="Settings_SubscriptionReminders" xml:space="preserve">
+    <value>Erinnerungen mit Abo</value>
+  </data>
+  <!-- Help - Free Reminders -->
+  <data name="Help_FreeReminders_Header" xml:space="preserve">
+    <value>Kostenlose Erinnerungen</value>
+  </data>
+  <data name="Help_FreeReminders_Content_1" xml:space="preserve">
+    <value>Die folgenden Erinnerungsmethoden sind kostenlos:
+
+• Push-Benachrichtigung - Erscheint auf dem Sperrbildschirm
+• Telefon-Alarm - Spielt einen Alarmton ab
+• E-Mail - Begrenzte Anzahl kostenloser E-Mails pro Monat
+• Signal - Nachricht über Signal Messenger</value>
+  </data>
+  <data name="Help_FreeReminders_Content_2" xml:space="preserve">
+    <value>Bitte beachten:
+• E-Mail-Erinnerungen sind mit begrenzter Anzahl pro Monat kostenlos. Für unbegrenzte E-Mails ist ein Abonnement erforderlich.
+• Die Signal-Integration hängt von der Verfügbarkeit des Drittanbieters ab und kann nicht dauerhaft garantiert werden.</value>
+  </data>
+  <!-- Support -->
+  <data name="Support_ReportBug" xml:space="preserve">
+    <value>Fehler melden</value>
+  </data>
+  <data name="Support_FeatureRequest" xml:space="preserve">
+    <value>Verbesserungsvorschlag</value>
+  </data>
+  <data name="Support_Feedback" xml:space="preserve">
+    <value>Feedback geben</value>
+  </data>
+  <data name="Page_NewSupport_Title" xml:space="preserve">
+    <value>Neuer Eintrag</value>
+  </data>
+  <data name="Page_SupportOverview_Title" xml:space="preserve">
+    <value>Support Übersicht</value>
+  </data>
+  <data name="Page_SupportDetail_Title" xml:space="preserve">
+    <value>Support Details</value>
+  </data>
+  <data name="Support_Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Support_Text" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Support_Type_Bug" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Support_Type_FeatureRequest" xml:space="preserve">
+    <value>Verbesserungsvorschlag</value>
+  </data>
+  <data name="Support_Type_Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <!-- Reminder Status -->
+  <data name="Reminder_Status_Free" xml:space="preserve">
+    <value>Kostenlos</value>
+  </data>
+  <data name="Reminder_Status_FreeLimited" xml:space="preserve">
+    <value>Kostenlos (begrenzt)</value>
+  </data>
+  <data name="Reminder_Status_FreeCurrently" xml:space="preserve">
+    <value>Aktuell kostenlos</value>
+  </data>
+  <data name="Reminder_Status_Subscription" xml:space="preserve">
+    <value>Abo erforderlich</value>
+  </data>
+  <data name="General_Label_Active" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="General_Label_Time" xml:space="preserve">
+    <value>Uhrzeit ({0})</value>
+  </data>
+  <!-- Help - Reminder Methods -->
+  <data name="Help_ReminderNotification_Header" xml:space="preserve">
+    <value>Push-Benachrichtigung</value>
+  </data>
+  <data name="Help_ReminderNotification_Content_1" xml:space="preserve">
+    <value>Push-Benachrichtigungen erscheinen auf deinem Sperrbildschirm und in der Benachrichtigungszentrale am Tag der Erinnerung.</value>
+  </data>
+  <data name="Help_ReminderNotification_Content_2" xml:space="preserve">
+    <value>Diese Funktion ist komplett kostenlos und funktioniert offline. Stelle sicher, dass Benachrichtigungen in deinen Geräteeinstellungen aktiviert sind.</value>
+  </data>
+  <data name="Help_ReminderAlarm_Header" xml:space="preserve">
+    <value>Telefon-Alarm</value>
+  </data>
+  <data name="Help_ReminderAlarm_Content_1" xml:space="preserve">
+    <value>Ein Alarm ertönt auf deinem Telefon zur festgelegten Zeit, um dich an den Geburtstag zu erinnern.</value>
+  </data>
+  <data name="Help_ReminderAlarm_Content_2" xml:space="preserve">
+    <value>Du kannst sogar einstellen, daß der Alarm auch ertönt, wenn Dein Telefon auf 'lautlos' steht. Aber standard-mässig passiert das nicht.</value>
+  </data>
+  <data name="Help_ReminderEmail_Header" xml:space="preserve">
+    <value>E-Mail Erinnerung</value>
+  </data>
+  <data name="Help_ReminderEmail_Content_1" xml:space="preserve">
+    <value>Du erhältst eine E-Mail-Erinnerung zur festgelegten Zeit vor dem Geburtstag.</value>
+  </data>
+  <data name="Help_ReminderEmail_Content_2" xml:space="preserve">
+    <value>Der kostenlose Plan enthält eine begrenzte Anzahl E-Mails pro Monat. Für unbegrenzte E-Mails ist ein Abonnement erforderlich.</value>
+  </data>
+  <data name="Help_ReminderSignal_Header" xml:space="preserve">
+    <value>Signal Messenger</value>
+  </data>
+  <data name="Help_ReminderSignal_Content_1" xml:space="preserve">
+    <value>Du erhältst eine Nachricht über Signal Messenger, um dich an den Geburtstag zu erinnern.</value>
+  </data>
+  <data name="Help_ReminderSignal_Content_2" xml:space="preserve">
+    <value>Dieser Dienst wird derzeit kostenlos angeboten. Die dauerhafte Verfügbarkeit kann jedoch nicht garantiert werden, da sie von Drittanbietern abhängt.</value>
+  </data>
+  <data name="Help_ReminderSms_Header" xml:space="preserve">
+    <value>SMS-Nachricht</value>
+  </data>
+  <data name="Help_ReminderSms_Content_1" xml:space="preserve">
+    <value>Du erhältst eine SMS-Nachricht, um dich an den Geburtstag zu erinnern.</value>
+  </data>
+  <data name="Help_ReminderSms_Content_2" xml:space="preserve">
+    <value>Diese Funktion erfordert ein aktives Abonnement. Die SMS-Kosten sind durch dein Abonnement abgedeckt.</value>
+  </data>
+  <data name="Help_ReminderWhatsApp_Header" xml:space="preserve">
+    <value>WhatsApp-Nachricht</value>
+  </data>
+  <data name="Help_ReminderWhatsApp_Content_1" xml:space="preserve">
+    <value>Du erhältst eine WhatsApp-Nachricht, um dich an den Geburtstag zu erinnern.</value>
+  </data>
+  <data name="Help_ReminderWhatsApp_Content_2" xml:space="preserve">
+    <value>Diese Funktion erfordert ein aktives Abonnement. Die WhatsApp Business API-Kosten sind durch dein Abonnement abgedeckt.</value>
+  </data>
+  <!-- Help - Timezone Note -->
+  <data name="Help_Timezone_Note" xml:space="preserve">
+    <value>Die Zeitzone {0} bedeutet {1} ({2}). Deine Zeitzone kannst Du jederzeit in den Einstellungen ändern.</value>
+  </data>
+  <!-- Timezone Names -->
+  <data name="Timezone_UTC" xml:space="preserve">
+    <value>Koordinierte Weltzeit</value>
+  </data>
+  <data name="Timezone_CET" xml:space="preserve">
+    <value>Mitteleuropäische Zeit</value>
+  </data>
+  <data name="Timezone_CEST" xml:space="preserve">
+    <value>Mitteleuropäische Sommerzeit</value>
+  </data>
+  <data name="Timezone_WET" xml:space="preserve">
+    <value>Westeuropäische Zeit</value>
+  </data>
+  <data name="Timezone_WEST" xml:space="preserve">
+    <value>Westeuropäische Sommerzeit</value>
+  </data>
+  <data name="Timezone_EET" xml:space="preserve">
+    <value>Osteuropäische Zeit</value>
+  </data>
+  <data name="Timezone_EEST" xml:space="preserve">
+    <value>Osteuropäische Sommerzeit</value>
+  </data>
+  <data name="Timezone_GMT" xml:space="preserve">
+    <value>Greenwich Mean Time</value>
+  </data>
+  <data name="Timezone_BST" xml:space="preserve">
+    <value>Britische Sommerzeit</value>
+  </data>
+  <data name="Timezone_EST" xml:space="preserve">
+    <value>Östliche Standardzeit (USA)</value>
+  </data>
+  <data name="Timezone_EDT" xml:space="preserve">
+    <value>Östliche Sommerzeit (USA)</value>
+  </data>
+  <data name="Timezone_CST" xml:space="preserve">
+    <value>Zentrale Standardzeit (USA)</value>
+  </data>
+  <data name="Timezone_CDT" xml:space="preserve">
+    <value>Zentrale Sommerzeit (USA)</value>
+  </data>
+  <data name="Timezone_MST" xml:space="preserve">
+    <value>Berg-Standardzeit (USA)</value>
+  </data>
+  <data name="Timezone_MDT" xml:space="preserve">
+    <value>Berg-Sommerzeit (USA)</value>
+  </data>
+  <data name="Timezone_PST" xml:space="preserve">
+    <value>Pazifische Standardzeit</value>
+  </data>
+  <data name="Timezone_PDT" xml:space="preserve">
+    <value>Pazifische Sommerzeit</value>
+  </data>
+  <data name="Timezone_AKST" xml:space="preserve">
+    <value>Alaska Standardzeit</value>
+  </data>
+  <data name="Timezone_AKDT" xml:space="preserve">
+    <value>Alaska Sommerzeit</value>
+  </data>
+  <data name="Timezone_HST" xml:space="preserve">
+    <value>Hawaii Standardzeit</value>
+  </data>
+  <data name="Timezone_JST" xml:space="preserve">
+    <value>Japanische Standardzeit</value>
+  </data>
+  <data name="Timezone_CST_China" xml:space="preserve">
+    <value>Chinesische Standardzeit</value>
+  </data>
+  <data name="Timezone_IST" xml:space="preserve">
+    <value>Indische Standardzeit</value>
+  </data>
+  <data name="Timezone_AEST" xml:space="preserve">
+    <value>Ostaustralische Standardzeit</value>
+  </data>
+  <data name="Timezone_AEDT" xml:space="preserve">
+    <value>Ostaustralische Sommerzeit</value>
+  </data>
+  <data name="Timezone_AWST" xml:space="preserve">
+    <value>Westaustralische Standardzeit</value>
+  </data>
+  <data name="Timezone_NZST" xml:space="preserve">
+    <value>Neuseeländische Standardzeit</value>
+  </data>
+  <data name="Timezone_NZDT" xml:space="preserve">
+    <value>Neuseeländische Sommerzeit</value>
+  </data>
+  <data name="Timezone_BRT" xml:space="preserve">
+    <value>Brasilianische Zeit</value>
+  </data>
+  <data name="Timezone_ART" xml:space="preserve">
+    <value>Argentinische Zeit</value>
+  </data>
+  <data name="Timezone_MSK" xml:space="preserve">
+    <value>Moskauer Zeit</value>
+  </data>
+  <data name="Timezone_GST" xml:space="preserve">
+    <value>Golf-Standardzeit</value>
+  </data>
+  <data name="Timezone_SGT" xml:space="preserve">
+    <value>Singapur-Zeit</value>
+  </data>
+  <data name="Timezone_HKT" xml:space="preserve">
+    <value>Hongkong-Zeit</value>
+  </data>
+  <data name="Timezone_KST" xml:space="preserve">
+    <value>Koreanische Standardzeit</value>
+  </data>
+  <data name="Timezone_ICT" xml:space="preserve">
+    <value>Indochina-Zeit</value>
+  </data>
+  <data name="Timezone_WIB" xml:space="preserve">
+    <value>Westindonesische Zeit</value>
+  </data>
+  <data name="Timezone_PKT" xml:space="preserve">
+    <value>Pakistanische Standardzeit</value>
+  </data>
+  <data name="Timezone_AST" xml:space="preserve">
+    <value>Arabische Standardzeit</value>
+  </data>
+  <data name="Timezone_SAST" xml:space="preserve">
+    <value>Südafrikanische Standardzeit</value>
+  </data>
+  <data name="Timezone_WAT" xml:space="preserve">
+    <value>Westafrikanische Zeit</value>
+  </data>
+  <data name="Timezone_EAT" xml:space="preserve">
+    <value>Ostafrikanische Zeit</value>
+  </data>
+  <data name="Timezone_TRT" xml:space="preserve">
+    <value>Türkei-Zeit</value>
+  </data>
+  <data name="Timezone_Unknown" xml:space="preserve">
+    <value>Unbekannte Zeitzone</value>
   </data>
 </root>

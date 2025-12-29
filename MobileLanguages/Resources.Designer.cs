@@ -2270,5 +2270,420 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("NameDirection_FirstLastName", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reminder Number -{0}- ähnelt.
+        /// </summary>
+        public static string Settings_ReminderNumber {
+            get {
+                return ResourceManager.GetString("Settings_ReminderNumber", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
+        /// </summary>
+        public static string Settings_FreeReminders {
+            get {
+                return ResourceManager.GetString("Settings_FreeReminders", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reminders with Subscription ähnelt.
+        /// </summary>
+        public static string Settings_SubscriptionReminders {
+            get {
+                return ResourceManager.GetString("Settings_SubscriptionReminders", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
+        /// </summary>
+        public static string Help_FreeReminders_Header {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge für Help_FreeReminders_Content_1.
+        /// </summary>
+        public static string Help_FreeReminders_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge für Help_FreeReminders_Content_2.
+        /// </summary>
+        public static string Help_FreeReminders_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report Bug ähnelt.
+        /// </summary>
+        public static string Support_ReportBug {
+            get {
+                return ResourceManager.GetString("Support_ReportBug", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suggest Improvement ähnelt.
+        /// </summary>
+        public static string Support_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Support_FeatureRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Give Feedback ähnelt.
+        /// </summary>
+        public static string Support_Feedback {
+            get {
+                return ResourceManager.GetString("Support_Feedback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Entry ähnelt.
+        /// </summary>
+        public static string Page_NewSupport_Title {
+            get {
+                return ResourceManager.GetString("Page_NewSupport_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Support Overview ähnelt.
+        /// </summary>
+        public static string Page_SupportOverview_Title {
+            get {
+                return ResourceManager.GetString("Page_SupportOverview_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Support Details ähnelt.
+        /// </summary>
+        public static string Page_SupportDetail_Title {
+            get {
+                return ResourceManager.GetString("Page_SupportDetail_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
+        /// </summary>
+        public static string Support_Title {
+            get {
+                return ResourceManager.GetString("Support_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
+        /// </summary>
+        public static string Support_Text {
+            get {
+                return ResourceManager.GetString("Support_Text", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bug ähnelt.
+        /// </summary>
+        public static string Support_Type_Bug {
+            get {
+                return ResourceManager.GetString("Support_Type_Bug", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Feature Request ähnelt.
+        /// </summary>
+        public static string Support_Type_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Support_Type_FeatureRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Feedback ähnelt.
+        /// </summary>
+        public static string Support_Type_Feedback {
+            get {
+                return ResourceManager.GetString("Support_Type_Feedback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free ähnelt.
+        /// </summary>
+        public static string Reminder_Status_Free {
+            get {
+                return ResourceManager.GetString("Reminder_Status_Free", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free (limited) ähnelt.
+        /// </summary>
+        public static string Reminder_Status_FreeLimited {
+            get {
+                return ResourceManager.GetString("Reminder_Status_FreeLimited", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently free ähnelt.
+        /// </summary>
+        public static string Reminder_Status_FreeCurrently {
+            get {
+                return ResourceManager.GetString("Reminder_Status_FreeCurrently", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Requires subscription ähnelt.
+        /// </summary>
+        public static string Reminder_Status_Subscription {
+            get {
+                return ResourceManager.GetString("Reminder_Status_Subscription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Active ähnelt.
+        /// </summary>
+        public static string General_Label_Active {
+            get {
+                return ResourceManager.GetString("General_Label_Active", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Time ähnelt.
+        /// </summary>
+        public static string General_Label_Time {
+            get {
+                return ResourceManager.GetString("General_Label_Time", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderNotification_Header
+        /// </summary>
+        public static string Help_ReminderNotification_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderNotification_Content_1
+        /// </summary>
+        public static string Help_ReminderNotification_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderNotification_Content_2
+        /// </summary>
+        public static string Help_ReminderNotification_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderAlarm_Header
+        /// </summary>
+        public static string Help_ReminderAlarm_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderAlarm_Content_1
+        /// </summary>
+        public static string Help_ReminderAlarm_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderAlarm_Content_2
+        /// </summary>
+        public static string Help_ReminderAlarm_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderEmail_Header
+        /// </summary>
+        public static string Help_ReminderEmail_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderEmail_Content_1
+        /// </summary>
+        public static string Help_ReminderEmail_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderEmail_Content_2
+        /// </summary>
+        public static string Help_ReminderEmail_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSignal_Header
+        /// </summary>
+        public static string Help_ReminderSignal_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSignal_Content_1
+        /// </summary>
+        public static string Help_ReminderSignal_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSignal_Content_2
+        /// </summary>
+        public static string Help_ReminderSignal_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSms_Header
+        /// </summary>
+        public static string Help_ReminderSms_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSms_Content_1
+        /// </summary>
+        public static string Help_ReminderSms_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderSms_Content_2
+        /// </summary>
+        public static string Help_ReminderSms_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderWhatsApp_Header
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderWhatsApp_Content_1
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Help_ReminderWhatsApp_Content_2
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your timezone: {0}. You can change this in settings. ähnelt.
+        ///   Help_Timezone_Note
+        /// </summary>
+        public static string Help_Timezone_Note {
+            get {
+                return ResourceManager.GetString("Help_Timezone_Note", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Timezone_UTC
+        /// </summary>
+        public static string Timezone_UTC {
+            get {
+                return ResourceManager.GetString("Timezone_UTC", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Timezone_Unknown
+        /// </summary>
+        public static string Timezone_Unknown {
+            get {
+                return ResourceManager.GetString("Timezone_Unknown", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Browser_OpenExternal
+        /// </summary>
+        public static string Browser_OpenExternal {
+            get {
+                return ResourceManager.GetString("Browser_OpenExternal", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Timezone_MoreInfo
+        /// </summary>
+        public static string Timezone_MoreInfo {
+            get {
+                return ResourceManager.GetString("Timezone_MoreInfo", resourceCulture);
+            }
+        }
     }
 }

@@ -6,6 +6,12 @@ public static class MobileConstants
 	public const string APP_NAME = "Mobile";
 	#endregion
 
+	#region External URLs
+	public const string URL_TIMEZONE_INFO = "https://www.timeanddate.com/time/zones/";
+	public const string URL_PRIVACY_POLICY = "https://birthday-reminder.online/privacy";
+	public const string URL_TERMS_OF_SERVICE = "https://birthday-reminder.online/terms";
+	#endregion
+
 	#region Debug
 	public const bool START_ALWAYS_WITH_WELCOME = true;
 	#endregion
@@ -46,5 +52,6 @@ public static class MobileConstants
 	public const string PREFS_ERRORS = "Errors";
 	public const string PREFS_PERSONS = "Persons";
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
+	public const string PREFS_SUPPORT = "Support";
 	#endregion
 }

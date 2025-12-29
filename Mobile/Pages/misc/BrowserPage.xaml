@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.BrowserPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.More_Informations}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Grid Grid.Row="0" Style="{StaticResource HeaderBar}">
+            <Grid ColumnDefinitions="Auto,*">
+                <Button Style="{StaticResource ButtonBack}"
+                        Clicked="OnBackClicked" />
+                <Label x:Name="HeaderLabel"
+                       Grid.Column="1"
+                       Text="{x:Static resx:Resources.More_Informations}"
+                       Style="{StaticResource LabelHeaderBar}" />
+            </Grid>
+        </Grid>
+
+        <!-- WebView -->
+        <WebView x:Name="BrowserWebView"
+                 Grid.Row="1" />
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator"
+                           Grid.Row="1"
+                           IsRunning="True"
+                           IsVisible="True"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Color="{StaticResource Primary}" />
+
+        <!-- Footer with Back and Open in Browser buttons -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="15"
+              Padding="30,15,30,30">
+            <Button Grid.Column="0"
+                    Text="{x:Static resx:Resources.General_Button_Back}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Clicked="OnBackClicked" />
+            <Button x:Name="OpenExternalButton"
+                    Grid.Column="1"
+                    Text="{x:Static resx:Resources.Browser_OpenExternal}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnOpenExternalClicked" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

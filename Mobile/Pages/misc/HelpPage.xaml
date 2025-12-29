@@ -36,6 +36,20 @@
                            Padding="20" />
                 </Border>
 
+                <Border x:Name="TimezoneCard" Style="{StaticResource Card}" IsVisible="False">
+                    <VerticalStackLayout Padding="20" Spacing="10">
+                        <Label x:Name="TimezoneLabel"
+                               Style="{StaticResource LabelInfo}" />
+                        <Label Text="{x:Static resx:Resources.Timezone_MoreInfo}"
+                               Style="{StaticResource LabelHelpLink}"
+                               HorizontalOptions="End">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTimezoneInfoTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </VerticalStackLayout>
+                </Border>
+
             </VerticalStackLayout>
         </ScrollView>
 
