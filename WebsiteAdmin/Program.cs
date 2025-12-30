@@ -25,6 +25,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
+// HttpClient
+builder.Services.AddHttpClient();
+
 // Application Services
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<SupportService>();

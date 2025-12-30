@@ -11,7 +11,7 @@ namespace Common;
 public static class DbContextInit
 {
 	#region Constants
-	private const string MESSAGE_TEXTS_PATH = "Common.Resources.Message-Texts";
+	private const string MESSAGE_TEXTS_PATH = "Common.Resources.Message_Texts";
 	private const string DEFAULT_LANGUAGE = "en";
 	#endregion
 

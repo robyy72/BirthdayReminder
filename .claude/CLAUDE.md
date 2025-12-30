@@ -35,6 +35,13 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 
 ---
 
+## Communication Style
+
+- **No suggestions** - Do not offer unsolicited suggestions or next steps
+- Just do what is asked, report results briefly
+
+---
+
 **Key Rules:**
 - Allman style for braces
 - Namespace = Project name (no folder-based namespaces)
