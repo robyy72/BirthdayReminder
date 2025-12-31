@@ -2,40 +2,28 @@ namespace Mobile;
 
 public partial class StartPage_2 : ContentPage
 {
-	#region Fields
-	private List<TimeZoneInfo> _timezones = [];
-	private const string DEVICE_TIMEZONE_PREFIX = "[Device] ";
-	#endregion
-
 	#region Constructor
 	public StartPage_2()
 	{
 		InitializeComponent();
-		LoadTimezones();
-		LoadAccount();
+		LoadSettings();
 	}
 	#endregion
 
 	#region Private Methods
-	private void LoadTimezones()
+	private void LoadSettings()
 	{
-		_timezones = TimeZoneInfo.GetSystemTimeZones().ToList();
-
-		// Add device timezone at top with prefix
-		var deviceTz = TimeZoneInfo.Local;
-		var items = new List<string>
+		// Language
+		switch (App.Account.Locale)
 		{
-			DEVICE_TIMEZONE_PREFIX + deviceTz.DisplayName
-		};
+			case "de":
+				RadioLanguageDe.IsChecked = true;
+				break;
+			default:
+				RadioLanguageEn.IsChecked = true;
+				break;
+		}
 
-		// Add all other timezones
-		items.AddRange(_timezones.Select(tz => tz.DisplayName));
-
-		TimezonePicker.ItemsSource = items;
-	}
-
-	private void LoadAccount()
-	{
 		// Theme
 		switch (App.Account.Theme)
 		{
@@ -51,50 +39,41 @@ public partial class StartPage_2 : ContentPage
 		}
 
 		// Timezone
-		if (string.IsNullOrEmpty(App.Account.TimeZoneId))
-		{
-			// Default to device timezone
-			TimezonePicker.SelectedIndex = 0;
-		}
-		else
-		{
-			// Find matching timezone
-			var index = _timezones.FindIndex(tz => tz.Id == App.Account.TimeZoneId);
-			if (index >= 0)
-			{
-				TimezonePicker.SelectedIndex = index + 1; // +1 because of device timezone at top
-			}
-			else
-			{
-				TimezonePicker.SelectedIndex = 0;
-			}
-		}
+		TimezonePicker.ItemsSource = TimezoneService.GetDisplayNames();
+		TimezonePicker.SelectedIndex = TimezoneService.GetIndex(App.Account.TimeZoneId);
 	}
 
 	private void SaveSettings()
 	{
+		// Save language
+		switch (RadioLanguageEn.IsChecked)
+		{
+			case true:
+				App.Account.Locale = "en";
+				break;
+			default:
+				App.Account.Locale = "de";
+				break;
+		}
+
 		// Save theme
-		if (RadioThemeLight.IsChecked)
-			App.Account.Theme = "Light";
-		else if (RadioThemeDark.IsChecked)
-			App.Account.Theme = "Dark";
-		else
-			App.Account.Theme = "System";
+		switch (true)
+		{
+			case true when RadioThemeLight.IsChecked:
+				App.Account.Theme = "Light";
+				break;
+			case true when RadioThemeDark.IsChecked:
+				App.Account.Theme = "Dark";
+				break;
+			default:
+				App.Account.Theme = "System";
+				break;
+		}
 
 		// Save timezone
-		if (TimezonePicker.SelectedIndex == 0)
-		{
-			// Device timezone
-			App.Account.TimeZoneId = TimeZoneInfo.Local.Id;
-		}
-		else if (TimezonePicker.SelectedIndex > 0)
-		{
-			App.Account.TimeZoneId = _timezones[TimezonePicker.SelectedIndex - 1].Id;
-		}
+		App.Account.TimeZoneId = TimezoneService.GetIdByIndex(TimezonePicker.SelectedIndex);
 
 		AccountService.Save();
-
-		// Apply theme immediately
 		DeviceService.ApplyTheme(App.Account.Theme);
 	}
 	#endregion

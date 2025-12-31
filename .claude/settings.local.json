@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Edit(.claude/CLAUDE.md)",
-      "Edit(.claude/settings.local.json)",
+      "Edit",
+      "Write",
       "WebSearch",
       "Bash(git add:*)",
       "Bash(git commit:*)",

@@ -1134,4 +1134,116 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="ContextMenu_Subscribe" xml:space="preserve">
     <value>Abo abschließen</value>
   </data>
+  <!-- Timezone Picker Entries -->
+  <data name="Tz_Device" xml:space="preserve">
+    <value>Geräte-Zeitzone</value>
+  </data>
+  <data name="Tz_Pacific_Midway" xml:space="preserve">
+    <value>Midway, Samoa</value>
+  </data>
+  <data name="Tz_Pacific_Honolulu" xml:space="preserve">
+    <value>Honolulu, Hawaii</value>
+  </data>
+  <data name="Tz_America_Anchorage" xml:space="preserve">
+    <value>Anchorage, Alaska</value>
+  </data>
+  <data name="Tz_America_LosAngeles" xml:space="preserve">
+    <value>Los Angeles, San Francisco</value>
+  </data>
+  <data name="Tz_America_Denver" xml:space="preserve">
+    <value>Denver, Phoenix</value>
+  </data>
+  <data name="Tz_America_Chicago" xml:space="preserve">
+    <value>Chicago, Houston</value>
+  </data>
+  <data name="Tz_America_NewYork" xml:space="preserve">
+    <value>New York, Washington</value>
+  </data>
+  <data name="Tz_America_Halifax" xml:space="preserve">
+    <value>Halifax, Atlantik</value>
+  </data>
+  <data name="Tz_America_SaoPaulo" xml:space="preserve">
+    <value>São Paulo, Rio</value>
+  </data>
+  <data name="Tz_America_BuenosAires" xml:space="preserve">
+    <value>Buenos Aires</value>
+  </data>
+  <data name="Tz_Atlantic_Azores" xml:space="preserve">
+    <value>Azoren</value>
+  </data>
+  <data name="Tz_Europe_London" xml:space="preserve">
+    <value>London, Dublin, Lissabon</value>
+  </data>
+  <data name="Tz_Europe_Berlin" xml:space="preserve">
+    <value>Berlin, München, Frankfurt</value>
+  </data>
+  <data name="Tz_Europe_Paris" xml:space="preserve">
+    <value>Paris, Brüssel</value>
+  </data>
+  <data name="Tz_Europe_Rome" xml:space="preserve">
+    <value>Rom, Mailand</value>
+  </data>
+  <data name="Tz_Europe_Madrid" xml:space="preserve">
+    <value>Madrid, Barcelona</value>
+  </data>
+  <data name="Tz_Europe_Amsterdam" xml:space="preserve">
+    <value>Amsterdam, Rotterdam</value>
+  </data>
+  <data name="Tz_Europe_Vienna" xml:space="preserve">
+    <value>Wien, Salzburg</value>
+  </data>
+  <data name="Tz_Europe_Zurich" xml:space="preserve">
+    <value>Zürich, Genf</value>
+  </data>
+  <data name="Tz_Europe_Warsaw" xml:space="preserve">
+    <value>Warschau, Krakau</value>
+  </data>
+  <data name="Tz_Europe_Athens" xml:space="preserve">
+    <value>Athen, Bukarest</value>
+  </data>
+  <data name="Tz_Europe_Helsinki" xml:space="preserve">
+    <value>Helsinki, Tallinn</value>
+  </data>
+  <data name="Tz_Europe_Istanbul" xml:space="preserve">
+    <value>Istanbul, Ankara</value>
+  </data>
+  <data name="Tz_Europe_Moscow" xml:space="preserve">
+    <value>Moskau, St. Petersburg</value>
+  </data>
+  <data name="Tz_Asia_Dubai" xml:space="preserve">
+    <value>Dubai, Abu Dhabi</value>
+  </data>
+  <data name="Tz_Asia_Karachi" xml:space="preserve">
+    <value>Karachi, Islamabad</value>
+  </data>
+  <data name="Tz_Asia_Kolkata" xml:space="preserve">
+    <value>Mumbai, Delhi, Kalkutta</value>
+  </data>
+  <data name="Tz_Asia_Dhaka" xml:space="preserve">
+    <value>Dhaka, Bangladesch</value>
+  </data>
+  <data name="Tz_Asia_Bangkok" xml:space="preserve">
+    <value>Bangkok, Hanoi</value>
+  </data>
+  <data name="Tz_Asia_Singapore" xml:space="preserve">
+    <value>Singapur, Kuala Lumpur</value>
+  </data>
+  <data name="Tz_Asia_HongKong" xml:space="preserve">
+    <value>Hongkong, Macau</value>
+  </data>
+  <data name="Tz_Asia_Shanghai" xml:space="preserve">
+    <value>Shanghai, Peking</value>
+  </data>
+  <data name="Tz_Asia_Tokyo" xml:space="preserve">
+    <value>Tokio, Osaka</value>
+  </data>
+  <data name="Tz_Asia_Seoul" xml:space="preserve">
+    <value>Seoul, Busan</value>
+  </data>
+  <data name="Tz_Australia_Sydney" xml:space="preserve">
+    <value>Sydney, Melbourne</value>
+  </data>
+  <data name="Tz_Pacific_Auckland" xml:space="preserve">
+    <value>Auckland, Wellington</value>
+  </data>
 </root>

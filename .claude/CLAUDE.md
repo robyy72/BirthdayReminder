@@ -92,7 +92,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 ## Build
 
 - **Do NOT run `dotnet build` unless explicitly requested** - it breaks Hot Reload!
-- **Clean command:** `pwsh -File clean.ps1` – deletes all bin/obj folders and runs dotnet clean
+- **Clean command:** `pwsh -File .claude/clean.ps1` – deletes all bin/obj folders and runs dotnet clean
 
 ---
 

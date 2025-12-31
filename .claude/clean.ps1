@@ -3,8 +3,9 @@
 
 Write-Host "Cleaning BirthdayReminder solution..." -ForegroundColor Cyan
 
-# Get script directory
-$rootDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+# Get root directory (parent of .claude folder)
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$rootDir = Split-Path -Parent $scriptDir
 
 # Delete bin and obj folders
 Write-Host "Deleting bin and obj folders..." -ForegroundColor Yellow

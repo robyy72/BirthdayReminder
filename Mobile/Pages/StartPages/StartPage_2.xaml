@@ -23,6 +23,38 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
+                <!-- Card: Language -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.Settings_Language}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="10"
+                                             RadioButtonGroup.GroupName="LanguageGroup">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Deutsch"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioLanguageDe"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}"
+                                             IsChecked="True" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="English"
+                                       Style="{StaticResource LabelInfo}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioLanguageEn"
+                                             Grid.Column="1"
+                                             Style="{StaticResource RadioStandard}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Card: Theme -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
