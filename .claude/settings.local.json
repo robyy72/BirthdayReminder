@@ -49,7 +49,11 @@
       "Bash(dotnet new:*)",
       "Bash(dotnet sln:*)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Resources\" -Directory)",
-      "Bash(dotnet restore:*)"
+      "Bash(dotnet restore:*)",
+      "WebFetch(domain:devblogs.microsoft.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(Select-String -Pattern \"\\(error|warning|Build succeeded|Build FAILED\\)\")"
     ],
     "deny": []
   }
