@@ -63,9 +63,7 @@ public partial class App : Application
 		var mainPage = new MainPage();
 		var navigationPage = new NavigationPage(mainPage)
 		{
-			BarBackgroundColor = Current?.RequestedTheme == AppTheme.Dark
-				? (Color)Current.Resources["Gray900"]
-				: (Color)Current.Resources["Primary"],
+			BarBackgroundColor = ResourceHelper.GetThemedColor("Primary", "Gray900"),
 			BarTextColor = Colors.White
 		};
 
