@@ -39,6 +39,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 
 - **No suggestions** - Do not offer unsolicited suggestions or next steps
 - Just do what is asked, report results briefly
+- **User changes have priority** - If user mentions they already made changes (e.g., "I changed line X"), check git diff or read the file FIRST to see what they wrote before implementing anything. Their naming, structure, and decisions take precedence.
 
 ---
 

@@ -45,21 +45,7 @@ public partial class App : Application
     #region Protected Methods
     protected override Window CreateWindow(IActivationState? activationState)
 	{
-		Page page;
-
-		if (ErrorService.IsBrokenVersion())
-		{
-			page = new BrokenVersionPage();
-		}
-		else if (AccountService.IsFirstRun())
-		{
-			page = CreateMainNavigationPage();
-		}
-		else
-		{
-			page = new StartPage_1();
-		}
-
+		Page page = GetStartPage();
 		Window window = new Window(page);
 		return window;
 	}
@@ -333,6 +319,21 @@ public partial class App : Application
 	private async void SyncErrorsInBackground()
 	{
 		await Task.Run(async () => await ErrorService.SyncPendingAsync());
+	}
+
+	/// <summary>
+	/// Aim: Determine the start page based on app state.
+	/// Return (Page): StartPage_1 for new users, BrokenVersionPage if crashed, MainPage otherwise.
+	/// </summary>
+	private Page GetStartPage()
+	{
+		if (!AccountService.IsFirstRun())
+			return new StartPage_1();
+
+		if (ErrorService.IsBrokenVersion())
+			return new BrokenVersionPage();
+
+		return CreateMainNavigationPage();
 	}
     #endregion
 }
