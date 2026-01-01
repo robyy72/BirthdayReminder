@@ -1246,4 +1246,23 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
     <value>Auckland, Wellington</value>
   </data>
+  <!-- Timezone Regions -->
+  <data name="Tz_Region_Europe" xml:space="preserve">
+    <value>Europa</value>
+  </data>
+  <data name="Tz_Region_America" xml:space="preserve">
+    <value>Amerika</value>
+  </data>
+  <data name="Tz_Region_Asia" xml:space="preserve">
+    <value>Asien</value>
+  </data>
+  <data name="Tz_Region_Pacific" xml:space="preserve">
+    <value>Pazifik</value>
+  </data>
+  <data name="Tz_Region_Atlantic" xml:space="preserve">
+    <value>Atlantik</value>
+  </data>
+  <data name="Tz_Region_Australia" xml:space="preserve">
+    <value>Australien</value>
+  </data>
 </root>

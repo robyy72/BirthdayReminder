@@ -1246,4 +1246,23 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
     <value>Auckland, Wellington</value>
   </data>
+  <!-- Timezone Regions -->
+  <data name="Tz_Region_Europe" xml:space="preserve">
+    <value>Europe</value>
+  </data>
+  <data name="Tz_Region_America" xml:space="preserve">
+    <value>America</value>
+  </data>
+  <data name="Tz_Region_Asia" xml:space="preserve">
+    <value>Asia</value>
+  </data>
+  <data name="Tz_Region_Pacific" xml:space="preserve">
+    <value>Pacific</value>
+  </data>
+  <data name="Tz_Region_Atlantic" xml:space="preserve">
+    <value>Atlantic</value>
+  </data>
+  <data name="Tz_Region_Australia" xml:space="preserve">
+    <value>Australia</value>
+  </data>
 </root>

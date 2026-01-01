@@ -40,7 +40,7 @@
                                 <RadioButton x:Name="RadioLanguageDe"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
-                                             IsChecked="True" />
+                                             CheckedChanged="OnLanguageChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
@@ -49,7 +49,8 @@
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioLanguageEn"
                                              Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnLanguageChanged" />
                             </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -66,22 +67,13 @@
                                              RadioButtonGroup.GroupName="ThemeGroup">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_Theme_System}"
-                                       Style="{StaticResource LabelInfo}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioThemeSystem"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}"
-                                             IsChecked="True" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Theme_Light}"
                                        Style="{StaticResource LabelInfo}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioThemeLight"
                                              Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnThemeChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
@@ -90,7 +82,8 @@
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioThemeDark"
                                              Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnThemeChanged" />
                             </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -107,7 +100,7 @@
                             <Picker x:Name="TimezonePicker"
                                     Title="{x:Static resx:Resources.Settings_Timezone_Select}" />
                             <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
-                                   Style="{StaticResource LabelSmall}"
+                                   Style="{StaticResource LabelInfo}"
                                    TextColor="{StaticResource Gray500}" />
                             <Label Text="{x:Static resx:Resources.More_Informations}"
                                    Style="{StaticResource LabelHelpLink}"
