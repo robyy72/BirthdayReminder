@@ -194,8 +194,7 @@ public static class DeviceService
 	/// </summary>
 	public static bool IsDarkTheme()
 	{
-		AppTheme theme = GetSystemTheme();
-		bool isDark = theme == AppTheme.Dark;
+		bool isDark = ResourceHelper.IsDarkTheme;
 		return isDark;
 	}
 

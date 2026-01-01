@@ -104,9 +104,7 @@ public partial class ContextMenu : ContentView
                 Text = item.Text,
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
-                TextColor = Application.Current?.RequestedTheme == AppTheme.Dark
-                    ? Colors.White
-                    : Colors.Black,
+                TextColor = ResourceHelper.IsDarkTheme ? Colors.White : Colors.Black,
                 VerticalOptions = LayoutOptions.Center
             };
 

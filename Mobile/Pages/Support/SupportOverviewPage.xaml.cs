@@ -74,7 +74,7 @@ public partial class SupportOverviewPage : ContentPage
 			var emptyLabel = new Label
 			{
 				Text = MobileLanguages.Resources.EmptyView_NoBirthdays,
-				Style = (Style)Application.Current!.Resources["LabelInfo"],
+				Style = ResourceHelper.GetStyle("LabelInfo"),
 				HorizontalOptions = LayoutOptions.Center,
 				Margin = new Thickness(0, 20, 0, 0)
 			};
@@ -96,7 +96,7 @@ public partial class SupportOverviewPage : ContentPage
 
 		var card = new Border
 		{
-			Style = (Style)Application.Current!.Resources["Card"]
+			Style = ResourceHelper.GetStyle("Card")
 		};
 
 		var stackLayout = new VerticalStackLayout { Spacing = 0 };
@@ -104,12 +104,12 @@ public partial class SupportOverviewPage : ContentPage
 		// Header
 		var headerBorder = new Border
 		{
-			Style = (Style)Application.Current.Resources["CardHeader"]
+			Style = ResourceHelper.GetStyle("CardHeader")
 		};
 		var headerLabel = new Label
 		{
 			Text = headerText,
-			Style = (Style)Application.Current.Resources["LabelCardHeader"]
+			Style = ResourceHelper.GetStyle("LabelCardHeader")
 		};
 		headerBorder.Content = headerLabel;
 
@@ -122,7 +122,7 @@ public partial class SupportOverviewPage : ContentPage
 		var textLabel = new Label
 		{
 			Text = entry.Text,
-			Style = (Style)Application.Current.Resources["LabelInfo"],
+			Style = ResourceHelper.GetStyle("LabelInfo"),
 			MaxLines = 3,
 			LineBreakMode = LineBreakMode.TailTruncation
 		};

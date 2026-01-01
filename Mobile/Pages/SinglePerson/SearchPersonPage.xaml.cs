@@ -70,7 +70,7 @@ public partial class SearchPersonPage : ContentPage
 
 		var tile = new Border
 		{
-			Style = (Style)Application.Current!.Resources["Tile"]
+			Style = ResourceHelper.GetStyle("Tile")
 		};
 
 		var grid = new Grid
@@ -86,14 +86,14 @@ public partial class SearchPersonPage : ContentPage
 		var nameLabel = new Label
 		{
 			Text = displayName,
-			Style = (Style)Application.Current.Resources["LabelInfo"],
+			Style = ResourceHelper.GetStyle("LabelInfo"),
 			VerticalOptions = LayoutOptions.Center
 		};
 
 		var dateLabel = new Label
 		{
 			Text = dateDisplay,
-			Style = (Style)Application.Current.Resources["LabelDescription"],
+			Style = ResourceHelper.GetStyle("LabelDescription"),
 			VerticalOptions = LayoutOptions.Center
 		};
 		Grid.SetColumn(dateLabel, 1);
@@ -147,8 +147,7 @@ public partial class SearchPersonPage : ContentPage
 	{
 		if (sender is Entry entry && entry.Parent?.Parent is Border outerBorder)
 		{
-			var primary = (Color)Application.Current!.Resources["Primary"];
-			outerBorder.Stroke = primary;
+			outerBorder.Stroke = ResourceHelper.GetColor("Primary");
 			outerBorder.StrokeThickness = 2;
 		}
 	}
@@ -157,10 +156,7 @@ public partial class SearchPersonPage : ContentPage
 	{
 		if (sender is Entry entry && entry.Parent?.Parent is Border outerBorder)
 		{
-			var strokeColor = Application.Current!.RequestedTheme == AppTheme.Dark
-				? (Color)Application.Current.Resources["Gray700"]
-				: (Color)Application.Current.Resources["Gray300"];
-			outerBorder.Stroke = strokeColor;
+			outerBorder.Stroke = ResourceHelper.GetThemedColor("Gray300", "Gray700");
 			outerBorder.StrokeThickness = 1;
 		}
 	}
