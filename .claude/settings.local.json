@@ -48,7 +48,8 @@
       "Bash(dotnet run:*)",
       "Bash(dotnet new:*)",
       "Bash(dotnet sln:*)",
-      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Resources\" -Directory)"
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Resources\" -Directory)",
+      "Bash(dotnet restore:*)"
     ],
     "deny": []
   }
