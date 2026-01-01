@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             x:Class="Mobile.BrokenVersionPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.BrokenVersion_Title}">
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center"
+                             Padding="20"
+                             Spacing="20">
+
+            <Label Text="{x:Static resx:Resources.BrokenVersion_Header}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="{x:Static resx:Resources.BrokenVersion_Info}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="Gray" />
+
+            <Button Text="{x:Static resx:Resources.BrokenVersion_CheckUpdate}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnCheckUpdateClicked" />
+
+            <Button Text="{x:Static resx:Resources.BrokenVersion_TryAnyway}"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray"
+                    Clicked="OnTryAnywayClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

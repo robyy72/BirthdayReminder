@@ -1265,4 +1265,20 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Tz_Region_Australia" xml:space="preserve">
     <value>Australia</value>
   </data>
+  <!-- Broken Version Page -->
+  <data name="BrokenVersion_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="BrokenVersion_Header" xml:space="preserve">
+    <value>This version doesn't work on your device.</value>
+  </data>
+  <data name="BrokenVersion_Info" xml:space="preserve">
+    <value>We have been automatically notified and are working on a solution.</value>
+  </data>
+  <data name="BrokenVersion_CheckUpdate" xml:space="preserve">
+    <value>Check for Update</value>
+  </data>
+  <data name="BrokenVersion_TryAnyway" xml:space="preserve">
+    <value>Try Anyway</value>
+  </data>
 </root>

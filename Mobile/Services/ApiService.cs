@@ -46,7 +46,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, endpoint);
+			ErrorService.Handle(ex);
 			return default;
 		}
 	}
@@ -71,7 +71,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, endpoint);
+			ErrorService.Handle(ex);
 			return default;
 		}
 	}
@@ -96,7 +96,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, endpoint);
+			ErrorService.Handle(ex);
 			return default;
 		}
 	}
@@ -120,7 +120,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, endpoint);
+			ErrorService.Handle(ex);
 			return false;
 		}
 	}
@@ -161,7 +161,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, "heartbeat");
+			ErrorService.Handle(ex);
 			return false;
 		}
 	}
@@ -202,7 +202,7 @@ public class ApiService
 		}
 		catch (Exception ex)
 		{
-			ErrorService.LogError(ex, "support");
+			ErrorService.Handle(ex);
 			return -1;
 		}
 	}

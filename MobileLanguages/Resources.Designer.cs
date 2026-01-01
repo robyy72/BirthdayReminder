@@ -2802,5 +2802,50 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("ContextMenu_Subscribe", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   BrokenVersion_Title
+        /// </summary>
+        public static string BrokenVersion_Title {
+            get {
+                return ResourceManager.GetString("BrokenVersion_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   BrokenVersion_Header
+        /// </summary>
+        public static string BrokenVersion_Header {
+            get {
+                return ResourceManager.GetString("BrokenVersion_Header", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   BrokenVersion_Info
+        /// </summary>
+        public static string BrokenVersion_Info {
+            get {
+                return ResourceManager.GetString("BrokenVersion_Info", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   BrokenVersion_CheckUpdate
+        /// </summary>
+        public static string BrokenVersion_CheckUpdate {
+            get {
+                return ResourceManager.GetString("BrokenVersion_CheckUpdate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   BrokenVersion_TryAnyway
+        /// </summary>
+        public static string BrokenVersion_TryAnyway {
+            get {
+                return ResourceManager.GetString("BrokenVersion_TryAnyway", resourceCulture);
+            }
+        }
     }
 }

@@ -42,16 +42,19 @@ public static class MobileConstants
 	#endregion
 
 	#region Errors
-	public const int MAX_ERRORS_INTO_PREFS = 10;
+	public const string ERROR_DB_FILENAME = "errors.db";
+	public const int ERROR_RETENTION_DAYS = 30;
 	#endregion
 
 	#region Preferences Keys
 	public const string PREFS_ACCOUNT = "Account";
 	public const string PREFS_ACCOUNT_INITIALIZED = "AccountInitialized";
 	public const string PREFS_ACCOUNT_FIRST_RUN = "AccountFirstRun";
-	public const string PREFS_ERRORS = "Errors";
 	public const string PREFS_PERSONS = "Persons";
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	public const string PREFS_SUPPORT = "Support";
+	public const string PREFS_BROKEN_VERSION = "BrokenVersion";
+	public const string PREFS_BROKEN_DEVICE = "BrokenDevice";
+	public const string PREFS_BROKEN_TIMESTAMP = "BrokenTimestamp";
 	#endregion
 }

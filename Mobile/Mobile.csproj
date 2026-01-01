@@ -23,7 +23,7 @@
 		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>60</ApplicationVersion>
+		<ApplicationVersion>61</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -58,6 +58,9 @@
 		<PackageReference Include="Xamarin.Android.Google.BillingClient" Version="7.1.1" Condition="'$(TargetFramework)' == 'net9.0-android'" />
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.1" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+		<PackageReference Include="Sentry.Maui" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -38,15 +38,20 @@ public partial class App : Application
 	public App()
 	{
 		InitializeComponent();
+		SetupGlobalExceptionHandlers();
 		Init();
 	}
 
-    #region Proctected Methods
+    #region Protected Methods
     protected override Window CreateWindow(IActivationState? activationState)
 	{
 		Page page;
 
-		if (AccountService.IsFirstRun())
+		if (ErrorService.IsBrokenVersion())
+		{
+			page = new BrokenVersionPage();
+		}
+		else if (AccountService.IsFirstRun())
 		{
 			page = CreateMainNavigationPage();
 		}
@@ -235,11 +240,13 @@ public partial class App : Application
     #endregion
 
     #region Private Methods
-    private void Init()
+    private async void Init()
 	{
         bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
         if (startAlwaysWithWelcome)
             PrefsHelper.RemoveAllKeys();
+
+		await ErrorDatabase.InitAsync();
 
         PersonService.Load();
 		AccountService.Load();
@@ -252,6 +259,8 @@ public partial class App : Application
 
         ApplyTheme();
 		SendHeartbeatIfNeeded();
+		SetupConnectivitySync();
+		SyncErrorsInBackground();
     }
 
 	private async void SendHeartbeatIfNeeded()
@@ -279,6 +288,51 @@ public partial class App : Application
     private void ApplyTheme()
 	{
 		DeviceService.ApplyTheme(Account.Theme);
+	}
+
+	private void SetupGlobalExceptionHandlers()
+	{
+		AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+		{
+			ErrorService.HandleFatal((Exception)e.ExceptionObject);
+		};
+
+		TaskScheduler.UnobservedTaskException += (s, e) =>
+		{
+			ErrorService.Handle(e.Exception);
+			e.SetObserved();
+		};
+
+#if ANDROID
+		Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
+		{
+			ErrorService.HandleFatal(e.Exception);
+			e.Handled = true;
+		};
+#endif
+
+#if IOS
+		ObjCRuntime.Runtime.MarshalManagedException += (s, e) =>
+		{
+			ErrorService.HandleFatal(e.Exception);
+		};
+#endif
+	}
+
+	private void SetupConnectivitySync()
+	{
+		Connectivity.Current.ConnectivityChanged += async (s, e) =>
+		{
+			if (e.NetworkAccess == NetworkAccess.Internet)
+			{
+				await ErrorService.SyncPendingAsync();
+			}
+		};
+	}
+
+	private async void SyncErrorsInBackground()
+	{
+		await Task.Run(async () => await ErrorService.SyncPendingAsync());
 	}
     #endregion
 }

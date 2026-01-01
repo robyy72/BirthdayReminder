@@ -1265,4 +1265,20 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Tz_Region_Australia" xml:space="preserve">
     <value>Australien</value>
   </data>
+  <!-- Broken Version Page -->
+  <data name="BrokenVersion_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="BrokenVersion_Header" xml:space="preserve">
+    <value>Diese Version läuft leider nicht auf deinem Gerät.</value>
+  </data>
+  <data name="BrokenVersion_Info" xml:space="preserve">
+    <value>Wir wurden automatisch informiert und arbeiten an einer Lösung.</value>
+  </data>
+  <data name="BrokenVersion_CheckUpdate" xml:space="preserve">
+    <value>Nach Update suchen</value>
+  </data>
+  <data name="BrokenVersion_TryAnyway" xml:space="preserve">
+    <value>Trotzdem versuchen</value>
+  </data>
 </root>
