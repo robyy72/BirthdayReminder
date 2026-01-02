@@ -417,8 +417,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# Local server files
+# Local server files (runner not in repo)
 runner/
-create-certificate.ps1
-dns-create.ps1
-dns-delete.ps1
