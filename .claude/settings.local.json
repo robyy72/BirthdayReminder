@@ -57,7 +57,8 @@
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\Mobile\\\\Pages\" -Filter \"*.xaml\")",
       "Bash(dir:*)",
       "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\.claude\\\\todo.md\" -Force)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(dotnet ef:*)"
     ],
     "deny": []
   }
