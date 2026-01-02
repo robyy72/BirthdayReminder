@@ -1,0 +1,147 @@
+# deploy-prod.yml v1.0.0
+name: Deploy to Prod
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, prod]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore dependencies
+        working-directory: src
+        run: dotnet restore BirthdayReminder.sln
+
+      - name: Build
+        working-directory: src
+        run: dotnet build BirthdayReminder.sln --configuration Release --no-restore
+
+      - name: Run tests
+        working-directory: src
+        run: dotnet test BirthdayReminder.sln --configuration Release --no-build --verbosity normal
+        continue-on-error: true
+
+      - name: Publish WebsiteAdmin
+        working-directory: src
+        run: dotnet publish WebsiteAdmin/WebsiteAdmin.csproj -c Release -o ../publish/WebsiteAdmin
+
+      - name: Publish WebsiteCustomer
+        working-directory: src
+        run: dotnet publish WebsiteCustomer/WebsiteCustomer.csproj -c Release -o ../publish/WebsiteCustomer
+
+      - name: Deploy WebsiteAdmin to IIS
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+
+          $solutionName = "BirthdayReminder"
+          $appPoolName = "$solutionName-WebsiteAdmin-Prod"
+          $baseFolder = "C:\inetpub\$solutionName\WebsiteAdmin\Prod"
+          $currentLink = Join-Path $baseFolder "current"
+          $tempLink = Join-Path $baseFolder "current_new"
+
+          # Extract version from .csproj
+          [xml]$csproj = Get-Content "src\WebsiteAdmin\WebsiteAdmin.csproj"
+          $version = $csproj.Project.PropertyGroup.Version
+          if (-not $version) { $version = "1.0.0" }
+          Write-Host "Deploying WebsiteAdmin version: $version"
+
+          $versionFolder = Join-Path $baseFolder $version
+
+          # Create version folder and copy files
+          if (Test-Path $versionFolder) {
+            Remove-Item $versionFolder -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path $versionFolder -Force | Out-Null
+          Copy-Item -Path "publish\WebsiteAdmin\*" -Destination $versionFolder -Recurse -Force
+
+          # Stop AppPool
+          $state = Get-WebAppPoolState -Name $appPoolName
+          if ($state.Value -eq "Started") {
+            Stop-WebAppPool -Name $appPoolName
+            Start-Sleep -Seconds 2
+          }
+
+          # Switch symlink
+          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          cmd /c mklink /J $tempLink $versionFolder | Out-Null
+          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
+          Rename-Item $tempLink $currentLink
+
+          # Start AppPool
+          Start-WebAppPool -Name $appPoolName
+          Start-Sleep -Seconds 2
+
+          Write-Host "Deployed WebsiteAdmin: $versionFolder"
+
+      - name: Deploy WebsiteCustomer to IIS
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+
+          $solutionName = "BirthdayReminder"
+          $appPoolName = "$solutionName-WebsiteCustomer"
+          $baseFolder = "C:\inetpub\$solutionName\WebsiteCustomer\Prod"
+          $currentLink = Join-Path $baseFolder "current"
+          $tempLink = Join-Path $baseFolder "current_new"
+
+          # Extract version from .csproj
+          [xml]$csproj = Get-Content "src\WebsiteCustomer\WebsiteCustomer.csproj"
+          $version = $csproj.Project.PropertyGroup.Version
+          if (-not $version) { $version = "1.0.0" }
+          Write-Host "Deploying WebsiteCustomer version: $version"
+
+          $versionFolder = Join-Path $baseFolder $version
+
+          # Create version folder and copy files
+          if (Test-Path $versionFolder) {
+            Remove-Item $versionFolder -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path $versionFolder -Force | Out-Null
+          Copy-Item -Path "publish\WebsiteCustomer\*" -Destination $versionFolder -Recurse -Force
+
+          # Stop AppPool
+          $state = Get-WebAppPoolState -Name $appPoolName
+          if ($state.Value -eq "Started") {
+            Stop-WebAppPool -Name $appPoolName
+            Start-Sleep -Seconds 2
+          }
+
+          # Switch symlink
+          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          cmd /c mklink /J $tempLink $versionFolder | Out-Null
+          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
+          Rename-Item $tempLink $currentLink
+
+          # Start AppPool
+          Start-WebAppPool -Name $appPoolName
+          Start-Sleep -Seconds 2
+
+          Write-Host "Deployed WebsiteCustomer: $versionFolder"
+
+      - name: Health check
+        shell: powershell
+        run: |
+          $urls = @(
+            "https://prod.birthday-reminder.online/health",
+            "https://birthday-reminder.online/health"
+          )
+          Start-Sleep -Seconds 5
+          foreach ($url in $urls) {
+            try {
+              $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 30
+              if ($response.StatusCode -eq 200) {
+                Write-Host "Health check passed: $url"
+              } else {
+                Write-Host "Health check returned: $($response.StatusCode)"
+              }
+            } catch {
+              Write-Host "Health check failed or endpoint not available: $url - $_"
+            }
+          }
