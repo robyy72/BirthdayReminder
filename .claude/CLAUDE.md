@@ -64,7 +64,7 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 - Use `git pull` (merge), NOT `git pull --rebase` to preserve history
 - **Commit only, don't push too often** - user will request push when needed
 - **Do NOT suggest "push" after commits** - user will push when ready
-- **IMPORTANT:** On every commit, increment `ApplicationVersion` in `Mobile/Mobile.csproj` by 1
+- **IMPORTANT:** On every commit, increment `ApplicationVersion` in `src/Mobile/Mobile.csproj` by 1
 - **IMPORTANT:** Run `dotnet build` before committing to ensure the build succeeds
 
 ---
@@ -112,60 +112,27 @@ If a command is in `allow`, execute it directly without asking for permission.
 
 ```
 BirthdayReminder/
-├── BirthdayReminder.sln
-├── Common/                         # Shared class library
-│   ├── Core/
-│   │   └── CommonConstants.cs      # DOMAIN, API_BASE_URL
-│   └── Models/
-│       └── ErrorModel.cs           # Error logging model
-├── Mobile/                         # MAUI App (Android & iOS only)
-│   ├── Core/
-│   │   ├── MobileConstants.cs
-│   │   └── MobileEnums.cs
-│   ├── Helpers/
-│   │   └── PrefsHelper.cs
-│   ├── Pages/
-│   │   ├── MainPage.xaml(.cs)
-│   │   ├── AllBirthdaysPage.xaml(.cs)
-│   │   ├── CreateBirthdayPage.xaml(.cs)
-│   │   ├── EditBirthdayPage.xaml(.cs)
-│   │   ├── DetailBirthdayPage.xaml(.cs)
-│   │   ├── DeleteBirthdayPage.xaml(.cs)
-│   │   ├── SearchPersonPage.xaml(.cs)
-│   │   ├── AccountPage.xaml(.cs)
-│   │   ├── PrivacyPage.xaml(.cs)
-│   │   ├── HelpPage.xaml(.cs)
-│   │   ├── SyncContactsToPersonsPage.xaml(.cs)
-│   │   ├── SyncPersonsToContactsPage.xaml(.cs)
-│   │   └── StartPage_1..9.xaml(.cs)    # Wizard flow
-│   ├── Services/
-│   │   ├── AccountService.cs       # Account/Settings management
-│   │   ├── ApiService.cs           # HTTP client with <T> support
-│   │   ├── ContactsService.cs      # Phone contacts (partial, platform code)
-│   │   ├── DeepLinkService.cs      # URL scheme handling
-│   │   ├── DeviceService.cs        # Device permissions, theme
-│   │   ├── ErrorService.cs         # Online: Sentry, Offline: prefs
-│   │   ├── MobileService.cs        # Network access detection
-│   │   ├── NavigationService.cs    # NavigationPage navigation
-│   │   ├── NotificationService.cs  # Local notifications
-│   │   └── PersonService.cs        # Person CRUD operations
-│   ├── Platforms/
-│   │   ├── Android/                # Android-specific (ContactsService, etc.)
-│   │   └── iOS/                    # iOS-specific (ContactsService, etc.)
-│   ├── Resources/
-│   ├── App.xaml / App.xaml.cs
-│   └── MauiProgram.cs
-├── MobileLanguages/                # Resource files (resx) for localization
-│   ├── Resources.resx              # English (default)
-│   ├── Resources.de.resx           # German
-│   └── Resources.Designer.cs
-├── WebsiteAdmin/                   # ASP.NET Core - admin.birthday-reminder.online
-│   ├── Core/
-│   │   └── WebsiteAdminConstants.cs
-│   ├── Services/
-│   │   └── ApiService.cs
-│   └── Pages/
-└── WebsiteCustomer/                # ASP.NET Core - birthday-reminder.online (landing page)
-    └── Core/
-        └── WebsiteCustomerConstants.cs
+├── .claude/                        # Claude Code configuration
+├── docs/                           # Documentation
+│   └── infrastructure.md           # URLs, subdomains, environments
+├── src/                            # Source code
+│   ├── BirthdayReminder.sln
+│   ├── ApiMobile/                  # ASP.NET Core API for mobile app
+│   ├── Common/                     # Shared class library
+│   │   ├── Core/
+│   │   │   └── CommonConstants.cs  # DOMAIN, API_BASE_URL
+│   │   ├── Database/               # EF Core, migrations
+│   │   └── DTOs/
+│   ├── Mobile/                     # MAUI App (Android & iOS only)
+│   │   ├── Core/
+│   │   ├── Helper/
+│   │   ├── Models/
+│   │   ├── Pages/
+│   │   ├── Platforms/
+│   │   ├── Services/
+│   │   └── Resources/
+│   ├── MobileLanguages/            # Resource files (resx) for localization
+│   ├── WebsiteAdmin/               # ASP.NET Core - admin.birthday-reminder.online
+│   └── WebsiteCustomer/            # ASP.NET Core - birthday-reminder.online
+└── README.md
 ```

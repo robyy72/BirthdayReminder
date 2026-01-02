@@ -30,6 +30,10 @@ jobs:
         working-directory: src/WebsiteCustomer
         run: dotnet build WebsiteCustomer.csproj --configuration Release --no-restore
 
+      - name: Run EF database migrations
+        working-directory: src
+        run: dotnet ef database update --project Common/Common.csproj --startup-project WebsiteAdmin/WebsiteAdmin.csproj
+
       - name: Publish WebsiteAdmin
         working-directory: src/WebsiteAdmin
         run: dotnet publish WebsiteAdmin.csproj -c Release -o ../../publish/WebsiteAdmin
