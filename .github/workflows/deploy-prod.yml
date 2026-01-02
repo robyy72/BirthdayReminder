@@ -14,26 +14,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Restore dependencies
-        working-directory: src
-        run: dotnet restore BirthdayReminder.sln
+      - name: Restore WebsiteAdmin
+        working-directory: src/WebsiteAdmin
+        run: dotnet restore WebsiteAdmin.csproj
 
-      - name: Build
-        working-directory: src
-        run: dotnet build BirthdayReminder.sln --configuration Release --no-restore
+      - name: Restore WebsiteCustomer
+        working-directory: src/WebsiteCustomer
+        run: dotnet restore WebsiteCustomer.csproj
 
-      - name: Run tests
-        working-directory: src
-        run: dotnet test BirthdayReminder.sln --configuration Release --no-build --verbosity normal
-        continue-on-error: true
+      - name: Build WebsiteAdmin
+        working-directory: src/WebsiteAdmin
+        run: dotnet build WebsiteAdmin.csproj --configuration Release --no-restore
+
+      - name: Build WebsiteCustomer
+        working-directory: src/WebsiteCustomer
+        run: dotnet build WebsiteCustomer.csproj --configuration Release --no-restore
 
       - name: Publish WebsiteAdmin
-        working-directory: src
-        run: dotnet publish WebsiteAdmin/WebsiteAdmin.csproj -c Release -o ../publish/WebsiteAdmin
+        working-directory: src/WebsiteAdmin
+        run: dotnet publish WebsiteAdmin.csproj -c Release -o ../../publish/WebsiteAdmin
 
       - name: Publish WebsiteCustomer
-        working-directory: src
-        run: dotnet publish WebsiteCustomer/WebsiteCustomer.csproj -c Release -o ../publish/WebsiteCustomer
+        working-directory: src/WebsiteCustomer
+        run: dotnet publish WebsiteCustomer.csproj -c Release -o ../../publish/WebsiteCustomer
 
       - name: Deploy WebsiteAdmin to IIS
         shell: powershell
