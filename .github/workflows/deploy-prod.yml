@@ -76,10 +76,10 @@ jobs:
           }
 
           # Switch symlink
-          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          if (Test-Path $tempLink) { cmd /c rmdir $tempLink 2>$null }
           cmd /c mklink /J $tempLink $versionFolder | Out-Null
-          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
-          Rename-Item $tempLink $currentLink
+          if (Test-Path $currentLink) { cmd /c rmdir $currentLink 2>$null }
+          Rename-Item $tempLink "current"
 
           # Start AppPool with retry
           $retries = 3
@@ -134,10 +134,10 @@ jobs:
           }
 
           # Switch symlink
-          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          if (Test-Path $tempLink) { cmd /c rmdir $tempLink 2>$null }
           cmd /c mklink /J $tempLink $versionFolder | Out-Null
-          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
-          Rename-Item $tempLink $currentLink
+          if (Test-Path $currentLink) { cmd /c rmdir $currentLink 2>$null }
+          Rename-Item $tempLink "current"
 
           # Start AppPool with retry
           $retries = 3
