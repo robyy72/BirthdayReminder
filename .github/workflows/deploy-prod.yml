@@ -65,10 +65,14 @@ jobs:
           Copy-Item -Path "publish\WebsiteAdmin\*" -Destination $versionFolder -Recurse -Force
 
           # Stop AppPool
-          $state = Get-WebAppPoolState -Name $appPoolName
-          if ($state.Value -eq "Started") {
-            Stop-WebAppPool -Name $appPoolName
-            Start-Sleep -Seconds 2
+          try {
+            $state = Get-WebAppPoolState -Name $appPoolName
+            if ($state.Value -eq "Started") {
+              Stop-WebAppPool -Name $appPoolName
+              Start-Sleep -Seconds 5
+            }
+          } catch {
+            Write-Host "AppPool not running or doesn't exist yet"
           }
 
           # Switch symlink
@@ -77,9 +81,18 @@ jobs:
           if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
           Rename-Item $tempLink $currentLink
 
-          # Start AppPool
-          Start-WebAppPool -Name $appPoolName
-          Start-Sleep -Seconds 2
+          # Start AppPool with retry
+          $retries = 3
+          for ($i = 1; $i -le $retries; $i++) {
+            try {
+              Start-WebAppPool -Name $appPoolName
+              Write-Host "AppPool started successfully"
+              break
+            } catch {
+              Write-Host "Retry $i/$retries - waiting for AppPool..."
+              Start-Sleep -Seconds 3
+            }
+          }
 
           Write-Host "Deployed WebsiteAdmin: $versionFolder"
 
@@ -110,10 +123,14 @@ jobs:
           Copy-Item -Path "publish\WebsiteCustomer\*" -Destination $versionFolder -Recurse -Force
 
           # Stop AppPool
-          $state = Get-WebAppPoolState -Name $appPoolName
-          if ($state.Value -eq "Started") {
-            Stop-WebAppPool -Name $appPoolName
-            Start-Sleep -Seconds 2
+          try {
+            $state = Get-WebAppPoolState -Name $appPoolName
+            if ($state.Value -eq "Started") {
+              Stop-WebAppPool -Name $appPoolName
+              Start-Sleep -Seconds 5
+            }
+          } catch {
+            Write-Host "AppPool not running or doesn't exist yet"
           }
 
           # Switch symlink
@@ -122,9 +139,18 @@ jobs:
           if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
           Rename-Item $tempLink $currentLink
 
-          # Start AppPool
-          Start-WebAppPool -Name $appPoolName
-          Start-Sleep -Seconds 2
+          # Start AppPool with retry
+          $retries = 3
+          for ($i = 1; $i -le $retries; $i++) {
+            try {
+              Start-WebAppPool -Name $appPoolName
+              Write-Host "AppPool started successfully"
+              break
+            } catch {
+              Write-Host "Retry $i/$retries - waiting for AppPool..."
+              Start-Sleep -Seconds 3
+            }
+          }
 
           Write-Host "Deployed WebsiteCustomer: $versionFolder"
 
