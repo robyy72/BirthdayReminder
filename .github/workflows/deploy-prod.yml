@@ -27,6 +27,9 @@ jobs:
         run: dotnet test BirthdayReminder.sln --configuration Release --no-build --verbosity normal
         continue-on-error: true
 
+      - name: Install dotnet-ef tool
+        run: dotnet tool install --global dotnet-ef --version 9.0.0 || dotnet tool update --global dotnet-ef --version 9.0.0
+
       - name: Run EF database migrations
         working-directory: src
         run: dotnet ef database update --project Common/Common.csproj --startup-project WebsiteAdmin/WebsiteAdmin.csproj
