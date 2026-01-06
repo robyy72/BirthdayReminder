@@ -58,7 +58,9 @@
       "Bash(dir:*)",
       "Bash(Remove-Item -Path \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\.claude\\\\todo.md\" -Force)",
       "Bash(mkdir:*)",
-      "Bash(dotnet ef:*)"
+      "Bash(dotnet ef:*)",
+      "Bash(touch:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

@@ -1,15 +1,19 @@
 @page
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<WebsiteCustomer.SharedResource> Lang
 @model IndexModel
 @{
-    ViewData["Title"] = "Birthday Reminder";
+    ViewData["Title"] = Lang["AppTitle"].Value;
 }
 
-<div class="landing-container">
-    <h1 class="app-title">Birthday Reminder</h1>
-    <p class="app-tagline">Never forget a birthday again</p>
+<div class="landing-container container-fluid">
+    <h1 class="app-title">@Lang["AppTitle"]</h1>
+    <p class="app-tagline">@Lang["AppTagline"]</p>
+    
+    <div class="row main-content">
 
-    <div class="main-content">
-        <div class="screenshots-section">
+        <!-- Area Screenshots -->
+        <div class="col-12 col-lg-6 screenshots-section">
             <div class="screenshot-placeholder">
                 <span>Screenshot 1</span>
             </div>
@@ -21,30 +25,31 @@
             </div>
         </div>
 
-        <div class="download-section">
-            <h2>Download the App</h2>
+        <!-- Area QR Codes -->
+        <div class="col-12 col-lg-6 download-section">
+            <h2>@Lang["DownloadTheApp"]</h2>
             <div class="qr-codes">
                 <div class="qr-code-item">
                     <div class="qr-placeholder">
                         <span>App Store QR</span>
                     </div>
-                    <p>iOS</p>
+                    <p>@Lang["iOS"]</p>
                 </div>
                 <div class="qr-code-item">
                     <div class="qr-placeholder">
                         <span>Play Store QR</span>
                     </div>
-                    <p>Android</p>
+                    <p>@Lang["Android"]</p>
                 </div>
             </div>
         </div>
     </div>
 
     <footer class="landing-footer">
-        <a href="/Contact">Contact</a>
-        <a href="/Privacy">Privacy</a>
-        <a href="/Terms">Terms</a>
-        <a href="/Cancellation">Cancellation</a>
-        <a href="/Imprint">Imprint</a>
+        <a href="/Contact">@Lang["Contact"]</a>
+        <a href="/Privacy">@Lang["Privacy"]</a>
+        <a href="/Terms">@Lang["Terms"]</a>
+        <a href="/Cancellation">@Lang["Cancellation"]</a>
+        <a href="/Imprint">@Lang["Imprint"]</a>
     </footer>
 </div>
