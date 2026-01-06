@@ -31,20 +31,20 @@ public static class AccountService
 
 	public static bool IsFirstRun()
 	{
-        bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
-        if (startAlwaysWithWelcome)
-		   return false;
-        
-        bool firstRun = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_FIRST_RUN);
-		return firstRun;
-    }
+		bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
+		if (startAlwaysWithWelcome)
+			return true;
 
-	/// <summary>
-	/// Aim: Marks the first run wizard as completed.
-	/// </summary>
-	public static void CompleteFirstRun()
+		bool hasCompletedFirstRun = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_FIRST_RUN_COMPLETED);
+		return !hasCompletedFirstRun;
+	}
+
+    /// <summary>
+    /// Aim: Marks the first run wizard as completed.
+    /// </summary>
+    public static void CompleteFirstRun()
 	{
-		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_FIRST_RUN, true);
+		PrefsHelper.SetValue(MobileConstants.PREFS_ACCOUNT_FIRST_RUN_COMPLETED, true);
 	}
 
 	/// <summary>

@@ -360,7 +360,7 @@ public partial class App : Application
     /// </summary>
     private Page GetStartPage()
     {
-        if (AccountService.IsFirstRun())  // Korrigiert: ! entfernt
+        if (AccountService.IsFirstRun())
             return new StartPage_1();
 
         if (ErrorService.IsBrokenVersion())

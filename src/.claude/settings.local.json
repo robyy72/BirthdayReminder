@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" status)",
+      "Bash(dir \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\.git\\\\hooks\" /B)",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder'' -Recurse -Include *.ps1,*.cmd,*.bat,*.sh -ErrorAction SilentlyContinue | ForEach-Object { $content = Get-Content $_FullName -Raw -ErrorAction SilentlyContinue; if \\($content -match ''>.*nul''\\) { $_FullName } }\")",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" config --local --list)",
+      "Bash(powershell -Command \"Get-Item ''C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\nul'' | Select-Object Name, CreationTime, LastWriteTime\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder'' -Filter ''nul'' -Force\")",
+      "Bash(git config:*)",
+      "Bash(Select-String -Pattern \"alias|hook|core.hooks\")",
+      "Bash(powershell -Command \"git config --global --list | Select-String -Pattern ''alias|hook''\")",
+      "Bash(powershell -Command \"git -C ''C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder'' ls-tree -r origin/dev --name-only | Select-String ''nul''\")",
+      "Bash(powershell -Command \"Get-ChildItem ''C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\.git\\\\hooks'' | Where-Object { $_Name -notlike ''*.sample'' }\")",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" clean -f nul)",
+      "Bash(cmd /c \"del \\\\?\\\\C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\\\\nul\")",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" add .gitignore src/Mobile/Mobile.csproj)",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" commit -m \"Add nul to gitignore to prevent Windows reserved filename issues\")",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" add .claude/CLAUDE.md src/Mobile/Mobile.csproj)",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" commit -m \"Add note about Git Bash null redirection in CLAUDE.md\")",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" push)",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" log --oneline -10)",
+      "Bash(git -C \"C:\\\\Users\\\\RobertHauptINFINITAS\\\\misc\\\\private_repos\\\\BirthdayReminder\" diff HEAD~5 --name-only)"
+    ]
+  }
+}
