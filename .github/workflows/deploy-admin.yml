@@ -1,0 +1,109 @@
+# deploy-admin.yml v1.0.0
+name: Deploy WebsiteAdmin
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, prod]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore dependencies
+        working-directory: src
+        run: dotnet restore WebsiteAdmin/WebsiteAdmin.csproj
+
+      - name: Build
+        working-directory: src
+        run: dotnet build WebsiteAdmin/WebsiteAdmin.csproj --configuration Release --no-restore
+
+      - name: Run tests
+        working-directory: src
+        run: dotnet test BirthdayReminder.sln --configuration Release --no-build --verbosity normal
+        continue-on-error: true
+
+      - name: Install dotnet-ef tool
+        shell: powershell
+        run: |
+          dotnet tool install --global dotnet-ef --version 9.0.0 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            dotnet tool update --global dotnet-ef --version 9.0.0
+          }
+          $env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
+
+      - name: Run EF database migrations
+        working-directory: src
+        shell: powershell
+        run: |
+          $env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
+          dotnet ef database update --project Common/Common.csproj --startup-project WebsiteAdmin/WebsiteAdmin.csproj
+
+      - name: Publish WebsiteAdmin
+        working-directory: src
+        run: dotnet publish WebsiteAdmin/WebsiteAdmin.csproj -c Release -o ../publish/WebsiteAdmin
+
+      - name: Deploy WebsiteAdmin to IIS
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+
+          $solutionName = "BirthdayReminder"
+          $appPoolName = "$solutionName-WebsiteAdmin-Prod"
+          $baseFolder = "C:\inetpub\$solutionName\WebsiteAdmin\Prod"
+          $currentLink = Join-Path $baseFolder "current"
+          $tempLink = Join-Path $baseFolder "current_new"
+
+          # Extract version from .csproj
+          [xml]$csproj = Get-Content "src\WebsiteAdmin\WebsiteAdmin.csproj"
+          $version = $csproj.Project.PropertyGroup.Version
+          if (-not $version) { $version = "1.0.0" }
+          Write-Host "Deploying WebsiteAdmin version: $version"
+
+          $versionFolder = Join-Path $baseFolder $version
+
+          # Create version folder and copy files
+          if (Test-Path $versionFolder) {
+            Remove-Item $versionFolder -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path $versionFolder -Force | Out-Null
+          Copy-Item -Path "publish\WebsiteAdmin\*" -Destination $versionFolder -Recurse -Force
+
+          # Stop AppPool
+          $state = Get-WebAppPoolState -Name $appPoolName
+          if ($state.Value -eq "Started") {
+            Stop-WebAppPool -Name $appPoolName
+            Start-Sleep -Seconds 2
+          }
+
+          # Switch symlink
+          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          cmd /c mklink /J $tempLink $versionFolder | Out-Null
+          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
+          Rename-Item $tempLink $currentLink
+
+          # Start AppPool
+          Start-WebAppPool -Name $appPoolName
+          Start-Sleep -Seconds 2
+
+          Write-Host "Deployed WebsiteAdmin: $versionFolder"
+
+      - name: Health check
+        shell: powershell
+        run: |
+          $url = "https://prod.birthday-reminder.online/health"
+          Start-Sleep -Seconds 5
+          try {
+            $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 30
+            if ($response.StatusCode -eq 200) {
+              Write-Host "Health check passed: $url"
+            } else {
+              Write-Host "Health check returned: $($response.StatusCode)"
+            }
+          } catch {
+            Write-Host "Health check failed or endpoint not available: $url - $_"
+          }
