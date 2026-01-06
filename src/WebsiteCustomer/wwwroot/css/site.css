@@ -36,18 +36,19 @@ html, body {
 .main-content {
     flex: 1;
     display: flex;
-    flex-direction: row; /* Explizit: nebeneinander auf Desktop */
-    flex-wrap: nowrap; /* Verhindert Umbruch */
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1400px; /* Etwas breiter für mehr Platz */
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
     /* Bootstrap Row Fix */
     .main-content.row {
-        --bs-gutter-x: 3rem; /* Mehr Gutter zwischen den Columns */
+        --bs-gutter-x: 2rem;
         margin-left: 0;
         margin-right: 0;
     }
@@ -60,15 +61,16 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 100%; /* Volle Breite der Column */
+    width: 100%;
     padding: 2rem 1rem;
+    min-width: 0;
 }
 
 .screenshots-section {
     flex-direction: row;
     gap: 1.5rem;
     flex-wrap: nowrap;
-    justify-content: center; /* Horizontal zentriert die Screenshots */
+    justify-content: center;
 }
 
 .screenshot-placeholder {
