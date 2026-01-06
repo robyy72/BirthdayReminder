@@ -6,11 +6,10 @@
 
 ## Subdomains
 
-| Environment | Website Admin | API Mobile | Landing Page |
-|-------------|---------------|------------|--------------|
+| Environment | WebsiteAdmin | ApiMobile | WebsiteCustomer (Landing Page) |
+|-------------|--------------|-----------|-------------------------------|
 | Dev | `dev.birthday-reminder.online` | `api-dev.birthday-reminder.online` | - |
 | Prod | `prod.birthday-reminder.online` | `api-prod.birthday-reminder.online` | `birthday-reminder.online` |
-| Admin | `admin.birthday-reminder.online` | - | - |
 
 ## Public URLs
 
