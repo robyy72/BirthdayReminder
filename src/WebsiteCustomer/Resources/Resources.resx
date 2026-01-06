@@ -100,4 +100,16 @@
   <data name="ImprintTitle" xml:space="preserve">
     <value>Imprint</value>
   </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Terms and Conditions</value>
+  </data>
+  <data name="Cancellation" xml:space="preserve">
+    <value>Cancellation</value>
+  </data>
+  <data name="RightOfWithdrawal" xml:space="preserve">
+    <value>Right of Withdrawal</value>
+  </data>
 </root>

@@ -34,10 +34,24 @@ html, body {
     margin-bottom: 3rem;
 }
 
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .main-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
+    }
+}
+
 .screenshots-section {
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 4rem;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -56,7 +70,9 @@ html, body {
 }
 
 .download-section {
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .download-section h2 {
@@ -99,7 +115,9 @@ html, body {
     margin-top: auto;
     padding-top: 2rem;
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .landing-footer a {
