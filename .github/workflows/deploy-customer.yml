@@ -59,10 +59,10 @@ jobs:
             Start-Sleep -Seconds 2
           }
 
-          # Switch symlink
-          if (Test-Path $tempLink) { Remove-Item $tempLink -Force }
+          # Switch symlink (use rmdir for junctions)
+          if (Test-Path $tempLink) { cmd /c rmdir $tempLink 2>$null }
           cmd /c mklink /J $tempLink $versionFolder | Out-Null
-          if (Test-Path $currentLink) { Remove-Item $currentLink -Force }
+          if (Test-Path $currentLink) { cmd /c rmdir $currentLink 2>$null }
           Rename-Item $tempLink $currentLink
 
           # Start AppPool
