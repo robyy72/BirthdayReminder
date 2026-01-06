@@ -28,10 +28,12 @@
 ---
 
 ## Working Directory
-`BirthdayReminder/` – This file lives here and Claude Code is started from here.
+`BirthdayReminder/` – Claude Code is started from here. Source code is in `src/`, `.claude/` config is at root.
 
 ## Platform
 Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, cat, etc.) do not work.
+
+**Claude Code Bash Tool:** Runs in Git Bash, not CMD. Use `> /dev/null` for null redirection, NOT `> nul` (creates a file named "nul").
 
 ---
 

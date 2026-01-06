@@ -12,4 +12,7 @@ namespace WebsiteCustomer;
 public static class WebsiteCustomerConstants
 {
 	public const string SUBDOMAIN = CommonConstants.DOMAIN;
+
+	public const string DEFAULT_LANGUAGE = "en";
+	public static readonly string[] SUPPORTED_LANGUAGES = ["de", "en", "es", "fr", "pt"];
 }

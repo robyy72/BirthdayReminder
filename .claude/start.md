@@ -1,6 +1,8 @@
 Read
 .claude/CLAUDE.md
 .claude/settings.local.json
-Common/[[Guidelines]]/Codex.md
+src/Common/[[Guidelines and Templates]]/Codex.md
 
-Output: "Read all files"
+Run "git pull"
+
+Output: "Read all files and git pull done"

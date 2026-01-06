@@ -16,7 +16,7 @@ Get-ChildItem -Path $rootDir -Include bin,obj -Recurse -Directory | ForEach-Obje
 
 # Run dotnet clean
 Write-Host "Running dotnet clean..." -ForegroundColor Yellow
-dotnet clean "$rootDir\BirthdayReminder.sln" --verbosity minimal
+dotnet clean "$rootDir\src\BirthdayReminder.sln" --verbosity minimal
 
 # macOS-specific: Clear Xamarin and Xcode caches
 if ($IsMacOS) {

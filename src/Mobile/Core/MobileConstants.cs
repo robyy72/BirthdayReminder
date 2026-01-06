@@ -49,7 +49,7 @@ public static class MobileConstants
 	#region Preferences Keys
 	public const string PREFS_ACCOUNT = "Account";
 	public const string PREFS_ACCOUNT_INITIALIZED = "AccountInitialized";
-	public const string PREFS_ACCOUNT_FIRST_RUN = "AccountFirstRun";
+	public const string PREFS_ACCOUNT_FIRST_RUN_COMPLETED = "AccountFirstRun";
 	public const string PREFS_PERSONS = "Persons";
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	public const string PREFS_SUPPORT = "Support";

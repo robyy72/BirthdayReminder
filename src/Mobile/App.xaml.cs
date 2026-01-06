@@ -19,11 +19,11 @@ public partial class App : Application
     public static List<Contact> Contacts { get; set; } = [];
     public static List<Support> SupportEntries { get; set; } = [];
     public static Account Account { get; set; } = new();
-	public static bool NeedsReadContacts { get; set; } = false;
+    public static bool NeedsReadContacts { get; set; } = false;
 
-	#region Navigation (for reusable pages)
-	public static Type? ForwardPageType { get; set; }
-	public static Type? BackwardPageType { get; set; }
+    #region Navigation (for reusable pages)
+    public static Type? ForwardPageType { get; set; }
+    public static Type? BackwardPageType { get; set; }
     #endregion
 
     #region Flyout Events
@@ -35,20 +35,21 @@ public partial class App : Application
 
     #endregion
 
-	public App()
-	{
-		InitializeComponent();
-		SetupGlobalExceptionHandlers();
-		Init();
-	}
+    public App()
+    {
+        InitializeComponent();
+        SetupGlobalExceptionHandlers();
+        InitAsync();
+        InitSync();
+    }
 
     #region Protected Methods
     protected override Window CreateWindow(IActivationState? activationState)
-	{
-		Page page = GetStartPage();
-		Window window = new Window(page);
-		return window;
-	}
+    {
+        Page page = GetStartPage();
+        Window window = new Window(page);
+        return window;
+    }
     #endregion
 
     #region Public Methods
@@ -59,18 +60,18 @@ public partial class App : Application
     /// Return: NavigationPage mit MainPage als Root
     /// </summary>
     public static NavigationPage CreateMainNavigationPage()
-	{
-		var mainPage = new MainPage();
-		var navigationPage = new NavigationPage(mainPage)
-		{
-			BarBackgroundColor = ResourceHelper.GetThemedColor("Primary", "Gray900"),
-			BarTextColor = Colors.White
-		};
+    {
+        var mainPage = new MainPage();
+        var navigationPage = new NavigationPage(mainPage)
+        {
+            BarBackgroundColor = ResourceHelper.GetThemedColor("Primary", "Gray900"),
+            BarTextColor = Colors.White
+        };
 
-		_navigation = navigationPage.Navigation;
+        _navigation = navigationPage.Navigation;
 
-		return navigationPage;
-	}
+        return navigationPage;
+    }
     #endregion
 
     #region Root Page Methods
@@ -99,7 +100,7 @@ public partial class App : Application
         {
             // Wrap current page in NavigationPage and push
             var currentPage = window.Page;
-            var navigationPage = new NavigationPage(currentPage);
+            NavigationPage navigationPage = new NavigationPage(currentPage);
             window.Page = navigationPage;
             await navigationPage.PushAsync(page);
         }
@@ -224,41 +225,72 @@ public partial class App : Application
     #endregion
 
     #region Private Methods
-    private async void Init()
-	{
+
+    /// <summary>
+    /// Aim: Asynchrone Initialisierung - läuft im Hintergrund, darf die App nicht blockieren.
+    /// </summary>
+    private async void InitAsync()
+    {
+        try
+        {
+            // ErrorDatabase initialisieren
+            await ErrorDatabase.InitAsync();
+
+            // Ab hier ist ErrorService.Handle() verfügbar
+            await ErrorService.SyncPendingAsync();
+
+            // Weitere Background-Tasks
+            SendHeartbeatIfNeeded();
+            SetupConnectivitySync();
+        }
+        catch (Exception ex)
+        {
+            // Nur für die kurze Zeit bis ErrorDatabase bereit ist
+            LogDebugInfo("InitAsync failed", ex);
+        }
+    }
+
+    /// <summary>
+    /// Aim: Synchrone Initialisierung - muss fertig sein bevor CreateWindow aufgerufen wird.
+    /// </summary>
+    private void InitSync()
+    {
         bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
         if (startAlwaysWithWelcome)
             PrefsHelper.RemoveAllKeys();
 
-		await ErrorDatabase.InitAsync();
-
         PersonService.Load();
-		AccountService.Load();
-		SupportService.Load();
+        AccountService.Load();
+        SupportService.Load();
 
         CheckTimeZone();
 
-		if (AccountService.UseContacts())
-			NeedsReadContacts = true;
+        if (AccountService.UseContacts())
+            NeedsReadContacts = true;
 
         ApplyTheme();
-		SendHeartbeatIfNeeded();
-		SetupConnectivitySync();
-		SyncErrorsInBackground();
     }
 
-	private async void SendHeartbeatIfNeeded()
-	{
-		// Send heartbeat at most once per day
-		var lastHeartbeat = Account.LastHeartbeat;
-		if (DateTime.UtcNow - lastHeartbeat < TimeSpan.FromDays(1))
-		{
-			return;
-		}
+    private async void SendHeartbeatIfNeeded()
+    {
+        try
+        {
+            // Send heartbeat at most once per day
+            var lastHeartbeat = Account.LastHeartbeat;
+            if (DateTime.UtcNow - lastHeartbeat < TimeSpan.FromDays(1))
+            {
+                return;
+            }
 
-		var apiService = new ApiService();
-		await apiService.SendHeartbeatAsync();
-	}
+            var apiService = new ApiService();
+            await apiService.SendHeartbeatAsync();
+        }
+        catch (Exception ex)
+        {
+            // Hier ist ErrorDatabase schon bereit
+            ErrorService.Handle(ex);
+        }
+    }
 
     private void CheckTimeZone()
     {
@@ -270,68 +302,93 @@ public partial class App : Application
     }
 
     private void ApplyTheme()
-	{
-		DeviceService.ApplyTheme(Account.Theme);
-	}
+    {
+        DeviceService.ApplyTheme(Account.Theme);
+    }
 
-	private void SetupGlobalExceptionHandlers()
-	{
-		AppDomain.CurrentDomain.UnhandledException += (s, e) =>
-		{
-			ErrorService.HandleFatal((Exception)e.ExceptionObject);
-		};
+    private void SetupGlobalExceptionHandlers()
+    {
+        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+        {
+            ErrorService.HandleFatal((Exception)e.ExceptionObject);
+        };
 
-		TaskScheduler.UnobservedTaskException += (s, e) =>
-		{
-			ErrorService.Handle(e.Exception);
-			e.SetObserved();
-		};
+        TaskScheduler.UnobservedTaskException += (s, e) =>
+        {
+            ErrorService.Handle(e.Exception);
+            e.SetObserved();
+        };
 
 #if ANDROID
-		Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
-		{
-			ErrorService.HandleFatal(e.Exception);
-			e.Handled = true;
-		};
+        Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
+        {
+            ErrorService.HandleFatal(e.Exception);
+            e.Handled = true;
+        };
 #endif
 
 #if IOS
-		ObjCRuntime.Runtime.MarshalManagedException += (s, e) =>
-		{
-			ErrorService.HandleFatal(e.Exception);
-		};
+        ObjCRuntime.Runtime.MarshalManagedException += (s, e) =>
+        {
+            ErrorService.HandleFatal(e.Exception);
+        };
 #endif
-	}
+    }
 
-	private void SetupConnectivitySync()
-	{
-		Connectivity.Current.ConnectivityChanged += async (s, e) =>
-		{
-			if (e.NetworkAccess == NetworkAccess.Internet)
-			{
-				await ErrorService.SyncPendingAsync();
-			}
-		};
-	}
+    private void SetupConnectivitySync()
+    {
+        Connectivity.Current.ConnectivityChanged += async (s, e) =>
+        {
+            if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                try
+                {
+                    await ErrorService.SyncPendingAsync();
+                }
+                catch (Exception ex)
+                {
+                    // ErrorDatabase ist hier definitiv bereit
+                    ErrorService.Handle(ex);
+                }
+            }
+        };
+    }
 
-	private async void SyncErrorsInBackground()
-	{
-		await Task.Run(async () => await ErrorService.SyncPendingAsync());
-	}
+    /// <summary>
+    /// Aim: Determine the start page based on app state.
+    /// Return (Page): StartPage_1 for new users, BrokenVersionPage if crashed, MainPage otherwise.
+    /// </summary>
+    private Page GetStartPage()
+    {
+        if (AccountService.IsFirstRun())
+            return new StartPage_1();
 
-	/// <summary>
-	/// Aim: Determine the start page based on app state.
-	/// Return (Page): StartPage_1 for new users, BrokenVersionPage if crashed, MainPage otherwise.
-	/// </summary>
-	private Page GetStartPage()
-	{
-		if (!AccountService.IsFirstRun())
-			return new StartPage_1();
+        if (ErrorService.IsBrokenVersion())
+            return new BrokenVersionPage();
 
-		if (ErrorService.IsBrokenVersion())
-			return new BrokenVersionPage();
+        return CreateMainNavigationPage();
+    }
 
-		return CreateMainNavigationPage();
-	}
+    /// <summary>
+    /// Aim: Debug-Logging für die kurze Zeit bis ErrorDatabase bereit ist.
+    /// Params: message (string) - Die zu loggende Nachricht.
+    /// </summary>
+    private static void LogDebugInfo(string message)
+    {
+        System.Diagnostics.Debug.WriteLine($"[{DateTime.Now:HH:mm:ss}] {message}");
+    }
+
+    /// <summary>
+    /// Aim: Debug-Logging mit Exception-Details.
+    /// Params: message (string) - Die zu loggende Nachricht, ex (Exception) - Die Exception.
+    /// </summary>
+    private static void LogDebugInfo(string message, Exception ex)
+    {
+        System.Diagnostics.Debug.WriteLine($"[{DateTime.Now:HH:mm:ss}] {message}");
+        System.Diagnostics.Debug.WriteLine($"  Exception: {ex.GetType().Name} - {ex.Message}");
+        if (!string.IsNullOrEmpty(ex.StackTrace))
+            System.Diagnostics.Debug.WriteLine($"  StackTrace: {ex.StackTrace}");
+    }
+
     #endregion
 }

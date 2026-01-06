@@ -5,12 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebsiteCustomer;
 
 /// <summary>
-/// Aim: Page model for the Privacy Policy page.
+/// Aim: Page model for the Cancellation/Right of Withdrawal page.
 /// </summary>
-public class PrivacyModel : PageModel
+public class CancellationModel : PageModel
 {
     public void OnGet()
     {
     }
 }
-

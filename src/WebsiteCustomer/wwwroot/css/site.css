@@ -15,8 +15,6 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 2rem;
     text-align: center;
 }
@@ -34,12 +32,43 @@ html, body {
     margin-bottom: 3rem;
 }
 
-.screenshots-section {
+/* Main content wächst und drückt Footer nach unten */
+.main-content {
+    flex: 1;
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
+    flex-direction: row; /* Explizit: nebeneinander auf Desktop */
+    flex-wrap: nowrap; /* Verhindert Umbruch */
+    align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 1400px; /* Etwas breiter für mehr Platz */
+    margin: 0 auto;
+}
+
+    /* Bootstrap Row Fix */
+    .main-content.row {
+        --bs-gutter-x: 3rem; /* Mehr Gutter zwischen den Columns */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+/* Areas mit vertikaler & horizontaler Zentrierung */
+.screenshots-section,
+.download-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%; /* Volle Breite der Column */
+    padding: 2rem 1rem;
+}
+
+.screenshots-section {
+    flex-direction: row;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+    justify-content: center; /* Horizontal zentriert die Screenshots */
 }
 
 .screenshot-placeholder {
@@ -53,10 +82,6 @@ html, body {
     justify-content: center;
     color: #555;
     font-size: 0.875rem;
-}
-
-.download-section {
-    margin-bottom: 3rem;
 }
 
 .download-section h2 {
@@ -95,14 +120,107 @@ html, body {
     font-size: 0.875rem;
 }
 
+/* Footer klebt unten */
 .landing-footer {
-    margin-top: auto;
-    padding-top: 2rem;
+    padding: 2rem 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
-.landing-footer p {
+    .landing-footer a {
+        color: #555;
+        font-size: 0.75rem;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+        .landing-footer a:hover {
+            color: #888;
+        }
+
+/* Content pages (Privacy, Contact, Imprint) */
+.content-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+    .content-page h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+
+    .content-page h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: #fff;
+    }
+
+    .content-page p {
+        color: #aaa;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .content-page .contact-info {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background-color: #1a1a1a;
+        border-radius: 8px;
+    }
+
+        .content-page .contact-info p {
+            margin-bottom: 0;
+        }
+
+.email-link {
+    color: #4a9eff;
+    text-decoration: none;
+}
+
+    .email-link:hover {
+        color: #7ab8ff;
+    }
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
     color: #555;
-    font-size: 0.75rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+
+    .back-link:hover {
+        color: #888;
+    }
+
+/* Tablet & Mobile: Alles untereinander */
+@media (max-width: 991px) {
+    .screenshots-section {
+        margin-bottom: 3rem;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 767px) {
+    .screenshots-section {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .app-title {
+        font-size: 2.5rem;
+    }
 }
 
 @media (max-width: 600px) {
