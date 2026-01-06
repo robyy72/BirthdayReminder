@@ -66,19 +66,19 @@ jobs:
 
           $versionFolder = Join-Path $baseFolder $version
 
+          # Stop AppPool first (to release file locks)
+          $state = Get-WebAppPoolState -Name $appPoolName
+          if ($state.Value -eq "Started") {
+            Stop-WebAppPool -Name $appPoolName
+            Start-Sleep -Seconds 2
+          }
+
           # Create version folder and copy files
           if (Test-Path $versionFolder) {
             Remove-Item $versionFolder -Recurse -Force
           }
           New-Item -ItemType Directory -Path $versionFolder -Force | Out-Null
           Copy-Item -Path "publish\WebsiteAdmin\*" -Destination $versionFolder -Recurse -Force
-
-          # Stop AppPool
-          $state = Get-WebAppPoolState -Name $appPoolName
-          if ($state.Value -eq "Started") {
-            Stop-WebAppPool -Name $appPoolName
-            Start-Sleep -Seconds 2
-          }
 
           # Switch symlink (use rmdir for junctions)
           if (Test-Path $tempLink) { cmd /c rmdir $tempLink 2>$null }
