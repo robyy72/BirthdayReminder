@@ -39,7 +39,7 @@ html, body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 0;
 }
@@ -57,9 +57,29 @@ html, body {
 .screenshots-section {
     flex: 0 0 60%;
     flex-direction: row;
-    gap: 2.5rem;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.screenshots-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.features-list {
+    color: #fff;
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+}
+
+.screenshots-row {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    flex-wrap: nowrap;
 }
 
 .download-section {
