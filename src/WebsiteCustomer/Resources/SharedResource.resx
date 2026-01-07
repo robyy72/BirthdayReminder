@@ -68,16 +68,16 @@
     <value>Download the App</value>
   </data>
   <data name="iOSLine1" xml:space="preserve">
-    <value>Download and install</value>
+    <value>Download and install from</value>
   </data>
   <data name="iOSLine2" xml:space="preserve">
-    <value>from Apple App Store</value>
+    <value>Apple App Store</value>
   </data>
   <data name="AndroidLine1" xml:space="preserve">
-    <value>Download and install</value>
+    <value>Download and install from</value>
   </data>
   <data name="AndroidLine2" xml:space="preserve">
-    <value>from Google Play Store</value>
+    <value>Google Play Store</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
@@ -117,5 +117,14 @@
   </data>
   <data name="RightOfWithdrawal" xml:space="preserve">
     <value>Right of Withdrawal</value>
+  </data>
+  <data name="Feature1" xml:space="preserve">
+    <value>useful</value>
+  </data>
+  <data name="Feature2" xml:space="preserve">
+    <value>not winning a design medal</value>
+  </data>
+  <data name="Feature3" xml:space="preserve">
+    <value>can remind until done</value>
   </data>
 </root>

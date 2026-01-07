@@ -71,13 +71,13 @@
     <value>Herunterladen und installieren</value>
   </data>
   <data name="iOSLine2" xml:space="preserve">
-    <value>aus dem Apple App Store</value>
+    <value>im Apple App Store</value>
   </data>
   <data name="AndroidLine1" xml:space="preserve">
     <value>Herunterladen und installieren</value>
   </data>
   <data name="AndroidLine2" xml:space="preserve">
-    <value>aus dem Google Play Store</value>
+    <value>im Google Play Store</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
@@ -107,7 +107,7 @@
     <value>Impressum</value>
   </data>
   <data name="Terms" xml:space="preserve">
-    <value>AGB</value>
+    <value>AGBs</value>
   </data>
   <data name="TermsAndConditions" xml:space="preserve">
     <value>Allgemeine Geschäftsbedingungen</value>
@@ -117,5 +117,14 @@
   </data>
   <data name="RightOfWithdrawal" xml:space="preserve">
     <value>Widerrufsrecht</value>
+  </data>
+  <data name="Feature1" xml:space="preserve">
+    <value>nützlich</value>
+  </data>
+  <data name="Feature2" xml:space="preserve">
+    <value>gewinnt keine Designmedaille</value>
+  </data>
+  <data name="Feature3" xml:space="preserve">
+    <value>erinnert bis es erledigt ist</value>
   </data>
 </root>
