@@ -19,6 +19,19 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #f0f0f0;
+}
+
+.card-header {
+  background-color: #0d6efd;
+  color: white;
+  border-color: white;
+}
+
+.navbar-brand-box {
+  border: 2px solid #0d6efd;
+  border-radius: 4px;
+  padding: 2px 8px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

@@ -60,7 +60,7 @@ public class HeartbeatService
 			{
 				user.PurchaseToken = dto.PurchaseToken;
 			}
-			if (dto.Store != Store.Unknown)
+			if (dto.Store != AppStore.Unknown)
 			{
 				user.Store = dto.Store;
 			}

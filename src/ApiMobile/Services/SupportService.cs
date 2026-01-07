@@ -58,7 +58,7 @@ public class SupportService
 			{
 				user.PurchaseToken = dto.PurchaseToken;
 			}
-			if (dto.Store != Store.Unknown)
+			if (dto.Store != AppStore.Unknown)
 			{
 				user.Store = dto.Store;
 			}
@@ -70,7 +70,7 @@ public class SupportService
 			Message = dto.Message,
 			Type = dto.Type,
 			Source = dto.Source,
-			Status = TicketStatus.Open
+			Status = TicketStatus.Created
 		};
 
 		_db.SupportTickets.Add(ticket);

@@ -1,0 +1,56 @@
+@page "{id:int}"
+@model WebsiteAdmin.Pages.SystemUsers.DeleteModel
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Delete User</h1>
+    <a asp-page="/SystemUsers/Index" class="btn btn-outline-secondary">Back to List</a>
+</div>
+
+@if (Model.SystemUser == null)
+{
+    <div class="alert alert-danger">User not found.</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-body">
+                    <div class="alert alert-danger mb-3">
+                        Are you sure you want to delete this user?
+                    </div>
+                    <table class="table table-sm">
+                        <tr>
+                            <td class="fw-bold" style="width: 120px;">ID</td>
+                            <td>@Model.SystemUser.Id</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Email</td>
+                            <td>@Model.SystemUser.Email</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Display Name</td>
+                            <td>@(Model.SystemUser.DisplayName ?? "-")</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Active</td>
+                            <td>@(Model.SystemUser.IsActive ? "Yes" : "No")</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Created</td>
+                            <td>@Model.SystemUser.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                        </tr>
+                    </table>
+                    <form method="post">
+                        <input type="hidden" name="id" value="@Model.SystemUser.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a asp-page="/SystemUsers/Index" class="btn btn-outline-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

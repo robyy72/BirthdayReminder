@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
 
-namespace WebsiteAdmin.Pages;
+namespace WebsiteAdmin.Pages.Customers;
 
 /// <summary>
 /// Aim: Page model for customers list.
 /// </summary>
 [Authorize]
-public class CustomersModel : PageModel
+public class IndexModel : PageModel
 {
 	#region Fields
 	private readonly HeartbeatService _heartbeatService;
@@ -22,7 +22,7 @@ public class CustomersModel : PageModel
 	#endregion
 
 	#region Constructor
-	public CustomersModel(HeartbeatService heartbeatService)
+	public IndexModel(HeartbeatService heartbeatService)
 	{
 		_heartbeatService = heartbeatService;
 	}

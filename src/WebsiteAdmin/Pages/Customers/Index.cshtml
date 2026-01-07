@@ -1,5 +1,5 @@
 @page
-@model CustomersModel
+@model WebsiteAdmin.Pages.Customers.IndexModel
 @{
     ViewData["Title"] = "Customers";
 }
@@ -62,10 +62,10 @@
                 <td>
                     @switch (user.Store)
                     {
-                        case Common.Store.GooglePlay:
+                        case Common.AppStore.GooglePlayStore:
                             <span class="badge bg-success">Google Play</span>
                             break;
-                        case Common.Store.Apple:
+                        case Common.AppStore.AppleAppStore:
                             <span class="badge bg-dark">Apple</span>
                             break;
                         default:

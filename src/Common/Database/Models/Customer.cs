@@ -21,7 +21,7 @@ public class Customer
 	[MaxLength(500)]
 	public string? PurchaseToken { get; set; }
 
-	public Store Store { get; set; } = Store.Unknown;
+	public AppStore Store { get; set; } = AppStore.Unknown;
 
 	public PreferredChannel PreferredChannel { get; set; } = PreferredChannel.NotSet;
 

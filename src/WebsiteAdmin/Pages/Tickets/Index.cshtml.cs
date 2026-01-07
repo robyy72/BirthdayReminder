@@ -5,21 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 #endregion
 
-namespace WebsiteAdmin.Pages;
+namespace WebsiteAdmin.Pages.Tickets;
 
 /// <summary>
-/// Aim: Page model for admin dashboard with ticket management.
+/// Aim: Page model for support tickets with filtering and detail view.
 /// </summary>
 [Authorize]
 public class IndexModel : PageModel
 {
 	#region Fields
-	private readonly HeartbeatService _heartbeatService;
 	private readonly SupportService _supportService;
 	#endregion
 
 	#region Properties
-	public UserStats UserStats { get; set; } = new();
 	public List<SupportTicket> Tickets { get; set; } = [];
 	public SupportTicket? SelectedTicket { get; set; }
 
@@ -31,17 +29,24 @@ public class IndexModel : PageModel
 	#endregion
 
 	#region Constructor
-	public IndexModel(HeartbeatService heartbeatService, SupportService supportService)
+	/// <summary>
+	/// Aim: Initialize the tickets page model.
+	/// Params: supportService (SupportService) - Service for ticket operations.
+	/// </summary>
+	public IndexModel(SupportService supportService)
 	{
-		_heartbeatService = heartbeatService;
 		_supportService = supportService;
 	}
 	#endregion
 
 	#region Handlers
+	/// <summary>
+	/// Aim: Load tickets with filters and selected ticket details.
+	/// Params: None.
+	/// Return: Task.
+	/// </summary>
 	public async Task OnGetAsync()
 	{
-		UserStats = await _heartbeatService.GetUserStatsAsync();
 		Tickets = await _supportService.GetFilteredTicketsAsync(Filter);
 
 		if (SelectedId.HasValue)
@@ -55,6 +60,11 @@ public class IndexModel : PageModel
 		}
 	}
 
+	/// <summary>
+	/// Aim: Update the status of a ticket.
+	/// Params: ticketId (int) - Ticket ID, status (TicketStatus) - New status.
+	/// Return (IActionResult): Redirect to page with selected ticket.
+	/// </summary>
 	public async Task<IActionResult> OnPostUpdateStatusAsync(int ticketId, TicketStatus status)
 	{
 		await _supportService.UpdateTicketStatusAsync(ticketId, status);
@@ -62,6 +72,11 @@ public class IndexModel : PageModel
 		return RedirectToPage(new { SelectedId = ticketId });
 	}
 
+	/// <summary>
+	/// Aim: Add a new entry to a ticket conversation.
+	/// Params: ticketId (int) - Ticket ID, message (string) - Message content.
+	/// Return (IActionResult): Redirect to page with selected ticket.
+	/// </summary>
 	public async Task<IActionResult> OnPostAddEntryAsync(int ticketId, string message)
 	{
 		await _supportService.AddTicketEntryAsync(ticketId, message, false, User.Identity?.Name);

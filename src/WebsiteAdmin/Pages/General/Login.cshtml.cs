@@ -29,7 +29,7 @@ public class LoginModel : PageModel
 	#endregion
 
 	#region Handlers
-	public async Task<IActionResult> OnGetAsync()
+	public IActionResult OnGet()
 	{
 		// If already logged in, redirect to dashboard
 		if (User.Identity?.IsAuthenticated == true)
