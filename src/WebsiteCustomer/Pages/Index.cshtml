@@ -6,40 +6,49 @@
     ViewData["Title"] = Lang["AppTitle"].Value;
 }
 
-<div class="landing-container container-fluid">
-    <h1 class="app-title">lala3 @Lang["AppTitle"]</h1>
+<div class="landing-container">
+    <h1 class="app-title">@Lang["AppTitle"]</h1>
     <p class="app-tagline">@Lang["AppTagline"]</p>
-    
-    <div class="row main-content">
+
+    <div class="main-content">
 
         <!-- Area Screenshots -->
-        <div class="col-12 col-lg-8 screenshots-section">
-            <div class="screenshot-placeholder">
-                <span>Screenshot 1</span>
-            </div>
-            <div class="screenshot-placeholder">
-                <span>Screenshot 2</span>
-            </div>
-            <div class="screenshot-placeholder">
-                <span>Screenshot 3</span>
+        <div class="screenshots-section">
+            <div class="screenshots-wrapper">
+                <div class="features-list">
+                    &middot;&nbsp;@Lang["Feature1"]<br />
+                    &middot;&nbsp;@Lang["Feature2"]<br />
+                    &middot;&nbsp;@Lang["Feature3"]
+                </div>
+                <div class="screenshots-row">
+                    <div class="screenshot-placeholder">
+                        <span>Screenshot 1</span>
+                    </div>
+                    <div class="screenshot-placeholder">
+                        <span>Screenshot 2</span>
+                    </div>
+                    <div class="screenshot-placeholder">
+                        <span>Screenshot 3</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Area QR Codes -->
-        <div class="col-12 col-lg-4 download-section">
+        <div class="download-section">
             <h2>@Lang["DownloadTheApp"]</h2>
             <div class="qr-codes">
                 <div class="qr-code-item">
                     <div class="qr-placeholder">
                         <span>App Store QR</span>
                     </div>
-                    <p>@Lang["iOS"]</p>
+                    <p>@Lang["iOSLine1"]<br />@Lang["iOSLine2"]</p>
                 </div>
                 <div class="qr-code-item">
                     <div class="qr-placeholder">
                         <span>Play Store QR</span>
                     </div>
-                    <p>@Lang["Android"]</p>
+                    <p>@Lang["AndroidLine1"]<br />@Lang["AndroidLine2"]</p>
                 </div>
             </div>
         </div>

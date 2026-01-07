@@ -13,6 +13,7 @@ html, body {
 
 .landing-container {
     min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -29,53 +30,67 @@ html, body {
 .app-tagline {
     font-size: 1.25rem;
     color: #888;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Main content wächst und drückt Footer nach unten */
+/* Main content grows and pushes footer down */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
 }
 
-    /* Bootstrap Row Fix */
-    .main-content.row {
-        --bs-gutter-x: 2rem;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-/* Areas mit vertikaler & horizontaler Zentrierung */
+/* Areas with vertical & horizontal centering */
 .screenshots-section,
 .download-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 2rem 1rem;
-    min-width: 0;
+    padding: 1rem;
 }
 
 .screenshots-section {
+    flex: 0 0 60%;
     flex-direction: row;
-    gap: 1.5rem;
-    flex-wrap: nowrap;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.screenshots-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.features-list {
+    color: #fff;
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+}
+
+.screenshots-row {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    flex-wrap: nowrap;
+}
+
+.download-section {
+    flex: 0 0 40%;
+    align-items: flex-start;
+    padding-left: 3rem;
 }
 
 .screenshot-placeholder {
-    width: 180px;
-    height: 360px;
+    width: 200px;
+    height: 400px;
     background-color: #1a1a1a;
     border: 1px solid #333;
     border-radius: 12px;
@@ -94,19 +109,21 @@ html, body {
 
 .qr-codes {
     display: flex;
-    gap: 3rem;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: center;
 }
 
 .qr-code-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 1rem;
 }
 
 .qr-placeholder {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background-color: #fff;
     border-radius: 8px;
     display: flex;
@@ -114,17 +131,19 @@ html, body {
     justify-content: center;
     color: #000;
     font-size: 0.75rem;
-    margin-bottom: 0.75rem;
+    flex-shrink: 0;
 }
 
 .qr-code-item p {
     color: #888;
     font-size: 0.875rem;
+    text-align: left;
+    white-space: nowrap;
 }
 
-/* Footer klebt unten */
+/* Footer sticks to bottom */
 .landing-footer {
-    padding: 2rem 0 1rem;
+    padding: 4rem 0 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -133,7 +152,7 @@ html, body {
 
     .landing-footer a {
         color: #555;
-        font-size: 0.75rem;
+        font-size: 1rem;
         text-decoration: none;
         transition: color 0.2s;
     }
@@ -203,23 +222,19 @@ html, body {
         color: #888;
     }
 
-/* Tablet & Mobile: Alles untereinander */
+/* Tablet & Mobile */
 @media (max-width: 991px) {
-    .screenshots-section {
-        margin-bottom: 3rem;
-    }
-
     .main-content {
         flex-direction: column;
+    }
+
+    .screenshots-section,
+    .download-section {
+        flex: 0 1 auto;
     }
 }
 
 @media (max-width: 767px) {
-    .screenshots-section {
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
     .app-title {
         font-size: 2.5rem;
     }
