@@ -137,8 +137,8 @@ html, body {
 .qr-code-item p {
     color: #888;
     font-size: 0.875rem;
-    max-width: 180px;
     text-align: left;
+    white-space: nowrap;
 }
 
 /* Footer sticks to bottom */
