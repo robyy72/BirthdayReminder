@@ -62,60 +62,60 @@
     <value>Birthday Reminder</value>
   </data>
   <data name="AppTagline" xml:space="preserve">
-    <value>Never forget an important birthday again</value>
+    <value>Nunca mais esqueça um aniversário importante</value>
   </data>
   <data name="DownloadTheApp" xml:space="preserve">
-    <value>Download the App</value>
+    <value>Baixar o aplicativo</value>
   </data>
   <data name="iOSLine1" xml:space="preserve">
-    <value>Download and install</value>
+    <value>Baixar e instalar</value>
   </data>
   <data name="iOSLine2" xml:space="preserve">
-    <value>from Apple App Store</value>
+    <value>da Apple App Store</value>
   </data>
   <data name="AndroidLine1" xml:space="preserve">
-    <value>Download and install</value>
+    <value>Baixar e instalar</value>
   </data>
   <data name="AndroidLine2" xml:space="preserve">
-    <value>from Google Play Store</value>
+    <value>da Google Play Store</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contato</value>
   </data>
   <data name="Privacy" xml:space="preserve">
-    <value>Privacy</value>
+    <value>Privacidade</value>
   </data>
   <data name="Imprint" xml:space="preserve">
-    <value>Imprint</value>
+    <value>Informações legais</value>
   </data>
   <data name="BackToHome" xml:space="preserve">
-    <value>Back to Home</value>
+    <value>Voltar ao início</value>
   </data>
   <data name="PrivacyPolicy" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>Política de privacidade</value>
   </data>
   <data name="ContactTitle" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contato</value>
   </data>
   <data name="ContactText" xml:space="preserve">
-    <value>If you have any questions, feedback, or need support, please reach out to us:</value>
+    <value>Se você tiver dúvidas, comentários ou precisar de suporte, entre em contato conosco:</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>E-mail</value>
   </data>
   <data name="ImprintTitle" xml:space="preserve">
-    <value>Imprint</value>
+    <value>Informações legais</value>
   </data>
   <data name="Terms" xml:space="preserve">
-    <value>Terms &amp; Conditions</value>
+    <value>Termos e condições</value>
   </data>
   <data name="TermsAndConditions" xml:space="preserve">
-    <value>Terms and Conditions</value>
+    <value>Termos e condições</value>
   </data>
   <data name="Cancellation" xml:space="preserve">
-    <value>Cancellation</value>
+    <value>Cancelamento</value>
   </data>
   <data name="RightOfWithdrawal" xml:space="preserve">
-    <value>Right of Withdrawal</value>
+    <value>Direito de arrependimento</value>
   </data>
 </root>

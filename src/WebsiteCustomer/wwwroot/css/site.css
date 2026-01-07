@@ -30,7 +30,7 @@ html, body {
 .app-tagline {
     font-size: 1.25rem;
     color: #888;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Main content grows and pushes footer down */
@@ -39,7 +39,7 @@ html, body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
     padding: 0;
 }
@@ -116,8 +116,9 @@ html, body {
 
 .qr-code-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap: 1rem;
 }
 
 .qr-placeholder {
@@ -130,17 +131,19 @@ html, body {
     justify-content: center;
     color: #000;
     font-size: 0.75rem;
-    margin-bottom: 0.75rem;
+    flex-shrink: 0;
 }
 
 .qr-code-item p {
     color: #888;
     font-size: 0.875rem;
+    max-width: 180px;
+    text-align: left;
 }
 
 /* Footer sticks to bottom */
 .landing-footer {
-    padding: 2rem 0 1rem;
+    padding: 4rem 0 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
