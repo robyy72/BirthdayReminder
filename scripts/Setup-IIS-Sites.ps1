@@ -8,7 +8,9 @@ param(
     [string]$DbPassword,
     [string]$DbUsername = "birthdayreminder",
     [string]$DbServer = ".\SQLEXPRESS",
-    [string]$SentryDsn
+    [string]$SentryDsn,
+    [string]$AdminEmail = "admin@birthday-reminder.online",
+    [string]$AdminPassword
 )
 
 Write-Host "=== IIS Sites Setup ===" -ForegroundColor Cyan
@@ -71,6 +73,13 @@ if (-not $DbPassword)
     $secureDbPwd = Read-Host "Enter DbPassword" -AsSecureString
     $DbPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureDbPwd)
+    )
+}
+if (-not $AdminPassword)
+{
+    $secureAdminPwd = Read-Host "Enter Seed:AdminPassword" -AsSecureString
+    $AdminPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureAdminPwd)
     )
 }
 if (-not $SentryDsn)
@@ -138,6 +147,8 @@ foreach ($site in $sites)
     $envVars = @{
         "ConnectionStrings__DefaultConnection" = $connectionString
         "Jwt__Key" = $JwtKey
+        "Seed__AdminEmail" = $AdminEmail
+        "Seed__AdminPassword" = $AdminPassword
     }
     if ($SentryDsn)
     {
@@ -145,8 +156,6 @@ foreach ($site in $sites)
     }
 
     # Clear existing environment variables and set new ones
-    $existingEnvVars = Get-ItemProperty -Path $appPoolPath -Name "environmentVariables" -ErrorAction SilentlyContinue
-
     foreach ($key in $envVars.Keys)
     {
         $value = $envVars[$key]
@@ -154,7 +163,7 @@ foreach ($site in $sites)
         & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/+[name='$($site.AppPool)'].environmentVariables.[name='$key',value='$value']" /commit:apphost 2>$null
         & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/[name='$($site.AppPool)'].environmentVariables.[name='$key'].value:$value" /commit:apphost 2>$null
     }
-    Write-Host "  Set environment variables: ConnectionStrings__DefaultConnection, Jwt__Key$(if($SentryDsn){', Sentry__Dsn'})"
+    Write-Host "  Set environment variables: ConnectionStrings, Jwt:Key, Seed:AdminEmail/Password$(if($SentryDsn){', Sentry:Dsn'})"
 
     # Create Site if not exists
     if (-not (Test-Path "IIS:\Sites\$($site.Name)"))

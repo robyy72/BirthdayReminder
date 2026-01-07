@@ -18,12 +18,12 @@ public static class DbContextInit
 	#region Public Methods
 	/// <summary>
 	/// Aim: Seed the database with initial data if not exists.
-	/// Params: db - the database context, language - language code (en, de).
+	/// Params: db - the database context, adminEmail - admin email from config, adminPassword - admin password from config, language - language code (en, de).
 	/// Return: None.
 	/// </summary>
-	public static async Task SeedAsync(CoreDbContext db, string language = DEFAULT_LANGUAGE)
+	public static async Task SeedAsync(CoreDbContext db, string adminEmail, string adminPassword, string language = DEFAULT_LANGUAGE)
 	{
-		await SeedSystemUsersAsync(db);
+		await SeedSystemUsersAsync(db, adminEmail, adminPassword);
 		await SeedEmailTextsAsync(db, language);
 		await SeedMessengerTextsAsync(db, language);
 	}
@@ -32,17 +32,17 @@ public static class DbContextInit
 	#region Private Methods
 	/// <summary>
 	/// Aim: Seed default admin user.
-	/// Params: db - the database context.
+	/// Params: db - the database context, adminEmail - admin email, adminPassword - admin password.
 	/// Return: None.
 	/// </summary>
-	private static async Task SeedSystemUsersAsync(CoreDbContext db)
+	private static async Task SeedSystemUsersAsync(CoreDbContext db, string adminEmail, string adminPassword)
 	{
 		if (await db.SystemUsers.AnyAsync()) return;
 
 		var admin = new SystemUser
 		{
-			Email = "admin@birthday-reminder.online",
-			PasswordHash = CryptHelper.HashPassword("admin123"),
+			Email = adminEmail,
+			PasswordHash = CryptHelper.HashPassword(adminPassword),
 			DisplayName = "Admin",
 			CreatedAt = DateTimeOffset.UtcNow,
 			IsActive = true

@@ -46,7 +46,10 @@ using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
 	db.Database.EnsureCreated();
-	await DbContextInit.SeedAsync(db);
+
+	var adminEmail = builder.Configuration["Seed:AdminEmail"] ?? throw new InvalidOperationException("Seed:AdminEmail not configured");
+	var adminPassword = builder.Configuration["Seed:AdminPassword"] ?? throw new InvalidOperationException("Seed:AdminPassword not configured");
+	await DbContextInit.SeedAsync(db, adminEmail, adminPassword);
 }
 #endregion
 
