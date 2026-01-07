@@ -64,7 +64,8 @@
       "Bash(Remove-Item -Path \"C:\\\\Solutions\\\\BirthdayReminder\\\\runner\\\\_work\\\\BirthdayReminder\\\\BirthdayReminder\\\\.claude\\\\start.md\" -Force)",
       "Bash(gh:*)",
       "Bash(git:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(pwsh:*)"
     ],
     "deny": []
   }

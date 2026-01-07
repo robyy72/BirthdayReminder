@@ -3,7 +3,7 @@
 		<TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 
-		<UserSecretsId>0c7a75d5-d0e4-471c-b92b-4a755ca16788</UserSecretsId>
+		<UserSecretsId>d5cf0508-0f02-4542-8e1a-72dfcef31cc0</UserSecretsId>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Mobile</RootNamespace>
@@ -23,7 +23,7 @@
 		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>82</ApplicationVersion>
+		<ApplicationVersion>83</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>

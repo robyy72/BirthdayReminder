@@ -1,19 +1,25 @@
 # Setup-Databases.ps1
 # Creates SQL Server databases and user with appropriate permissions
+# Uses Windows Authentication (Trusted Connection) to connect to SQL Server
 
 param(
-    [string]$SqlServer = "localhost",
+    [string]$SqlServer = ".\SQLEXPRESS",
     [string]$Username = "birthdayreminder",
     [string]$Password
 )
 
-$databases = @("BirthdayReminder-Dev", "BirthdayReminder-Prod")
+$databases = @("BirthdayReminder")
 
 Write-Host "=== Database Setup ===" -ForegroundColor Cyan
+Write-Host "Connecting to SQL Server '$SqlServer' using Windows Authentication..." -ForegroundColor Yellow
 
-# Prompt for password if not provided
+# Prompt for password if not provided via parameter
 if (-not $Password)
 {
+    Write-Host ""
+    Write-Host "Password not provided. You can find it in secrets.json:" -ForegroundColor Yellow
+    Write-Host "  %APPDATA%\Microsoft\UserSecrets\d5cf0508-0f02-4542-8e1a-72dfcef31cc0\secrets.json" -ForegroundColor Gray
+    Write-Host ""
     $securePassword = Read-Host "Enter password for SQL user '$Username'" -AsSecureString
     $Password = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
@@ -109,5 +115,5 @@ PRINT 'Roles assigned: db_datareader, db_datawriter, db_ddladmin'
 Write-Host ""
 Write-Host "Database setup completed successfully." -ForegroundColor Green
 Write-Host ""
-Write-Host "Connection string format:" -ForegroundColor Cyan
-Write-Host "Server=$SqlServer;Database=BirthdayReminder-Dev;User Id=$Username;Password=<password>;TrustServerCertificate=True"
+Write-Host "Connection string:" -ForegroundColor Cyan
+Write-Host "Server=$SqlServer;Database=BirthdayReminder;User Id=$Username;Password=<from secrets.json>;TrustServerCertificate=True"

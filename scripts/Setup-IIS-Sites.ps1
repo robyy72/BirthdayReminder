@@ -1,8 +1,14 @@
 # Setup-IIS-Sites.ps1
 # Sets up IIS sites for BirthdayReminder (requires wildcard certificate)
+# Also configures App Pool environment variables for secrets
 
 param(
-    [string]$Domain = "birthday-reminder.online"
+    [string]$Domain = "birthday-reminder.online",
+    [string]$JwtKey,
+    [string]$DbPassword,
+    [string]$DbUsername = "birthdayreminder",
+    [string]$DbServer = ".\SQLEXPRESS",
+    [string]$SentryDsn
 )
 
 Write-Host "=== IIS Sites Setup ===" -ForegroundColor Cyan
@@ -49,6 +55,30 @@ if (-not $cert)
 
 Write-Host "Wildcard certificate found: $($cert.Thumbprint)" -ForegroundColor Green
 $thumbprint = $cert.Thumbprint
+
+# Prompt for secrets if not provided
+Write-Host ""
+Write-Host "=== App Pool Environment Variables ===" -ForegroundColor Cyan
+Write-Host "These values will be set as environment variables on the App Pools." -ForegroundColor Gray
+Write-Host ""
+
+if (-not $JwtKey)
+{
+    $JwtKey = Read-Host "Enter Jwt:Key (64+ chars)"
+}
+if (-not $DbPassword)
+{
+    $secureDbPwd = Read-Host "Enter DbPassword" -AsSecureString
+    $DbPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureDbPwd)
+    )
+}
+if (-not $SentryDsn)
+{
+    $SentryDsn = Read-Host "Enter Sentry DSN (or press Enter to skip)"
+}
+
+$connectionString = "Server=$DbServer;Database=BirthdayReminder;User Id=$DbUsername;Password=$DbPassword;TrustServerCertificate=True;"
 
 # Define sites configuration
 $sites = @(
@@ -102,6 +132,29 @@ foreach ($site in $sites)
     {
         Write-Host "  AppPool exists: $($site.AppPool)"
     }
+
+    # Set environment variables on App Pool
+    $appPoolPath = "IIS:\AppPools\$($site.AppPool)"
+    $envVars = @{
+        "ConnectionStrings__DefaultConnection" = $connectionString
+        "Jwt__Key" = $JwtKey
+    }
+    if ($SentryDsn)
+    {
+        $envVars["Sentry__Dsn"] = $SentryDsn
+    }
+
+    # Clear existing environment variables and set new ones
+    $existingEnvVars = Get-ItemProperty -Path $appPoolPath -Name "environmentVariables" -ErrorAction SilentlyContinue
+
+    foreach ($key in $envVars.Keys)
+    {
+        $value = $envVars[$key]
+        # Use appcmd to set environment variables (more reliable)
+        & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/+[name='$($site.AppPool)'].environmentVariables.[name='$key',value='$value']" /commit:apphost 2>$null
+        & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/[name='$($site.AppPool)'].environmentVariables.[name='$key'].value:$value" /commit:apphost 2>$null
+    }
+    Write-Host "  Set environment variables: ConnectionStrings__DefaultConnection, Jwt__Key$(if($SentryDsn){', Sentry__Dsn'})"
 
     # Create Site if not exists
     if (-not (Test-Path "IIS:\Sites\$($site.Name)"))
