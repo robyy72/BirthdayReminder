@@ -1,30 +1,11 @@
 namespace Common;
 
-public enum PersonNameDirection
+#region App and Subscription
+public enum AppStore
 {
-	NotSet = 0,
-	FirstFirstName = 1,
-	FirstLastName = 2,
-	FirstNameOnly = 3
-}
-
-public enum SupportEntryType
-{
-    NotSet = 0,
-	Error = 1,
-	SupportRequest = 2,
-    FeatureRequest = 3,
-	CustomerFeedback = 4
-}
-
-public enum SupportEntryStatus
-{
-	Created = 1,
-	Assigned = 2,
-	WeAnswered = 3,
-    WaitingForClientAnswer = 4,
-    Successful = 5,
-	Cancelled = 6
+	Unknown = 0,
+	GooglePlayStore = 1,
+	AppleAppStore = 2
 }
 
 public enum SubscriptionTier
@@ -33,8 +14,57 @@ public enum SubscriptionTier
 	Plus,
 	Pro
 }
+#endregion
 
-#region Reminder Method Types
+#region Customer
+public enum PreferredChannel
+{
+	NotSet = 0,
+	Email = 1,
+	Sms = 2,
+	WhatsApp = 3,
+	Signal = 4
+}
+
+public enum PersonNameDirection
+{
+	NotSet = 0,
+	FirstFirstName = 1,
+	FirstLastName = 2,
+	FirstNameOnly = 3
+}
+#endregion
+
+#region Tickets
+public enum TicketType
+{
+	NotSet = 0,
+	Error = 1,
+	SupportRequest = 2,
+	FeatureRequest = 3,
+	CustomerFeedback = 4
+}
+
+public enum TicketSource
+{
+	NotSet = 0,
+	FromCustomerViaApp = 1,
+	FromCustomerViaEmail = 2,
+	ManuallyByAdmin = 3
+}
+
+public enum TicketStatus
+{
+	Created = 1,
+	Assigned = 2,
+	WeAnswered = 3,
+	WaitingForClientAnswer = 4,
+	Successful = 5,
+	Cancelled = 6
+}
+#endregion
+
+#region Reminders
 public enum LocalMethodType
 {
 	Notification,
@@ -58,41 +88,7 @@ public enum NotificationPriority
 }
 #endregion
 
-#region Support
-public enum TicketStatus
-{
-	Open = 1,
-	InProgress = 2,
-	Closed = 3
-}
-
-public enum Store
-{
-	Unknown = 0,
-	GooglePlay = 1,
-	Apple = 2
-}
-
-public enum PreferredChannel
-{
-	NotSet = 0,
-	Email = 1,
-	Sms = 2,
-	WhatsApp = 3,
-	Signal = 4
-}
-
-public enum SupportSource
-{
-	NotSet = 0,
-	Mobile = 1,
-	SystemUser = 2,
-	ContactFormular = 3,
-	DirectEmail = 4
-}
-#endregion
-
-#region Database
+#region Infrastructure
 public enum DatabaseProviderType
 {
 	NotSet = 0,

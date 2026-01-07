@@ -171,7 +171,7 @@ public class ApiService
 	/// Params: message - support message, type - ticket type.
 	/// Return: Created ticket ID or -1 if failed.
 	/// </summary>
-	public async Task<int> SendSupportTicketAsync(string message, SupportEntryType type = SupportEntryType.SupportRequest)
+	public async Task<int> SendSupportTicketAsync(string message, TicketType type = TicketType.SupportRequest)
 	{
 		try
 		{

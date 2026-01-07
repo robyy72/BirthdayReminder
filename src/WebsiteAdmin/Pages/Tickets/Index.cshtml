@@ -1,5 +1,5 @@
 @page
-@model IndexModel
+@model WebsiteAdmin.Pages.Tickets.IndexModel
 @{
     ViewData["Title"] = "Support Tickets";
 }
@@ -16,7 +16,7 @@
                 <!-- Filter Form -->
                 <form method="get" class="mb-3">
                     <div class="row g-2">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <select asp-for="Filter.Status" class="form-select form-select-sm">
                                 <option value="">All Status</option>
                                 @foreach (var status in Enum.GetValues<Common.TicketStatus>())
@@ -25,20 +25,14 @@
                                 }
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <select asp-for="Filter.Type" class="form-select form-select-sm">
                                 <option value="">All Types</option>
-                                @foreach (var type in Enum.GetValues<Common.SupportEntryType>())
+                                @foreach (var type in Enum.GetValues<Common.TicketType>().Where(t => t != Common.TicketType.NotSet))
                                 {
                                     <option value="@type">@type</option>
                                 }
                             </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input asp-for="Filter.OnlyUnassigned" class="form-check-input" type="checkbox" />
-                                <label asp-for="Filter.OnlyUnassigned" class="form-check-label small">Unassigned</label>
-                            </div>
                         </div>
                     </div>
                     <div class="row g-2 mt-1">
@@ -56,7 +50,7 @@
                     @foreach (var ticket in Model.Tickets)
                     {
                         var isSelected = Model.SelectedId == ticket.Id;
-                        <a asp-page="/Index" asp-route-SelectedId="@ticket.Id"
+                        <a asp-page="/Tickets/Index" asp-route-SelectedId="@ticket.Id"
                            class="list-group-item list-group-item-action @(isSelected ? "active" : "")">
                             <div class="d-flex w-100 justify-content-between">
                                 <small class="fw-bold">#@ticket.Id</small>
@@ -68,9 +62,12 @@
                                 @{
                                     var statusClass = ticket.Status switch
                                     {
-                                        Common.TicketStatus.Open => "bg-warning",
-                                        Common.TicketStatus.InProgress => "bg-info",
-                                        Common.TicketStatus.Closed => "bg-success",
+                                        Common.TicketStatus.Created => "bg-warning",
+                                        Common.TicketStatus.Assigned => "bg-info",
+                                        Common.TicketStatus.WeAnswered => "bg-primary",
+                                        Common.TicketStatus.WaitingForClientAnswer => "bg-secondary",
+                                        Common.TicketStatus.Successful => "bg-success",
+                                        Common.TicketStatus.Cancelled => "bg-dark",
                                         _ => "bg-secondary"
                                     };
                                 }
@@ -97,9 +94,12 @@
                     @{
                         var detailStatusClass = Model.SelectedTicket.Status switch
                         {
-                            Common.TicketStatus.Open => "bg-warning",
-                            Common.TicketStatus.InProgress => "bg-info",
-                            Common.TicketStatus.Closed => "bg-success",
+                            Common.TicketStatus.Created => "bg-warning",
+                            Common.TicketStatus.Assigned => "bg-info",
+                            Common.TicketStatus.WeAnswered => "bg-primary",
+                            Common.TicketStatus.WaitingForClientAnswer => "bg-secondary",
+                            Common.TicketStatus.Successful => "bg-success",
+                            Common.TicketStatus.Cancelled => "bg-dark",
                             _ => "bg-secondary"
                         };
                     }
@@ -129,31 +129,17 @@
                     </table>
 
                     <!-- Status Actions -->
-                    <div class="btn-group btn-group-sm mb-3">
-                        @if (Model.SelectedTicket.Status != Common.TicketStatus.InProgress)
-                        {
-                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
-                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
-                                <input type="hidden" name="status" value="@Common.TicketStatus.InProgress" />
-                                <button type="submit" class="btn btn-info btn-sm">In Progress</button>
-                            </form>
-                        }
-                        @if (Model.SelectedTicket.Status != Common.TicketStatus.Closed)
-                        {
-                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline ms-1">
-                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
-                                <input type="hidden" name="status" value="@Common.TicketStatus.Closed" />
-                                <button type="submit" class="btn btn-success btn-sm">Close</button>
-                            </form>
-                        }
-                        @if (Model.SelectedTicket.Status == Common.TicketStatus.Closed)
-                        {
-                            <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
-                                <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
-                                <input type="hidden" name="status" value="@Common.TicketStatus.Open" />
-                                <button type="submit" class="btn btn-warning btn-sm">Reopen</button>
-                            </form>
-                        }
+                    <div class="mb-3">
+                        <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
+                            <input type="hidden" name="ticketId" value="@Model.SelectedTicket.Id" />
+                            <select name="status" class="form-select form-select-sm d-inline-block w-auto">
+                                @foreach (var status in Enum.GetValues<Common.TicketStatus>())
+                                {
+                                    <option value="@status" selected="@(Model.SelectedTicket.Status == status)">@status</option>
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                        </form>
                     </div>
 
                     <!-- Initial Message -->

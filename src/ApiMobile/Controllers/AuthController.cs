@@ -95,7 +95,7 @@ public class RegisterRequest
 	public Guid UserId { get; set; }
 	public string? Email { get; set; }
 	public string? PhoneNumber { get; set; }
-	public Common.Store Store { get; set; } = Common.Store.Unknown;
+	public Common.AppStore Store { get; set; } = Common.AppStore.Unknown;
 }
 
 public class RefreshRequest

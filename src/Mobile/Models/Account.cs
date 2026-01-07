@@ -14,7 +14,7 @@ public class Account
 	public string? Email { get; set; }
 	public string? PhoneNumber { get; set; }
 	public string? PurchaseToken { get; set; }
-	public Store Store { get; set; } = Store.Unknown;
+	public AppStore Store { get; set; } = AppStore.Unknown;
 	public PreferredChannel PreferredChannel { get; set; } = PreferredChannel.NotSet;
 	public SubscriptionTier Subscription { get; set; } = SubscriptionTier.Free;
 	public DateTime? ValidUntil { get; set; }

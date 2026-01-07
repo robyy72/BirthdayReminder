@@ -10,9 +10,8 @@ namespace WebsiteAdmin;
 public class TicketFilter
 {
 	public TicketStatus? Status { get; set; }
-	public SupportEntryType? Type { get; set; }
+	public TicketType? Type { get; set; }
 	public string? SearchText { get; set; }
 	public DateTime? FromDate { get; set; }
 	public DateTime? ToDate { get; set; }
-	public bool OnlyUnassigned { get; set; }
 }

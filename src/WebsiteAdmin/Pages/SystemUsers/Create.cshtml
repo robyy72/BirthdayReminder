@@ -1,0 +1,34 @@
+@page
+@model WebsiteAdmin.Pages.SystemUsers.CreateModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Create User</h1>
+    <a asp-page="/SystemUsers/Index" class="btn btn-outline-secondary">Back to List</a>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DisplayName" class="form-label">Display Name</label>
+                        <input asp-for="DisplayName" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" required minlength="6" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

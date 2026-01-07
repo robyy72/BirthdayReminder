@@ -22,11 +22,11 @@ public class SupportTicket
 	[Required]
 	public string Message { get; set; } = string.Empty;
 
-	public SupportEntryType Type { get; set; } = SupportEntryType.SupportRequest;
+	public TicketType Type { get; set; } = TicketType.SupportRequest;
 
-	public SupportSource Source { get; set; } = SupportSource.NotSet;
+	public TicketSource Source { get; set; } = TicketSource.NotSet;
 
-	public TicketStatus Status { get; set; } = TicketStatus.Open;
+	public TicketStatus Status { get; set; } = TicketStatus.Created;
 
 	public int? SystemUserId { get; set; }
 

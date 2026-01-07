@@ -79,5 +79,79 @@ public class AuthService
 
 		return true;
 	}
+
+	/// <summary>
+	/// Aim: Get all system users.
+	/// Params: None.
+	/// Return (List of SystemUser): All system users.
+	/// </summary>
+	public async Task<List<SystemUser>> GetAllUsersAsync()
+	{
+		var users = await _db.SystemUsers
+			.OrderBy(u => u.Email)
+			.ToListAsync();
+
+		return users;
+	}
+
+	/// <summary>
+	/// Aim: Create a new system user.
+	/// Params: email, password, displayName.
+	/// Return (SystemUser): Created user.
+	/// </summary>
+	public async Task<SystemUser> CreateUserAsync(string email, string password, string? displayName)
+	{
+		var user = new SystemUser
+		{
+			Email = email,
+			PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
+			DisplayName = displayName,
+			IsActive = true
+		};
+
+		_db.SystemUsers.Add(user);
+		await _db.SaveChangesAsync();
+
+		return user;
+	}
+
+	/// <summary>
+	/// Aim: Update system user.
+	/// Params: id, email, displayName, isActive.
+	/// Return (bool): True if successful.
+	/// </summary>
+	public async Task<bool> UpdateUserAsync(int id, string email, string? displayName, bool isActive)
+	{
+		var user = await _db.SystemUsers.FindAsync(id);
+		if (user == null)
+		{
+			return false;
+		}
+
+		user.Email = email;
+		user.DisplayName = displayName;
+		user.IsActive = isActive;
+
+		await _db.SaveChangesAsync();
+		return true;
+	}
+
+	/// <summary>
+	/// Aim: Delete system user.
+	/// Params: id - user ID.
+	/// Return (bool): True if successful.
+	/// </summary>
+	public async Task<bool> DeleteUserAsync(int id)
+	{
+		var user = await _db.SystemUsers.FindAsync(id);
+		if (user == null)
+		{
+			return false;
+		}
+
+		_db.SystemUsers.Remove(user);
+		await _db.SaveChangesAsync();
+		return true;
+	}
 	#endregion
 }

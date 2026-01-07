@@ -1,5 +1,5 @@
 @page "{id:int}"
-@model TicketDetailModel
+@model WebsiteAdmin.Pages.Tickets.DetailModel
 @{
     ViewData["Title"] = $"Ticket #{Model.Ticket?.Id}";
 }
@@ -12,7 +12,7 @@ else
 {
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Ticket #@Model.Ticket.Id</h1>
-        <a href="/Tickets" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-page="/Tickets/Index" class="btn btn-outline-secondary">Back to List</a>
     </div>
 
     <div class="row">
@@ -42,9 +42,10 @@ else
                         <div class="mb-3">
                             <label class="form-label">Status</label>
                             <select name="status" class="form-select">
-                                <option value="Open" selected="@(Model.Ticket.Status == Common.TicketStatus.Open)">Open</option>
-                                <option value="InProgress" selected="@(Model.Ticket.Status == Common.TicketStatus.InProgress)">In Progress</option>
-                                <option value="Closed" selected="@(Model.Ticket.Status == Common.TicketStatus.Closed)">Closed</option>
+                                @foreach (var status in Enum.GetValues<Common.TicketStatus>())
+                                {
+                                    <option value="@status" selected="@(Model.Ticket.Status == status)">@status</option>
+                                }
                             </select>
                         </div>
                         <div class="mb-3">

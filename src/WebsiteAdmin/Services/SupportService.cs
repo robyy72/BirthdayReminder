@@ -58,7 +58,7 @@ public class SupportService
 			{
 				user.PurchaseToken = dto.PurchaseToken;
 			}
-			if (dto.Store != Store.Unknown)
+			if (dto.Store != AppStore.Unknown)
 			{
 				user.Store = dto.Store;
 			}
@@ -70,7 +70,7 @@ public class SupportService
 			Message = dto.Message,
 			Type = dto.Type,
 			Source = dto.Source,
-			Status = TicketStatus.Open
+			Status = TicketStatus.Created
 		};
 
 		_db.SupportTickets.Add(ticket);
@@ -88,7 +88,7 @@ public class SupportService
 		var tickets = await _db.SupportTickets
 			.Include(t => t.customer)
 			.Include(t => t.systemUser)
-			.Where(t => t.Status != TicketStatus.Closed)
+			.Where(t => t.Status != TicketStatus.Successful && t.Status != TicketStatus.Cancelled)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();
 
@@ -155,7 +155,7 @@ public class SupportService
 			ticket.AdminNotes = adminNotes;
 		}
 
-		if (status == TicketStatus.Closed)
+		if (status == TicketStatus.Successful || status == TicketStatus.Cancelled)
 		{
 			ticket.ClosedAt = DateTimeOffset.UtcNow;
 		}
@@ -178,7 +178,7 @@ public class SupportService
 		}
 
 		ticket.SystemUserId = adminId;
-		ticket.Status = TicketStatus.InProgress;
+		ticket.Status = TicketStatus.Assigned;
 		ticket.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
@@ -237,11 +237,6 @@ public class SupportService
 		if (filter.ToDate.HasValue)
 		{
 			query = query.Where(t => t.CreatedAt <= filter.ToDate.Value);
-		}
-
-		if (filter.OnlyUnassigned)
-		{
-			query = query.Where(t => t.SystemUserId == null);
 		}
 
 		var tickets = await query

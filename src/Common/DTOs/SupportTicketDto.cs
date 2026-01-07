@@ -10,7 +10,7 @@ public class SupportTicketDto
 	public string? Email { get; set; }
 	public string? PhoneNumber { get; set; }
 	public string? PurchaseToken { get; set; }
-	public Store Store { get; set; } = Store.Unknown;
-	public SupportEntryType Type { get; set; } = SupportEntryType.SupportRequest;
-	public SupportSource Source { get; set; } = SupportSource.Mobile;
+	public AppStore Store { get; set; } = AppStore.Unknown;
+	public TicketType Type { get; set; } = TicketType.SupportRequest;
+	public TicketSource Source { get; set; } = TicketSource.FromCustomerViaApp;
 }
