@@ -1,4 +1,4 @@
-namespace Mobile;
+﻿namespace Mobile;
 
 public static class MobileConstants
 {
@@ -41,6 +41,10 @@ public static class MobileConstants
 	public const string YEARS_DISPLAY_NOT = "1,1604,1900,1904";
 	#endregion
 
+	#region Sentry
+	public const string SENTRY_DSN = "https://a7322c361a63c2577a1afa16efe302bb@o4510638147829760.ingest.de.sentry.io/4510638162116688";
+	#endregion
+
 	#region Errors
 	public const string ERROR_DB_FILENAME = "errors.db";
 	public const int ERROR_RETENTION_DAYS = 30;
@@ -58,3 +62,4 @@ public static class MobileConstants
 	public const string PREFS_BROKEN_TIMESTAMP = "BrokenTimestamp";
 	#endregion
 }
+

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
@@ -17,15 +17,6 @@
 
         <ScrollView Grid.Row="1">
             <Grid RowDefinitions="*,Auto" Padding="30">
-                <FlyoutBase.ContextFlyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="{x:Static resx:Resources.General_Button_Edit}"
-                                        Clicked="OnEditMenuClicked" />
-                        <MenuFlyoutItem Text="{x:Static resx:Resources.General_Button_Delete}"
-                                        Clicked="OnDeleteMenuClicked" />
-                    </MenuFlyout>
-                </FlyoutBase.ContextFlyout>
-
                 <!-- Content -->
                 <VerticalStackLayout Grid.Row="0" Spacing="20" VerticalOptions="Center">
 
@@ -92,3 +83,4 @@
     </Grid>
 
 </ContentPage>
+

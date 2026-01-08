@@ -1,12 +1,17 @@
-namespace Mobile;
+﻿namespace Mobile;
 
 public partial class StartPage_2 : ContentPage
 {
+	#region Private Fields
+	private bool _isLoading = true;
+	#endregion
+
 	#region Constructor
 	public StartPage_2()
 	{
 		InitializeComponent();
 		LoadSettings();
+		_isLoading = false;
 	}
 	#endregion
 
@@ -94,7 +99,7 @@ public partial class StartPage_2 : ContentPage
 	#region Event Handlers
 	private void OnLanguageChanged(object? sender, CheckedChangedEventArgs e)
 	{
-		if (!e.Value) return;
+		if (_isLoading || !e.Value) return;
 
 		string locale = RadioLanguageDe.IsChecked == true ? "de" : "en";
 		App.Account.Locale = locale;
@@ -110,7 +115,7 @@ public partial class StartPage_2 : ContentPage
 
 	private void OnThemeChanged(object? sender, CheckedChangedEventArgs e)
 	{
-		if (!e.Value) return;
+		if (_isLoading || !e.Value) return;
 
 		string theme = RadioThemeDark.IsChecked == true ? "Dark" : "Light";
 		App.Account.Theme = theme;
@@ -135,3 +140,7 @@ public partial class StartPage_2 : ContentPage
 	}
 	#endregion
 }
+
+
+
+

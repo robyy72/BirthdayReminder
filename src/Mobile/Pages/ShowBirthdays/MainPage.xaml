@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
@@ -19,16 +19,6 @@
 
         <!-- Content -->
         <ScrollView Grid.Row="1" Padding="20">
-            <FlyoutBase.ContextFlyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="{x:Static resx:Resources.Page_Main_NewBirthday}"
-                                    Clicked="OnNewBirthdayClicked" />
-                    <MenuFlyoutItem Text="{x:Static resx:Resources.Page_AllBirthdays_Title}"
-                                    Clicked="OnAllBirthdaysClicked" />
-                    <MenuFlyoutItem Text="{x:Static resx:Resources.Page_Settings_Title}"
-                                    Clicked="OnSettingsClicked" />
-                </MenuFlyout>
-            </FlyoutBase.ContextFlyout>
             <VerticalStackLayout Spacing="15">
                 <!-- Upcoming Birthdays Section -->
                 <Label x:Name="UpcomingBirthdaysLabel"
@@ -133,3 +123,4 @@
                               Grid.RowSpan="2" />
     </Grid>
 </ContentPage>
+

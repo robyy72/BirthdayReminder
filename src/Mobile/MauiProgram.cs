@@ -1,6 +1,4 @@
-#region Usings
-using System.Reflection;
-using Microsoft.Extensions.Configuration;
+﻿#region Usings
 using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
 #endregion
@@ -13,11 +11,7 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 
-		var config = new ConfigurationBuilder()
-			.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true)
-			.Build();
-
-		string? sentryDsn = config["Sentry:Dsn"];
+		string sentryDsn = MobileConstants.SENTRY_DSN;
 		SentryService.Initialize(sentryDsn);
 
 		builder
@@ -25,10 +19,7 @@ public static class MauiProgram
 			.UseLocalNotification()
 			.UseSentry(options =>
 			{
-				if (!string.IsNullOrWhiteSpace(sentryDsn))
-				{
-					options.Dsn = sentryDsn;
-				}
+				options.Dsn = sentryDsn ?? "";
 #if DEBUG
 				options.Environment = "development";
 #else
@@ -56,3 +47,4 @@ public static class MauiProgram
 		return builder.Build();
 	}
 }
+
