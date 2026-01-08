@@ -51,7 +51,14 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
-	db.Database.EnsureCreated();
+
+	if (app.Environment.IsDevelopment())
+	{
+		if (!db.Database.CanConnect())
+			throw new InvalidOperationException("Database does not exist. Run Setup-Databases.ps1 first.");
+	}
+
+	db.Database.Migrate();
 
 	var adminEmail = builder.Configuration["Seed:AdminEmail"] ?? throw new InvalidOperationException("Seed:AdminEmail not configured");
 	var adminPassword = builder.Configuration["Seed:AdminPassword"] ?? throw new InvalidOperationException("Seed:AdminPassword not configured");
