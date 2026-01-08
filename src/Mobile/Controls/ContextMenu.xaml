@@ -22,8 +22,10 @@
                 HorizontalOptions="End"
                 WidthRequest="180"
                 AnchorX="1"
-                ScaleX="0"
-                Shadow="{Shadow Brush=Black, Offset='-3,3', Radius=8, Opacity=0.3}">
+                ScaleX="0">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="-3,3" Radius="8" Opacity="0.3" />
+            </Border.Shadow>
 
             <!-- Menu Items -->
             <VerticalStackLayout x:Name="MenuItemsContainer"

@@ -22,8 +22,10 @@
                 Padding="0"
                 HorizontalOptions="Start"
                 WidthRequest="250"
-                Shadow="{Shadow Brush=Black, Offset='5,5', Radius=10, Opacity=0.3}"
                 TranslationX="-250">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3" />
+            </Border.Shadow>
 
             <Grid RowDefinitions="60,*,Auto">
 
