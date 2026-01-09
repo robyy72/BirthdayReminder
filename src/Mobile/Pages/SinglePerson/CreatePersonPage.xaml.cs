@@ -219,25 +219,21 @@ public partial class CreatePersonPage : ContentPage
         if (matches.Count == 0)
             return;
 
+        var nameDirection = App.Account.PersonNameDirection;
+
         foreach (var person in matches)
         {
-            var label = new Label
+            string displayName = PersonHelper.GetDisplayName(person.FirstName, person.LastName, nameDirection);
+            string dateDisplay = person.Birthday != null ? BirthdayHelper.GetDateDisplay(person.Birthday) : string.Empty;
+
+            var tile = new TilePersonResult
             {
-                Text = person.DisplayName,
-                Style = ResourceHelper.GetStyle("LabelInfo"),
-                Padding = new Thickness(10, 8),
-                TextDecorations = TextDecorations.Underline
+                DisplayName = displayName,
+                DateDisplay = dateDisplay,
+                PersonId = person.Id
             };
 
-            var tapGesture = new TapGestureRecognizer();
-            int personId = person.Id;
-            tapGesture.Tapped += async (s, e) =>
-            {
-                await App.NavigateToAsync<EditPersonPage>(personId);
-            };
-            label.GestureRecognizers.Add(tapGesture);
-
-            FoundBirthdaysList.Children.Add(label);
+            FoundBirthdaysList.Children.Add(tile);
         }
 
         FoundBirthdaysCard.IsVisible = true;

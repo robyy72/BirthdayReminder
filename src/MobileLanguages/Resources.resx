@@ -683,7 +683,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Search for an existing entry or create a new one.</value>
   </data>
   <data name="SearchPerson_SearchHeader" xml:space="preserve">
-    <value>Search</value>
+    <value>Search Results</value>
   </data>
   <data name="SearchPerson_SearchPlaceholder" xml:space="preserve">
     <value>Enter name...</value>
@@ -696,7 +696,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   </data>
   <!-- Found Birthdays -->
   <data name="FoundBirthdays_Header" xml:space="preserve">
-    <value>Found birthdays</value>
+    <value>Found same birthdays</value>
   </data>
   <!-- Error Messages -->
   <data name="Error_NameRequired" xml:space="preserve">

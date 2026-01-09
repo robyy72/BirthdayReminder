@@ -283,6 +283,10 @@
         <Setter Property="Padding" Value="12,10" />
     </Style>
 
+    <Style TargetType="Border" x:Key="TilePersonResult" BasedOn="{StaticResource Tile}">
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
     <!-- ==================== CARDS ==================== -->
 
     <Style TargetType="Border" x:Key="Card">

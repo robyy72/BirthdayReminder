@@ -62,54 +62,18 @@ public partial class SearchPersonPage : ContentPage
 		ResultsCard.IsVisible = true;
 	}
 
-	private Border CreatePersonTile(Person person)
+	private TilePersonResult CreatePersonTile(Person person)
 	{
 		var nameDirection = App.Account.PersonNameDirection;
 		string displayName = PersonHelper.GetDisplayName(person.FirstName, person.LastName, nameDirection);
 		string dateDisplay = person.Birthday != null ? BirthdayHelper.GetDateDisplay(person.Birthday) : string.Empty;
 
-		var tile = new Border
+		var tile = new TilePersonResult
 		{
-			Style = ResourceHelper.GetStyle("Tile")
+			DisplayName = displayName,
+			DateDisplay = dateDisplay,
+			PersonId = person.Id
 		};
-
-		var grid = new Grid
-		{
-			ColumnDefinitions = new ColumnDefinitionCollection
-			{
-				new ColumnDefinition { Width = GridLength.Star },
-				new ColumnDefinition { Width = GridLength.Auto }
-			},
-			Padding = new Thickness(15, 12)
-		};
-
-		var nameLabel = new Label
-		{
-			Text = displayName,
-			Style = ResourceHelper.GetStyle("LabelInfo"),
-			VerticalOptions = LayoutOptions.Center
-		};
-
-		var dateLabel = new Label
-		{
-			Text = dateDisplay,
-			Style = ResourceHelper.GetStyle("LabelDescription"),
-			VerticalOptions = LayoutOptions.Center
-		};
-		Grid.SetColumn(dateLabel, 1);
-
-		grid.Children.Add(nameLabel);
-		grid.Children.Add(dateLabel);
-
-		tile.Content = grid;
-
-		var tapGesture = new TapGestureRecognizer();
-		int personId = person.Id;
-		tapGesture.Tapped += async (s, e) =>
-		{
-			await App.NavigateToAsync<EditPersonPage>(personId);
-		};
-		tile.GestureRecognizers.Add(tapGesture);
 
 		return tile;
 	}
