@@ -285,6 +285,7 @@
 
     <Style TargetType="Border" x:Key="TilePersonResult" BasedOn="{StaticResource Tile}">
         <Setter Property="Padding" Value="0" />
+        <Setter Property="Shadow" Value="{x:Null}" />
     </Style>
 
     <!-- ==================== CARDS ==================== -->
