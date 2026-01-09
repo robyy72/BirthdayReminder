@@ -23,7 +23,7 @@
 		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>92</ApplicationVersion>
+		<ApplicationVersion>93</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -43,6 +43,9 @@
 	<ItemGroup>
 		<!-- App Icon (bereits mit Hintergrund und Design, keine Foreground/Color nötig) -->
 		<MauiIcon Include="Resources\AppIcon\appicon.png" BaseSize="512,512" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#0066CC" BaseSize="128,128" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

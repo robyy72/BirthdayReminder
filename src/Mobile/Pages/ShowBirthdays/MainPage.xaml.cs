@@ -38,12 +38,12 @@ public partial class MainPage : ContentPage
 		AccountService.CheckRightsAndUpdateAccount();
 		if (App.NeedsReadContacts)
 		{
-			ContactsService.ReadContactsIfAllowed();
+			await ContactsService.ReadContactsIfAllowedAsync();
 			if (App.Contacts.Count > 0)
 			{
-                await App.NavigateToAsync<SyncContactsToPersonsPage>();
-            }
-        }
+				await App.NavigateToAsync<SyncContactsToPersonsPage>();
+			}
+		}
 	}
     #endregion
 

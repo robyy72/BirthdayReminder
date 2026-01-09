@@ -18,7 +18,7 @@ public partial class ContactsService
 	/// <summary>
 	/// Aim: Reads contacts into App.Contacts if allowed. If Persons is empty, copies contacts to Persons.
 	/// </summary>
-	public static async void ReadContactsIfAllowed()
+	public static async Task ReadContactsIfAllowedAsync()
 	{
 		if (!AccountService.UseContacts())
 			return;

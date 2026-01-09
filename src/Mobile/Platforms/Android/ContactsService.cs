@@ -19,6 +19,11 @@ public partial class ContactsService
 	/// </summary>
 	public partial Task<List<Contact>> GetContactsAsync(bool onlyWithBirthday)
 	{
+		return Task.Run(() => GetContactsSync(onlyWithBirthday));
+	}
+
+	private static List<Contact> GetContactsSync(bool onlyWithBirthday)
+	{
 		var results = new List<Contact>();
 
 		try
@@ -26,14 +31,17 @@ public partial class ContactsService
 			var context = Platform.CurrentActivity ?? Android.App.Application.Context;
 			var contentResolver = context.ContentResolver;
 			if (contentResolver == null)
-				return Task.FromResult(results);
+				return results;
 
 			var uri = ContactsContract.Data.ContentUri;
 			if (uri == null)
-				return Task.FromResult(results);
+				return results;
 
-			// Get all contacts with birthdays
+			// Batch load all birthdays
 			var contactBirthdays = GetContactBirthdays(contentResolver, uri);
+
+			// Batch load all names
+			var contactNames = GetAllContactNames(contentResolver);
 
 			int idCounter = 1;
 			if (onlyWithBirthday)
@@ -47,17 +55,18 @@ public partial class ContactsService
 					if (!TryParseBirthday(dateString, out Birthday? birthday) || birthday == null)
 						continue;
 
-					var (firstName, lastName) = GetContactName(contentResolver, contactId);
+					if (!contactNames.TryGetValue(contactId, out var names))
+						continue;
 
-					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+					if (string.IsNullOrWhiteSpace(names.FirstName) && string.IsNullOrWhiteSpace(names.LastName))
 						continue;
 
 					var contact = new Contact
 					{
 						Id = idCounter++,
-						FirstName = firstName,
-						LastName = lastName,
-						DisplayName = $"{lastName}, {firstName}".Trim(' ', ','),
+						FirstName = names.FirstName,
+						LastName = names.LastName,
+						DisplayName = FormatDisplayName(names.FirstName, names.LastName),
 						Birthday = birthday
 					};
 
@@ -67,13 +76,12 @@ public partial class ContactsService
 			else
 			{
 				// Return ALL contacts, with or without birthday
-				var allContactIds = GetAllContactIds(contentResolver);
-
-				foreach (string contactId in allContactIds)
+				foreach (var kvp in contactNames)
 				{
-					var (firstName, lastName) = GetContactName(contentResolver, contactId);
+					string contactId = kvp.Key;
+					var names = kvp.Value;
 
-					if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
+					if (string.IsNullOrWhiteSpace(names.FirstName) && string.IsNullOrWhiteSpace(names.LastName))
 						continue;
 
 					Birthday? birthday = null;
@@ -85,9 +93,9 @@ public partial class ContactsService
 					var contact = new Contact
 					{
 						Id = idCounter++,
-						FirstName = firstName,
-						LastName = lastName,
-						DisplayName = $"{lastName}, {firstName}".Trim(' ', ','),
+						FirstName = names.FirstName,
+						LastName = names.LastName,
+						DisplayName = FormatDisplayName(names.FirstName, names.LastName),
 						Birthday = birthday
 					};
 
@@ -100,40 +108,66 @@ public partial class ContactsService
 			System.Diagnostics.Debug.WriteLine($"Error reading Android contacts: {ex.Message}");
 		}
 
-		return Task.FromResult(results);
+		return results;
+	}
+
+	private static string FormatDisplayName(string firstName, string lastName)
+	{
+		if (string.IsNullOrWhiteSpace(lastName))
+			return firstName;
+		if (string.IsNullOrWhiteSpace(firstName))
+			return lastName;
+		return $"{lastName}, {firstName}";
 	}
 
 	/// <summary>
-	/// Aim: Gets all contact IDs from the device.
+	/// Aim: Batch loads all contact names.
 	/// Params: contentResolver - Android content resolver
-	/// Return: HashSet of contact IDs
+	/// Return: Dictionary mapping contact ID to (FirstName, LastName)
 	/// </summary>
-	private static HashSet<string> GetAllContactIds(ContentResolver contentResolver)
+	private static Dictionary<string, (string FirstName, string LastName)> GetAllContactNames(ContentResolver contentResolver)
 	{
-		var contactIds = new HashSet<string>();
+		var contactNames = new Dictionary<string, (string FirstName, string LastName)>();
 
-		var contactsUri = ContactsContract.Contacts.ContentUri;
-		if (contactsUri == null)
-			return contactIds;
+		var uri = ContactsContract.Data.ContentUri;
+		if (uri == null)
+			return contactNames;
 
-		string[] projection = [ContactsContract.Contacts.InterfaceConsts.Id];
+		string[] projection =
+		[
+			ContactsContract.Data.InterfaceConsts.ContactId,
+			ContactsContract.CommonDataKinds.StructuredName.GivenName,
+			ContactsContract.CommonDataKinds.StructuredName.FamilyName
+		];
 
-		using var cursor = contentResolver.Query(contactsUri, projection, null, null, null);
+		string selection = $"{ContactsContract.Data.InterfaceConsts.Mimetype} = ?";
+		string[] selectionArgs = [ContactsContract.CommonDataKinds.StructuredName.ContentItemType];
+
+		using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
 		if (cursor == null)
-			return contactIds;
+			return contactNames;
 
-		int idIndex = cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.Id);
+		int contactIdIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.ContactId);
+		int givenNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GivenName);
+		int familyNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FamilyName);
 
 		while (cursor.MoveToNext())
 		{
-			string? id = cursor.GetString(idIndex);
-			if (!string.IsNullOrWhiteSpace(id))
-			{
-				contactIds.Add(id);
-			}
+			string? contactId = cursor.GetString(contactIdIndex);
+			if (string.IsNullOrWhiteSpace(contactId))
+				continue;
+
+			// Only take first name entry per contact (skip duplicates)
+			if (contactNames.ContainsKey(contactId))
+				continue;
+
+			string firstName = cursor.GetString(givenNameIndex) ?? string.Empty;
+			string lastName = cursor.GetString(familyNameIndex) ?? string.Empty;
+
+			contactNames[contactId] = (firstName, lastName);
 		}
 
-		return contactIds;
+		return contactNames;
 	}
 
 	/// <summary>
@@ -171,39 +205,6 @@ public partial class ContactsService
 		}
 
 		return contactBirthdays;
-	}
-
-	/// <summary>
-	/// Aim: Gets first and last name for a contact from StructuredName.
-	/// Params: contentResolver - Android content resolver, contactId - Contact ID
-	/// Return: Tuple with first name and last name
-	/// </summary>
-	private static (string FirstName, string LastName) GetContactName(ContentResolver contentResolver, string contactId)
-	{
-		var uri = ContactsContract.Data.ContentUri;
-		if (uri == null)
-			return (string.Empty, string.Empty);
-
-		string[] projection =
-		[
-			ContactsContract.CommonDataKinds.StructuredName.GivenName,
-			ContactsContract.CommonDataKinds.StructuredName.FamilyName
-		];
-
-		string selection = $"{ContactsContract.Data.InterfaceConsts.ContactId} = ? AND {ContactsContract.Data.InterfaceConsts.Mimetype} = ?";
-		string[] selectionArgs = [contactId, ContactsContract.CommonDataKinds.StructuredName.ContentItemType];
-
-		using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
-		if (cursor == null || !cursor.MoveToFirst())
-			return (string.Empty, string.Empty);
-
-		int givenNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GivenName);
-		int familyNameIndex = cursor.GetColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FamilyName);
-
-		string firstName = cursor.GetString(givenNameIndex) ?? string.Empty;
-		string lastName = cursor.GetString(familyNameIndex) ?? string.Empty;
-
-		return (firstName, lastName);
 	}
 
 	private static bool TryParseBirthday(string dateString, out Birthday? birthday)
@@ -245,7 +246,7 @@ public partial class ContactsService
 		FirstName = person.FirstName,
 		LastName = person.LastName,
 		Birthday = person.Birthday,
-		DisplayName = $"{person.LastName}, {person.FirstName}".Trim(' ', ',')
+		DisplayName = FormatDisplayName(person.FirstName, person.LastName)
 	};
 
 	public static partial PersonNameDirection GetDeviceNameOrder()
@@ -253,7 +254,7 @@ public partial class ContactsService
 		int countWithComma = 0;
 		foreach (var contact in App.Contacts)
 		{
-			if (contact.DisplayName.Contains(","))
+			if (contact.DisplayName.Contains(','))
 				countWithComma++;
 		}
 
