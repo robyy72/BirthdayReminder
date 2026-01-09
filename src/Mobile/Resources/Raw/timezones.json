@@ -16,7 +16,7 @@
   { "offset": 1, "region": "EU", "city": "Berlin", "id": "Europe/Berlin" },
   { "offset": 1, "region": "EU", "city": "Paris", "id": "Europe/Paris" },
   { "offset": 2, "region": "EU", "city": "Athens", "id": "Europe/Athens" },
-  { "offset": 3, "region": "EU", "city": "Moscow", "id": "Europe/Moscow" },
+  { "offset": 3, "region": "RU", "city": "Moscow", "id": "Europe/Moscow" },
   { "offset": 3.5, "region": "ASIA", "city": "Tehran", "id": "Asia/Tehran" },
   { "offset": 4, "region": "ASIA", "city": "Dubai", "id": "Asia/Dubai" },
   { "offset": 4.5, "region": "ASIA", "city": "Kabul", "id": "Asia/Kabul" },

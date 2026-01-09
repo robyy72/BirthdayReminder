@@ -1,5 +1,6 @@
 #region Usings
 using System.Text.Json;
+using MobileLanguages;
 #endregion
 
 namespace Mobile;
@@ -94,13 +95,24 @@ public static class TimezoneService
 	{
 		var tz = TimeZoneInfo.FindSystemTimeZoneById(json.Id);
 		var offset = tz.GetUtcOffset(DateTime.Now);
+		var city = GetLocalizedCity(json.Id, json.City);
 		var entry = new TimezoneEntry
 		{
 			Id = json.Id,
-			DisplayName = $"{json.Region} [{FormatOffset(offset)}] ({json.City})",
+			DisplayName = $"{json.Region} ({FormatOffset(offset)}h) | {city}",
 			Offset = offset
 		};
 		return entry;
+	}
+
+	private static string GetLocalizedCity(string timezoneId, string fallbackCity)
+	{
+		var parts = timezoneId.Split('/');
+		var region = parts[0];
+		var city = parts.Length > 1 ? parts[^1].Replace("_", "") : "";
+		var resourceKey = $"Tz_{region}_{city}";
+		var localizedCity = Resources.ResourceManager.GetString(resourceKey);
+		return localizedCity ?? fallbackCity;
 	}
 
 	private static int FindClosestIndex(string timezoneId)
@@ -125,23 +137,18 @@ public static class TimezoneService
 
 	private static string FormatOffset(TimeSpan offset)
 	{
-		double hours = offset.TotalHours;
-		string sign = hours >= 0 ? "+" : "";
+		int hours = (int)offset.TotalHours;
+		int minutes = Math.Abs(offset.Minutes);
+		string sign = offset.TotalHours >= 0 ? "+" : "";
 
-		double fraction = Math.Abs(hours) % 1;
-		if (fraction < 0.01)
+		if (minutes == 0)
 		{
-			var formatted = $"{sign}{(int)hours}";
-			return formatted;
-		}
-		else if (Math.Abs(fraction - 0.5) < 0.01)
-		{
-			var formatted = $"{sign}{hours:0.#}";
+			var formatted = $"{sign}{hours}";
 			return formatted;
 		}
 		else
 		{
-			var formatted = $"{sign}{hours:0.##}";
+			var formatted = $"{sign}{hours}:{minutes:D2}";
 			return formatted;
 		}
 	}
