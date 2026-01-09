@@ -37,7 +37,7 @@ public static class ErrorService
 	/// </summary>
 	public static async void HandleFatal(Exception ex)
 	{
-		Preferences.Set(MobileConstants.PREFS_BROKEN_VERSION, AppInfo.VersionString);
+		Preferences.Set(MobileConstants.PREFS_BROKEN_VERSION, AppInfo.BuildString);
 		Preferences.Set(MobileConstants.PREFS_BROKEN_DEVICE, DeviceInfo.Model);
 		Preferences.Set(MobileConstants.PREFS_BROKEN_TIMESTAMP, DateTime.UtcNow.ToString("O"));
 
@@ -85,7 +85,7 @@ public static class ErrorService
 	public static bool IsBrokenVersion()
 	{
 		string brokenVersion = Preferences.Get(MobileConstants.PREFS_BROKEN_VERSION, string.Empty);
-		bool isBroken = brokenVersion == AppInfo.VersionString;
+		bool isBroken = brokenVersion == AppInfo.BuildString;
 		return isBroken;
 	}
 

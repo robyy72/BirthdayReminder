@@ -62,7 +62,8 @@
       "Bash(timeout:*)",
       "Bash(sqlcmd:*)",
       "Bash(net stop MSSQL$SQLEXPRESS)",
-      "Bash(net start MSSQL$SQLEXPRESS)"
+      "Bash(net start MSSQL$SQLEXPRESS)",
+      "Bash(adb logcat:*)"
     ],
     "deny": []
   }
