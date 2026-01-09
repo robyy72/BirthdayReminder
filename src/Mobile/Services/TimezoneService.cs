@@ -95,7 +95,7 @@ public static class TimezoneService
 	{
 		var tz = TimeZoneInfo.FindSystemTimeZoneById(json.Id);
 		var offset = tz.GetUtcOffset(DateTime.Now);
-		var city = GetLocalizedCity(json.Id, json.City);
+		var city = GetLocalizedCity(json.Id);
 		var entry = new TimezoneEntry
 		{
 			Id = json.Id,
@@ -105,14 +105,14 @@ public static class TimezoneService
 		return entry;
 	}
 
-	private static string GetLocalizedCity(string timezoneId, string fallbackCity)
+	private static string GetLocalizedCity(string timezoneId)
 	{
 		var parts = timezoneId.Split('/');
 		var region = parts[0];
 		var city = parts.Length > 1 ? parts[^1].Replace("_", "") : "";
 		var resourceKey = $"Tz_{region}_{city}";
 		var localizedCity = Resources.ResourceManager.GetString(resourceKey);
-		return localizedCity ?? fallbackCity;
+		return localizedCity ?? city;
 	}
 
 	private static int FindClosestIndex(string timezoneId)

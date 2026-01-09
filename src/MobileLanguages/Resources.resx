@@ -1228,9 +1228,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Tz_Europe_Berlin" xml:space="preserve">
     <value>Berlin, Munich, Frankfurt</value>
   </data>
-  <data name="Tz_Europe_Paris" xml:space="preserve">
-    <value>Paris, Brussels</value>
-  </data>
   <data name="Tz_Europe_Rome" xml:space="preserve">
     <value>Rome, Milan</value>
   </data>

@@ -1177,9 +1177,6 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Tz_Europe_Berlin" xml:space="preserve">
     <value>Berlin, München, Frankfurt</value>
   </data>
-  <data name="Tz_Europe_Paris" xml:space="preserve">
-    <value>Paris, Brüssel</value>
-  </data>
   <data name="Tz_Europe_Rome" xml:space="preserve">
     <value>Rom, Mailand</value>
   </data>
