@@ -2,34 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.BrokenVersionPage"
              NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.BrokenVersion_Title}">
 
-    <ScrollView>
-        <VerticalStackLayout VerticalOptions="Center"
-                             Padding="20"
-                             Spacing="20">
+    <Grid RowDefinitions="Auto,*">
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.BrokenVersion_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="False"
+                               ShowContextMenu="False" />
 
-            <Label Text="{x:Static resx:Resources.BrokenVersion_Header}"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   HorizontalTextAlignment="Center" />
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Padding="20"
+                                 Spacing="20">
 
-            <Label Text="{x:Static resx:Resources.BrokenVersion_Info}"
-                   HorizontalTextAlignment="Center"
-                   TextColor="Gray" />
+                <Label Text="{x:Static resx:Resources.BrokenVersion_ErrorHeader}"
+                       Style="{StaticResource LabelHeader}"
+                       HorizontalTextAlignment="Center" />
 
-            <Button Text="{x:Static resx:Resources.BrokenVersion_CheckUpdate}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Clicked="OnCheckUpdateClicked" />
+                <Label Text="{x:Static resx:Resources.BrokenVersion_Header}"
+                       Style="{StaticResource LabelInfo}"
+                       HorizontalTextAlignment="Center" />
 
-            <Button Text="{x:Static resx:Resources.BrokenVersion_TryAnyway}"
-                    BackgroundColor="Transparent"
-                    TextColor="Gray"
-                    Clicked="OnTryAnywayClicked" />
+                <Label Text="{x:Static resx:Resources.BrokenVersion_Info}"
+                       Style="{StaticResource LabelInfo}"
+                       HorizontalTextAlignment="Center" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Button Text="{x:Static resx:Resources.BrokenVersion_CheckUpdate}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnCheckUpdateClicked" />
+
+                <Label Text="{x:Static resx:Resources.BrokenVersion_TryAnyway}"
+                       Style="{StaticResource LabelInfo}"
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTryAnywayClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>

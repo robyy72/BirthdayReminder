@@ -203,7 +203,16 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("BrokenVersion_CheckUpdate", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error occurred ähnelt.
+        /// </summary>
+        public static string BrokenVersion_ErrorHeader {
+            get {
+                return ResourceManager.GetString("BrokenVersion_ErrorHeader", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die This version doesn&apos;t work on your device. ähnelt.
         /// </summary>

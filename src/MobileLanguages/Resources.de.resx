@@ -1264,10 +1264,13 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <!-- Broken Version Page -->
   <data name="BrokenVersion_Title" xml:space="preserve">
-    <value>Fehler</value>
+    <value>Birthday-Reminder</value>
+  </data>
+  <data name="BrokenVersion_ErrorHeader" xml:space="preserve">
+    <value>Fehler aufgetreten</value>
   </data>
   <data name="BrokenVersion_Header" xml:space="preserve">
-    <value>Diese Version läuft leider nicht auf deinem Gerät.</value>
+    <value>Diese App läuft leider aktuell nicht in dieser Version auf diesem Gerät.</value>
   </data>
   <data name="BrokenVersion_Info" xml:space="preserve">
     <value>Wir wurden automatisch informiert und arbeiten an einer Lösung.</value>
