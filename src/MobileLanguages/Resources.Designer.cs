@@ -194,79 +194,61 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Birthday_WithYear", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The birthday of ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Check for Update ähnelt.
         /// </summary>
-        public static string Detail_BirthdayOf {
+        public static string BrokenVersion_CheckUpdate {
             get {
-                return ResourceManager.GetString("Detail_BirthdayOf", resourceCulture);
+                return ResourceManager.GetString("BrokenVersion_CheckUpdate", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die is on ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die This version doesn&apos;t work on your device. ähnelt.
         /// </summary>
-        public static string Detail_IsOn {
+        public static string BrokenVersion_Header {
             get {
-                return ResourceManager.GetString("Detail_IsOn", resourceCulture);
+                return ResourceManager.GetString("BrokenVersion_Header", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die He / she will turn {0} on that day ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die We have been automatically notified and are working on a solution. ähnelt.
         /// </summary>
-        public static string Detail_AgeOnThatDay {
+        public static string BrokenVersion_Info {
             get {
-                return ResourceManager.GetString("Detail_AgeOnThatDay", resourceCulture);
+                return ResourceManager.GetString("BrokenVersion_Info", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die That's Today! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
         /// </summary>
-        public static string Detail_Birthday_TodayIs {
+        public static string BrokenVersion_Title {
             get {
-                return ResourceManager.GetString("Detail_Birthday_TodayIs", resourceCulture);
+                return ResourceManager.GetString("BrokenVersion_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die That's Tomorrow ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Try Anyway ähnelt.
         /// </summary>
-        public static string Detail_Birthday_TomorrowIs {
+        public static string BrokenVersion_TryAnyway {
             get {
-                return ResourceManager.GetString("Detail_Birthday_TomorrowIs", resourceCulture);
+                return ResourceManager.GetString("BrokenVersion_TryAnyway", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die That's in {0} days ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Browser ▶ ähnelt.
         /// </summary>
-        public static string Detail_Birthday_InDaysIs {
+        public static string Browser_OpenExternal {
             get {
-                return ResourceManager.GetString("Detail_Birthday_InDaysIs", resourceCulture);
+                return ResourceManager.GetString("Browser_OpenExternal", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You have no reminders set ähnelt.
-        /// </summary>
-        public static string Detail_NoReminders {
-            get {
-                return ResourceManager.GetString("Detail_NoReminders", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You will be reminded as follows: ähnelt.
-        /// </summary>
-        public static string Detail_RemindersSet {
-            get {
-                return ResourceManager.GetString("Detail_RemindersSet", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Configure Reminders ähnelt.
         /// </summary>
@@ -349,6 +331,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subscribe ähnelt.
+        /// </summary>
+        public static string ContextMenu_Subscribe {
+            get {
+                return ResourceManager.GetString("ContextMenu_Subscribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Day ähnelt.
         /// </summary>
         public static string Date_Day {
@@ -372,6 +363,78 @@ namespace MobileLanguages {
         public static string Date_Year {
             get {
                 return ResourceManager.GetString("Date_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die He / she will turn {0} on that day ähnelt.
+        /// </summary>
+        public static string Detail_AgeOnThatDay {
+            get {
+                return ResourceManager.GetString("Detail_AgeOnThatDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That&apos;s in {0} days ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_InDaysIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_InDaysIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That&apos;s Today! ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_TodayIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_TodayIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die That&apos;s Tomorrow ähnelt.
+        /// </summary>
+        public static string Detail_Birthday_TomorrowIs {
+            get {
+                return ResourceManager.GetString("Detail_Birthday_TomorrowIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The birthday of ähnelt.
+        /// </summary>
+        public static string Detail_BirthdayOf {
+            get {
+                return ResourceManager.GetString("Detail_BirthdayOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die is on ähnelt.
+        /// </summary>
+        public static string Detail_IsOn {
+            get {
+                return ResourceManager.GetString("Detail_IsOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No reminders set yet ähnelt.
+        /// </summary>
+        public static string Detail_NoReminders {
+            get {
+                return ResourceManager.GetString("Detail_NoReminders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will be reminded as follows: ähnelt.
+        /// </summary>
+        public static string Detail_RemindersSet {
+            get {
+                return ResourceManager.GetString("Detail_RemindersSet", resourceCulture);
             }
         }
         
@@ -421,7 +484,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Found birthdays ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Found same birthdays ähnelt.
         /// </summary>
         public static string FoundBirthdays_Header {
             get {
@@ -511,6 +574,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Active ähnelt.
+        /// </summary>
+        public static string General_Label_Active {
+            get {
+                return ResourceManager.GetString("General_Label_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Birthday ähnelt.
         /// </summary>
         public static string General_Label_Birthday {
@@ -561,6 +633,15 @@ namespace MobileLanguages {
         public static string General_Label_Name {
             get {
                 return ResourceManager.GetString("General_Label_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Time ({0}) ähnelt.
+        /// </summary>
+        public static string General_Label_Time {
+            get {
+                return ResourceManager.GetString("General_Label_Time", resourceCulture);
             }
         }
         
@@ -634,6 +715,211 @@ namespace MobileLanguages {
         public static string Help_BirthdayWithoutYear_Header {
             get {
                 return ResourceManager.GetString("Help_BirthdayWithoutYear_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The following reminder methods are free to use:
+        ///
+        ///• Push Notification - Appears on your lock screen
+        ///• Phone Alarm - Plays an alarm sound
+        ///• Email - Limited number of free emails per month
+        ///• Signal - Message via Signal messenger ähnelt.
+        /// </summary>
+        public static string Help_FreeReminders_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please note:
+        ///• Email reminders are free with a limited number per month. For unlimited emails, a subscription is required.
+        ///• Signal integration depends on third-party availability and cannot be permanently guaranteed. ähnelt.
+        /// </summary>
+        public static string Help_FreeReminders_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
+        /// </summary>
+        public static string Help_FreeReminders_Header {
+            get {
+                return ResourceManager.GetString("Help_FreeReminders_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An alarm will sound on your phone at the specified time to remind you of the birthday. ähnelt.
+        /// </summary>
+        public static string Help_ReminderAlarm_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You can even set the alarm to sound when your phone is in silent mode. But by default, this doesn&apos;t happen. ähnelt.
+        /// </summary>
+        public static string Help_ReminderAlarm_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Phone Alarm ähnelt.
+        /// </summary>
+        public static string Help_ReminderAlarm_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderAlarm_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will receive an email reminder at the specified time before the birthday. ähnelt.
+        /// </summary>
+        public static string Help_ReminderEmail_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The free plan includes a limited number of emails per month. For unlimited emails, a subscription is required. ähnelt.
+        /// </summary>
+        public static string Help_ReminderEmail_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email Reminder ähnelt.
+        /// </summary>
+        public static string Help_ReminderEmail_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderEmail_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Push notifications appear on your lock screen and in the notification center on the day of the reminder. ähnelt.
+        /// </summary>
+        public static string Help_ReminderNotification_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This feature is completely free and works offline. Make sure notifications are enabled in your device settings. ähnelt.
+        /// </summary>
+        public static string Help_ReminderNotification_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Push Notification ähnelt.
+        /// </summary>
+        public static string Help_ReminderNotification_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderNotification_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will receive a message via Signal Messenger to remind you of the birthday. ähnelt.
+        /// </summary>
+        public static string Help_ReminderSignal_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This service is currently offered free of charge. However, continued availability cannot be permanently guaranteed as it depends on third-party services. ähnelt.
+        /// </summary>
+        public static string Help_ReminderSignal_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Signal Messenger ähnelt.
+        /// </summary>
+        public static string Help_ReminderSignal_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderSignal_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will receive an SMS message to remind you of the birthday. ähnelt.
+        /// </summary>
+        public static string Help_ReminderSms_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This feature requires an active subscription. SMS messages incur costs that are covered by your subscription. ähnelt.
+        /// </summary>
+        public static string Help_ReminderSms_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SMS Message ähnelt.
+        /// </summary>
+        public static string Help_ReminderSms_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderSms_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You will receive a WhatsApp message to remind you of the birthday. ähnelt.
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Content_1 {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This feature requires an active subscription. WhatsApp Business API costs are covered by your subscription. ähnelt.
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Content_2 {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die WhatsApp Message ähnelt.
+        /// </summary>
+        public static string Help_ReminderWhatsApp_Header {
+            get {
+                return ResourceManager.GetString("Help_ReminderWhatsApp_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The timezone {0} means {1} ({2}). You can change your timezone anytime in settings. ähnelt.
+        /// </summary>
+        public static string Help_Timezone_Note {
+            get {
+                return ResourceManager.GetString("Help_Timezone_Note", resourceCulture);
             }
         }
         
@@ -895,6 +1181,24 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die First name Last name ähnelt.
+        /// </summary>
+        public static string NameDirection_FirstFirstName {
+            get {
+                return ResourceManager.GetString("NameDirection_FirstFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Last name, First name ähnelt.
+        /// </summary>
+        public static string NameDirection_FirstLastName {
+            get {
+                return ResourceManager.GetString("NameDirection_FirstLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Account ähnelt.
         /// </summary>
         public static string Page_Account_Title {
@@ -976,7 +1280,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Help ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die More Information ähnelt.
         /// </summary>
         public static string Page_Help_Title {
             get {
@@ -1030,6 +1334,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Entry ähnelt.
+        /// </summary>
+        public static string Page_NewSupport_Title {
+            get {
+                return ResourceManager.GetString("Page_NewSupport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Privacy ähnelt.
         /// </summary>
         public static string Page_Privacy_Title {
@@ -1046,42 +1359,6 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Page_ReminderSettings_Title", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Configure your reminders. Tap a card to edit. ähnelt.
-        /// </summary>
-        public static string ReminderSettings_Description {
-            get {
-                return ResourceManager.GetString("ReminderSettings_Description", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {0} days before ähnelt.
-        /// </summary>
-        public static string ReminderSettings_DaysBefore {
-            get {
-                return ResourceManager.GetString("ReminderSettings_DaysBefore", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Not configured yet ähnelt.
-        /// </summary>
-        public static string ReminderSettings_NotConfigured {
-            get {
-                return ResourceManager.GetString("ReminderSettings_NotConfigured", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No methods enabled ähnelt.
-        /// </summary>
-        public static string ReminderSettings_NoMethods {
-            get {
-                return ResourceManager.GetString("ReminderSettings_NoMethods", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
@@ -1089,6 +1366,24 @@ namespace MobileLanguages {
         public static string Page_Settings_Title {
             get {
                 return ResourceManager.GetString("Page_Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Support Details ähnelt.
+        /// </summary>
+        public static string Page_SupportDetail_Title {
+            get {
+                return ResourceManager.GetString("Page_SupportDetail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Support Overview ähnelt.
+        /// </summary>
+        public static string Page_SupportOverview_Title {
+            get {
+                return ResourceManager.GetString("Page_SupportOverview_Title", resourceCulture);
             }
         }
         
@@ -1138,11 +1433,92 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Permission not granted, that&apos;s ok too ähnelt.
+        /// </summary>
+        public static string Permission_Denied {
+            get {
+                return ResourceManager.GetString("Permission_Denied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The permission was already denied. The dialog cannot be shown again. Please go to your device settings to grant the permission manually. ähnelt.
+        /// </summary>
+        public static string Permission_DeniedInfo {
+            get {
+                return ResourceManager.GetString("Permission_DeniedInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Permission granted ähnelt.
+        /// </summary>
+        public static string Permission_Granted {
+            get {
+                return ResourceManager.GetString("Permission_Granted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please grant permission for this phone now ähnelt.
+        /// </summary>
+        public static string Permission_GrantRequest {
+            get {
+                return ResourceManager.GetString("Permission_GrantRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Permission required ähnelt.
+        /// </summary>
+        public static string Permission_Needed {
+            get {
+                return ResourceManager.GetString("Permission_Needed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open Settings ähnelt.
+        /// </summary>
+        public static string Permission_OpenSettings {
+            get {
+                return ResourceManager.GetString("Permission_OpenSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Permission Required ähnelt.
         /// </summary>
         public static string Permission_Required {
             get {
                 return ResourceManager.GetString("Permission_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Result ähnelt.
+        /// </summary>
+        public static string Permission_Result {
+            get {
+                return ResourceManager.GetString("Permission_Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start dialog ähnelt.
+        /// </summary>
+        public static string Permission_StartDialog {
+            get {
+                return ResourceManager.GetString("Permission_StartDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Waiting for permission... ähnelt.
+        /// </summary>
+        public static string Permission_Waiting {
+            get {
+                return ResourceManager.GetString("Permission_Waiting", resourceCulture);
             }
         }
         
@@ -1201,11 +1577,128 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subscribe Now ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Button {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Premium Features ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_CardHeader {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_CardHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In-app purchases will be available soon. ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_ComingSoon {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_ComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unlock all reminder methods with a subscription. SMS and WhatsApp reminders require an active subscription. ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Description {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die • Unlimited email reminders ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Feature_Email {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die • Unlimited SMS reminders ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Feature_Sms {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_Sms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die • Unlimited WhatsApp reminders ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Feature_WhatsApp {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Feature_WhatsApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Included Features ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_FeaturesHeader {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_FeaturesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subscribe ähnelt.
+        /// </summary>
+        public static string PurchaseAbo_Title {
+            get {
+                return ResourceManager.GetString("PurchaseAbo_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set Reminders ähnelt.
         /// </summary>
         public static string Reminder_Label {
             get {
                 return ResourceManager.GetString("Reminder_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free ähnelt.
+        /// </summary>
+        public static string Reminder_Status_Free {
+            get {
+                return ResourceManager.GetString("Reminder_Status_Free", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently free ähnelt.
+        /// </summary>
+        public static string Reminder_Status_FreeCurrently {
+            get {
+                return ResourceManager.GetString("Reminder_Status_FreeCurrently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free (limited) ähnelt.
+        /// </summary>
+        public static string Reminder_Status_FreeLimited {
+            get {
+                return ResourceManager.GetString("Reminder_Status_FreeLimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Requires subscription ähnelt.
+        /// </summary>
+        public static string Reminder_Status_Subscription {
+            get {
+                return ResourceManager.GetString("Reminder_Status_Subscription", resourceCulture);
             }
         }
         
@@ -1246,7 +1739,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Alarm ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mobile phone alarm ähnelt.
         /// </summary>
         public static string ReminderMethod_Alarm {
             get {
@@ -1255,7 +1748,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Email ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Email message ähnelt.
         /// </summary>
         public static string ReminderMethod_Email {
             get {
@@ -1282,7 +1775,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Notification ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Push notification on lockscreen ähnelt.
         /// </summary>
         public static string ReminderMethod_Notification {
             get {
@@ -1300,7 +1793,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Signal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Signal Messenger ähnelt.
         /// </summary>
         public static string ReminderMethod_Signal {
             get {
@@ -1309,7 +1802,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die SMS ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die SMS message ähnelt.
         /// </summary>
         public static string ReminderMethod_Sms {
             get {
@@ -1318,11 +1811,47 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die WhatsApp ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die WhatsApp Messenger ähnelt.
         /// </summary>
         public static string ReminderMethod_WhatsApp {
             get {
                 return ResourceManager.GetString("ReminderMethod_WhatsApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die {0} days before ähnelt.
+        /// </summary>
+        public static string ReminderSettings_DaysBefore {
+            get {
+                return ResourceManager.GetString("ReminderSettings_DaysBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Configure your reminders. Tap a card to edit. ähnelt.
+        /// </summary>
+        public static string ReminderSettings_Description {
+            get {
+                return ResourceManager.GetString("ReminderSettings_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No methods enabled ähnelt.
+        /// </summary>
+        public static string ReminderSettings_NoMethods {
+            get {
+                return ResourceManager.GetString("ReminderSettings_NoMethods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Not configured yet ähnelt.
+        /// </summary>
+        public static string ReminderSettings_NotConfigured {
+            get {
+                return ResourceManager.GetString("ReminderSettings_NotConfigured", resourceCulture);
             }
         }
         
@@ -1516,7 +2045,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Search ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Search Results ähnelt.
         /// </summary>
         public static string SearchPerson_SearchHeader {
             get {
@@ -1588,7 +2117,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Create contact entry ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create entry in my contacts ähnelt.
         /// </summary>
         public static string Settings_CreateContact {
             get {
@@ -1624,11 +2153,29 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
+        /// </summary>
+        public static string Settings_FreeReminders {
+            get {
+                return ResourceManager.GetString("Settings_FreeReminders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Select Language ähnelt.
         /// </summary>
         public static string Settings_Language {
             get {
                 return ResourceManager.GetString("Settings_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name order ähnelt.
+        /// </summary>
+        public static string Settings_NameDirection {
+            get {
+                return ResourceManager.GetString("Settings_NameDirection", resourceCulture);
             }
         }
         
@@ -1705,6 +2252,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reminder No - {0} - ähnelt.
+        /// </summary>
+        public static string Settings_ReminderNumber {
+            get {
+                return ResourceManager.GetString("Settings_ReminderNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set reminders manually ähnelt.
         /// </summary>
         public static string Settings_RemindersManual {
@@ -1768,6 +2324,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reminders with Subscription ähnelt.
+        /// </summary>
+        public static string Settings_SubscriptionReminders {
+            get {
+                return ResourceManager.GetString("Settings_SubscriptionReminders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Select Theme ähnelt.
         /// </summary>
         public static string Settings_Theme {
@@ -1802,7 +2367,7 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Settings_Theme_System", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Timezone ähnelt.
         /// </summary>
@@ -1811,16 +2376,16 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Settings_Timezone", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Set this to your main location ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time. ähnelt.
         /// </summary>
         public static string Settings_Timezone_Hint {
             get {
                 return ResourceManager.GetString("Settings_Timezone_Hint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Select Timezone ähnelt.
         /// </summary>
@@ -1829,9 +2394,9 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Settings_Timezone_Select", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Update contact entry ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update entry in my contacts ähnelt.
         /// </summary>
         public static string Settings_UpdateContact {
             get {
@@ -1993,87 +2558,6 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Permission not granted, that&apos;s ok too ähnelt.
-        /// </summary>
-        public static string Permission_Denied {
-            get {
-                return ResourceManager.GetString("Permission_Denied", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The permission was already denied... ähnelt.
-        /// </summary>
-        public static string Permission_DeniedInfo {
-            get {
-                return ResourceManager.GetString("Permission_DeniedInfo", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Permission granted ähnelt.
-        /// </summary>
-        public static string Permission_Granted {
-            get {
-                return ResourceManager.GetString("Permission_Granted", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please grant permission for this phone now ähnelt.
-        /// </summary>
-        public static string Permission_GrantRequest {
-            get {
-                return ResourceManager.GetString("Permission_GrantRequest", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Permission required ähnelt.
-        /// </summary>
-        public static string Permission_Needed {
-            get {
-                return ResourceManager.GetString("Permission_Needed", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Open Settings ähnelt.
-        /// </summary>
-        public static string Permission_OpenSettings {
-            get {
-                return ResourceManager.GetString("Permission_OpenSettings", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Result ähnelt.
-        /// </summary>
-        public static string Permission_Result {
-            get {
-                return ResourceManager.GetString("Permission_Result", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Start dialog ähnelt.
-        /// </summary>
-        public static string Permission_StartDialog {
-            get {
-                return ResourceManager.GetString("Permission_StartDialog", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Waiting for permission... ähnelt.
-        /// </summary>
-        public static string Permission_Waiting {
-            get {
-                return ResourceManager.GetString("Permission_Waiting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die This can also be set manually for each entry ähnelt.
         /// </summary>
         public static string Start5_ManualNote {
@@ -2155,6 +2639,78 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suggest Improvement ähnelt.
+        /// </summary>
+        public static string Support_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Support_FeatureRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Give Feedback ähnelt.
+        /// </summary>
+        public static string Support_Feedback {
+            get {
+                return ResourceManager.GetString("Support_Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report Bug ähnelt.
+        /// </summary>
+        public static string Support_ReportBug {
+            get {
+                return ResourceManager.GetString("Support_ReportBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
+        /// </summary>
+        public static string Support_Text {
+            get {
+                return ResourceManager.GetString("Support_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
+        /// </summary>
+        public static string Support_Title {
+            get {
+                return ResourceManager.GetString("Support_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bug ähnelt.
+        /// </summary>
+        public static string Support_Type_Bug {
+            get {
+                return ResourceManager.GetString("Support_Type_Bug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Feature Request ähnelt.
+        /// </summary>
+        public static string Support_Type_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Support_Type_FeatureRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Feedback ähnelt.
+        /// </summary>
+        public static string Support_Type_Feedback {
+            get {
+                return ResourceManager.GetString("Support_Type_Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Account ähnelt.
         /// </summary>
         public static string Tab_Account {
@@ -2164,7 +2720,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Overview ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
         /// </summary>
         public static string Tab_Overview {
             get {
@@ -2227,6 +2783,798 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Australian Eastern Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_AEDT {
+            get {
+                return ResourceManager.GetString("Timezone_AEDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Australian Eastern Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_AEST {
+            get {
+                return ResourceManager.GetString("Timezone_AEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alaska Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_AKDT {
+            get {
+                return ResourceManager.GetString("Timezone_AKDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alaska Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_AKST {
+            get {
+                return ResourceManager.GetString("Timezone_AKST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Argentina Time ähnelt.
+        /// </summary>
+        public static string Timezone_ART {
+            get {
+                return ResourceManager.GetString("Timezone_ART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Arabia Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_AST {
+            get {
+                return ResourceManager.GetString("Timezone_AST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Australian Western Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_AWST {
+            get {
+                return ResourceManager.GetString("Timezone_AWST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Brasilia Time ähnelt.
+        /// </summary>
+        public static string Timezone_BRT {
+            get {
+                return ResourceManager.GetString("Timezone_BRT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die British Summer Time ähnelt.
+        /// </summary>
+        public static string Timezone_BST {
+            get {
+                return ResourceManager.GetString("Timezone_BST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Central Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_CDT {
+            get {
+                return ResourceManager.GetString("Timezone_CDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Central European Summer Time ähnelt.
+        /// </summary>
+        public static string Timezone_CEST {
+            get {
+                return ResourceManager.GetString("Timezone_CEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Central European Time ähnelt.
+        /// </summary>
+        public static string Timezone_CET {
+            get {
+                return ResourceManager.GetString("Timezone_CET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Central Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_CST {
+            get {
+                return ResourceManager.GetString("Timezone_CST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die China Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_CST_China {
+            get {
+                return ResourceManager.GetString("Timezone_CST_China", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die East Africa Time ähnelt.
+        /// </summary>
+        public static string Timezone_EAT {
+            get {
+                return ResourceManager.GetString("Timezone_EAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eastern Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_EDT {
+            get {
+                return ResourceManager.GetString("Timezone_EDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eastern European Summer Time ähnelt.
+        /// </summary>
+        public static string Timezone_EEST {
+            get {
+                return ResourceManager.GetString("Timezone_EEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eastern European Time ähnelt.
+        /// </summary>
+        public static string Timezone_EET {
+            get {
+                return ResourceManager.GetString("Timezone_EET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eastern Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_EST {
+            get {
+                return ResourceManager.GetString("Timezone_EST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Greenwich Mean Time ähnelt.
+        /// </summary>
+        public static string Timezone_GMT {
+            get {
+                return ResourceManager.GetString("Timezone_GMT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Gulf Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_GST {
+            get {
+                return ResourceManager.GetString("Timezone_GST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hong Kong Time ähnelt.
+        /// </summary>
+        public static string Timezone_HKT {
+            get {
+                return ResourceManager.GetString("Timezone_HKT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hawaii Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_HST {
+            get {
+                return ResourceManager.GetString("Timezone_HST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Indochina Time ähnelt.
+        /// </summary>
+        public static string Timezone_ICT {
+            get {
+                return ResourceManager.GetString("Timezone_ICT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die India Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_IST {
+            get {
+                return ResourceManager.GetString("Timezone_IST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Japan Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_JST {
+            get {
+                return ResourceManager.GetString("Timezone_JST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Korea Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_KST {
+            get {
+                return ResourceManager.GetString("Timezone_KST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mountain Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_MDT {
+            get {
+                return ResourceManager.GetString("Timezone_MDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Learn more about timezones ähnelt.
+        /// </summary>
+        public static string Timezone_MoreInfo {
+            get {
+                return ResourceManager.GetString("Timezone_MoreInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Moscow Time ähnelt.
+        /// </summary>
+        public static string Timezone_MSK {
+            get {
+                return ResourceManager.GetString("Timezone_MSK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mountain Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_MST {
+            get {
+                return ResourceManager.GetString("Timezone_MST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Zealand Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_NZDT {
+            get {
+                return ResourceManager.GetString("Timezone_NZDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Zealand Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_NZST {
+            get {
+                return ResourceManager.GetString("Timezone_NZST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pacific Daylight Time ähnelt.
+        /// </summary>
+        public static string Timezone_PDT {
+            get {
+                return ResourceManager.GetString("Timezone_PDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pakistan Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_PKT {
+            get {
+                return ResourceManager.GetString("Timezone_PKT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pacific Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_PST {
+            get {
+                return ResourceManager.GetString("Timezone_PST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die South Africa Standard Time ähnelt.
+        /// </summary>
+        public static string Timezone_SAST {
+            get {
+                return ResourceManager.GetString("Timezone_SAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Singapore Time ähnelt.
+        /// </summary>
+        public static string Timezone_SGT {
+            get {
+                return ResourceManager.GetString("Timezone_SGT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Turkey Time ähnelt.
+        /// </summary>
+        public static string Timezone_TRT {
+            get {
+                return ResourceManager.GetString("Timezone_TRT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown Timezone ähnelt.
+        /// </summary>
+        public static string Timezone_Unknown {
+            get {
+                return ResourceManager.GetString("Timezone_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Coordinated Universal Time ähnelt.
+        /// </summary>
+        public static string Timezone_UTC {
+            get {
+                return ResourceManager.GetString("Timezone_UTC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die West Africa Time ähnelt.
+        /// </summary>
+        public static string Timezone_WAT {
+            get {
+                return ResourceManager.GetString("Timezone_WAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Western European Summer Time ähnelt.
+        /// </summary>
+        public static string Timezone_WEST {
+            get {
+                return ResourceManager.GetString("Timezone_WEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Western European Time ähnelt.
+        /// </summary>
+        public static string Timezone_WET {
+            get {
+                return ResourceManager.GetString("Timezone_WET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Western Indonesia Time ähnelt.
+        /// </summary>
+        public static string Timezone_WIB {
+            get {
+                return ResourceManager.GetString("Timezone_WIB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Anchorage, Alaska ähnelt.
+        /// </summary>
+        public static string Tz_America_Anchorage {
+            get {
+                return ResourceManager.GetString("Tz_America_Anchorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Buenos Aires ähnelt.
+        /// </summary>
+        public static string Tz_America_BuenosAires {
+            get {
+                return ResourceManager.GetString("Tz_America_BuenosAires", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Chicago, Houston ähnelt.
+        /// </summary>
+        public static string Tz_America_Chicago {
+            get {
+                return ResourceManager.GetString("Tz_America_Chicago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Denver, Phoenix ähnelt.
+        /// </summary>
+        public static string Tz_America_Denver {
+            get {
+                return ResourceManager.GetString("Tz_America_Denver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Halifax, Atlantic ähnelt.
+        /// </summary>
+        public static string Tz_America_Halifax {
+            get {
+                return ResourceManager.GetString("Tz_America_Halifax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Los Angeles, San Francisco ähnelt.
+        /// </summary>
+        public static string Tz_America_LosAngeles {
+            get {
+                return ResourceManager.GetString("Tz_America_LosAngeles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New York, Washington ähnelt.
+        /// </summary>
+        public static string Tz_America_NewYork {
+            get {
+                return ResourceManager.GetString("Tz_America_NewYork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die São Paulo, Rio ähnelt.
+        /// </summary>
+        public static string Tz_America_SaoPaulo {
+            get {
+                return ResourceManager.GetString("Tz_America_SaoPaulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bangkok, Hanoi ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Bangkok {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Bangkok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dhaka, Bangladesh ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Dhaka {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Dhaka", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dubai, Abu Dhabi ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Dubai {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Dubai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hong Kong, Macau ähnelt.
+        /// </summary>
+        public static string Tz_Asia_HongKong {
+            get {
+                return ResourceManager.GetString("Tz_Asia_HongKong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Karachi, Islamabad ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Karachi {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Karachi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mumbai, Delhi, Kolkata ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Kolkata {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Kolkata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Seoul, Busan ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Seoul {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Seoul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shanghai, Beijing ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Shanghai {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Shanghai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Singapore, Kuala Lumpur ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Singapore {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Singapore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tokyo, Osaka ähnelt.
+        /// </summary>
+        public static string Tz_Asia_Tokyo {
+            get {
+                return ResourceManager.GetString("Tz_Asia_Tokyo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Azores ähnelt.
+        /// </summary>
+        public static string Tz_Atlantic_Azores {
+            get {
+                return ResourceManager.GetString("Tz_Atlantic_Azores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sydney, Melbourne ähnelt.
+        /// </summary>
+        public static string Tz_Australia_Sydney {
+            get {
+                return ResourceManager.GetString("Tz_Australia_Sydney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Device Timezone ähnelt.
+        /// </summary>
+        public static string Tz_Device {
+            get {
+                return ResourceManager.GetString("Tz_Device", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Amsterdam, Rotterdam ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Amsterdam {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Amsterdam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Athens, Bucharest ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Athens {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Athens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Berlin, Munich, Frankfurt ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Berlin {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Berlin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Helsinki, Tallinn ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Helsinki {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Helsinki", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Istanbul, Ankara ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Istanbul {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Istanbul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die London, Dublin, Lisbon ähnelt.
+        /// </summary>
+        public static string Tz_Europe_London {
+            get {
+                return ResourceManager.GetString("Tz_Europe_London", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Madrid, Barcelona ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Madrid {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Madrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Moscow, St. Petersburg ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Moscow {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Moscow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Paris, Brussels ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Paris {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Paris", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rome, Milan ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Rome {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Rome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vienna, Salzburg ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Vienna {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Vienna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Warsaw, Krakow ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Warsaw {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Warsaw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zurich, Geneva ähnelt.
+        /// </summary>
+        public static string Tz_Europe_Zurich {
+            get {
+                return ResourceManager.GetString("Tz_Europe_Zurich", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Auckland, Wellington ähnelt.
+        /// </summary>
+        public static string Tz_Pacific_Auckland {
+            get {
+                return ResourceManager.GetString("Tz_Pacific_Auckland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Honolulu, Hawaii ähnelt.
+        /// </summary>
+        public static string Tz_Pacific_Honolulu {
+            get {
+                return ResourceManager.GetString("Tz_Pacific_Honolulu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Midway, Samoa ähnelt.
+        /// </summary>
+        public static string Tz_Pacific_Midway {
+            get {
+                return ResourceManager.GetString("Tz_Pacific_Midway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die America ähnelt.
+        /// </summary>
+        public static string Tz_Region_America {
+            get {
+                return ResourceManager.GetString("Tz_Region_America", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Asia ähnelt.
+        /// </summary>
+        public static string Tz_Region_Asia {
+            get {
+                return ResourceManager.GetString("Tz_Region_Asia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Atlantic ähnelt.
+        /// </summary>
+        public static string Tz_Region_Atlantic {
+            get {
+                return ResourceManager.GetString("Tz_Region_Atlantic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Australia ähnelt.
+        /// </summary>
+        public static string Tz_Region_Australia {
+            get {
+                return ResourceManager.GetString("Tz_Region_Australia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Europe ähnelt.
+        /// </summary>
+        public static string Tz_Region_Europe {
+            get {
+                return ResourceManager.GetString("Tz_Region_Europe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pacific ähnelt.
+        /// </summary>
+        public static string Tz_Region_Pacific {
+            get {
+                return ResourceManager.GetString("Tz_Region_Pacific", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die From now on, remember every important birthday with our help. ähnelt.
         /// </summary>
         public static string Welcome_1_Text_1 {
@@ -2268,583 +3616,6 @@ namespace MobileLanguages {
         public static string Welcome_Header_Title {
             get {
                 return ResourceManager.GetString("Welcome_Header_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Name order ähnelt.
-        /// </summary>
-        public static string Settings_NameDirection {
-            get {
-                return ResourceManager.GetString("Settings_NameDirection", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die First name Last name ähnelt.
-        /// </summary>
-        public static string NameDirection_FirstFirstName {
-            get {
-                return ResourceManager.GetString("NameDirection_FirstFirstName", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Last name, First name ähnelt.
-        /// </summary>
-        public static string NameDirection_FirstLastName {
-            get {
-                return ResourceManager.GetString("NameDirection_FirstLastName", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Reminder Number -{0}- ähnelt.
-        /// </summary>
-        public static string Settings_ReminderNumber {
-            get {
-                return ResourceManager.GetString("Settings_ReminderNumber", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
-        /// </summary>
-        public static string Settings_FreeReminders {
-            get {
-                return ResourceManager.GetString("Settings_FreeReminders", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Reminders with Subscription ähnelt.
-        /// </summary>
-        public static string Settings_SubscriptionReminders {
-            get {
-                return ResourceManager.GetString("Settings_SubscriptionReminders", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Free Reminders ähnelt.
-        /// </summary>
-        public static string Help_FreeReminders_Header {
-            get {
-                return ResourceManager.GetString("Help_FreeReminders_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge für Help_FreeReminders_Content_1.
-        /// </summary>
-        public static string Help_FreeReminders_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_FreeReminders_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge für Help_FreeReminders_Content_2.
-        /// </summary>
-        public static string Help_FreeReminders_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_FreeReminders_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Report Bug ähnelt.
-        /// </summary>
-        public static string Support_ReportBug {
-            get {
-                return ResourceManager.GetString("Support_ReportBug", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Suggest Improvement ähnelt.
-        /// </summary>
-        public static string Support_FeatureRequest {
-            get {
-                return ResourceManager.GetString("Support_FeatureRequest", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Give Feedback ähnelt.
-        /// </summary>
-        public static string Support_Feedback {
-            get {
-                return ResourceManager.GetString("Support_Feedback", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die New Entry ähnelt.
-        /// </summary>
-        public static string Page_NewSupport_Title {
-            get {
-                return ResourceManager.GetString("Page_NewSupport_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Support Overview ähnelt.
-        /// </summary>
-        public static string Page_SupportOverview_Title {
-            get {
-                return ResourceManager.GetString("Page_SupportOverview_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Support Details ähnelt.
-        /// </summary>
-        public static string Page_SupportDetail_Title {
-            get {
-                return ResourceManager.GetString("Page_SupportDetail_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
-        /// </summary>
-        public static string Support_Title {
-            get {
-                return ResourceManager.GetString("Support_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
-        /// </summary>
-        public static string Support_Text {
-            get {
-                return ResourceManager.GetString("Support_Text", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bug ähnelt.
-        /// </summary>
-        public static string Support_Type_Bug {
-            get {
-                return ResourceManager.GetString("Support_Type_Bug", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Feature Request ähnelt.
-        /// </summary>
-        public static string Support_Type_FeatureRequest {
-            get {
-                return ResourceManager.GetString("Support_Type_FeatureRequest", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Feedback ähnelt.
-        /// </summary>
-        public static string Support_Type_Feedback {
-            get {
-                return ResourceManager.GetString("Support_Type_Feedback", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Free ähnelt.
-        /// </summary>
-        public static string Reminder_Status_Free {
-            get {
-                return ResourceManager.GetString("Reminder_Status_Free", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Free (limited) ähnelt.
-        /// </summary>
-        public static string Reminder_Status_FreeLimited {
-            get {
-                return ResourceManager.GetString("Reminder_Status_FreeLimited", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Currently free ähnelt.
-        /// </summary>
-        public static string Reminder_Status_FreeCurrently {
-            get {
-                return ResourceManager.GetString("Reminder_Status_FreeCurrently", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Requires subscription ähnelt.
-        /// </summary>
-        public static string Reminder_Status_Subscription {
-            get {
-                return ResourceManager.GetString("Reminder_Status_Subscription", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Active ähnelt.
-        /// </summary>
-        public static string General_Label_Active {
-            get {
-                return ResourceManager.GetString("General_Label_Active", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Time ähnelt.
-        /// </summary>
-        public static string General_Label_Time {
-            get {
-                return ResourceManager.GetString("General_Label_Time", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderNotification_Header
-        /// </summary>
-        public static string Help_ReminderNotification_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderNotification_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderNotification_Content_1
-        /// </summary>
-        public static string Help_ReminderNotification_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderNotification_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderNotification_Content_2
-        /// </summary>
-        public static string Help_ReminderNotification_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderNotification_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderAlarm_Header
-        /// </summary>
-        public static string Help_ReminderAlarm_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderAlarm_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderAlarm_Content_1
-        /// </summary>
-        public static string Help_ReminderAlarm_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderAlarm_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderAlarm_Content_2
-        /// </summary>
-        public static string Help_ReminderAlarm_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderAlarm_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderEmail_Header
-        /// </summary>
-        public static string Help_ReminderEmail_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderEmail_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderEmail_Content_1
-        /// </summary>
-        public static string Help_ReminderEmail_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderEmail_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderEmail_Content_2
-        /// </summary>
-        public static string Help_ReminderEmail_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderEmail_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSignal_Header
-        /// </summary>
-        public static string Help_ReminderSignal_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderSignal_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSignal_Content_1
-        /// </summary>
-        public static string Help_ReminderSignal_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderSignal_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSignal_Content_2
-        /// </summary>
-        public static string Help_ReminderSignal_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderSignal_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSms_Header
-        /// </summary>
-        public static string Help_ReminderSms_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderSms_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSms_Content_1
-        /// </summary>
-        public static string Help_ReminderSms_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderSms_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderSms_Content_2
-        /// </summary>
-        public static string Help_ReminderSms_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderSms_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderWhatsApp_Header
-        /// </summary>
-        public static string Help_ReminderWhatsApp_Header {
-            get {
-                return ResourceManager.GetString("Help_ReminderWhatsApp_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderWhatsApp_Content_1
-        /// </summary>
-        public static string Help_ReminderWhatsApp_Content_1 {
-            get {
-                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_1", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Help_ReminderWhatsApp_Content_2
-        /// </summary>
-        public static string Help_ReminderWhatsApp_Content_2 {
-            get {
-                return ResourceManager.GetString("Help_ReminderWhatsApp_Content_2", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Your timezone: {0}. You can change this in settings. ähnelt.
-        ///   Help_Timezone_Note
-        /// </summary>
-        public static string Help_Timezone_Note {
-            get {
-                return ResourceManager.GetString("Help_Timezone_Note", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Timezone_UTC
-        /// </summary>
-        public static string Timezone_UTC {
-            get {
-                return ResourceManager.GetString("Timezone_UTC", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Timezone_Unknown
-        /// </summary>
-        public static string Timezone_Unknown {
-            get {
-                return ResourceManager.GetString("Timezone_Unknown", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Browser_OpenExternal
-        /// </summary>
-        public static string Browser_OpenExternal {
-            get {
-                return ResourceManager.GetString("Browser_OpenExternal", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Timezone_MoreInfo
-        /// </summary>
-        public static string Timezone_MoreInfo {
-            get {
-                return ResourceManager.GetString("Timezone_MoreInfo", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Title
-        /// </summary>
-        public static string PurchaseAbo_Title {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_CardHeader
-        /// </summary>
-        public static string PurchaseAbo_CardHeader {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_CardHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Description
-        /// </summary>
-        public static string PurchaseAbo_Description {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Description", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Button
-        /// </summary>
-        public static string PurchaseAbo_Button {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Button", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_FeaturesHeader
-        /// </summary>
-        public static string PurchaseAbo_FeaturesHeader {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_FeaturesHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Feature_Sms
-        /// </summary>
-        public static string PurchaseAbo_Feature_Sms {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Feature_Sms", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Feature_WhatsApp
-        /// </summary>
-        public static string PurchaseAbo_Feature_WhatsApp {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Feature_WhatsApp", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_Feature_Email
-        /// </summary>
-        public static string PurchaseAbo_Feature_Email {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_Feature_Email", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   PurchaseAbo_ComingSoon
-        /// </summary>
-        public static string PurchaseAbo_ComingSoon {
-            get {
-                return ResourceManager.GetString("PurchaseAbo_ComingSoon", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   ContextMenu_Subscribe
-        /// </summary>
-        public static string ContextMenu_Subscribe {
-            get {
-                return ResourceManager.GetString("ContextMenu_Subscribe", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   BrokenVersion_Title
-        /// </summary>
-        public static string BrokenVersion_Title {
-            get {
-                return ResourceManager.GetString("BrokenVersion_Title", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   BrokenVersion_Header
-        /// </summary>
-        public static string BrokenVersion_Header {
-            get {
-                return ResourceManager.GetString("BrokenVersion_Header", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   BrokenVersion_Info
-        /// </summary>
-        public static string BrokenVersion_Info {
-            get {
-                return ResourceManager.GetString("BrokenVersion_Info", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   BrokenVersion_CheckUpdate
-        /// </summary>
-        public static string BrokenVersion_CheckUpdate {
-            get {
-                return ResourceManager.GetString("BrokenVersion_CheckUpdate", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   BrokenVersion_TryAnyway
-        /// </summary>
-        public static string BrokenVersion_TryAnyway {
-            get {
-                return ResourceManager.GetString("BrokenVersion_TryAnyway", resourceCulture);
             }
         }
     }

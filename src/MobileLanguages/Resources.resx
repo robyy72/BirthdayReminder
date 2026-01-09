@@ -1,18 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -157,10 +235,10 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Save to contact</value>
   </data>
   <data name="Settings_UpdateContact" xml:space="preserve">
-    <value>Update contact entry</value>
+    <value>Update entry in my contacts</value>
   </data>
   <data name="Settings_CreateContact" xml:space="preserve">
-    <value>Create contact entry</value>
+    <value>Create entry in my contacts</value>
   </data>
   <data name="Settings_DeleteContact" xml:space="preserve">
     <value>Also delete from contacts</value>
@@ -576,7 +654,6 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Privacy_Text_3" xml:space="preserve">
     <value>All data remains on your device and under your control.</value>
   </data>
-  <!-- StartPage_2 -->
   <data name="Start2_Text_1" xml:space="preserve">
     <value>Each of your contacts has a birthday field in addition to first and last name.</value>
   </data>
@@ -592,7 +669,6 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Start2_AskNextPage" xml:space="preserve">
     <value>Ask for options on next page</value>
   </data>
-  <!-- StartPage_3 -->
   <data name="Start3_WhichContacts" xml:space="preserve">
     <value>Which contacts?</value>
   </data>
@@ -617,7 +693,6 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Start3_ReadAlwaysWrite" xml:space="preserve">
     <value>Always read and always create or update contact</value>
   </data>
-  <!-- RequestPermissionPage -->
   <data name="Permission_Needed" xml:space="preserve">
     <value>Permission required</value>
   </data>
@@ -645,18 +720,15 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Permission_OpenSettings" xml:space="preserve">
     <value>Open Settings</value>
   </data>
-  <!-- StartPage_5 -->
   <data name="Start5_ReminderQuestion" xml:space="preserve">
     <value>Do you want to be reminded on the exact day or also three days before or even 3 times?</value>
   </data>
   <data name="Start5_ManualNote" xml:space="preserve">
     <value>This can also be set manually for each entry</value>
   </data>
-  <!-- StartPage_6/7/8 - ReminderMethod_Signal missing -->
   <data name="ReminderMethod_Signal" xml:space="preserve">
     <value>Signal Messenger</value>
   </data>
-  <!-- StartPage_9 -->
   <data name="Start9_CalendarExport" xml:space="preserve">
     <value>Calendar Export</value>
   </data>
@@ -678,7 +750,6 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Start9_GoogleCalendar" xml:space="preserve">
     <value>Google Calendar</value>
   </data>
-  <!-- SearchPersonPage -->
   <data name="SearchPerson_Description" xml:space="preserve">
     <value>Search for an existing entry or create a new one.</value>
   </data>
@@ -694,15 +765,12 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="SearchPerson_CreateNew" xml:space="preserve">
     <value>Create new entry</value>
   </data>
-  <!-- Found Birthdays -->
   <data name="FoundBirthdays_Header" xml:space="preserve">
     <value>Found same birthdays</value>
   </data>
-  <!-- Error Messages -->
   <data name="Error_NameRequired" xml:space="preserve">
     <value>Please enter at least a first or last name.</value>
   </data>
-  <!-- Account Page -->
   <data name="Page_Account_Title" xml:space="preserve">
     <value>Account</value>
   </data>
@@ -724,7 +792,6 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Account_Unlimited" xml:space="preserve">
     <value>Unlimited</value>
   </data>
-  <!-- Reminder Settings Page -->
   <data name="Page_ReminderSettings_Title" xml:space="preserve">
     <value>Reminder Settings</value>
   </data>
@@ -746,14 +813,12 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Tab_Reminders" xml:space="preserve">
     <value>Reminders</value>
   </data>
-  <!-- Reminder Methods - Local -->
   <data name="ReminderMethod_Notification" xml:space="preserve">
     <value>Push notification on lockscreen</value>
   </data>
   <data name="ReminderMethod_Alarm" xml:space="preserve">
     <value>Mobile phone alarm</value>
   </data>
-  <!-- Reminder Message Templates - Today -->
   <data name="ReminderTemplate_Email_Today" xml:space="preserve">
     <value>Hello,
 
@@ -772,7 +837,6 @@ I would like to remind you that {Name} has a birthday today ({Date}). {AgeText}
   <data name="ReminderTemplate_Signal_Today" xml:space="preserve">
     <value>Reminder: {Name} has a birthday today ({Date})! {AgeText}</value>
   </data>
-  <!-- Reminder Message Templates - Tomorrow -->
   <data name="ReminderTemplate_Email_Tomorrow" xml:space="preserve">
     <value>Hello,
 
@@ -791,7 +855,6 @@ I would like to remind you that {Name} has a birthday tomorrow ({Date}). {AgeTex
   <data name="ReminderTemplate_Signal_Tomorrow" xml:space="preserve">
     <value>Reminder: {Name} has a birthday tomorrow ({Date})! {AgeText}</value>
   </data>
-  <!-- Reminder Message Templates - In X Days -->
   <data name="ReminderTemplate_Email_InDays" xml:space="preserve">
     <value>Hello,
 
@@ -810,18 +873,15 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="ReminderTemplate_Signal_InDays" xml:space="preserve">
     <value>Reminder: {Name} has a birthday in {Days} days ({Date})! {AgeText}</value>
   </data>
-  <!-- Age Text -->
   <data name="ReminderTemplate_AgeText" xml:space="preserve">
     <value>{Name} is turning {Age} years old.</value>
   </data>
-  <!-- Goodbye and Signature -->
   <data name="ReminderTemplate_Goodbye" xml:space="preserve">
     <value>Best regards</value>
   </data>
   <data name="ReminderTemplate_TeamSignature" xml:space="preserve">
     <value>Your team from {Domain}</value>
   </data>
-  <!-- Name Direction -->
   <data name="Settings_NameDirection" xml:space="preserve">
     <value>Name order</value>
   </data>
@@ -831,7 +891,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="NameDirection_FirstLastName" xml:space="preserve">
     <value>Last name, First name</value>
   </data>
-  <!-- ReminderPage - New structure -->
   <data name="Settings_ReminderNumber" xml:space="preserve">
     <value>Reminder No - {0} -</value>
   </data>
@@ -841,7 +900,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Settings_SubscriptionReminders" xml:space="preserve">
     <value>Reminders with Subscription</value>
   </data>
-  <!-- Help - Free Reminders -->
   <data name="Help_FreeReminders_Header" xml:space="preserve">
     <value>Free Reminders</value>
   </data>
@@ -858,7 +916,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
 • Email reminders are free with a limited number per month. For unlimited emails, a subscription is required.
 • Signal integration depends on third-party availability and cannot be permanently guaranteed.</value>
   </data>
-  <!-- Support -->
   <data name="Support_ReportBug" xml:space="preserve">
     <value>Report Bug</value>
   </data>
@@ -892,7 +949,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Support_Type_Feedback" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <!-- Reminder Status -->
   <data name="Reminder_Status_Free" xml:space="preserve">
     <value>Free</value>
   </data>
@@ -911,7 +967,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="General_Label_Time" xml:space="preserve">
     <value>Time ({0})</value>
   </data>
-  <!-- Help - Reminder Methods -->
   <data name="Help_ReminderNotification_Header" xml:space="preserve">
     <value>Push Notification</value>
   </data>
@@ -966,11 +1021,9 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Help_ReminderWhatsApp_Content_2" xml:space="preserve">
     <value>This feature requires an active subscription. WhatsApp Business API costs are covered by your subscription.</value>
   </data>
-  <!-- Help - Timezone Note -->
   <data name="Help_Timezone_Note" xml:space="preserve">
     <value>The timezone {0} means {1} ({2}). You can change your timezone anytime in settings.</value>
   </data>
-  <!-- Timezone Names -->
   <data name="Timezone_UTC" xml:space="preserve">
     <value>Coordinated Universal Time</value>
   </data>
@@ -1103,7 +1156,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Timezone_Unknown" xml:space="preserve">
     <value>Unknown Timezone</value>
   </data>
-  <!-- Purchase Abo Page -->
   <data name="PurchaseAbo_Title" xml:space="preserve">
     <value>Subscribe</value>
   </data>
@@ -1134,7 +1186,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="ContextMenu_Subscribe" xml:space="preserve">
     <value>Subscribe</value>
   </data>
-  <!-- Timezone Picker Entries -->
   <data name="Tz_Device" xml:space="preserve">
     <value>Device Timezone</value>
   </data>
@@ -1246,7 +1297,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
     <value>Auckland, Wellington</value>
   </data>
-  <!-- Timezone Regions -->
   <data name="Tz_Region_Europe" xml:space="preserve">
     <value>Europe</value>
   </data>
@@ -1265,7 +1315,6 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Tz_Region_Australia" xml:space="preserve">
     <value>Australia</value>
   </data>
-  <!-- Broken Version Page -->
   <data name="BrokenVersion_Title" xml:space="preserve">
     <value>Error</value>
   </data>
