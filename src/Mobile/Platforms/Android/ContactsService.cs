@@ -267,4 +267,98 @@ public partial class ContactsService
 
 		return PersonNameDirection.NotSet;
 	}
+
+	/// <summary>
+	/// Aim: Updates a contact's birthday in Android contacts.
+	/// Params: contactId - Raw contact ID, birthday - Birthday to set
+	/// Return: True if update was successful
+	/// </summary>
+	public partial Task<bool> UpdateContactBirthdayAsync(string contactId, Birthday birthday)
+	{
+		return Task.Run(() => UpdateContactBirthdaySync(contactId, birthday));
+	}
+
+	private static bool UpdateContactBirthdaySync(string contactId, Birthday birthday)
+	{
+		try
+		{
+			var context = Platform.CurrentActivity ?? Android.App.Application.Context;
+			var contentResolver = context.ContentResolver;
+			if (contentResolver == null)
+				return false;
+
+			// Format birthday for Android: yyyy-MM-dd or --MM-dd (no year)
+			string dateString = birthday.Year > 0
+				? $"{birthday.Year:D4}-{birthday.Month:D2}-{birthday.Day:D2}"
+				: $"--{birthday.Month:D2}-{birthday.Day:D2}";
+
+			// Check if birthday already exists for this contact
+			var existingBirthday = GetExistingBirthdayDataId(contentResolver, contactId);
+
+			if (existingBirthday != null)
+			{
+				// Update existing birthday
+				var values = new ContentValues();
+				values.Put(ContactsContract.CommonDataKinds.Event.StartDate, dateString);
+
+				var uri = ContactsContract.Data.ContentUri;
+				string where = $"{ContactsContract.Data.InterfaceConsts.Id} = ?";
+				string[] whereArgs = [existingBirthday];
+
+				int updated = contentResolver.Update(uri, values, where, whereArgs);
+				return updated > 0;
+			}
+			else
+			{
+				// Insert new birthday
+				var values = new ContentValues();
+				values.Put(ContactsContract.Data.InterfaceConsts.RawContactId, GetRawContactId(contentResolver, contactId));
+				values.Put(ContactsContract.Data.InterfaceConsts.Mimetype, ContactsContract.CommonDataKinds.Event.ContentItemType);
+				values.Put(ContactsContract.CommonDataKinds.Event.StartDate, dateString);
+				values.Put(ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type, (int)EventDataKind.Birthday);
+
+				var insertUri = contentResolver.Insert(ContactsContract.Data.ContentUri, values);
+				return insertUri != null;
+			}
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error updating Android contact birthday: {ex.Message}");
+			return false;
+		}
+	}
+
+	private static string? GetExistingBirthdayDataId(ContentResolver contentResolver, string contactId)
+	{
+		var uri = ContactsContract.Data.ContentUri;
+		string[] projection = [ContactsContract.Data.InterfaceConsts.Id];
+		string selection = $"{ContactsContract.Data.InterfaceConsts.ContactId} = ? AND {ContactsContract.Data.InterfaceConsts.Mimetype} = ? AND {ContactsContract.CommonDataKinds.Event.InterfaceConsts.Type} = ?";
+		string[] selectionArgs = [contactId, ContactsContract.CommonDataKinds.Event.ContentItemType, ((int)EventDataKind.Birthday).ToString()];
+
+		using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
+		if (cursor != null && cursor.MoveToFirst())
+		{
+			int idIndex = cursor.GetColumnIndex(ContactsContract.Data.InterfaceConsts.Id);
+			return cursor.GetString(idIndex);
+		}
+
+		return null;
+	}
+
+	private static string? GetRawContactId(ContentResolver contentResolver, string contactId)
+	{
+		var uri = ContactsContract.RawContacts.ContentUri;
+		string[] projection = [ContactsContract.RawContacts.InterfaceConsts.Id];
+		string selection = $"{ContactsContract.RawContacts.InterfaceConsts.ContactId} = ?";
+		string[] selectionArgs = [contactId];
+
+		using var cursor = contentResolver.Query(uri, projection, selection, selectionArgs, null);
+		if (cursor != null && cursor.MoveToFirst())
+		{
+			int idIndex = cursor.GetColumnIndex(ContactsContract.RawContacts.InterfaceConsts.Id);
+			return cursor.GetString(idIndex);
+		}
+
+		return null;
+	}
 }

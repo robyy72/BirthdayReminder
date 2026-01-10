@@ -2,21 +2,89 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             xmlns:controls="clr-namespace:Mobile"
+             xmlns:local="clr-namespace:Mobile"
              x:Class="Mobile.SyncContactsToPersonsPage"
+             x:DataType="local:SyncContactsToPersonsPage"
              NavigationPage.HasNavigationBar="False">
 
     <Grid RowDefinitions="Auto,*">
-        <!-- Custom Header -->
-        <controls:CustomHeader Grid.Row="0"
-                               Title="Sync Contacts"
-                               ShowMenuButton="False"
-                               ShowBackButton="True" />
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              Style="{StaticResource HeaderBarWithBack}"
+              ColumnDefinitions="Auto,*">
+            <Button Grid.Column="0"
+                    Style="{StaticResource ButtonBack}"
+                    Clicked="OnSkipClicked" />
+            <Label Grid.Column="1"
+                   Text="{x:Static resx:Resources.Page_SyncContacts_Title}"
+                   Style="{StaticResource LabelHeaderBar}" />
+        </Grid>
 
-        <!-- Content -->
-        <ScrollView Grid.Row="1" Padding="20">
-            <VerticalStackLayout Spacing="15">
-                <!-- TODO: Sync UI -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <!-- Info Text -->
+                <Label Text="{x:Static resx:Resources.Page_SyncContacts_Info}"
+                       Style="{StaticResource LabelInfo}" />
+
+                <!-- New Contacts Count -->
+                <Label x:Name="CountLabel"
+                       Style="{StaticResource LabelInfo}"
+                       FontAttributes="Bold" />
+
+                <!-- Select All -->
+                <Grid ColumnDefinitions="Auto,*" Margin="0,10,0,0">
+                    <CheckBox x:Name="SelectAllCheckBox"
+                              CheckedChanged="OnSelectAllChanged"
+                              VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="{x:Static resx:Resources.Page_SyncContacts_SelectAll}"
+                           Style="{StaticResource LabelInfo}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <!-- New Contacts List -->
+                <CollectionView x:Name="ContactsList"
+                                ItemsSource="{Binding NewContacts}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:ContactSyncViewModel">
+                            <Border Style="{StaticResource CardBirthday}">
+                                <Grid ColumnDefinitions="Auto,*" Padding="10">
+                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                              VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                        <Label Text="{Binding DisplayName}"
+                                               Style="{StaticResource LabelCardHeader}"
+                                               FontSize="16" />
+                                        <Label Text="{Binding BirthdayDisplay}"
+                                               Style="{StaticResource LabelInfo}"
+                                               FontSize="13"
+                                               IsVisible="{Binding HasBirthday}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label Text="{x:Static resx:Resources.Page_SyncContacts_NoNewContacts}"
+                               Style="{StaticResource LabelInfo}"
+                               HorizontalOptions="Center"
+                               Padding="20" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+
+                <!-- Buttons -->
+                <Button Text="{x:Static resx:Resources.Page_SyncContacts_AddSelected}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnAddSelectedClicked"
+                        Margin="0,20,0,0" />
+
+                <Button Text="{x:Static resx:Resources.Page_SyncContacts_Skip}"
+                        Style="{StaticResource ButtonSecondary}"
+                        Clicked="OnSkipClicked" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

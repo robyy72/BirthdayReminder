@@ -1330,4 +1330,25 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="BrokenVersion_TryAnyway" xml:space="preserve">
     <value>Try Anyway</value>
   </data>
+  <data name="Page_SyncContacts_Title" xml:space="preserve">
+    <value>Sync Contacts</value>
+  </data>
+  <data name="Page_SyncContacts_Info" xml:space="preserve">
+    <value>New contacts have been found that are not yet in your birthday list.</value>
+  </data>
+  <data name="Page_SyncContacts_Count" xml:space="preserve">
+    <value>{0} new contact(s) found</value>
+  </data>
+  <data name="Page_SyncContacts_SelectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="Page_SyncContacts_AddSelected" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="Page_SyncContacts_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="Page_SyncContacts_NoNewContacts" xml:space="preserve">
+    <value>No new contacts found</value>
+  </data>
 </root>

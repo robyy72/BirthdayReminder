@@ -128,4 +128,68 @@ public partial class ContactsService
 
 		return result;
 	}
+
+	/// <summary>
+	/// Aim: Updates a contact's birthday in iOS contacts.
+	/// Params: contactId - Contact identifier, birthday - Birthday to set
+	/// Return: True if update was successful
+	/// </summary>
+	public partial Task<bool> UpdateContactBirthdayAsync(string contactId, Birthday birthday)
+	{
+		try
+		{
+			var store = new CNContactStore();
+
+			// Find the contact by identifier
+			var keysToFetch = new NSString[]
+			{
+				CNContactKey.Identifier,
+				CNContactKey.Birthday
+			};
+
+			var contact = store.GetUnifiedContact(contactId, keysToFetch, out var fetchError);
+			if (fetchError != null || contact == null)
+			{
+				System.Diagnostics.Debug.WriteLine($"Error fetching contact: {fetchError?.LocalizedDescription}");
+				return Task.FromResult(false);
+			}
+
+			// Create mutable copy
+			var mutableContact = contact.MutableCopy() as CNMutableContact;
+			if (mutableContact == null)
+				return Task.FromResult(false);
+
+			// Create birthday components
+			var birthdayComponents = new NSDateComponents
+			{
+				Day = birthday.Day,
+				Month = birthday.Month
+			};
+
+			if (birthday.Year > 0)
+			{
+				birthdayComponents.Year = birthday.Year;
+			}
+
+			mutableContact.Birthday = birthdayComponents;
+
+			// Save the contact
+			var saveRequest = new CNSaveRequest();
+			saveRequest.UpdateContact(mutableContact);
+
+			bool success = store.ExecuteSaveRequest(saveRequest, out var saveError);
+			if (saveError != null)
+			{
+				System.Diagnostics.Debug.WriteLine($"Error saving contact: {saveError.LocalizedDescription}");
+				return Task.FromResult(false);
+			}
+
+			return Task.FromResult(success);
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"Error updating iOS contact birthday: {ex.Message}");
+			return Task.FromResult(false);
+		}
+	}
 }

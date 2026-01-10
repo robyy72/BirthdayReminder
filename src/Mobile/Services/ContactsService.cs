@@ -66,4 +66,29 @@ public partial class ContactsService
 	public static partial Person ConvertContactToPerson(Contact contact);
 	public static partial Contact ConvertPersonToContact(Person person);
 	public static partial PersonNameDirection GetDeviceNameOrder();
+
+	/// <summary>
+	/// Aim: Updates a contact's birthday in device contacts.
+	/// Params: contactId - Device contact ID, birthday - Birthday to set
+	/// Return: True if update was successful
+	/// </summary>
+	public partial Task<bool> UpdateContactBirthdayAsync(string contactId, Birthday birthday);
+
+	/// <summary>
+	/// Aim: Check if write-back to contacts is allowed.
+	/// Return: True if ContactsReadWriteMode allows writing.
+	/// </summary>
+	public static bool CanWriteToContacts()
+	{
+		return App.Account.ContactsReadWriteMode == ContactsReadWriteMode.ReadAlwaysAndWriteBack;
+	}
+
+	/// <summary>
+	/// Aim: Check if write-back requires asking the user.
+	/// Return: True if ContactsReadWriteMode requires asking before writing.
+	/// </summary>
+	public static bool ShouldAskBeforeWriting()
+	{
+		return App.Account.ContactsReadWriteMode == ContactsReadWriteMode.ReadAlwaysAndAskWriteBack;
+	}
 }

@@ -1395,7 +1395,70 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Page_SupportOverview_Title", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add Selected ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_AddSelected {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_AddSelected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die {0} new contact(s) found ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_Count {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_Count", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New contacts have been found that are not yet in your birthday list. ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_Info {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_Info", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No new contacts found ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_NoNewContacts {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_NoNewContacts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Select all ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_SelectAll {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_SelectAll", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Skip ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_Skip {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_Skip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sync Contacts ähnelt.
+        /// </summary>
+        public static string Page_SyncContacts_Title {
+            get {
+                return ResourceManager.GetString("Page_SyncContacts_Title", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Welcome ähnelt.
         /// </summary>
