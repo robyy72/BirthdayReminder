@@ -15,6 +15,7 @@ public partial class MainPage : ContentPage
 		InitContextMenu();
 		AccountService.CheckRightsAndUpdateAccount();
 		LoadContactsAfterWizardIfNeeded();
+		App.ContactsPermissionChanged += OnContactsPermissionChanged;
 	}
 
 	private void InitContextMenu()
@@ -130,6 +131,19 @@ public partial class MainPage : ContentPage
     #endregion
 
     #region Private Methods
+    /// <summary>
+    /// Aim: Handle contacts permission change event.
+    /// Params: status (AppPermissionStatus) - The new permission status.
+    /// </summary>
+    private async void OnContactsPermissionChanged(AppPermissionStatus status)
+    {
+        if (status == AppPermissionStatus.Granted)
+        {
+            await ContactsService.ReadContactsIfAllowedAsync();
+            UpdateBirthdayListsOnTheForm();
+        }
+    }
+
     private void CloseFlyout()
     {
         App.CloseFlyout();
