@@ -1190,31 +1190,31 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
     <value>Device Timezone</value>
   </data>
   <data name="Tz_Pacific_Midway" xml:space="preserve">
-    <value>Midway, Samoa</value>
+    <value>Midway</value>
   </data>
   <data name="Tz_Pacific_Honolulu" xml:space="preserve">
-    <value>Honolulu, Hawaii</value>
+    <value>Honolulu</value>
   </data>
   <data name="Tz_America_Anchorage" xml:space="preserve">
-    <value>Anchorage, Alaska</value>
+    <value>Anchorage</value>
   </data>
   <data name="Tz_America_LosAngeles" xml:space="preserve">
-    <value>Los Angeles, San Francisco</value>
+    <value>Los Angeles</value>
   </data>
   <data name="Tz_America_Denver" xml:space="preserve">
-    <value>Denver, Phoenix</value>
+    <value>Denver</value>
   </data>
   <data name="Tz_America_Chicago" xml:space="preserve">
-    <value>Chicago, Houston</value>
+    <value>Chicago</value>
   </data>
   <data name="Tz_America_NewYork" xml:space="preserve">
-    <value>New York, Washington</value>
+    <value>New York</value>
   </data>
   <data name="Tz_America_Halifax" xml:space="preserve">
-    <value>Halifax, Atlantic</value>
+    <value>Halifax</value>
   </data>
   <data name="Tz_America_SaoPaulo" xml:space="preserve">
-    <value>São Paulo, Rio</value>
+    <value>São Paulo</value>
   </data>
   <data name="Tz_America_BuenosAires" xml:space="preserve">
     <value>Buenos Aires</value>
@@ -1223,76 +1223,76 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
     <value>Azores</value>
   </data>
   <data name="Tz_Europe_London" xml:space="preserve">
-    <value>London, Dublin, Lisbon</value>
+    <value>London</value>
   </data>
   <data name="Tz_Europe_Berlin" xml:space="preserve">
-    <value>Berlin, Munich, Frankfurt</value>
+    <value>Berlin</value>
   </data>
   <data name="Tz_Europe_Rome" xml:space="preserve">
-    <value>Rome, Milan</value>
+    <value>Rome</value>
   </data>
   <data name="Tz_Europe_Madrid" xml:space="preserve">
-    <value>Madrid, Barcelona</value>
+    <value>Madrid</value>
   </data>
   <data name="Tz_Europe_Amsterdam" xml:space="preserve">
-    <value>Amsterdam, Rotterdam</value>
+    <value>Amsterdam</value>
   </data>
   <data name="Tz_Europe_Vienna" xml:space="preserve">
-    <value>Vienna, Salzburg</value>
+    <value>Vienna</value>
   </data>
   <data name="Tz_Europe_Zurich" xml:space="preserve">
-    <value>Zurich, Geneva</value>
+    <value>Zurich</value>
   </data>
   <data name="Tz_Europe_Warsaw" xml:space="preserve">
-    <value>Warsaw, Krakow</value>
+    <value>Warsaw</value>
   </data>
   <data name="Tz_Europe_Athens" xml:space="preserve">
-    <value>Athens, Bucharest</value>
+    <value>Athens</value>
   </data>
   <data name="Tz_Europe_Helsinki" xml:space="preserve">
-    <value>Helsinki, Tallinn</value>
+    <value>Helsinki</value>
   </data>
   <data name="Tz_Europe_Istanbul" xml:space="preserve">
-    <value>Istanbul, Ankara</value>
+    <value>Istanbul</value>
   </data>
   <data name="Tz_Europe_Moscow" xml:space="preserve">
-    <value>Moscow, St. Petersburg</value>
+    <value>Moscow</value>
   </data>
   <data name="Tz_Asia_Dubai" xml:space="preserve">
-    <value>Dubai, Abu Dhabi</value>
+    <value>Dubai</value>
   </data>
   <data name="Tz_Asia_Karachi" xml:space="preserve">
-    <value>Karachi, Islamabad</value>
+    <value>Karachi</value>
   </data>
   <data name="Tz_Asia_Kolkata" xml:space="preserve">
-    <value>Mumbai, Delhi, Kolkata</value>
+    <value>Mumbai</value>
   </data>
   <data name="Tz_Asia_Dhaka" xml:space="preserve">
-    <value>Dhaka, Bangladesh</value>
+    <value>Dhaka</value>
   </data>
   <data name="Tz_Asia_Bangkok" xml:space="preserve">
-    <value>Bangkok, Hanoi</value>
+    <value>Bangkok</value>
   </data>
   <data name="Tz_Asia_Singapore" xml:space="preserve">
-    <value>Singapore, Kuala Lumpur</value>
+    <value>Singapore</value>
   </data>
   <data name="Tz_Asia_HongKong" xml:space="preserve">
-    <value>Hong Kong, Macau</value>
+    <value>Hong Kong</value>
   </data>
   <data name="Tz_Asia_Shanghai" xml:space="preserve">
-    <value>Shanghai, Beijing</value>
+    <value>Shanghai</value>
   </data>
   <data name="Tz_Asia_Tokyo" xml:space="preserve">
-    <value>Tokyo, Osaka</value>
+    <value>Tokyo</value>
   </data>
   <data name="Tz_Asia_Seoul" xml:space="preserve">
-    <value>Seoul, Busan</value>
+    <value>Seoul</value>
   </data>
   <data name="Tz_Australia_Sydney" xml:space="preserve">
-    <value>Sydney, Melbourne</value>
+    <value>Sydney</value>
   </data>
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
-    <value>Auckland, Wellington</value>
+    <value>Auckland</value>
   </data>
   <data name="Tz_Region_Europe" xml:space="preserve">
     <value>Europe</value>
