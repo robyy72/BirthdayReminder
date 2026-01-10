@@ -135,8 +135,10 @@ public partial class StartPage_2 : ContentPage
 
 	private async void OnTimezoneInfoTapped(object? sender, EventArgs e)
 	{
-		var helpPage = new HelpPage { Topic = HelpTopic.Timezone.ToString() };
-		await Navigation.PushModalAsync(helpPage);
+		var browserPage = new BrowserPage(
+			MobileConstants.URL_TIMEZONE_INFO,
+			MobileLanguages.Resources.Timezone_MoreInfo);
+		await Navigation.PushModalAsync(browserPage);
 	}
 	#endregion
 }
