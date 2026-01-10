@@ -6,10 +6,10 @@
              x:Class="Mobile.AllBirthdaysPage"
              x:DataType="controls:AllBirthdaysPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource White}"
+
              Title="{x:Static resx:Resources.Page_AllBirthdays_Title}">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_AllBirthdays_Title}"
@@ -68,8 +68,6 @@
             </CollectionView>
         </Grid>
 
-        <!-- Tab Menu -->
-        <controls:TabMenu Grid.Row="2" ActiveTab="List" />
     </Grid>
 
 </ContentPage>

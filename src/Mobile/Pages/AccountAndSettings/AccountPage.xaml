@@ -5,10 +5,10 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.AccountPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource White}"
+
              Title="{x:Static resx:Resources.Page_Account_Title}">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_Account_Title}"
@@ -61,8 +61,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Tab Menu -->
-        <controls:TabMenu Grid.Row="2" ActiveTab="Person" />
     </Grid>
 
 </ContentPage>

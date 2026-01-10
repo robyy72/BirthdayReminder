@@ -337,7 +337,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Zeitzone</value>
   </data>
   <data name="Settings_Timezone_Select" xml:space="preserve">
-    <value>Zeitzone auswählen</value>
+    <value>Meine Zeitzone auswählen</value>
   </data>
   <data name="Settings_Timezone_Hint" xml:space="preserve">
     <value>Stelle die Zeitzone auf deinen Hauptaufenthaltsort ein, nicht auf dein aktuelles Reiseziel. So kommen Erinnerungen zur richtigen Zeit an.</value>

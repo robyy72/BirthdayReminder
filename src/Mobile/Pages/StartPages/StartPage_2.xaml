@@ -97,8 +97,12 @@
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
-                            <Picker x:Name="TimezonePicker"
-                                    Title="{x:Static resx:Resources.Settings_Timezone_Select}" />
+                            <Border Style="{StaticResource TileOuterForEntry}">
+                                <Border Style="{StaticResource TileInnerForEntry}">
+                                    <Picker x:Name="TimezonePicker"
+                                            Title="{x:Static resx:Resources.Settings_Timezone_Select}" />
+                                </Border>
+                            </Border>
                             <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
                                    Style="{StaticResource LabelInfo}"
                                    TextColor="{StaticResource Gray500}" />

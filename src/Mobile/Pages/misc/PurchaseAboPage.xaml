@@ -7,9 +7,9 @@
              x:DataType="controls:PurchaseAboPage"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource White}">
+>
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.PurchaseAbo_Title}"
@@ -61,8 +61,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Tab Menu -->
-        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
     </Grid>
 
 </ContentPage>

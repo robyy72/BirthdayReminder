@@ -6,10 +6,9 @@
              x:Class="Mobile.MainPage"
              x:DataType="controls:MainPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource White}"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader x:Name="TheHeader"
                                Grid.Row="0"
@@ -114,17 +113,15 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Tab Menu -->
-        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
 
         <!-- Flyout Menu Overlay (spans all rows) -->
         <controls:FlyoutMenu x:Name="TheFlyout"
                              Grid.Row="0"
-                             Grid.RowSpan="3" />
+                             Grid.RowSpan="2" />
 
         <!-- Context Menu Overlay (spans all rows) -->
         <controls:ContextMenu x:Name="TheContextMenu"
                               Grid.Row="0"
-                              Grid.RowSpan="3" />
+                              Grid.RowSpan="2" />
     </Grid>
 </ContentPage>

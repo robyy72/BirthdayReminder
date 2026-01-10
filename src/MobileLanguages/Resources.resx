@@ -415,7 +415,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Timezone</value>
   </data>
   <data name="Settings_Timezone_Select" xml:space="preserve">
-    <value>Select Timezone</value>
+    <value>Select my timezone</value>
   </data>
   <data name="Settings_Timezone_Hint" xml:space="preserve">
     <value>Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time.</value>

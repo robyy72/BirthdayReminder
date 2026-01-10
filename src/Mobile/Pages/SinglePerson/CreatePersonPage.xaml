@@ -5,10 +5,10 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.CreatePersonPage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource White}"
+
              Title="{x:Static resx:Resources.Page_NewBirthday_Title}">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_NewBirthday_Title}"
@@ -121,8 +121,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Tab Menu -->
-        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
     </Grid>
 
 </ContentPage>
