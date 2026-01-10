@@ -39,7 +39,9 @@ Windows – Use PowerShell or Windows commands. Linux/macOS commands (rm, ls, ca
 
 ## Communication Style
 
-- **No suggestions** - Do not offer unsolicited suggestions or next steps
+- **No suggestions** - Do not offer unsolicited suggestions, improvements, or next steps
+- **No "you could also..." or "consider..."** - Never propose alternatives unless explicitly asked
+- **No recommendations** - Don't recommend refactoring, cleanup, or "better" approaches
 - Just do what is asked, report results briefly
 - **User changes have priority** - If user mentions they already made changes (e.g., "I changed line X"), check git diff or read the file FIRST to see what they wrote before implementing anything. Their naming, structure, and decisions take precedence.
 
