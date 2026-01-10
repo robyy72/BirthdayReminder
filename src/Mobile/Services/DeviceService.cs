@@ -222,13 +222,30 @@ public static class DeviceService
 	#region Permissions
 	/// <summary>
 	/// Aim: Checks if contacts read permission is granted
-	/// Return: True if granted, false otherwise
+	/// Return: True if granted (full or limited), false otherwise
 	/// </summary>
 	public static async Task<bool> CheckContactsReadPermissionAsync()
 	{
 		PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
-		bool isGranted = status == PermissionStatus.Granted;
+		bool isGranted = status == PermissionStatus.Granted || status == PermissionStatus.Limited;
 		return isGranted;
+	}
+
+	/// <summary>
+	/// Aim: Gets the contacts access choice (iOS only: full vs limited access)
+	/// Return: ContactsAccessChoice enum value
+	/// </summary>
+	public static async Task<ContactsAccessChoice> GetContactsAccessChoiceAsync()
+	{
+		PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+
+		if (status == PermissionStatus.Limited)
+			return ContactsAccessChoice.OnlySomeContacts;
+
+		if (status == PermissionStatus.Granted)
+			return ContactsAccessChoice.AllContacts;
+
+		return ContactsAccessChoice.NotSet;
 	}
 
 	/// <summary>

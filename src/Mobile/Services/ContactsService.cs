@@ -75,16 +75,17 @@ public partial class ContactsService
 	public partial Task<bool> UpdateContactBirthdayAsync(string contactId, Birthday birthday);
 
 	/// <summary>
-	/// Aim: Check if write-back to contacts is allowed.
+	/// Aim: Check if write-back to contacts is allowed (mode 3 or 4).
 	/// Return: True if ContactsReadWriteMode allows writing.
 	/// </summary>
 	public static bool CanWriteToContacts()
 	{
-		return App.Account.ContactsReadWriteMode == ContactsReadWriteMode.ReadAlwaysAndWriteBack;
+		return App.Account.ContactsReadWriteMode == ContactsReadWriteMode.ReadAlwaysAndAskWriteBack
+			|| App.Account.ContactsReadWriteMode == ContactsReadWriteMode.ReadAlwaysAndWriteBack;
 	}
 
 	/// <summary>
-	/// Aim: Check if write-back requires asking the user.
+	/// Aim: Check if write-back requires asking the user (mode 3 only, for editing existing).
 	/// Return: True if ContactsReadWriteMode requires asking before writing.
 	/// </summary>
 	public static bool ShouldAskBeforeWriting()

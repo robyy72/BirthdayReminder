@@ -43,7 +43,7 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (granted)
 		{
-			SetPermissionStatus(AppPermissionStatus.Granted);
+			await SetPermissionStatusAsync(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 		}
 
@@ -100,22 +100,13 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (granted)
 		{
-			SetPermissionStatus(AppPermissionStatus.Granted);
+			await SetPermissionStatusAsync(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 		}
 		else
 		{
-			SetPermissionStatus(AppPermissionStatus.Denied);
+			await SetPermissionStatusAsync(AppPermissionStatus.Denied);
 			ShowPanel(ResultState.Denied);
-
-			if (_permissionType == PermissionType.Contacts)
-			{
-				if (App.Account.ContactsReadMode != ContactsReadMode.None)
-				{
-					App.Account.ContactsReadMode = ContactsReadMode.None;
-					AccountService.Save();
-				}
-			}
 		}
 
 		ButtonNext.IsEnabled = true;
@@ -135,18 +126,17 @@ public partial class RequestPermissionPage_1 : ContentPage
 	#endregion
 
 	#region Private Methods
-	private void SetPermissionStatus(AppPermissionStatus status)
+	private async Task SetPermissionStatusAsync(AppPermissionStatus status)
 	{
 		switch (_permissionType)
 		{
 			case PermissionType.Contacts:
-				App.Account.ContactsPermission = status;
+				await PermissionService.UpdateContactsPermissionAsync(status);
 				break;
 			case PermissionType.Calendar:
-				App.Account.CalendarPermission = status;
+				PermissionService.UpdateCalendarPermission(status);
 				break;
 		}
-		AccountService.Save();
 	}
 
 	private void ShowPanel(ResultState state)

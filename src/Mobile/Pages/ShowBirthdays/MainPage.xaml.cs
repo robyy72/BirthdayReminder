@@ -15,7 +15,7 @@ public partial class MainPage : ContentPage
 		InitContextMenu();
 		AccountService.CheckRightsAndUpdateAccount();
 		LoadContactsAfterWizardIfNeeded();
-		App.ContactsPermissionChanged += OnContactsPermissionChanged;
+		PermissionService.ContactsPermissionChanged += OnContactsPermissionChanged;
 	}
 
 	private void InitContextMenu()

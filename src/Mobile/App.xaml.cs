@@ -8,7 +8,6 @@ public partial class App : Application
 {
     #region Private Fields
     private static INavigation? _navigation;
-    private static AppPermissionStatus _lastContactsPermission;
     #endregion
 
     #region Public Properties
@@ -34,9 +33,6 @@ public partial class App : Application
     public static event Action? ContextMenuCloseRequested;
     #endregion
 
-    #region Permission Events
-    public static event Action<AppPermissionStatus>? ContactsPermissionChanged;
-    #endregion
 
     #endregion
 
@@ -271,7 +267,7 @@ public partial class App : Application
         AccountService.Load();
         SupportService.Load();
 
-        InitPermissionTracking();
+        PermissionService.InitTracking();
         CheckTimeZone();
         LoadContactsIfNeeded();
         ApplyTheme();
@@ -365,32 +361,7 @@ public partial class App : Application
     /// </summary>
     private async void OnAppResumed(object? sender, EventArgs e)
     {
-        await CheckContactsPermissionAsync();
-    }
-
-    /// <summary>
-    /// Aim: Check if contacts permission changed and fire event if so.
-    /// </summary>
-    private static async Task CheckContactsPermissionAsync()
-    {
-        bool isGranted = await DeviceService.CheckContactsReadPermissionAsync();
-        AppPermissionStatus currentStatus = isGranted ? AppPermissionStatus.Granted : AppPermissionStatus.Denied;
-
-        if (currentStatus != _lastContactsPermission)
-        {
-            _lastContactsPermission = currentStatus;
-            Account.ContactsPermission = currentStatus;
-            AccountService.Save();
-            ContactsPermissionChanged?.Invoke(currentStatus);
-        }
-    }
-
-    /// <summary>
-    /// Aim: Initialize permission tracking with current state.
-    /// </summary>
-    private static void InitPermissionTracking()
-    {
-        _lastContactsPermission = Account.ContactsPermission;
+        await PermissionService.CheckContactsPermissionAsync();
     }
 
     private void SetupGlobalExceptionHandlers()
