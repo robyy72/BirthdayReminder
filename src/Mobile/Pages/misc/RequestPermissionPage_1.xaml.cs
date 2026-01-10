@@ -43,7 +43,6 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (granted)
 		{
-			App.NeedsReadContacts = true;
 			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 		}
@@ -101,7 +100,6 @@ public partial class RequestPermissionPage_1 : ContentPage
 
 		if (granted)
 		{
-			App.NeedsReadContacts = true;
 			SetPermissionStatus(AppPermissionStatus.Granted);
 			ShowPanel(ResultState.Success);
 		}

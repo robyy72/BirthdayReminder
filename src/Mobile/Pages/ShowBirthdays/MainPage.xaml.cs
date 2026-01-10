@@ -13,7 +13,8 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		BindingContext = this;
 		InitContextMenu();
-		Init();
+		AccountService.CheckRightsAndUpdateAccount();
+		LoadContactsAfterWizardIfNeeded();
 	}
 
 	private void InitContextMenu()
@@ -24,6 +25,23 @@ public partial class MainPage : ContentPage
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_Feedback, OnFeedbackFromMenu);
 	}
 
+	/// <summary>
+	/// Aim: Load contacts after wizard completes (first run only).
+	/// </summary>
+	private async void LoadContactsAfterWizardIfNeeded()
+	{
+		// Only needed when coming from wizard (contacts not loaded yet but permission granted)
+		if (App.Contacts.Count > 0 || !AccountService.UseContacts())
+			return;
+
+		await ContactsService.ReadContactsIfAllowedAsync();
+
+		if (App.Contacts.Count > 0 && App.NeedsSyncContacts)
+		{
+			await App.NavigateToAsync<SyncContactsToPersonsPage>();
+		}
+	}
+
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
@@ -31,19 +49,6 @@ public partial class MainPage : ContentPage
 		UpcomingBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_UpcomingTitle, App.Account.ShowUpcomingBirthdays);
 		PastBirthdaysLabel.Text = string.Format(MobileLanguages.Resources.Page_Main_MissedTitle, App.Account.ShowPastBirthdays);
 		UpdateBirthdayListsOnTheForm();
-	}
-
-	private async void Init()
-	{
-		AccountService.CheckRightsAndUpdateAccount();
-		if (App.NeedsReadContacts)
-		{
-			await ContactsService.ReadContactsIfAllowedAsync();
-			if (App.Contacts.Count > 0)
-			{
-				await App.NavigateToAsync<SyncContactsToPersonsPage>();
-			}
-		}
 	}
     #endregion
 

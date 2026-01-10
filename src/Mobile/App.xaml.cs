@@ -8,6 +8,7 @@ public partial class App : Application
 {
     #region Private Fields
     private static INavigation? _navigation;
+    private static AppPermissionStatus _lastContactsPermission;
     #endregion
 
     #region Public Properties
@@ -19,7 +20,7 @@ public partial class App : Application
     public static List<Contact> Contacts { get; set; } = [];
     public static List<Support> SupportEntries { get; set; } = [];
     public static Account Account { get; set; } = new();
-    public static bool NeedsReadContacts { get; set; } = false;
+    public static bool NeedsSyncContacts { get; set; } = false;
 
     #region Navigation (for reusable pages)
     public static Type? ForwardPageType { get; set; }
@@ -31,6 +32,10 @@ public partial class App : Application
     public static event Action? FlyoutCloseRequested;
     public static event Action? ContextMenuOpenRequested;
     public static event Action? ContextMenuCloseRequested;
+    #endregion
+
+    #region Permission Events
+    public static event Action<AppPermissionStatus>? ContactsPermissionChanged;
     #endregion
 
     #endregion
@@ -48,6 +53,9 @@ public partial class App : Application
     {
         Page page = GetStartPage();
         Window window = new Window(page);
+
+        window.Resumed += OnAppResumed;
+
         return window;
     }
     #endregion
@@ -263,12 +271,58 @@ public partial class App : Application
         AccountService.Load();
         SupportService.Load();
 
+        InitPermissionTracking();
         CheckTimeZone();
-
-        if (AccountService.UseContacts())
-            NeedsReadContacts = true;
-
+        LoadContactsIfNeeded();
         ApplyTheme();
+    }
+
+    /// <summary>
+    /// Aim: Load contacts during splash screen and check if sync is needed.
+    /// </summary>
+    private void LoadContactsIfNeeded()
+    {
+        if (!AccountService.UseContacts())
+            return;
+
+        try
+        {
+            var serviceWithPlatformCode = new ContactsService();
+            bool onlyWithBirthday = Account.ContactsReadMode == ContactsReadMode.ReadNamesWithBirthday;
+            Contacts = serviceWithPlatformCode.GetContactsAsync(onlyWithBirthday).GetAwaiter().GetResult();
+
+            if (Contacts.Count == 0)
+                return;
+
+            // First run: import all contacts as persons
+            if (Persons.Count == 0)
+            {
+                foreach (Contact contact in Contacts)
+                {
+                    if (string.IsNullOrWhiteSpace(contact.FirstName) && string.IsNullOrWhiteSpace(contact.LastName))
+                        continue;
+
+                    Person person = ContactsService.ConvertContactToPerson(contact);
+                    person.Source = PersonSource.Contacts;
+                    PersonService.Add(person);
+                }
+
+                Account.PersonNameDirection = ContactsService.GetDeviceNameOrder();
+                if (Account.PersonNameDirection == PersonNameDirection.NotSet)
+                    Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
+
+                AccountService.Save();
+                return;
+            }
+
+            // Compare: check if contacts count differs from persons with ContactId
+            int personsFromContacts = Persons.Count(p => !string.IsNullOrEmpty(p.ContactId));
+            NeedsSyncContacts = Contacts.Count != personsFromContacts;
+        }
+        catch (Exception ex)
+        {
+            LogDebugInfo("Error loading contacts", ex);
+        }
     }
 
     private async void SendHeartbeatIfNeeded()
@@ -304,6 +358,39 @@ public partial class App : Application
     private void ApplyTheme()
     {
         DeviceService.ApplyTheme(Account.Theme);
+    }
+
+    /// <summary>
+    /// Aim: Handle app resume event to check for permission changes.
+    /// </summary>
+    private async void OnAppResumed(object? sender, EventArgs e)
+    {
+        await CheckContactsPermissionAsync();
+    }
+
+    /// <summary>
+    /// Aim: Check if contacts permission changed and fire event if so.
+    /// </summary>
+    private static async Task CheckContactsPermissionAsync()
+    {
+        bool isGranted = await DeviceService.CheckContactsReadPermissionAsync();
+        AppPermissionStatus currentStatus = isGranted ? AppPermissionStatus.Granted : AppPermissionStatus.Denied;
+
+        if (currentStatus != _lastContactsPermission)
+        {
+            _lastContactsPermission = currentStatus;
+            Account.ContactsPermission = currentStatus;
+            AccountService.Save();
+            ContactsPermissionChanged?.Invoke(currentStatus);
+        }
+    }
+
+    /// <summary>
+    /// Aim: Initialize permission tracking with current state.
+    /// </summary>
+    private static void InitPermissionTracking()
+    {
+        _lastContactsPermission = Account.ContactsPermission;
     }
 
     private void SetupGlobalExceptionHandlers()
@@ -356,7 +443,7 @@ public partial class App : Application
 
     /// <summary>
     /// Aim: Determine the start page based on app state.
-    /// Return (Page): StartPage_1 for new users, BrokenVersionPage if crashed, MainPage otherwise.
+    /// Return (Page): StartPage_1 for new users, BrokenVersionPage if crashed, SyncPage if contacts changed, MainPage otherwise.
     /// </summary>
     private Page GetStartPage()
     {
@@ -366,7 +453,28 @@ public partial class App : Application
         if (ErrorService.IsBrokenVersion())
             return new BrokenVersionPage();
 
+        if (NeedsSyncContacts)
+            return CreateSyncNavigationPage();
+
         return CreateMainNavigationPage();
+    }
+
+    /// <summary>
+    /// Aim: Creates NavigationPage with SyncContactsToPersonsPage as root.
+    /// Return (NavigationPage): NavigationPage with SyncContactsToPersonsPage.
+    /// </summary>
+    public static NavigationPage CreateSyncNavigationPage()
+    {
+        var syncPage = new SyncContactsToPersonsPage();
+        var navigationPage = new NavigationPage(syncPage)
+        {
+            BarBackgroundColor = ResourceHelper.GetThemedColor("Primary", "Gray900"),
+            BarTextColor = Colors.White
+        };
+
+        _navigation = navigationPage.Navigation;
+
+        return navigationPage;
     }
 
     /// <summary>
