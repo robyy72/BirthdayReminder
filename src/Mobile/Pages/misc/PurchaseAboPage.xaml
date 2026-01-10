@@ -2,26 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             xmlns:local="clr-namespace:Mobile"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.PurchaseAboPage"
-             x:DataType="local:PurchaseAboPage"
+             x:DataType="controls:PurchaseAboPage"
              Shell.NavBarIsVisible="False"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource White}">
 
-    <Grid RowDefinitions="Auto,*">
-        <!-- Header with Back Button -->
-        <Grid Grid.Row="0"
-              Style="{StaticResource HeaderBarWithBack}"
-              ColumnDefinitions="Auto,*">
-            <Button Grid.Column="0"
-                    Style="{StaticResource ButtonBack}"
-                    Clicked="OnBackClicked" />
-            <Label Grid.Column="1"
-                   Text="{x:Static resx:Resources.PurchaseAbo_Title}"
-                   Style="{StaticResource LabelHeaderBar}" />
-        </Grid>
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.PurchaseAbo_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
 
-        <ScrollView Grid.Row="1">
+        <!-- Content with gold background -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <!-- Card: Subscription Info -->
@@ -61,13 +58,11 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Back Button -->
-                <Button Text="{x:Static resx:Resources.General_Button_Back}"
-                        Style="{StaticResource ButtonSecondary}"
-                        Clicked="OnBackClicked" />
-
             </VerticalStackLayout>
         </ScrollView>
+
+        <!-- Tab Menu -->
+        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
     </Grid>
 
 </ContentPage>

@@ -2,30 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
-             xmlns:local="clr-namespace:Mobile"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.AllBirthdaysPage"
-             x:DataType="local:AllBirthdaysPage"
+             x:DataType="controls:AllBirthdaysPage"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource White}"
              Title="{x:Static resx:Resources.Page_AllBirthdays_Title}">
 
-    <Grid RowDefinitions="Auto,*">
-        <!-- Header with Back Button -->
-        <Grid Grid.Row="0"
-              Style="{StaticResource HeaderBarWithBack}"
-              ColumnDefinitions="Auto,*,Auto">
-            <Button Grid.Column="0"
-                    Style="{StaticResource ButtonBack}"
-                    Clicked="OnBackClicked" />
-            <Label Grid.Column="1"
-                   Text="{x:Static resx:Resources.Page_AllBirthdays_Title}"
-                   Style="{StaticResource LabelHeaderBar}" />
-            <Button Grid.Column="2"
-                    Text="+"
-                    Style="{StaticResource ButtonGlass}"
-                    Clicked="OnNewBirthdayClicked" />
-        </Grid>
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_AllBirthdays_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
 
-        <Grid Grid.Row="1" RowDefinitions="Auto,*" Padding="20,20,20,0">
+        <!-- Content with gold background -->
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto,*"
+              Padding="20,20,20,0"
+              BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <!-- Month Filter Picker -->
             <Picker x:Name="MonthPicker"
                     Style="{StaticResource PickerBase}"
@@ -43,7 +38,7 @@
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:PersonViewModel">
+                    <DataTemplate x:DataType="controls:PersonViewModel">
                         <Border Style="{StaticResource CardBirthday}">
                             <VerticalStackLayout Spacing="0">
                                 <Border Style="{StaticResource CardHeader}">
@@ -72,6 +67,9 @@
                 </CollectionView.EmptyView>
             </CollectionView>
         </Grid>
+
+        <!-- Tab Menu -->
+        <controls:TabMenu Grid.Row="2" ActiveTab="List" />
     </Grid>
 
 </ContentPage>

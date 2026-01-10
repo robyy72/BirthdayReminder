@@ -5,9 +5,10 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.DetailPersonPage"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource White}"
              Title="{x:Static resx:Resources.Page_BirthdayDetail_Title}">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_BirthdayDetail_Title}"
@@ -15,7 +16,9 @@
                                ShowBackButton="True"
                                BackClickedCommand="{Binding BackCommand}" />
 
-        <ScrollView Grid.Row="1">
+        <!-- Content with gold background -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <Grid RowDefinitions="*,Auto" Padding="30">
                 <!-- Content -->
                 <VerticalStackLayout Grid.Row="0" Spacing="20" VerticalOptions="Center">
@@ -80,6 +83,9 @@
 
             </Grid>
         </ScrollView>
+
+        <!-- Tab Menu -->
+        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
     </Grid>
 
 </ContentPage>

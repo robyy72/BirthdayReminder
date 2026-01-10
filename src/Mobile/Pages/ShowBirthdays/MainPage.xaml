@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
@@ -6,9 +6,10 @@
              x:Class="Mobile.MainPage"
              x:DataType="controls:MainPage"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource White}"
              Title="{x:Static resx:Resources.Page_Main_Title}">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <!-- Custom Header -->
         <controls:CustomHeader x:Name="TheHeader"
                                Grid.Row="0"
@@ -17,9 +18,10 @@
                                ShowBackButton="False"
                                ShowContextMenu="True" />
 
-        <!-- Content -->
-        <ScrollView Grid.Row="1" Padding="20">
-            <VerticalStackLayout Spacing="15">
+        <!-- Content with gold background -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+            <VerticalStackLayout Spacing="15" Padding="20">
                 <!-- Upcoming Birthdays Section -->
                 <Label x:Name="UpcomingBirthdaysLabel"
                        Style="{StaticResource LabelSubHeader}" HorizontalOptions="Center"/>
@@ -112,15 +114,17 @@
             </VerticalStackLayout>
         </ScrollView>
 
+        <!-- Tab Menu -->
+        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
+
         <!-- Flyout Menu Overlay (spans all rows) -->
         <controls:FlyoutMenu x:Name="TheFlyout"
                              Grid.Row="0"
-                             Grid.RowSpan="2" />
+                             Grid.RowSpan="3" />
 
         <!-- Context Menu Overlay (spans all rows) -->
         <controls:ContextMenu x:Name="TheContextMenu"
                               Grid.Row="0"
-                              Grid.RowSpan="2" />
+                              Grid.RowSpan="3" />
     </Grid>
 </ContentPage>
-

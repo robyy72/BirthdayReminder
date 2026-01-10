@@ -2,23 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.HelpPage"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource White}"
              Title="{x:Static resx:Resources.Page_Help_Title}">
 
     <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Header -->
-        <Grid Grid.Row="0" Style="{StaticResource HeaderBar}">
-            <Grid ColumnDefinitions="Auto,*">
-                <Button Style="{StaticResource ButtonBack}"
-                        Clicked="OnBackClicked" />
-                <Label Grid.Column="1"
-                       Text="{x:Static resx:Resources.Page_Help_Title}"
-                       Style="{StaticResource LabelHeaderBar}" />
-            </Grid>
-        </Grid>
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_Help_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
 
-        <ScrollView Grid.Row="1">
+        <!-- Content with gold background -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <VerticalStackLayout Padding="30" Spacing="25">
 
                 <Label x:Name="HeaderLabel"
@@ -53,12 +52,8 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Back Button -->
-        <Button Grid.Row="2"
-                Text="{x:Static resx:Resources.General_Button_Back}"
-                Style="{StaticResource ButtonPrimary}"
-                Margin="30,15,30,30"
-                Clicked="OnBackClicked" />
+        <!-- Tab Menu -->
+        <controls:TabMenu Grid.Row="2" ActiveTab="Home" />
     </Grid>
 
 </ContentPage>
