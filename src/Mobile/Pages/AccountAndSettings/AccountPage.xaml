@@ -26,7 +26,7 @@
 
                 <Border Style="{StaticResource Tile}">
                     <Label x:Name="EmailLabel"
-                           Style="{StaticResource LabelInfo}" />
+                           Style="{StaticResource LabelInfoOnCard}" />
                 </Border>
 
                 <!-- Subscription -->
@@ -38,21 +38,21 @@
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Grid.Column="0"
                                    Text="{x:Static resx:Resources.Account_SubscriptionTier}"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    VerticalOptions="Center" />
                             <Label x:Name="SubscriptionLabel"
                                    Grid.Column="1"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontAttributes="Bold" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Grid.Column="0"
                                    Text="{x:Static resx:Resources.Account_ValidUntil}"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    VerticalOptions="Center" />
                             <Label x:Name="ValidUntilLabel"
                                    Grid.Column="1"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontAttributes="Bold" />
                         </Grid>
                     </VerticalStackLayout>

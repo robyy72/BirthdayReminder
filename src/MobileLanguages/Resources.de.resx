@@ -860,10 +860,10 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <!-- Support -->
   <data name="Support_ReportBug" xml:space="preserve">
-    <value>Fehler melden</value>
+    <value>Support</value>
   </data>
   <data name="Support_FeatureRequest" xml:space="preserve">
-    <value>Verbesserungsvorschlag</value>
+    <value>Feature vorschlagen</value>
   </data>
   <data name="Support_Feedback" xml:space="preserve">
     <value>Feedback geben</value>
@@ -891,6 +891,49 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="Support_Type_Feedback" xml:space="preserve">
     <value>Feedback</value>
+  </data>
+  <!-- Ticket -->
+  <data name="Page_NewTicket_Title" xml:space="preserve">
+    <value>Neues Ticket</value>
+  </data>
+  <data name="Page_TicketList_Title" xml:space="preserve">
+    <value>Tickets</value>
+  </data>
+  <data name="Page_TicketDetail_Title" xml:space="preserve">
+    <value>Ticket Details</value>
+  </data>
+  <data name="Ticket_Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Ticket_Text" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Ticket_Type_Bug" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Ticket_Type_FeatureRequest" xml:space="preserve">
+    <value>Verbesserungsvorschlag</value>
+  </data>
+  <data name="Ticket_Type_Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Ticket_Answer" xml:space="preserve">
+    <value>Antwort hinzufügen</value>
+  </data>
+  <data name="Ticket_YourAnswer" xml:space="preserve">
+    <value>Deine Antwort</value>
+  </data>
+  <data name="Ticket_Entries" xml:space="preserve">
+    <value>Antworten</value>
+  </data>
+  <data name="Ticket_SavedOffline" xml:space="preserve">
+    <value>Dein Ticket wurde gespeichert und wird gesendet, sobald du online bist.</value>
+  </data>
+  <data name="EmptyView_NoTickets" xml:space="preserve">
+    <value>Noch keine Tickets</value>
+  </data>
+  <data name="Filter_All" xml:space="preserve">
+    <value>-- alle --</value>
   </data>
   <!-- Reminder Status -->
   <data name="Reminder_Status_Free" xml:space="preserve">
@@ -1280,5 +1323,49 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="BrokenVersion_TryAnyway" xml:space="preserve">
     <value>Trotzdem versuchen</value>
+  </data>
+  <!-- Error Page -->
+  <data name="Page_Error_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Error_Header" xml:space="preserve">
+    <value>Etwas ist schiefgelaufen</value>
+  </data>
+  <data name="Error_GenericMessage" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.</value>
+  </data>
+  <data name="Error_Details" xml:space="preserve">
+    <value>Technische Details</value>
+  </data>
+  <data name="Error_TryAgain" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="Error_ShowDetails" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="Error_HideDetails" xml:space="preserve">
+    <value>Details ausblenden</value>
+  </data>
+  <!-- No Internet Page -->
+  <data name="Page_NoInternet_Title" xml:space="preserve">
+    <value>Kein Internet</value>
+  </data>
+  <data name="NoInternet_Title" xml:space="preserve">
+    <value>Keine Verbindung</value>
+  </data>
+  <data name="NoInternet_Header" xml:space="preserve">
+    <value>Keine Internetverbindung</value>
+  </data>
+  <data name="NoInternet_Message" xml:space="preserve">
+    <value>Bitte überprüfe deine Verbindung und versuche es erneut.</value>
+  </data>
+  <data name="NoInternet_TryAgain" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="NoInternet_ContinueOffline" xml:space="preserve">
+    <value>Offline fortfahren</value>
+  </data>
+  <data name="NoInternet_StillOffline" xml:space="preserve">
+    <value>Immer noch keine Internetverbindung verfügbar.</value>
   </data>
 </root>

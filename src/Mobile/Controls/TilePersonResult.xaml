@@ -11,12 +11,12 @@
         <Grid ColumnDefinitions="*,Auto" Padding="10,4">
             <Label x:Name="NameLabel"
                    Grid.Column="0"
-                   Style="{StaticResource LabelInfo}"
+                   Style="{StaticResource LabelInfoOnCard}"
                    VerticalOptions="Center" />
 
             <Label x:Name="DateLabel"
                    Grid.Column="1"
-                   Style="{StaticResource LabelInfo}"
+                   Style="{StaticResource LabelInfoOnCard}"
                    VerticalOptions="Center" />
         </Grid>
     </Border>

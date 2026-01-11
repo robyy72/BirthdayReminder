@@ -18,6 +18,8 @@ public partial class App : Application
     public static List<Person> Persons { get; set; } = [];
     public static List<Contact> Contacts { get; set; } = [];
     public static List<Support> SupportEntries { get; set; } = [];
+    public static List<SupportEntry> SupportTicketEntries { get; set; } = [];
+    public static List<ErrorLog> ErrorLogs { get; set; } = [];
     public static Account Account { get; set; } = new();
     public static bool NeedsSyncContacts { get; set; } = false;
 
@@ -237,11 +239,8 @@ public partial class App : Application
     {
         try
         {
-            // ErrorDatabase initialisieren
-            await ErrorDatabase.InitAsync();
-
-            // Ab hier ist ErrorService.Handle() verfügbar
-            await ErrorService.SyncPendingAsync();
+            // Sync pending error logs to Sentry
+            ErrorService.SyncPending();
 
             // Weitere Background-Tasks
             SendHeartbeatIfNeeded();
@@ -249,9 +248,10 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            // Nur für die kurze Zeit bis ErrorDatabase bereit ist
             LogDebugInfo("InitAsync failed", ex);
         }
+
+        await Task.CompletedTask;
     }
 
     /// <summary>
@@ -265,7 +265,8 @@ public partial class App : Application
 
         PersonService.Load();
         AccountService.Load();
-        SupportService.Load();
+        SupportService.LoadEntries();
+        ErrorService.Load();
 
         PermissionService.InitTracking();
         CheckTimeZone();
@@ -337,7 +338,6 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            // Hier ist ErrorDatabase schon bereit
             ErrorService.Handle(ex);
         }
     }
@@ -395,17 +395,16 @@ public partial class App : Application
 
     private void SetupConnectivitySync()
     {
-        Connectivity.Current.ConnectivityChanged += async (s, e) =>
+        Connectivity.Current.ConnectivityChanged += (s, e) =>
         {
             if (e.NetworkAccess == NetworkAccess.Internet)
             {
                 try
                 {
-                    await ErrorService.SyncPendingAsync();
+                    ErrorService.SyncPending();
                 }
                 catch (Exception ex)
                 {
-                    // ErrorDatabase ist hier definitiv bereit
                     ErrorService.Handle(ex);
                 }
             }
@@ -449,7 +448,7 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Aim: Debug-Logging für die kurze Zeit bis ErrorDatabase bereit ist.
+    /// Aim: Debug-Logging.
     /// Params: message (string) - Die zu loggende Nachricht.
     /// </summary>
     private static void LogDebugInfo(string message)

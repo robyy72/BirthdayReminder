@@ -25,20 +25,20 @@
 
                 <Border Style="{StaticResource Card}">
                     <Label x:Name="ContentLabel_1"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />
                 </Border>
 
                 <Border Style="{StaticResource Card}">
                     <Label x:Name="ContentLabel_2"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />
                 </Border>
 
                 <Border x:Name="TimezoneCard" Style="{StaticResource Card}" IsVisible="False">
                     <VerticalStackLayout Padding="20" Spacing="10">
                         <Label x:Name="TimezoneLabel"
-                               Style="{StaticResource LabelInfo}" />
+                               Style="{StaticResource LabelInfoOnCard}" />
                         <Label Text="{x:Static resx:Resources.Timezone_MoreInfo}"
                                Style="{StaticResource LabelHelpLink}"
                                HorizontalOptions="End">

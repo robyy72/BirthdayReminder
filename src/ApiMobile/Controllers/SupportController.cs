@@ -34,7 +34,7 @@ public class SupportController : ControllerBase
 	/// Return: Created ticket ID.
 	/// </summary>
 	[HttpPost]
-	public async Task<IActionResult> CreateTicket([FromBody] SupportTicketDto dto)
+	public async Task<IActionResult> CreateTicket([FromBody] TicketDto dto)
 	{
 		// Verify user matches token
 		var tokenUserId = _tokenService.GetUserIdFromClaims(User);

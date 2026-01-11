@@ -6,43 +6,65 @@ using Sentry;
 namespace Mobile;
 
 /// <summary>
-/// Aim: Service for error handling - stores in SQLite, syncs to Sentry when online.
+/// Aim: Service for error handling - stores in Prefs, syncs to Sentry when online.
 /// </summary>
 public static class ErrorService
 {
 	#region Public Methods
 	/// <summary>
-	/// Aim: Handle a non-fatal error - stores in SQLite, sends to Sentry if online.
-	/// Params: ex (Exception) - The exception to handle.
-	/// Params: caller (string) - Auto-captured caller method name.
+	/// Aim: Load error logs from Prefs into App.ErrorLogs.
 	/// </summary>
-	public static async void Handle(Exception ex, [CallerMemberName] string caller = "")
+	public static void Load()
 	{
-		var log = CreateErrorLog(ex, caller, isFatal: false);
-		await ErrorDatabase.SaveAsync(log);
-
-		if (MobileService.HasNetworkAccess() && SentryService.IsInitialized)
+		var logs = PrefsHelper.GetValue<List<ErrorLog>>(MobileConstants.PREFS_NOT_UPLOADED_ERROR_LOGS);
+		if (logs != null)
 		{
-			bool sent = SentryService.CaptureException(ex);
-			if (sent)
-			{
-				await ErrorDatabase.MarkSyncedAsync(log.Id);
-			}
+			App.ErrorLogs = logs;
+		}
+		else
+		{
+			App.ErrorLogs = new List<ErrorLog>();
 		}
 	}
 
 	/// <summary>
-	/// Aim: Handle a fatal error - marks version as broken, stores in SQLite, sends to Sentry.
+	/// Aim: Save App.ErrorLogs to Prefs.
+	/// </summary>
+	public static void Save()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_NOT_UPLOADED_ERROR_LOGS, App.ErrorLogs);
+	}
+
+	/// <summary>
+	/// Aim: Handle a non-fatal error - sends to Sentry if online, stores in Prefs if offline.
+	/// Params: ex (Exception) - The exception to handle.
+	/// Params: caller (string) - Auto-captured caller method name.
+	/// </summary>
+	public static void Handle(Exception ex, [CallerMemberName] string caller = "")
+	{
+		if (MobileService.HasNetworkAccess() && SentryService.IsInitialized)
+		{
+			SentryService.CaptureException(ex);
+		}
+		else
+		{
+			var log = CreateErrorLog(ex, caller, isFatal: false);
+			AddLog(log);
+		}
+	}
+
+	/// <summary>
+	/// Aim: Handle a fatal error - marks version as broken, stores in Prefs, sends to Sentry.
 	/// Params: ex (Exception) - The exception to handle.
 	/// </summary>
-	public static async void HandleFatal(Exception ex)
+	public static void HandleFatal(Exception ex)
 	{
 		Preferences.Set(MobileConstants.PREFS_BROKEN_VERSION, AppInfo.BuildString);
 		Preferences.Set(MobileConstants.PREFS_BROKEN_DEVICE, DeviceInfo.Model);
 		Preferences.Set(MobileConstants.PREFS_BROKEN_TIMESTAMP, DateTime.UtcNow.ToString("O"));
 
 		var log = CreateErrorLog(ex, "FATAL", isFatal: true);
-		await ErrorDatabase.SaveAsync(log);
+		AddLog(log);
 
 		if (SentryService.IsInitialized)
 		{
@@ -51,15 +73,14 @@ public static class ErrorService
 	}
 
 	/// <summary>
-	/// Aim: Sync all pending errors to Sentry and clean up old logs.
-	/// Return (Task): Async task.
+	/// Aim: Sync all pending errors to Sentry and clean up synced logs.
 	/// </summary>
-	public static async Task SyncPendingAsync()
+	public static void SyncPending()
 	{
 		if (!MobileService.HasNetworkAccess()) return;
 		if (!SentryService.IsInitialized) return;
 
-		var pending = await ErrorDatabase.GetUnsyncedAsync();
+		var pending = App.ErrorLogs.Where(l => !l.IsSynced).ToList();
 
 		foreach (var log in pending)
 		{
@@ -67,7 +88,7 @@ public static class ErrorService
 			bool sent = SentryService.CaptureMessage($"[{level}] {log.Caller}: {log.Message}", SentryLevel.Error);
 			if (sent)
 			{
-				await ErrorDatabase.MarkSyncedAsync(log.Id);
+				log.IsSynced = true;
 			}
 			else
 			{
@@ -75,7 +96,10 @@ public static class ErrorService
 			}
 		}
 
-		await ErrorDatabase.DeleteOldLogsAsync(MobileConstants.ERROR_RETENTION_DAYS);
+		// Remove synced logs
+		App.ErrorLogs.RemoveAll(l => l.IsSynced);
+
+		Save();
 	}
 
 	/// <summary>
@@ -101,6 +125,35 @@ public static class ErrorService
 	#endregion
 
 	#region Private Methods
+	/// <summary>
+	/// Aim: Add error log to App.ErrorLogs and save. Skips if limit reached.
+	/// Params: log (ErrorLog) - The error log to add.
+	/// </summary>
+	private static void AddLog(ErrorLog log)
+	{
+		if (App.ErrorLogs.Count >= MobileConstants.ERROR_MAX_OFFLINE_ENTRIES)
+			return;
+
+		log.Id = GetNextId();
+		App.ErrorLogs.Add(log);
+		Save();
+	}
+
+	/// <summary>
+	/// Aim: Get next available ID for error log.
+	/// Return (int): Next ID.
+	/// </summary>
+	private static int GetNextId()
+	{
+		if (App.ErrorLogs.Count == 0)
+		{
+			return 1;
+		}
+
+		var maxId = App.ErrorLogs.Max(l => l.Id);
+		return maxId + 1;
+	}
+
 	/// <summary>
 	/// Aim: Create ErrorLog from exception.
 	/// Params: ex (Exception) - The exception.

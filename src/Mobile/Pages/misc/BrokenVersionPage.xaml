@@ -24,11 +24,11 @@
                        HorizontalTextAlignment="Center" />
 
                 <Label Text="{x:Static resx:Resources.BrokenVersion_Header}"
-                       Style="{StaticResource LabelInfo}"
+                       Style="{StaticResource LabelInfoOnCard}"
                        HorizontalTextAlignment="Center" />
 
                 <Label Text="{x:Static resx:Resources.BrokenVersion_Info}"
-                       Style="{StaticResource LabelInfo}"
+                       Style="{StaticResource LabelInfoOnCard}"
                        HorizontalTextAlignment="Center" />
 
                 <Button Text="{x:Static resx:Resources.BrokenVersion_CheckUpdate}"
@@ -36,7 +36,7 @@
                         Clicked="OnCheckUpdateClicked" />
 
                 <Label Text="{x:Static resx:Resources.BrokenVersion_TryAnyway}"
-                       Style="{StaticResource LabelInfo}"
+                       Style="{StaticResource LabelInfoOnCard}"
                        TextColor="Gray"
                        HorizontalTextAlignment="Center">
                     <Label.GestureRecognizers>

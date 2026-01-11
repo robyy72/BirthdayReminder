@@ -24,10 +24,10 @@
             <VerticalStackLayout Padding="30" Spacing="25">
 
                 <Label Text="{x:Static resx:Resources.Start2_Text_1}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <Label Text="{x:Static resx:Resources.Start2_Text_2}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <!-- Contacts Selection -->
                 <Border Style="{StaticResource Card}">
@@ -41,7 +41,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start2_NoContacts}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioNoContacts"
                                              Grid.Column="1"
@@ -51,7 +51,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start2_AskNextPage}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioAskNextPage"
                                              Grid.Column="1"

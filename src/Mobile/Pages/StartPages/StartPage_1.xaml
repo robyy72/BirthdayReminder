@@ -24,13 +24,13 @@
 
                 <Border Style="{StaticResource Card}">
                     <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />
                 </Border>
 
                 <Border Style="{StaticResource Card}">
                     <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />
                 </Border>
 

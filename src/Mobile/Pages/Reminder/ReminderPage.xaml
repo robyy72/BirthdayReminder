@@ -30,7 +30,7 @@
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                 <Label Grid.Column="0"
                        Text="{x:Static resx:Resources.Settings_DaysBefore}"
-                       Style="{StaticResource LabelInfo}"
+                       Style="{StaticResource LabelInfoOnCard}"
                        VerticalOptions="Center" />
                 <Picker x:Name="DaysPicker"
                         Grid.Column="1"
@@ -53,18 +53,18 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="NotificationStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_Free}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="NotificationSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="NotificationTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="NotificationTimePicker"
                                             Grid.Column="1"
@@ -91,18 +91,18 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="AlarmStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_Free}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="AlarmSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="AlarmTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="AlarmTimePicker"
                                             Grid.Column="1"
@@ -129,18 +129,18 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="EmailStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_FreeLimited}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="EmailSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="EmailTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="EmailTimePicker"
                                             Grid.Column="1"
@@ -167,18 +167,18 @@
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="SignalStatusLabel"
                                    Text="{x:Static resx:Resources.Reminder_Status_FreeCurrently}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="SignalSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="SignalTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="SignalTimePicker"
                                             Grid.Column="1"
@@ -213,14 +213,14 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="SmsSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="SmsTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="SmsTimePicker"
                                             Grid.Column="1"
@@ -255,14 +255,14 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.General_Label_Active}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="WhatsAppSwitch" Grid.Column="1" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label x:Name="WhatsAppTimeLabel"
                                        Grid.Column="0"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <TimePicker x:Name="WhatsAppTimePicker"
                                             Grid.Column="1"

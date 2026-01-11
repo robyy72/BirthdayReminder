@@ -1,16 +1,11 @@
-#region Usings
-using SQLite;
-#endregion
-
 namespace Mobile;
 
 /// <summary>
-/// Aim: Represents an error log entry stored in SQLite for offline-first error tracking.
+/// Aim: Represents an error log entry stored in Prefs for offline-first error tracking.
 /// </summary>
 public class ErrorLog
 {
 	#region Properties
-	[PrimaryKey, AutoIncrement]
 	public int Id { get; set; }
 	public string Message { get; set; } = string.Empty;
 	public string? StackTrace { get; set; }

@@ -5,72 +5,168 @@ using Common;
 namespace Mobile;
 
 /// <summary>
-/// Aim: Service for managing support entries list (uses App.SupportEntries as cache).
+/// Aim: Service for managing support tickets with API sync and offline storage.
 /// </summary>
 public static class SupportService
 {
-	public static void Load()
+	#region API Sync Methods
+	/// <summary>
+	/// Aim: Download tickets from API and populate App.SupportEntries.
+	/// Return: True if successful, false if offline or failed.
+	/// </summary>
+	public static async Task<bool> DownloadTicketsAsync()
 	{
-		var entries = PrefsHelper.GetValue<List<Support>>(MobileConstants.PREFS_SUPPORT);
-		if (entries != null)
+		if (!MobileService.HasNetworkAccess())
 		{
-			App.SupportEntries = entries;
+			return false;
 		}
-		else
+
+		var apiService = new ApiService();
+		var tickets = await apiService.GetTicketsAsync();
+
+		if (tickets == null)
 		{
-			App.SupportEntries = new List<Support>();
+			return false;
 		}
+
+		App.SupportEntries.Clear();
+		foreach (var ticket in tickets)
+		{
+			var support = ConvertTicketItemToSupport(ticket);
+			App.SupportEntries.Add(support);
+		}
+
+		return true;
 	}
 
 	/// <summary>
-	/// Aim: Save App.SupportEntries to prefs.
+	/// Aim: Upload a ticket to API or save to pending if offline.
+	/// Params: entry (Support) - The ticket to upload.
+	/// Return: True if uploaded, false if saved to pending.
 	/// </summary>
-	public static void Save()
+	public static async Task<bool> UploadTicketAsync(Support entry)
 	{
-		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT, App.SupportEntries);
-	}
-
-	/// <summary>
-	/// Aim: Add a support entry to App.SupportEntries and save.
-	/// Params: entry - The support entry to add
-	/// </summary>
-	public static void Add(Support entry)
-	{
-		entry.Id = GetNextId();
 		entry.CreatedAt = DateTime.Now;
-		App.SupportEntries.Add(entry);
-		Save();
+
+		if (!MobileService.HasNetworkAccess())
+		{
+			AddToPending(entry);
+			return false;
+		}
+
+		var apiService = new ApiService();
+		var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
+		var message = FormatMessage(entry.Title, entry.Text);
+
+		var ticketId = await apiService.SendSupportTicketAsync(message, ticketType);
+
+		if (ticketId > 0)
+		{
+			entry.Id = ticketId;
+			App.SupportEntries.Insert(0, entry);
+			return true;
+		}
+
+		AddToPending(entry);
+		return false;
 	}
 
 	/// <summary>
-	/// Aim: Update a support entry in App.SupportEntries and save.
-	/// Params: entry - The support entry to update
+	/// Aim: Sync pending tickets to API.
 	/// </summary>
-	public static void Update(Support entry)
+	public static async Task SyncPendingAsync()
 	{
-		var existing = App.SupportEntries.FirstOrDefault(s => s.Id == entry.Id);
-		if (existing != null)
+		if (!MobileService.HasNetworkAccess())
 		{
-			int index = App.SupportEntries.IndexOf(existing);
-			App.SupportEntries[index] = entry;
-			Save();
+			return;
 		}
+
+		var pending = LoadPending();
+		if (pending.Count == 0)
+		{
+			return;
+		}
+
+		var apiService = new ApiService();
+		var uploaded = new List<Support>();
+
+		foreach (var entry in pending)
+		{
+			var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
+			var message = FormatMessage(entry.Title, entry.Text);
+
+			var ticketId = await apiService.SendSupportTicketAsync(message, ticketType);
+			if (ticketId > 0)
+			{
+				uploaded.Add(entry);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (uploaded.Count > 0)
+		{
+			pending.RemoveAll(p => uploaded.Any(u => u.CreatedAt == p.CreatedAt && u.Title == p.Title));
+			SavePending(pending);
+		}
+	}
+	#endregion
+
+	#region Pending Tickets (NotUploadedTickets)
+	/// <summary>
+	/// Aim: Load pending tickets from prefs.
+	/// Return: List of pending tickets.
+	/// </summary>
+	private static List<Support> LoadPending()
+	{
+		var entries = PrefsHelper.GetValue<List<Support>>(MobileConstants.PREFS_NOT_UPLOADED_TICKETS);
+		return entries ?? new List<Support>();
 	}
 
 	/// <summary>
-	/// Aim: Remove a support entry by id from App.SupportEntries and save.
-	/// Params: id - The id of the support entry to remove
+	/// Aim: Save pending tickets to prefs.
+	/// Params: entries - List of pending tickets.
 	/// </summary>
-	public static void Remove(int id)
+	private static void SavePending(List<Support> entries)
 	{
-		var entry = App.SupportEntries.FirstOrDefault(s => s.Id == id);
-		if (entry != null)
-		{
-			App.SupportEntries.Remove(entry);
-			Save();
-		}
+		PrefsHelper.SetValue(MobileConstants.PREFS_NOT_UPLOADED_TICKETS, entries);
 	}
 
+	/// <summary>
+	/// Aim: Add a ticket to pending list.
+	/// Params: entry - The ticket to add.
+	/// </summary>
+	private static void AddToPending(Support entry)
+	{
+		var pending = LoadPending();
+		pending.Add(entry);
+		SavePending(pending);
+	}
+
+	/// <summary>
+	/// Aim: Check if there are pending tickets.
+	/// Return: True if there are pending tickets.
+	/// </summary>
+	public static bool HasPending()
+	{
+		var pending = LoadPending();
+		return pending.Count > 0;
+	}
+
+	/// <summary>
+	/// Aim: Get count of pending tickets.
+	/// Return: Number of pending tickets.
+	/// </summary>
+	public static int GetPendingCount()
+	{
+		var pending = LoadPending();
+		return pending.Count;
+	}
+	#endregion
+
+	#region List Access Methods
 	/// <summary>
 	/// Aim: Get a support entry by id from App.SupportEntries.
 	/// Params: id - The id of the support entry
@@ -107,19 +203,160 @@ public static class SupportService
 			.ToList();
 		return entries;
 	}
+	#endregion
+
+	#region Type Conversion Helpers
+	/// <summary>
+	/// Aim: Convert SupportType to TicketType.
+	/// Params: supportType - The SupportType to convert.
+	/// Return: Corresponding TicketType.
+	/// </summary>
+	public static TicketType ConvertSupportTypeToTicketType(SupportType supportType)
+	{
+		return supportType switch
+		{
+			SupportType.Bug => TicketType.Error,
+			SupportType.FeatureRequest => TicketType.FeatureRequest,
+			SupportType.Feedback => TicketType.CustomerFeedback,
+			_ => TicketType.SupportRequest
+		};
+	}
 
 	/// <summary>
-	/// Aim: Get the next available id for a support entry.
-	/// Return: The next available id
+	/// Aim: Convert TicketType to SupportType.
+	/// Params: ticketType - The TicketType to convert.
+	/// Return: Corresponding SupportType.
 	/// </summary>
-	private static int GetNextId()
+	public static SupportType ConvertTicketTypeToSupportType(TicketType ticketType)
 	{
-		if (App.SupportEntries.Count == 0)
+		return ticketType switch
+		{
+			TicketType.Error => SupportType.Bug,
+			TicketType.FeatureRequest => SupportType.FeatureRequest,
+			TicketType.CustomerFeedback => SupportType.Feedback,
+			_ => SupportType.Feedback
+		};
+	}
+
+	/// <summary>
+	/// Aim: Convert TicketItem from API to Support model.
+	/// Params: ticket - The TicketItem to convert.
+	/// Return: Support model.
+	/// </summary>
+	private static Support ConvertTicketItemToSupport(TicketItem ticket)
+	{
+		var (title, text) = ParseMessage(ticket.Message);
+		var support = new Support
+		{
+			Id = ticket.Id,
+			Type = (int)ConvertTicketTypeToSupportType(ticket.Type),
+			Title = title,
+			Text = text,
+			CreatedAt = ticket.CreatedAt.LocalDateTime
+		};
+		return support;
+	}
+
+	/// <summary>
+	/// Aim: Format title and text into message for API.
+	/// Params: title - Ticket title, text - Ticket text.
+	/// Return: Combined message string.
+	/// </summary>
+	private static string FormatMessage(string title, string text)
+	{
+		if (string.IsNullOrEmpty(text))
+		{
+			return title;
+		}
+		return $"{title}\n\n{text}";
+	}
+
+	/// <summary>
+	/// Aim: Parse API message back to title and text.
+	/// Params: message - The message to parse.
+	/// Return: Tuple of title and text.
+	/// </summary>
+	private static (string title, string text) ParseMessage(string message)
+	{
+		if (string.IsNullOrEmpty(message))
+		{
+			return (string.Empty, string.Empty);
+		}
+
+		var parts = message.Split("\n\n", 2);
+		if (parts.Length == 2)
+		{
+			return (parts[0], parts[1]);
+		}
+
+		return (message, string.Empty);
+	}
+	#endregion
+
+	#region Ticket Entries
+	/// <summary>
+	/// Aim: Load ticket entries from prefs.
+	/// </summary>
+	public static void LoadEntries()
+	{
+		var entries = PrefsHelper.GetValue<List<SupportEntry>>(MobileConstants.PREFS_SUPPORT_ENTRIES);
+		if (entries != null)
+		{
+			App.SupportTicketEntries = entries;
+		}
+		else
+		{
+			App.SupportTicketEntries = new List<SupportEntry>();
+		}
+	}
+
+	/// <summary>
+	/// Aim: Save ticket entries to prefs.
+	/// </summary>
+	public static void SaveEntries()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT_ENTRIES, App.SupportTicketEntries);
+	}
+
+	/// <summary>
+	/// Aim: Add a ticket entry and save.
+	/// Params: entry (SupportEntry) - The entry to add.
+	/// </summary>
+	public static void AddEntry(SupportEntry entry)
+	{
+		entry.Id = GetNextEntryId();
+		entry.CreatedAt = DateTime.Now;
+		App.SupportTicketEntries.Add(entry);
+		SaveEntries();
+	}
+
+	/// <summary>
+	/// Aim: Get all entries for a specific ticket.
+	/// Params: ticketId (int) - The ticket id.
+	/// Return: List of entries for the ticket.
+	/// </summary>
+	public static List<SupportEntry> GetEntriesByTicketId(int ticketId)
+	{
+		var entries = App.SupportTicketEntries
+			.Where(e => e.SupportId == ticketId)
+			.OrderBy(e => e.CreatedAt)
+			.ToList();
+		return entries;
+	}
+
+	/// <summary>
+	/// Aim: Get the next available id for a ticket entry.
+	/// Return: The next available id.
+	/// </summary>
+	private static int GetNextEntryId()
+	{
+		if (App.SupportTicketEntries.Count == 0)
 		{
 			return 1;
 		}
 
-		var maxId = App.SupportEntries.Max(s => s.Id);
+		var maxId = App.SupportTicketEntries.Max(e => e.Id);
 		return maxId + 1;
 	}
+	#endregion
 }

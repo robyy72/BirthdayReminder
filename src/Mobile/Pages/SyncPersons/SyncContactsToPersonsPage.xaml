@@ -24,11 +24,11 @@
             <VerticalStackLayout Padding="20" Spacing="20">
                 <!-- Info Text -->
                 <Label Text="{x:Static resx:Resources.Page_SyncContacts_Info}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <!-- New Contacts Count -->
                 <Label x:Name="CountLabel"
-                       Style="{StaticResource LabelInfo}"
+                       Style="{StaticResource LabelInfoOnCard}"
                        FontAttributes="Bold" />
 
                 <!-- Select All -->
@@ -38,7 +38,7 @@
                               VerticalOptions="Center" />
                     <Label Grid.Column="1"
                            Text="{x:Static resx:Resources.Page_SyncContacts_SelectAll}"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            VerticalOptions="Center" />
                 </Grid>
 
@@ -60,7 +60,7 @@
                                                Style="{StaticResource LabelCardHeader}"
                                                FontSize="16" />
                                         <Label Text="{Binding BirthdayDisplay}"
-                                               Style="{StaticResource LabelInfo}"
+                                               Style="{StaticResource LabelInfoOnCard}"
                                                FontSize="13"
                                                IsVisible="{Binding HasBirthday}" />
                                     </VerticalStackLayout>
@@ -70,7 +70,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="{x:Static resx:Resources.Page_SyncContacts_NoNewContacts}"
-                               Style="{StaticResource LabelInfo}"
+                               Style="{StaticResource LabelInfoOnCard}"
                                HorizontalOptions="Center"
                                Padding="20" />
                     </CollectionView.EmptyView>

@@ -43,11 +43,11 @@
                                     <Grid ColumnDefinitions="*,Auto" Padding="15,12">
                                         <Label Grid.Column="0"
                                                Text="{Binding DateDisplay}"
-                                               Style="{StaticResource LabelInfo}"
+                                               Style="{StaticResource LabelInfoOnCard}"
                                                VerticalOptions="Center" />
                                         <Label Grid.Column="1"
                                                Text="{Binding AgeDisplay}"
-                                               Style="{StaticResource LabelInfo}"
+                                               Style="{StaticResource LabelInfoOnCard}"
                                                VerticalOptions="Center" />
                                     </Grid>
                                 </VerticalStackLayout>
@@ -56,7 +56,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="{x:Static resx:Resources.EmptyView_NoUpcoming}"
-                               Style="{StaticResource LabelInfo}"
+                               Style="{StaticResource LabelInfoOnCard}"
                                HorizontalOptions="Center"
                                Padding="20" />
                     </CollectionView.EmptyView>
@@ -86,11 +86,11 @@
                                     <Grid ColumnDefinitions="*,Auto" Padding="15,12">
                                         <Label Grid.Column="0"
                                                Text="{Binding DateDisplay}"
-                                               Style="{StaticResource LabelInfo}"
+                                               Style="{StaticResource LabelInfoOnCard}"
                                                VerticalOptions="Center" />
                                         <Label Grid.Column="1"
                                                Text="{Binding AgeDisplay}"
-                                               Style="{StaticResource LabelInfo}"
+                                               Style="{StaticResource LabelInfoOnCard}"
                                                VerticalOptions="Center" />
                                     </Grid>
                                 </VerticalStackLayout>
@@ -99,7 +99,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="{x:Static resx:Resources.EmptyView_NoMissed}"
-                               Style="{StaticResource LabelInfo}"
+                               Style="{StaticResource LabelInfoOnCard}"
                                HorizontalOptions="Center"
                                Padding="20" />
                     </CollectionView.EmptyView>

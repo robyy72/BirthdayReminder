@@ -123,7 +123,7 @@
                       Padding="15,10"
                       HeightRequest="50">
                     <Label x:Name="VersionLabel"
-                           Style="{StaticResource LabelDescription}"
+                           Style="{StaticResource LabelDescriptionOnCard}"
                            VerticalOptions="End"
                            HorizontalOptions="Start" />
                 </Grid>

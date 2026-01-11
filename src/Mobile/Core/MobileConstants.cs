@@ -12,10 +12,6 @@ public static class MobileConstants
 	public const string URL_TERMS_OF_SERVICE = "https://birthday-reminder.online/terms";
 	#endregion
 
-	#region Debug
-	public const bool START_ALWAYS_WITH_WELCOME = false;
-	#endregion
-
 	#region Localization
 	public static readonly string[] SUPPORTED_LOCALES = ["de", "en"];
 	public const string DEFAULT_LOCALE = "de";
@@ -41,13 +37,10 @@ public static class MobileConstants
 	public const string YEARS_DISPLAY_NOT = "1,1604,1900,1904";
 	#endregion
 
-	#region Sentry
+	#region Debug, Errors and Sentry
+	public const bool START_ALWAYS_WITH_WELCOME = false;
 	public const string SENTRY_DSN = "https://a7322c361a63c2577a1afa16efe302bb@o4510638147829760.ingest.de.sentry.io/4510638162116688";
-	#endregion
-
-	#region Errors
-	public const string ERROR_DB_FILENAME = "errors.db";
-	public const int ERROR_RETENTION_DAYS = 30;
+	public const int ERROR_MAX_OFFLINE_ENTRIES = 10;
 	#endregion
 
 	#region Preferences Keys
@@ -57,6 +50,9 @@ public static class MobileConstants
 	public const string PREFS_PERSONS = "Persons";
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	public const string PREFS_SUPPORT = "Support";
+	public const string PREFS_SUPPORT_ENTRIES = "SupportEntries";
+	public const string PREFS_NOT_UPLOADED_TICKETS = "NotUploadedTickets";
+	public const string PREFS_NOT_UPLOADED_ERROR_LOGS = "NotUploadedErrorLogs";
 	public const string PREFS_BROKEN_VERSION = "BrokenVersion";
 	public const string PREFS_BROKEN_DEVICE = "BrokenDevice";
 	public const string PREFS_BROKEN_TIMESTAMP = "BrokenTimestamp";

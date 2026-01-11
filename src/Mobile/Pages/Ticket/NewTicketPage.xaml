@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:controls="clr-namespace:Mobile"
-             x:Class="Mobile.NewSupportEntryPage"
+             x:Class="Mobile.NewTicketPage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Page_NewSupport_Title}">
+             Title="{x:Static resx:Resources.Page_NewTicket_Title}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
-                               Title="{x:Static resx:Resources.Page_NewSupport_Title}"
+                               Title="{x:Static resx:Resources.Page_NewTicket_Title}"
                                ShowMenuButton="False"
                                ShowBackButton="True" />
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="15">
 
-                <!-- Support Type Display -->
+                <!-- Ticket Type Display -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
@@ -30,8 +30,8 @@
                                 <Label x:Name="ErrorLabel" Style="{StaticResource LabelError}" />
                             </Border>
                             <!-- Title Entry -->
-                            <Label Text="{x:Static resx:Resources.Support_Title}"
-                                   Style="{StaticResource LabelInfo}"
+                            <Label Text="{x:Static resx:Resources.Ticket_Title}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontAttributes="Bold" />
                             <Border Style="{StaticResource TileOuterForEntry}">
                                 <Border Style="{StaticResource TileInnerForEntry}">
@@ -42,8 +42,8 @@
                                 </Border>
                             </Border>
                             <!-- Text Editor -->
-                            <Label Text="{x:Static resx:Resources.Support_Text}"
-                                   Style="{StaticResource LabelInfo}"
+                            <Label Text="{x:Static resx:Resources.Ticket_Text}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontAttributes="Bold"
                                    Margin="0,10,0,0" />
                             <Border Style="{StaticResource TileOuterForEntry}">

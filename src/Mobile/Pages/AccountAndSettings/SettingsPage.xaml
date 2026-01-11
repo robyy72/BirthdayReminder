@@ -41,7 +41,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ShowUpcomingBirthdays}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Border Grid.Column="1" Style="{StaticResource TileOuterForEntry}" WidthRequest="70">
                                     <Border Style="{StaticResource TileInnerForEntry}">
@@ -55,7 +55,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ShowPastBirthdays}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Border Grid.Column="1" Style="{StaticResource TileOuterForEntry}" WidthRequest="70">
                                     <Border Style="{StaticResource TileInnerForEntry}">
@@ -68,19 +68,19 @@
                             </Grid>
                             <!-- Name Direction -->
                             <Label Text="{x:Static resx:Resources.Settings_NameDirection}"
-                                   Style="{StaticResource LabelDescription}"
+                                   Style="{StaticResource LabelDescriptionOnCard}"
                                    Margin="0,10,0,0" />
                             <VerticalStackLayout RadioButtonGroup.GroupName="NameDirectionGroup" Spacing="5">
                                 <RadioButton Value="FirstFirstName" x:Name="RadioFirstFirstName">
                                     <RadioButton.Content>
                                         <Label Text="{x:Static resx:Resources.NameDirection_FirstFirstName}"
-                                               Style="{StaticResource LabelInfo}" />
+                                               Style="{StaticResource LabelInfoOnCard}" />
                                     </RadioButton.Content>
                                 </RadioButton>
                                 <RadioButton Value="FirstLastName" x:Name="RadioFirstLastName">
                                     <RadioButton.Content>
                                         <Label Text="{x:Static resx:Resources.NameDirection_FirstLastName}"
-                                               Style="{StaticResource LabelInfo}" />
+                                               Style="{StaticResource LabelInfoOnCard}" />
                                     </RadioButton.Content>
                                 </RadioButton>
                             </VerticalStackLayout>
@@ -110,13 +110,13 @@
                             <RadioButton Value="Light" x:Name="RadioLight">
                                 <RadioButton.Content>
                                     <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
-                                           Style="{StaticResource LabelInfo}" />
+                                           Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
                             <RadioButton Value="Dark" x:Name="RadioDark">
                                 <RadioButton.Content>
                                     <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
-                                           Style="{StaticResource LabelInfo}" />
+                                           Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
                         </VerticalStackLayout>
@@ -145,13 +145,13 @@
                             <RadioButton Value="de" x:Name="RadioDe">
                                 <RadioButton.Content>
                                     <Label Text="Deutsch"
-                                           Style="{StaticResource LabelInfo}" />
+                                           Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
                             <RadioButton Value="en" x:Name="RadioEn">
                                 <RadioButton.Content>
                                     <Label Text="English"
-                                           Style="{StaticResource LabelInfo}" />
+                                           Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
                         </VerticalStackLayout>
@@ -180,7 +180,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsRead}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsRead"
                                              Grid.Column="1"
@@ -190,7 +190,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_ContactsNone}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioContactsNone"
                                              Grid.Column="1"
@@ -222,7 +222,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_WriteCalendarsMultiple}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="WriteCalendarsSwitch"
                                         Grid.Column="1"
@@ -234,7 +234,7 @@
                                                  IsVisible="False"
                                                  Spacing="5">
                                 <Label Text="{x:Static resx:Resources.Settings_SelectCalendars}"
-                                       Style="{StaticResource LabelDescription}" />
+                                       Style="{StaticResource LabelDescriptionOnCard}" />
                                 <VerticalStackLayout x:Name="CalendarTogglesContainer"
                                                      Spacing="5" />
                             </VerticalStackLayout>

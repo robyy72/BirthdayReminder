@@ -124,8 +124,12 @@ BirthdayReminder/
 │   ├── ApiMobile/                  # ASP.NET Core API for mobile app
 │   ├── Common/                     # Shared class library
 │   │   ├── Core/
-│   │   │   └── CommonConstants.cs  # DOMAIN, API_BASE_URL
-│   │   ├── Database/               # EF Core, migrations
+│   │   │   ├── CommonConstants.cs  # DOMAIN, API_BASE_URL
+│   │   │   └── CommonEnums.cs      # Shared enums (TicketType, TicketStatus, etc.)
+│   │   ├── Database/
+│   │   │   ├── AppDbContext.cs     # EF Core DbContext
+│   │   │   ├── Models/             # Entity models (Support, SupportEntry, Customer, etc.)
+│   │   │   └── Migrations/
 │   │   └── DTOs/
 │   ├── Mobile/                     # MAUI App (Android & iOS only)
 │   │   ├── Core/

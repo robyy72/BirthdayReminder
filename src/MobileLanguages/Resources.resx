@@ -917,10 +917,10 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
 • Signal integration depends on third-party availability and cannot be permanently guaranteed.</value>
   </data>
   <data name="Support_ReportBug" xml:space="preserve">
-    <value>Report Bug</value>
+    <value>Support</value>
   </data>
   <data name="Support_FeatureRequest" xml:space="preserve">
-    <value>Suggest Improvement</value>
+    <value>Suggest Feature</value>
   </data>
   <data name="Support_Feedback" xml:space="preserve">
     <value>Give Feedback</value>
@@ -948,6 +948,49 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="Support_Type_Feedback" xml:space="preserve">
     <value>Feedback</value>
+  </data>
+  <!-- Ticket -->
+  <data name="Page_NewTicket_Title" xml:space="preserve">
+    <value>New Ticket</value>
+  </data>
+  <data name="Page_TicketList_Title" xml:space="preserve">
+    <value>Tickets</value>
+  </data>
+  <data name="Page_TicketDetail_Title" xml:space="preserve">
+    <value>Ticket Details</value>
+  </data>
+  <data name="Ticket_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Ticket_Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Ticket_Type_Bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="Ticket_Type_FeatureRequest" xml:space="preserve">
+    <value>Feature Request</value>
+  </data>
+  <data name="Ticket_Type_Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Ticket_Answer" xml:space="preserve">
+    <value>Add Answer</value>
+  </data>
+  <data name="Ticket_YourAnswer" xml:space="preserve">
+    <value>Your Answer</value>
+  </data>
+  <data name="Ticket_Entries" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="Ticket_SavedOffline" xml:space="preserve">
+    <value>Your ticket has been saved and will be sent when you're online.</value>
+  </data>
+  <data name="EmptyView_NoTickets" xml:space="preserve">
+    <value>No tickets yet</value>
+  </data>
+  <data name="Filter_All" xml:space="preserve">
+    <value>-- all --</value>
   </data>
   <data name="Reminder_Status_Free" xml:space="preserve">
     <value>Free</value>
@@ -1329,6 +1372,50 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="BrokenVersion_TryAnyway" xml:space="preserve">
     <value>Try Anyway</value>
+  </data>
+  <!-- Error Page -->
+  <data name="Page_Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_Header" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="Error_GenericMessage" xml:space="preserve">
+    <value>An unexpected error occurred. Please try again.</value>
+  </data>
+  <data name="Error_Details" xml:space="preserve">
+    <value>Technical Details</value>
+  </data>
+  <data name="Error_TryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="Error_ShowDetails" xml:space="preserve">
+    <value>Show Details</value>
+  </data>
+  <data name="Error_HideDetails" xml:space="preserve">
+    <value>Hide Details</value>
+  </data>
+  <!-- No Internet Page -->
+  <data name="Page_NoInternet_Title" xml:space="preserve">
+    <value>No Internet</value>
+  </data>
+  <data name="NoInternet_Title" xml:space="preserve">
+    <value>No Connection</value>
+  </data>
+  <data name="NoInternet_Header" xml:space="preserve">
+    <value>No Internet Connection</value>
+  </data>
+  <data name="NoInternet_Message" xml:space="preserve">
+    <value>Please check your connection and try again.</value>
+  </data>
+  <data name="NoInternet_TryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="NoInternet_ContinueOffline" xml:space="preserve">
+    <value>Continue Offline</value>
+  </data>
+  <data name="NoInternet_StillOffline" xml:space="preserve">
+    <value>Still no internet connection available.</value>
   </data>
   <data name="Page_SyncContacts_Title" xml:space="preserve">
     <value>Sync Contacts</value>

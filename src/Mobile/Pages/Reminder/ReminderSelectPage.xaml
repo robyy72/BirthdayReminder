@@ -26,7 +26,7 @@
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <Label Text="{x:Static resx:Resources.ReminderSettings_Description}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <!-- Reminder 1 Card -->
                 <Border x:Name="Reminder1Card" Style="{StaticResource Card}">
@@ -47,9 +47,9 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="5">
                             <Label x:Name="Reminder1DaysLabel"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label x:Name="Reminder1MethodsLabel"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -74,9 +74,9 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="5">
                             <Label x:Name="Reminder2DaysLabel"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label x:Name="Reminder2MethodsLabel"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -101,9 +101,9 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="5">
                             <Label x:Name="Reminder3DaysLabel"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label x:Name="Reminder3MethodsLabel"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>

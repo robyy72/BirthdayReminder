@@ -19,7 +19,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="5">
                             <Label x:Name="NameDisplayLabel"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontSize="20"
                                    HorizontalOptions="Center" />
                         </VerticalStackLayout>
@@ -35,7 +35,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="5">
                             <Label x:Name="BirthdayDisplayLabel"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    FontSize="20"
                                    HorizontalOptions="Center" />
                         </VerticalStackLayout>
@@ -45,7 +45,7 @@
                 <!-- Delete from Contact Toggle -->
                 <Grid x:Name="DeleteFromContactRow" ColumnDefinitions="*,Auto" IsVisible="False" Margin="0,10,0,0">
                     <Label x:Name="DeleteFromContactLabel"
-                           Style="{StaticResource LabelInfo}"
+                           Style="{StaticResource LabelInfoOnCard}"
                            VerticalOptions="Center" />
                     <Switch x:Name="DeleteFromContactSwitch"
                             Grid.Column="1" />

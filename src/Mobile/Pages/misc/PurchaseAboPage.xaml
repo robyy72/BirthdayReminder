@@ -30,7 +30,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="20">
                             <Label Text="{x:Static resx:Resources.PurchaseAbo_Description}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
 
                             <Button x:Name="ButtonPurchase"
                                     Text="{x:Static resx:Resources.PurchaseAbo_Button}"
@@ -49,11 +49,11 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="10">
                             <Label Text="{x:Static resx:Resources.PurchaseAbo_Feature_Sms}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label Text="{x:Static resx:Resources.PurchaseAbo_Feature_WhatsApp}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label Text="{x:Static resx:Resources.PurchaseAbo_Feature_Email}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

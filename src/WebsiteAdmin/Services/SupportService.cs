@@ -27,7 +27,7 @@ public class SupportService
 	/// Params: dto - support ticket data.
 	/// Return: Created ticket ID.
 	/// </summary>
-	public async Task<int> CreateTicketAsync(SupportTicketDto dto)
+	public async Task<int> CreateTicketAsync(TicketDto dto)
 	{
 		// Ensure user exists
 		var user = await _db.Customers.FindAsync(dto.UserId);

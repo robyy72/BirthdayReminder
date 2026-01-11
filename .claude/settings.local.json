@@ -63,7 +63,15 @@
       "Bash(sqlcmd:*)",
       "Bash(net stop MSSQL$SQLEXPRESS)",
       "Bash(net start MSSQL$SQLEXPRESS)",
-      "Bash(adb logcat:*)"
+      "Bash(adb logcat:*)",
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(del:*)",
+      "Bash(Remove-Item:*)",
+      "Bash(cp:*)",
+      "Bash(copy:*)",
+      "Bash(Copy-Item:*)",
+      "Bash(Move-Item:*)"
     ],
     "deny": []
   }

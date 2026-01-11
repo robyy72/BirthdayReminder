@@ -34,7 +34,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="20">
                             <Label Text="{x:Static resx:Resources.Permission_DeniedInfo}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
 
                             <Button Text="{x:Static resx:Resources.Permission_OpenSettings}"
                                     Style="{StaticResource ButtonPrimary}"

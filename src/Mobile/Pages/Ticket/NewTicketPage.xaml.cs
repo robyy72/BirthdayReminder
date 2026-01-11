@@ -4,17 +4,17 @@ using Common;
 
 namespace Mobile;
 
-public partial class NewSupportEntryPage : ContentPage
+public partial class NewTicketPage : ContentPage
 {
 	#region Fields
-	private readonly SupportType _supportType;
+	private readonly SupportType _ticketType;
 	#endregion
 
 	#region Constructor
-	public NewSupportEntryPage(SupportType supportType)
+	public NewTicketPage(SupportType ticketType)
 	{
 		InitializeComponent();
-		_supportType = supportType;
+		_ticketType = ticketType;
 		SetupHeader();
 	}
 	#endregion
@@ -22,12 +22,12 @@ public partial class NewSupportEntryPage : ContentPage
 	#region Private Methods
 	private void SetupHeader()
 	{
-		TypeHeaderLabel.Text = _supportType switch
+		TypeHeaderLabel.Text = _ticketType switch
 		{
-			SupportType.Bug => MobileLanguages.Resources.Support_Type_Bug,
-			SupportType.FeatureRequest => MobileLanguages.Resources.Support_Type_FeatureRequest,
-			SupportType.Feedback => MobileLanguages.Resources.Support_Type_Feedback,
-			_ => MobileLanguages.Resources.Support_Type_Feedback
+			SupportType.Bug => MobileLanguages.Resources.Ticket_Type_Bug,
+			SupportType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
+			SupportType.Feedback => MobileLanguages.Resources.Ticket_Type_Feedback,
+			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 	}
 	#endregion
@@ -47,14 +47,22 @@ public partial class NewSupportEntryPage : ContentPage
 
 		ErrorBorder.IsVisible = false;
 
-		var support = new Support
+		var ticket = new Support
 		{
-			Type = (int)_supportType,
+			Type = (int)_ticketType,
 			Title = title,
 			Text = text
 		};
 
-		SupportService.Add(support);
+		var uploaded = await SupportService.UploadTicketAsync(ticket);
+
+		if (!uploaded)
+		{
+			await DisplayAlert(
+				MobileLanguages.Resources.NoInternet_Title,
+				MobileLanguages.Resources.Ticket_SavedOffline,
+				MobileLanguages.Resources.General_Button_OK);
+		}
 
 		await App.GoBackAsync();
 	}

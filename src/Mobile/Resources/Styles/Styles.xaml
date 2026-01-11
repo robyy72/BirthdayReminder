@@ -180,8 +180,24 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     </Style>
 
+    <Style TargetType="Label" x:Key="LabelInfoOnPage" BasedOn="{StaticResource LabelInfo}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelInfoOnCard" BasedOn="{StaticResource LabelInfo}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelDescription">
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelDescriptionOnPage" BasedOn="{StaticResource LabelDescription}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelDescriptionOnCard" BasedOn="{StaticResource LabelDescription}">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
     </Style>
 

@@ -5,10 +5,22 @@ namespace Mobile;
 /// </summary>
 public partial class BrokenVersionPage : ContentPage
 {
+	#region Fields
+	private readonly ErrorLog? _errorLog;
+	#endregion
+
+	#region Constructor
 	public BrokenVersionPage()
 	{
 		InitializeComponent();
 	}
+
+	public BrokenVersionPage(ErrorLog errorLog)
+	{
+		InitializeComponent();
+		_errorLog = errorLog;
+	}
+	#endregion
 
 	/// <summary>
 	/// Aim: Open app store to check for updates.

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.ErrorDisplayPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_Error_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_Error_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True"
+                               ShowContextMenu="False" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Padding="30"
+                                 Spacing="20">
+
+                <Image Source="error_icon.png"
+                       HeightRequest="80"
+                       WidthRequest="80"
+                       HorizontalOptions="Center" />
+
+                <Label Text="{x:Static resx:Resources.Error_Header}"
+                       Style="{StaticResource LabelHeader}"
+                       HorizontalTextAlignment="Center" />
+
+                <Label x:Name="ErrorMessageLabel"
+                       Style="{StaticResource LabelInfoOnCard}"
+                       HorizontalTextAlignment="Center" />
+
+                <Border Style="{StaticResource Card}" IsVisible="False" x:Name="DetailsCard">
+                    <VerticalStackLayout Padding="15" Spacing="10">
+                        <Label Text="{x:Static resx:Resources.Error_Details}"
+                               Style="{StaticResource LabelInfoOnCard}"
+                               FontAttributes="Bold" />
+                        <Label x:Name="DetailsLabel"
+                               Style="{StaticResource LabelDescriptionOnCard}"
+                               FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="{x:Static resx:Resources.Error_TryAgain}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnTryAgainClicked" />
+
+                <Label Text="{x:Static resx:Resources.Error_ShowDetails}"
+                       Style="{StaticResource LabelHelpLink}"
+                       HorizontalOptions="Center"
+                       x:Name="ShowDetailsLabel">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnShowDetailsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

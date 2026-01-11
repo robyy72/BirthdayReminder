@@ -165,17 +165,34 @@ public partial class MainPage : ContentPage
 
     private async void OnReportBugFromMenu()
     {
-        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.Bug);
+        await NavigateToSupportAsync(SupportType.Bug);
     }
 
     private async void OnFeatureRequestFromMenu()
     {
-        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.FeatureRequest);
+        await NavigateToSupportAsync(SupportType.FeatureRequest);
     }
 
     private async void OnFeedbackFromMenu()
     {
-        await App.NavigateToAsync<NewSupportEntryPage>(SupportType.Feedback);
+        await NavigateToSupportAsync(SupportType.Feedback);
+    }
+
+    /// <summary>
+    /// Aim: Navigate to ticket page - if entries exist go to list, otherwise create new.
+    /// Params: ticketType (SupportType) - The type of ticket.
+    /// </summary>
+    private async Task NavigateToSupportAsync(SupportType ticketType)
+    {
+        var entries = SupportService.GetByType(ticketType);
+        if (entries.Count > 0)
+        {
+            await App.NavigateToAsync<TicketListPage>(ticketType);
+        }
+        else
+        {
+            await App.NavigateToAsync<NewTicketPage>(ticketType);
+        }
     }
     #endregion
 }

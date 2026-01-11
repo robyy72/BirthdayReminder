@@ -3690,5 +3690,185 @@ namespace MobileLanguages {
                 return ResourceManager.GetString("Welcome_Header_Title", resourceCulture);
             }
         }
+
+        public static string Error_GenericMessage {
+            get {
+                return ResourceManager.GetString("Error_GenericMessage", resourceCulture);
+            }
+        }
+
+        public static string Error_HideDetails {
+            get {
+                return ResourceManager.GetString("Error_HideDetails", resourceCulture);
+            }
+        }
+
+        public static string Error_ShowDetails {
+            get {
+                return ResourceManager.GetString("Error_ShowDetails", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_Title {
+            get {
+                return ResourceManager.GetString("NoInternet_Title", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_StillOffline {
+            get {
+                return ResourceManager.GetString("NoInternet_StillOffline", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Type_Bug {
+            get {
+                return ResourceManager.GetString("Ticket_Type_Bug", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Type_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Ticket_Type_FeatureRequest", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Type_Feedback {
+            get {
+                return ResourceManager.GetString("Ticket_Type_Feedback", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Entries {
+            get {
+                return ResourceManager.GetString("Ticket_Entries", resourceCulture);
+            }
+        }
+
+        public static string Ticket_SavedOffline {
+            get {
+                return ResourceManager.GetString("Ticket_SavedOffline", resourceCulture);
+            }
+        }
+
+        public static string Filter_All {
+            get {
+                return ResourceManager.GetString("Filter_All", resourceCulture);
+            }
+        }
+
+        public static string EmptyView_NoTickets {
+            get {
+                return ResourceManager.GetString("EmptyView_NoTickets", resourceCulture);
+            }
+        }
+
+        public static string Page_Error_Title {
+            get {
+                return ResourceManager.GetString("Page_Error_Title", resourceCulture);
+            }
+        }
+
+        public static string Page_NoInternet_Title {
+            get {
+                return ResourceManager.GetString("Page_NoInternet_Title", resourceCulture);
+            }
+        }
+
+        public static string Page_NewTicket_Title {
+            get {
+                return ResourceManager.GetString("Page_NewTicket_Title", resourceCulture);
+            }
+        }
+
+        public static string Page_TicketDetail_Title {
+            get {
+                return ResourceManager.GetString("Page_TicketDetail_Title", resourceCulture);
+            }
+        }
+
+        public static string Page_TicketList_Title {
+            get {
+                return ResourceManager.GetString("Page_TicketList_Title", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Title {
+            get {
+                return ResourceManager.GetString("Ticket_Title", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Text {
+            get {
+                return ResourceManager.GetString("Ticket_Text", resourceCulture);
+            }
+        }
+
+        public static string Ticket_Answer {
+            get {
+                return ResourceManager.GetString("Ticket_Answer", resourceCulture);
+            }
+        }
+
+        public static string Ticket_YourAnswer {
+            get {
+                return ResourceManager.GetString("Ticket_YourAnswer", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_Header {
+            get {
+                return ResourceManager.GetString("NoInternet_Header", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_Message {
+            get {
+                return ResourceManager.GetString("NoInternet_Message", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_TryAgain {
+            get {
+                return ResourceManager.GetString("NoInternet_TryAgain", resourceCulture);
+            }
+        }
+
+        public static string NoInternet_ContinueOffline {
+            get {
+                return ResourceManager.GetString("NoInternet_ContinueOffline", resourceCulture);
+            }
+        }
+
+        public static string Error_Header {
+            get {
+                return ResourceManager.GetString("Error_Header", resourceCulture);
+            }
+        }
+
+        public static string Error_Message {
+            get {
+                return ResourceManager.GetString("Error_Message", resourceCulture);
+            }
+        }
+
+        public static string Error_Details {
+            get {
+                return ResourceManager.GetString("Error_Details", resourceCulture);
+            }
+        }
+
+        public static string Error_TryAgain {
+            get {
+                return ResourceManager.GetString("Error_TryAgain", resourceCulture);
+            }
+        }
+
+        public static string General_Button_Send {
+            get {
+                return ResourceManager.GetString("General_Button_Send", resourceCulture);
+            }
+        }
     }
 }

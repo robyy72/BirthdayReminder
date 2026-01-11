@@ -167,6 +167,36 @@ public class ApiService
 	}
 
 	/// <summary>
+	/// Aim: Get all tickets for current user from backend.
+	/// Return: List of tickets or null if failed.
+	/// </summary>
+	public async Task<List<TicketItem>?> GetTicketsAsync()
+	{
+		try
+		{
+			if (!MobileService.HasNetworkAccess())
+			{
+				return null;
+			}
+
+			var response = await _httpClient.GetAsync($"{_baseUrl}/api/support");
+			if (!response.IsSuccessStatusCode)
+			{
+				return null;
+			}
+
+			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+			var tickets = await response.Content.ReadFromJsonAsync<List<TicketItem>>(options);
+			return tickets;
+		}
+		catch (Exception ex)
+		{
+			ErrorService.Handle(ex);
+			return null;
+		}
+	}
+
+	/// <summary>
 	/// Aim: Send support ticket to backend.
 	/// Params: message - support message, type - ticket type.
 	/// Return: Created ticket ID or -1 if failed.
@@ -180,7 +210,7 @@ public class ApiService
 				return -1;
 			}
 
-			var dto = new SupportTicketDto
+			var dto = new TicketDto
 			{
 				UserId = App.Account.UserId,
 				Message = message,
@@ -215,4 +245,18 @@ public class ApiService
 internal class TicketResponse
 {
 	public int TicketId { get; set; }
+}
+
+/// <summary>
+/// Aim: Model for ticket data returned by API.
+/// </summary>
+public class TicketItem
+{
+	public int Id { get; set; }
+	public string Message { get; set; } = string.Empty;
+	public TicketType Type { get; set; }
+	public TicketStatus Status { get; set; }
+	public DateTimeOffset CreatedAt { get; set; }
+	public DateTimeOffset? UpdatedAt { get; set; }
+	public DateTimeOffset? ClosedAt { get; set; }
 }

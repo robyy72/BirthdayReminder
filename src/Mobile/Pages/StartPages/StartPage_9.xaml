@@ -50,7 +50,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_WriteToCalendar}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="DeviceCalendarSwitch"
                                         Grid.Column="1"
@@ -90,7 +90,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_SingleEmail}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="OutlookSingleEmailSwitch"
                                         Grid.Column="1"
@@ -99,7 +99,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_GrantAccess}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="OutlookGrantAccessSwitch"
                                         Grid.Column="1"
@@ -130,7 +130,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_SingleEmail}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="GoogleSingleEmailSwitch"
                                         Grid.Column="1"
@@ -139,7 +139,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_GrantAccess}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <Switch x:Name="GoogleGrantAccessSwitch"
                                         Grid.Column="1"

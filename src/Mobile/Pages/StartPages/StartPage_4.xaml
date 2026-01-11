@@ -37,7 +37,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_OnlyWithBirthday}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadWithBirthday"
                                              Grid.Column="1"
@@ -47,7 +47,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_AllContacts}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAll"
                                              Grid.Column="1"
@@ -71,7 +71,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_ReadOnce}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadOnlyOnce"
                                              Grid.Column="1"
@@ -81,7 +81,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_ReadAlways}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlways"
                                              Grid.Column="1"
@@ -90,7 +90,7 @@
                             <Grid x:Name="GridOption3" ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_ReadAlwaysAskWrite}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlwaysAndAskWriteBack"
                                              Grid.Column="1"
@@ -99,7 +99,7 @@
                             <Grid x:Name="GridOption4" ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start3_ReadAlwaysWrite}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioReadAlwaysAndWriteBack"
                                              Grid.Column="1"

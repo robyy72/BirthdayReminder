@@ -3,7 +3,7 @@ namespace Common;
 /// <summary>
 /// Aim: DTO for creating a support ticket from the mobile app.
 /// </summary>
-public class SupportTicketDto
+public class TicketDto
 {
 	public Guid UserId { get; set; }
 	public string Message { get; set; } = string.Empty;

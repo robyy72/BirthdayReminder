@@ -1,0 +1,61 @@
+@page
+@model WebsiteAdmin.Pages.ErrorLogs.IndexModel
+@{
+    ViewData["Title"] = "Error Logs";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <span>Error Logs</span>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h5 class="alert-heading">Error Tracking via Sentry</h5>
+                    <p>
+                        Application errors are automatically tracked and reported to Sentry.
+                        Use the Sentry dashboard to view detailed error information, stack traces,
+                        and user impact data.
+                    </p>
+                    <hr>
+                    <a href="@Model.SentryDashboardUrl" target="_blank" class="btn btn-primary">
+                        Open Sentry Dashboard
+                    </a>
+                </div>
+
+                <h5 class="mt-4">What's Tracked</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Unhandled Exceptions
+                        <span class="badge bg-danger">Critical</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Application Crashes
+                        <span class="badge bg-danger">Critical</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        API Errors
+                        <span class="badge bg-warning text-dark">Warning</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Handled Exceptions
+                        <span class="badge bg-info">Info</span>
+                    </li>
+                </ul>
+
+                <h5 class="mt-4">Error Details</h5>
+                <p class="text-muted">
+                    Each error in Sentry includes:
+                </p>
+                <ul>
+                    <li>Full stack trace</li>
+                    <li>Device information (model, OS version)</li>
+                    <li>App version</li>
+                    <li>User context (anonymized)</li>
+                    <li>Timestamp and occurrence count</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

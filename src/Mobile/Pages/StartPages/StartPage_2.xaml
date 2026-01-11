@@ -35,7 +35,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="Deutsch"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioLanguageDe"
                                              Grid.Column="1"
@@ -45,7 +45,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="English"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioLanguageEn"
                                              Grid.Column="1"
@@ -68,7 +68,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Theme_Light}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioThemeLight"
                                              Grid.Column="1"
@@ -78,7 +78,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Theme_Dark}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioThemeDark"
                                              Grid.Column="1"
@@ -104,7 +104,7 @@
                                 </Border>
                             </Border>
                             <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
-                                   Style="{StaticResource LabelInfo}"
+                                   Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />
                             <Label Text="{x:Static resx:Resources.More_Informations}"
                                    Style="{StaticResource LabelHelpLink}"

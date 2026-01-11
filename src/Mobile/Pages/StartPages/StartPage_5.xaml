@@ -26,7 +26,7 @@
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <Label Text="{x:Static resx:Resources.Start5_ReminderQuestion}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <!-- Reminder Count Section -->
                 <Border Style="{StaticResource Card}">
@@ -40,7 +40,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.ReminderCount_None}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioNoReminder"
                                              Grid.Column="1"
@@ -50,7 +50,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.ReminderCount_One}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioOneReminder"
                                              Grid.Column="1"
@@ -59,7 +59,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.ReminderCount_Two}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioTwoReminders"
                                              Grid.Column="1"
@@ -68,7 +68,7 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.ReminderCount_Three}"
-                                       Style="{StaticResource LabelInfo}"
+                                       Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioThreeReminders"
                                              Grid.Column="1"
@@ -79,7 +79,7 @@
                 </Border>
 
                 <Label Text="{x:Static resx:Resources.Start5_ManualNote}"
-                       Style="{StaticResource LabelInfo}" />
+                       Style="{StaticResource LabelInfoOnCard}" />
 
                 <!-- Bottom Buttons -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="15">

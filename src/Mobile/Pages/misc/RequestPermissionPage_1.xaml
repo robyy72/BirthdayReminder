@@ -34,7 +34,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="20">
                             <Label Text="{x:Static resx:Resources.Permission_GrantRequest}"
-                                   Style="{StaticResource LabelInfo}" />
+                                   Style="{StaticResource LabelInfoOnCard}" />
 
                             <Button x:Name="ButtonRequestPermission"
                                     Text="{x:Static resx:Resources.Permission_StartDialog}"
@@ -55,19 +55,19 @@
                             <!-- Initial State -->
                             <VerticalStackLayout x:Name="PanelInitial">
                                 <Label Text="{x:Static resx:Resources.Permission_Waiting}"
-                                       Style="{StaticResource LabelInfo}" />
+                                       Style="{StaticResource LabelInfoOnCard}" />
                             </VerticalStackLayout>
 
                             <!-- Success State -->
                             <VerticalStackLayout x:Name="PanelSuccess" IsVisible="False">
                                 <Label Text="{x:Static resx:Resources.Permission_Granted}"
-                                       Style="{StaticResource LabelInfo}" />
+                                       Style="{StaticResource LabelInfoOnCard}" />
                             </VerticalStackLayout>
 
                             <!-- Denied State -->
                             <VerticalStackLayout x:Name="PanelDenied" IsVisible="False">
                                 <Label Text="{x:Static resx:Resources.Permission_Denied}"
-                                       Style="{StaticResource LabelInfo}" />
+                                       Style="{StaticResource LabelInfoOnCard}" />
                             </VerticalStackLayout>
 
                         </VerticalStackLayout>
