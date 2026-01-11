@@ -7,9 +7,9 @@ using Common;
 namespace WebsiteAdmin;
 
 /// <summary>
-/// Aim: Constants specific to the Admin website.
+/// Aim: Constants specific to the WebsiteAdmin website.
 /// </summary>
 public static class WebsiteAdminConstants
 {
-	public const string SUBDOMAIN = "admin." + CommonConstants.DOMAIN;
+	// public const string SUBDOMAIN = "admin." + CommonConstants.DOMAIN;
 }
