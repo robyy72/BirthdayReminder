@@ -4,6 +4,8 @@ using Common;
 
 #endregion
 
+// see also Common/Core/CommonConstants.cs
+
 namespace WebsiteAdmin;
 
 /// <summary>
