@@ -1,5 +1,7 @@
 ﻿namespace Mobile;
 
+// see also Common/Core/CommonConstants.cs
+
 public static class MobileConstants
 {
 	#region App Info
