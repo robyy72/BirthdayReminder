@@ -418,10 +418,19 @@ FodyWeavers.xsd
 *.msp
 
 # Local server files
-runner/
 create-certificate.ps1
 dns-create.ps1
 dns-delete.ps1
+
+# GitHub Actions Runners
+deploy/*/runner/_diag/
+deploy/*/runner/_work/
+deploy/*/runner/.credentials
+deploy/*/runner/.credentials_rsaparams
+deploy/*/runner/.runner
+deploy/*/runner/.runner_migrated
+deploy/*/runner/actions-runner.zip
+deploy/*/runner/*.2.*/
 
 # Windows reserved name (created accidentally by shell redirection)
 nul
