@@ -74,12 +74,27 @@ jobs:
           $state = Get-WebAppPoolState -Name $appPoolName
           if ($state.Value -eq "Started") {
             Stop-WebAppPool -Name $appPoolName
-            Start-Sleep -Seconds 2
+            # Wait for worker process to fully exit
+            Start-Sleep -Seconds 5
           }
 
-          # Create version folder and copy files
+          # Create version folder and copy files (retry if files are locked)
           if (Test-Path $versionFolder) {
-            Remove-Item $versionFolder -Recurse -Force
+            $retries = 3
+            while ($retries -gt 0) {
+              try {
+                Remove-Item $versionFolder -Recurse -Force -ErrorAction Stop
+                break
+              } catch {
+                $retries--
+                if ($retries -gt 0) {
+                  Write-Host "Files locked, waiting... ($retries retries left)"
+                  Start-Sleep -Seconds 3
+                } else {
+                  throw $_
+                }
+              }
+            }
           }
           New-Item -ItemType Directory -Path $versionFolder -Force | Out-Null
           Copy-Item -Path "publish\WebsiteAdmin\*" -Destination $versionFolder -Recurse -Force
