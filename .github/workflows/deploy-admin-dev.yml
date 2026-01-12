@@ -43,7 +43,9 @@ jobs:
         shell: powershell
         run: |
           $env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
-          dotnet ef database update --project Common/Common.csproj --startup-project WebsiteAdmin/WebsiteAdmin.csproj
+          # Use Windows Auth for migrations - runner has db_ddladmin rights
+          $connString = "Server=.\SQLEXPRESS;Database=BirthdayReminder-Dev;Trusted_Connection=True;TrustServerCertificate=True;"
+          dotnet ef database update --project Common/Common.csproj --startup-project WebsiteAdmin/WebsiteAdmin.csproj --connection $connString
 
       - name: Publish WebsiteAdmin
         working-directory: src
