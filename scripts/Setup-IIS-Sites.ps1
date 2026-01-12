@@ -13,6 +13,13 @@ param(
     [string]$AdminPassword
 )
 
+# Function to generate a random password/key
+function New-RandomPassword {
+    param([int]$Length = 32)
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    -join ((1..$Length) | ForEach-Object { $chars[(Get-Random -Maximum $chars.Length)] })
+}
+
 Write-Host "=== IIS Sites Setup ===" -ForegroundColor Cyan
 
 # Check for admin privileges
@@ -66,30 +73,40 @@ Write-Host ""
 
 if (-not $JwtKey)
 {
-    $JwtKey = Read-Host "Enter Jwt:Key (64+ chars)"
+    $JwtKey = Read-Host "Enter Jwt:Key (64+ chars, or press Enter to generate)"
+    if (-not $JwtKey) {
+        $JwtKey = New-RandomPassword -Length 64
+        Write-Host "Generated Jwt:Key: $JwtKey" -ForegroundColor Green
+    }
 }
 if (-not $DbPassword)
 {
-    $secureDbPwd = Read-Host "Enter DbPassword" -AsSecureString
+    $secureDbPwd = Read-Host "Enter DbPassword (or press Enter to generate)" -AsSecureString
     $DbPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureDbPwd)
     )
+    if (-not $DbPassword) {
+        $DbPassword = New-RandomPassword -Length 32
+        Write-Host "Generated DbPassword: $DbPassword" -ForegroundColor Green
+    }
 }
 if (-not $AdminPassword)
 {
-    $secureAdminPwd = Read-Host "Enter Seed:AdminPassword" -AsSecureString
+    $secureAdminPwd = Read-Host "Enter Seed:AdminPassword (or press Enter to generate)" -AsSecureString
     $AdminPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureAdminPwd)
     )
+    if (-not $AdminPassword) {
+        $AdminPassword = New-RandomPassword -Length 24
+        Write-Host "Generated AdminPassword: $AdminPassword" -ForegroundColor Green
+    }
 }
 if (-not $SentryDsn)
 {
     $SentryDsn = Read-Host "Enter Sentry DSN (or press Enter to skip)"
 }
 
-$connectionString = "Server=$DbServer;Database=BirthdayReminder;User Id=$DbUsername;Password=$DbPassword;TrustServerCertificate=True;"
-
-# Define sites configuration
+# Define sites configuration (Database only for Admin sites)
 $sites = @(
     @{
         Name = "BirthdayReminder-WebsiteCustomer"
@@ -103,6 +120,7 @@ $sites = @(
         Name = "BirthdayReminder-WebsiteAdmin-Dev"
         AppPool = "BirthdayReminder-WebsiteAdmin-Dev"
         Path = "C:\inetpub\BirthdayReminder\WebsiteAdmin\Dev\current"
+        Database = "BirthdayReminder-Dev"
         Bindings = @(
             @{ Host = "dev.$Domain"; Port = 443; Protocol = "https" }
         )
@@ -111,6 +129,7 @@ $sites = @(
         Name = "BirthdayReminder-WebsiteAdmin-Prod"
         AppPool = "BirthdayReminder-WebsiteAdmin-Prod"
         Path = "C:\inetpub\BirthdayReminder\WebsiteAdmin\Prod\current"
+        Database = "BirthdayReminder-Prod"
         Bindings = @(
             @{ Host = "prod.$Domain"; Port = 443; Protocol = "https" }
         )
@@ -143,13 +162,19 @@ foreach ($site in $sites)
     }
 
     # Set environment variables on App Pool
-    $appPoolPath = "IIS:\AppPools\$($site.AppPool)"
     $envVars = @{
-        "ConnectionStrings__DefaultConnection" = $connectionString
         "Jwt__Key" = $JwtKey
         "Seed__AdminEmail" = $AdminEmail
         "Seed__AdminPassword" = $AdminPassword
     }
+
+    # Add ConnectionString only for sites with Database
+    if ($site.Database)
+    {
+        $connectionString = "Server=$DbServer;Database=$($site.Database);User Id=$DbUsername;Password=$DbPassword;TrustServerCertificate=True;"
+        $envVars["ConnectionStrings__DefaultConnection"] = $connectionString
+    }
+
     if ($SentryDsn)
     {
         $envVars["Sentry__Dsn"] = $SentryDsn
@@ -163,7 +188,11 @@ foreach ($site in $sites)
         & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/+[name='$($site.AppPool)'].environmentVariables.[name='$key',value='$value']" /commit:apphost 2>$null
         & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/[name='$($site.AppPool)'].environmentVariables.[name='$key'].value:$value" /commit:apphost 2>$null
     }
-    Write-Host "  Set environment variables: ConnectionStrings, Jwt:Key, Seed:AdminEmail/Password$(if($SentryDsn){', Sentry:Dsn'})"
+
+    $envList = "Jwt:Key, Seed:AdminEmail/Password"
+    if ($site.Database) { $envList = "ConnectionStrings ($($site.Database)), $envList" }
+    if ($SentryDsn) { $envList += ", Sentry:Dsn" }
+    Write-Host "  Set environment variables: $envList"
 
     # Create Site if not exists
     if (-not (Test-Path "IIS:\Sites\$($site.Name)"))
@@ -205,5 +234,5 @@ Write-Host "IIS setup completed successfully." -ForegroundColor Green
 Write-Host ""
 Write-Host "Sites configured:" -ForegroundColor Cyan
 Write-Host "  - https://$Domain (WebsiteCustomer)"
-Write-Host "  - https://dev.$Domain (WebsiteAdmin Dev)"
-Write-Host "  - https://prod.$Domain (WebsiteAdmin Prod)"
+Write-Host "  - https://dev.$Domain (WebsiteAdmin Dev, DB: BirthdayReminder-Dev)"
+Write-Host "  - https://prod.$Domain (WebsiteAdmin Prod, DB: BirthdayReminder-Prod)"
