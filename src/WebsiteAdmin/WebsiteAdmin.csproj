@@ -18,6 +18,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>d5cf0508-0f02-4542-8e1a-72dfcef31cc0</UserSecretsId>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
 </Project>
