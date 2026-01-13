@@ -1,45 +1,61 @@
 #region Usings
-
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Common;
-
 #endregion
 
 namespace Mobile;
 
 /// <summary>
-/// Aim: Service for API communication with dynamic object support.
+/// Aim: Static service for API communication with connection pooling and JWT support.
 /// </summary>
-public class ApiService
+public static class ApiService
 {
-	private readonly HttpClient _httpClient;
-	private readonly string _baseUrl;
-
-	public ApiService()
+	#region Private Fields
+	private static readonly SocketsHttpHandler _handler = new()
 	{
-		_httpClient = new HttpClient();
+		PooledConnectionLifetime = TimeSpan.FromMinutes(10),
+		PooledConnectionIdleTimeout = TimeSpan.FromMinutes(5)
+	};
+	private static readonly HttpClient _httpClient = new(_handler);
+	private static readonly string _baseUrl;
+	private static Func<Task<string?>>? _tokenProvider;
+	#endregion
+
+	#region Constructor
+	static ApiService()
+	{
 #if DEBUG
 		_baseUrl = CommonHelper.GetApiUrl(isDevelopment: true);
 #else
 		_baseUrl = CommonHelper.GetApiUrl(isDevelopment: false);
 #endif
 	}
+	#endregion
+
+	#region Public Methods
+	/// <summary>
+	/// Aim: Configure the JWT token provider.
+	/// Params: tokenProvider (Func&lt;Task&lt;string?&gt;&gt;) - Async function returning the JWT token.
+	/// </summary>
+	public static void ConfigureTokenProvider(Func<Task<string?>> tokenProvider)
+	{
+		_tokenProvider = tokenProvider;
+	}
 
 	/// <summary>
 	/// Aim: Perform GET request and deserialize response to type T.
-	/// Params: endpoint - API endpoint path.
-	/// Return: Deserialized object of type T or default.
+	/// Params: endpoint (string) - API endpoint path.
+	/// Return (T?): Deserialized object of type T or default.
 	/// </summary>
-	public async Task<T?> GetAsync<T>(string endpoint)
+	public static async Task<T?> GetAsync<T>(string endpoint)
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return default;
-			}
+			if (!MobileService.HasNetworkAccess()) return default;
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.GetAsync($"{_baseUrl}/{endpoint}");
 			response.EnsureSuccessStatusCode();
 			return await response.Content.ReadFromJsonAsync<T>();
@@ -53,18 +69,18 @@ public class ApiService
 
 	/// <summary>
 	/// Aim: Perform POST request with data and deserialize response to type T.
-	/// Params: endpoint - API endpoint path, data - object to send.
-	/// Return: Deserialized object of type T or default.
+	/// Params:
+	///   endpoint (string) - API endpoint path.
+	///   data (object) - Object to send.
+	/// Return (T?): Deserialized object of type T or default.
 	/// </summary>
-	public async Task<T?> PostAsync<T>(string endpoint, object data)
+	public static async Task<T?> PostAsync<T>(string endpoint, object data)
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return default;
-			}
+			if (!MobileService.HasNetworkAccess()) return default;
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/{endpoint}", data);
 			response.EnsureSuccessStatusCode();
 			return await response.Content.ReadFromJsonAsync<T>();
@@ -78,18 +94,18 @@ public class ApiService
 
 	/// <summary>
 	/// Aim: Perform PUT request with data and deserialize response to type T.
-	/// Params: endpoint - API endpoint path, data - object to send.
-	/// Return: Deserialized object of type T or default.
+	/// Params:
+	///   endpoint (string) - API endpoint path.
+	///   data (object) - Object to send.
+	/// Return (T?): Deserialized object of type T or default.
 	/// </summary>
-	public async Task<T?> PutAsync<T>(string endpoint, object data)
+	public static async Task<T?> PutAsync<T>(string endpoint, object data)
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return default;
-			}
+			if (!MobileService.HasNetworkAccess()) return default;
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.PutAsJsonAsync($"{_baseUrl}/{endpoint}", data);
 			response.EnsureSuccessStatusCode();
 			return await response.Content.ReadFromJsonAsync<T>();
@@ -103,18 +119,16 @@ public class ApiService
 
 	/// <summary>
 	/// Aim: Perform DELETE request.
-	/// Params: endpoint - API endpoint path.
-	/// Return: True if successful, false otherwise.
+	/// Params: endpoint (string) - API endpoint path.
+	/// Return (bool): True if successful, false otherwise.
 	/// </summary>
-	public async Task<bool> DeleteAsync(string endpoint)
+	public static async Task<bool> DeleteAsync(string endpoint)
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return false;
-			}
+			if (!MobileService.HasNetworkAccess()) return false;
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.DeleteAsync($"{_baseUrl}/{endpoint}");
 			return response.IsSuccessStatusCode;
 		}
@@ -124,20 +138,18 @@ public class ApiService
 			return false;
 		}
 	}
+	#endregion
 
 	#region App-Specific Methods
 	/// <summary>
 	/// Aim: Send heartbeat to backend.
-	/// Return: True if successful.
+	/// Return (bool): True if successful.
 	/// </summary>
-	public async Task<bool> SendHeartbeatAsync()
+	public static async Task<bool> SendHeartbeatAsync()
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return false;
-			}
+			if (!MobileService.HasNetworkAccess()) return false;
 
 			var dto = new HeartbeatDto
 			{
@@ -149,6 +161,7 @@ public class ApiService
 				PreferredChannel = App.Account.PreferredChannel
 			};
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/heartbeat", dto);
 
 			if (response.IsSuccessStatusCode)
@@ -168,22 +181,17 @@ public class ApiService
 
 	/// <summary>
 	/// Aim: Get all tickets for current user from backend.
-	/// Return: List of tickets or null if failed.
+	/// Return (List&lt;TicketItem&gt;?): List of tickets or null if failed.
 	/// </summary>
-	public async Task<List<TicketItem>?> GetTicketsAsync()
+	public static async Task<List<TicketItem>?> GetTicketsAsync()
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return null;
-			}
+			if (!MobileService.HasNetworkAccess()) return null;
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.GetAsync($"{_baseUrl}/api/support");
-			if (!response.IsSuccessStatusCode)
-			{
-				return null;
-			}
+			if (!response.IsSuccessStatusCode) return null;
 
 			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 			var tickets = await response.Content.ReadFromJsonAsync<List<TicketItem>>(options);
@@ -198,17 +206,16 @@ public class ApiService
 
 	/// <summary>
 	/// Aim: Send support ticket to backend.
-	/// Params: message - support message, type - ticket type.
-	/// Return: Created ticket ID or -1 if failed.
+	/// Params:
+	///   message (string) - Support message.
+	///   type (TicketType) - Ticket type.
+	/// Return (int): Created ticket ID or -1 if failed.
 	/// </summary>
-	public async Task<int> SendSupportTicketAsync(string message, TicketType type = TicketType.SupportRequest)
+	public static async Task<int> SendSupportTicketAsync(string message, TicketType type = TicketType.SupportRequest)
 	{
 		try
 		{
-			if (!MobileService.HasNetworkAccess())
-			{
-				return -1;
-			}
+			if (!MobileService.HasNetworkAccess()) return -1;
 
 			var dto = new TicketDto
 			{
@@ -221,11 +228,9 @@ public class ApiService
 				Type = type
 			};
 
+			await AddAuthHeaderAsync();
 			var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/api/support", dto);
-			if (!response.IsSuccessStatusCode)
-			{
-				return -1;
-			}
+			if (!response.IsSuccessStatusCode) return -1;
 
 			var result = await response.Content.ReadFromJsonAsync<TicketResponse>();
 			return result?.TicketId ?? -1;
@@ -234,6 +239,22 @@ public class ApiService
 		{
 			ErrorService.Handle(ex);
 			return -1;
+		}
+	}
+	#endregion
+
+	#region Private Methods
+	/// <summary>
+	/// Aim: Add JWT authorization header to request if token provider is configured.
+	/// </summary>
+	private static async Task AddAuthHeaderAsync()
+	{
+		if (_tokenProvider == null) return;
+
+		string? token = await _tokenProvider();
+		if (!string.IsNullOrEmpty(token))
+		{
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 		}
 	}
 	#endregion

@@ -54,7 +54,7 @@ public partial class NewTicketPage : ContentPage
 			Text = text
 		};
 
-		var uploaded = await SupportService.UploadTicketAsync(ticket);
+		var uploaded = await TicketService.UploadTicketAsync(ticket);
 
 		if (!uploaded)
 		{

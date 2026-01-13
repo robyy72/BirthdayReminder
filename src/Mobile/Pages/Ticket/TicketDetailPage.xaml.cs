@@ -31,7 +31,7 @@ public partial class TicketDetailPage : ContentPage
 	#region Private Methods
 	private async Task LoadTicket()
 	{
-		_ticket = SupportService.GetById(_ticketId);
+		_ticket = TicketService.GetById(_ticketId);
 		if (_ticket == null)
 		{
 			await App.GoBackAsync();
@@ -60,7 +60,7 @@ public partial class TicketDetailPage : ContentPage
 		if (_ticket == null)
 			return;
 
-		var entries = SupportService.GetEntriesByTicketId(_ticketId);
+		var entries = TicketService.GetEntriesByTicketId(_ticketId);
 
 		if (entries.Count > 0)
 		{
@@ -165,7 +165,7 @@ public partial class TicketDetailPage : ContentPage
 			Text = text
 		};
 
-		SupportService.AddEntry(entry);
+		TicketService.AddEntry(entry);
 
 		await HideAnswerAreaAsync();
 		LoadEntries();

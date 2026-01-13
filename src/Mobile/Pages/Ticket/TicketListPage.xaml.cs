@@ -66,7 +66,7 @@ public partial class TicketListPage : ContentPage
 	{
 		ShowLoading(true);
 
-		var success = await SupportService.DownloadTicketsAsync();
+		var success = await TicketService.DownloadTicketsAsync();
 
 		if (!success)
 		{
@@ -94,7 +94,7 @@ public partial class TicketListPage : ContentPage
 
 		if (_selectedFilterIndex == 0)
 		{
-			entries = SupportService.GetAll();
+			entries = TicketService.GetAll();
 		}
 		else
 		{
@@ -105,7 +105,7 @@ public partial class TicketListPage : ContentPage
 				3 => SupportType.Feedback,
 				_ => SupportType.Feedback
 			};
-			entries = SupportService.GetByType(ticketType);
+			entries = TicketService.GetByType(ticketType);
 		}
 
 		foreach (var entry in entries)

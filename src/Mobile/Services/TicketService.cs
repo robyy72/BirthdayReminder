@@ -7,7 +7,7 @@ namespace Mobile;
 /// <summary>
 /// Aim: Service for managing support tickets with API sync and offline storage.
 /// </summary>
-public static class SupportService
+public static class TicketService
 {
 	#region API Sync Methods
 	/// <summary>
@@ -21,8 +21,8 @@ public static class SupportService
 			return false;
 		}
 
-		var apiService = new ApiService();
-		var tickets = await apiService.GetTicketsAsync();
+		
+		var tickets = await ApiService.GetTicketsAsync();
 
 		if (tickets == null)
 		{
@@ -54,11 +54,11 @@ public static class SupportService
 			return false;
 		}
 
-		var apiService = new ApiService();
+		
 		var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
 		var message = FormatMessage(entry.Title, entry.Text);
 
-		var ticketId = await apiService.SendSupportTicketAsync(message, ticketType);
+		var ticketId = await ApiService.SendSupportTicketAsync(message, ticketType);
 
 		if (ticketId > 0)
 		{
@@ -87,7 +87,7 @@ public static class SupportService
 			return;
 		}
 
-		var apiService = new ApiService();
+		
 		var uploaded = new List<Support>();
 
 		foreach (var entry in pending)
@@ -95,7 +95,7 @@ public static class SupportService
 			var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
 			var message = FormatMessage(entry.Title, entry.Text);
 
-			var ticketId = await apiService.SendSupportTicketAsync(message, ticketType);
+			var ticketId = await ApiService.SendSupportTicketAsync(message, ticketType);
 			if (ticketId > 0)
 			{
 				uploaded.Add(entry);

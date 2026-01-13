@@ -184,7 +184,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     private async Task NavigateToSupportAsync(SupportType ticketType)
     {
-        var entries = SupportService.GetByType(ticketType);
+        var entries = TicketService.GetByType(ticketType);
         if (entries.Count > 0)
         {
             await App.NavigateToAsync<TicketListPage>(ticketType);

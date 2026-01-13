@@ -265,8 +265,11 @@ public partial class App : Application
 
         PersonService.Load();
         AccountService.Load();
-        SupportService.LoadEntries();
+        TicketService.LoadEntries();
         ErrorService.Load();
+
+        // Configure JWT token provider for API calls
+        ApiService.ConfigureTokenProvider(() => SecureStorage.GetAsync("AuthToken"));
 
         PermissionService.InitTracking();
         CheckTimeZone();
@@ -333,8 +336,8 @@ public partial class App : Application
                 return;
             }
 
-            var apiService = new ApiService();
-            await apiService.SendHeartbeatAsync();
+            // ApiService is now static
+            await ApiService.SendHeartbeatAsync();
         }
         catch (Exception ex)
         {
