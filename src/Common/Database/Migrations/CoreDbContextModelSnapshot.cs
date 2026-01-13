@@ -64,7 +64,7 @@ namespace Common.Database.Migrations
 
                     b.HasIndex("PhoneNumber");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Common.EmailText", b =>
@@ -103,7 +103,7 @@ namespace Common.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmailTexts");
+                    b.ToTable("EmailTexts", (string)null);
                 });
 
             modelBuilder.Entity("Common.MessengerText", b =>
@@ -141,48 +141,10 @@ namespace Common.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MessengerTexts");
+                    b.ToTable("MessengerTexts", (string)null);
                 });
 
-            modelBuilder.Entity("Common.SystemUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("DisplayName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LastLoginAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("SystemUsers");
-                });
-
-            modelBuilder.Entity("Common.Ticket", b =>
+            modelBuilder.Entity("Common.SupportTicket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,10 +193,10 @@ namespace Common.Database.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("SupportTickets", (string)null);
                 });
 
-            modelBuilder.Entity("Common.TicketEntry", b =>
+            modelBuilder.Entity("Common.SupportTicketEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -252,58 +214,96 @@ namespace Common.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SystemUserId")
+                    b.Property<int>("SupportTicketId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketId")
+                    b.Property<int?>("SystemUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SupportTicketId");
+
                     b.HasIndex("SystemUserId");
 
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("TicketEntries");
+                    b.ToTable("SupportTicketEntries", (string)null);
                 });
 
-            modelBuilder.Entity("Common.Ticket", b =>
+            modelBuilder.Entity("Common.SystemUser", b =>
                 {
-                    b.HasOne("Common.Customer", "Customer")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("DisplayName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LastLoginAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("SystemUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Common.SupportTicket", b =>
+                {
+                    b.HasOne("Common.Customer", "customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Common.SystemUser", "SystemUser")
+                    b.HasOne("Common.SystemUser", "systemUser")
                         .WithMany()
                         .HasForeignKey("SystemUserId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Customer");
+                    b.Navigation("customer");
 
-                    b.Navigation("SystemUser");
+                    b.Navigation("systemUser");
                 });
 
-            modelBuilder.Entity("Common.TicketEntry", b =>
+            modelBuilder.Entity("Common.SupportTicketEntry", b =>
                 {
-                    b.HasOne("Common.SystemUser", "SystemUser")
-                        .WithMany()
-                        .HasForeignKey("SystemUserId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Common.Ticket", "Ticket")
+                    b.HasOne("Common.SupportTicket", "supportTicket")
                         .WithMany("Entries")
-                        .HasForeignKey("TicketId")
+                        .HasForeignKey("SupportTicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SystemUser");
+                    b.HasOne("Common.SystemUser", "systemUser")
+                        .WithMany()
+                        .HasForeignKey("SystemUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Ticket");
+                    b.Navigation("supportTicket");
+
+                    b.Navigation("systemUser");
                 });
 
-            modelBuilder.Entity("Common.Ticket", b =>
+            modelBuilder.Entity("Common.SupportTicket", b =>
                 {
                     b.Navigation("Entries");
                 });
