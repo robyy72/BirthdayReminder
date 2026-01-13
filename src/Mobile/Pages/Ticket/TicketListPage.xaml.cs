@@ -70,9 +70,10 @@ public partial class TicketListPage : ContentPage
 
 		if (!success)
 		{
-			ShowLoading(false);
-			await App.NavigateToAsync<NoInternetPage>();
-			return;
+			await DisplayAlert(
+				MobileLanguages.Resources.Error_Header,
+				MobileLanguages.Resources.Error_GenericMessage,
+				MobileLanguages.Resources.General_Button_OK);
 		}
 
 		ShowLoading(false);

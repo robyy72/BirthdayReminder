@@ -58,11 +58,11 @@ public class IndexModel : PageModel
 		ticketStats.TryGetValue(TicketStatus.Resolved, out var resolved);
 		ticketStats.TryGetValue(TicketStatus.Cancelled, out var cancelled);
 
-		OpenTickets = created;
+		OpenTickets = open;
 		AssignedTickets = assigned;
-		AdminRepliedTickets = weAnswered;
-		CustomerRepliedTickets = waiting;
-		ResolvedTickets = successful;
+		AdminRepliedTickets = adminReplied;
+		CustomerRepliedTickets = customerReplied;
+		ResolvedTickets = resolved;
 		CancelledTickets = cancelled;
 		TotalTickets = open + assigned + adminReplied + customerReplied + resolved + cancelled;
 	}
