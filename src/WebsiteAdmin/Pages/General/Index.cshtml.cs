@@ -14,26 +14,26 @@ public class IndexModel : PageModel
 {
 	#region Fields
 	private readonly HeartbeatService _heartbeatService;
-	private readonly SupportService _supportService;
+	private readonly TicketService _supportService;
 	#endregion
 
 	#region Properties
 	public UserStats UserStats { get; set; } = new();
 	public int TotalTickets { get; set; }
-	public int CreatedTickets { get; set; }
+	public int OpenTickets { get; set; }
 	public int AssignedTickets { get; set; }
-	public int WeAnsweredTickets { get; set; }
-	public int WaitingTickets { get; set; }
-	public int SuccessfulTickets { get; set; }
+	public int AdminRepliedTickets { get; set; }
+	public int CustomerRepliedTickets { get; set; }
+	public int ResolvedTickets { get; set; }
 	public int CancelledTickets { get; set; }
 	#endregion
 
 	#region Constructor
 	/// <summary>
 	/// Aim: Initialize the dashboard page model.
-	/// Params: heartbeatService (HeartbeatService), supportService (SupportService).
+	/// Params: heartbeatService (HeartbeatService), supportService (TicketService).
 	/// </summary>
-	public IndexModel(HeartbeatService heartbeatService, SupportService supportService)
+	public IndexModel(HeartbeatService heartbeatService, TicketService supportService)
 	{
 		_heartbeatService = heartbeatService;
 		_supportService = supportService;
@@ -51,20 +51,20 @@ public class IndexModel : PageModel
 		UserStats = await _heartbeatService.GetUserStatsAsync();
 
 		var ticketStats = await _supportService.GetTicketStatsAsync();
-		ticketStats.TryGetValue(TicketStatus.Created, out var created);
+		ticketStats.TryGetValue(TicketStatus.Open, out var open);
 		ticketStats.TryGetValue(TicketStatus.Assigned, out var assigned);
-		ticketStats.TryGetValue(TicketStatus.WeAnswered, out var weAnswered);
-		ticketStats.TryGetValue(TicketStatus.WaitingForClientAnswer, out var waiting);
-		ticketStats.TryGetValue(TicketStatus.Successful, out var successful);
+		ticketStats.TryGetValue(TicketStatus.AdminReplied, out var adminReplied);
+		ticketStats.TryGetValue(TicketStatus.CustomerReplied, out var customerReplied);
+		ticketStats.TryGetValue(TicketStatus.Resolved, out var resolved);
 		ticketStats.TryGetValue(TicketStatus.Cancelled, out var cancelled);
 
-		CreatedTickets = created;
+		OpenTickets = created;
 		AssignedTickets = assigned;
-		WeAnsweredTickets = weAnswered;
-		WaitingTickets = waiting;
-		SuccessfulTickets = successful;
+		AdminRepliedTickets = weAnswered;
+		CustomerRepliedTickets = waiting;
+		ResolvedTickets = successful;
 		CancelledTickets = cancelled;
-		TotalTickets = created + assigned + weAnswered + waiting + successful + cancelled;
+		TotalTickets = open + assigned + adminReplied + customerReplied + resolved + cancelled;
 	}
 	#endregion
 }

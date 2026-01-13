@@ -38,7 +38,7 @@ builder.Services.AddAuthorization();
 
 // Application Services
 builder.Services.AddScoped<HeartbeatService>();
-builder.Services.AddScoped<SupportService>();
+builder.Services.AddScoped<TicketService>();
 builder.Services.AddScoped<TokenService>();
 
 // Controllers

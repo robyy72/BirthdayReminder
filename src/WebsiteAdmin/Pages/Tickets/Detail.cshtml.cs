@@ -14,19 +14,19 @@ namespace WebsiteAdmin.Pages.Tickets;
 public class DetailModel : PageModel
 {
 	#region Fields
-	private readonly SupportService _supportService;
+	private readonly TicketService _supportService;
 	#endregion
 
 	#region Properties
-	public SupportTicket? Ticket { get; set; }
+	public Ticket? Ticket { get; set; }
 	#endregion
 
 	#region Constructor
 	/// <summary>
 	/// Aim: Initialize the ticket detail page model.
-	/// Params: supportService (SupportService) - Service for ticket operations.
+	/// Params: supportService (TicketService) - Service for ticket operations.
 	/// </summary>
-	public DetailModel(SupportService supportService)
+	public DetailModel(TicketService supportService)
 	{
 		_supportService = supportService;
 	}
@@ -52,7 +52,7 @@ public class DetailModel : PageModel
 	{
 		if (!Enum.TryParse<TicketStatus>(status, out var ticketStatus))
 		{
-			ticketStatus = TicketStatus.Created;
+			ticketStatus = TicketStatus.Open;
 		}
 
 		await _supportService.UpdateTicketStatusAsync(ticketId, ticketStatus, adminNotes);

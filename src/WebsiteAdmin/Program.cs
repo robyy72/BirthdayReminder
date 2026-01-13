@@ -30,7 +30,7 @@ builder.Services.AddHttpClient();
 
 // Application Services
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<SupportService>();
+builder.Services.AddScoped<TicketService>();
 builder.Services.AddScoped<HeartbeatService>();
 builder.Services.AddScoped<SubscriptionService>();
 builder.Services.AddScoped<TextsService>();

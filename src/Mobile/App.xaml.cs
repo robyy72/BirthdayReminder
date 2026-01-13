@@ -18,7 +18,7 @@ public partial class App : Application
     public static List<Person> Persons { get; set; } = [];
     public static List<Contact> Contacts { get; set; } = [];
     public static List<Support> SupportEntries { get; set; } = [];
-    public static List<SupportEntry> SupportTicketEntries { get; set; } = [];
+    public static List<SupportEntry> TicketEntries { get; set; } = [];
     public static List<ErrorLog> ErrorLogs { get; set; } = [];
     public static Account Account { get; set; } = new();
     public static bool NeedsSyncContacts { get; set; } = false;

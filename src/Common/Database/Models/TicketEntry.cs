@@ -6,18 +6,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Common;
 
 /// <summary>
-/// Aim: Individual entry/message in a support ticket conversation.
+/// Aim: Individual entry/message in a ticket conversation.
 /// </summary>
-public class SupportTicketEntry
+public class TicketEntry
 {
 	[Key]
 	public int Id { get; set; }
 
 	[Required]
-	public int SupportTicketId { get; set; }
+	public int TicketId { get; set; }
 
-	[ForeignKey(nameof(SupportTicketId))]
-	public SupportTicket? supportTicket { get; set; }
+	[ForeignKey(nameof(TicketId))]
+	public Ticket? Ticket { get; set; }
 
 	[Required]
 	public string Message { get; set; } = string.Empty;
@@ -27,7 +27,7 @@ public class SupportTicketEntry
 	public int? SystemUserId { get; set; }
 
 	[ForeignKey(nameof(SystemUserId))]
-	public SystemUser? systemUser { get; set; }
+	public SystemUser? SystemUser { get; set; }
 
 	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }

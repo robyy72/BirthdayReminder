@@ -62,11 +62,11 @@
                                 @{
                                     var statusClass = ticket.Status switch
                                     {
-                                        Common.TicketStatus.Created => "bg-warning",
+                                        Common.TicketStatus.Open => "bg-warning",
                                         Common.TicketStatus.Assigned => "bg-info",
-                                        Common.TicketStatus.WeAnswered => "bg-primary",
-                                        Common.TicketStatus.WaitingForClientAnswer => "bg-secondary",
-                                        Common.TicketStatus.Successful => "bg-success",
+                                        Common.TicketStatus.AdminReplied => "bg-primary",
+                                        Common.TicketStatus.CustomerReplied => "bg-secondary",
+                                        Common.TicketStatus.Resolved => "bg-success",
                                         Common.TicketStatus.Cancelled => "bg-dark",
                                         _ => "bg-secondary"
                                     };
@@ -94,11 +94,11 @@
                     @{
                         var detailStatusClass = Model.SelectedTicket.Status switch
                         {
-                            Common.TicketStatus.Created => "bg-warning",
+                            Common.TicketStatus.Open => "bg-warning",
                             Common.TicketStatus.Assigned => "bg-info",
-                            Common.TicketStatus.WeAnswered => "bg-primary",
-                            Common.TicketStatus.WaitingForClientAnswer => "bg-secondary",
-                            Common.TicketStatus.Successful => "bg-success",
+                            Common.TicketStatus.AdminReplied => "bg-primary",
+                            Common.TicketStatus.CustomerReplied => "bg-secondary",
+                            Common.TicketStatus.Resolved => "bg-success",
                             Common.TicketStatus.Cancelled => "bg-dark",
                             _ => "bg-secondary"
                         };

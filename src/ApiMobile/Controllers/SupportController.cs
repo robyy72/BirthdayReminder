@@ -15,12 +15,12 @@ namespace ApiMobile;
 public class SupportController : ControllerBase
 {
 	#region Fields
-	private readonly SupportService _supportService;
+	private readonly TicketService _supportService;
 	private readonly TokenService _tokenService;
 	#endregion
 
 	#region Constructor
-	public SupportController(SupportService supportService, TokenService tokenService)
+	public SupportController(TicketService supportService, TokenService tokenService)
 	{
 		_supportService = supportService;
 		_tokenService = tokenService;

@@ -14,12 +14,12 @@ namespace WebsiteAdmin.Pages.Tickets;
 public class IndexModel : PageModel
 {
 	#region Fields
-	private readonly SupportService _supportService;
+	private readonly TicketService _supportService;
 	#endregion
 
 	#region Properties
-	public List<SupportTicket> Tickets { get; set; } = [];
-	public SupportTicket? SelectedTicket { get; set; }
+	public List<Ticket> Tickets { get; set; } = [];
+	public Ticket? SelectedTicket { get; set; }
 
 	[BindProperty(SupportsGet = true)]
 	public TicketFilter Filter { get; set; } = new();
@@ -31,9 +31,9 @@ public class IndexModel : PageModel
 	#region Constructor
 	/// <summary>
 	/// Aim: Initialize the tickets page model.
-	/// Params: supportService (SupportService) - Service for ticket operations.
+	/// Params: supportService (TicketService) - Service for ticket operations.
 	/// </summary>
-	public IndexModel(SupportService supportService)
+	public IndexModel(TicketService supportService)
 	{
 		_supportService = supportService;
 	}

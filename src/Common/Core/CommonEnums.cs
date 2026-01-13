@@ -55,11 +55,11 @@ public enum TicketSource
 
 public enum TicketStatus
 {
-	Created = 1,
+	Open = 1,
 	Assigned = 2,
-	WeAnswered = 3,
-	WaitingForClientAnswer = 4,
-	Successful = 5,
+	AdminReplied = 3,
+	CustomerReplied = 4,
+	Resolved = 5,
 	Cancelled = 6
 }
 #endregion

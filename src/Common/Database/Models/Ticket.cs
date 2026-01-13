@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Common;
 
 /// <summary>
-/// Aim: Support ticket entity for user support requests.
+/// Aim: Ticket entity for user support requests.
 /// </summary>
-public class SupportTicket
+public class Ticket
 {
 	[Key]
 	public int Id { get; set; }
@@ -17,7 +17,7 @@ public class SupportTicket
 	public Guid CustomerId { get; set; }
 
 	[ForeignKey(nameof(CustomerId))]
-	public Customer? customer { get; set; }
+	public Customer? Customer { get; set; }
 
 	[Required]
 	public string Message { get; set; } = string.Empty;
@@ -26,12 +26,12 @@ public class SupportTicket
 
 	public TicketSource Source { get; set; } = TicketSource.NotSet;
 
-	public TicketStatus Status { get; set; } = TicketStatus.Created;
+	public TicketStatus Status { get; set; } = TicketStatus.Open;
 
 	public int? SystemUserId { get; set; }
 
 	[ForeignKey(nameof(SystemUserId))]
-	public SystemUser? systemUser { get; set; }
+	public SystemUser? SystemUser { get; set; }
 
 	public string? AdminNotes { get; set; }
 
@@ -41,5 +41,5 @@ public class SupportTicket
 
 	public DateTimeOffset? ClosedAt { get; set; }
 
-	public ICollection<SupportTicketEntry> Entries { get; set; } = new List<SupportTicketEntry>();
+	public ICollection<TicketEntry> Entries { get; set; } = new List<TicketEntry>();
 }

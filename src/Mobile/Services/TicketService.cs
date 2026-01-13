@@ -58,7 +58,7 @@ public static class TicketService
 		var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
 		var message = FormatMessage(entry.Title, entry.Text);
 
-		var ticketId = await ApiService.SendSupportTicketAsync(message, ticketType);
+		var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 
 		if (ticketId > 0)
 		{
@@ -95,7 +95,7 @@ public static class TicketService
 			var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
 			var message = FormatMessage(entry.Title, entry.Text);
 
-			var ticketId = await ApiService.SendSupportTicketAsync(message, ticketType);
+			var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 			if (ticketId > 0)
 			{
 				uploaded.Add(entry);
@@ -302,11 +302,11 @@ public static class TicketService
 		var entries = PrefsHelper.GetValue<List<SupportEntry>>(MobileConstants.PREFS_SUPPORT_ENTRIES);
 		if (entries != null)
 		{
-			App.SupportTicketEntries = entries;
+			App.TicketEntries = entries;
 		}
 		else
 		{
-			App.SupportTicketEntries = new List<SupportEntry>();
+			App.TicketEntries = new List<SupportEntry>();
 		}
 	}
 
@@ -315,7 +315,7 @@ public static class TicketService
 	/// </summary>
 	public static void SaveEntries()
 	{
-		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT_ENTRIES, App.SupportTicketEntries);
+		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT_ENTRIES, App.TicketEntries);
 	}
 
 	/// <summary>
@@ -326,7 +326,7 @@ public static class TicketService
 	{
 		entry.Id = GetNextEntryId();
 		entry.CreatedAt = DateTime.Now;
-		App.SupportTicketEntries.Add(entry);
+		App.TicketEntries.Add(entry);
 		SaveEntries();
 	}
 
@@ -337,7 +337,7 @@ public static class TicketService
 	/// </summary>
 	public static List<SupportEntry> GetEntriesByTicketId(int ticketId)
 	{
-		var entries = App.SupportTicketEntries
+		var entries = App.TicketEntries
 			.Where(e => e.SupportId == ticketId)
 			.OrderBy(e => e.CreatedAt)
 			.ToList();
@@ -350,12 +350,12 @@ public static class TicketService
 	/// </summary>
 	private static int GetNextEntryId()
 	{
-		if (App.SupportTicketEntries.Count == 0)
+		if (App.TicketEntries.Count == 0)
 		{
 			return 1;
 		}
 
-		var maxId = App.SupportTicketEntries.Max(e => e.Id);
+		var maxId = App.TicketEntries.Max(e => e.Id);
 		return maxId + 1;
 	}
 	#endregion

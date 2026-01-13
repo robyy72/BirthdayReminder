@@ -8,14 +8,14 @@ namespace ApiMobile;
 /// <summary>
 /// Aim: Service for creating support tickets from mobile app.
 /// </summary>
-public class SupportService
+public class TicketService
 {
 	#region Fields
 	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public SupportService(CoreDbContext db)
+	public TicketService(CoreDbContext db)
 	{
 		_db = db;
 	}
@@ -64,16 +64,16 @@ public class SupportService
 			}
 		}
 
-		var ticket = new SupportTicket
+		var ticket = new Ticket
 		{
 			CustomerId = dto.UserId,
 			Message = dto.Message,
 			Type = dto.Type,
 			Source = dto.Source,
-			Status = TicketStatus.Created
+			Status = TicketStatus.Open
 		};
 
-		_db.SupportTickets.Add(ticket);
+		_db.Tickets.Add(ticket);
 		await _db.SaveChangesAsync();
 
 		return ticket.Id;
@@ -84,9 +84,9 @@ public class SupportService
 	/// Params: userId - user GUID.
 	/// Return: List of user's tickets.
 	/// </summary>
-	public async Task<List<SupportTicket>> GetUserTicketsAsync(Guid userId)
+	public async Task<List<Ticket>> GetUserTicketsAsync(Guid userId)
 	{
-		var tickets = await _db.SupportTickets
+		var tickets = await _db.Tickets
 			.Where(t => t.CustomerId == userId)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();

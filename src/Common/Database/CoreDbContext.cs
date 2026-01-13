@@ -15,8 +15,8 @@ public class CoreDbContext : DbContext
 
 	public DbSet<Customer> Customers { get; set; } = null!;
 	public DbSet<SystemUser> SystemUsers { get; set; } = null!;
-	public DbSet<SupportTicket> SupportTickets { get; set; } = null!;
-	public DbSet<SupportTicketEntry> SupportTicketEntries { get; set; } = null!;
+	public DbSet<Ticket> Tickets { get; set; } = null!;
+	public DbSet<TicketEntry> TicketEntries { get; set; } = null!;
 	public DbSet<EmailText> EmailTexts { get; set; } = null!;
 	public DbSet<MessengerText> MessengerTexts { get; set; } = null!;
 
@@ -37,15 +37,15 @@ public class CoreDbContext : DbContext
 			entity.HasIndex(e => e.Email).IsUnique();
 		});
 
-		// SupportTicket configuration
-		modelBuilder.Entity<SupportTicket>(entity =>
+		// Ticket configuration
+		modelBuilder.Entity<Ticket>(entity =>
 		{
-			entity.HasOne(t => t.customer)
+			entity.HasOne(t => t.Customer)
 				.WithMany()
 				.HasForeignKey(t => t.CustomerId)
 				.OnDelete(DeleteBehavior.Cascade);
 
-			entity.HasOne(t => t.systemUser)
+			entity.HasOne(t => t.SystemUser)
 				.WithMany()
 				.HasForeignKey(t => t.SystemUserId)
 				.OnDelete(DeleteBehavior.SetNull);
@@ -54,15 +54,15 @@ public class CoreDbContext : DbContext
 			entity.HasIndex(e => e.CreatedAt);
 		});
 
-		// SupportTicketEntry configuration
-		modelBuilder.Entity<SupportTicketEntry>(entity =>
+		// TicketEntry configuration
+		modelBuilder.Entity<TicketEntry>(entity =>
 		{
-			entity.HasOne(e => e.supportTicket)
+			entity.HasOne(e => e.Ticket)
 				.WithMany(t => t.Entries)
-				.HasForeignKey(e => e.SupportTicketId)
+				.HasForeignKey(e => e.TicketId)
 				.OnDelete(DeleteBehavior.Cascade);
 
-			entity.HasOne(e => e.systemUser)
+			entity.HasOne(e => e.SystemUser)
 				.WithMany()
 				.HasForeignKey(e => e.SystemUserId)
 				.OnDelete(DeleteBehavior.SetNull);

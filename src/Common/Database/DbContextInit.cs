@@ -65,9 +65,9 @@ public static class DbContextInit
 		{
 			CreateEmailText("Welcome", language),
 			CreateEmailText("BirthdayReminder", language),
-			CreateEmailText("SupportTicketCreated", language),
-			CreateEmailText("SupportTicketResponse", language),
-			CreateEmailText("SupportTicketClosed", language)
+			CreateEmailText("TicketCreated", language),
+			CreateEmailText("TicketResponse", language),
+			CreateEmailText("TicketClosed", language)
 		};
 
 		db.EmailTexts.AddRange(templates);

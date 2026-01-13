@@ -8,14 +8,14 @@ namespace WebsiteAdmin;
 /// <summary>
 /// Aim: Service for managing support tickets.
 /// </summary>
-public class SupportService
+public class TicketService
 {
 	#region Fields
 	private readonly CoreDbContext _db;
 	#endregion
 
 	#region Constructor
-	public SupportService(CoreDbContext db)
+	public TicketService(CoreDbContext db)
 	{
 		_db = db;
 	}
@@ -64,16 +64,16 @@ public class SupportService
 			}
 		}
 
-		var ticket = new SupportTicket
+		var ticket = new Ticket
 		{
 			CustomerId = dto.UserId,
 			Message = dto.Message,
 			Type = dto.Type,
 			Source = dto.Source,
-			Status = TicketStatus.Created
+			Status = TicketStatus.Open
 		};
 
-		_db.SupportTickets.Add(ticket);
+		_db.Tickets.Add(ticket);
 		await _db.SaveChangesAsync();
 
 		return ticket.Id;
@@ -83,12 +83,12 @@ public class SupportService
 	/// Aim: Get all open tickets.
 	/// Return: List of open support tickets.
 	/// </summary>
-	public async Task<List<SupportTicket>> GetOpenTicketsAsync()
+	public async Task<List<Ticket>> GetOpenTicketsAsync()
 	{
-		var tickets = await _db.SupportTickets
+		var tickets = await _db.Tickets
 			.Include(t => t.customer)
 			.Include(t => t.systemUser)
-			.Where(t => t.Status != TicketStatus.Successful && t.Status != TicketStatus.Cancelled)
+			.Where(t => t.Status != TicketStatus.Resolved && t.Status != TicketStatus.Cancelled)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();
 
@@ -100,9 +100,9 @@ public class SupportService
 	/// Params: status - optional status filter.
 	/// Return: List of support tickets.
 	/// </summary>
-	public async Task<List<SupportTicket>> GetTicketsAsync(TicketStatus? status = null)
+	public async Task<List<Ticket>> GetTicketsAsync(TicketStatus? status = null)
 	{
-		var query = _db.SupportTickets
+		var query = _db.Tickets
 			.Include(t => t.customer)
 			.Include(t => t.systemUser)
 			.AsQueryable();
@@ -124,9 +124,9 @@ public class SupportService
 	/// Params: id - ticket ID.
 	/// Return: Support ticket or null.
 	/// </summary>
-	public async Task<SupportTicket?> GetTicketByIdAsync(int id)
+	public async Task<Ticket?> GetTicketByIdAsync(int id)
 	{
-		var ticket = await _db.SupportTickets
+		var ticket = await _db.Tickets
 			.Include(t => t.customer)
 			.Include(t => t.systemUser)
 			.FirstOrDefaultAsync(t => t.Id == id);
@@ -141,7 +141,7 @@ public class SupportService
 	/// </summary>
 	public async Task<bool> UpdateTicketStatusAsync(int id, TicketStatus status, string? adminNotes = null)
 	{
-		var ticket = await _db.SupportTickets.FindAsync(id);
+		var ticket = await _db.Tickets.FindAsync(id);
 		if (ticket == null)
 		{
 			return false;
@@ -155,7 +155,7 @@ public class SupportService
 			ticket.AdminNotes = adminNotes;
 		}
 
-		if (status == TicketStatus.Successful || status == TicketStatus.Cancelled)
+		if (status == TicketStatus.Resolved || status == TicketStatus.Cancelled)
 		{
 			ticket.ClosedAt = DateTimeOffset.UtcNow;
 		}
@@ -171,7 +171,7 @@ public class SupportService
 	/// </summary>
 	public async Task<bool> AssignTicketAsync(int ticketId, int adminId)
 	{
-		var ticket = await _db.SupportTickets.FindAsync(ticketId);
+		var ticket = await _db.Tickets.FindAsync(ticketId);
 		if (ticket == null)
 		{
 			return false;
@@ -191,7 +191,7 @@ public class SupportService
 	/// </summary>
 	public async Task<Dictionary<TicketStatus, int>> GetTicketStatsAsync()
 	{
-		var stats = await _db.SupportTickets
+		var stats = await _db.Tickets
 			.GroupBy(t => t.Status)
 			.Select(g => new { Status = g.Key, Count = g.Count() })
 			.ToDictionaryAsync(x => x.Status, x => x.Count);
@@ -204,9 +204,9 @@ public class SupportService
 	/// Params: filter - ticket filter options.
 	/// Return: Filtered list of tickets.
 	/// </summary>
-	public async Task<List<SupportTicket>> GetFilteredTicketsAsync(TicketFilter filter)
+	public async Task<List<Ticket>> GetFilteredTicketsAsync(TicketFilter filter)
 	{
-		var query = _db.SupportTickets
+		var query = _db.Tickets
 			.Include(t => t.customer)
 			.Include(t => t.systemUser)
 			.Include(t => t.Entries)
@@ -253,7 +253,7 @@ public class SupportService
 	/// </summary>
 	public async Task<bool> AddTicketEntryAsync(int ticketId, string message, bool isFromCustomer, string? adminName = null)
 	{
-		var ticket = await _db.SupportTickets.FindAsync(ticketId);
+		var ticket = await _db.Tickets.FindAsync(ticketId);
 		if (ticket == null)
 		{
 			return false;
@@ -266,15 +266,15 @@ public class SupportService
 			systemUserId = admin?.Id;
 		}
 
-		var entry = new SupportTicketEntry
+		var entry = new TicketEntry
 		{
-			SupportTicketId = ticketId,
+			TicketId = ticketId,
 			Message = message,
 			IsFromCustomer = isFromCustomer,
 			SystemUserId = systemUserId
 		};
 
-		_db.SupportTicketEntries.Add(entry);
+		_db.TicketEntries.Add(entry);
 		ticket.UpdatedAt = DateTimeOffset.UtcNow;
 
 		await _db.SaveChangesAsync();
