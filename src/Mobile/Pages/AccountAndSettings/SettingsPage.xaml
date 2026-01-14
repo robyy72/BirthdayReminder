@@ -48,6 +48,7 @@
                                         <Entry x:Name="UpcomingEntry"
                                                Keyboard="Numeric"
                                                HorizontalTextAlignment="Center"
+                                               Unfocused="OnUpcomingEntryUnfocused"
                                                Style="{StaticResource EntryStandard}" />
                                     </Border>
                                 </Border>
@@ -62,6 +63,7 @@
                                         <Entry x:Name="PastEntry"
                                                Keyboard="Numeric"
                                                HorizontalTextAlignment="Center"
+                                               Unfocused="OnPastEntryUnfocused"
                                                Style="{StaticResource EntryStandard}" />
                                     </Border>
                                 </Border>
@@ -71,13 +73,13 @@
                                    Style="{StaticResource LabelDescriptionOnCard}"
                                    Margin="0,10,0,0" />
                             <VerticalStackLayout RadioButtonGroup.GroupName="NameDirectionGroup" Spacing="5">
-                                <RadioButton Value="FirstFirstName" x:Name="RadioFirstFirstName">
+                                <RadioButton Value="FirstFirstName" x:Name="RadioFirstFirstName" CheckedChanged="OnNameDirectionRadioChanged">
                                     <RadioButton.Content>
                                         <Label Text="{x:Static resx:Resources.NameDirection_FirstFirstName}"
                                                Style="{StaticResource LabelInfoOnCard}" />
                                     </RadioButton.Content>
                                 </RadioButton>
-                                <RadioButton Value="FirstLastName" x:Name="RadioFirstLastName">
+                                <RadioButton Value="FirstLastName" x:Name="RadioFirstLastName" CheckedChanged="OnNameDirectionRadioChanged">
                                     <RadioButton.Content>
                                         <Label Text="{x:Static resx:Resources.NameDirection_FirstLastName}"
                                                Style="{StaticResource LabelInfoOnCard}" />
@@ -107,13 +109,13 @@
                         </Border>
                         <VerticalStackLayout x:Name="Accordion2Content" Padding="20" Spacing="10" IsVisible="False"
                                              RadioButtonGroup.GroupName="ThemeGroup">
-                            <RadioButton Value="Light" x:Name="RadioLight">
+                            <RadioButton Value="Light" x:Name="RadioLight" CheckedChanged="OnThemeRadioChanged">
                                 <RadioButton.Content>
                                     <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
                                            Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
-                            <RadioButton Value="Dark" x:Name="RadioDark">
+                            <RadioButton Value="Dark" x:Name="RadioDark" CheckedChanged="OnThemeRadioChanged">
                                 <RadioButton.Content>
                                     <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
                                            Style="{StaticResource LabelInfoOnCard}" />
@@ -142,13 +144,13 @@
                         </Border>
                         <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="10" IsVisible="False"
                                              RadioButtonGroup.GroupName="LocaleGroup">
-                            <RadioButton Value="de" x:Name="RadioDe">
+                            <RadioButton Value="de" x:Name="RadioDe" CheckedChanged="OnLocaleRadioChanged">
                                 <RadioButton.Content>
                                     <Label Text="Deutsch"
                                            Style="{StaticResource LabelInfoOnCard}" />
                                 </RadioButton.Content>
                             </RadioButton>
-                            <RadioButton Value="en" x:Name="RadioEn">
+                            <RadioButton Value="en" x:Name="RadioEn" CheckedChanged="OnLocaleRadioChanged">
                                 <RadioButton.Content>
                                     <Label Text="English"
                                            Style="{StaticResource LabelInfoOnCard}" />
@@ -241,12 +243,6 @@
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
-
-                <!-- Save Button -->
-                <Button Text="{x:Static resx:Resources.General_Button_Save}"
-                        Style="{StaticResource ButtonPrimary}"
-                        Clicked="OnSaveClicked"
-                        Margin="0,15,0,0" />
 
             </VerticalStackLayout>
         </ScrollView>
