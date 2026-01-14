@@ -56,7 +56,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="{x:Static resx:Resources.EmptyView_NoUpcoming}"
-                               Style="{StaticResource LabelInfoOnCard}"
+                               Style="{StaticResource LabelInfoOnPage}"
                                HorizontalOptions="Center"
                                Padding="20" />
                     </CollectionView.EmptyView>
@@ -99,7 +99,7 @@
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>
                         <Label Text="{x:Static resx:Resources.EmptyView_NoMissed}"
-                               Style="{StaticResource LabelInfoOnCard}"
+                               Style="{StaticResource LabelInfoOnPage}"
                                HorizontalOptions="Center"
                                Padding="20" />
                     </CollectionView.EmptyView>

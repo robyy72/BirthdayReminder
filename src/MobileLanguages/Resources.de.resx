@@ -135,17 +135,20 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
 • Die Erinnerung funktioniert trotzdem normal
 • Du kannst das Jahr später durch Bearbeiten hinzufügen</value>
   </data>
-  <data name="Tab_ShowAll" xml:space="preserve">
+  <data name="Flyout_ShowAll" xml:space="preserve">
     <value>Alle anzeigen</value>
   </data>
-  <data name="Tab_Settings" xml:space="preserve">
+  <data name="Flyout_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="Tab_Privacy" xml:space="preserve">
+  <data name="Flyout_Privacy" xml:space="preserve">
     <value>Datenschutz</value>
   </data>
   <data name="General_Button_Save" xml:space="preserve">
     <value>Speichern</value>
+  </data>
+  <data name="General_Button_Send" xml:space="preserve">
+    <value>Senden</value>
   </data>
   <data name="General_Button_Cancel" xml:space="preserve">
     <value>Abbrechen</value>
@@ -474,7 +477,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Filter_AllMonths" xml:space="preserve">
     <value>-- alle --</value>
   </data>
-  <data name="Tab_Overview" xml:space="preserve">
+  <data name="Flyout_Overview" xml:space="preserve">
     <value>Startseite</value>
   </data>
   <data name="Settings_ReminderCount" xml:space="preserve">
@@ -740,11 +743,14 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="ReminderSettings_NoMethods" xml:space="preserve">
     <value>Keine Methoden aktiviert</value>
   </data>
-  <data name="Tab_Account" xml:space="preserve">
+  <data name="Flyout_Account" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="Tab_Reminders" xml:space="preserve">
+  <data name="Flyout_Reminders" xml:space="preserve">
     <value>Erinnerungen</value>
+  </data>
+  <data name="Flyout_Tickets" xml:space="preserve">
+    <value>Meine Tickets</value>
   </data>
   <!-- Reminder Methods - Local -->
   <data name="ReminderMethod_Notification" xml:space="preserve">

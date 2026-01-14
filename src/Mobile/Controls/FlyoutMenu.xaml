@@ -49,7 +49,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOverviewTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Overview}"
+                        <Label Text="{x:Static resx:Resources.Flyout_Overview}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
@@ -61,7 +61,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAllBirthdaysTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_ShowAll}"
+                        <Label Text="{x:Static resx:Resources.Flyout_ShowAll}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
@@ -73,7 +73,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAccountTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Account}"
+                        <Label Text="{x:Static resx:Resources.Flyout_Account}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
@@ -85,7 +85,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSettingsTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Settings}"
+                        <Label Text="{x:Static resx:Resources.Flyout_Settings}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
@@ -97,7 +97,19 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnRemindersTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Reminders}"
+                        <Label Text="{x:Static resx:Resources.Flyout_Reminders}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Meine Tickets -->
+                    <Border Style="{StaticResource TileFlyout}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTicketsTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Tickets}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
@@ -109,7 +121,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnPrivacyTapped" />
                         </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Privacy}"
+                        <Label Text="{x:Static resx:Resources.Flyout_Privacy}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"

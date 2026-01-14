@@ -102,5 +102,12 @@ public partial class FlyoutMenu : ContentView
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<PrivacyPage>();
     }
+
+    private async void OnTicketsTapped(object? sender, TappedEventArgs e)
+    {
+        await Close();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<TicketListPage>(SupportType.Feedback);
+    }
     #endregion
 }

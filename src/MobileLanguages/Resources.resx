@@ -213,17 +213,20 @@ If you don't know the birth year, simply choose "Without year" when selecting th
 • The reminder will still work normally
 • You can add the year later by editing the birthday</value>
   </data>
-  <data name="Tab_ShowAll" xml:space="preserve">
+  <data name="Flyout_ShowAll" xml:space="preserve">
     <value>Show All</value>
   </data>
-  <data name="Tab_Settings" xml:space="preserve">
+  <data name="Flyout_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Tab_Privacy" xml:space="preserve">
+  <data name="Flyout_Privacy" xml:space="preserve">
     <value>Privacy</value>
   </data>
   <data name="General_Button_Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="General_Button_Send" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="General_Button_Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -552,7 +555,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Filter_AllMonths" xml:space="preserve">
     <value>-- all --</value>
   </data>
-  <data name="Tab_Overview" xml:space="preserve">
+  <data name="Flyout_Overview" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="Settings_ReminderCount" xml:space="preserve">
@@ -807,11 +810,14 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="ReminderSettings_NoMethods" xml:space="preserve">
     <value>No methods enabled</value>
   </data>
-  <data name="Tab_Account" xml:space="preserve">
+  <data name="Flyout_Account" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="Tab_Reminders" xml:space="preserve">
+  <data name="Flyout_Reminders" xml:space="preserve">
     <value>Reminders</value>
+  </data>
+  <data name="Flyout_Tickets" xml:space="preserve">
+    <value>My Tickets</value>
   </data>
   <data name="ReminderMethod_Notification" xml:space="preserve">
     <value>Push notification on lockscreen</value>

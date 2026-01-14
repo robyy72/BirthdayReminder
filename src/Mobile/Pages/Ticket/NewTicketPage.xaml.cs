@@ -62,9 +62,12 @@ public partial class NewTicketPage : ContentPage
 				MobileLanguages.Resources.NoInternet_Title,
 				MobileLanguages.Resources.Ticket_SavedOffline,
 				MobileLanguages.Resources.General_Button_OK);
+			await App.GoBackAsync();
+			return;
 		}
 
 		await App.GoBackAsync();
+		await App.NavigateToAsync<TicketDetailPage>(ticket.Id);
 	}
 
 	private void OnEntryFocused(object? sender, FocusEventArgs e)

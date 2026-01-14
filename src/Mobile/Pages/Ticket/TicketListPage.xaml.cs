@@ -120,7 +120,7 @@ public partial class TicketListPage : ContentPage
 			var emptyLabel = new Label
 			{
 				Text = MobileLanguages.Resources.EmptyView_NoTickets,
-				Style = ResourceHelper.GetStyle("LabelInfoOnCard"),
+				Style = ResourceHelper.GetStyle("LabelInfoOnPage"),
 				HorizontalOptions = LayoutOptions.Center,
 				Margin = new Thickness(0, 20, 0, 0)
 			};

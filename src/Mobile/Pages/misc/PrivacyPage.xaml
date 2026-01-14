@@ -20,13 +20,17 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <VerticalStackLayout Padding="20" Spacing="15">
 
-                <Label Text="{x:Static resx:Resources.Privacy_Header}" FontSize="24" FontAttributes="Bold" />
+                <Label Text="{x:Static resx:Resources.Privacy_Header}"
+                       Style="{StaticResource LabelHeader}" />
 
-                <Label Text="{x:Static resx:Resources.Privacy_Text_1}" />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_1}"
+                       Style="{StaticResource LabelInfoOnPage}" />
 
-                <Label Text="{x:Static resx:Resources.Privacy_Text_2}" />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_2}"
+                       Style="{StaticResource LabelInfoOnPage}" />
 
-                <Label Text="{x:Static resx:Resources.Privacy_Text_3}" />
+                <Label Text="{x:Static resx:Resources.Privacy_Text_3}"
+                       Style="{StaticResource LabelInfoOnPage}" />
 
             </VerticalStackLayout>
         </ScrollView>
