@@ -54,8 +54,7 @@ public static class TicketService
 			return false;
 		}
 
-		
-		var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
+		var ticketType = (TicketType)entry.Type;
 		var message = FormatMessage(entry.Title, entry.Text);
 
 		var ticketId = await ApiService.SendTicketAsync(message, ticketType);
@@ -92,7 +91,7 @@ public static class TicketService
 
 		foreach (var entry in pending)
 		{
-			var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
+			var ticketType = (TicketType)entry.Type;
 			var message = FormatMessage(entry.Title, entry.Text);
 
 			var ticketId = await ApiService.SendTicketAsync(message, ticketType);
@@ -180,10 +179,10 @@ public static class TicketService
 
 	/// <summary>
 	/// Aim: Get all support entries filtered by type.
-	/// Params: type - The SupportType to filter by
-	/// Return: List of support entries matching the type
+	/// Params: type - The TicketType to filter by.
+	/// Return: List of support entries matching the type.
 	/// </summary>
-	public static List<Support> GetByType(SupportType type)
+	public static List<Support> GetByType(TicketType type)
 	{
 		var entries = App.SupportEntries
 			.Where(s => s.Type == (int)type)
@@ -207,38 +206,6 @@ public static class TicketService
 
 	#region Type Conversion Helpers
 	/// <summary>
-	/// Aim: Convert SupportType to TicketType.
-	/// Params: supportType - The SupportType to convert.
-	/// Return: Corresponding TicketType.
-	/// </summary>
-	public static TicketType ConvertSupportTypeToTicketType(SupportType supportType)
-	{
-		return supportType switch
-		{
-			SupportType.Bug => TicketType.Error,
-			SupportType.FeatureRequest => TicketType.FeatureRequest,
-			SupportType.Feedback => TicketType.CustomerFeedback,
-			_ => TicketType.SupportRequest
-		};
-	}
-
-	/// <summary>
-	/// Aim: Convert TicketType to SupportType.
-	/// Params: ticketType - The TicketType to convert.
-	/// Return: Corresponding SupportType.
-	/// </summary>
-	public static SupportType ConvertTicketTypeToSupportType(TicketType ticketType)
-	{
-		return ticketType switch
-		{
-			TicketType.Error => SupportType.Bug,
-			TicketType.FeatureRequest => SupportType.FeatureRequest,
-			TicketType.CustomerFeedback => SupportType.Feedback,
-			_ => SupportType.Feedback
-		};
-	}
-
-	/// <summary>
 	/// Aim: Convert TicketItem from API to Support model.
 	/// Params: ticket - The TicketItem to convert.
 	/// Return: Support model.
@@ -249,7 +216,7 @@ public static class TicketService
 		var support = new Support
 		{
 			Id = ticket.Id,
-			Type = (int)ConvertTicketTypeToSupportType(ticket.Type),
+			Type = (int)ticket.Type,
 			Title = title,
 			Text = text,
 			CreatedAt = ticket.CreatedAt.LocalDateTime

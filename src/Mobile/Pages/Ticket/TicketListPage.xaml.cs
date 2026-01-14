@@ -7,13 +7,13 @@ namespace Mobile;
 public partial class TicketListPage : ContentPage
 {
 	#region Fields
-	private readonly SupportType _ticketType;
+	private readonly TicketType _ticketType;
 	private int _selectedFilterIndex = 0;
 	private bool _isFirstLoad = true;
 	#endregion
 
 	#region Constructor
-	public TicketListPage(SupportType ticketType)
+	public TicketListPage(TicketType ticketType)
 	{
 		InitializeComponent();
 		_ticketType = ticketType;
@@ -54,9 +54,9 @@ public partial class TicketListPage : ContentPage
 		// Pre-select filter based on ticket type
 		_selectedFilterIndex = _ticketType switch
 		{
-			SupportType.Bug => 1,
-			SupportType.FeatureRequest => 2,
-			SupportType.Feedback => 3,
+			TicketType.Error => 1,
+			TicketType.FeatureRequest => 2,
+			TicketType.CustomerFeedback => 3,
 			_ => 0
 		};
 		FilterPicker.SelectedIndex = _selectedFilterIndex;
@@ -101,10 +101,10 @@ public partial class TicketListPage : ContentPage
 		{
 			var ticketType = _selectedFilterIndex switch
 			{
-				1 => SupportType.Bug,
-				2 => SupportType.FeatureRequest,
-				3 => SupportType.Feedback,
-				_ => SupportType.Feedback
+				1 => TicketType.Error,
+				2 => TicketType.FeatureRequest,
+				3 => TicketType.CustomerFeedback,
+				_ => TicketType.CustomerFeedback
 			};
 			entries = TicketService.GetByType(ticketType);
 		}
@@ -130,11 +130,11 @@ public partial class TicketListPage : ContentPage
 
 	private Border CreateEntryCard(Support entry)
 	{
-		var typeText = ((SupportType)entry.Type) switch
+		var typeText = ((TicketType)entry.Type) switch
 		{
-			SupportType.Bug => MobileLanguages.Resources.Ticket_Type_Bug,
-			SupportType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
-			SupportType.Feedback => MobileLanguages.Resources.Ticket_Type_Feedback,
+			TicketType.Error => MobileLanguages.Resources.Ticket_Type_Bug,
+			TicketType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
+			TicketType.CustomerFeedback => MobileLanguages.Resources.Ticket_Type_Feedback,
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 
@@ -192,15 +192,15 @@ public partial class TicketListPage : ContentPage
 
 	/// <summary>
 	/// Aim: Get the current filter type for creating new tickets.
-	/// Return: SupportType based on current filter selection.
+	/// Return: TicketType based on current filter selection.
 	/// </summary>
-	private SupportType GetCurrentFilterType()
+	private TicketType GetCurrentFilterType()
 	{
 		var result = _selectedFilterIndex switch
 		{
-			1 => SupportType.Bug,
-			2 => SupportType.FeatureRequest,
-			3 => SupportType.Feedback,
+			1 => TicketType.Error,
+			2 => TicketType.FeatureRequest,
+			3 => TicketType.CustomerFeedback,
 			_ => _ticketType
 		};
 		return result;

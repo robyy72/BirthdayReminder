@@ -1,3 +1,5 @@
+using Common;
+
 namespace Mobile;
 
 /// <summary>
@@ -107,7 +109,7 @@ public partial class FlyoutMenu : ContentView
     {
         await Close();
         await App.NavigateToRootAsync();
-        await App.NavigateToAsync<TicketListPage>(SupportType.Feedback);
+        await App.NavigateToAsync<TicketListPage>(TicketType.CustomerFeedback);
     }
     #endregion
 }

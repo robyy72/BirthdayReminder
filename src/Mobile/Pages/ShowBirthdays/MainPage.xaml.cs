@@ -1,3 +1,5 @@
+using Common;
+
 namespace Mobile;
 
 public partial class MainPage : ContentPage
@@ -165,24 +167,24 @@ public partial class MainPage : ContentPage
 
     private async void OnReportBugFromMenu()
     {
-        await NavigateToSupportAsync(SupportType.Bug);
+        await NavigateToSupportAsync(TicketType.Error);
     }
 
     private async void OnFeatureRequestFromMenu()
     {
-        await NavigateToSupportAsync(SupportType.FeatureRequest);
+        await NavigateToSupportAsync(TicketType.FeatureRequest);
     }
 
     private async void OnFeedbackFromMenu()
     {
-        await NavigateToSupportAsync(SupportType.Feedback);
+        await NavigateToSupportAsync(TicketType.CustomerFeedback);
     }
 
     /// <summary>
     /// Aim: Navigate to ticket page - if entries exist go to list, otherwise create new.
-    /// Params: ticketType (SupportType) - The type of ticket.
+    /// Params: ticketType (TicketType) - The type of ticket.
     /// </summary>
-    private async Task NavigateToSupportAsync(SupportType ticketType)
+    private async Task NavigateToSupportAsync(TicketType ticketType)
     {
         var entries = TicketService.GetByType(ticketType);
         if (entries.Count > 0)

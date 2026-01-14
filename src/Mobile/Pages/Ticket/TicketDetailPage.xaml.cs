@@ -38,11 +38,11 @@ public partial class TicketDetailPage : ContentPage
 			return;
 		}
 
-		var typeText = ((SupportType)_ticket.Type) switch
+		var typeText = ((TicketType)_ticket.Type) switch
 		{
-			SupportType.Bug => MobileLanguages.Resources.Ticket_Type_Bug,
-			SupportType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
-			SupportType.Feedback => MobileLanguages.Resources.Ticket_Type_Feedback,
+			TicketType.Error => MobileLanguages.Resources.Ticket_Type_Bug,
+			TicketType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
+			TicketType.CustomerFeedback => MobileLanguages.Resources.Ticket_Type_Feedback,
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 

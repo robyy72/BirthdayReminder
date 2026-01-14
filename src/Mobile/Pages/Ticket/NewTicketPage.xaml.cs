@@ -7,11 +7,11 @@ namespace Mobile;
 public partial class NewTicketPage : ContentPage
 {
 	#region Fields
-	private readonly SupportType _ticketType;
+	private readonly TicketType _ticketType;
 	#endregion
 
 	#region Constructor
-	public NewTicketPage(SupportType ticketType)
+	public NewTicketPage(TicketType ticketType)
 	{
 		InitializeComponent();
 		_ticketType = ticketType;
@@ -24,9 +24,9 @@ public partial class NewTicketPage : ContentPage
 	{
 		TypeHeaderLabel.Text = _ticketType switch
 		{
-			SupportType.Bug => MobileLanguages.Resources.Ticket_Type_Bug,
-			SupportType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
-			SupportType.Feedback => MobileLanguages.Resources.Ticket_Type_Feedback,
+			TicketType.Error => MobileLanguages.Resources.Ticket_Type_Bug,
+			TicketType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
+			TicketType.CustomerFeedback => MobileLanguages.Resources.Ticket_Type_Feedback,
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 	}
