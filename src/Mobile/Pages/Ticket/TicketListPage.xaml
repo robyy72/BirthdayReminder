@@ -8,27 +8,26 @@
              Title="{x:Static resx:Resources.Page_TicketList_Title}">
 
     <Grid RowDefinitions="Auto,Auto,*">
-        <!-- Custom Header -->
-        <controls:CustomHeader Grid.Row="0"
+        <!-- Custom Header with Add Button -->
+        <controls:CustomHeader x:Name="TheHeader"
+                               Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_TicketList_Title}"
                                ShowMenuButton="False"
-                               ShowBackButton="True" />
+                               ShowBackButton="True"
+                               ShowAddButton="True"
+                               AddClicked="OnAddClicked" />
 
-        <!-- Filter and Add Button Row -->
-        <Grid Grid.Row="1" Padding="20,10" ColumnDefinitions="*,Auto">
-            <Picker x:Name="FilterPicker"
-                    Grid.Column="0"
-                    SelectedIndexChanged="OnFilterChanged"
-                    HorizontalOptions="Start" />
-            <Button x:Name="AddButton"
-                    Grid.Column="1"
-                    Text="+"
-                    Style="{StaticResource ButtonPrimary}"
-                    WidthRequest="50"
-                    HeightRequest="40"
-                    Padding="0"
-                    FontSize="24"
-                    Clicked="OnAddClicked" />
+        <!-- Filter Row -->
+        <Grid Grid.Row="1"
+              Padding="20,15"
+              BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+            <Border Style="{StaticResource TileOuterForPicker}">
+                <Border Style="{StaticResource TileInnerForPicker}">
+                    <Picker x:Name="FilterPicker"
+                            Style="{StaticResource PickerFilter}"
+                            SelectedIndexChanged="OnFilterChanged" />
+                </Border>
+            </Border>
         </Grid>
 
         <!-- Loading Indicator -->

@@ -50,6 +50,19 @@
                 Opacity="0"
                 InputTransparent="True"
                 Clicked="OnContextMenuButtonClicked" />
+
+        <!-- Add Button (uses Opacity to reserve space when hidden) -->
+        <Button x:Name="AddButton"
+                Grid.Column="2"
+                Text="+"
+                FontSize="28"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                MinimumWidthRequest="30"
+                Opacity="0"
+                InputTransparent="True"
+                Clicked="OnAddButtonClicked" />
     </Grid>
 
 </ContentView>

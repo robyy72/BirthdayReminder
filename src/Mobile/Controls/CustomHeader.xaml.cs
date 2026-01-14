@@ -34,6 +34,13 @@ public partial class CustomHeader : ContentView
         false,
         propertyChanged: OnContextMenuVisibilityChanged);
 
+    public static readonly BindableProperty ShowAddButtonProperty = BindableProperty.Create(
+        nameof(ShowAddButton),
+        typeof(bool),
+        typeof(CustomHeader),
+        false,
+        propertyChanged: OnAddButtonVisibilityChanged);
+
     public static readonly BindableProperty BackClickedCommandProperty = BindableProperty.Create(
         nameof(BackClickedCommand),
         typeof(System.Windows.Input.ICommand),
@@ -65,6 +72,14 @@ public partial class CustomHeader : ContentView
         get => (bool)GetValue(ShowContextMenuProperty);
         set => SetValue(ShowContextMenuProperty, value);
     }
+
+    public bool ShowAddButton
+    {
+        get => (bool)GetValue(ShowAddButtonProperty);
+        set => SetValue(ShowAddButtonProperty, value);
+    }
+
+    public event EventHandler? AddClicked;
 
     public System.Windows.Input.ICommand? BackClickedCommand
     {
@@ -107,6 +122,16 @@ public partial class CustomHeader : ContentView
             header.ContextMenuButton.InputTransparent = !show;
         }
     }
+
+    private static void OnAddButtonVisibilityChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is CustomHeader header)
+        {
+            var show = (bool)newValue;
+            header.AddButton.Opacity = show ? 1 : 0;
+            header.AddButton.InputTransparent = !show;
+        }
+    }
     #endregion
 
     #region Private Methods
@@ -138,6 +163,11 @@ public partial class CustomHeader : ContentView
     private void OnContextMenuButtonClicked(object? sender, EventArgs e)
     {
         App.OpenContextMenu();
+    }
+
+    private void OnAddButtonClicked(object? sender, EventArgs e)
+    {
+        AddClicked?.Invoke(this, EventArgs.Empty);
     }
     #endregion
 }

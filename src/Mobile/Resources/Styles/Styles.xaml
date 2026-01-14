@@ -508,6 +508,28 @@
         <Setter Property="FontSize" Value="20" />
     </Style>
 
+    <Style TargetType="Picker" x:Key="PickerFilter" BasedOn="{StaticResource PickerBase}">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileOuterForPicker">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileInnerForPicker">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 9" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
     <Style TargetType="Label" x:Key="LabelDateSeparator">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="VerticalOptions" Value="Center" />
