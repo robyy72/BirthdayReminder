@@ -211,7 +211,7 @@ public static class ApiService
 	///   type (TicketType) - Ticket type.
 	/// Return (int): Created ticket ID or -1 if failed.
 	/// </summary>
-	public static async Task<int> SendTicketAsync(string message, TicketType type = TicketType.SupportRequest)
+	public static async Task<int> SendTicketAsync(string message, TicketType type = TicketType.CustomerFeedback)
 	{
 		try
 		{

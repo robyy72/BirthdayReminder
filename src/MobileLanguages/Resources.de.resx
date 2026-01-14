@@ -899,11 +899,17 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
     <value>Feedback</value>
   </data>
   <!-- Ticket -->
-  <data name="Page_NewTicket_Title" xml:space="preserve">
+  <data name="Page_SelectTicketType_Title" xml:space="preserve">
     <value>Neues Ticket</value>
   </data>
+  <data name="Page_CreateTicket_Title" xml:space="preserve">
+    <value>Ticket erstellen</value>
+  </data>
   <data name="Page_TicketList_Title" xml:space="preserve">
-    <value>Tickets</value>
+    <value>Meine Tickets</value>
+  </data>
+  <data name="SelectTicketType_Header" xml:space="preserve">
+    <value>Was möchten Sie tun?</value>
   </data>
   <data name="Page_TicketDetail_Title" xml:space="preserve">
     <value>Ticket Details</value>
@@ -915,7 +921,7 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
     <value>Beschreibung</value>
   </data>
   <data name="Ticket_Type_Bug" xml:space="preserve">
-    <value>Fehler</value>
+    <value>Fehler melden</value>
   </data>
   <data name="Ticket_Type_FeatureRequest" xml:space="preserve">
     <value>Verbesserungsvorschlag</value>

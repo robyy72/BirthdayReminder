@@ -956,11 +956,17 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
     <value>Feedback</value>
   </data>
   <!-- Ticket -->
-  <data name="Page_NewTicket_Title" xml:space="preserve">
+  <data name="Page_SelectTicketType_Title" xml:space="preserve">
     <value>New Ticket</value>
   </data>
+  <data name="Page_CreateTicket_Title" xml:space="preserve">
+    <value>Create Ticket</value>
+  </data>
   <data name="Page_TicketList_Title" xml:space="preserve">
-    <value>Tickets</value>
+    <value>My Tickets</value>
+  </data>
+  <data name="SelectTicketType_Header" xml:space="preserve">
+    <value>What would you like to do?</value>
   </data>
   <data name="Page_TicketDetail_Title" xml:space="preserve">
     <value>Ticket Details</value>
@@ -972,7 +978,7 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
     <value>Description</value>
   </data>
   <data name="Ticket_Type_Bug" xml:space="preserve">
-    <value>Bug</value>
+    <value>Report Bug</value>
   </data>
   <data name="Ticket_Type_FeatureRequest" xml:space="preserve">
     <value>Feature Request</value>

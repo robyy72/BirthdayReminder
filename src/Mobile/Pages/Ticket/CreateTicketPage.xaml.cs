@@ -4,14 +4,14 @@ using Common;
 
 namespace Mobile;
 
-public partial class NewTicketPage : ContentPage
+public partial class CreateTicketPage : ContentPage
 {
 	#region Fields
 	private readonly TicketType _ticketType;
 	#endregion
 
 	#region Constructor
-	public NewTicketPage(TicketType ticketType)
+	public CreateTicketPage(TicketType ticketType)
 	{
 		InitializeComponent();
 		_ticketType = ticketType;

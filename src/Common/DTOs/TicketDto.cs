@@ -11,6 +11,6 @@ public class TicketDto
 	public string? PhoneNumber { get; set; }
 	public string? PurchaseToken { get; set; }
 	public AppStore Store { get; set; } = AppStore.Unknown;
-	public TicketType Type { get; set; } = TicketType.SupportRequest;
+	public TicketType Type { get; set; } = TicketType.CustomerFeedback;
 	public TicketSource Source { get; set; } = TicketSource.FromCustomerViaApp;
 }

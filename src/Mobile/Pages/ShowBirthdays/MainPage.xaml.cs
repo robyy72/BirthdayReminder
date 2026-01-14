@@ -193,7 +193,7 @@ public partial class MainPage : ContentPage
         }
         else
         {
-            await App.NavigateToAsync<NewTicketPage>(ticketType);
+            await App.NavigateToAsync<CreateTicketPage>(ticketType);
         }
     }
     #endregion

@@ -216,7 +216,7 @@ public partial class TicketListPage : ContentPage
 
 	private async void OnAddClicked(object? sender, EventArgs e)
 	{
-		await App.NavigateToAsync<NewTicketPage>(GetCurrentFilterType());
+		await App.NavigateToAsync<SelectTicketTypePage>();
 	}
 	#endregion
 }

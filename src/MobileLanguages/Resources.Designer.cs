@@ -1466,6 +1466,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Ticket.
+        /// </summary>
+        public static string Page_CreateTicket_Title {
+            get {
+                return ResourceManager.GetString("Page_CreateTicket_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Birthday.
         /// </summary>
         public static string Page_DeleteBirthday_Title {
@@ -1556,15 +1565,6 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Ticket.
-        /// </summary>
-        public static string Page_NewTicket_Title {
-            get {
-                return ResourceManager.GetString("Page_NewTicket_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No Internet.
         /// </summary>
         public static string Page_NoInternet_Title {
@@ -1588,6 +1588,15 @@ namespace MobileLanguages {
         public static string Page_ReminderSettings_Title {
             get {
                 return ResourceManager.GetString("Page_ReminderSettings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Ticket.
+        /// </summary>
+        public static string Page_SelectTicketType_Title {
+            get {
+                return ResourceManager.GetString("Page_SelectTicketType_Title", resourceCulture);
             }
         }
         
@@ -1691,7 +1700,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tickets.
+        ///   Looks up a localized string similar to My Tickets.
         /// </summary>
         public static string Page_TicketList_Title {
             get {
@@ -2371,6 +2380,15 @@ namespace MobileLanguages {
         public static string SearchPerson_SearchPlaceholder {
             get {
                 return ResourceManager.GetString("SearchPerson_SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What would you like to do?.
+        /// </summary>
+        public static string SelectTicketType_Header {
+            get {
+                return ResourceManager.GetString("SelectTicketType_Header", resourceCulture);
             }
         }
         
@@ -3068,7 +3086,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bug.
+        ///   Looks up a localized string similar to Report Bug.
         /// </summary>
         public static string Ticket_Type_Bug {
             get {

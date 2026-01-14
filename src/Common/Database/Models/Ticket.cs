@@ -22,7 +22,7 @@ public class Ticket
 	[Required]
 	public string Message { get; set; } = string.Empty;
 
-	public TicketType Type { get; set; } = TicketType.SupportRequest;
+	public TicketType Type { get; set; } = TicketType.CustomerFeedback;
 
 	public TicketSource Source { get; set; } = TicketSource.NotSet;
 

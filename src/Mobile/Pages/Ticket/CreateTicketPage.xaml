@@ -3,18 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:controls="clr-namespace:Mobile"
-             x:Class="Mobile.NewTicketPage"
+             x:Class="Mobile.CreateTicketPage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Page_NewTicket_Title}">
+             Title="{x:Static resx:Resources.Page_CreateTicket_Title}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader Grid.Row="0"
-                               Title="{x:Static resx:Resources.Page_NewTicket_Title}"
+                               Title="{x:Static resx:Resources.Page_CreateTicket_Title}"
                                ShowMenuButton="False"
                                ShowBackButton="True" />
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
             <VerticalStackLayout Padding="30" Spacing="15">
 
                 <!-- Ticket Type Display -->
@@ -58,7 +59,7 @@
                 </Border>
 
                 <!-- Bottom Buttons -->
-                <Button Text="{x:Static resx:Resources.General_Button_Save}"
+                <Button Text="{x:Static resx:Resources.General_Button_Send}"
                         Style="{StaticResource ButtonPrimary}"
                         Clicked="OnSaveClicked"
                         Margin="0,20,0,0" />

@@ -40,7 +40,7 @@ public enum TicketType
 {
 	NotSet = 0,
 	Error = 1,
-	SupportRequest = 2,
+	ReportBug = 2,
 	FeatureRequest = 3,
 	CustomerFeedback = 4
 }
