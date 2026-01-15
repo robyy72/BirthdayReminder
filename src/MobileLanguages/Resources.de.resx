@@ -337,7 +337,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Systemstandard</value>
   </data>
   <data name="Settings_Timezone" xml:space="preserve">
-    <value>Zeitzone</value>
+    <value>Zeitzone auswählen</value>
   </data>
   <data name="Settings_Timezone_Select" xml:space="preserve">
     <value>Meine Zeitzone auswählen</value>

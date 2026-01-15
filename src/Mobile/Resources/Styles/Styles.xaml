@@ -267,7 +267,7 @@
     <!-- ==================== TILES / BORDERS ==================== -->
 
     <Style TargetType="Border" x:Key="Tile">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 15" />
         <Setter Property="Padding" Value="20" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
@@ -311,7 +311,7 @@
     <!-- ==================== CARDS ==================== -->
 
     <Style TargetType="Border" x:Key="Card">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
@@ -338,7 +338,7 @@
     </Style>
 
     <Style TargetType="Border" x:Key="AccordionHeader" BasedOn="{StaticResource CardHeader}">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray700}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray700}}" />
     </Style>
 
     <Style TargetType="Border" x:Key="Accordion">

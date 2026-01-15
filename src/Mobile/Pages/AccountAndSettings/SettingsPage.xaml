@@ -252,6 +252,45 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Accordion 6: Timezone -->
+                <Border x:Name="Accordion6" Style="{StaticResource Accordion}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource AccordionHeader}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Timezone}"
+                                       Style="{StaticResource LabelCardHeader}" />
+                                <Label x:Name="Accordion6Arrow"
+                                       Grid.Column="1"
+                                       Text="▼"
+                                       Style="{StaticResource LabelCardHeader}" />
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAccordion6Tapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <VerticalStackLayout x:Name="Accordion6Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Border Style="{StaticResource TileOuterForPicker}">
+                                <Border Style="{StaticResource TileInnerForPicker}">
+                                    <Picker x:Name="TimezonePicker"
+                                            Style="{StaticResource PickerFilter}"
+                                            SelectedIndexChanged="OnTimezoneChanged" />
+                                </Border>
+                            </Border>
+                            <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
+                                   Style="{StaticResource LabelInfoOnCard}"
+                                   TextColor="{StaticResource Gray500}" />
+                            <Label Text="{x:Static resx:Resources.More_Informations}"
+                                   Style="{StaticResource LabelHelpLink}"
+                                   HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTimezoneInfoTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
             </VerticalStackLayout>
         </ScrollView>
 

@@ -2700,7 +2700,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Timezone.
+        ///   Looks up a localized string similar to Select Timezone.
         /// </summary>
         public static string Settings_Timezone {
             get {

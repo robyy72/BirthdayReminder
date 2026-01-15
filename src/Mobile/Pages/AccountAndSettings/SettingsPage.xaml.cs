@@ -51,6 +51,10 @@ public partial class SettingsPage : ContentPage
 		{
 			_ = LoadCalendarsAsync(account.DeviceCalendar_SelectedIds);
 		}
+
+		// Timezone
+		TimezonePicker.ItemsSource = TimezoneService.GetDisplayNames();
+		TimezonePicker.SelectedIndex = TimezoneService.GetIndex(account.TimeZoneId);
 	}
 	#endregion
 
@@ -78,6 +82,11 @@ public partial class SettingsPage : ContentPage
 	private void OnAccordion5Tapped(object? sender, TappedEventArgs e)
 	{
 		ToggleAccordion(5);
+	}
+
+	private void OnAccordion6Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(6);
 	}
 
 	private void ToggleAccordion(int accordionNumber)
@@ -109,6 +118,7 @@ public partial class SettingsPage : ContentPage
 			3 => Accordion3Content,
 			4 => Accordion4Content,
 			5 => Accordion5Content,
+			6 => Accordion6Content,
 			_ => null
 		};
 
@@ -119,6 +129,7 @@ public partial class SettingsPage : ContentPage
 			3 => Accordion3Arrow,
 			4 => Accordion4Arrow,
 			5 => Accordion5Arrow,
+			6 => Accordion6Arrow,
 			_ => null
 		};
 
@@ -348,7 +359,25 @@ public partial class SettingsPage : ContentPage
 			AccountService.Save();
 		}
 	}
+	#endregion
 
+	#region Timezone
+	private void OnTimezoneChanged(object? sender, EventArgs e)
+	{
+		if (_isLoading)
+			return;
+
+		App.Account.TimeZoneId = TimezoneService.GetIdByIndex(TimezonePicker.SelectedIndex);
+		AccountService.Save();
+	}
+
+	private async void OnTimezoneInfoTapped(object? sender, EventArgs e)
+	{
+		var browserPage = new BrowserPage(
+			MobileConstants.URL_TIMEZONE_INFO,
+			MobileLanguages.Resources.Timezone_MoreInfo);
+		await Navigation.PushModalAsync(browserPage);
+	}
 	#endregion
 
 	#region Calendar Helpers

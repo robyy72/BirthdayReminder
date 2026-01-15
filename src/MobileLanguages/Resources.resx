@@ -415,7 +415,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>System Default</value>
   </data>
   <data name="Settings_Timezone" xml:space="preserve">
-    <value>Timezone</value>
+    <value>Select Timezone</value>
   </data>
   <data name="Settings_Timezone_Select" xml:space="preserve">
     <value>Select my timezone</value>
