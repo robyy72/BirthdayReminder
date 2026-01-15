@@ -427,22 +427,22 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Current Timezone</value>
   </data>
   <data name="Settings_Timezone_Adjust" xml:space="preserve">
-    <value>Adjust Timezone</value>
+    <value>Select Timezone</value>
   </data>
   <data name="Settings_Language_Current" xml:space="preserve">
     <value>Current Language</value>
   </data>
   <data name="Settings_Language_Adjust" xml:space="preserve">
-    <value>Adjust Language</value>
+    <value>Select Language</value>
   </data>
   <data name="Language_Select_Header" xml:space="preserve">
-    <value>Select Language</value>
+    <value>Set Language of App</value>
   </data>
   <data name="Language_Select_Current" xml:space="preserve">
     <value>Current</value>
   </data>
   <data name="Timezone_Select_Header" xml:space="preserve">
-    <value>Select Timezone</value>
+    <value>Set Timezone of App</value>
   </data>
   <data name="Timezone_Select_Current" xml:space="preserve">
     <value>Current</value>
@@ -727,7 +727,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Please grant permission for this phone now</value>
   </data>
   <data name="Permission_StartDialog" xml:space="preserve">
-    <value>Start dialog</value>
+    <value>Grant Permission</value>
   </data>
   <data name="Permission_Result" xml:space="preserve">
     <value>Result</value>
@@ -736,10 +736,10 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Waiting for permission...</value>
   </data>
   <data name="Permission_Granted" xml:space="preserve">
-    <value>Permission granted</value>
+    <value>Thanks, that worked</value>
   </data>
   <data name="Permission_Denied" xml:space="preserve">
-    <value>Permission not granted, that's ok too</value>
+    <value>Ok, that's fine too</value>
   </data>
   <data name="Permission_DeniedInfo" xml:space="preserve">
     <value>The permission was already denied. The dialog cannot be shown again. Please go to your device settings to grant the permission manually.</value>

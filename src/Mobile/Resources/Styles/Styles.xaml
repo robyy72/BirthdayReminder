@@ -291,6 +291,14 @@
         <Setter Property="StrokeThickness" Value="1" />
     </Style>
 
+    <Style TargetType="Border" x:Key="TileDialog">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
     <Style TargetType="Border" x:Key="TileInnerForEntry">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 9" />

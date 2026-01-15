@@ -39,13 +39,28 @@ public partial class SelectLanguagePage : ContentPage
 	#region Load
 	private void LoadLanguages()
 	{
-		string currentLocale = App.Account.Locale ?? "de";
+		string currentLocale = GetEffectiveLocale();
 
 		foreach (var lang in _languages)
 		{
 			var tile = CreateLanguageTile(lang, lang.Code == currentLocale);
 			LanguageTilesContainer.Children.Add(tile);
 		}
+	}
+
+	private string GetEffectiveLocale()
+	{
+		// If explicitly set and saved, use it
+		if (App.Account.Locale == "de" || App.Account.Locale == "en")
+		{
+			bool isInitialized = Preferences.ContainsKey(MobileConstants.PREFS_ACCOUNT_INITIALIZED);
+			if (isInitialized)
+				return App.Account.Locale;
+		}
+
+		// Detect from current UI culture
+		string uiLocale = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+		return uiLocale == "de" ? "de" : "en";
 	}
 
 	private Border CreateLanguageTile(LanguageEntry lang, bool isSelected)

@@ -39,7 +39,7 @@ public static class MobileConstants
 	public const string YEARS_DISPLAY_NOT = "1,1604,1900,1904";
 	#endregion
 
-	#region Debug, Errors and Sentry
+	#region Errors and Sentry
 	public const string SENTRY_DSN = "https://a7322c361a63c2577a1afa16efe302bb@o4510638147829760.ingest.de.sentry.io/4510638162116688";
 	public const int ERROR_MAX_OFFLINE_ENTRIES = 10;
 	#endregion

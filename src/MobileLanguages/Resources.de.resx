@@ -349,22 +349,22 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Aktuelle Zeitzone</value>
   </data>
   <data name="Settings_Timezone_Adjust" xml:space="preserve">
-    <value>Zeitzone anpassen</value>
+    <value>Zeitzone auswählen</value>
   </data>
   <data name="Settings_Language_Current" xml:space="preserve">
     <value>Aktuelle Sprache</value>
   </data>
   <data name="Settings_Language_Adjust" xml:space="preserve">
-    <value>Sprache anpassen</value>
+    <value>Sprache auswählen</value>
   </data>
   <data name="Language_Select_Header" xml:space="preserve">
-    <value>Sprache ändern</value>
+    <value>Sprache der App festlegen</value>
   </data>
   <data name="Language_Select_Current" xml:space="preserve">
     <value>Aktuelle</value>
   </data>
   <data name="Timezone_Select_Header" xml:space="preserve">
-    <value>Zeitzone ändern</value>
+    <value>Zeitzone der App festlegen</value>
   </data>
   <data name="Timezone_Select_Current" xml:space="preserve">
     <value>Aktuelle</value>
@@ -652,7 +652,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Jetzt bitte Berechtigung für dieses Telefon erteilen</value>
   </data>
   <data name="Permission_StartDialog" xml:space="preserve">
-    <value>Dialog starten</value>
+    <value>Berechtigung erteilen</value>
   </data>
   <data name="Permission_Result" xml:space="preserve">
     <value>Ergebnis</value>
@@ -661,10 +661,10 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Warte auf Berechtigung...</value>
   </data>
   <data name="Permission_Granted" xml:space="preserve">
-    <value>Berechtigung erteilt</value>
+    <value>Danke, war erfolgreich</value>
   </data>
   <data name="Permission_Denied" xml:space="preserve">
-    <value>Berechtigung nicht erteilt, auch ok</value>
+    <value>Ok, auch gut</value>
   </data>
   <data name="Permission_DeniedInfo" xml:space="preserve">
     <value>Die Berechtigung wurde bereits abgelehnt. Der Dialog kann nicht erneut angezeigt werden. Bitte gehe in die Einstellungen deines Geräts, um die Berechtigung manuell zu erteilen.</value>
