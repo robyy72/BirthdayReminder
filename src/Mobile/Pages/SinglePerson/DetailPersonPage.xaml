@@ -18,7 +18,7 @@
 
         <!-- Content with gold background -->
         <ScrollView Grid.Row="1"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <Grid RowDefinitions="*,Auto" Padding="30">
                 <!-- Content -->
                 <VerticalStackLayout Grid.Row="0" Spacing="20" VerticalOptions="Center">

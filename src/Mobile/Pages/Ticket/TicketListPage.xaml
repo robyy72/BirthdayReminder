@@ -20,7 +20,7 @@
         <!-- Filter Row -->
         <Grid Grid.Row="1"
               Padding="20,15"
-              BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+              BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <Border Style="{StaticResource TileOuterForPicker}">
                 <Border Style="{StaticResource TileInnerForPicker}">
                     <Picker x:Name="FilterPicker"
