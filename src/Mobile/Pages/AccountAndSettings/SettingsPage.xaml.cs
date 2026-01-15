@@ -34,10 +34,12 @@ public partial class SettingsPage : ContentPage
 		else
 			RadioLight.IsChecked = true;
 
-		if (account.Locale == "en")
-			RadioEn.IsChecked = true;
+		UpdateLanguageLabel();
+
+		if (account.PersonNameDirection == Common.PersonNameDirection.FirstLastName)
+			RadioFirstLastName.IsChecked = true;
 		else
-			RadioDe.IsChecked = true;
+			RadioFirstFirstName.IsChecked = true;
 
 		if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
 			RadioContactsNone.IsChecked = true;
@@ -53,8 +55,30 @@ public partial class SettingsPage : ContentPage
 		}
 
 		// Timezone
-		TimezonePicker.ItemsSource = TimezoneService.GetDisplayNames();
-		TimezonePicker.SelectedIndex = TimezoneService.GetIndex(account.TimeZoneId);
+		UpdateTimezoneLabel();
+	}
+
+	private void UpdateTimezoneLabel()
+	{
+		var displayNames = TimezoneService.GetDisplayNames();
+		int index = TimezoneService.GetIndex(App.Account.TimeZoneId);
+		if (index >= 0 && index < displayNames.Count)
+		{
+			CurrentTimezoneLabel.Text = displayNames[index];
+		}
+	}
+
+	private void UpdateLanguageLabel()
+	{
+		string locale = App.Account.Locale ?? "de";
+		CurrentLanguageLabel.Text = locale == "de" ? "Deutsch" : "English";
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		UpdateLanguageLabel();
+		UpdateTimezoneLabel();
 	}
 	#endregion
 
@@ -160,22 +184,25 @@ public partial class SettingsPage : ContentPage
 	#endregion
 
 	#region Language
-	private void OnLocaleRadioChanged(object? sender, CheckedChangedEventArgs e)
+	private void OnLanguageAdjustClicked(object? sender, EventArgs e)
+	{
+		App.BackwardPageType = typeof(SettingsPage);
+		App.SetRootPage(new SelectLanguagePage());
+	}
+	#endregion
+
+	#region Name Direction
+	private void OnNameDirectionRadioChanged(object? sender, CheckedChangedEventArgs e)
 	{
 		if (!e.Value || _isLoading)
 			return;
 
-		string locale = sender == RadioEn ? "en" : "de";
-		App.Account.Locale = locale;
+		if (sender == RadioFirstLastName)
+			App.Account.PersonNameDirection = Common.PersonNameDirection.FirstLastName;
+		else
+			App.Account.PersonNameDirection = Common.PersonNameDirection.FirstFirstName;
+
 		AccountService.Save();
-
-		var culture = new System.Globalization.CultureInfo(locale);
-		System.Globalization.CultureInfo.CurrentCulture = culture;
-		System.Globalization.CultureInfo.CurrentUICulture = culture;
-		MobileLanguages.Resources.Culture = culture;
-
-		// Reload page to apply new language
-		App.SetRootPage(new SettingsPage());
 	}
 	#endregion
 
@@ -362,21 +389,10 @@ public partial class SettingsPage : ContentPage
 	#endregion
 
 	#region Timezone
-	private void OnTimezoneChanged(object? sender, EventArgs e)
+	private void OnTimezoneAdjustClicked(object? sender, EventArgs e)
 	{
-		if (_isLoading)
-			return;
-
-		App.Account.TimeZoneId = TimezoneService.GetIdByIndex(TimezonePicker.SelectedIndex);
-		AccountService.Save();
-	}
-
-	private async void OnTimezoneInfoTapped(object? sender, EventArgs e)
-	{
-		var browserPage = new BrowserPage(
-			MobileConstants.URL_TIMEZONE_INFO,
-			MobileLanguages.Resources.Timezone_MoreInfo);
-		await Navigation.PushModalAsync(browserPage);
+		App.BackwardPageType = typeof(SettingsPage);
+		App.SetRootPage(new SelectTimezonePage());
 	}
 	#endregion
 

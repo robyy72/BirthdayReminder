@@ -423,6 +423,18 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Settings_Timezone_Hint" xml:space="preserve">
     <value>Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time.</value>
   </data>
+  <data name="Settings_Timezone_Current" xml:space="preserve">
+    <value>Current Timezone</value>
+  </data>
+  <data name="Settings_Timezone_Adjust" xml:space="preserve">
+    <value>Adjust Timezone</value>
+  </data>
+  <data name="Settings_Language_Current" xml:space="preserve">
+    <value>Current Language</value>
+  </data>
+  <data name="Settings_Language_Adjust" xml:space="preserve">
+    <value>Adjust Language</value>
+  </data>
   <data name="Date_Day" xml:space="preserve">
     <value>Day</value>
   </data>
@@ -1348,6 +1360,102 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
     <value>Auckland</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Midway" xml:space="preserve">
+    <value>Midway, Samoa</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Honolulu" xml:space="preserve">
+    <value>Honolulu, Hawaii</value>
+  </data>
+  <data name="Tz_Cities_America_Anchorage" xml:space="preserve">
+    <value>Anchorage, Juneau, Fairbanks</value>
+  </data>
+  <data name="Tz_Cities_America_Vancouver" xml:space="preserve">
+    <value>Vancouver, Seattle, Portland, Los Angeles</value>
+  </data>
+  <data name="Tz_Cities_America_Denver" xml:space="preserve">
+    <value>Denver, Phoenix, Salt Lake City</value>
+  </data>
+  <data name="Tz_Cities_America_Chicago" xml:space="preserve">
+    <value>Chicago, Houston, Dallas, Mexico City</value>
+  </data>
+  <data name="Tz_Cities_America_NewYork" xml:space="preserve">
+    <value>New York, Toronto, Miami, Washington</value>
+  </data>
+  <data name="Tz_Cities_America_Lima" xml:space="preserve">
+    <value>Lima, Bogota, Quito</value>
+  </data>
+  <data name="Tz_Cities_America_Halifax" xml:space="preserve">
+    <value>Halifax, Caracas, La Paz</value>
+  </data>
+  <data name="Tz_Cities_America_Santiago" xml:space="preserve">
+    <value>Santiago, Asuncion</value>
+  </data>
+  <data name="Tz_Cities_America_SaoPaulo" xml:space="preserve">
+    <value>Sao Paulo, Rio de Janeiro, Brasilia</value>
+  </data>
+  <data name="Tz_Cities_America_Argentina_BuenosAires" xml:space="preserve">
+    <value>Buenos Aires, Montevideo</value>
+  </data>
+  <data name="Tz_Cities_Atlantic_Azores" xml:space="preserve">
+    <value>Azores, Cape Verde</value>
+  </data>
+  <data name="Tz_Cities_Europe_London" xml:space="preserve">
+    <value>London, Dublin, Lisbon</value>
+  </data>
+  <data name="Tz_Cities_Europe_Berlin" xml:space="preserve">
+    <value>Berlin, Paris, Rome, Madrid, Vienna</value>
+  </data>
+  <data name="Tz_Cities_Europe_Athens" xml:space="preserve">
+    <value>Athens, Helsinki, Bucharest, Istanbul</value>
+  </data>
+  <data name="Tz_Cities_Europe_Moscow" xml:space="preserve">
+    <value>Moscow, St. Petersburg, Minsk</value>
+  </data>
+  <data name="Tz_Cities_Asia_Tehran" xml:space="preserve">
+    <value>Tehran</value>
+  </data>
+  <data name="Tz_Cities_Asia_Dubai" xml:space="preserve">
+    <value>Dubai, Abu Dhabi, Muscat</value>
+  </data>
+  <data name="Tz_Cities_Asia_Kabul" xml:space="preserve">
+    <value>Kabul</value>
+  </data>
+  <data name="Tz_Cities_Asia_Karachi" xml:space="preserve">
+    <value>Karachi, Islamabad, Tashkent</value>
+  </data>
+  <data name="Tz_Cities_Asia_Kolkata" xml:space="preserve">
+    <value>Mumbai, New Delhi, Kolkata, Chennai</value>
+  </data>
+  <data name="Tz_Cities_Asia_Dhaka" xml:space="preserve">
+    <value>Dhaka, Almaty</value>
+  </data>
+  <data name="Tz_Cities_Asia_Bangkok" xml:space="preserve">
+    <value>Bangkok, Jakarta, Hanoi</value>
+  </data>
+  <data name="Tz_Cities_Asia_HongKong" xml:space="preserve">
+    <value>Hong Kong, Beijing, Shanghai, Taipei</value>
+  </data>
+  <data name="Tz_Cities_Asia_Singapore" xml:space="preserve">
+    <value>Singapore, Kuala Lumpur, Perth</value>
+  </data>
+  <data name="Tz_Cities_Asia_Seoul" xml:space="preserve">
+    <value>Seoul, Pyongyang</value>
+  </data>
+  <data name="Tz_Cities_Asia_Tokyo" xml:space="preserve">
+    <value>Tokyo, Osaka, Sapporo</value>
+  </data>
+  <data name="Tz_Cities_Australia_Adelaide" xml:space="preserve">
+    <value>Adelaide, Darwin</value>
+  </data>
+  <data name="Tz_Cities_Australia_Sydney" xml:space="preserve">
+    <value>Sydney, Melbourne, Brisbane</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Noumea" xml:space="preserve">
+    <value>Noumea, Solomon Islands</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Auckland" xml:space="preserve">
+    <value>Auckland, Wellington, Fiji</value>
   </data>
   <data name="Tz_Region_Europe" xml:space="preserve">
     <value>Europe</value>

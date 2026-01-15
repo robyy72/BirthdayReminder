@@ -2501,6 +2501,24 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adjust Language.
+        /// </summary>
+        public static string Settings_Language_Adjust {
+            get {
+                return ResourceManager.GetString("Settings_Language_Adjust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Language.
+        /// </summary>
+        public static string Settings_Language_Current {
+            get {
+                return ResourceManager.GetString("Settings_Language_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name order.
         /// </summary>
         public static string Settings_NameDirection {
@@ -2704,6 +2722,24 @@ namespace MobileLanguages {
         public static string Settings_Timezone {
             get {
                 return ResourceManager.GetString("Settings_Timezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust Timezone.
+        /// </summary>
+        public static string Settings_Timezone_Adjust {
+            get {
+                return ResourceManager.GetString("Settings_Timezone_Adjust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Timezone.
+        /// </summary>
+        public static string Settings_Timezone_Current {
+            get {
+                return ResourceManager.GetString("Settings_Timezone_Current", resourceCulture);
             }
         }
         
@@ -3721,6 +3757,294 @@ namespace MobileLanguages {
         public static string Tz_Australia_Sydney {
             get {
                 return ResourceManager.GetString("Tz_Australia_Sydney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anchorage, Juneau, Fairbanks.
+        /// </summary>
+        public static string Tz_Cities_America_Anchorage {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Anchorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buenos Aires, Montevideo.
+        /// </summary>
+        public static string Tz_Cities_America_Argentina_BuenosAires {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Argentina_BuenosAires", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chicago, Houston, Dallas, Mexico City.
+        /// </summary>
+        public static string Tz_Cities_America_Chicago {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Chicago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Denver, Phoenix, Salt Lake City.
+        /// </summary>
+        public static string Tz_Cities_America_Denver {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Denver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Halifax, Caracas, La Paz.
+        /// </summary>
+        public static string Tz_Cities_America_Halifax {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Halifax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lima, Bogota, Quito.
+        /// </summary>
+        public static string Tz_Cities_America_Lima {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Lima", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New York, Toronto, Miami, Washington.
+        /// </summary>
+        public static string Tz_Cities_America_NewYork {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_NewYork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Santiago, Asuncion.
+        /// </summary>
+        public static string Tz_Cities_America_Santiago {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Santiago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sao Paulo, Rio de Janeiro, Brasilia.
+        /// </summary>
+        public static string Tz_Cities_America_SaoPaulo {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_SaoPaulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vancouver, Seattle, Portland, Los Angeles.
+        /// </summary>
+        public static string Tz_Cities_America_Vancouver {
+            get {
+                return ResourceManager.GetString("Tz_Cities_America_Vancouver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bangkok, Jakarta, Hanoi.
+        /// </summary>
+        public static string Tz_Cities_Asia_Bangkok {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Bangkok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dhaka, Almaty.
+        /// </summary>
+        public static string Tz_Cities_Asia_Dhaka {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Dhaka", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dubai, Abu Dhabi, Muscat.
+        /// </summary>
+        public static string Tz_Cities_Asia_Dubai {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Dubai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hong Kong, Beijing, Shanghai, Taipei.
+        /// </summary>
+        public static string Tz_Cities_Asia_HongKong {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_HongKong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kabul.
+        /// </summary>
+        public static string Tz_Cities_Asia_Kabul {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Kabul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Karachi, Islamabad, Tashkent.
+        /// </summary>
+        public static string Tz_Cities_Asia_Karachi {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Karachi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mumbai, New Delhi, Kolkata, Chennai.
+        /// </summary>
+        public static string Tz_Cities_Asia_Kolkata {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Kolkata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seoul, Pyongyang.
+        /// </summary>
+        public static string Tz_Cities_Asia_Seoul {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Seoul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Singapore, Kuala Lumpur, Perth.
+        /// </summary>
+        public static string Tz_Cities_Asia_Singapore {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Singapore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tehran.
+        /// </summary>
+        public static string Tz_Cities_Asia_Tehran {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Tehran", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tokyo, Osaka, Sapporo.
+        /// </summary>
+        public static string Tz_Cities_Asia_Tokyo {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Asia_Tokyo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Azores, Cape Verde.
+        /// </summary>
+        public static string Tz_Cities_Atlantic_Azores {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Atlantic_Azores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adelaide, Darwin.
+        /// </summary>
+        public static string Tz_Cities_Australia_Adelaide {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Australia_Adelaide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sydney, Melbourne, Brisbane.
+        /// </summary>
+        public static string Tz_Cities_Australia_Sydney {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Australia_Sydney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Athens, Helsinki, Bucharest, Istanbul.
+        /// </summary>
+        public static string Tz_Cities_Europe_Athens {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Europe_Athens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berlin, Paris, Rome, Madrid, Vienna.
+        /// </summary>
+        public static string Tz_Cities_Europe_Berlin {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Europe_Berlin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to London, Dublin, Lisbon.
+        /// </summary>
+        public static string Tz_Cities_Europe_London {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Europe_London", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moscow, St. Petersburg, Minsk.
+        /// </summary>
+        public static string Tz_Cities_Europe_Moscow {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Europe_Moscow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auckland, Wellington, Fiji.
+        /// </summary>
+        public static string Tz_Cities_Pacific_Auckland {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Pacific_Auckland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Honolulu, Hawaii.
+        /// </summary>
+        public static string Tz_Cities_Pacific_Honolulu {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Pacific_Honolulu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Midway, Samoa.
+        /// </summary>
+        public static string Tz_Cities_Pacific_Midway {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Pacific_Midway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noumea, Solomon Islands.
+        /// </summary>
+        public static string Tz_Cities_Pacific_Noumea {
+            get {
+                return ResourceManager.GetString("Tz_Cities_Pacific_Noumea", resourceCulture);
             }
         }
         

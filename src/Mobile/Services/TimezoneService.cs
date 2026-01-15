@@ -96,10 +96,13 @@ public static class TimezoneService
 		var tz = TimeZoneInfo.FindSystemTimeZoneById(json.Id);
 		var offset = tz.GetUtcOffset(DateTime.Now);
 		var city = GetLocalizedCity(json.Id);
+		var cities = GetLocalizedCities(json.Id) ?? city;
 		var entry = new TimezoneEntry
 		{
 			Id = json.Id,
 			DisplayName = $"{json.Region} ({FormatOffset(offset)}h) | {city}",
+			RegionWithOffset = $"{json.Region} (UTC{FormatOffset(offset)})",
+			Cities = cities,
 			Offset = offset
 		};
 		return entry;
@@ -113,6 +116,15 @@ public static class TimezoneService
 		var resourceKey = $"Tz_{region}_{city}";
 		var localizedCity = Resources.ResourceManager.GetString(resourceKey);
 		return localizedCity ?? city;
+	}
+
+	private static string? GetLocalizedCities(string timezoneId)
+	{
+		var parts = timezoneId.Split('/');
+		var region = parts[0];
+		var city = parts.Length > 1 ? parts[^1].Replace("_", "") : "";
+		var resourceKey = $"Tz_Cities_{region}_{city}";
+		return Resources.ResourceManager.GetString(resourceKey);
 	}
 
 	private static int FindClosestIndex(string timezoneId)
@@ -162,5 +174,7 @@ public class TimezoneEntry
 {
 	public string Id { get; set; } = string.Empty;
 	public string DisplayName { get; set; } = string.Empty;
+	public string RegionWithOffset { get; set; } = string.Empty;
+	public string Cities { get; set; } = string.Empty;
 	public TimeSpan Offset { get; set; }
 }

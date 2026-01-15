@@ -69,6 +69,30 @@
                                 </Border>
                             </Grid>
                             <BoxView HeightRequest="1" Margin="0,10,0,0" />
+                            <VerticalStackLayout Spacing="10" RadioButtonGroup.GroupName="NameDirectionGroup">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="{x:Static resx:Resources.NameDirection_FirstFirstName}"
+                                           Style="{StaticResource LabelInfoOnCard}"
+                                           VerticalOptions="Center" />
+                                    <RadioButton x:Name="RadioFirstFirstName"
+                                                 Grid.Column="1"
+                                                 Value="FirstFirstName"
+                                                 Style="{StaticResource RadioStandard}"
+                                                 CheckedChanged="OnNameDirectionRadioChanged" />
+                                </Grid>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="{x:Static resx:Resources.NameDirection_FirstLastName}"
+                                           Style="{StaticResource LabelInfoOnCard}"
+                                           VerticalOptions="Center" />
+                                    <RadioButton x:Name="RadioFirstLastName"
+                                                 Grid.Column="1"
+                                                 Value="FirstLastName"
+                                                 Style="{StaticResource RadioStandard}"
+                                                 CheckedChanged="OnNameDirectionRadioChanged" />
+                                </Grid>
+                            </VerticalStackLayout>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -135,30 +159,12 @@
                                 <TapGestureRecognizer Tapped="OnAccordion3Tapped" />
                             </Border.GestureRecognizers>
                         </Border>
-                        <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="10" IsVisible="False"
-                                             RadioButtonGroup.GroupName="LocaleGroup">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="Deutsch"
-                                       Style="{StaticResource LabelInfoOnCard}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioDe"
-                                             Grid.Column="1"
-                                             Value="de"
-                                             Style="{StaticResource RadioStandard}"
-                                             CheckedChanged="OnLocaleRadioChanged" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="English"
-                                       Style="{StaticResource LabelInfoOnCard}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioEn"
-                                             Grid.Column="1"
-                                             Value="en"
-                                             Style="{StaticResource RadioStandard}"
-                                             CheckedChanged="OnLocaleRadioChanged" />
-                            </Grid>
+                        <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="15" IsVisible="False">
+                            <Label x:Name="CurrentLanguageLabel"
+                                   Style="{StaticResource LabelInfoOnCard}" />
+                            <Button Text="{x:Static resx:Resources.Settings_Language_Adjust}"
+                                    Style="{StaticResource ButtonSecondary}"
+                                    Clicked="OnLanguageAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -270,23 +276,14 @@
                             </Border.GestureRecognizers>
                         </Border>
                         <VerticalStackLayout x:Name="Accordion6Content" Padding="20" Spacing="15" IsVisible="False">
-                            <Border Style="{StaticResource TileOuterForPicker}">
-                                <Border Style="{StaticResource TileInnerForPicker}">
-                                    <Picker x:Name="TimezonePicker"
-                                            Style="{StaticResource PickerFilter}"
-                                            SelectedIndexChanged="OnTimezoneChanged" />
-                                </Border>
-                            </Border>
+                            <Label x:Name="CurrentTimezoneLabel"
+                                   Style="{StaticResource LabelInfoOnCard}" />
                             <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
                                    Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />
-                            <Label Text="{x:Static resx:Resources.More_Informations}"
-                                   Style="{StaticResource LabelHelpLink}"
-                                   HorizontalOptions="End">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnTimezoneInfoTapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
+                            <Button Text="{x:Static resx:Resources.Settings_Timezone_Adjust}"
+                                    Style="{StaticResource ButtonSecondary}"
+                                    Clicked="OnTimezoneAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
