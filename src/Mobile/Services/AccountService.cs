@@ -31,10 +31,6 @@ public static class AccountService
 
 	public static bool IsFirstRun()
 	{
-		bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
-		if (startAlwaysWithWelcome)
-			return true;
-
 		bool hasCompletedFirstRun = PrefsHelper.GetValue<bool>(MobileConstants.PREFS_ACCOUNT_FIRST_RUN_COMPLETED);
 		return !hasCompletedFirstRun;
 	}

@@ -1106,6 +1106,24 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Language.
+        /// </summary>
+        public static string Language_Select_Current {
+            get {
+                return ResourceManager.GetString("Language_Select_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Language.
+        /// </summary>
+        public static string Language_Select_Header {
+            get {
+                return ResourceManager.GetString("Language_Select_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
         public static string Month_April {
@@ -3505,6 +3523,24 @@ namespace MobileLanguages {
         public static string Timezone_SAST {
             get {
                 return ResourceManager.GetString("Timezone_SAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Timezone.
+        /// </summary>
+        public static string Timezone_Select_Current {
+            get {
+                return ResourceManager.GetString("Timezone_Select_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Timezone.
+        /// </summary>
+        public static string Timezone_Select_Header {
+            get {
+                return ResourceManager.GetString("Timezone_Select_Header", resourceCulture);
             }
         }
         

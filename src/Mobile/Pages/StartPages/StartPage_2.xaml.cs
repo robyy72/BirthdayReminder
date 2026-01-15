@@ -40,7 +40,9 @@ public partial class StartPage_2 : ContentPage
 	private void UpdateLanguageLabel()
 	{
 		string locale = GetEffectiveLocale();
-		CurrentLanguageLabel.Text = locale == "de" ? "Deutsch" : "English";
+		string langName = locale == "de" ? "Deutsch" : "English";
+		string prefix = MobileLanguages.Resources.Language_Select_Current;
+		CurrentLanguageLabel.Text = $"{prefix}: {langName}";
 	}
 
 	private void UpdateTimezoneLabel()
@@ -49,7 +51,8 @@ public partial class StartPage_2 : ContentPage
 		int index = TimezoneService.GetIndex(App.Account.TimeZoneId);
 		if (index >= 0 && index < displayNames.Count)
 		{
-			CurrentTimezoneLabel.Text = displayNames[index];
+			string prefix = MobileLanguages.Resources.Timezone_Select_Current;
+			CurrentTimezoneLabel.Text = $"{prefix}: {displayNames[index]}";
 		}
 	}
 

@@ -5,13 +5,13 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.SelectTimezonePage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Settings_Timezone}">
+             Title="{x:Static resx:Resources.Timezone_Select_Header}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader x:Name="TheHeader"
                                Grid.Row="0"
-                               Title="{x:Static resx:Resources.Settings_Timezone}"
+                               Title="{x:Static resx:Resources.Timezone_Select_Header}"
                                ShowMenuButton="False"
                                ShowBackButton="True" />
 

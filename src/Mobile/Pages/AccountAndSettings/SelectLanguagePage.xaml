@@ -5,13 +5,13 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.SelectLanguagePage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Settings_Language}">
+             Title="{x:Static resx:Resources.Language_Select_Header}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Custom Header -->
         <controls:CustomHeader x:Name="TheHeader"
                                Grid.Row="0"
-                               Title="{x:Static resx:Resources.Settings_Language}"
+                               Title="{x:Static resx:Resources.Language_Select_Header}"
                                ShowMenuButton="False"
                                ShowBackButton="True" />
 

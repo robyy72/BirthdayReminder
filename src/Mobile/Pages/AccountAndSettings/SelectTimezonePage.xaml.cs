@@ -72,15 +72,13 @@ public partial class SelectTimezonePage : ContentPage
 		var regionLabel = new Label
 		{
 			Text = tz.RegionWithOffset,
-			Style = (Style)Application.Current!.Resources["LabelInfoOnCard"],
-			FontAttributes = FontAttributes.Bold
+			Style = (Style)Application.Current!.Resources["LabelHeader"]
 		};
 
 		var citiesLabel = new Label
 		{
 			Text = tz.Cities,
-			Style = (Style)Application.Current!.Resources["LabelInfoOnCard"],
-			TextColor = (Color)Application.Current!.Resources["Gray500"]
+			Style = (Style)Application.Current!.Resources["LabelInfoOnCard"]
 		};
 
 		textStack.Children.Add(regionLabel);

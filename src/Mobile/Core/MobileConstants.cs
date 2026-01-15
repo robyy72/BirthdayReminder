@@ -40,7 +40,6 @@ public static class MobileConstants
 	#endregion
 
 	#region Debug, Errors and Sentry
-	public const bool START_ALWAYS_WITH_WELCOME = true;
 	public const string SENTRY_DSN = "https://a7322c361a63c2577a1afa16efe302bb@o4510638147829760.ingest.de.sentry.io/4510638162116688";
 	public const int ERROR_MAX_OFFLINE_ENTRIES = 10;
 	#endregion

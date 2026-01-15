@@ -27,14 +27,14 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Language_Current}"
+                            <Label Text="{x:Static resx:Resources.Language_Select_Header}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="CurrentLanguageLabel"
                                    Style="{StaticResource LabelInfoOnCard}" />
                             <Button Text="{x:Static resx:Resources.Settings_Language_Adjust}"
-                                    Style="{StaticResource ButtonSecondary}"
+                                    Style="{StaticResource ButtonGreen}"
                                     Clicked="OnLanguageAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -77,15 +77,12 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Timezone_Current}"
+                            <Label Text="{x:Static resx:Resources.Timezone_Select_Header}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <Label x:Name="CurrentTimezoneLabel"
                                    Style="{StaticResource LabelInfoOnCard}" />
-                            <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
-                                   Style="{StaticResource LabelInfoOnCard}"
-                                   TextColor="{StaticResource Gray500}" />
                             <Button Text="{x:Static resx:Resources.Settings_Timezone_Adjust}"
                                     Style="{StaticResource ButtonSecondary}"
                                     Clicked="OnTimezoneAdjustClicked" />

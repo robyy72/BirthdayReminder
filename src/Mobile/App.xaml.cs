@@ -259,10 +259,6 @@ public partial class App : Application
     /// </summary>
     private void InitSync()
     {
-        bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
-        if (startAlwaysWithWelcome)
-            PrefsHelper.RemoveAllKeys();
-
         PersonService.Load();
         AccountService.Load();
         TicketService.LoadEntries();

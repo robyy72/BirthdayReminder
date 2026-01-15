@@ -357,6 +357,18 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Settings_Language_Adjust" xml:space="preserve">
     <value>Sprache anpassen</value>
   </data>
+  <data name="Language_Select_Header" xml:space="preserve">
+    <value>Sprache ändern</value>
+  </data>
+  <data name="Language_Select_Current" xml:space="preserve">
+    <value>Aktuelle Sprache</value>
+  </data>
+  <data name="Timezone_Select_Header" xml:space="preserve">
+    <value>Zeitzone ändern</value>
+  </data>
+  <data name="Timezone_Select_Current" xml:space="preserve">
+    <value>Aktuelle Zeitzone</value>
+  </data>
   <data name="Date_Day" xml:space="preserve">
     <value>Tag</value>
   </data>

@@ -435,6 +435,18 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Settings_Language_Adjust" xml:space="preserve">
     <value>Adjust Language</value>
   </data>
+  <data name="Language_Select_Header" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
+  <data name="Language_Select_Current" xml:space="preserve">
+    <value>Current Language</value>
+  </data>
+  <data name="Timezone_Select_Header" xml:space="preserve">
+    <value>Select Timezone</value>
+  </data>
+  <data name="Timezone_Select_Current" xml:space="preserve">
+    <value>Current Timezone</value>
+  </data>
   <data name="Date_Day" xml:space="preserve">
     <value>Day</value>
   </data>

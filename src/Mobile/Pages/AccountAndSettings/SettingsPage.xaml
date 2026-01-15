@@ -148,7 +148,7 @@
                         <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_Language}"
+                                       Text="{x:Static resx:Resources.Language_Select_Header}"
                                        Style="{StaticResource LabelCardHeader}" />
                                 <Label x:Name="Accordion3Arrow"
                                        Grid.Column="1"
@@ -264,7 +264,7 @@
                         <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_Timezone}"
+                                       Text="{x:Static resx:Resources.Timezone_Select_Header}"
                                        Style="{StaticResource LabelCardHeader}" />
                                 <Label x:Name="Accordion6Arrow"
                                        Grid.Column="1"
