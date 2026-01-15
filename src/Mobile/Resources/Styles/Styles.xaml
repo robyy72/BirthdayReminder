@@ -337,8 +337,12 @@
         <Setter Property="Stroke" Value="Transparent" />
     </Style>
 
+    <Style TargetType="Border" x:Key="AccordionHeader" BasedOn="{StaticResource CardHeader}">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray700}}" />
+    </Style>
+
     <Style TargetType="Border" x:Key="Accordion">
-        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Stroke" Value="Transparent" />

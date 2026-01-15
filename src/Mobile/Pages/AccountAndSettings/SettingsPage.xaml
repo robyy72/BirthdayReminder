@@ -23,7 +23,7 @@
                 <!-- Accordion 1: Display -->
                 <Border x:Name="Accordion1" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Display}"
@@ -68,24 +68,7 @@
                                     </Border>
                                 </Border>
                             </Grid>
-                            <!-- Name Direction -->
-                            <Label Text="{x:Static resx:Resources.Settings_NameDirection}"
-                                   Style="{StaticResource LabelDescriptionOnCard}"
-                                   Margin="0,10,0,0" />
-                            <VerticalStackLayout RadioButtonGroup.GroupName="NameDirectionGroup" Spacing="5">
-                                <RadioButton Value="FirstFirstName" x:Name="RadioFirstFirstName" CheckedChanged="OnNameDirectionRadioChanged">
-                                    <RadioButton.Content>
-                                        <Label Text="{x:Static resx:Resources.NameDirection_FirstFirstName}"
-                                               Style="{StaticResource LabelInfoOnCard}" />
-                                    </RadioButton.Content>
-                                </RadioButton>
-                                <RadioButton Value="FirstLastName" x:Name="RadioFirstLastName" CheckedChanged="OnNameDirectionRadioChanged">
-                                    <RadioButton.Content>
-                                        <Label Text="{x:Static resx:Resources.NameDirection_FirstLastName}"
-                                               Style="{StaticResource LabelInfoOnCard}" />
-                                    </RadioButton.Content>
-                                </RadioButton>
-                            </VerticalStackLayout>
+                            <BoxView HeightRequest="1" Margin="0,10,0,0" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -93,7 +76,7 @@
                 <!-- Accordion 2: Theme -->
                 <Border x:Name="Accordion2" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Theme}"
@@ -109,18 +92,28 @@
                         </Border>
                         <VerticalStackLayout x:Name="Accordion2Content" Padding="20" Spacing="10" IsVisible="False"
                                              RadioButtonGroup.GroupName="ThemeGroup">
-                            <RadioButton Value="Light" x:Name="RadioLight" CheckedChanged="OnThemeRadioChanged">
-                                <RadioButton.Content>
-                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Light}"
-                                           Style="{StaticResource LabelInfoOnCard}" />
-                                </RadioButton.Content>
-                            </RadioButton>
-                            <RadioButton Value="Dark" x:Name="RadioDark" CheckedChanged="OnThemeRadioChanged">
-                                <RadioButton.Content>
-                                    <Label Text="{x:Static resx:Resources.Settings_Theme_Dark}"
-                                           Style="{StaticResource LabelInfoOnCard}" />
-                                </RadioButton.Content>
-                            </RadioButton>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Theme_Light}"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioLight"
+                                             Grid.Column="1"
+                                             Value="Light"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnThemeRadioChanged" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="{x:Static resx:Resources.Settings_Theme_Dark}"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioDark"
+                                             Grid.Column="1"
+                                             Value="Dark"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnThemeRadioChanged" />
+                            </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -128,7 +121,7 @@
                 <!-- Accordion 3: Language -->
                 <Border x:Name="Accordion3" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Language}"
@@ -144,18 +137,28 @@
                         </Border>
                         <VerticalStackLayout x:Name="Accordion3Content" Padding="20" Spacing="10" IsVisible="False"
                                              RadioButtonGroup.GroupName="LocaleGroup">
-                            <RadioButton Value="de" x:Name="RadioDe" CheckedChanged="OnLocaleRadioChanged">
-                                <RadioButton.Content>
-                                    <Label Text="Deutsch"
-                                           Style="{StaticResource LabelInfoOnCard}" />
-                                </RadioButton.Content>
-                            </RadioButton>
-                            <RadioButton Value="en" x:Name="RadioEn" CheckedChanged="OnLocaleRadioChanged">
-                                <RadioButton.Content>
-                                    <Label Text="English"
-                                           Style="{StaticResource LabelInfoOnCard}" />
-                                </RadioButton.Content>
-                            </RadioButton>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="Deutsch"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioDe"
+                                             Grid.Column="1"
+                                             Value="de"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnLocaleRadioChanged" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0"
+                                       Text="English"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       VerticalOptions="Center" />
+                                <RadioButton x:Name="RadioEn"
+                                             Grid.Column="1"
+                                             Value="en"
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnLocaleRadioChanged" />
+                            </Grid>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -163,7 +166,7 @@
                 <!-- Accordion 4: Contacts -->
                 <Border x:Name="Accordion4" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Contacts}"
@@ -179,22 +182,27 @@
                         </Border>
                         <VerticalStackLayout x:Name="Accordion4Content" Padding="20" Spacing="10" IsVisible="False"
                                              RadioButtonGroup.GroupName="ContactsGroup">
+                            <Label Text="{x:Static resx:Resources.Start2_Text_1}"
+                                   Style="{StaticResource LabelInfoOnCard}" />
+                            <Label Text="{x:Static resx:Resources.Start2_Text_2}"
+                                   Style="{StaticResource LabelInfoOnCard}" />
+                            <BoxView HeightRequest="1" Margin="0,5" />
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ContactsRead}"
+                                       Text="{x:Static resx:Resources.Start2_NoContacts}"
                                        Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioContactsRead"
+                                <RadioButton x:Name="RadioContactsNone"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
                                              CheckedChanged="OnContactsRadioChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
-                                       Text="{x:Static resx:Resources.Settings_ContactsNone}"
+                                       Text="{x:Static resx:Resources.Settings_ContactsRead}"
                                        Style="{StaticResource LabelInfoOnCard}"
                                        VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioContactsNone"
+                                <RadioButton x:Name="RadioContactsRead"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
                                              CheckedChanged="OnContactsRadioChanged" />
@@ -206,7 +214,7 @@
                 <!-- Accordion 5: Calendars -->
                 <Border x:Name="Accordion5" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Settings_Calendars}"

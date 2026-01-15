@@ -34,12 +34,6 @@ public partial class SettingsPage : ContentPage
 		else
 			RadioLight.IsChecked = true;
 
-		// Name Direction
-		if (account.PersonNameDirection == PersonNameDirection.FirstLastName)
-			RadioFirstLastName.IsChecked = true;
-		else
-			RadioFirstFirstName.IsChecked = true;
-
 		if (account.Locale == "en")
 			RadioEn.IsChecked = true;
 		else
@@ -355,18 +349,6 @@ public partial class SettingsPage : ContentPage
 		}
 	}
 
-	private void OnNameDirectionRadioChanged(object? sender, CheckedChangedEventArgs e)
-	{
-		if (!e.Value || _isLoading)
-			return;
-
-		if (sender == RadioFirstLastName)
-			App.Account.PersonNameDirection = PersonNameDirection.FirstLastName;
-		else
-			App.Account.PersonNameDirection = PersonNameDirection.FirstFirstName;
-
-		AccountService.Save();
-	}
 	#endregion
 
 	#region Calendar Helpers
