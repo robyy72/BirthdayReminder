@@ -276,8 +276,13 @@
                             </Border.GestureRecognizers>
                         </Border>
                         <VerticalStackLayout x:Name="Accordion6Content" Padding="20" Spacing="15" IsVisible="False">
-                            <Label x:Name="CurrentTimezoneLabel"
-                                   Style="{StaticResource LabelInfoOnCard}" />
+                            <VerticalStackLayout Spacing="2">
+                                <Label x:Name="CurrentTimezoneLabel"
+                                       Style="{StaticResource LabelInfoOnCard}" />
+                                <Label x:Name="CurrentTimezoneCitiesLabel"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       TextColor="{StaticResource Gray500}" />
+                            </VerticalStackLayout>
                             <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
                                    Style="{StaticResource LabelInfoOnCard}"
                                    TextColor="{StaticResource Gray500}" />

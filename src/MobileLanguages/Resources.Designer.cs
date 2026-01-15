@@ -1106,7 +1106,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Language.
+        ///   Looks up a localized string similar to Current.
         /// </summary>
         public static string Language_Select_Current {
             get {
@@ -3527,7 +3527,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Timezone.
+        ///   Looks up a localized string similar to Current.
         /// </summary>
         public static string Timezone_Select_Current {
             get {

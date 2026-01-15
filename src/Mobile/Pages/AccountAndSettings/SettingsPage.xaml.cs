@@ -60,12 +60,14 @@ public partial class SettingsPage : ContentPage
 
 	private void UpdateTimezoneLabel()
 	{
-		var displayNames = TimezoneService.GetDisplayNames();
+		var timezones = TimezoneService.LoadTimezones();
 		int index = TimezoneService.GetIndex(App.Account.TimeZoneId);
-		if (index >= 0 && index < displayNames.Count)
+		if (index >= 0 && index < timezones.Count)
 		{
+			var tz = timezones[index];
 			string prefix = MobileLanguages.Resources.Timezone_Select_Current;
-			CurrentTimezoneLabel.Text = $"{prefix}: {displayNames[index]}";
+			CurrentTimezoneLabel.Text = $"{prefix}: {tz.RegionWithOffset}";
+			CurrentTimezoneCitiesLabel.Text = tz.Cities;
 		}
 	}
 
