@@ -1,12 +1,12 @@
 namespace Mobile;
 
-public partial class StartPage_9 : ContentPage
+public partial class StartPage_6 : ContentPage
 {
 	private List<CalendarInfo> _calendars = [];
 	private bool _isLoading = true;
 	private int _openAccordion = 0;
 
-	public StartPage_9()
+	public StartPage_6()
 	{
 		InitializeComponent();
 		LoadAccount();

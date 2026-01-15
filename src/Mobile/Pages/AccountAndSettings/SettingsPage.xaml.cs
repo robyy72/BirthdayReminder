@@ -174,8 +174,8 @@ public partial class SettingsPage : ContentPage
 		System.Globalization.CultureInfo.CurrentUICulture = culture;
 		MobileLanguages.Resources.Culture = culture;
 
-		// Reload app to apply new language
-		App.SetRootPage(App.CreateMainNavigationPage());
+		// Reload page to apply new language
+		App.SetRootPage(new SettingsPage());
 	}
 	#endregion
 

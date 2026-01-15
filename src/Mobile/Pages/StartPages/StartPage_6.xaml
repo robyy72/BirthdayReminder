@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:local="clr-namespace:Mobile"
-             x:Class="Mobile.StartPage_9"
-             x:DataType="local:StartPage_9"
+             x:Class="Mobile.StartPage_6"
+             x:DataType="local:StartPage_6"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">

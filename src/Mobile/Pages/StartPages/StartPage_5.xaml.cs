@@ -65,7 +65,7 @@ public partial class StartPage_5 : ContentPage
 		AccountService.Save();
 
 		if (newCount == 0)
-			App.SetRootPage(new StartPage_9());
+			App.SetRootPage(new StartPage_6());
 		else
 			App.SetRootPage(new ReminderPage(0));
 	}
