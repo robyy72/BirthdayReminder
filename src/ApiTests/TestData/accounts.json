@@ -1,0 +1,52 @@
+[
+  {
+    "email": "max.mustermann@example.com",
+    "phoneNumber": "+49151123456",
+    "store": 1
+  },
+  {
+    "email": "anna.schmidt@example.com",
+    "phoneNumber": "+49152234567",
+    "store": 2
+  },
+  {
+    "email": "peter.mueller@example.com",
+    "phoneNumber": "+49153345678",
+    "store": 1
+  },
+  {
+    "email": "maria.weber@example.com",
+    "phoneNumber": "+49154456789",
+    "store": 2
+  },
+  {
+    "email": "thomas.fischer@example.com",
+    "phoneNumber": "+49155567890",
+    "store": 1
+  },
+  {
+    "email": "sandra.meyer@example.com",
+    "phoneNumber": "+49156678901",
+    "store": 2
+  },
+  {
+    "email": "michael.wagner@example.com",
+    "phoneNumber": "+49157789012",
+    "store": 1
+  },
+  {
+    "email": "lisa.becker@example.com",
+    "phoneNumber": "+49158890123",
+    "store": 2
+  },
+  {
+    "email": "stefan.hoffmann@example.com",
+    "phoneNumber": "+49159901234",
+    "store": 1
+  },
+  {
+    "email": "julia.schulz@example.com",
+    "phoneNumber": "+49160012345",
+    "store": 2
+  }
+]
