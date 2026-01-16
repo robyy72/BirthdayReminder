@@ -3,29 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.FlyoutMenu"
-             IsVisible="False">
+             IsVisible="False"
+             HorizontalOptions="Fill"
+             VerticalOptions="Fill">
 
-    <Grid>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
         <!-- Semi-transparent overlay (tap to close, MainPage visible behind) -->
         <BoxView x:Name="Overlay"
-                 Color="#40000000"
-                 Opacity="0">
+                 Color="Black"
+                 Opacity="0"
+                 ZIndex="1">
             <BoxView.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnOverlayTapped" />
             </BoxView.GestureRecognizers>
         </BoxView>
 
-        <!-- Flyout Panel -->
-        <Border x:Name="FlyoutPanel"
-                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
-                StrokeThickness="0"
-                Padding="0"
-                HorizontalOptions="Start"
-                WidthRequest="250"
-                TranslationX="-250">
-            <Border.Shadow>
-                <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3" />
-            </Border.Shadow>
+        <!-- Flyout Panel - using Frame instead of Border for Android compatibility -->
+        <Frame x:Name="FlyoutPanel"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+               BorderColor="Transparent"
+               CornerRadius="0"
+               Padding="0"
+               HorizontalOptions="Start"
+               VerticalOptions="Fill"
+               WidthRequest="250"
+               ZIndex="2"
+               HasShadow="True"
+               TranslationX="-250">
 
             <Grid RowDefinitions="60,*,Auto">
 
@@ -33,7 +37,7 @@
                 <Grid Grid.Row="0"
                       BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
                       Padding="15,0">
-                    <Label Text="Wunschseite wählen"
+                    <Label Text="{x:Static resx:Resources.Flyout_Title}"
                            Style="{StaticResource LabelHeaderBar}"
                            VerticalOptions="Center"
                            HorizontalOptions="Start" />
@@ -45,76 +49,88 @@
                                      Spacing="5">
 
                     <!-- Startseite -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOverviewTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Overview}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Overview}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
 
                     <!-- Alle Geburtstage -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAllBirthdaysTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_ShowAll}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_ShowAll}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
 
                     <!-- Konto -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAccountTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Account}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Account}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
 
                     <!-- Einstellungen -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSettingsTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Settings}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Settings}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
 
                     <!-- Erinnerungen -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnRemindersTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Reminders}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Reminders}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
+
+                    <!-- Meine Tickets -->
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTicketsTapped" />
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Tickets}"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </Frame>
 
                     <!-- Datenschutz -->
-                    <Border Style="{StaticResource TileFlyout}">
-                        <Border.GestureRecognizers>
+                    <Frame Style="{StaticResource FrameFlyout}">
+                        <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnPrivacyTapped" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{x:Static resx:Resources.Tab_Privacy}"
+                        </Frame.GestureRecognizers>
+                        <Label Text="{x:Static resx:Resources.Flyout_Privacy}"
                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                                FontSize="16"
                                FontAttributes="Bold"
                                VerticalOptions="Center" />
-                    </Border>
+                    </Frame>
 
                 </VerticalStackLayout>
 
@@ -129,7 +145,7 @@
                 </Grid>
 
             </Grid>
-        </Border>
+        </Frame>
     </Grid>
 
 </ContentView>

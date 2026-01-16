@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              xmlns:local="clr-namespace:Mobile"
-             x:Class="Mobile.StartPage_9"
-             x:DataType="local:StartPage_9"
+             x:Class="Mobile.StartPage_6"
+             x:DataType="local:StartPage_6"
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
@@ -22,7 +22,8 @@
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <Label Text="{x:Static resx:Resources.Start9_CalendarExport}"
@@ -31,7 +32,7 @@
                 <!-- Accordion 1: Device Calendar -->
                 <Border x:Name="Accordion1" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_DeviceCalendar}"
@@ -72,7 +73,7 @@
                 <!-- Accordion 2: Outlook Calendar -->
                 <Border x:Name="Accordion2" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_OutlookCalendar}"
@@ -112,7 +113,7 @@
                 <!-- Accordion 3: Google Calendar -->
                 <Border x:Name="Accordion3" Style="{StaticResource Accordion}">
                     <VerticalStackLayout Spacing="0">
-                        <Border Style="{StaticResource CardHeader}">
+                        <Border Style="{StaticResource AccordionHeader}">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
                                        Text="{x:Static resx:Resources.Start9_GoogleCalendar}"

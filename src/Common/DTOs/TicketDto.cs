@@ -7,10 +7,11 @@ public class TicketDto
 {
 	public Guid UserId { get; set; }
 	public string Message { get; set; } = string.Empty;
+	public string Message2 { get; set; } = string.Empty;
 	public string? Email { get; set; }
 	public string? PhoneNumber { get; set; }
 	public string? PurchaseToken { get; set; }
 	public AppStore Store { get; set; } = AppStore.Unknown;
-	public TicketType Type { get; set; } = TicketType.SupportRequest;
+	public TicketType Type { get; set; } = TicketType.CustomerFeedback;
 	public TicketSource Source { get; set; } = TicketSource.FromCustomerViaApp;
 }

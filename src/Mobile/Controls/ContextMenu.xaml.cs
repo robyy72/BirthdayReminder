@@ -14,7 +14,7 @@ public class ContextMenuItem
 }
 
 /// <summary>
-/// Aim: Slide-In Context Menu von rechts (wie Flyout, aber schmaler und ohne Header)
+/// Aim: Slide-In Context Menu von rechts mit Header und TileFlyout-Style
 /// </summary>
 public partial class ContextMenu : ContentView
 {
@@ -47,8 +47,8 @@ public partial class ContextMenu : ContentView
 
         IsVisible = true;
         await Task.WhenAll(
-            ContextMenuPanel.ScaleXTo(1, AnimationDuration, Easing.CubicOut),
-            Overlay.FadeTo(1, AnimationDuration)
+            ContextMenuPanel.ScaleTo(1, AnimationDuration, Easing.CubicOut),
+            Overlay.FadeTo(0.4, AnimationDuration) // Semi-transparent overlay
         );
     }
 
@@ -58,7 +58,7 @@ public partial class ContextMenu : ContentView
     public async Task Close()
     {
         await Task.WhenAll(
-            ContextMenuPanel.ScaleXTo(0, AnimationDuration, Easing.CubicIn),
+            ContextMenuPanel.ScaleTo(0, AnimationDuration, Easing.CubicIn),
             Overlay.FadeTo(0, AnimationDuration)
         );
         IsVisible = false;
@@ -92,23 +92,27 @@ public partial class ContextMenu : ContentView
 
         foreach (var item in MenuItems)
         {
-            var border = new Border
+            // Using Frame instead of Border for Android compatibility
+            var frame = new Frame
             {
-                Padding = new Thickness(15, 12),
-                BackgroundColor = Colors.Transparent,
-                StrokeThickness = 0
+                BackgroundColor = ResourceHelper.GetThemedColor("White", "Gray500"),
+                BorderColor = Colors.Transparent,
+                CornerRadius = 15,
+                Padding = new Thickness(12, 10),
+                Margin = new Thickness(5, 3),
+                HasShadow = true
             };
 
             var label = new Label
             {
                 Text = item.Text,
+                TextColor = ResourceHelper.GetThemedColor("Black", "White"),
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
-                TextColor = ResourceHelper.IsDarkTheme ? Colors.White : Colors.Black,
                 VerticalOptions = LayoutOptions.Center
             };
 
-            border.Content = label;
+            frame.Content = label;
 
             var tapGesture = new TapGestureRecognizer();
             tapGesture.Tapped += async (s, e) =>
@@ -116,9 +120,9 @@ public partial class ContextMenu : ContentView
                 await Close();
                 item.ClickAction?.Invoke();
             };
-            border.GestureRecognizers.Add(tapGesture);
+            frame.GestureRecognizers.Add(tapGesture);
 
-            MenuItemsContainer.Children.Add(border);
+            MenuItemsContainer.Children.Add(frame);
         }
     }
     #endregion

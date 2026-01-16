@@ -46,7 +46,8 @@
                                 <RadioButton x:Name="RadioNoContacts"
                                              Grid.Column="1"
                                              Style="{StaticResource RadioStandard}"
-                                             IsChecked="True" />
+                                             IsChecked="True"
+                                             CheckedChanged="OnRadioChanged" />
                             </Grid>
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Grid.Column="0"
@@ -55,8 +56,30 @@
                                        VerticalOptions="Center" />
                                 <RadioButton x:Name="RadioAskNextPage"
                                              Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}" />
+                                             Style="{StaticResource RadioStandard}"
+                                             CheckedChanged="OnRadioChanged" />
                             </Grid>
+
+                            <!-- Permission Request Box -->
+                            <Border x:Name="PermissionBox"
+                                    Style="{StaticResource TileDialog}"
+                                    IsVisible="False"
+                                    Margin="0,10,0,0">
+                                <Border Style="{StaticResource TileInnerForEntry}"
+                                        Padding="15">
+                                    <VerticalStackLayout Spacing="10">
+                                        <Label Text="{x:Static resx:Resources.Permission_GrantRequest}"
+                                               Style="{StaticResource LabelInfoOnCard}" />
+                                        <Button x:Name="PermissionButton"
+                                                Text="{x:Static resx:Resources.Permission_StartDialog}"
+                                                Style="{StaticResource ButtonGreen}"
+                                                Clicked="OnPermissionButtonClicked" />
+                                        <Label x:Name="PermissionResultLabel"
+                                               Style="{StaticResource LabelInfoOnCard}"
+                                               IsVisible="False" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Border>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

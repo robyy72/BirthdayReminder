@@ -158,6 +158,7 @@
         <Setter Property="FontSize" Value="22" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="White" />
+        <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
@@ -267,9 +268,9 @@
     <!-- ==================== TILES / BORDERS ==================== -->
 
     <Style TargetType="Border" x:Key="Tile">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 15" />
-        <Setter Property="Padding" Value="20" />
+        <Setter Property="Padding" Value="10,5,10,5" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
         <Setter Property="StrokeThickness" Value="{AppThemeBinding Light=1, Dark=0}" />
         <Setter Property="Shadow">
@@ -290,6 +291,14 @@
         <Setter Property="StrokeThickness" Value="1" />
     </Style>
 
+    <Style TargetType="Border" x:Key="TileDialog">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
     <Style TargetType="Border" x:Key="TileInnerForEntry">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 9" />
@@ -303,6 +312,30 @@
         <Setter Property="Padding" Value="12,10" />
     </Style>
 
+    <Style TargetType="Border" x:Key="TileContextMenu" BasedOn="{StaticResource Tile}">
+        <Setter Property="Margin" Value="5,3" />
+        <Setter Property="Padding" Value="12,10" />
+    </Style>
+
+    <!-- Frame styles for Android compatibility (Border doesn't render properly on Android) -->
+    <Style TargetType="Frame" x:Key="FrameFlyout">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="Margin" Value="10,5" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="HasShadow" Value="True" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="FrameContextMenu">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="Margin" Value="5,3" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="HasShadow" Value="True" />
+    </Style>
+
     <Style TargetType="Border" x:Key="TilePersonResult" BasedOn="{StaticResource Tile}">
         <Setter Property="Padding" Value="0" />
         <Setter Property="Shadow" Value="{x:Null}" />
@@ -311,7 +344,7 @@
     <!-- ==================== CARDS ==================== -->
 
     <Style TargetType="Border" x:Key="Card">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray600}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
@@ -337,8 +370,12 @@
         <Setter Property="Stroke" Value="Transparent" />
     </Style>
 
+    <Style TargetType="Border" x:Key="AccordionHeader" BasedOn="{StaticResource CardHeader}">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray700}}" />
+    </Style>
+
     <Style TargetType="Border" x:Key="Accordion">
-        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Stroke" Value="Transparent" />
@@ -360,14 +397,14 @@
 
     <Style TargetType="Grid" x:Key="HeaderBar">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
-        <Setter Property="Padding" Value="20" />
-        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="Padding" Value="15,5,12,5" />
+        <Setter Property="MinimumHeightRequest" Value="50" />
     </Style>
 
     <Style TargetType="Grid" x:Key="HeaderBarWithBack">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
-        <Setter Property="Padding" Value="10,20" />
-        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="Padding" Value="15,5,12,5" />
+        <Setter Property="MinimumHeightRequest" Value="50" />
     </Style>
 
     <!-- ==================== BUTTONS ==================== -->
@@ -506,6 +543,28 @@
     <Style TargetType="Picker" x:Key="PickerYear" BasedOn="{StaticResource PickerBase}">
         <Setter Property="WidthRequest" Value="80" />
         <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style TargetType="Picker" x:Key="PickerFilter" BasedOn="{StaticResource PickerBase}">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileOuterForPicker">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="TileInnerForPicker">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 9" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeThickness" Value="0" />
     </Style>
 
     <Style TargetType="Label" x:Key="LabelDateSeparator">
@@ -729,7 +788,7 @@
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBackground}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}" />
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">

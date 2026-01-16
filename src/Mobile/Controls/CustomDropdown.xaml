@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.CustomDropdown">
+
+    <Grid RowDefinitions="Auto,Auto">
+        <!-- Selected Value Display -->
+        <Frame x:Name="SelectionFrame"
+               Grid.Row="0"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray700}}"
+               BorderColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"
+               CornerRadius="8"
+               Padding="12,10"
+               HasShadow="False">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnSelectionTapped" />
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="*,Auto">
+                <Label x:Name="SelectedLabel"
+                       Grid.Column="0"
+                       Text=""
+                       FontSize="16"
+                       TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                       VerticalOptions="Center" />
+                <Label x:Name="ArrowLabel"
+                       Grid.Column="1"
+                       Text="▼"
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Frame>
+
+        <!-- Dropdown List -->
+        <Frame x:Name="DropdownFrame"
+               Grid.Row="1"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray800}}"
+               BorderColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"
+               CornerRadius="8"
+               Padding="0"
+               Margin="0,-4,0,0"
+               HasShadow="True"
+               IsVisible="False"
+               ZIndex="100">
+            <VerticalStackLayout x:Name="OptionsContainer"
+                                 Spacing="0" />
+        </Frame>
+    </Grid>
+
+</ContentView>

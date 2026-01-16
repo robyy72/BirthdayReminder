@@ -453,7 +453,7 @@ public partial class ReminderPage : ContentPage
 		}
 		else
 		{
-			App.SetRootPage(new StartPage_9());
+			App.SetRootPage(new StartPage_6());
 		}
 	}
 	#endregion

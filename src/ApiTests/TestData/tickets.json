@@ -1,0 +1,82 @@
+[
+  {
+    "type": 1,
+    "message": "App stürzt ab beim Öffnen der Kontaktliste\n\nNach dem Update auf die neueste Version stürzt die App ab, sobald ich versuche, meine Kontakte anzuzeigen."
+  },
+  {
+    "type": 3,
+    "message": "Dunkelmodus für die App\n\nEs wäre super, wenn die App einen Dunkelmodus hätte, der die Augen schont."
+  },
+  {
+    "type": 4,
+    "message": "Tolle App!\n\nIch nutze die App seit 3 Monaten und bin sehr zufrieden. Die Erinnerungen funktionieren perfekt."
+  },
+  {
+    "type": 1,
+    "message": "Erinnerung kommt nicht zur eingestellten Zeit\n\nIch habe eine Erinnerung für 9:00 Uhr eingestellt, aber sie kommt erst um 9:15 Uhr an."
+  },
+  {
+    "type": 3,
+    "message": "Export der Geburtstagsliste als PDF\n\nKönnten Sie eine Funktion hinzufügen, um alle Geburtstage als PDF zu exportieren?"
+  },
+  {
+    "type": 4,
+    "message": "Vielen Dank für die schnelle Hilfe\n\nDer Support hat mir sehr schnell bei meinem Problem geholfen. Weiter so!"
+  },
+  {
+    "type": 1,
+    "message": "Synchronisation mit Google Kalender funktioniert nicht\n\nDie Synchronisation bricht nach wenigen Sekunden ab mit einer Fehlermeldung."
+  },
+  {
+    "type": 3,
+    "message": "Gruppenansicht für Geburtstage\n\nWäre es möglich, Geburtstage nach Gruppen (Familie, Freunde, Arbeit) zu sortieren?"
+  },
+  {
+    "type": 4,
+    "message": "Einfach zu bedienen\n\nAuch für ältere Menschen wie mich ist die App sehr einfach zu bedienen. Danke!"
+  },
+  {
+    "type": 1,
+    "message": "Bilder werden nicht angezeigt\n\nDie Kontaktbilder werden seit dem letzten Update nicht mehr angezeigt."
+  },
+  {
+    "type": 3,
+    "message": "WhatsApp Integration\n\nEine direkte Integration mit WhatsApp zum Versenden von Glückwünschen wäre toll."
+  },
+  {
+    "type": 4,
+    "message": "Beste Geburtstags-App\n\nHabe viele Apps ausprobiert, aber diese ist mit Abstand die beste!"
+  },
+  {
+    "type": 1,
+    "message": "Datum wird falsch angezeigt\n\nBei manchen Kontakten wird das Geburtsdatum um einen Tag verschoben angezeigt."
+  },
+  {
+    "type": 3,
+    "message": "Wiederkehrende Erinnerungen\n\nKönnten Sie eine Option für jährlich wiederkehrende Erinnerungen hinzufügen?"
+  },
+  {
+    "type": 4,
+    "message": "Super Kundenservice\n\nIch hatte eine Frage und bekam innerhalb von 2 Stunden eine hilfreiche Antwort."
+  },
+  {
+    "type": 1,
+    "message": "App friert ein nach 10 Minuten\n\nWenn ich die App länger als 10 Minuten offen habe, friert sie komplett ein."
+  },
+  {
+    "type": 3,
+    "message": "Altersberechnung anzeigen\n\nEs wäre praktisch, wenn das Alter der Person direkt angezeigt würde."
+  },
+  {
+    "type": 4,
+    "message": "Endlich vergesse ich keine Geburtstage mehr\n\nSeit ich diese App nutze, habe ich keinen einzigen Geburtstag mehr vergessen. Danke!"
+  },
+  {
+    "type": 1,
+    "message": "Push-Benachrichtigungen kommen doppelt\n\nJede Erinnerung kommt zweimal hintereinander an."
+  },
+  {
+    "type": 3,
+    "message": "Widget für den Homescreen\n\nEin Widget, das die nächsten 3 Geburtstage anzeigt, wäre sehr nützlich."
+  }
+]

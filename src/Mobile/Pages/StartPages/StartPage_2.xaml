@@ -20,38 +20,23 @@
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <!-- Card: Language -->
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Language}"
+                            <Label Text="{x:Static resx:Resources.Language_Select_Header}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
-                        <VerticalStackLayout Padding="20" Spacing="10"
-                                             RadioButtonGroup.GroupName="LanguageGroup">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="Deutsch"
-                                       Style="{StaticResource LabelInfoOnCard}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioLanguageDe"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}"
-                                             CheckedChanged="OnLanguageChanged" />
-                            </Grid>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Grid.Column="0"
-                                       Text="English"
-                                       Style="{StaticResource LabelInfoOnCard}"
-                                       VerticalOptions="Center" />
-                                <RadioButton x:Name="RadioLanguageEn"
-                                             Grid.Column="1"
-                                             Style="{StaticResource RadioStandard}"
-                                             CheckedChanged="OnLanguageChanged" />
-                            </Grid>
+                        <VerticalStackLayout Padding="20" Spacing="15">
+                            <Label x:Name="CurrentLanguageLabel"
+                                   Style="{StaticResource LabelInfoOnCard}" />
+                            <Button Text="{x:Static resx:Resources.Settings_Language_Adjust}"
+                                    Style="{StaticResource ButtonGreen}"
+                                    Clicked="OnLanguageAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -93,26 +78,20 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="0">
                         <Border Style="{StaticResource CardHeader}">
-                            <Label Text="{x:Static resx:Resources.Settings_Timezone}"
+                            <Label Text="{x:Static resx:Resources.Timezone_Select_Header}"
                                    Style="{StaticResource LabelCardHeader}" />
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
-                            <Border Style="{StaticResource TileOuterForEntry}">
-                                <Border Style="{StaticResource TileInnerForEntry}">
-                                    <Picker x:Name="TimezonePicker"
-                                            Title="{x:Static resx:Resources.Settings_Timezone_Select}" />
-                                </Border>
-                            </Border>
-                            <Label Text="{x:Static resx:Resources.Settings_Timezone_Hint}"
-                                   Style="{StaticResource LabelInfoOnCard}"
-                                   TextColor="{StaticResource Gray500}" />
-                            <Label Text="{x:Static resx:Resources.More_Informations}"
-                                   Style="{StaticResource LabelHelpLink}"
-                                   HorizontalOptions="End">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnTimezoneInfoTapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
+                            <VerticalStackLayout Spacing="2">
+                                <Label x:Name="CurrentTimezoneLabel"
+                                       Style="{StaticResource LabelInfoOnCard}" />
+                                <Label x:Name="CurrentTimezoneCitiesLabel"
+                                       Style="{StaticResource LabelInfoOnCard}"
+                                       TextColor="{StaticResource Gray500}" />
+                            </VerticalStackLayout>
+                            <Button Text="{x:Static resx:Resources.Settings_Timezone_Adjust}"
+                                    Style="{StaticResource ButtonGreen}"
+                                    Clicked="OnTimezoneAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

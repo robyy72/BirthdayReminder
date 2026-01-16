@@ -7,13 +7,20 @@ namespace Mobile;
 public partial class TicketListPage : ContentPage
 {
 	#region Fields
-	private readonly SupportType _ticketType;
+	private readonly TicketType _ticketType;
 	private int _selectedFilterIndex = 0;
 	private bool _isFirstLoad = true;
 	#endregion
 
 	#region Constructor
-	public TicketListPage(SupportType ticketType)
+	public TicketListPage() : this(TicketType.CustomerFeedback)
+	{
+		// Show all tickets
+		_selectedFilterIndex = 0;
+		FilterDropdown.SelectedIndex = 0;
+	}
+
+	public TicketListPage(TicketType ticketType)
 	{
 		InitializeComponent();
 		_ticketType = ticketType;
@@ -41,43 +48,55 @@ public partial class TicketListPage : ContentPage
 	#region Private Methods
 	private void SetupFilter()
 	{
+		var filteredBy = MobileLanguages.Resources.Filter_FilteredBy;
 		var filterItems = new List<string>
 		{
-			MobileLanguages.Resources.Filter_All,
-			MobileLanguages.Resources.Ticket_Type_Bug,
-			MobileLanguages.Resources.Ticket_Type_FeatureRequest,
-			MobileLanguages.Resources.Ticket_Type_Feedback
+			MobileLanguages.Resources.Filter_AllTicketTypes,
+			$"{filteredBy} {MobileLanguages.Resources.Ticket_Type_Bug}",
+			$"{filteredBy} {MobileLanguages.Resources.Ticket_Type_FeatureRequest}",
+			$"{filteredBy} {MobileLanguages.Resources.Ticket_Type_Feedback}"
 		};
 
-		FilterPicker.ItemsSource = filterItems;
+		FilterDropdown.ItemsSource = filterItems;
 
 		// Pre-select filter based on ticket type
 		_selectedFilterIndex = _ticketType switch
 		{
-			SupportType.Bug => 1,
-			SupportType.FeatureRequest => 2,
-			SupportType.Feedback => 3,
+			TicketType.Error => 1,
+			TicketType.FeatureRequest => 2,
+			TicketType.CustomerFeedback => 3,
 			_ => 0
 		};
-		FilterPicker.SelectedIndex = _selectedFilterIndex;
+		FilterDropdown.SelectedIndex = _selectedFilterIndex;
 	}
 
 	private async Task LoadTicketsAsync()
 	{
 		ShowLoading(true);
 
-		var success = await TicketService.DownloadTicketsAsync();
-
-		if (!success)
-		{
-			await DisplayAlert(
-				MobileLanguages.Resources.Error_Header,
-				MobileLanguages.Resources.Error_GenericMessage,
-				MobileLanguages.Resources.General_Button_OK);
-		}
+		var (success, hadNetwork) = await TicketService.DownloadTicketsAsync();
 
 		ShowLoading(false);
 		LoadEntries();
+
+		if (!success)
+		{
+			if (!hadNetwork && !App.ToastNoInternetAlreadyShown)
+			{
+				// No internet - show info toast
+				App.ToastNoInternetAlreadyShown = true;
+				await DisplayAlert(
+					MobileLanguages.Resources.Info_NoInternet_Title,
+					MobileLanguages.Resources.Info_NoInternet_TicketDownload,
+					MobileLanguages.Resources.General_Button_OK);
+			}
+			else if (hadNetwork)
+			{
+				// Had internet but API failed - show error page
+				await App.NavigateToAsync<ErrorDisplayPage>(
+					MobileLanguages.Resources.Error_ApiUnavailable);
+			}
+		}
 	}
 
 	private void ShowLoading(bool isLoading)
@@ -101,10 +120,10 @@ public partial class TicketListPage : ContentPage
 		{
 			var ticketType = _selectedFilterIndex switch
 			{
-				1 => SupportType.Bug,
-				2 => SupportType.FeatureRequest,
-				3 => SupportType.Feedback,
-				_ => SupportType.Feedback
+				1 => TicketType.Error,
+				2 => TicketType.FeatureRequest,
+				3 => TicketType.CustomerFeedback,
+				_ => TicketType.CustomerFeedback
 			};
 			entries = TicketService.GetByType(ticketType);
 		}
@@ -117,47 +136,57 @@ public partial class TicketListPage : ContentPage
 
 		if (entries.Count == 0)
 		{
-			var emptyLabel = new Label
+			var createButton = new Button
 			{
-				Text = MobileLanguages.Resources.EmptyView_NoTickets,
-				Style = ResourceHelper.GetStyle("LabelInfoOnCard"),
+				Text = MobileLanguages.Resources.Button_CreateTicket,
+				Style = ResourceHelper.GetStyle("ButtonPrimary"),
 				HorizontalOptions = LayoutOptions.Center,
 				Margin = new Thickness(0, 20, 0, 0)
 			};
-			EntriesContainer.Children.Add(emptyLabel);
+			createButton.Clicked += async (s, e) => await App.NavigateToAsync<SelectTicketTypePage>();
+			EntriesContainer.Children.Add(createButton);
 		}
 	}
 
-	private Border CreateEntryCard(Support entry)
+	private Frame CreateEntryCard(Support entry)
 	{
-		var typeText = ((SupportType)entry.Type) switch
+		var typeText = ((TicketType)entry.Type) switch
 		{
-			SupportType.Bug => MobileLanguages.Resources.Ticket_Type_Bug,
-			SupportType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
-			SupportType.Feedback => MobileLanguages.Resources.Ticket_Type_Feedback,
+			TicketType.Error => MobileLanguages.Resources.Ticket_Type_Bug,
+			TicketType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
+			TicketType.CustomerFeedback => MobileLanguages.Resources.Ticket_Type_Feedback,
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 
 		var headerText = $"{typeText}: {entry.Title}";
 
-		var card = new Border
+		// Using Frame instead of Border for Android compatibility
+		var card = new Frame
 		{
-			Style = ResourceHelper.GetStyle("Card")
+			BackgroundColor = ResourceHelper.GetThemedColor("White", "Gray900"),
+			CornerRadius = 12,
+			Padding = 0,
+			BorderColor = Colors.Transparent,
+			HasShadow = true
 		};
 
 		var stackLayout = new VerticalStackLayout { Spacing = 0 };
 
-		// Header
-		var headerBorder = new Border
+		// Header - using Frame instead of Border
+		var headerFrame = new Frame
 		{
-			Style = ResourceHelper.GetStyle("CardHeader")
+			BackgroundColor = ResourceHelper.GetThemedColor("Primary", "Gray700"),
+			CornerRadius = 12,
+			Padding = new Thickness(15, 12),
+			BorderColor = Colors.Transparent,
+			HasShadow = false
 		};
 		var headerLabel = new Label
 		{
 			Text = headerText,
 			Style = ResourceHelper.GetStyle("LabelCardHeader")
 		};
-		headerBorder.Content = headerLabel;
+		headerFrame.Content = headerLabel;
 
 		// Content
 		var contentStack = new VerticalStackLayout
@@ -174,7 +203,7 @@ public partial class TicketListPage : ContentPage
 		};
 		contentStack.Children.Add(textLabel);
 
-		stackLayout.Children.Add(headerBorder);
+		stackLayout.Children.Add(headerFrame);
 		stackLayout.Children.Add(contentStack);
 
 		card.Content = stackLayout;
@@ -192,15 +221,15 @@ public partial class TicketListPage : ContentPage
 
 	/// <summary>
 	/// Aim: Get the current filter type for creating new tickets.
-	/// Return: SupportType based on current filter selection.
+	/// Return: TicketType based on current filter selection.
 	/// </summary>
-	private SupportType GetCurrentFilterType()
+	private TicketType GetCurrentFilterType()
 	{
 		var result = _selectedFilterIndex switch
 		{
-			1 => SupportType.Bug,
-			2 => SupportType.FeatureRequest,
-			3 => SupportType.Feedback,
+			1 => TicketType.Error,
+			2 => TicketType.FeatureRequest,
+			3 => TicketType.CustomerFeedback,
 			_ => _ticketType
 		};
 		return result;
@@ -210,13 +239,13 @@ public partial class TicketListPage : ContentPage
 	#region Event Handlers
 	private void OnFilterChanged(object? sender, EventArgs e)
 	{
-		_selectedFilterIndex = FilterPicker.SelectedIndex;
+		_selectedFilterIndex = FilterDropdown.SelectedIndex;
 		LoadEntries();
 	}
 
 	private async void OnAddClicked(object? sender, EventArgs e)
 	{
-		await App.NavigateToAsync<NewTicketPage>(GetCurrentFilterType());
+		await App.NavigateToAsync<SelectTicketTypePage>();
 	}
 	#endregion
 }

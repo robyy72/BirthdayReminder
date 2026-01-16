@@ -18,17 +18,8 @@ public partial class StartPage_2 : ContentPage
 	#region Private Methods
 	private void LoadSettings()
 	{
-		// Language - detect from device if not explicitly set
-		string locale = GetEffectiveLocale();
-		switch (locale)
-		{
-			case "de":
-				RadioLanguageDe.IsChecked = true;
-				break;
-			default:
-				RadioLanguageEn.IsChecked = true;
-				break;
-		}
+		// Language
+		UpdateLanguageLabel();
 
 		// Theme - use system theme if "System" or not explicitly set
 		string theme = GetEffectiveTheme();
@@ -43,8 +34,28 @@ public partial class StartPage_2 : ContentPage
 		}
 
 		// Timezone
-		TimezonePicker.ItemsSource = TimezoneService.GetDisplayNames();
-		TimezonePicker.SelectedIndex = TimezoneService.GetIndex(App.Account.TimeZoneId);
+		UpdateTimezoneLabel();
+	}
+
+	private void UpdateLanguageLabel()
+	{
+		string locale = GetEffectiveLocale();
+		string langName = locale == "de" ? "Deutsch" : "English";
+		string prefix = MobileLanguages.Resources.Language_Select_Current;
+		CurrentLanguageLabel.Text = $"{prefix}: {langName}";
+	}
+
+	private void UpdateTimezoneLabel()
+	{
+		var timezones = TimezoneService.LoadTimezones();
+		int index = TimezoneService.GetIndex(App.Account.TimeZoneId);
+		if (index >= 0 && index < timezones.Count)
+		{
+			var tz = timezones[index];
+			string prefix = MobileLanguages.Resources.Timezone_Select_Current;
+			CurrentTimezoneLabel.Text = $"{prefix}: {tz.RegionWithOffset}";
+			CurrentTimezoneCitiesLabel.Text = tz.Cities;
+		}
 	}
 
 	private string GetEffectiveLocale()
@@ -82,14 +93,10 @@ public partial class StartPage_2 : ContentPage
 
 	private void SaveSettings()
 	{
-		// Save language
-		App.Account.Locale = RadioLanguageEn.IsChecked == true ? "en" : "de";
-
 		// Save theme
 		App.Account.Theme = RadioThemeDark.IsChecked == true ? "Dark" : "Light";
 
-		// Save timezone
-		App.Account.TimeZoneId = TimezoneService.GetIdByIndex(TimezonePicker.SelectedIndex);
+		// Language and Timezone are saved on their respective selection pages
 
 		AccountService.Save();
 		DeviceService.ApplyTheme(App.Account.Theme);
@@ -97,20 +104,10 @@ public partial class StartPage_2 : ContentPage
 	#endregion
 
 	#region Event Handlers
-	private void OnLanguageChanged(object? sender, CheckedChangedEventArgs e)
+	private void OnLanguageAdjustClicked(object? sender, EventArgs e)
 	{
-		if (_isLoading || !e.Value) return;
-
-		string locale = RadioLanguageDe.IsChecked == true ? "de" : "en";
-		App.Account.Locale = locale;
-
-		var culture = new System.Globalization.CultureInfo(locale);
-		System.Globalization.CultureInfo.CurrentCulture = culture;
-		System.Globalization.CultureInfo.CurrentUICulture = culture;
-		MobileLanguages.Resources.Culture = culture;
-
-		// Reload page to apply new language
-		App.SetRootPage(new StartPage_2());
+		App.BackwardPageType = typeof(StartPage_2);
+		App.SetRootPage(new SelectLanguagePage());
 	}
 
 	private void OnThemeChanged(object? sender, CheckedChangedEventArgs e)
@@ -133,12 +130,17 @@ public partial class StartPage_2 : ContentPage
 		App.SetRootPage(new StartPage_3());
 	}
 
-	private async void OnTimezoneInfoTapped(object? sender, EventArgs e)
+	private void OnTimezoneAdjustClicked(object? sender, EventArgs e)
 	{
-		var browserPage = new BrowserPage(
-			MobileConstants.URL_TIMEZONE_INFO,
-			MobileLanguages.Resources.Timezone_MoreInfo);
-		await Navigation.PushModalAsync(browserPage);
+		App.BackwardPageType = typeof(StartPage_2);
+		App.SetRootPage(new SelectTimezonePage());
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		UpdateLanguageLabel();
+		UpdateTimezoneLabel();
 	}
 	#endregion
 }

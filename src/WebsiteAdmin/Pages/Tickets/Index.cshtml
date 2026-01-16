@@ -58,7 +58,7 @@
                             </div>
                             <p class="mb-1 small text-truncate">@ticket.Message</p>
                             <div class="d-flex justify-content-between">
-                                <small>@(ticket.customer?.Email ?? ticket.CustomerId.ToString().Substring(0, 8))</small>
+                                <small>@(ticket.Customer?.Email ?? ticket.CustomerId.ToString().Substring(0, 8))</small>
                                 @{
                                     var statusClass = ticket.Status switch
                                     {
@@ -109,7 +109,7 @@
                     <table class="table table-sm">
                         <tr>
                             <td class="fw-bold" style="width: 120px;">Customer</td>
-                            <td>@(Model.SelectedTicket.customer?.Email ?? Model.SelectedTicket.customer?.PhoneNumber ?? "-")</td>
+                            <td>@(Model.SelectedTicket.Customer?.Email ?? Model.SelectedTicket.Customer?.PhoneNumber ?? "-")</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Type</td>
@@ -119,11 +119,11 @@
                             <td class="fw-bold">Created</td>
                             <td>@Model.SelectedTicket.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
                         </tr>
-                        @if (Model.SelectedTicket.systemUser != null)
+                        @if (Model.SelectedTicket.SystemUser != null)
                         {
                             <tr>
                                 <td class="fw-bold">Assigned To</td>
-                                <td>@(Model.SelectedTicket.systemUser.DisplayName ?? Model.SelectedTicket.systemUser.Email)</td>
+                                <td>@(Model.SelectedTicket.SystemUser.DisplayName ?? Model.SelectedTicket.SystemUser.Email)</td>
                             </tr>
                         }
                     </table>
@@ -165,7 +165,7 @@
                             <div class="mb-2 @align">
                                 <div class="d-inline-block p-2 rounded @entryClass" style="max-width: 80%;">
                                     <small class="d-block text-muted">
-                                        @(entry.IsFromCustomer ? "Customer" : entry.systemUser?.DisplayName ?? "Admin")
+                                        @(entry.IsFromCustomer ? "Customer" : entry.SystemUser?.DisplayName ?? "Admin")
                                         - @entry.CreatedAt.ToString("dd.MM HH:mm")
                                     </small>
                                     <span>@entry.Message</span>

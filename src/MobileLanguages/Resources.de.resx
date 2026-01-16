@@ -135,17 +135,20 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
 • Die Erinnerung funktioniert trotzdem normal
 • Du kannst das Jahr später durch Bearbeiten hinzufügen</value>
   </data>
-  <data name="Tab_ShowAll" xml:space="preserve">
+  <data name="Flyout_ShowAll" xml:space="preserve">
     <value>Alle anzeigen</value>
   </data>
-  <data name="Tab_Settings" xml:space="preserve">
+  <data name="Flyout_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="Tab_Privacy" xml:space="preserve">
+  <data name="Flyout_Privacy" xml:space="preserve">
     <value>Datenschutz</value>
   </data>
   <data name="General_Button_Save" xml:space="preserve">
     <value>Speichern</value>
+  </data>
+  <data name="General_Button_Send" xml:space="preserve">
+    <value>Senden</value>
   </data>
   <data name="General_Button_Cancel" xml:space="preserve">
     <value>Abbrechen</value>
@@ -321,6 +324,9 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Button_LetsGo" xml:space="preserve">
     <value>Los geht's</value>
   </data>
+  <data name="Button_CreateTicket" xml:space="preserve">
+    <value>Ticket erstellen</value>
+  </data>
   <data name="Settings_Theme" xml:space="preserve">
     <value>Design auswählen</value>
   </data>
@@ -334,13 +340,37 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Systemstandard</value>
   </data>
   <data name="Settings_Timezone" xml:space="preserve">
-    <value>Zeitzone</value>
+    <value>Zeitzone auswählen</value>
   </data>
   <data name="Settings_Timezone_Select" xml:space="preserve">
     <value>Meine Zeitzone auswählen</value>
   </data>
   <data name="Settings_Timezone_Hint" xml:space="preserve">
-    <value>Stelle die Zeitzone auf deinen Hauptaufenthaltsort ein, nicht auf dein aktuelles Reiseziel. So kommen Erinnerungen zur richtigen Zeit an.</value>
+    <value>Wir empfehlen deine Zeitzone auf dein Zuhause zu setzen damit Erinnerungen zur richtigen Zeit ankommen.</value>
+  </data>
+  <data name="Settings_Timezone_Current" xml:space="preserve">
+    <value>Aktuelle Zeitzone</value>
+  </data>
+  <data name="Settings_Timezone_Adjust" xml:space="preserve">
+    <value>Zeitzone auswählen</value>
+  </data>
+  <data name="Settings_Language_Current" xml:space="preserve">
+    <value>Aktuelle Sprache</value>
+  </data>
+  <data name="Settings_Language_Adjust" xml:space="preserve">
+    <value>Sprache auswählen</value>
+  </data>
+  <data name="Language_Select_Header" xml:space="preserve">
+    <value>Sprache der App festlegen</value>
+  </data>
+  <data name="Language_Select_Current" xml:space="preserve">
+    <value>Aktuelle</value>
+  </data>
+  <data name="Timezone_Select_Header" xml:space="preserve">
+    <value>Zeitzone der App festlegen</value>
+  </data>
+  <data name="Timezone_Select_Current" xml:space="preserve">
+    <value>Aktuelle</value>
   </data>
   <data name="Date_Day" xml:space="preserve">
     <value>Tag</value>
@@ -474,7 +504,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Filter_AllMonths" xml:space="preserve">
     <value>-- alle --</value>
   </data>
-  <data name="Tab_Overview" xml:space="preserve">
+  <data name="Flyout_Overview" xml:space="preserve">
     <value>Startseite</value>
   </data>
   <data name="Settings_ReminderCount" xml:space="preserve">
@@ -622,7 +652,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Berechtigung benötigt</value>
   </data>
   <data name="Permission_GrantRequest" xml:space="preserve">
-    <value>Jetzt bitte Berechtigung für dieses Telefon erteilen</value>
+    <value>Berechtigung erteilen</value>
   </data>
   <data name="Permission_StartDialog" xml:space="preserve">
     <value>Dialog starten</value>
@@ -634,10 +664,10 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Warte auf Berechtigung...</value>
   </data>
   <data name="Permission_Granted" xml:space="preserve">
-    <value>Berechtigung erteilt</value>
+    <value>Danke, war erfolgreich</value>
   </data>
   <data name="Permission_Denied" xml:space="preserve">
-    <value>Berechtigung nicht erteilt, auch ok</value>
+    <value>Ok, auch gut</value>
   </data>
   <data name="Permission_DeniedInfo" xml:space="preserve">
     <value>Die Berechtigung wurde bereits abgelehnt. Der Dialog kann nicht erneut angezeigt werden. Bitte gehe in die Einstellungen deines Geräts, um die Berechtigung manuell zu erteilen.</value>
@@ -740,11 +770,17 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="ReminderSettings_NoMethods" xml:space="preserve">
     <value>Keine Methoden aktiviert</value>
   </data>
-  <data name="Tab_Account" xml:space="preserve">
+  <data name="Flyout_Account" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="Tab_Reminders" xml:space="preserve">
+  <data name="Flyout_Reminders" xml:space="preserve">
     <value>Erinnerungen</value>
+  </data>
+  <data name="Flyout_Tickets" xml:space="preserve">
+    <value>Meine Tickets</value>
+  </data>
+  <data name="Flyout_Title" xml:space="preserve">
+    <value>Hauptmenü</value>
   </data>
   <!-- Reminder Methods - Local -->
   <data name="ReminderMethod_Notification" xml:space="preserve">
@@ -858,58 +894,60 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
 • E-Mail-Erinnerungen sind mit begrenzter Anzahl pro Monat kostenlos. Für unbegrenzte E-Mails ist ein Abonnement erforderlich.
 • Die Signal-Integration hängt von der Verfügbarkeit des Drittanbieters ab und kann nicht dauerhaft garantiert werden.</value>
   </data>
-  <!-- Support -->
-  <data name="Support_ReportBug" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="Support_FeatureRequest" xml:space="preserve">
-    <value>Feature vorschlagen</value>
-  </data>
-  <data name="Support_Feedback" xml:space="preserve">
-    <value>Feedback geben</value>
-  </data>
-  <data name="Page_NewSupport_Title" xml:space="preserve">
-    <value>Neuer Eintrag</value>
-  </data>
-  <data name="Page_SupportOverview_Title" xml:space="preserve">
-    <value>Support Übersicht</value>
-  </data>
-  <data name="Page_SupportDetail_Title" xml:space="preserve">
-    <value>Support Details</value>
-  </data>
-  <data name="Support_Title" xml:space="preserve">
-    <value>Titel</value>
-  </data>
-  <data name="Support_Text" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="Support_Type_Bug" xml:space="preserve">
-    <value>Fehler</value>
-  </data>
-  <data name="Support_Type_FeatureRequest" xml:space="preserve">
-    <value>Verbesserungsvorschlag</value>
-  </data>
-  <data name="Support_Type_Feedback" xml:space="preserve">
-    <value>Feedback</value>
-  </data>
   <!-- Ticket -->
-  <data name="Page_NewTicket_Title" xml:space="preserve">
+  <data name="Page_SelectTicketType_Title" xml:space="preserve">
     <value>Neues Ticket</value>
   </data>
+  <data name="Page_CreateTicket_Title" xml:space="preserve">
+    <value>Ticket erstellen</value>
+  </data>
   <data name="Page_TicketList_Title" xml:space="preserve">
-    <value>Tickets</value>
+    <value>Meine Tickets</value>
+  </data>
+  <data name="SelectTicketType_Header" xml:space="preserve">
+    <value>Was möchten Sie tun?</value>
   </data>
   <data name="Page_TicketDetail_Title" xml:space="preserve">
     <value>Ticket Details</value>
   </data>
-  <data name="Ticket_Title" xml:space="preserve">
-    <value>Titel</value>
+  <data name="Ticket_Subject" xml:space="preserve">
+    <value>Betreff / Thema</value>
   </data>
-  <data name="Ticket_Text" xml:space="preserve">
+  <data name="Ticket_Placeholder_Bug_Subject" xml:space="preserve">
+    <value>Kurze Zusammenfassung des Fehlers</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Subject" xml:space="preserve">
+    <value>Kurze Zusammenfassung Deiner Idee</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Subject" xml:space="preserve">
+    <value>Worum geht es in Deinem Feedback?</value>
+  </data>
+  <data name="Ticket_Text_1" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="Ticket_Text_2" xml:space="preserve">
+    <value>Weitere Details</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Text_1" xml:space="preserve">
+    <value>Wie es aktuell aussieht/funktioniert</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Text_2" xml:space="preserve">
+    <value>Wie sollte es aussehen/funktionieren ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Text_1" xml:space="preserve">
+    <value>Wie es aktuell aussieht/funktioniert</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Text_2" xml:space="preserve">
+    <value>Wie sollte es aussehen/funktionieren ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Text_1" xml:space="preserve">
+    <value>Was gefällt Dir ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Text_2" xml:space="preserve">
+    <value>Was könnten wir besser machen, was fehlt Dir ?</value>
+  </data>
   <data name="Ticket_Type_Bug" xml:space="preserve">
-    <value>Fehler</value>
+    <value>Fehler melden</value>
   </data>
   <data name="Ticket_Type_FeatureRequest" xml:space="preserve">
     <value>Verbesserungsvorschlag</value>
@@ -934,6 +972,12 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="Filter_All" xml:space="preserve">
     <value>-- alle --</value>
+  </data>
+  <data name="Filter_AllTicketTypes" xml:space="preserve">
+    <value>Alle Tickettypen anzeigen</value>
+  </data>
+  <data name="Filter_FilteredBy" xml:space="preserve">
+    <value>Gefiltert nach</value>
   </data>
   <!-- Reminder Status -->
   <data name="Reminder_Status_Free" xml:space="preserve">
@@ -1286,6 +1330,102 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Tz_Pacific_Auckland" xml:space="preserve">
     <value>Auckland</value>
   </data>
+  <data name="Tz_Cities_Pacific_Midway" xml:space="preserve">
+    <value>Midway, Samoa</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Honolulu" xml:space="preserve">
+    <value>Honolulu, Hawaii</value>
+  </data>
+  <data name="Tz_Cities_America_Anchorage" xml:space="preserve">
+    <value>Anchorage, Juneau, Fairbanks</value>
+  </data>
+  <data name="Tz_Cities_America_Vancouver" xml:space="preserve">
+    <value>Vancouver, Seattle, Portland, Los Angeles</value>
+  </data>
+  <data name="Tz_Cities_America_Denver" xml:space="preserve">
+    <value>Denver, Phoenix, Salt Lake City</value>
+  </data>
+  <data name="Tz_Cities_America_Chicago" xml:space="preserve">
+    <value>Chicago, Houston, Dallas, Mexiko-Stadt</value>
+  </data>
+  <data name="Tz_Cities_America_NewYork" xml:space="preserve">
+    <value>New York, Toronto, Miami, Washington</value>
+  </data>
+  <data name="Tz_Cities_America_Lima" xml:space="preserve">
+    <value>Lima, Bogota, Quito</value>
+  </data>
+  <data name="Tz_Cities_America_Halifax" xml:space="preserve">
+    <value>Halifax, Caracas, La Paz</value>
+  </data>
+  <data name="Tz_Cities_America_Santiago" xml:space="preserve">
+    <value>Santiago, Asuncion</value>
+  </data>
+  <data name="Tz_Cities_America_SaoPaulo" xml:space="preserve">
+    <value>Sao Paulo, Rio de Janeiro, Brasilia</value>
+  </data>
+  <data name="Tz_Cities_America_Argentina_BuenosAires" xml:space="preserve">
+    <value>Buenos Aires, Montevideo</value>
+  </data>
+  <data name="Tz_Cities_Atlantic_Azores" xml:space="preserve">
+    <value>Azoren, Kap Verde</value>
+  </data>
+  <data name="Tz_Cities_Europe_London" xml:space="preserve">
+    <value>London, Dublin, Lissabon</value>
+  </data>
+  <data name="Tz_Cities_Europe_Berlin" xml:space="preserve">
+    <value>Berlin, Paris, Rom, Madrid, Wien</value>
+  </data>
+  <data name="Tz_Cities_Europe_Athens" xml:space="preserve">
+    <value>Athen, Helsinki, Bukarest, Istanbul</value>
+  </data>
+  <data name="Tz_Cities_Europe_Moscow" xml:space="preserve">
+    <value>Moskau, St. Petersburg, Minsk</value>
+  </data>
+  <data name="Tz_Cities_Asia_Tehran" xml:space="preserve">
+    <value>Teheran</value>
+  </data>
+  <data name="Tz_Cities_Asia_Dubai" xml:space="preserve">
+    <value>Dubai, Abu Dhabi, Muskat</value>
+  </data>
+  <data name="Tz_Cities_Asia_Kabul" xml:space="preserve">
+    <value>Kabul</value>
+  </data>
+  <data name="Tz_Cities_Asia_Karachi" xml:space="preserve">
+    <value>Karachi, Islamabad, Taschkent</value>
+  </data>
+  <data name="Tz_Cities_Asia_Kolkata" xml:space="preserve">
+    <value>Mumbai, Neu-Delhi, Kalkutta, Chennai</value>
+  </data>
+  <data name="Tz_Cities_Asia_Dhaka" xml:space="preserve">
+    <value>Dhaka, Almaty</value>
+  </data>
+  <data name="Tz_Cities_Asia_Bangkok" xml:space="preserve">
+    <value>Bangkok, Jakarta, Hanoi</value>
+  </data>
+  <data name="Tz_Cities_Asia_HongKong" xml:space="preserve">
+    <value>Hongkong, Peking, Shanghai, Taipeh</value>
+  </data>
+  <data name="Tz_Cities_Asia_Singapore" xml:space="preserve">
+    <value>Singapur, Kuala Lumpur, Perth</value>
+  </data>
+  <data name="Tz_Cities_Asia_Seoul" xml:space="preserve">
+    <value>Seoul, Pjöngjang</value>
+  </data>
+  <data name="Tz_Cities_Asia_Tokyo" xml:space="preserve">
+    <value>Tokio, Osaka, Sapporo</value>
+  </data>
+  <data name="Tz_Cities_Australia_Adelaide" xml:space="preserve">
+    <value>Adelaide, Darwin</value>
+  </data>
+  <data name="Tz_Cities_Australia_Sydney" xml:space="preserve">
+    <value>Sydney, Melbourne, Brisbane</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Noumea" xml:space="preserve">
+    <value>Noumea, Salomonen</value>
+  </data>
+  <data name="Tz_Cities_Pacific_Auckland" xml:space="preserve">
+    <value>Auckland, Wellington, Fidschi</value>
+  </data>
   <!-- Timezone Regions -->
   <data name="Tz_Region_Europe" xml:space="preserve">
     <value>Europa</value>
@@ -1334,6 +1474,9 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Error_GenericMessage" xml:space="preserve">
     <value>Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.</value>
   </data>
+  <data name="Error_ApiUnavailable" xml:space="preserve">
+    <value>Der Server konnte nicht erreicht werden. Bitte versuche es später erneut.</value>
+  </data>
   <data name="Error_Details" xml:space="preserve">
     <value>Technische Details</value>
   </data>
@@ -1345,6 +1488,19 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="Error_HideDetails" xml:space="preserve">
     <value>Details ausblenden</value>
+  </data>
+  <data name="Error_ExitApp" xml:space="preserve">
+    <value>Später versuchen, App verlassen</value>
+  </data>
+  <data name="Error_BackToApp" xml:space="preserve">
+    <value>Zurück zur App</value>
+  </data>
+  <!-- Info Messages -->
+  <data name="Info_NoInternet_Title" xml:space="preserve">
+    <value>Keine Internetverbindung</value>
+  </data>
+  <data name="Info_NoInternet_TicketDownload" xml:space="preserve">
+    <value>Die neuesten Tickets und Bearbeitungsstände können daher leider nicht heruntergeladen werden.</value>
   </data>
   <!-- No Internet Page -->
   <data name="Page_NoInternet_Title" xml:space="preserve">
@@ -1367,5 +1523,8 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="NoInternet_StillOffline" xml:space="preserve">
     <value>Immer noch keine Internetverbindung verfügbar.</value>
+  </data>
+  <data name="ContextMenu_Title" xml:space="preserve">
+    <value>Kontextmenü</value>
   </data>
 </root>

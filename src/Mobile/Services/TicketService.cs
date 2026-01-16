@@ -12,21 +12,24 @@ public static class TicketService
 	#region API Sync Methods
 	/// <summary>
 	/// Aim: Download tickets from API and populate App.SupportEntries.
-	/// Return: True if successful, false if offline or failed.
+	/// Return: (success, hadNetwork) - success if API worked, hadNetwork indicates if internet was available.
 	/// </summary>
-	public static async Task<bool> DownloadTicketsAsync()
+	public static async Task<(bool success, bool hadNetwork)> DownloadTicketsAsync()
 	{
-		if (!MobileService.HasNetworkAccess())
+		var hasNetwork = MobileService.HasNetworkAccess();
+
+		if (!hasNetwork)
 		{
-			return false;
+			LoadSupportEntries(); // Load from local cache
+			return (false, false); // No network
 		}
 
-		
 		var tickets = await ApiService.GetTicketsAsync();
 
 		if (tickets == null)
 		{
-			return false;
+			LoadSupportEntries(); // Load from local cache on failure
+			return (false, true); // Had network but API failed
 		}
 
 		App.SupportEntries.Clear();
@@ -36,7 +39,29 @@ public static class TicketService
 			App.SupportEntries.Add(support);
 		}
 
-		return true;
+		SaveSupportEntries(); // Cache locally for offline use
+		App.ToastNoInternetAlreadyShown = false; // Reset flag on successful API call
+		return (true, true);
+	}
+
+	/// <summary>
+	/// Aim: Load support entries from local cache.
+	/// </summary>
+	private static void LoadSupportEntries()
+	{
+		var entries = PrefsHelper.GetValue<List<Support>>(MobileConstants.PREFS_SUPPORT_ENTRIES_CACHE);
+		if (entries != null)
+		{
+			App.SupportEntries = entries;
+		}
+	}
+
+	/// <summary>
+	/// Aim: Save support entries to local cache.
+	/// </summary>
+	private static void SaveSupportEntries()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT_ENTRIES_CACHE, App.SupportEntries);
 	}
 
 	/// <summary>
@@ -54,9 +79,8 @@ public static class TicketService
 			return false;
 		}
 
-		
-		var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
-		var message = FormatMessage(entry.Title, entry.Text);
+		var ticketType = (TicketType)entry.Type;
+		var message = FormatMessage(entry.Title, entry.Text, entry.Text2);
 
 		var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 
@@ -64,6 +88,7 @@ public static class TicketService
 		{
 			entry.Id = ticketId;
 			App.SupportEntries.Insert(0, entry);
+			App.ToastNoInternetAlreadyShown = false; // Reset flag on successful API call
 			return true;
 		}
 
@@ -92,8 +117,8 @@ public static class TicketService
 
 		foreach (var entry in pending)
 		{
-			var ticketType = ConvertSupportTypeToTicketType((SupportType)entry.Type);
-			var message = FormatMessage(entry.Title, entry.Text);
+			var ticketType = (TicketType)entry.Type;
+			var message = FormatMessage(entry.Title, entry.Text, entry.Text2);
 
 			var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 			if (ticketId > 0)
@@ -180,10 +205,10 @@ public static class TicketService
 
 	/// <summary>
 	/// Aim: Get all support entries filtered by type.
-	/// Params: type - The SupportType to filter by
-	/// Return: List of support entries matching the type
+	/// Params: type - The TicketType to filter by.
+	/// Return: List of support entries matching the type.
 	/// </summary>
-	public static List<Support> GetByType(SupportType type)
+	public static List<Support> GetByType(TicketType type)
 	{
 		var entries = App.SupportEntries
 			.Where(s => s.Type == (int)type)
@@ -207,89 +232,63 @@ public static class TicketService
 
 	#region Type Conversion Helpers
 	/// <summary>
-	/// Aim: Convert SupportType to TicketType.
-	/// Params: supportType - The SupportType to convert.
-	/// Return: Corresponding TicketType.
-	/// </summary>
-	public static TicketType ConvertSupportTypeToTicketType(SupportType supportType)
-	{
-		return supportType switch
-		{
-			SupportType.Bug => TicketType.Error,
-			SupportType.FeatureRequest => TicketType.FeatureRequest,
-			SupportType.Feedback => TicketType.CustomerFeedback,
-			_ => TicketType.SupportRequest
-		};
-	}
-
-	/// <summary>
-	/// Aim: Convert TicketType to SupportType.
-	/// Params: ticketType - The TicketType to convert.
-	/// Return: Corresponding SupportType.
-	/// </summary>
-	public static SupportType ConvertTicketTypeToSupportType(TicketType ticketType)
-	{
-		return ticketType switch
-		{
-			TicketType.Error => SupportType.Bug,
-			TicketType.FeatureRequest => SupportType.FeatureRequest,
-			TicketType.CustomerFeedback => SupportType.Feedback,
-			_ => SupportType.Feedback
-		};
-	}
-
-	/// <summary>
 	/// Aim: Convert TicketItem from API to Support model.
 	/// Params: ticket - The TicketItem to convert.
 	/// Return: Support model.
 	/// </summary>
 	private static Support ConvertTicketItemToSupport(TicketItem ticket)
 	{
-		var (title, text) = ParseMessage(ticket.Message);
+		var (title, text, text2) = ParseMessage(ticket.Message);
 		var support = new Support
 		{
 			Id = ticket.Id,
-			Type = (int)ConvertTicketTypeToSupportType(ticket.Type),
+			Type = (int)ticket.Type,
 			Title = title,
 			Text = text,
+			Text2 = text2,
 			CreatedAt = ticket.CreatedAt.LocalDateTime
 		};
 		return support;
 	}
 
 	/// <summary>
-	/// Aim: Format title and text into message for API.
-	/// Params: title - Ticket title, text - Ticket text.
+	/// Aim: Format title, text and text2 into message for API.
+	/// Params: title - Ticket title, text - Ticket text, text2 - Second text.
 	/// Return: Combined message string.
 	/// </summary>
-	private static string FormatMessage(string title, string text)
+	private static string FormatMessage(string title, string text, string text2)
 	{
-		if (string.IsNullOrEmpty(text))
+		var parts = new List<string> { title };
+		if (!string.IsNullOrEmpty(text))
 		{
-			return title;
+			parts.Add(text);
 		}
-		return $"{title}\n\n{text}";
+		if (!string.IsNullOrEmpty(text2))
+		{
+			parts.Add(text2);
+		}
+		return string.Join("\n\n", parts);
 	}
 
 	/// <summary>
-	/// Aim: Parse API message back to title and text.
+	/// Aim: Parse API message back to title, text and text2.
 	/// Params: message - The message to parse.
-	/// Return: Tuple of title and text.
+	/// Return: Tuple of title, text and text2.
 	/// </summary>
-	private static (string title, string text) ParseMessage(string message)
+	private static (string title, string text, string text2) ParseMessage(string message)
 	{
 		if (string.IsNullOrEmpty(message))
 		{
-			return (string.Empty, string.Empty);
+			return (string.Empty, string.Empty, string.Empty);
 		}
 
-		var parts = message.Split("\n\n", 2);
-		if (parts.Length == 2)
+		var parts = message.Split("\n\n", 3);
+		return parts.Length switch
 		{
-			return (parts[0], parts[1]);
-		}
-
-		return (message, string.Empty);
+			3 => (parts[0], parts[1], parts[2]),
+			2 => (parts[0], parts[1], string.Empty),
+			_ => (message, string.Empty, string.Empty)
+		};
 	}
 	#endregion
 

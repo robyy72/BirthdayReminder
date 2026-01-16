@@ -7,11 +7,11 @@
              NavigationPage.HasNavigationBar="False"
              Title="{x:Static resx:Resources.Page_Error_Title}">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <controls:CustomHeader Grid.Row="0"
                                Title="{x:Static resx:Resources.Page_Error_Title}"
                                ShowMenuButton="False"
-                               ShowBackButton="True"
+                               ShowBackButton="False"
                                ShowContextMenu="False" />
 
         <ScrollView Grid.Row="1">
@@ -29,7 +29,7 @@
                        HorizontalTextAlignment="Center" />
 
                 <Label x:Name="ErrorMessageLabel"
-                       Style="{StaticResource LabelInfoOnCard}"
+                       Style="{StaticResource LabelInfoOnPage}"
                        HorizontalTextAlignment="Center" />
 
                 <Border Style="{StaticResource Card}" IsVisible="False" x:Name="DetailsCard">
@@ -43,10 +43,6 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Button Text="{x:Static resx:Resources.Error_TryAgain}"
-                        Style="{StaticResource ButtonPrimary}"
-                        Clicked="OnTryAgainClicked" />
-
                 <Label Text="{x:Static resx:Resources.Error_ShowDetails}"
                        Style="{StaticResource LabelHelpLink}"
                        HorizontalOptions="Center"
@@ -58,6 +54,21 @@
 
             </VerticalStackLayout>
         </ScrollView>
+
+        <!-- Bottom Buttons -->
+        <VerticalStackLayout Grid.Row="2"
+                             Padding="20,40,20,20"
+                             Spacing="10">
+            <Button Text="{x:Static resx:Resources.Error_TryAgain}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Clicked="OnTryAgainClicked" />
+            <Button Text="{x:Static resx:Resources.Error_ExitApp}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Clicked="OnExitAppClicked" />
+            <Button Text="{x:Static resx:Resources.Error_BackToApp}"
+                    Style="{StaticResource ButtonGreen}"
+                    Clicked="OnBackToAppClicked" />
+        </VerticalStackLayout>
     </Grid>
 
 </ContentPage>

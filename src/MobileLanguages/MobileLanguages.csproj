@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<!-- Enable automatic generation of strongly typed resource classes -->
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,6 +14,11 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<CustomToolNamespace>MobileLanguages</CustomToolNamespace>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<StronglyTypedFileName>Resources.Designer.cs</StronglyTypedFileName>
+			<StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+			<StronglyTypedNamespace>MobileLanguages</StronglyTypedNamespace>
+			<StronglyTypedClassName>Resources</StronglyTypedClassName>
+			<PublicClass>true</PublicClass>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Resources.de.resx">
 			<DependentUpon>Resources.resx</DependentUpon>

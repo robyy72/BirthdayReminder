@@ -18,14 +18,14 @@
 
         <!-- Content with gold background -->
         <ScrollView Grid.Row="1"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <Grid RowDefinitions="*,Auto" Padding="30">
                 <!-- Content -->
                 <VerticalStackLayout Grid.Row="0" Spacing="20" VerticalOptions="Center">
 
                     <!-- "Der Geburtstag von" -->
                     <Label Text="{x:Static resx:Resources.Detail_BirthdayOf}"
-                           Style="{StaticResource LabelInfoOnCard}"
+                           Style="{StaticResource LabelInfoOnPage}"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center" />
 
@@ -37,7 +37,7 @@
 
                     <!-- "ist am" -->
                     <Label Text="{x:Static resx:Resources.Detail_IsOn}"
-                           Style="{StaticResource LabelInfoOnCard}"
+                           Style="{StaticResource LabelInfoOnPage}"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center" />
 
@@ -49,14 +49,14 @@
 
                     <!-- Alter (nur wenn Jahrgang bekannt) -->
                     <Label x:Name="AgeDisplayLabel"
-                           Style="{StaticResource LabelInfoOnCard}"
+                           Style="{StaticResource LabelInfoOnPage}"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center"
                            IsVisible="False" />
 
                     <!-- Days until -->
                     <Label x:Name="DaysUntilLabel"
-                           Style="{StaticResource LabelInfoOnCard}"
+                           Style="{StaticResource LabelInfoOnPage}"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center" />
 
@@ -68,7 +68,7 @@
 
                     <!-- Reminder info -->
                     <Label x:Name="ReminderInfoLabel"
-                           Style="{StaticResource LabelDescriptionOnCard}"
+                           Style="{StaticResource LabelDescriptionOnPage}"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center" />
 

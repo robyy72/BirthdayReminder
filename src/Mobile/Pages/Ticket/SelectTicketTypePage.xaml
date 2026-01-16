@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.SelectTicketTypePage"
+             NavigationPage.HasNavigationBar="False"
+             Title="{x:Static resx:Resources.Page_SelectTicketType_Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader Grid.Row="0"
+                               Title="{x:Static resx:Resources.Page_SelectTicketType_Title}"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Ticket Type Selection -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="0">
+                        <Border Style="{StaticResource CardHeader}">
+                            <Label Text="{x:Static resx:Resources.SelectTicketType_Header}"
+                                   Style="{StaticResource LabelCardHeader}" />
+                        </Border>
+                        <VerticalStackLayout Padding="20" Spacing="15"
+                                             RadioButtonGroup.GroupName="TicketTypeGroup">
+                            <RadioButton x:Name="RadioBug" Value="Bug">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Ticket_Type_Bug}"
+                                           Style="{StaticResource LabelInfoOnCard}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton x:Name="RadioFeature" Value="Feature">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Ticket_Type_FeatureRequest}"
+                                           Style="{StaticResource LabelInfoOnCard}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton x:Name="RadioFeedback" Value="Feedback" IsChecked="True">
+                                <RadioButton.Content>
+                                    <Label Text="{x:Static resx:Resources.Ticket_Type_Feedback}"
+                                           Style="{StaticResource LabelInfoOnCard}" />
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Continue Button -->
+                <Button Text="{x:Static resx:Resources.General_Button_Next}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnContinueClicked"
+                        Margin="0,20,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

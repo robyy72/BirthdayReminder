@@ -20,7 +20,7 @@
         <Grid Grid.Row="1"
               RowDefinitions="Auto,*"
               Padding="20,20,20,0"
-              BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray900}}">
+              BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <!-- Month Filter Picker -->
             <Picker x:Name="MonthPicker"
                     Style="{StaticResource PickerBase}"
@@ -61,7 +61,7 @@
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>
                     <Label Text="{x:Static resx:Resources.EmptyView_NoBirthdays}"
-                           Style="{StaticResource LabelInfoOnCard}"
+                           Style="{StaticResource LabelInfoOnPage}"
                            HorizontalOptions="Center"
                            Padding="20" />
                 </CollectionView.EmptyView>

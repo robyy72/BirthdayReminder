@@ -24,7 +24,8 @@
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
-    <Color x:Key="PageBackground">#FFF3E0</Color>
+    <Color x:Key="BodyBackgroundLight">#FFF3E0</Color>
+    <Color x:Key="BodyBackgroundDark">#212121</Color>
 
     <!-- Theme Colors -->
     <Color x:Key="Primary">#0066CC</Color>

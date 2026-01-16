@@ -6,17 +6,19 @@
     <!-- Header Bar -->
     <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}"
           MinimumHeightRequest="50"
-          Padding="15,5,12,5"
-          ColumnDefinitions="Auto,*,Auto">
+          Padding="5,5"
+          ColumnDefinitions="44,*,44">
 
         <!-- Menu Button (Hamburger) -->
         <Button x:Name="MenuButton"
                 Grid.Column="0"
-                Text="☰"
-                FontSize="24"
+                Text="≡"
+                FontSize="28"
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
+                WidthRequest="44"
+                Padding="0"
                 Clicked="OnMenuClicked" />
 
         <!-- Back Button -->
@@ -27,6 +29,8 @@
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
+                WidthRequest="44"
+                Padding="0"
                 IsVisible="False"
                 Clicked="OnBackClicked" />
 
@@ -35,6 +39,8 @@
                Grid.Column="1"
                Text=""
                Style="{StaticResource LabelHeaderBar}"
+               LineBreakMode="NoWrap"
+               MaxLines="1"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
@@ -46,10 +52,25 @@
                 TextColor="{StaticResource White}"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
-                MinimumWidthRequest="30"
+                WidthRequest="44"
+                Padding="0"
                 Opacity="0"
                 InputTransparent="True"
                 Clicked="OnContextMenuButtonClicked" />
+
+        <!-- Add Button (uses Opacity to reserve space when hidden) -->
+        <Button x:Name="AddButton"
+                Grid.Column="2"
+                Text="+"
+                FontSize="28"
+                TextColor="{StaticResource White}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                WidthRequest="44"
+                Padding="0"
+                Opacity="0"
+                InputTransparent="True"
+                Clicked="OnAddButtonClicked" />
     </Grid>
 
 </ContentView>

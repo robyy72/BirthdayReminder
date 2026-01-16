@@ -22,6 +22,7 @@ public partial class App : Application
     public static List<ErrorLog> ErrorLogs { get; set; } = [];
     public static Account Account { get; set; } = new();
     public static bool NeedsSyncContacts { get; set; } = false;
+    public static bool ToastNoInternetAlreadyShown { get; set; } = false;
 
     #region Navigation (for reusable pages)
     public static Type? ForwardPageType { get; set; }
@@ -259,10 +260,6 @@ public partial class App : Application
     /// </summary>
     private void InitSync()
     {
-        bool startAlwaysWithWelcome = MobileConstants.START_ALWAYS_WITH_WELCOME;
-        if (startAlwaysWithWelcome)
-            PrefsHelper.RemoveAllKeys();
-
         PersonService.Load();
         AccountService.Load();
         TicketService.LoadEntries();

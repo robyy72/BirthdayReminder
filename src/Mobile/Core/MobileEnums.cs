@@ -14,13 +14,6 @@ public enum HelpTopic
 	Timezone = 10
 }
 
-public enum SupportType
-{
-	Bug = 1,
-	FeatureRequest = 2,
-	Feedback = 3
-}
-
 public enum ContactsReadMode
 {
 	NotSet = 0,

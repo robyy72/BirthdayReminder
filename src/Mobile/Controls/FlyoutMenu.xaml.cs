@@ -1,3 +1,5 @@
+using Common;
+
 namespace Mobile;
 
 /// <summary>
@@ -29,7 +31,7 @@ public partial class FlyoutMenu : ContentView
         IsVisible = true;
         await Task.WhenAll(
             FlyoutPanel.TranslateTo(0, 0, AnimationDuration, Easing.CubicOut),
-            Overlay.FadeTo(1, AnimationDuration)
+            Overlay.FadeTo(0.4, AnimationDuration) // Semi-transparent overlay
         );
     }
 
@@ -101,6 +103,13 @@ public partial class FlyoutMenu : ContentView
         await Close();
         await App.NavigateToRootAsync();
         await App.NavigateToAsync<PrivacyPage>();
+    }
+
+    private async void OnTicketsTapped(object? sender, TappedEventArgs e)
+    {
+        await Close();
+        await App.NavigateToRootAsync();
+        await App.NavigateToAsync<TicketListPage>();
     }
     #endregion
 }

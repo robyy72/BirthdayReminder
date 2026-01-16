@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
+             xmlns:controls="clr-namespace:Mobile"
+             x:Class="Mobile.CreateTicketPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Custom Header -->
+        <controls:CustomHeader x:Name="TheHeader"
+                               Grid.Row="0"
+                               ShowMenuButton="False"
+                               ShowBackButton="True" />
+
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
+            <VerticalStackLayout Padding="30" Spacing="15">
+
+                <!-- Error Display -->
+                <Border x:Name="ErrorBorder" Style="{StaticResource BorderError}">
+                    <Label x:Name="ErrorLabel" Style="{StaticResource LabelError}" />
+                </Border>
+
+                <!-- Title Entry -->
+                <Border Style="{StaticResource TileOuterForEntry}">
+                    <Border Style="{StaticResource TileInnerForEntry}">
+                        <Entry x:Name="TitleEntry"
+                               Style="{StaticResource EntryStandard}"
+                               Focused="OnEntryFocused"
+                               Unfocused="OnEntryUnfocused" />
+                    </Border>
+                </Border>
+
+                <!-- Text Editor 1 -->
+                <Border Style="{StaticResource TileOuterForEntry}">
+                    <Border Style="{StaticResource TileInnerForEntry}">
+                        <Editor x:Name="Text1Editor"
+                                HeightRequest="120"
+                                AutoSize="TextChanges" />
+                    </Border>
+                </Border>
+
+                <!-- Text Editor 2 -->
+                <Border Style="{StaticResource TileOuterForEntry}">
+                    <Border Style="{StaticResource TileInnerForEntry}">
+                        <Editor x:Name="Text2Editor"
+                                HeightRequest="120"
+                                AutoSize="TextChanges" />
+                    </Border>
+                </Border>
+
+                <!-- Bottom Buttons -->
+                <Button Text="{x:Static resx:Resources.General_Button_Send}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Clicked="OnSaveClicked"
+                        Margin="0,20,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

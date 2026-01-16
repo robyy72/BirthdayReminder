@@ -34,16 +34,12 @@ public partial class SettingsPage : ContentPage
 		else
 			RadioLight.IsChecked = true;
 
-		// Name Direction
-		if (account.PersonNameDirection == PersonNameDirection.FirstLastName)
+		UpdateLanguageLabel();
+
+		if (account.PersonNameDirection == Common.PersonNameDirection.FirstLastName)
 			RadioFirstLastName.IsChecked = true;
 		else
 			RadioFirstFirstName.IsChecked = true;
-
-		if (account.Locale == "en")
-			RadioEn.IsChecked = true;
-		else
-			RadioDe.IsChecked = true;
 
 		if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
 			RadioContactsNone.IsChecked = true;
@@ -57,6 +53,37 @@ public partial class SettingsPage : ContentPage
 		{
 			_ = LoadCalendarsAsync(account.DeviceCalendar_SelectedIds);
 		}
+
+		// Timezone
+		UpdateTimezoneLabel();
+	}
+
+	private void UpdateTimezoneLabel()
+	{
+		var timezones = TimezoneService.LoadTimezones();
+		int index = TimezoneService.GetIndex(App.Account.TimeZoneId);
+		if (index >= 0 && index < timezones.Count)
+		{
+			var tz = timezones[index];
+			string prefix = MobileLanguages.Resources.Timezone_Select_Current;
+			CurrentTimezoneLabel.Text = $"{prefix}: {tz.RegionWithOffset}";
+			CurrentTimezoneCitiesLabel.Text = tz.Cities;
+		}
+	}
+
+	private void UpdateLanguageLabel()
+	{
+		string locale = App.Account.Locale ?? "de";
+		string langName = locale == "de" ? "Deutsch" : "English";
+		string prefix = MobileLanguages.Resources.Language_Select_Current;
+		CurrentLanguageLabel.Text = $"{prefix}: {langName}";
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		UpdateLanguageLabel();
+		UpdateTimezoneLabel();
 	}
 	#endregion
 
@@ -84,6 +111,11 @@ public partial class SettingsPage : ContentPage
 	private void OnAccordion5Tapped(object? sender, TappedEventArgs e)
 	{
 		ToggleAccordion(5);
+	}
+
+	private void OnAccordion6Tapped(object? sender, TappedEventArgs e)
+	{
+		ToggleAccordion(6);
 	}
 
 	private void ToggleAccordion(int accordionNumber)
@@ -115,6 +147,7 @@ public partial class SettingsPage : ContentPage
 			3 => Accordion3Content,
 			4 => Accordion4Content,
 			5 => Accordion5Content,
+			6 => Accordion6Content,
 			_ => null
 		};
 
@@ -125,6 +158,7 @@ public partial class SettingsPage : ContentPage
 			3 => Accordion3Arrow,
 			4 => Accordion4Arrow,
 			5 => Accordion5Arrow,
+			6 => Accordion6Arrow,
 			_ => null
 		};
 
@@ -133,6 +167,47 @@ public partial class SettingsPage : ContentPage
 
 		if (arrow != null)
 			arrow.Text = isOpen ? "▲" : "▼";
+	}
+	#endregion
+
+	#region Theme
+	private void OnThemeRadioChanged(object? sender, CheckedChangedEventArgs e)
+	{
+		if (!e.Value || _isLoading)
+			return;
+
+		var account = App.Account;
+
+		if (sender == RadioDark)
+			account.Theme = "Dark";
+		else
+			account.Theme = "Light";
+
+		DeviceService.ApplyTheme(account.Theme);
+		AccountService.Save();
+	}
+	#endregion
+
+	#region Language
+	private void OnLanguageAdjustClicked(object? sender, EventArgs e)
+	{
+		App.BackwardPageType = typeof(SettingsPage);
+		App.SetRootPage(new SelectLanguagePage());
+	}
+	#endregion
+
+	#region Name Direction
+	private void OnNameDirectionRadioChanged(object? sender, CheckedChangedEventArgs e)
+	{
+		if (!e.Value || _isLoading)
+			return;
+
+		if (sender == RadioFirstLastName)
+			App.Account.PersonNameDirection = Common.PersonNameDirection.FirstLastName;
+		else
+			App.Account.PersonNameDirection = Common.PersonNameDirection.FirstFirstName;
+
+		AccountService.Save();
 	}
 	#endregion
 
@@ -154,6 +229,17 @@ public partial class SettingsPage : ContentPage
 					MobileLanguages.Resources.General_Button_OK);
 			}
 		}
+
+		// Save contacts mode immediately
+		var account = App.Account;
+		if (RadioContactsNone.IsChecked)
+			account.ContactsReadMode = ContactsReadMode.None;
+		else if (RadioContactsRead.IsChecked)
+		{
+			if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
+				account.ContactsReadMode = ContactsReadMode.ReadNamesWithBirthday;
+		}
+		AccountService.Save();
 	}
 	#endregion
 
@@ -180,6 +266,10 @@ public partial class SettingsPage : ContentPage
 		}
 
 		UpdateCalendarListVisibility();
+
+		// Save immediately
+		App.Account.DeviceCalendar_Enabled = WriteCalendarsSwitch.IsToggled;
+		AccountService.Save();
 	}
 
 	private void UpdateCalendarListVisibility()
@@ -259,7 +349,11 @@ public partial class SettingsPage : ContentPage
 				IsToggled = calendar.IsSelected,
 				VerticalOptions = LayoutOptions.Center
 			};
-			toggle.Toggled += (s, e) => calendar.IsSelected = e.Value;
+			toggle.Toggled += (s, e) =>
+			{
+				calendar.IsSelected = e.Value;
+				SaveCalendarSelection();
+			};
 			grid.SetColumn(toggle, 2);
 
 			grid.Children.Add(colorBox);
@@ -271,58 +365,50 @@ public partial class SettingsPage : ContentPage
 	}
 	#endregion
 
-	#region Save
-	private async void OnSaveClicked(object? sender, EventArgs e)
+	#region Display Settings
+	private void OnUpcomingEntryUnfocused(object? sender, FocusEventArgs e)
 	{
-		var account = App.Account;
+		if (_isLoading)
+			return;
 
 		if (int.TryParse(UpcomingEntry.Text, out int upcoming))
-			account.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+		{
+			App.Account.ShowUpcomingBirthdays = Math.Clamp(upcoming, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+			UpcomingEntry.Text = App.Account.ShowUpcomingBirthdays.ToString();
+			AccountService.Save();
+		}
+	}
+
+	private void OnPastEntryUnfocused(object? sender, FocusEventArgs e)
+	{
+		if (_isLoading)
+			return;
 
 		if (int.TryParse(PastEntry.Text, out int past))
-			account.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
-
-		if (RadioDark.IsChecked)
-			account.Theme = "Dark";
-		else
-			account.Theme = "Light";
-
-		DeviceService.ApplyTheme(account.Theme);
-
-		// Name Direction
-		if (RadioFirstLastName.IsChecked)
-			account.PersonNameDirection = PersonNameDirection.FirstLastName;
-		else
-			account.PersonNameDirection = PersonNameDirection.FirstFirstName;
-
-		if (RadioEn.IsChecked)
-			account.Locale = "en";
-		else
-			account.Locale = "de";
-
-		if (RadioContactsNone.IsChecked)
-			account.ContactsReadMode = ContactsReadMode.None;
-		else if (RadioContactsRead.IsChecked)
 		{
-			// If enabling contacts, default to ReadNamesWithBirthday if not already set
-			if (account.ContactsReadMode == ContactsReadMode.None || account.ContactsReadMode == ContactsReadMode.NotSet)
-				account.ContactsReadMode = ContactsReadMode.ReadNamesWithBirthday;
+			App.Account.ShowPastBirthdays = Math.Clamp(past, 1, MobileConstants.SHOW_MAX_BIRTHDAYS);
+			PastEntry.Text = App.Account.ShowPastBirthdays.ToString();
+			AccountService.Save();
 		}
+	}
+	#endregion
 
-		account.DeviceCalendar_Enabled = WriteCalendarsSwitch.IsToggled;
-		account.DeviceCalendar_SelectedIds = _calendars
+	#region Timezone
+	private void OnTimezoneAdjustClicked(object? sender, EventArgs e)
+	{
+		App.BackwardPageType = typeof(SettingsPage);
+		App.SetRootPage(new SelectTimezonePage());
+	}
+	#endregion
+
+	#region Calendar Helpers
+	private void SaveCalendarSelection()
+	{
+		App.Account.DeviceCalendar_SelectedIds = _calendars
 			.Where(c => c.IsSelected)
 			.Select(c => c.Id)
 			.ToList();
-
 		AccountService.Save();
-
-		await DisplayAlert(
-			MobileLanguages.Resources.Settings_Saved_Title,
-			MobileLanguages.Resources.Settings_Saved_Message,
-			MobileLanguages.Resources.General_Button_OK);
-
-		await App.GoBackAsync();
 	}
 	#endregion
 }
