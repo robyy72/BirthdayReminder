@@ -52,6 +52,7 @@ public static class MobileConstants
 	public const string PREFS_REMINDER_SETTINGS_SHOWN = "ReminderSettingsShown";
 	public const string PREFS_SUPPORT = "Support";
 	public const string PREFS_SUPPORT_ENTRIES = "SupportEntries";
+	public const string PREFS_SUPPORT_ENTRIES_CACHE = "SupportEntriesCache";
 	public const string PREFS_NOT_UPLOADED_TICKETS = "NotUploadedTickets";
 	public const string PREFS_NOT_UPLOADED_ERROR_LOGS = "NotUploadedErrorLogs";
 	public const string PREFS_BROKEN_VERSION = "BrokenVersion";

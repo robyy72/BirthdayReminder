@@ -5,7 +5,8 @@
              xmlns:controls="clr-namespace:Mobile"
              x:Class="Mobile.TicketListPage"
              NavigationPage.HasNavigationBar="False"
-             Title="{x:Static resx:Resources.Page_TicketList_Title}">
+             Title="{x:Static resx:Resources.Page_TicketList_Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
 
     <Grid RowDefinitions="Auto,Auto,*">
         <!-- Custom Header with Add Button -->
@@ -21,13 +22,8 @@
         <Grid Grid.Row="1"
               Padding="20,15"
               BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
-            <Border Style="{StaticResource TileOuterForPicker}">
-                <Border Style="{StaticResource TileInnerForPicker}">
-                    <Picker x:Name="FilterPicker"
-                            Style="{StaticResource PickerFilter}"
-                            SelectedIndexChanged="OnFilterChanged" />
-                </Border>
-            </Border>
+            <controls:CustomDropdown x:Name="FilterDropdown"
+                                     SelectedIndexChanged="OnFilterChanged" />
         </Grid>
 
         <!-- Loading Indicator -->

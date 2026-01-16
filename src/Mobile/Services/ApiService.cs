@@ -189,16 +189,28 @@ public static class ApiService
 		{
 			if (!MobileService.HasNetworkAccess()) return null;
 
+			System.Diagnostics.Debug.WriteLine($"[ApiService] GetTicketsAsync - BaseUrl: {_baseUrl}");
 			await AddAuthHeaderAsync();
+			System.Diagnostics.Debug.WriteLine("[ApiService] Auth header added, calling API...");
+
 			var response = await _httpClient.GetAsync($"{_baseUrl}/api/support");
-			if (!response.IsSuccessStatusCode) return null;
+			System.Diagnostics.Debug.WriteLine($"[ApiService] Response: {response.StatusCode}");
+
+			if (!response.IsSuccessStatusCode)
+			{
+				var errorContent = await response.Content.ReadAsStringAsync();
+				System.Diagnostics.Debug.WriteLine($"[ApiService] Error content: {errorContent}");
+				return null;
+			}
 
 			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 			var tickets = await response.Content.ReadFromJsonAsync<List<TicketItem>>(options);
+			System.Diagnostics.Debug.WriteLine($"[ApiService] Parsed {tickets?.Count ?? 0} tickets");
 			return tickets;
 		}
 		catch (Exception ex)
 		{
+			System.Diagnostics.Debug.WriteLine($"[ApiService] Exception: {ex.GetType().Name} - {ex.Message}");
 			ErrorService.Handle(ex);
 			return null;
 		}

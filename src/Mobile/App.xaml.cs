@@ -22,6 +22,7 @@ public partial class App : Application
     public static List<ErrorLog> ErrorLogs { get; set; } = [];
     public static Account Account { get; set; } = new();
     public static bool NeedsSyncContacts { get; set; } = false;
+    public static bool ToastNoInternetAlreadyShown { get; set; } = false;
 
     #region Navigation (for reusable pages)
     public static Type? ForwardPageType { get; set; }

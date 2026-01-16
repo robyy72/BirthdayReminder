@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MobileLanguages;assembly=MobileLanguages"
              x:Class="Mobile.ContextMenu"
-             IsVisible="False">
+             IsVisible="False"
+             HorizontalOptions="Fill"
+             VerticalOptions="Fill">
 
-    <Grid>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
         <!-- Semi-transparent overlay (tap to close) -->
         <BoxView x:Name="Overlay"
-                 Color="#80000000"
-                 Opacity="0">
+                 Color="Black"
+                 Opacity="0"
+                 ZIndex="1">
             <BoxView.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnOverlayTapped" />
             </BoxView.GestureRecognizers>
         </BoxView>
 
-        <!-- Context Menu Panel (unfolds from right edge) -->
-        <Border x:Name="ContextMenuPanel"
-                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
-                StrokeThickness="0"
-                Padding="0"
-                HorizontalOptions="End"
-                WidthRequest="180"
-                AnchorX="1"
-                ScaleX="0">
-            <Border.Shadow>
-                <Shadow Brush="Black" Offset="-3,3" Radius="8" Opacity="0.3" />
-            </Border.Shadow>
+        <!-- Context Menu Panel - using Frame instead of Border for Android compatibility -->
+        <Frame x:Name="ContextMenuPanel"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+               BorderColor="Transparent"
+               CornerRadius="8"
+               Padding="0"
+               Margin="0,60,10,0"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               ZIndex="2"
+               HasShadow="True"
+               Scale="0">
 
-            <!-- Menu Items -->
-            <VerticalStackLayout x:Name="MenuItemsContainer"
-                                 Padding="10,15"
-                                 Spacing="5" />
-        </Border>
+            <VerticalStackLayout Spacing="0">
+                <!-- Header -->
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray800}}"
+                       CornerRadius="8"
+                       Padding="15,0"
+                       HeightRequest="45"
+                       HasShadow="False"
+                       BorderColor="Transparent">
+                    <Label Text="{x:Static resx:Resources.ContextMenu_Title}"
+                           Style="{StaticResource LabelHeaderBar}"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <!-- Menu Items -->
+                <VerticalStackLayout x:Name="MenuItemsContainer"
+                                     Padding="8,10"
+                                     Spacing="3" />
+            </VerticalStackLayout>
+        </Frame>
     </Grid>
 
 </ContentView>

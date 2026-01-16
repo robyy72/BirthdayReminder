@@ -312,6 +312,30 @@
         <Setter Property="Padding" Value="12,10" />
     </Style>
 
+    <Style TargetType="Border" x:Key="TileContextMenu" BasedOn="{StaticResource Tile}">
+        <Setter Property="Margin" Value="5,3" />
+        <Setter Property="Padding" Value="12,10" />
+    </Style>
+
+    <!-- Frame styles for Android compatibility (Border doesn't render properly on Android) -->
+    <Style TargetType="Frame" x:Key="FrameFlyout">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="Margin" Value="10,5" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="HasShadow" Value="True" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="FrameContextMenu">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="Margin" Value="5,3" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="HasShadow" Value="True" />
+    </Style>
+
     <Style TargetType="Border" x:Key="TilePersonResult" BasedOn="{StaticResource Tile}">
         <Setter Property="Padding" Value="0" />
         <Setter Property="Shadow" Value="{x:Null}" />

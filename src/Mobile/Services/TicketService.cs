@@ -12,21 +12,24 @@ public static class TicketService
 	#region API Sync Methods
 	/// <summary>
 	/// Aim: Download tickets from API and populate App.SupportEntries.
-	/// Return: True if successful, false if offline or failed.
+	/// Return: (success, hadNetwork) - success if API worked, hadNetwork indicates if internet was available.
 	/// </summary>
-	public static async Task<bool> DownloadTicketsAsync()
+	public static async Task<(bool success, bool hadNetwork)> DownloadTicketsAsync()
 	{
-		if (!MobileService.HasNetworkAccess())
+		var hasNetwork = MobileService.HasNetworkAccess();
+
+		if (!hasNetwork)
 		{
-			return false;
+			LoadSupportEntries(); // Load from local cache
+			return (false, false); // No network
 		}
 
-		
 		var tickets = await ApiService.GetTicketsAsync();
 
 		if (tickets == null)
 		{
-			return false;
+			LoadSupportEntries(); // Load from local cache on failure
+			return (false, true); // Had network but API failed
 		}
 
 		App.SupportEntries.Clear();
@@ -36,7 +39,29 @@ public static class TicketService
 			App.SupportEntries.Add(support);
 		}
 
-		return true;
+		SaveSupportEntries(); // Cache locally for offline use
+		App.ToastNoInternetAlreadyShown = false; // Reset flag on successful API call
+		return (true, true);
+	}
+
+	/// <summary>
+	/// Aim: Load support entries from local cache.
+	/// </summary>
+	private static void LoadSupportEntries()
+	{
+		var entries = PrefsHelper.GetValue<List<Support>>(MobileConstants.PREFS_SUPPORT_ENTRIES_CACHE);
+		if (entries != null)
+		{
+			App.SupportEntries = entries;
+		}
+	}
+
+	/// <summary>
+	/// Aim: Save support entries to local cache.
+	/// </summary>
+	private static void SaveSupportEntries()
+	{
+		PrefsHelper.SetValue(MobileConstants.PREFS_SUPPORT_ENTRIES_CACHE, App.SupportEntries);
 	}
 
 	/// <summary>
@@ -63,6 +88,7 @@ public static class TicketService
 		{
 			entry.Id = ticketId;
 			App.SupportEntries.Insert(0, entry);
+			App.ToastNoInternetAlreadyShown = false; // Reset flag on successful API call
 			return true;
 		}
 

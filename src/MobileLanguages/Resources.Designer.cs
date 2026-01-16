@@ -266,6 +266,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Ticket.
+        /// </summary>
+        public static string Button_CreateTicket {
+            get {
+                return ResourceManager.GetString("Button_CreateTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Let&apos;s go.
         /// </summary>
         public static string Button_LetsGo {
@@ -343,6 +352,15 @@ namespace MobileLanguages {
         public static string ContextMenu_Subscribe {
             get {
                 return ResourceManager.GetString("ContextMenu_Subscribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Context Menu.
+        /// </summary>
+        public static string ContextMenu_Title {
+            get {
+                return ResourceManager.GetString("ContextMenu_Title", resourceCulture);
             }
         }
         
@@ -482,6 +500,15 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server could not be reached. Please try again later..
+        /// </summary>
+        public static string Error_ApiUnavailable {
+            get {
+                return ResourceManager.GetString("Error_ApiUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Technical Details.
         /// </summary>
         public static string Error_Details {
@@ -563,6 +590,24 @@ namespace MobileLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show all ticket types.
+        /// </summary>
+        public static string Filter_AllTicketTypes {
+            get {
+                return ResourceManager.GetString("Filter_AllTicketTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtered by.
+        /// </summary>
+        public static string Filter_FilteredBy {
+            get {
+                return ResourceManager.GetString("Filter_FilteredBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account.
         /// </summary>
         public static string Flyout_Account {
@@ -622,6 +667,15 @@ namespace MobileLanguages {
         public static string Flyout_Tickets {
             get {
                 return ResourceManager.GetString("Flyout_Tickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main Menu.
+        /// </summary>
+        public static string Flyout_Title {
+            get {
+                return ResourceManager.GetString("Flyout_Title", resourceCulture);
             }
         }
         
@@ -1103,6 +1157,24 @@ namespace MobileLanguages {
         public static string Help_UseContacts_Header {
             get {
                 return ResourceManager.GetString("Help_UseContacts_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The latest tickets and processing status could not be downloaded..
+        /// </summary>
+        public static string Info_NoInternet_TicketDownload {
+            get {
+                return ResourceManager.GetString("Info_NoInternet_TicketDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Internet Connection.
+        /// </summary>
+        public static string Info_NoInternet_Title {
+            get {
+                return ResourceManager.GetString("Info_NoInternet_Title", resourceCulture);
             }
         }
         

@@ -117,11 +117,15 @@
         <!-- Flyout Menu Overlay (spans all rows) -->
         <controls:FlyoutMenu x:Name="TheFlyout"
                              Grid.Row="0"
-                             Grid.RowSpan="2" />
+                             Grid.RowSpan="2"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Fill" />
 
         <!-- Context Menu Overlay (spans all rows) -->
         <controls:ContextMenu x:Name="TheContextMenu"
                               Grid.Row="0"
-                              Grid.RowSpan="2" />
+                              Grid.RowSpan="2"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Fill" />
     </Grid>
 </ContentPage>

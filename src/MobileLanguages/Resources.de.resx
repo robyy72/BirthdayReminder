@@ -324,6 +324,9 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Button_LetsGo" xml:space="preserve">
     <value>Los geht's</value>
   </data>
+  <data name="Button_CreateTicket" xml:space="preserve">
+    <value>Ticket erstellen</value>
+  </data>
   <data name="Settings_Theme" xml:space="preserve">
     <value>Design auswählen</value>
   </data>
@@ -776,6 +779,9 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
   <data name="Flyout_Tickets" xml:space="preserve">
     <value>Meine Tickets</value>
   </data>
+  <data name="Flyout_Title" xml:space="preserve">
+    <value>Hauptmenü</value>
+  </data>
   <!-- Reminder Methods - Local -->
   <data name="ReminderMethod_Notification" xml:space="preserve">
     <value>Push-Message auf dem Sperrbildschirm</value>
@@ -966,6 +972,12 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="Filter_All" xml:space="preserve">
     <value>-- alle --</value>
+  </data>
+  <data name="Filter_AllTicketTypes" xml:space="preserve">
+    <value>Alle Tickettypen anzeigen</value>
+  </data>
+  <data name="Filter_FilteredBy" xml:space="preserve">
+    <value>Gefiltert nach</value>
   </data>
   <!-- Reminder Status -->
   <data name="Reminder_Status_Free" xml:space="preserve">
@@ -1462,6 +1474,9 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Error_GenericMessage" xml:space="preserve">
     <value>Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.</value>
   </data>
+  <data name="Error_ApiUnavailable" xml:space="preserve">
+    <value>Der Server konnte nicht erreicht werden. Bitte versuche es später erneut.</value>
+  </data>
   <data name="Error_Details" xml:space="preserve">
     <value>Technische Details</value>
   </data>
@@ -1473,6 +1488,13 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="Error_HideDetails" xml:space="preserve">
     <value>Details ausblenden</value>
+  </data>
+  <!-- Info Messages -->
+  <data name="Info_NoInternet_Title" xml:space="preserve">
+    <value>Keine Internetverbindung</value>
+  </data>
+  <data name="Info_NoInternet_TicketDownload" xml:space="preserve">
+    <value>Die neuesten Tickets und Bearbeitungsstände können daher leider nicht heruntergeladen werden.</value>
   </data>
   <!-- No Internet Page -->
   <data name="Page_NoInternet_Title" xml:space="preserve">
@@ -1495,5 +1517,8 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   </data>
   <data name="NoInternet_StillOffline" xml:space="preserve">
     <value>Immer noch keine Internetverbindung verfügbar.</value>
+  </data>
+  <data name="ContextMenu_Title" xml:space="preserve">
+    <value>Kontextmenü</value>
   </data>
 </root>

@@ -402,6 +402,9 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Button_LetsGo" xml:space="preserve">
     <value>Let's go</value>
   </data>
+  <data name="Button_CreateTicket" xml:space="preserve">
+    <value>Create Ticket</value>
+  </data>
   <data name="Settings_Theme" xml:space="preserve">
     <value>Select Theme</value>
   </data>
@@ -843,6 +846,9 @@ If you don't know the birth year, simply choose "Without year" when selecting th
   <data name="Flyout_Tickets" xml:space="preserve">
     <value>My Tickets</value>
   </data>
+  <data name="Flyout_Title" xml:space="preserve">
+    <value>Main Menu</value>
+  </data>
   <data name="ReminderMethod_Notification" xml:space="preserve">
     <value>Push notification on lockscreen</value>
   </data>
@@ -1024,6 +1030,12 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="Filter_All" xml:space="preserve">
     <value>-- all --</value>
+  </data>
+  <data name="Filter_AllTicketTypes" xml:space="preserve">
+    <value>Show all ticket types</value>
+  </data>
+  <data name="Filter_FilteredBy" xml:space="preserve">
+    <value>Filtered by</value>
   </data>
   <data name="Reminder_Status_Free" xml:space="preserve">
     <value>Free</value>
@@ -1512,6 +1524,9 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Error_GenericMessage" xml:space="preserve">
     <value>An unexpected error occurred. Please try again.</value>
   </data>
+  <data name="Error_ApiUnavailable" xml:space="preserve">
+    <value>The server could not be reached. Please try again later.</value>
+  </data>
   <data name="Error_Details" xml:space="preserve">
     <value>Technical Details</value>
   </data>
@@ -1523,6 +1538,13 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="Error_HideDetails" xml:space="preserve">
     <value>Hide Details</value>
+  </data>
+  <!-- Info Messages -->
+  <data name="Info_NoInternet_Title" xml:space="preserve">
+    <value>No Internet Connection</value>
+  </data>
+  <data name="Info_NoInternet_TicketDownload" xml:space="preserve">
+    <value>The latest tickets and processing status could not be downloaded.</value>
   </data>
   <!-- No Internet Page -->
   <data name="Page_NoInternet_Title" xml:space="preserve">
@@ -1566,5 +1588,8 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   </data>
   <data name="Page_SyncContacts_NoNewContacts" xml:space="preserve">
     <value>No new contacts found</value>
+  </data>
+  <data name="ContextMenu_Title" xml:space="preserve">
+    <value>Context Menu</value>
   </data>
 </root>
