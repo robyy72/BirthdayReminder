@@ -48,7 +48,8 @@ public partial class TicketDetailPage : ContentPage
 
 		TypeHeaderLabel.Text = typeText;
 		TitleLabel.Text = _ticket.Title;
-		TextLabel.Text = _ticket.Text;
+		Text1Label.Text = _ticket.Text;
+		Text2Label.Text = _ticket.Text2;
 
 		LoadEntries();
 	}

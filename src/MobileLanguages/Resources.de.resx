@@ -888,40 +888,6 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
 • E-Mail-Erinnerungen sind mit begrenzter Anzahl pro Monat kostenlos. Für unbegrenzte E-Mails ist ein Abonnement erforderlich.
 • Die Signal-Integration hängt von der Verfügbarkeit des Drittanbieters ab und kann nicht dauerhaft garantiert werden.</value>
   </data>
-  <!-- Support -->
-  <data name="Support_ReportBug" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="Support_FeatureRequest" xml:space="preserve">
-    <value>Feature vorschlagen</value>
-  </data>
-  <data name="Support_Feedback" xml:space="preserve">
-    <value>Feedback geben</value>
-  </data>
-  <data name="Page_NewSupport_Title" xml:space="preserve">
-    <value>Neuer Eintrag</value>
-  </data>
-  <data name="Page_SupportOverview_Title" xml:space="preserve">
-    <value>Support Übersicht</value>
-  </data>
-  <data name="Page_SupportDetail_Title" xml:space="preserve">
-    <value>Support Details</value>
-  </data>
-  <data name="Support_Title" xml:space="preserve">
-    <value>Titel</value>
-  </data>
-  <data name="Support_Text" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="Support_Type_Bug" xml:space="preserve">
-    <value>Fehler</value>
-  </data>
-  <data name="Support_Type_FeatureRequest" xml:space="preserve">
-    <value>Verbesserungsvorschlag</value>
-  </data>
-  <data name="Support_Type_Feedback" xml:space="preserve">
-    <value>Feedback</value>
-  </data>
   <!-- Ticket -->
   <data name="Page_SelectTicketType_Title" xml:space="preserve">
     <value>Neues Ticket</value>
@@ -941,8 +907,29 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Ticket_Title" xml:space="preserve">
     <value>Titel</value>
   </data>
-  <data name="Ticket_Text" xml:space="preserve">
+  <data name="Ticket_Text_1" xml:space="preserve">
     <value>Beschreibung</value>
+  </data>
+  <data name="Ticket_Text_2" xml:space="preserve">
+    <value>Weitere Details</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Text_1" xml:space="preserve">
+    <value>Wie es aktuell aussieht/funktioniert</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Text_2" xml:space="preserve">
+    <value>Wie sollte es aussehen/funktionieren ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Text_1" xml:space="preserve">
+    <value>Wie es aktuell aussieht/funktioniert</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Text_2" xml:space="preserve">
+    <value>Wie sollte es aussehen/funktionieren ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Text_1" xml:space="preserve">
+    <value>Was gefällt Dir ?</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Text_2" xml:space="preserve">
+    <value>Was könnten wir besser machen, was fehlt Dir ?</value>
   </data>
   <data name="Ticket_Type_Bug" xml:space="preserve">
     <value>Fehler melden</value>

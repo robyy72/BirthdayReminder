@@ -23,9 +23,9 @@ public partial class MainPage : ContentPage
 	private void InitContextMenu()
 	{
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
-		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_ReportBug, OnReportBugFromMenu);
-		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_FeatureRequest, OnFeatureRequestFromMenu);
-		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Support_Feedback, OnFeedbackFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_Bug, OnReportBugFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_FeatureRequest, OnFeatureRequestFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_Feedback, OnFeedbackFromMenu);
 	}
 
 	/// <summary>

@@ -15,19 +15,35 @@ public partial class CreateTicketPage : ContentPage
 	{
 		InitializeComponent();
 		_ticketType = ticketType;
-		SetupHeader();
+		SetupUI();
 	}
 	#endregion
 
 	#region Private Methods
-	private void SetupHeader()
+	private void SetupUI()
 	{
-		TypeHeaderLabel.Text = _ticketType switch
+		TheHeader.Title = _ticketType switch
 		{
 			TicketType.Error => MobileLanguages.Resources.Ticket_Type_Bug,
 			TicketType.FeatureRequest => MobileLanguages.Resources.Ticket_Type_FeatureRequest,
 			TicketType.CustomerFeedback => MobileLanguages.Resources.Ticket_Type_Feedback,
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
+		};
+
+		(Text1Editor.Placeholder, Text2Editor.Placeholder) = _ticketType switch
+		{
+			TicketType.Error => (
+				MobileLanguages.Resources.Ticket_Placeholder_Bug_Text_1,
+				MobileLanguages.Resources.Ticket_Placeholder_Bug_Text_2),
+			TicketType.FeatureRequest => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feature_Text_1,
+				MobileLanguages.Resources.Ticket_Placeholder_Feature_Text_2),
+			TicketType.CustomerFeedback => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_1,
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_2),
+			_ => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_1,
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_2)
 		};
 	}
 	#endregion
@@ -36,7 +52,8 @@ public partial class CreateTicketPage : ContentPage
 	private async void OnSaveClicked(object? sender, EventArgs e)
 	{
 		var title = TitleEntry.Text?.Trim() ?? string.Empty;
-		var text = TextEditor.Text?.Trim() ?? string.Empty;
+		var text1 = Text1Editor.Text?.Trim() ?? string.Empty;
+		var text2 = Text2Editor.Text?.Trim() ?? string.Empty;
 
 		if (string.IsNullOrEmpty(title))
 		{
@@ -51,17 +68,14 @@ public partial class CreateTicketPage : ContentPage
 		{
 			Type = (int)_ticketType,
 			Title = title,
-			Text = text
+			Text = text1,
+			Text2 = text2
 		};
 
 		var uploaded = await TicketService.UploadTicketAsync(ticket);
 
 		if (!uploaded)
 		{
-			await DisplayAlert(
-				MobileLanguages.Resources.NoInternet_Title,
-				MobileLanguages.Resources.Ticket_SavedOffline,
-				MobileLanguages.Resources.General_Button_OK);
 			await App.GoBackAsync();
 			return;
 		}

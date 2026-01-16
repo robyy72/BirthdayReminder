@@ -55,7 +55,7 @@ public static class TicketService
 		}
 
 		var ticketType = (TicketType)entry.Type;
-		var message = FormatMessage(entry.Title, entry.Text);
+		var message = FormatMessage(entry.Title, entry.Text, entry.Text2);
 
 		var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 
@@ -92,7 +92,7 @@ public static class TicketService
 		foreach (var entry in pending)
 		{
 			var ticketType = (TicketType)entry.Type;
-			var message = FormatMessage(entry.Title, entry.Text);
+			var message = FormatMessage(entry.Title, entry.Text, entry.Text2);
 
 			var ticketId = await ApiService.SendTicketAsync(message, ticketType);
 			if (ticketId > 0)
@@ -212,51 +212,57 @@ public static class TicketService
 	/// </summary>
 	private static Support ConvertTicketItemToSupport(TicketItem ticket)
 	{
-		var (title, text) = ParseMessage(ticket.Message);
+		var (title, text, text2) = ParseMessage(ticket.Message);
 		var support = new Support
 		{
 			Id = ticket.Id,
 			Type = (int)ticket.Type,
 			Title = title,
 			Text = text,
+			Text2 = text2,
 			CreatedAt = ticket.CreatedAt.LocalDateTime
 		};
 		return support;
 	}
 
 	/// <summary>
-	/// Aim: Format title and text into message for API.
-	/// Params: title - Ticket title, text - Ticket text.
+	/// Aim: Format title, text and text2 into message for API.
+	/// Params: title - Ticket title, text - Ticket text, text2 - Second text.
 	/// Return: Combined message string.
 	/// </summary>
-	private static string FormatMessage(string title, string text)
+	private static string FormatMessage(string title, string text, string text2)
 	{
-		if (string.IsNullOrEmpty(text))
+		var parts = new List<string> { title };
+		if (!string.IsNullOrEmpty(text))
 		{
-			return title;
+			parts.Add(text);
 		}
-		return $"{title}\n\n{text}";
+		if (!string.IsNullOrEmpty(text2))
+		{
+			parts.Add(text2);
+		}
+		return string.Join("\n\n", parts);
 	}
 
 	/// <summary>
-	/// Aim: Parse API message back to title and text.
+	/// Aim: Parse API message back to title, text and text2.
 	/// Params: message - The message to parse.
-	/// Return: Tuple of title and text.
+	/// Return: Tuple of title, text and text2.
 	/// </summary>
-	private static (string title, string text) ParseMessage(string message)
+	private static (string title, string text, string text2) ParseMessage(string message)
 	{
 		if (string.IsNullOrEmpty(message))
 		{
-			return (string.Empty, string.Empty);
+			return (string.Empty, string.Empty, string.Empty);
 		}
 
-		var parts = message.Split("\n\n", 2);
-		if (parts.Length == 2)
+		var parts = message.Split("\n\n", 3);
+		return parts.Length switch
 		{
-			return (parts[0], parts[1]);
-		}
-
-		return (message, string.Empty);
+			3 => (parts[0], parts[1], parts[2]),
+			2 => (parts[0], parts[1], string.Empty),
+			_ => (message, string.Empty, string.Empty)
+		};
 	}
 	#endregion
 
