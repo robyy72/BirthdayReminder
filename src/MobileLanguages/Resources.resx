@@ -1539,6 +1539,12 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Error_HideDetails" xml:space="preserve">
     <value>Hide Details</value>
   </data>
+  <data name="Error_ExitApp" xml:space="preserve">
+    <value>Try later, exit app</value>
+  </data>
+  <data name="Error_BackToApp" xml:space="preserve">
+    <value>Back to app</value>
+  </data>
   <!-- Info Messages -->
   <data name="Info_NoInternet_Title" xml:space="preserve">
     <value>No Internet Connection</value>

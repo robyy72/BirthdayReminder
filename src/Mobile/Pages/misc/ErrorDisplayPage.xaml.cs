@@ -40,6 +40,19 @@ public partial class ErrorDisplayPage : ContentPage
 	#region Event Handlers
 	private async void OnTryAgainClicked(object? sender, EventArgs e)
 	{
+		// Reload/retry the previous action
+		await App.GoBackAsync();
+	}
+
+	private void OnExitAppClicked(object? sender, EventArgs e)
+	{
+		// Exit the application
+		Application.Current?.Quit();
+	}
+
+	private async void OnBackToAppClicked(object? sender, EventArgs e)
+	{
+		// Navigate back to the app (main page)
 		await App.GoBackAsync();
 	}
 

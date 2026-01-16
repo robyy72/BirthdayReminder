@@ -200,6 +200,9 @@ public static class ApiService
 			{
 				var errorContent = await response.Content.ReadAsStringAsync();
 				System.Diagnostics.Debug.WriteLine($"[ApiService] Error content: {errorContent}");
+				// Log API error to Sentry/Prefs
+				var apiError = new Exception($"API Error {(int)response.StatusCode}: {response.ReasonPhrase}. {errorContent}");
+				ErrorService.Handle(apiError);
 				return null;
 			}
 
