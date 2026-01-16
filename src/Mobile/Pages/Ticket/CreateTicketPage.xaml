@@ -27,7 +27,6 @@
                     <Border Style="{StaticResource TileInnerForEntry}">
                         <Entry x:Name="TitleEntry"
                                Style="{StaticResource EntryStandard}"
-                               Placeholder="{x:Static resx:Resources.Ticket_Title}"
                                Focused="OnEntryFocused"
                                Unfocused="OnEntryUnfocused" />
                     </Border>

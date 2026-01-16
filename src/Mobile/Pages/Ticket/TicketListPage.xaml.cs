@@ -13,6 +13,13 @@ public partial class TicketListPage : ContentPage
 	#endregion
 
 	#region Constructor
+	public TicketListPage() : this(TicketType.CustomerFeedback)
+	{
+		// Show all tickets
+		_selectedFilterIndex = 0;
+		FilterPicker.SelectedIndex = 0;
+	}
+
 	public TicketListPage(TicketType ticketType)
 	{
 		InitializeComponent();

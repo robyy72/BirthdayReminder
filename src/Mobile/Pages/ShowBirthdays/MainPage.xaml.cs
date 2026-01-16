@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
 	private void InitContextMenu()
 	{
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Page_Main_NewBirthday, OnNewBirthdayFromMenu);
+		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Flyout_Tickets, OnMyTicketsFromMenu);
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_Bug, OnReportBugFromMenu);
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_FeatureRequest, OnFeatureRequestFromMenu);
 		TheContextMenu.AddMenuItem(MobileLanguages.Resources.Ticket_Type_Feedback, OnFeedbackFromMenu);
@@ -163,6 +164,11 @@ public partial class MainPage : ContentPage
         {
             await App.NavigateToAsync<SearchPersonPage>();
         }
+    }
+
+    private async void OnMyTicketsFromMenu()
+    {
+        await App.NavigateToAsync<TicketListPage>();
     }
 
     private async void OnReportBugFromMenu()

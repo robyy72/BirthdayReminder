@@ -962,8 +962,17 @@ I would like to remind you that {Name} has a birthday in {Days} days ({Date}). {
   <data name="Page_TicketDetail_Title" xml:space="preserve">
     <value>Ticket Details</value>
   </data>
-  <data name="Ticket_Title" xml:space="preserve">
-    <value>Title</value>
+  <data name="Ticket_Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Subject" xml:space="preserve">
+    <value>Short summary of the bug</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Subject" xml:space="preserve">
+    <value>Short summary of your idea</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Subject" xml:space="preserve">
+    <value>What is your feedback about?</value>
   </data>
   <data name="Ticket_Text_1" xml:space="preserve">
     <value>Description</value>

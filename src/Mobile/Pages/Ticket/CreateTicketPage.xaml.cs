@@ -30,18 +30,22 @@ public partial class CreateTicketPage : ContentPage
 			_ => MobileLanguages.Resources.Ticket_Type_Feedback
 		};
 
-		(Text1Editor.Placeholder, Text2Editor.Placeholder) = _ticketType switch
+		(TitleEntry.Placeholder, Text1Editor.Placeholder, Text2Editor.Placeholder) = _ticketType switch
 		{
 			TicketType.Error => (
+				MobileLanguages.Resources.Ticket_Placeholder_Bug_Subject,
 				MobileLanguages.Resources.Ticket_Placeholder_Bug_Text_1,
 				MobileLanguages.Resources.Ticket_Placeholder_Bug_Text_2),
 			TicketType.FeatureRequest => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feature_Subject,
 				MobileLanguages.Resources.Ticket_Placeholder_Feature_Text_1,
 				MobileLanguages.Resources.Ticket_Placeholder_Feature_Text_2),
 			TicketType.CustomerFeedback => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Subject,
 				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_1,
 				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_2),
 			_ => (
+				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Subject,
 				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_1,
 				MobileLanguages.Resources.Ticket_Placeholder_Feedback_Text_2)
 		};

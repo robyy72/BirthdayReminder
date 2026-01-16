@@ -904,8 +904,17 @@ ich möchte Dich daran erinnern, dass {Name} in {Days} Tagen ({Date}) Geburtstag
   <data name="Page_TicketDetail_Title" xml:space="preserve">
     <value>Ticket Details</value>
   </data>
-  <data name="Ticket_Title" xml:space="preserve">
-    <value>Titel</value>
+  <data name="Ticket_Subject" xml:space="preserve">
+    <value>Betreff / Thema</value>
+  </data>
+  <data name="Ticket_Placeholder_Bug_Subject" xml:space="preserve">
+    <value>Kurze Zusammenfassung des Fehlers</value>
+  </data>
+  <data name="Ticket_Placeholder_Feature_Subject" xml:space="preserve">
+    <value>Kurze Zusammenfassung Deiner Idee</value>
+  </data>
+  <data name="Ticket_Placeholder_Feedback_Subject" xml:space="preserve">
+    <value>Worum geht es in Deinem Feedback?</value>
   </data>
   <data name="Ticket_Text_1" xml:space="preserve">
     <value>Beschreibung</value>

@@ -26,7 +26,7 @@
                         </Border>
                         <VerticalStackLayout Padding="20" Spacing="15">
                             <!-- Title -->
-                            <Label Text="{x:Static resx:Resources.Ticket_Title}"
+                            <Label Text="{x:Static resx:Resources.Ticket_Subject}"
                                    Style="{StaticResource LabelInfoOnCard}"
                                    FontAttributes="Bold" />
                             <Label x:Name="TitleLabel"
