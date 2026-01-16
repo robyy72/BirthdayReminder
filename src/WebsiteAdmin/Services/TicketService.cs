@@ -86,8 +86,8 @@ public class TicketService
 	public async Task<List<Ticket>> GetOpenTicketsAsync()
 	{
 		var tickets = await _db.Tickets
-			.Include(t => t.customer)
-			.Include(t => t.systemUser)
+			.Include(t => t.Customer)
+			.Include(t => t.SystemUser)
 			.Where(t => t.Status != TicketStatus.Resolved && t.Status != TicketStatus.Cancelled)
 			.OrderByDescending(t => t.CreatedAt)
 			.ToListAsync();
@@ -103,8 +103,8 @@ public class TicketService
 	public async Task<List<Ticket>> GetTicketsAsync(TicketStatus? status = null)
 	{
 		var query = _db.Tickets
-			.Include(t => t.customer)
-			.Include(t => t.systemUser)
+			.Include(t => t.Customer)
+			.Include(t => t.SystemUser)
 			.AsQueryable();
 
 		if (status.HasValue)
@@ -127,8 +127,8 @@ public class TicketService
 	public async Task<Ticket?> GetTicketByIdAsync(int id)
 	{
 		var ticket = await _db.Tickets
-			.Include(t => t.customer)
-			.Include(t => t.systemUser)
+			.Include(t => t.Customer)
+			.Include(t => t.SystemUser)
 			.FirstOrDefaultAsync(t => t.Id == id);
 
 		return ticket;
@@ -207,8 +207,8 @@ public class TicketService
 	public async Task<List<Ticket>> GetFilteredTicketsAsync(TicketFilter filter)
 	{
 		var query = _db.Tickets
-			.Include(t => t.customer)
-			.Include(t => t.systemUser)
+			.Include(t => t.Customer)
+			.Include(t => t.SystemUser)
 			.Include(t => t.Entries)
 			.AsQueryable();
 
@@ -226,7 +226,7 @@ public class TicketService
 		{
 			query = query.Where(t =>
 				t.Message.Contains(filter.SearchText) ||
-				(t.customer != null && t.customer.Email != null && t.customer.Email.Contains(filter.SearchText)));
+				(t.Customer != null && t.Customer.Email != null && t.Customer.Email.Contains(filter.SearchText)));
 		}
 
 		if (filter.FromDate.HasValue)
