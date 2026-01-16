@@ -6,7 +6,8 @@
              Title="{x:Static resx:Resources.Page_Welcome_Title}"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
 
     <Grid RowDefinitions="Auto,*">
         <!-- Header -->
@@ -15,20 +16,21 @@
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
+        <!-- Body -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="25">
 
                 <Label Text="{x:Static resx:Resources.Welcome_Header_Title}"
                        Style="{StaticResource LabelHeader}"
-                       Margin="0,20,0,0" />
+                       FontSize="36" />
 
-                <Border Style="{StaticResource Card}">
+                <Border Style="{StaticResource Tile}">
                     <Label Text="{x:Static resx:Resources.Welcome_1_Text_1}"
                            Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />
                 </Border>
 
-                <Border Style="{StaticResource Card}">
+                <Border Style="{StaticResource Tile}">
                     <Label Text="{x:Static resx:Resources.Welcome_1_Text_2}"
                            Style="{StaticResource LabelInfoOnCard}"
                            Padding="20" />

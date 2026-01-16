@@ -56,34 +56,27 @@ public partial class SelectTimezonePage : ContentPage
 
 		var grid = new Grid
 		{
+			RowDefinitions =
+			[
+				new RowDefinition(GridLength.Auto),
+				new RowDefinition(GridLength.Auto)
+			],
 			ColumnDefinitions =
 			[
 				new ColumnDefinition(GridLength.Star),
 				new ColumnDefinition(GridLength.Auto)
-			]
-		};
-
-		var textStack = new VerticalStackLayout
-		{
-			Spacing = 2,
-			VerticalOptions = LayoutOptions.Center
+			],
+			RowSpacing = 4
 		};
 
 		var regionLabel = new Label
 		{
 			Text = tz.RegionWithOffset,
-			Style = (Style)Application.Current!.Resources["LabelHeader"]
+			Style = (Style)Application.Current!.Resources["LabelHeader"],
+			VerticalOptions = LayoutOptions.Center
 		};
-
-		var citiesLabel = new Label
-		{
-			Text = tz.Cities,
-			Style = (Style)Application.Current!.Resources["LabelInfoOnCard"]
-		};
-
-		textStack.Children.Add(regionLabel);
-		textStack.Children.Add(citiesLabel);
-		grid.SetColumn(textStack, 0);
+		grid.SetRow(regionLabel, 0);
+		grid.SetColumn(regionLabel, 0);
 
 		var radio = new RadioButton
 		{
@@ -93,10 +86,21 @@ public partial class SelectTimezonePage : ContentPage
 			VerticalOptions = LayoutOptions.Center
 		};
 		radio.CheckedChanged += OnTimezoneRadioChanged;
+		grid.SetRow(radio, 0);
 		grid.SetColumn(radio, 1);
 
-		grid.Children.Add(textStack);
+		var citiesLabel = new Label
+		{
+			Text = tz.Cities,
+			Style = (Style)Application.Current!.Resources["LabelInfoOnCard"]
+		};
+		grid.SetRow(citiesLabel, 1);
+		grid.SetColumn(citiesLabel, 0);
+		grid.SetColumnSpan(citiesLabel, 2);
+
+		grid.Children.Add(regionLabel);
 		grid.Children.Add(radio);
+		grid.Children.Add(citiesLabel);
 		tile.Content = grid;
 
 		return tile;

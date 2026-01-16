@@ -1800,7 +1800,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please grant permission for this phone now.
+        ///   Looks up a localized string similar to Grant permission.
         /// </summary>
         public static string Permission_GrantRequest {
             get {
@@ -1845,7 +1845,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Grant Permission.
+        ///   Looks up a localized string similar to Start Dialog.
         /// </summary>
         public static string Permission_StartDialog {
             get {
@@ -2763,7 +2763,7 @@ namespace MobileLanguages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time..
+        ///   Looks up a localized string similar to We recommend to set the timezone to your main location to ensure that reminders arrive at an appropriate time..
         /// </summary>
         public static string Settings_Timezone_Hint {
             get {

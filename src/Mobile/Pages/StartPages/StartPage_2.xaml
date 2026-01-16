@@ -20,7 +20,8 @@
                    Style="{StaticResource LabelHeaderBar}" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BodyBackgroundLight}, Dark={StaticResource BodyBackgroundDark}}">
             <VerticalStackLayout Padding="30" Spacing="20">
 
                 <!-- Card: Language -->
@@ -89,7 +90,7 @@
                                        TextColor="{StaticResource Gray500}" />
                             </VerticalStackLayout>
                             <Button Text="{x:Static resx:Resources.Settings_Timezone_Adjust}"
-                                    Style="{StaticResource ButtonSecondary}"
+                                    Style="{StaticResource ButtonGreen}"
                                     Clicked="OnTimezoneAdjustClicked" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>

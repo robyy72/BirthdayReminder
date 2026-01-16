@@ -270,7 +270,7 @@
     <Style TargetType="Border" x:Key="Tile">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray500}}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 15" />
-        <Setter Property="Padding" Value="20" />
+        <Setter Property="Padding" Value="10,5,10,5" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark=Transparent}" />
         <Setter Property="StrokeThickness" Value="{AppThemeBinding Light=1, Dark=0}" />
         <Setter Property="Shadow">

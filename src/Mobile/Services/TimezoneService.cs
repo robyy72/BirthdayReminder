@@ -101,7 +101,7 @@ public static class TimezoneService
 		{
 			Id = json.Id,
 			DisplayName = $"{json.Region} ({FormatOffset(offset)}h) | {city}",
-			RegionWithOffset = $"{json.Region} (UTC{FormatOffset(offset)})",
+			RegionWithOffset = $"{json.Region} (UTC {FormatOffset(offset)})",
 			Cities = cities,
 			Offset = offset
 		};

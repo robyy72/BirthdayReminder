@@ -343,7 +343,7 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Meine Zeitzone auswählen</value>
   </data>
   <data name="Settings_Timezone_Hint" xml:space="preserve">
-    <value>Stelle die Zeitzone auf deinen Hauptaufenthaltsort ein, nicht auf dein aktuelles Reiseziel. So kommen Erinnerungen zur richtigen Zeit an.</value>
+    <value>Wir empfehlen deine Zeitzone auf dein Zuhause zu setzen damit Erinnerungen zur richtigen Zeit ankommen.</value>
   </data>
   <data name="Settings_Timezone_Current" xml:space="preserve">
     <value>Aktuelle Zeitzone</value>
@@ -649,10 +649,10 @@ Wenn du das Geburtsjahr nicht kennst, wähle einfach "Ohne Jahr" bei der Datumsa
     <value>Berechtigung benötigt</value>
   </data>
   <data name="Permission_GrantRequest" xml:space="preserve">
-    <value>Jetzt bitte Berechtigung für dieses Telefon erteilen</value>
+    <value>Berechtigung erteilen</value>
   </data>
   <data name="Permission_StartDialog" xml:space="preserve">
-    <value>Berechtigung erteilen</value>
+    <value>Dialog starten</value>
   </data>
   <data name="Permission_Result" xml:space="preserve">
     <value>Ergebnis</value>

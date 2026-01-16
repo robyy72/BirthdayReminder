@@ -421,7 +421,7 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Select my timezone</value>
   </data>
   <data name="Settings_Timezone_Hint" xml:space="preserve">
-    <value>Set this to your main location, not your current travel destination. This ensures reminders arrive at the right time.</value>
+    <value>We recommend to set the timezone to your main location to ensure that reminders arrive at an appropriate time.</value>
   </data>
   <data name="Settings_Timezone_Current" xml:space="preserve">
     <value>Current Timezone</value>
@@ -724,10 +724,10 @@ If you don't know the birth year, simply choose "Without year" when selecting th
     <value>Permission required</value>
   </data>
   <data name="Permission_GrantRequest" xml:space="preserve">
-    <value>Please grant permission for this phone now</value>
+    <value>Grant permission</value>
   </data>
   <data name="Permission_StartDialog" xml:space="preserve">
-    <value>Grant Permission</value>
+    <value>Start Dialog</value>
   </data>
   <data name="Permission_Result" xml:space="preserve">
     <value>Result</value>
