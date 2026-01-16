@@ -106,7 +106,7 @@ if (-not $SentryDsn)
     $SentryDsn = Read-Host "Enter Sentry DSN (or press Enter to skip)"
 }
 
-# Define sites configuration (Database only for Admin sites)
+# Define sites configuration (Database only for Admin and Api sites)
 $sites = @(
     @{
         Name = "BirthdayReminder-WebsiteCustomer"
@@ -114,6 +114,7 @@ $sites = @(
         Path = "C:\inetpub\BirthdayReminder\WebsiteCustomer\Prod\current"
         Bindings = @(
             @{ Host = $Domain; Port = 443; Protocol = "https" }
+            @{ Host = "www.$Domain"; Port = 443; Protocol = "https" }
         )
     },
     @{
@@ -121,6 +122,7 @@ $sites = @(
         AppPool = "BirthdayReminder-WebsiteAdmin-Dev"
         Path = "C:\inetpub\BirthdayReminder\WebsiteAdmin\Dev\current"
         Database = "BirthdayReminder-Dev"
+        NeedsSeed = $true
         Bindings = @(
             @{ Host = "dev.$Domain"; Port = 443; Protocol = "https" }
         )
@@ -130,8 +132,27 @@ $sites = @(
         AppPool = "BirthdayReminder-WebsiteAdmin-Prod"
         Path = "C:\inetpub\BirthdayReminder\WebsiteAdmin\Prod\current"
         Database = "BirthdayReminder-Prod"
+        NeedsSeed = $true
         Bindings = @(
             @{ Host = "prod.$Domain"; Port = 443; Protocol = "https" }
+        )
+    },
+    @{
+        Name = "BirthdayReminder-ApiMobile-Dev"
+        AppPool = "BirthdayReminder-ApiMobile-Dev"
+        Path = "C:\inetpub\BirthdayReminder\ApiMobile\Dev\current"
+        Database = "BirthdayReminder-Dev"
+        Bindings = @(
+            @{ Host = "api-dev.$Domain"; Port = 443; Protocol = "https" }
+        )
+    },
+    @{
+        Name = "BirthdayReminder-ApiMobile-Prod"
+        AppPool = "BirthdayReminder-ApiMobile-Prod"
+        Path = "C:\inetpub\BirthdayReminder\ApiMobile\Prod\current"
+        Database = "BirthdayReminder-Prod"
+        Bindings = @(
+            @{ Host = "api-prod.$Domain"; Port = 443; Protocol = "https" }
         )
     }
 )
@@ -164,8 +185,13 @@ foreach ($site in $sites)
     # Set environment variables on App Pool
     $envVars = @{
         "Jwt__Key" = $JwtKey
-        "Seed__AdminEmail" = $AdminEmail
-        "Seed__AdminPassword" = $AdminPassword
+    }
+
+    # Add Seed variables only for WebsiteAdmin
+    if ($site.NeedsSeed)
+    {
+        $envVars["Seed__AdminEmail"] = $AdminEmail
+        $envVars["Seed__AdminPassword"] = $AdminPassword
     }
 
     # Add ConnectionString only for sites with Database
@@ -189,7 +215,8 @@ foreach ($site in $sites)
         & "$env:SystemRoot\System32\inetsrv\appcmd.exe" set config -section:system.applicationHost/applicationPools "/[name='$($site.AppPool)'].environmentVariables.[name='$key'].value:$value" /commit:apphost 2>$null
     }
 
-    $envList = "Jwt:Key, Seed:AdminEmail/Password"
+    $envList = "Jwt:Key"
+    if ($site.NeedsSeed) { $envList += ", Seed:AdminEmail/Password" }
     if ($site.Database) { $envList = "ConnectionStrings ($($site.Database)), $envList" }
     if ($SentryDsn) { $envList += ", Sentry:Dsn" }
     Write-Host "  Set environment variables: $envList"
@@ -197,7 +224,6 @@ foreach ($site in $sites)
     # Create Site if not exists
     if (-not (Test-Path "IIS:\Sites\$($site.Name)"))
     {
-        $firstBinding = $site.Bindings[0]
         New-Website -Name $site.Name -PhysicalPath $basePath -ApplicationPool $site.AppPool | Out-Null
         Write-Host "  Created Site: $($site.Name)"
     }
@@ -233,6 +259,8 @@ Write-Host ""
 Write-Host "IIS setup completed successfully." -ForegroundColor Green
 Write-Host ""
 Write-Host "Sites configured:" -ForegroundColor Cyan
-Write-Host "  - https://$Domain (WebsiteCustomer)"
+Write-Host "  - https://$Domain + https://www.$Domain (WebsiteCustomer)"
 Write-Host "  - https://dev.$Domain (WebsiteAdmin Dev, DB: BirthdayReminder-Dev)"
 Write-Host "  - https://prod.$Domain (WebsiteAdmin Prod, DB: BirthdayReminder-Prod)"
+Write-Host "  - https://api-dev.$Domain (ApiMobile Dev, DB: BirthdayReminder-Dev)"
+Write-Host "  - https://api-prod.$Domain (ApiMobile Prod, DB: BirthdayReminder-Prod)"
