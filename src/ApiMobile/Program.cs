@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using ApiMobile;
 #endregion
 
-// Initial deployment via GitHub Actions pipeline
+// Deploy via GitHub Actions pipeline
 
 var builder = WebApplication.CreateBuilder(args);
 
