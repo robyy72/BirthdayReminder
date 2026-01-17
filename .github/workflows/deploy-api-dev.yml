@@ -29,23 +29,7 @@ jobs:
         run: dotnet test BirthdayReminder.sln --configuration Release --no-build --verbosity normal
         continue-on-error: true
 
-      - name: Install dotnet-ef tool
-        shell: powershell
-        run: |
-          dotnet tool install --global dotnet-ef --version 9.0.0 2>$null
-          if ($LASTEXITCODE -ne 0) {
-            dotnet tool update --global dotnet-ef --version 9.0.0
-          }
-          $env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
-
-      - name: Run EF database migrations
-        working-directory: src
-        shell: powershell
-        run: |
-          $env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
-          # Use Windows Auth for migrations - runner has db_ddladmin rights
-          $connString = "Server=.\SQLEXPRESS;Database=BirthdayReminder-Dev;Trusted_Connection=True;TrustServerCertificate=True;"
-          dotnet ef database update --project Common/Common.csproj --startup-project ApiMobile/ApiMobile.csproj --connection $connString
+      # Note: EF migrations are handled by WebsiteAdmin pipeline
 
       - name: Publish ApiMobile
         working-directory: src
