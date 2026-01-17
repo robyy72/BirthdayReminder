@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using WebsiteAdmin;
 #endregion
 
-// Trigger pipeline to run EF migrations
+// Trigger pipeline to run EF migrations (v2)
 
 var builder = WebApplication.CreateBuilder(args);
 
