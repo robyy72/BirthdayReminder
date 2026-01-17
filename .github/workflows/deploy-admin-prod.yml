@@ -1,5 +1,5 @@
-# deploy-admin.yml v1.0.0
-name: Deploy WebsiteAdmin
+# deploy-admin-prod.yml v1.0.0
+name: Deploy WebsiteAdmin Prod
 
 on:
   push:

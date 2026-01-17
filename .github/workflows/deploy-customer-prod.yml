@@ -1,5 +1,5 @@
-# deploy-customer.yml v1.0.0
-name: Deploy WebsiteCustomer
+# deploy-customer-prod.yml v1.0.0
+name: Deploy WebsiteCustomer Prod
 
 on:
   push:
